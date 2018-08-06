@@ -1,0 +1,39 @@
+environment variable PATH in .bashrc file
+$ export PATH=$PATH:$HOME/Downloads/esbmc-v5.0.0-linux-static-64/bin/
+
+
+
+Error:
+
+ESBMC version 5.0.0 64-bit x86_64 linux
+file codePVsystem_rev2.c: Parsing
+In file included from codePVsystem_rev2.c:6:
+In file included from /usr/include/stdio.h:27:
+/usr/include/features.h:367:12: fatal error: 'sys/cdefs.h' file not found
+#  include <sys/cdefs.h>
+           ^~~~~~~~~~~~~
+
+Correcting:
+$ sudo apt-get install build-essential
+$ sudo apt-get install gcc-multilib
+
+
+>>>>>>>>>>>>>>>>>>>>>>ESBMC command<<<<<<<<<<<<<<<<<<<<<<
+
+$ esbmc mainESBMC2crc32.c --no-bounds-check --no-pointer-check --no-div-by-zero-check --no-slice --boolector
+
+$ esbmc --help
+
+
+$ time esbmc codePVsystem_rev2.c --no-bounds-check --no-pointer-check --no-div-by-zero-check --unwind 269
+
+time esbmc codePVsystem_rev3.c --no-bounds-check --no-pointer-check --no-div-by-zero-check --k-induction --max-k-step 270
+
+time esbmc codePVsystem_rev3.c --no-bounds-check --no-pointer-check --no-div-by-zero-check --unwind 269 --smt-during-symex --smt-symex-guard --z3    ***unico que usa pouca memoria, o resto está estourando 16GB fácil
+
+time esbmc codePVsystem_rev3.c --no-bounds-check --no-pointer-check --no-div-by-zero-check --unwind 269 --z3 --ir
+
+time esbmc codePVsystem_rev4.c --no-bounds-check --no-pointer-check --no-div-by-zero-check --unwind 400 --smt-during-symex --smt-symex-guard --z3 -DHOUSE1 > house1.txt
+
+
+

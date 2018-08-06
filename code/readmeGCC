@@ -1,0 +1,3 @@
+gcc pixelplot.c -o pixelplot -lgraph -lm -ldl
+
+gcc filename.c -o filenameout -lgraph

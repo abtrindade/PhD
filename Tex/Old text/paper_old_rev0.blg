@@ -1,0 +1,53 @@
+This is BibTeX, Version 0.99d (TeX Live 2015/Debian)
+Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+The top-level auxiliary file: paper_old_rev0.aux
+The style file: ieeetr.bst
+Database file #1: trindadeThesis.bib
+Warning--can't use both author and editor fields in Karekesi
+Warning--can't use both author and editor fields in Mohanty
+Warning--there's a number but no series in Hansen
+Warning--can't use both author and editor fields in Clarke2008
+Warning--can't use both author and editor fields in Forejt2011
+Warning--empty title in Alur
+You've used 74 entries,
+            1876 wiz_defined-function locations,
+            966 strings with 16156 characters,
+and the built_in function-call counts, 21041 in all, are:
+= -- 2017
+> -- 838
+< -- 0
++ -- 307
+- -- 233
+* -- 1479
+:= -- 2933
+add.period$ -- 92
+call.type$ -- 74
+change.case$ -- 65
+chr.to.int$ -- 0
+cite$ -- 80
+duplicate$ -- 1072
+empty$ -- 2056
+format.name$ -- 233
+if$ -- 5265
+int.to.chr$ -- 0
+int.to.str$ -- 74
+missing$ -- 77
+newline$ -- 243
+num.names$ -- 86
+pop$ -- 274
+preamble$ -- 1
+purify$ -- 0
+quote$ -- 0
+skip$ -- 744
+stack$ -- 0
+substring$ -- 1338
+swap$ -- 448
+text.length$ -- 0
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 0
+warning$ -- 6
+while$ -- 187
+width$ -- 76
+write$ -- 743
+(There were 6 warnings)

@@ -1,0 +1,381 @@
+\begin{thebibliography}{10}
+
+\bibitem{Coelho}
+S.~Coelho, A.~Sanches-Pereira, L.~Tudeschini, J.~Escobar, M.~Poveda, N.~Coluna,
+  A.~Collin, E.~L. Rovere, A.~Trindade, and O.~Pereira, ``Biomass residues as
+  electricity generation source in low hd source in regions of brazil,'' in
+  {\em The XI LatinAmerican Congress of Electricity Generation and Transmition
+  CLAGTEE} (UNESP, ed.), pp.~1--8, 2015.
+
+\bibitem{Karekesi}
+S.~Karekesi, K.~Lata, and S.~Coelho, {\em Renewable Energy - A Global Review of
+  Technologies, Policies and Markets}, ch.~Traditional Biomass Energy:
+  Improving Its Use and Moving to Modern Energy Use, pp.~231--261.
+\newblock London: Earthscan, 2006.
+
+\bibitem{EPIA}
+EPIA, {\em Global market outlook for photovoltaics 2014-2018}.
+\newblock Belgium: European Phototoltaic Industry Association, 2014.
+
+\bibitem{Yatimi}
+H.~Yatimi and E.~Aroudam, ``Modeling and simulation of a stand-alone
+  photovoltaic system,'' in {\em Xth International Conference on Integrated
+  Design and Production} (T.~Marocco, ed.), 2015.
+
+\bibitem{Noroozian}
+R.~Noroozian and G.~Gharehpetian, ``An investigation on combined operation of
+  active power filter with photovoltaic arrays,'' {\em International Journal of
+  Electrical Power \& Energy Systems}, vol.~46, pp.~392--399, 2013.
+
+\bibitem{SEIA}
+SEIA, ``Solar energy.'' http://www.seia.org/about/solar-energy.
+\newblock Accessed 1st October, 2016.
+
+\bibitem{Chauhan}
+A.~Chauhan and R.~Saini, ``Renewable energy based off-grid rural
+  electrification in uttarakhand state of india: Technology options, modelling
+  method, barriers and recommendations,'' {\em Renewable and Sustainable Energy
+  Reviews}, vol.~51, pp.~662--681, 2015.
+
+\bibitem{Rawat}
+R.~Rawat, S.~Kaushik, and R.~Lamba, ``A review on modeling, design methodology
+  and size otimization of photovoltaic based motor pumping, standalone and grid
+  connectec system,'' {\em Renewable and Sustainable Energy Reviews}, vol.~57,
+  pp.~1506--1519, 2016.
+
+\bibitem{Brooks}
+W.~Brooks and J.~Dunlop, {\em NABCEP: PV Installation Professional Resource
+  Guide}.
+\newblock Clifton Park, NY: NABCEP, 2013.
+
+\bibitem{Baier}
+C.~Baier and J.-P. Katoen, {\em Principles of model checking}.
+\newblock London: The MIT Press, 2008.
+
+\bibitem{Trindade}
+A.~Trindade and L.~Cordeiro, ``Applying smt-based verification to
+  hardware/software partitioning in embedded systems,'' {\em Design Automation
+  for Embedded Systems (DAES)}, vol.~20, no.~1, pp.~1--19, 2016.
+
+\bibitem{Clarkeetal}
+E.~Clarke, E.~Emerson, and J.~Sifakis, ``Model checking: algorithmic
+  verification and debugging,'' {\em Communications of the ACM}, vol.~51,
+  no.~11, pp.~74--84, 2009.
+
+\bibitem{Roy}
+T.~Roy, ``Simulation and analysis of photovoltaic stand- alone systems,''
+  technology in electrical engineering, Department of Electrical Engineering
+  National Institute of Technology, Rourkela, Odisha, India, 2013.
+
+\bibitem{Gules}
+R.~Gules, J.~Pacheco, H.~Hey, and J.~Imhoff, ``A maximum power point tracking
+  system with parallel connection for pv stand alone applications,'' {\em IEEE
+  Transactions on Industrial Electronics}, vol.~55, no.~7, pp.~2674--2683,
+  2008.
+
+\bibitem{Mohanty}
+P.~Mohanty, K.~Sharma, M.~Gujar, M.~Kolhe, and A.~Azmi, {\em Solar Photovoltaic
+  System Applications}, ch.~PV System Design for Off-Grid Applications,
+  pp.~49--83.
+\newblock Springer International Publishing, 2016.
+
+\bibitem{Pinho}
+J.~Pinho and M.~Galdino, {\em Manual de Engenharia para Sistemas
+  Fotovoltaicos}.
+\newblock Rio de Janeiro/RJ: CEPEL – CRESESB, 2014.
+
+\bibitem{Kim}
+S.~Kim, ``Sliding mode controller for the single-phase grid connected
+  photovoltaic system,'' {\em Applied Energy}, vol.~83, no.~10, pp.~1101--1115,
+  2006.
+
+\bibitem{Freeman}
+J.~Freeman, J.~Whitmore, N.~Blair, and A.~Dobos, ``Validation of multiple tools
+  for flat plate photovoltaic modeling against measured data,'' tech. rep.,
+  National Renewable Energy Laboratory, Colorado, 2014.
+
+\bibitem{NRELDobos}
+A.~P. Dobos, ``Pvwatts version 5 manual,'' tech. rep., National Renewable
+  Energy Laboratory, Colorado, 2014.
+
+\bibitem{NRELBlair}
+N.~Blair, A.~Dobos, J.~Freeman, T.~Neises, and M.~Wagner, ``System advisor
+  model, sam 2014.1.14: General description,'' tech. rep., National Renewable
+  Energy Laboratory, Colorado, 2014.
+
+\bibitem{Cameron2008}
+C.~Cameron, W.~Boyson, and D.~Riley, ``Comparison of pv system
+  performance-model predictions with measured pv system performance,'' in {\em
+  33rd IEEE Photovoltaic Specialists Conference}, pp.~1--6, 2008.
+
+\bibitem{HOMER}
+HOMER, ``The homer microgrid software.''
+  http://www.homerenergy.com/software.html.
+\newblock 1st October 2016.
+
+\bibitem{Swarnkar}
+N.~Swarnkar, L.~Gidwani, and R.~Sharma, ``An application of homer pro in
+  optimization of hybrid energy system for electrification of technical
+  institute,'' in {\em International Conference on Energy Efficient
+  Technologies for Sustainability (ICEETS)}, pp.~56--61, 2016.
+
+\bibitem{Pradhan}
+S.~Pradhan, S.~Singh, M.~Choudhury, and D.~Dwivedy, ``Study of cost analysis
+  and emission analysis for grid connected pv systems using retscreen 4
+  simulation software,'' {\em International Journal of Engineering Research \&
+  Technology}, vol.~4, no.~4, pp.~203--207, 2015.
+
+\bibitem{Mills}
+A.~Mills and S.~Al-Hallaj, ``Simulation of hydrogen-based hybrid systems using
+  hybrid2,'' {\em International Journal of Hydrogen Energy}, vol.~29, no.~10,
+  pp.~991--999, 2004.
+
+\bibitem{UMASS}
+U.~of~Massachusetts Amherst~UMASS, ``Hybrid2.''
+  http://www.umass.edu/windenergy/research/topics/tools/software/hybrid2.
+\newblock 1st October 2016.
+
+\bibitem{Hansen}
+A.~Hansen, P.~S$\o$rensen, L.~Hansen, and H.~Bindner, {\em Models for a
+  stand-alone PV system}.
+\newblock No.~1219, Forskningscenter Risoe, 2001.
+
+\bibitem{Lorenzo}
+E.~Lorenzo, {\em Solar Electricity Engineering of Photovoltaic Systems}.
+\newblock Spain: Artes Gráficas Gala, S.L., 1994.
+
+\bibitem{SamlexSolar}
+SamlexSolar.com, ``Solar (pv) cell, module, array.''
+  http://www.samlexsolar.com/learning-center/solar-cell-module-array.aspx.
+\newblock Accessed 28th December, 2017.
+
+\bibitem{Jakhrani}
+A.~Jakhrani, S.~Samo, S.~Kamboh, J.~Labadin, and A.~Rigit, ``An improved
+  mathematical model for computing power output of solar photovoltaic
+  modules,'' {\em International Journal of Photoenergy}, vol.~2014, no.~ID
+  346704, p.~9, 2014.
+
+\bibitem{Durisch}
+W.~Durisch, D.~Tille, A.~Worz, and W.~Plapp, ``Characterisation of photovoltaic
+  generators,'' {\em Applied Energy}, vol.~65, no.~1-4, pp.~273--284, 2000.
+
+\bibitem{Rajanna}
+S.~Rajanna and R.~Saini, ``Modeling of integrated renewable energy system for
+  electrification of a remote area in india,'' {\em Renewable Energy}, vol.~90,
+  no.~C, pp.~175--187, 2016.
+
+\bibitem{Badejani}
+M.~Badejani, M.~Masoum, and M.~Kalanta, ``Power engineering conference,'' in
+  {\em AUPEC 2007} (A.~Universities, ed.), pp.~1--6, 2007.
+
+\bibitem{Ferrari}
+S.~Ferrari, M.~L.~V. Piuri, A.~Salman, L.~Cristaldi, M.~Faifer, and S.~Toscani,
+  ``Solar panel modelling through computational intelligence techniques,'' {\em
+  Measurement: Journal of the International Measurement Confederation}, no.~93,
+  pp.~572--580, 2016.
+
+\bibitem{Saloux}
+E.~Saloux, A.~Teyssedou, and M.~Sorin, ``Explicit model of photovoltaic panels
+  to determine voltages and currents at the maximum power point,'' {\em Solar
+  Energy}, vol.~85, no.~5, pp.~713--722, 2011.
+
+\bibitem{Hasan}
+M.~Hasan and S.~Parida, ``An overview of solar photovoltaic panel modeling
+  based on analytical and experimental viewpoint,'' {\em Renewable and
+  Sustainable Energy Reviews}, vol.~60, pp.~75--83, 2016.
+
+\bibitem{King}
+D.~King, W.~Boyson, and J.~Kratochvill, {\em Photovoltaic Array Performance
+  Model}.
+\newblock Albuquerque, New Mexico: Sandia National Laboratories, 2004.
+
+\bibitem{Mellit}
+A.~Mellit, M.~Benghanem, and S.~Kalogirou, ``Modeling and simulation of a
+  stand-alone photovoltaic system using an adaptive artificial neural network:
+  Proposition for a new sizing procedure,'' {\em Renewable Energy}, vol.~32,
+  no.~2, pp.~285--313, 2007.
+
+\bibitem{Cubas}
+J.~Cubas, S.~Pindado, and F.~Sorribes-Palmer, ``Analytical calculation of
+  photovoltaic systems maximum power point (mpp) based on the operation
+  point,'' {\em Applied Sciences}, vol.~7, no.~9, pp.~870--884, 2017.
+
+\bibitem{Brano}
+V.~Brano, A.~Orioli, G.~Ciulla, and A.~Gangi, ``Modeling , design and
+  simulation of stand-alone photovoltaic power systems with battery storage,''
+  {\em Solar Energy Materials \& Solar Cells}, vol.~94, pp.~1358--1370, 2010.
+
+\bibitem{Shenawy}
+E.~Shenawy, O.~Esmail, A.~Elbaset, and H.~Hamed, ``Practical identification of
+  photovoltaic module parameters,'' {\em ISESCO Journal of Science and
+  Technology}, vol.~11, no.~19, pp.~66--71, 2015.
+
+\bibitem{Tian}
+H.~Tian, F.~Mancilla–David, K.~Ellis, E.~Muljadic, and J.~Jenkins, ``A
+  detailed performance model for photovoltaic systems,'' tech. rep., National
+  Renewable Energy Laboratory, Colorado, 2012.
+
+\bibitem{Villalva}
+M.~Villalva, J.~Gazoli, and E.~Filho, ``Comprehensive approach to modeling and
+  simulation of photovoltaic arrays,'' {\em IEEE Transactions on Power
+  Electronics}, vol.~24, pp.~1198--1208, 2009.
+
+\bibitem{Ross}
+R.~Ross, ``Flat-plate photovoltaic array design optimization,'' in {\em 14th
+  IEEE Photovoltaic Specialists Conference} (C.~San~Diego, ed.),
+  pp.~1126--1132, 1980.
+
+\bibitem{Copetti}
+J.~Copetti, E.~Lorenzo, and F.~Chenlo, ``A general battery model for pv system
+  simulation,'' {\em Progress in Photovoltaics: Research and Applications},
+  vol.~1, no.~4, pp.~283--292, 1993.
+
+\bibitem{Sukamongkol}
+Y.~Sukamongkol, S.~Chungpaibulpatana, and W.~Ongsakul, ``A simulation model for
+  predicting the performance of a solar photovoltaic system with alternating
+  current loads,'' {\em Renewable Energy}, vol.~27, no.~2, pp.~237--258, 2002.
+
+\bibitem{Manwell93}
+J.~Manwell and J.~McGowan, ``Lead acid battery storage model for hybrid energy
+  systems,'' {\em Solar Energy}, vol.~50, no.~5, pp.~399--405, 1993.
+
+\bibitem{Manwell94}
+J.~Manwell and J.~McGowan, ``Extension of the kinetic battery model for
+  wind/hybrid power systems,'' in {\em 5th European Wind Energy Association
+  Conference}, pp.~284--289, 1994.
+
+\bibitem{Wenham}
+S.~Wenham, M.~Green, and M.~Watt, {\em Applied Photovoltaics}.
+\newblock Australia: Center for Photovoltaic Devices and Systems, 1994.
+
+\bibitem{Abdulateef}
+J.~Abdulateef, ``Simulation of solar off- grid photovoltaic system for
+  residential unit,'' {\em International Journal of Sustainable and Green
+  Energy. Special Issue: Engineering Solution for High Performance of Solar
+  Energy System}, vol.~4, no.~3-1, pp.~29--33, 2014.
+
+\bibitem{Mahanta}
+P.~Mahanta, K.~Debnath, and M.~Rahman, ``Modeling and simulation of a pv module
+  based power system using matlab/simulink,'' {\em Dhaka University Journal of
+  Science}, vol.~62, no.~2, pp.~127--132, 2014.
+
+\bibitem{Dhanowa}
+A.~Dhanowa and V.~Garg, ``Modeling and simulation of an off grid pv system for
+  with battery backup for remote and rural area network,'' {\em International
+  Journal of Engineering Research \& Technology (IJERT)}, vol.~4, no.~06,
+  pp.~915--918, 2015.
+
+\bibitem{Catherine}
+D.~Catherine and K.~Bhaskar, ``Simulation of a solar mppt charger using cuk
+  converter for standalone application,'' {\em International Journal of
+  Electrical, Electronics and Computer Systems (IJEECS)}, vol.~1, no.~1, 2013.
+
+\bibitem{Haque}
+A.~Haque, ``Maximum power point tracking (mppt) scheme for solar photovoltaic
+  system,'' {\em Energy Technology \& Policy}, vol.~1, no.~1, pp.~115--122,
+  2014.
+
+\bibitem{Clarke2008}
+E.~Clarke, {\em 25 Years of Model Checking}, ch.~The birth of model checking,
+  pp.~1--26.
+\newblock Springer, 2008.
+
+\bibitem{Forejt2011}
+F.~Forejt, M.~Kwiatkowska, G.~Norman, and D.~Parker, {\em Automated
+  Verification Techniques for Probabilistic Systems}, pp.~53--113.
+\newblock Berlin, Heidelberg: Springer Berlin Heidelberg, 2011.
+
+\bibitem{Kroening}
+D.~Kroening and M.~Tautschnig, ``Cbmc – c bounded model checker (competition
+  contribution),'' in {\em Tools and Algorithms for the Construction and
+  Analysis of Systems (TACAS)}, vol.~LNCS 8413, pp.~389--391, 2014.
+
+\bibitem{GadelhaSBMF}
+M.~Gadelha, L.~Cordeiro, and D.~Nicole, ``Encoding floating-points using the
+  smt theory in esbmc: An empirical evaluation over the sv-comp benchmarks,''
+  in {\em 20th Brazilian Symposium on Formal Methods (SBMF)}, vol.~LNCS 10623,
+  pp.~91--106, 2017.
+
+\bibitem{Ramalho}
+M.~Ramalho, M.~Freitas, F.~Sousa, H.~Marques, L.~Cordeiro, and B.~Fischer,
+  ``Smt-based bounded model checking of c++ programs,'' in {\em 20th IEEE
+  International Conference and Workshops on Engineering of Computer Based
+  Systems (ECBS)}, pp.~147--156, 2013.
+
+\bibitem{Brummayer}
+R.~Brummayer and A.~Biere, ``Boolector: An efficient smt solver for bit-vectors
+  and arrays,'' in {\em Tools and Algorithms for the Construction and Analysis
+  of Systems (TACAS)}, vol.~LNCS 5505, pp.~174--177, 2009.
+
+\bibitem{DeMoura}
+L.~D. Moura and N.~Bj$\o$rner, ``Z3: An efficient smt solver,'' in {\em Tools
+  and Algorithms for the Construction and Analysis of Systems (TACAS)},
+  vol.~LNCS 4963, pp.~337--340, 2008.
+
+\bibitem{Cimatti}
+A.~Cimatti, A.~Griggio, B.~Schaafsma, and R.~Sebastiani, ``The mathsat5 smt
+  solver,'' in {\em Tools and Algorithms for the Construction and Analysis of
+  Systems (TACAS)}, vol.~LNCS 7795, pp.~93--107, 2013.
+
+\bibitem{Dutertre}
+B.~Dutertre, ``Yices 2.2,'' in {\em Computer Aided Verification (CAV)}
+  (A.~Biere and R.~Bloem, eds.), vol.~LNCS 8559, pp.~734--744, 2014.
+
+\bibitem{Barrett}
+C.~Barrett, C.~Conway, M.~Deters, L.~Hadarean, D.~Jovanovic, T.~King,
+  A.~Reynolds, and C.~Tinelli, ``Cvc4,'' in {\em Computer Aided Verification},
+  vol.~LNCS 6806, pp.~171--177, 2011.
+
+\bibitem{UC}
+UC, ``Cyber-physical systems.'' http://cyberphysicalsystems.org/.
+\newblock Accessed 1st October, 2016.
+
+\bibitem{Alur}
+R.~Alur, R.~Bodik, G.~Juniwal, M.~Martin, M.~Raghothaman, S.~Seshia, R.~Singh,
+  A.~Solar-Lezama, E.~Torlak, and A.~Udupa in {\em 2013 Formal Methods in
+  ComputerAided Design}, pp.~1--17, 2013.
+
+\bibitem{Schrammel2017}
+P.~Schrammel, D.~Kroening, M.~Brain, R.~Martins, T.~Teige, and T.~Bienmüller,
+  ``Incremental bounded model checking for embedded software,'' {\em Formal
+  Aspects of Computing}, vol.~29, no.~5, pp.~911--931, 2017.
+
+\bibitem{Cordeiro}
+L.~Cordeiro, B.~Fischer, and J.~Marques-Silva, ``Smt-based bounded model
+  checking for embedded ansi-c software,'' {\em IEEE Transactions on Software
+  Engineering}, vol.~38, no.~4, pp.~957--974, 2012.
+
+\bibitem{GadelhaK}
+M.~Gadelha, H.~Ismail, and L.~Cordeiro, ``Handling loops in bounded model
+  checking of c programs via k-induction,'' {\em International Journal on
+  Software Tools for Technology Transfer STTT}, vol.~19, no.~1, pp.~97--114,
+  2017.
+
+\bibitem{Bessa}
+I.~Bessa, H.~Ismail, R.~Palhares, L.~Cordeiro, and J.~C. Filho, ``Formal
+  nonfragile stability verification of digital control systems with
+  uncertainty,'' {\em In IEEE Transactions on Computers}, vol.~66, no.~3,
+  pp.~545--552, 2017.
+
+\bibitem{Abateetal2017}
+A.~Abate, I.~Bessa, D.~Cattaruzza, L.~Cordeiro, C.~David, P.~Kesseli,
+  D.~Kroening, and E.~Polgreen, ``Automated formal synthesis of digital
+  controllers for state-space physical plants,'' in {\em Computer Aided
+  Verification}, vol.~LNCS 10426, pp.~462--482, 2017.
+
+\bibitem{Kremers}
+E.~Kremers, {\em Modelling and Simulation of Electrical Systems through a
+  Complex Systems Approach using Agent-Based Models}.
+\newblock Karlsruhe - Germany: KIT Scientific Publishing, Karlsruhe, 2013.
+
+\bibitem{Abateetal2014}
+A.~Abate, M.~Fränzle, I.~Hiskens, and M.~Strelec, ``Modeling, verification,
+  and control of complex systems for energy networks,'' {\em Dagstuhl Reports},
+  vol.~4, no.~10, pp.~69--97, 2014.
+
+\bibitem{Abate2017}
+A.~Abate, ``Verification of networks of smart energy systems over the cloud,''
+  in {\em Numerical Software Verification} (S.~Bogomolov, M.~Martel, and
+  P.~Prabhakar, eds.), vol.~LNCS 10152, pp.~1--14, 2017.
+
+\end{thebibliography}
