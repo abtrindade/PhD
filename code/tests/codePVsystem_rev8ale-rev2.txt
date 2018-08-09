@@ -1,0 +1,96 @@
+Started reading file: nondet_log.csv
+started nondet log
+  Call Function  : __VERIFIER_nondet_uint()
+  Value          : 152                                                                                                                                           
+  Line Number    : 228                                                                                                                                           
+  Function Scope : main                                                                                                                                          
+
+started nondet log
+  Call Function  : __VERIFIER_nondet_uint()
+  Value          : 152                                                                                                                                           
+  Line Number    : 234                                                                                                                                           
+  Function Scope : main                                                                                                                                          
+
+started nondet log
+  Call Function  : __VERIFIER_nondet_uint()
+  Value          : 152                                                                                                                                           
+  Line Number    : 228                                                                                                                                           
+  Function Scope : main                                                                                                                                          
+
+started nondet log
+  Call Function  : __VERIFIER_nondet_uint()
+  Value          : 152                                                                                                                                           
+  Line Number    : 234                                                                                                                                           
+  Function Scope : main                                                                                                                                          
+
+started nondet log
+  Call Function  : __VERIFIER_nondet_uint()
+  Value          : 152                                                                                                                                           
+  Line Number    : 228                                                                                                                                           
+  Function Scope : main                                                                                                                                          
+
+started nondet log
+  Call Function  : __VERIFIER_nondet_uint()
+  Value          : 152                                                                                                                                           
+  Line Number    : 234                                                                                                                                           
+  Function Scope : main                                                                                                                                          
+
+started nondet log
+  Call Function  : __VERIFIER_nondet_uint()
+  Value          : 152                                                                                                                                           
+  Line Number    : 228                                                                                                                                           
+  Function Scope : main                                                                                                                                          
+
+started nondet log
+  Call Function  : __VERIFIER_nondet_uint()
+  Value          : 152                                                                                                                                           
+  Line Number    : 234                                                                                                                                           
+  Function Scope : main                                                                                                                                          
+
+started nondet log
+  Call Function  : __VERIFIER_nondet_uint()
+  Value          : 152                                                                                                                                           
+  Line Number    : 228                                                                                                                                           
+  Function Scope : main                                                                                                                                          
+
+started nondet log
+  Call Function  : __VERIFIER_nondet_uint()
+  Value          : 152                                                                                                                                           
+  Line Number    : 234                                                                                                                                           
+  Function Scope : main                                                                                                                                          
+
+started nondet log
+  Call Function  : __VERIFIER_nondet_uint()
+  Value          : 152                                                                                                                                           
+  Line Number    : 228                                                                                                                                           
+  Function Scope : main                                                                                                                                          
+
+started nondet log
+  Call Function  : __VERIFIER_nondet_uint()
+  Value          : 152                                                                                                                                           
+  Line Number    : 234                                                                                                                                           
+  Function Scope : main                                                                                                                                          
+
+started nondet log
+  Call Function  : __VERIFIER_nondet_uint()
+  Value          : 152
+  Line Number    : 228
+  Function Scope : main
+
+started nondet log
+  Call Function  : __VERIFIER_nondet_uint()
+  Value          : 152
+  Line Number    : 234
+  Function Scope : main
+
+started nondet log
+  Call Function  : __VERIFIER_nondet_uint()
+  Value          : 152
+  Line Number    : 228
+  Function Scope : main
+
+started nondet log
+  Call Function  : __VERIFIER_nondet_uint()
+  Value          : 152
+  Line Number    : 234
+  Function Scope : main
