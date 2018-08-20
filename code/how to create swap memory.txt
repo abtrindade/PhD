@@ -1,0 +1,8 @@
+%swap file creation in Ubuntu/Linux
+sudo swapoff -a
+sudo dd if=/dev/zero of=/swapfile bs=1024 count=8192k    (16384k)
+sudo mkswap /swapfile
+sudo swapon /swapfile
+sudo swapon -s
+sudo chown root:root /swapfile
+sudo chmod 0600 /swapfile
