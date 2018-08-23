@@ -1,7 +1,7 @@
 /* --------------------------------------------------------------------------------------------------------
   Here is the code that describes the whole PV system, focused at the charge controller and decides if the 
   load can be met by the battery, PV panel or if is desconnected (system-off)
----------------------------------------------------------------------by Alessandro Trindade, JUL-AGO 2018 */
+------------------------------------------------------------------------by Alessandro Trindade, July 2018 */
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -294,7 +294,7 @@ int sizing_check(void){
 //main code
 int main(){
 	unsigned char SOC, checkstatus;
-     	int count, countlimit, AMBtemperature, G, demand_temp[]=loadcurve, demand;
+     	int count, countlimit, AMBtemperature, G, demand[]={45,16,16,16,16,16,0,0,0,72,72,222,150,150,0,0,72,72,814,814,814,742,742,16};
 	float tempf, drainedCurrent, PinDCmin, Idcmin, Idc, Vdc;
 
 	checkstatus = sizing_check();
@@ -309,12 +309,11 @@ int main(){
 
 		//defining minimum values to met the house requirements, considering demand, output voltage of VoutAC from inverter
 		//at the inverter:
-		demand = demand_temp[count];
-		PinDCmin = demand/ ni; //(PoutAC = efficiency*PinputDC)
+		PinDCmin = demand[count] / ni; //(PoutAC = efficiency*PinputDC)
 		//at the charge controller output (Vdc is 12*NBS and Idc must be greater than PinDC/Vdc)
 		Idcmin = PinDCmin / (Vbat*NBS);
 
-		drainedCurrent = demand / VoutAC;  
+		drainedCurrent = demand[count] / VoutAC; 
 
 		//Non-deterministic variable AMBtemperature (ambient temperature: in Manaus from 23 to 32 degree Celsius)
 		AMBtemperature = nondet_uint(); //ambient temperature
@@ -394,8 +393,8 @@ int main(){
 	if (auton <=8) countlimit = auton+15;  //means 16:00h + battery autonomy
 	else countlimit = 23;   //means go until 24:00h
 	for (count=16; count <= countlimit; count++){
-		demand = demand_temp[count];
-		drainedCurrent = demand / VoutAC; 
+
+		drainedCurrent = demand[count] / VoutAC; 
 
 		tempf = 100*drainedCurrent*6/bankcapacity;
         	__VERIFIER_assume(tempf>=0 && tempf<=100);
@@ -408,8 +407,8 @@ int main(){
 		if (auton <=16) countlimit = auton-8-1;  //means 16h + battery autonomy ?????????????
 		else countlimit = 7;   //means go until 7:00h
 		for (count=0; count <= countlimit; count++){
-			demand = demand_temp[count];
-			drainedCurrent = demand / VoutAC; 
+
+			drainedCurrent = demand[count] / VoutAC; 
 
 			tempf = 100*drainedCurrent*6/bankcapacity;
         		__VERIFIER_assume(tempf>=0 && tempf<=100);
@@ -426,12 +425,11 @@ int main(){
 
 		//defining minimum values to met the house requirements, considering demand, output voltage of VoutAC from inverter
 		//at the inverter:
-		demand = demand_temp[count];
-		PinDCmin = demand / ni; //(PoutAC = efficiency*PinputDC)
+		PinDCmin = demand[count] / ni; //(PoutAC = efficiency*PinputDC)
 		//at the charge controller output (Vdc is 12*NBS and Idc must be greater than PinDC/Vdc)
 		Idcmin = PinDCmin / (Vbat*NBS);
 
-		drainedCurrent = demand / VoutAC; 
+		drainedCurrent = demand[count] / VoutAC; 
 
 		//Non-deterministic variable AMBtemperature (ambient temperature: in Manaus from 23 to 32 degree Celsius)
 		AMBtemperature = nondet_uint(); //ambient temperature
@@ -510,8 +508,8 @@ int main(){
 	//from 16:00h to 7:00h
 	if (auton >= 25) {
 		for (count=16; count <= 23; count++){
-			demand = demand_temp[count];
-			drainedCurrent = demand / VoutAC; 
+
+			drainedCurrent = demand[count] / VoutAC; 
 
 			tempf = 100*drainedCurrent*6/bankcapacity;
         		__VERIFIER_assume(tempf>=0 && tempf<=100);
@@ -520,8 +518,8 @@ int main(){
 			assert(SOC>=SOClimit && SOC<=100); 
 		}
 		for (count=0; count <= 7; count++){
-			demand = demand_temp[count];
-			drainedCurrent = demand / VoutAC; 
+
+			drainedCurrent = demand[count] / VoutAC; 
 
 			tempf = 100*drainedCurrent*6/bankcapacity;
         		__VERIFIER_assume(tempf>=0 && tempf<=100);
@@ -534,5 +532,8 @@ int main(){
 
 //**** HERE END THE AUTOMATED VERIFICATION ********
 }
+
+
+
 
 
