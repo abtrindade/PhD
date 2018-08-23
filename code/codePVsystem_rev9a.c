@@ -132,6 +132,7 @@
 
 //controller
 #define nc 0.98
+#define IC 35
 
 //global variables
 int Parray, Iarray, Varray;
@@ -250,7 +251,7 @@ void pvmodel (int Gf, int AMBtemperaturef){
 
 int sizing_check(void){
 	char NTP;
-	float Ecorrected, Ep, NTPmin, NPSmin, NPPmin, Cbank, NBtotal, ICmin; 
+	float Ecorrected, Ep, NTPmin, NPSmin, NPPmin, Cbank, NBtotal, ICmin, Iscamb; 
 
 	//Econsumption = energy consumed in one day from the house
 	Ecorrected = Econsumption / (nb*nc*ni);
@@ -278,7 +279,7 @@ int sizing_check(void){
 	assert (VC == Vsystem); 
 
 	Iscamb = Iscref*(1+mii*(Tcell-25)); //from each PV panel
-	ICmin = Iscamb * NPP
+	ICmin = Iscamb * NPP;
 	assert (IC >= ICmin);
 
 	//inverter check
