@@ -36,4 +36,10 @@ time esbmc codePVsystem_rev3.c --no-bounds-check --no-pointer-check --no-div-by-
 time esbmc codePVsystem_rev4.c --no-bounds-check --no-pointer-check --no-div-by-zero-check --unwind 400 --smt-during-symex --smt-symex-guard --z3 -DHOUSE1 > house1.txt
 
 
+CBMC:
+#include <asert.h>
+
+criar função POW
+
+ ./cbmc ~/Documents/PhD/code/codePVsystem_rev10.c --unwind 400 --z3 -DHOUSE5 > house5_cbmc_24082018.txt
 
