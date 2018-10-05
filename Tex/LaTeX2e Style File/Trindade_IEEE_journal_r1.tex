@@ -433,7 +433,7 @@
 % As a general rule, do not put math, special symbols or citations
 % in the abstract or keywords.
 \begin{abstract}
-The deployment of renewable energy in off-grid systems is growing in both developed and developing countries. With declining costs and increasing performance, off-grid renewable energy systems could become an important growth market for the future deployment of renewables according to International Renewable Energy Agency. The impact of off-grid renewable energy systems will not only be measured in terms of their usage or reduced costs for electricity consumption in rural areas, but also in the context of their effect on the lives of more than 1.3 billion people who today do not have access to electricity. Electrification of rural areas can improve the standard of education, health conditions, and living of this population. In addition, depending on the geography of the country, using renewable energy sources in off-grid mode is a feasible solution if compared to grid extension. Tools to aid the design and validation of rural electrification projects are available; however, there is no software that applies formal verification to analyze, and evaluate rural electrification projects. This paper aims to build the framework to apply automated verification methods to mathematical models of a complete system of rural electrification with solar photovoltaic energy to validate its design from a formal verification perspective. Results show that the proposed tool can find situations where the sized solar photovoltaic system fails to met the requirements demanded to electrify a house, and that simulation made with commercial tools can not find the same fail. Data from practical application of solar systems prove the results obtained by the tool.
+The deployment of renewable energy in off-grid systems is growing in both developed and developing countries. With declining costs and increasing performance, off-grid renewable energy systems could become an important growth market for the future deployment of renewables according to International Renewable Energy Agency. The impact of off-grid renewable energy systems will not only be measured in terms of their usage or reduced costs for electricity consumption in rural areas, but also in the context of their effect on the lives of more than 1.3 billion people who today do not have access to electricity. Electrification of rural areas can improve the standard of education, health conditions, and living of this population. In addition, depending on the geography of the country, using renewable energy sources in off-grid mode is a feasible solution if compared to grid extension. Tools to aid the design and validation of rural electrification projects are available; however, there is no software that applies formal verification to analyze, and evaluate rural electrification projects. This paper aims to build the framework to apply automated verification methods to mathematical models of a system of rural electrification with solar photovoltaic energy to validate its design from a formal verification perspective. Results show that the proposed tool can find situations where the sized solar photovoltaic system fails to met the requirements demanded to electrify a house, and that simulation made with commercial tools can not find the same fail. Data from practical application of solar systems prove the results obtained by the tool.
 \end{abstract}
 
 % Note that keywords are not normally used for peerreview papers.
@@ -471,17 +471,24 @@ Automated verification, model checking, energy systems, solar photovoltaic syste
 % and "HIS" in caps to complete the first word.
 \IEEEPARstart{A}{ccording} to \cite{Coelho} there are presently 1.3 billion people with no access to electricity worldwide. The definition of energy access usually includes both electricity access and access to modern fuels for cooking and heating, in order to replace traditional biomass. Increased access to energy allows economic growth and poverty alleviation \cite{Karekesi}. 
 
-Among the options of renewable sources, there are hydro, wind, and solar photovoltaic (PV). Only a niche market a few years ago, PV are now becoming a mainstream electricity provider, changing the way the world is powered. Based in data from \cite{EPIA}, there was an increase of approximately 30\% from 2013 to 2014 in terms of new installations of PV. The use of the power generation technology with renewable energy source is developing rapidly due to the industrial development \cite{Yatimi}. The renewable energy leads to an advance all over the world by protecting the environment: it is clean (low greenhouse gases emissions), operating silently, long lifetime, low maintenance, absence of fuel cost and inexhaustible \cite{Noroozian}. Renewable energy, and particularly the power generation from solar energy using photovoltaic (PV) panels, has emerged as an alternative to fossil or nuclear fuel generation. The increase in a number of PV systems installed all over the world brings the need for proper modeling and simulation tools for researcher and practitioners involved in their application. 
+Among the options of renewable sources, there are hydro, wind, and solar photovoltaic (PV). Only a niche market a few years ago, PV are now becoming a mainstream electricity provider, changing the way the world is powered. Based in data from \cite{EPIA}, there was an increase of approximately 50\% from 2016 to 2017 in terms of new installations of PV. The use of the power generation technology with renewable energy source is developing rapidly due to the industrial development \cite{Yatimi}. The renewable energy leads to an advance all over the world by protecting the environment: it is clean,
+%(low greenhouse gases emissions)
+operating silently, long lifetime, low maintenance, absence of fuel cost and inexhaustible \cite{Noroozian}. Renewable energy, and particularly the power generation from solar energy using photovoltaic (PV) panels, has emerged as an alternative to fossil or nuclear fuel generation.
+ 
+The PV cell in a solar photovoltaic system, as defined in \cite{Rawat}, is a semiconductor device, which directly converts the solar radiation into electrical energy. Apart from PV modules; the PV systems consist of battery bank, controller, and inverter, plus the load. Moreover, the optimum sizing of these devices is important for reliable operation. Therefore, these systems need to be designed properly according to the site, land area available, load requirement, load pattern, environmental conditions and economics in order to utilize available resources efficiently and economically \cite{Rawat}. 
+
+The increase in a number of PV systems installed all over the world brings the need for proper modeling and simulation tools for researcher and practitioners involved in their application. 
 
 In order to validate or even simulate a potential PV solution, there are a myriad of tools. However, to the best of our knowledge, this work can be the first work to perform automated verification of a solar PV off-grid project solution.  
 
-According to \cite{SEIA} and \cite{Chauhan}, solar is the most abundant source of renewable energy on earth. In SPV system, solar radiations are captured from the sun and turned into electricity using SPV cells made of silicon and other materials. SPV systems can be classified into grid-connected and stand-alone systems. At this proposal, only off-grid or stand-alone systems will be considered. The utilization of solar energy in off-grid mode has the potential to meet the energy need for remote rural areas of developing countries.  
+%According to \cite{SEIA} and \cite{Chauhan}, solar is the most abundant source of renewable energy on earth. In SPV system, solar radiations are captured from the sun and turned into electricity using SPV cells made of silicon and other materials. SPV...
 
-The PV cell in a solar photovoltaic system, as defined in \cite{Rawat}, is a semiconductor device, which directly converts the solar radiation into electrical energy. Apart from PV modules; the PV systems consist of battery bank, controller, and inverter, plus the load. Moreover, the optimum sizing of these devices is important for reliable operation. Therefore, these systems need to be designed properly according to the site, land area available, load requirement, load pattern, environmental conditions and economics in order to utilize available resources efficiently and economically \cite{Rawat}. 
  
-In order to address different aspects of a SPV project, there is a myriad of public domain and commercial software available. According to \cite{Brooks}, the capabilities of these tools range from simple solar resource and energy production estimative, to site survey and system design tools, to complex financial analysis software (with optimization). Some tools also provide support to rebate programs applications and tax incentives (specific to each country or region), while other programs and worksheets focus on the technical aspects of system sizing and design.  
+%In order to address different aspects of a SPV project, there is a myriad of public domain and commercial software available. According to \cite{Brooks}, the capabilities of these tools range from simple solar resource and energy production estimative, to site survey and system design tools, to complex financial analysis software (with optimization). Some tools also provide support to rebate programs applications and tax incentives (specific to each country or region), while other programs and worksheets focus on the technical aspects of system sizing and design.  
 
-Manufactures and integrators have yet their proprietary software to perform various system sizing, with the drawback of include just their own products among the possibilities of choice, what restrict the solution. 
+%Manufactures and integrators have yet their proprietary software to perform various system sizing, with the drawback of include just their own products among the possibilities of choice, what restrict the solution. 
+
+PV systems can be classified into grid-connected and stand-alone systems. At this proposal, only off-grid or stand-alone systems will be considered. The utilization of solar energy in off-grid mode has the potential to meet the energy need for remote rural areas of developing countries.  
 
 Changing the subject to the design of complex systems, more time is spent on verification than on construction, as shown in \cite{Baier}. Formal methods based on model checking offer great potential to obtain a more effective and faster verification in the design process. Programs, and more generally computer systems, may be viewed as mathematical objects with behavior that is, in principle, well determined. This makes it possible to specify programs using mathematical logic, which constitutes the intended (correct) behavior. Then, one can try to give a formal proof or otherwise establish that the program meets its specification, as defined by \cite{Trindade}. 
 
@@ -491,7 +498,7 @@ In the recent decades, research in formal methods has led to the development of 
 
 Model-based verification techniques are based on models that describe the possible system behavior in a mathematically precise and unambiguous manner. Thus, such problems as incompleteness, ambiguities, and inconsistencies, which normally are discovered only in later stages of the design, can be detected in advance, as described by \cite{Trindade}. Algorithms can verify the system model through systematically explore all their states. 
 
-Bringing this idea to the field of solar photovoltaic systems, instead of finding a bug or a software inconsistence, the present work aim to verify a complete PV system project, informing in which condition the project do not meet user requirements or will fail. Among the non-deterministic variables evaluated, is it worth to mention environmental issues (like solar irradiance, and temperature), and the variation of the electrical load (power consumption) or the battery' state of charge, as shown in Fig.\ref{fig:flowchartgeneral}. That is the main contribution of this paper.
+Bringing this technique to the field of solar photovoltaic systems, instead of finding a bug or a software inconsistence, the present work aim to verify a PV system project, informing in which condition the project do not meet user requirements or will fail. Among the non-deterministic variables considerated, is it worth to mention environmental issues (like solar irradiance, and temperature), and the variation of the electrical load (power consumption) or the battery' state of charge, as shown in Fig.\ref{fig:flowchartgeneral}. That is the main contribution of this paper.
 
 \begin{figure}[h]
 \includegraphics[width=0.4\textwidth]{flowchart_verification.png}
@@ -500,86 +507,93 @@ Bringing this idea to the field of solar photovoltaic systems, instead of findin
 \label{fig:flowchartgeneral}
 \end{figure}
 
-The framework provided at this paper outlines the requirements, the process and the mathematical modeling to perform automated formal verification of a complete PV off-grid system, using the satisfiability modulo theories (SMT)-based verification method.
+%The framework provided at this paper outlines the requirements, the process and the mathematical modeling to perform automated formal verification of a PV off-grid system, using the satisfiability modulo theories (SMT)-based verification method.
  
-To the best of our knowledge, this is the first work to use an SMT-based verification tool to solve this kind of problem. 
+To the best of our knowledge, this is the first work to use a
+%n SMT-based 
+verification tool to solve this kind of problem. 
 
-The implementation of the ideas will be done with the efficient SMT-based bounded model checker (ESBMC) tool that uses the front-end of the C Bounded Model Checker (CBMC) or the clang-based front-end, which permits to describe the problem as a C/C++ language code.
+The implementation of the
+% ideas will be 
+proposed framework is done with the efficient SMT-based bounded model checker (ESBMC) tool that uses the front-end of the C Bounded Model Checker (CBMC) or the clang-based front-end, which permits to describe the PV system as a C/C++ language code.
  
 The remainder of this paper is organized as follows: Sect. 2 gives a background of solar PV systems. Section 3 describes the design and validation of a solar PV system. Section 4 describes the formal mathematical modeling of a generic PV system. Section 5 presents the automated verification theory, including details of the ESBMC process. The methodology is presented at Section 6. Section 7 discusses the related work. Section 8 presents the conclusion and describes future work. At the end of the paper, there is a list of all nomenclatures used at the text. 
 
 \section{Solar Photovoltaic System }
 According to \cite{Roy}, a PV system is designed to give the electric supply to a load. This load can be either Alternate Current (AC) type or Direct Current (DC) type. Electric supply can be needed either in daytime or evening time (in particular cases, in both times). The most basic PV system can give supply only in daytime.  For night hours or rainy days, one needed to have batteries, where power can be stored and used \cite{Gules}. 
 
-PV systems are broadly classified into three distinct types, as described by \cite{Mohanty}: 
+PV systems are broadly classified into three distinct types, as described by \cite{Mohanty}: Standalone systems, where the energy is generated and consumed in the same place and which does not interact with the main grid, Grid-connected systems, and solar PV hybrid system, where another source(s) of energy, such as wind, biomass or diesel, can work together with the solar PV system to provide the required demand.
 
-\begin{itemize}
-\item Standalone systems, where the energy is generated and consumed in the same place and which does not interact with the main grid. Normally, the electricity consuming/utilizing device is part of the system, i.e., solar home systems, solar street lighting system, solar lanterns, and solar power plants; 
-\item Grid-connected systems, where the solar PV system is connected to the grid. The grid-connected system can be either a grid-tied system, which can only feed power into the grid and such system cannot deliver power locally during blackouts and emergencies since these systems have to be completely disconnected from the grid and have to be shut down as per national and international electrical safety standards. Some grid-connected PV systems, with energy storage, can also provide power locally in an islanding mode; 
-\item Solar PV hybrid system: In a hybrid system, another source(s) of energy, such as wind, biomass or diesel, can work together with the solar PV system to provide the required demand. In such type of system, main objective is to bring more reliability into the overall system at an affordable way by adding one or more energy sources.
-\end{itemize}
+As the goal of this work is just the solutions aimed to isolated/ off-grid application, therefore it is not considered the on-grid or hybrid configurations.
+
+%\begin{itemize}
+%\item Standalone systems, where the energy is generated and consumed in the same place and which does not interact with the main grid. Normally, the electricity consuming/utilizing device is part of the system, i.e., solar home systems, solar street lighting system, solar lanterns, and solar power plants; 
+%\item Grid-connected systems, where the solar PV system is connected to the grid. The grid-connected system can be either a grid-tied system, which can only feed power into the grid and such system cannot deliver power locally during blackouts and emergencies since these systems have to be completely disconnected from the grid and have to be shut down as per national and international electrical safety standards. Some grid-connected PV systems, with energy storage, can also provide power locally in an islanding mode; 
+%\item Solar PV hybrid system: In a hybrid system, another source(s) of energy, such as wind, biomass or diesel, can work together with the solar PV system to provide the required demand. In such type of system, main objective is to bring more reliability into the overall system at an affordable way by adding one or more energy sources.
+%\end{itemize}
  
-Specifically concerning isolated communities, depending on the type of load, cost, resources availability, and requirements of the load, standalone systems can be split into several categories, which are described in this section. As the goal of this Thesis is just the solutions aimed to isolated/ off-grid application, therefore it is not considered the on-grid or hybrid configurations.
+Specifically concerning isolated communities, depending on the type of load, cost, resources availability, and requirements of the load, standalone systems can be split into several categories. However, the configuration that is most common nowadays related to off-grid individual system, is the regulated standalone system with battery and AC load.
+
+This configuration includes PV array, battery, MPPT and AC load. Battery is used to store the extra power of PV system. A charge controller is necessary for this type of system because the useful life of the battery is less than that of the PV module. Extra charging and deep discharging can reduce the battery life \cite{Kim}. Because of the AC load, an inverter (DC to AC converter) is required. This solution has an increase of cost because has more equipment. However, the AC availability brings the advantage of a higher number of AC appliances to use at the houses or consumer units.
  
-There is a resource, called maximum power point tracking (MPPT), which is an electronic control mechanism that maintains the PV operating in a voltage that correspond to the voltage of maximum power, which maximizes the transfer of power and avoiding lost at the PV cells \cite{Pinho}. That resource is found at modern PV systems and is strongly indicated due to its advantages.
+The resource MPPT, called of maximum power point tracking, is an electronic control mechanism that maintains the PV operating in a voltage that correspond to the voltage of maximum power, which maximizes the transfer of power and avoiding lost at the PV cells \cite{Pinho}. %That resource is found at modern PV systems and is strongly indicated due to its advantages.
 
-\subsection{Unregulated standalone PV system with DC load }
-Usually this type of system is for low power applications, as defined by \cite{Roy}. The PV system is directly connected to the load without any MPPT controller, as shown at Fig.\ref{fig:standaloneSPV} letter (a). At night hours, the system will not provide any supply because of the absence of the battery. 
+%\subsection{Unregulated standalone PV system with DC load }
+%Usually this type of system is for low power applications, as defined by \cite{Roy}. The PV system is directly connected to the load without any MPPT controller, as shown at Fig.\ref{fig:standaloneSPV} letter (a). At night hours, the system will not provide any supply because of the absence of the battery. 
  
-\begin{figure}[h]
-\includegraphics[width=0.5\textwidth]{reg_unreg4.png}
-\centering
-\caption{PV standalone systems: (a) regulated standalone SPV system with DC load; (b) regulated standalone SPV system with DC load; (c) regulated standalone SPV system with battery DC load; and (d) regulated standalone system with battery and AC load  (Source: \cite{Roy})}
-\label{fig:standaloneSPV}
-\end{figure}
+%\begin{figure}[h]
+%\includegraphics[width=0.5\textwidth]{reg_unreg4.png}
+%\centering
+%\caption{PV standalone systems: (a) regulated standalone SPV system with DC load; (b) regulated standalone SPV system with DC load; (c) regulated standalone SPV system with battery DC load; and (d) regulated standalone system with battery and AC load  (Source: \cite{Roy})}
+%\label{fig:standaloneSPV}
+%\end{figure}
 
-\subsection{Regulated standalone PV system with DC load}
-It is similar to unregulated standalone system with DC load, but the main difference between this and the previous one is that this system requires a MPPT technique, as illustrated by Fig.\ref{fig:standaloneSPV} letter (b). Usually system with MPPT should have battery; otherwise, extra power will be waste.
+%\subsection{Regulated standalone PV system with DC load}
+%It is similar to unregulated standalone system with DC load, but the main difference between this and the previous one is that this system requires a MPPT technique, as illustrated by Fig.\ref{fig:standaloneSPV} letter (b). Usually system with MPPT should have battery; otherwise, extra power will be waste.
 
-\subsection{Regulated standalone system with battery and DC load}
-Configuration with PV array, battery, MPPT and DC load, as shown in Fig.\ref{fig:standaloneSPV} letter (c). Battery is used to store the extra power of PV system. A charge controller is necessary for this type of system because the useful life of the battery is less than that of the PV module. Extra charging and deep discharging can reduce the battery life \cite{Kim}. 
+%\subsection{Regulated standalone system with battery and DC load}
+%Configuration with PV array, battery, MPPT and DC load, as shown in Fig.\ref{fig:standaloneSPV} letter (c). Battery is used to store the extra power of PV system. A charge controller is necessary for this type of system because the useful life of the battery is less than that of the PV module. Extra charging and deep discharging can reduce the battery life \cite{Kim}. 
 
-According to \cite{Pinho}, PV systems that are used to feed loads with low variation on the consumption can be sized to operate without the controller. That is called of self-regulated standalone PV system with battery. However, the voltage from the PV panel must be compatible with the batteries voltage. Normally, the bank of batteries are oversized related to the PV panel and to the load. The drawback is the operation of the batteries, normally overloaded or with excessive discharges (that can damage the batteries).
+%According to \cite{Pinho}, PV systems that are used to feed loads with low variation on the consumption can be sized to operate without the controller. That is called of self-regulated standalone PV system with battery. However, the voltage from the PV panel must be compatible with the batteries voltage. Normally, the bank of batteries are oversized related to the PV panel and to the load. The drawback is the operation of the batteries, normally overloaded or with excessive discharges (that can damage the batteries).
 
-\subsection{Regulated standalone system with battery, AC load}
-This system is similar to the previous one, but here AC load draws the power from PV system and, because of the AC load, an inverter (DC to AC converter) is required, as seen in Fig.\ref{fig:standaloneSPV} letter (d). This solution has an increase of cost because has more equipments. However, the AC availability brings the advantage of a higher number of AC appliances to use at the houses or consumer units. That configuration is the focus of the present thesis since it is the most common nowadays all over the world, when off-grid or isolated regions is the target.
+%\subsection{Regulated standalone system with battery and AC load}
+%This system is similar to the previous one, but here AC load draws the power from PV system and, because of the AC load, an inverter (DC to AC converter) is required, as seen in Fig.\ref{fig:standaloneSPV} letter (d). This solution has an increase of cost because has more equipments. However, the AC availability brings the advantage of a higher number of AC appliances to use at the houses or consumer units. That configuration is the focus of the present work since it is the most common nowadays all over the world, when off-grid or isolated regions is the target.
 
 \section{Design and Validation of a Solar photovoltaic system}
-The design and validation of a SPV system can be done by hand or with the aid of a software tool. 
+The design and validation of a PV system can be done by hand or with the aid of a software tool. 
 
-In order to address different aspects of project system and systems design, there is a myriad of public domain and commercial software available for the SPV market. According to \cite{Brooks}, the capabilities of these tools range from simple solar resource and energy production estimative, to site survey and system design tools, to complex financial analysis software (with optimization). Some tools also provide support to rebate programs applications and tax incentives (specific to each country or region), while other programs and worksheets focus on the technical aspects of system sizing and design.
+In order to address different aspects of project system and systems design, there is a myriad of public domain and commercial software available for the PV market. According to \cite{Brooks}, the capabilities of these tools range from simple solar resource and energy production estimation, to site survey and system design tools, to complex financial analysis software (with optimization). Some tools also provide support to rebate programs applications and tax incentives (specific to each country or region), while other programs and worksheets focus on the technical aspects of system sizing and design.
  
-Manufacturers and integrators have yet their proprietary software to perform inverter string sizing and various system sizing and design tools, with the drawback to just include their own products among the possibilities of choice. 
-In this study, the most popular tools are presented: PVWatts, SAM, Homer, RETScreen, and Hybrid2.
+Manufacturers and integrators have yet their proprietary software to perform inverter string sizing and various system sizing and design tools, with the drawback to just include their own products among the possibilities of choice. In this work, were evaluated the most popular tools, as PVWatts, SAM, Homer Pro, RETScreen Expert, and Hybrid2.
 
-\subsection{PVWatts Calculator}
-According to \cite{Freeman} and \cite{NRELDobos}, it is a web application developed by the National Renewable Energy Laboratory (NREL), which estimates the electricity production of a grid-connected roof- or ground-mounted photovoltaic system based on a few inputs. According to \cite{NRELDobos}, to use the calculator, it is necessary to provide information about the system's location, basic design parameters, and system economics. PVWatts calculates estimated values for the system's annual and monthly electricity production, and for the electricity monetary value. This tool is suitable for very preliminary studies of a potential location for a photovoltaic system that uses crystalline silicon or thin film photovoltaic modules. The production estimates that PVWatts computation do not account for many factors that are important in the design of a photovoltaic system, therefore it is necessary support of an energy expert. The calculator estimates the monthly and annual electricity production of a photovoltaic system using an hour-by-hour simulation over a period of one year. To represent the system's physical characteristics, PVWatts requires values for six inputs: System DC size; Module type; Array type; System losses; Array tilt angle; Array azimuth angle.
+%\subsection{PVWatts Calculator}
+%According to \cite{Freeman} and \cite{NRELDobos}, it is a web application developed by the National Renewable Energy Laboratory (NREL), which estimates the electricity production of a grid-connected roof- or ground-mounted photovoltaic system based on a few inputs. According to \cite{NRELDobos}, to use the calculator, it is necessary to provide information about the system's location, basic design parameters, and system economics. PVWatts calculates estimated values for the system's annual and monthly electricity production, and for the electricity monetary value. This tool is suitable for very preliminary studies of a potential location for a photovoltaic system that uses crystalline silicon or thin film photovoltaic modules. The production estimates that PVWatts computation do not account for many factors that are important in the design of a photovoltaic system, therefore it is necessary support of an energy expert. The calculator estimates the monthly and annual electricity production of a photovoltaic system using an hour-by-hour simulation over a period of one year. To represent the system's physical characteristics, PVWatts requires values for six inputs: System DC size; Module type; Array type; System losses; Array tilt angle; Array azimuth angle.
 
-\subsection{SAM}
-SAM or System Advisor Model is a software from the U.S. Department of Energy and National Renewable Energy Laboratory. According to \cite{NRELBlair} and \cite{Cameron2008}, SAM is intended to help users to determine whether the model meets their project constraints/specifications, and (also) to provide information for readers who do not plan to use the model, but want to learn about its capabilities. SAM is a performance and financial model designed to facilitate decision making for people involved in the renewable energy industry: Project managers and engineers; Financial and policy analysts; Technology developers; and Researchers. SAM makes performance predictions and cost of energy estimates for grid-connected power projects based on installation and operating costs and system design parameters that you specify as inputs to the model. Projects can be either on the customer side of the utility meter, where they buy and sell electricity at retail rates, or on the utility side of the meter, where they sell electricity at a price negotiated through a power purchase agreement. SAM is an electric power generation model and assumes that the renewable energy system delivers power either to an electric grid, or to a grid-connected building or facility to meet electric load. It does not model thermal energy systems that meet a thermal process load. As mentioned in \cite{NRELBlair}, SAM does not model isolated or off-grid power systems, and does not model systems with electricity storage batteries.
+%\subsection{SAM}
+%SAM or System Advisor Model is a software from the U.S. Department of Energy and National Renewable Energy Laboratory. According to \cite{NRELBlair} and \cite{Cameron2008}, SAM is intended to help users to determine whether the model meets their project constraints/specifications, and (also) to provide information for readers who do not plan to use the model, but want to learn about its capabilities. SAM is a performance and financial model designed to facilitate decision making for people involved in the renewable energy industry: Project managers and engineers; Financial and policy analysts; Technology developers; and Researchers. SAM makes performance predictions and cost of energy estimates for grid-connected power projects based on installation and operating costs and system design parameters that you specify as inputs to the model. Projects can be either on the customer side of the utility meter, where they buy and sell electricity at retail rates, or on the utility side of the meter, where they sell electricity at a price negotiated through a power purchase agreement. SAM is an electric power generation model and assumes that the renewable energy system delivers power either to an electric grid, or to a grid-connected building or facility to meet electric load. It does not model thermal energy systems that meet a thermal process load. As mentioned in \cite{NRELBlair}, SAM does not model isolated or off-grid power systems, and does not model systems with electricity storage batteries.
 
-\subsection{HOMER}
-As defined in \cite{HOMER}, actually is a set of two tools: HOMER Legacy and HOMER Pro. HOMER is an acronym for Hybrid Optimization Model for Multiple Energy Resources. HOMER Legacy is the original HOMER software version created at the National Renewable Energy Laboratory (NREL). HOMER Legacy is a free computer model that simplifies the task of evaluating design options for both off-grid and grid-connected power systems for remote, stand-alone, and distributed generation applications. HOMER's optimization and sensitivity analysis algorithms allow the user to evaluate the economic and technical feasibility of a large number of technology options. Since 2016 Homer Legacy can be found at HOMER web site, but only available for students and nonprofit organizations, as defined in \cite{HOMER}, and has not support available. At the short-time only the commercial version will remain.
+%\subsection{HOMER}
+%As defined in \cite{HOMER}, actually is a set of two tools: HOMER Legacy and HOMER Pro. HOMER is an acronym for Hybrid Optimization Model for Multiple Energy Resources. HOMER Legacy is the original HOMER software version created at the National Renewable Energy Laboratory (NREL). HOMER Legacy is a free computer model that simplifies the task of evaluating design options for both off-grid and grid-connected power systems for remote, stand-alone, and distributed generation applications. HOMER's optimization and sensitivity analysis algorithms allow the user to evaluate the economic and technical feasibility of a large number of technology options. Since 2016 Homer Legacy can be found at HOMER web site, but only available for students and nonprofit organizations, as defined in \cite{HOMER}, and has not support available. At the short-time only the commercial version will remain.
  
-The commercial version (paid), called HOMER Pro, as defined in \cite{Swarnkar}, is a tool for optimizing micro-grid design in all sectors, from village power and island utilities to grid-connected campuses and military bases. HOMER Pro put together three tools in one product: optimization, simulation, and sensitivity analysis. HOMER Pro provides the detailed rigor of chronological simulation and optimization in a model that is intended to be easy to use. It is adaptable to a wide variety of projects. For a village or community-scale power system, HOMER can model both the technical and economic factors involved in the project. For larger systems, HOMER can provide an overview that compares the cost and feasibility of different configurations. Chronological simulation is essential for modeling variable resources, such as solar and wind power and for combined heat and power applications, where the thermal load is variable. HOMER's sensitivity analysis helps determine the potential impact of uncertain factors such as fuel prices or wind speed on a given system. 
+%The commercial version (paid), called HOMER Pro, as defined in \cite{Swarnkar}, is a tool for optimizing micro-grid design in all sectors, from village power and island utilities to grid-connected campuses and military bases. HOMER Pro put together three tools in one product: optimization, simulation, and sensitivity analysis. HOMER Pro provides the detailed rigor of chronological simulation and optimization in a model that is intended to be easy to use. It is adaptable to a wide variety of projects. For a village or community-scale power system, HOMER can model both the technical and economic factors involved in the project. For larger systems, HOMER can provide an overview that compares the cost and feasibility of different configurations. Chronological simulation is essential for modeling variable resources, such as solar and wind power and for combined heat and power applications, where the thermal load is variable. HOMER's sensitivity analysis helps determine the potential impact of uncertain factors such as fuel prices or wind speed on a given system. 
 
-\subsection{RETScreen}
-As mentioned in \cite{Pradhan}, RETScreen is a decision-support tool designed to help decision makers and energy professionals to evaluate the financial viability of renewable energy, energy efficiency, and/or co-generation projects.
+%\subsection{RETScreen}
+%As mentioned in \cite{Pradhan}, RETScreen is a decision-support tool designed to help decision makers and energy professionals to evaluate the financial viability of renewable energy, energy efficiency, and/or co-generation projects.
 
-RETScreen models various types of renewable energy technologies (RETs), allowing for comparisons between technology options. The software can be used to evaluate benefits from both clean energy production from power generation projects and savings through energy efficiency projects, accounting for project costs, greenhouse gas emission reductions, and financial risk. The software is freely distributed (but with restrictions to save work or print), and had three different versions:
+%RETScreen models various types of renewable energy technologies (RETs), allowing for comparisons between technology options. The software can be used to evaluate benefits from both clean energy production from power generation projects and savings through energy efficiency projects, accounting for project costs, greenhouse gas emission reductions, and financial risk. The software is freely distributed (but with restrictions to save work or print), and had three different versions:
 
-\begin{itemize}
-\item RETScreen 4 (discontinued, requires Microsoft Excel to run); 
-\item RETScreen Software Suit, which includes the RETScreen 4 and a Windows-based graphical software that allows project owners to verify the ongoing energy performance of their facilities (discontinued in 2013);
-\item And the actual (2016) RETScreen Expert, which allows users to evaluate energy investments over an entire project life-cycle (including benchmarking, feasibility, and performance analysis) in a fully integrated way, and within one software platform. However, this version works is only Windows-based. This version has a complete paid version, in an annual subscription way.
-\end{itemize}
+%\begin{itemize}
+%\item RETScreen 4 (discontinued, requires Microsoft Excel to run); 
+%\item RETScreen Software Suit, which includes the RETScreen 4 and a Windows-based graphical software that allows project owners to verify the ongoing energy performance of their facilities (discontinued in 2013);
+%\item And the actual (2016) RETScreen Expert, which allows users to evaluate energy investments over an entire project life-cycle (including benchmarking, feasibility, and performance analysis) in a fully integrated way, and within one software platform. However, this version works is only Windows-based. This version has a complete paid version, in an annual subscription way.
+%\end{itemize}
 
-As described by \cite{Pradhan}, RETScreen performs a five-step standard analysis: setting and site conditions; energy model; cost analysis; emission analysis, financial analysis, sensitivity, and risk analysis. It is developed and maintained by the Government of Canada, through the CanmetENERGY Varennes Research Centre of Natural Resources; in collaboration with: NASA; Renewable Energy and Energy Efficiency Partnership (REEEP); United Nations Environment Programme (UNEP), and the Global Environment Facility (GEF). RETScreen is available in 36 languages; it is a multi-awarded tool, and includes equipment databases for components manufactured and available worldwide.
+%As described by \cite{Pradhan}, RETScreen performs a five-step standard analysis: setting and site conditions; energy model; cost analysis; emission analysis, financial analysis, sensitivity, and risk analysis. It is developed and maintained by the Government of Canada, through the CanmetENERGY Varennes Research Centre of Natural Resources; in collaboration with: NASA; Renewable Energy and Energy Efficiency Partnership (REEEP); United Nations Environment Programme (UNEP), and the Global Environment Facility (GEF). RETScreen is available in 36 languages; it is a multi-awarded tool, and includes equipment databases for components manufactured and available worldwide.
 
-\subsection{Hybrid2}
-The Hybrid2 software package, as described in \cite{Mills}, is a user-friendly tool to perform detailed long-term performance and economic analysis on a wide variety of hybrid power systems. Hybrid2 is a probabilistic/time series computer model, using time series data for loads, wind speed, solar insolation, and temperature; and the power system is designed or selected by the user, in order to predict the performance of the hybrid power system. Variations in wind speed and in load within each time step are factored into the performance predictions. The code does not consider short-term system fluctuations caused by system dynamics or component transients. This program is not supported anymore and according to \cite{UMASS}, probably after the user performs the free download of the tool, it will not work on Windows platforms later than Windows XP, what is a limitation.
+%\subsection{Hybrid2}
+%The Hybrid2 software package, as described in \cite{Mills}, is a user-friendly tool to perform detailed long-term performance and economic analysis on a wide variety of hybrid power systems. Hybrid2 is a probabilistic/time series computer model, using time series data for loads, wind speed, solar insolation, and temperature; and the power system is designed or selected by the user, in order to predict the performance of the hybrid power system. Variations in wind speed and in load within each time step are factored into the performance predictions. The code does not consider short-term system fluctuations caused by system dynamics or component transients. This program is not supported anymore and according to \cite{UMASS}, probably after the user performs the free download of the tool, it will not work on Windows platforms later than Windows XP, what is a limitation.
 
-Table \ref{table:softwares} summarizes the tools described in this paper.  Where just Hybrid2 do not have technical support; only HOMER, RETScreen and Hybrid2 perform off-grid system or battery backup analysis; all the tools perform solar photovoltaic analysis; and that only HOMER and RETScreen are complete, including economical analysis or even optimization-sensitive analysis. However, only paid version of those softwares have all the features, and they run only at Windows-based operational systems.
+Table \ref{table:softwares} summarizes the off-the-shelf tools mentioned in this paper.  Where just Hybrid2 do not have technical support; only HOMER Pro, and Hybrid2 perform off-grid system or battery backup analysis; all the tools perform solar photovoltaic analysis; and that only HOMER Pro and RETScreen Expert are complete, including economical analysis or even optimization-sensitive analysis. However, only paid version of those softwares have all the features, and they run only at Windows-based operational systems. RETScreen and HOMER have a web-based version but with limited resources.
 
 \begin{table}[!t]
 %% increase table row spacing, adjust to taste
@@ -594,7 +608,7 @@ Table \ref{table:softwares} summarizes the tools described in this paper.  Where
 \begin{tabular}{c | c | c | c | c | c}
 \hline
 \hline
-Characteristic  & \rotatebox{90}{PVWatts} & \rotatebox{90}{SAM} & \rotatebox{90}{HOMER} & \rotatebox{90}{RETScreen } & \rotatebox{90}{Hybrid2}\\
+Characteristic  & \rotatebox{90}{PVWatts} & \rotatebox{90}{SAM} & \rotatebox{90}{HOMER Pro} & \rotatebox{90}{RETScreen Expert} & \rotatebox{90}{Hybrid2}\\
 \hline
 \hline
 Support & X & X & X & X &  \\
@@ -605,7 +619,7 @@ Hybrid systems &  &  & X & X & X\\
 \hline
 Photovoltaics & X & X & X & X & X\\
 \hline
-Batteries &  &  & X & X & X\\
+Batteries &  &  & X &  & X\\
 \hline
 \makecell{Main technical (T) \\ or economical(E)} & T & T & E & E & T \\
 \hline
@@ -620,6 +634,8 @@ Sensitive analysis &  &  & X & X & \\
 \subsection{Paper Proposal x Reference Tools}
 Considering that the focus of this research is on off-grid solutions and supported tools, only HOMER and RETScreen remain for comparative. All tools need some parameters inherently from manufacturer's catalog, so the project starts with manufacturers and integrators tool to define the basic items of the project: panels, inverters, controllers, and batteries. After that, the potential solution is analyzed in another tool to validate or even optimize the solution. Therefore, that is the challenge of this work, i.e., to prove that is possible to use automated verification to validate an off-grid PV solution and to prove that this verification is more efficient and complete than the listed-more common tools.
 
+The comparative between the Homer Pro and the automated verification tool is presented at the Section \ref{sec:results}.
+
 \section{Component models for stand-alone PV system }
 The main purpose of this section is to describe the models for the elements of a standalone PV system: PV generator, battery, controller, inverter, and load. The modeling of the PV system is based on modular blocks, as illustrated in Fig.\ref{fig:blockdiagram}, from \cite{Hansen}. The modular structure facilitates the modeling of the other system structures and replacing of elements as, for instance, a DC load instead of an AC load. 
 
@@ -630,14 +646,16 @@ The main purpose of this section is to describe the models for the elements of a
 \label{fig:blockdiagram}
 \end{figure}
 
-In the literature, there are several mathematical models available for each component of stand-alone PV systems. In this section, the mathematical model for each component of PV system is presented. 
+In the literature, there are several mathematical models available for each component of PV systems. In this section, the mathematical model for each component is presented. 
 
 \subsection{PV generator (cell, module, array) }
 A photovoltaic PV generator is the whole assembly of solar cells, connections, protective parts, and supports. In the present modeling, the focus is only on cell/module/array.
  
 The basic element of a PV System is the PV cell, also called a Solar Cell. A PV / Solar Cell is a semiconductor device that can convert solar energy into DC electricity. The semiconductor materials (usually silicon), which are specially treated to form an electric field, positive on one side (backside) and negative on the other (towards the sun). When solar energy (photons) hits the solar cell, electrons are knocked loose from the atoms in the semiconductor material, creating electron-hole pairs \cite{Lorenzo}. If electrical conductors are attached to the positive and negative sides, forming an electrical circuit, the electrons are captured in the form of electric current $ I_{ph} $ (photocurrent).
  
-To increase their utility, a number of individual PV cells are interconnected together in a sealed, weatherproof package called Panel (or Module). For instance, a 12 V Panel will have 36 cells connected in series and a 24 V Panel will have 72 PV cells connected in series. In addition, to achieve the desired voltage and current, modules are wired in series and parallel into what is called a PV Array, as shown in Fig.\ref{fig:celmodarray}. The flexibility of the modular PV system allows designers to create PV systems that can meet a wide variety of electrical demands. 
+To increase their utility, a number of individual PV cells are interconnected together in a sealed, weatherproof package called Panel (or Module). 
+
+%For instance, a 12 V Panel will have 36 cells connected in series and a 24 V Panel will have 72 PV cells connected in series. In addition, to achieve the desired voltage and current, modules are wired in series and parallel into what is called a PV Array, as shown in Fig.\ref{fig:celmodarray}. The flexibility of the modular PV system allows designers to create PV systems that can meet a wide variety of electrical demands. 
 
 \begin{figure}[h]
 \includegraphics[width=0.4\textwidth]{celmodarray}
@@ -648,20 +666,24 @@ To increase their utility, a number of individual PV cells are interconnected to
 
 The PV modules are generally rated under standard test conditions (STC), which leads to the following specification by the manufacturers:  solar radiation of 1000 W/m$^{2}$, cell temperature of 25$^{o}$C, and solar spectrum of 1.5. The parameters required for the input of the PV modules are relying on the meteorological conditions of the area to be serviced by photovoltaic solution. However, the climatic conditions are unpredictable due to the random nature of their occurrence \cite{Jakhrani}.
  
-These uncertainties lead to either over- or underestimation of energy yield from PV modules. An overestimation up to 40\% was reported as compared to the rated power output of PV modules \cite{Durisch}. The growing demand of photovoltaics technologies led to research in the various aspects of its components from cell technology to the modeling, size optimization, and system performance \cite{Rajanna}, \cite{Badejani}; \cite{Yatimi}, \cite{Ferrari}, \cite{Saloux}, \cite{Hasan}, \cite{King}, \cite{Mellit}. Modeling PV modules is one of the major components responsible for proper functioning of PV systems. However, the estimation of models is affected by various intrinsic and extrinsic factors, which ultimately influence the behavior of current and voltage. Therefore, perfect modeling is essential to estimate the performance of PV modules in different environmental conditions \cite{Jakhrani}.
+These uncertainties lead to either over- or underestimation of energy yield from PV modules. An overestimation up to 40\% was reported as compared to the rated power output of PV modules \cite{Durisch}. The growing demand of photovoltaics technologies led to research in the various aspects of its components from cell technology to the modeling, size optimization, and system performance \cite{Rajanna}, \cite{Badejani}, \cite{Yatimi}, \cite{Ferrari}, \cite{Saloux}, \cite{Hasan}, \cite{King}, \cite{Mellit}. 
+
+%Modeling PV modules is one of the major components responsible for proper functioning of PV systems. However, the estimation of models is affected by various intrinsic and extrinsic factors, which ultimately influence the behavior of current and voltage. Therefore, perfect modeling is essential to estimate the performance of PV modules in different environmental conditions \cite{Jakhrani}.
  
 Modeling provides the ways to understand the current, voltage, and power relationships of PV systems.
   
-The performance of photovoltaic systems (solar cell/panels), that is, the output current/voltage curve ($I-V$ curve), is usually studied using an equivalent circuit model. This equivalent circuit consists of a current source with one or two diodes connected in parallel, and up to two resistors, one connected in parallel and the other one in series, to take into account energy losses in this model \cite{Cubas}. Based on these electronic components, four basic configurations are normally used when studying photovoltaic systems, as shown by Fig. \ref{fig:equivckt}. 
+The performance of photovoltaic systems (solar cell/panels), that is, the output current/voltage curve ($I-V$ curve), is usually studied using an equivalent circuit model. This equivalent circuit consists of a current source with one or two diodes connected in parallel, and up to two resistors, one connected in parallel and the other one in series, to take into account energy losses in this model \cite{Cubas}. 
+%Based on these electronic components, four basic configurations are normally used when studying photovoltaic systems, as shown by Fig. \ref{fig:equivckt}. 
 
 \begin{figure}[h]
-\includegraphics[width=0.48\textwidth]{equivckt}
+\includegraphics[width=0.30\textwidth]{equivckt1D}
 \centering
-\caption{Four different equivalent circuit models: (a) 1-diode; (b) 1-diode/1-resistor; (c) 1-diode/2-resistor; (d) 2-diode/2-resistor (Source: \cite{Cubas})}
+\caption{ 1-diode equivalent PV cell/panel circuit model (Source: \cite{Cubas})}
+%\caption{Four different equivalent circuit models: (a) 1-diode; (b) 1-diode/1-resistor; (c) 1-diode/2-resistor; (d) 2-diode/2-resistor (Source: \cite{Cubas})}
 \label{fig:equivckt}
 \end{figure}
  
-The 1-diode model, whose equation to relate the output current, $I$, to the output voltage, $V$, is described in Equation \ref{eq:1diodemodel}. 
+The 1-diode model, shown by Fig. \ref{fig:equivckt}, whose equation to relate the output current, $I$, to the output voltage, $V$, is described in Equation \ref{eq:1diodemodel}. 
 
 \begin{equation}
 \label{eq:1diodemodel}
@@ -691,46 +713,47 @@ Where:
 
 This model has only three unknown parameters ($ I_{ph}$, $I_{0}$, and $a $), and it assumes that the series resistance is $ zero $ and shunt resistance is $ infinite $ and, thus, both of these parameters are ignored.
  
-The 1-diode/1-resistor model, is described by Equation \ref{eq:1d1rmodel}. 
+%The 1-diode/1-resistor model, is described by Equation \ref{eq:1d1rmodel}. 
 
-\begin{equation}
-\label{eq:1d1rmodel}
-I =I_{ph}-I_{0}\left[ exp \left( \dfrac{V+IR_{s}}{NaV_{T}} \right) -1 \right] 
-\end{equation}
+%\begin{equation}
+%\label{eq:1d1rmodel}
+%I =I_{ph}-I_{0}\left[ exp \left( \dfrac{V+IR_{s}}{NaV_{T}} \right) -1 \right] 
+%\end{equation}
 
-Where $R_{s}$ is the series resistor.
+%Where $R_{s}$ is the series resistor.
 
-At this model, there are four unknown parameters ($ I_{ph}$, $I_{0}$, $ R_{s} $, and $ a $), and it assumes shunt resistance as $ infinite $.
+%At this model, there are four unknown parameters ($ I_{ph}$, $I_{0}$, $ R_{s} $, and $ a $), and it assumes shunt resistance as $ infinite $.
 
-The 1-diode/2-resistor model, is described by Equation \ref{eq:1d2rmodel}. 
+%The 1-diode/2-resistor model, is described by Equation \ref{eq:1d2rmodel}. 
 
-\begin{equation}
-\label{eq:1d2rmodel}
-I =I_{ph}-I_{0}\left[ exp \left( \dfrac{V+IR_{s}}{NaV_{T}} \right) -1 \right] - \dfrac{V+IR_{s}}{R_{sh}}
-\end{equation}
+%\begin{equation}
+%\label{eq:1d2rmodel}
+%I =I_{ph}-I_{0}\left[ exp \left( \dfrac{V+IR_{s}}{NaV_{T}} \right) -1 \right] - \dfrac{V+IR_{s}}{R_{sh}}
+%\end{equation}
 
-Where $R_{sh}$ is the shunt resistor.
+%Where $R_{sh}$ is the shunt resistor.
 
-At this model, there are five unknown parameters ($ I_{ph}$, $I_{0}$, $ R_{s} $, $ R_{sh} $, and $ a $).
+%At this model, there are five unknown parameters ($ I_{ph}$, $I_{0}$, $ R_{s} $, $ R_{sh} $, and $ a $).
 
-And the 2-diode/2-resistor model, is described by Equation \ref{eq:2d2rmodel}. 
+%And the 2-diode/2-resistor model, is described by Equation \ref{eq:2d2rmodel}. 
 
-\begin{multline}
-\label{eq:2d2rmodel}
-I =I_{ph}-I_{01}\left[ exp \left( \dfrac{V+IR_{s}}{Na_{1}V_{T}} \right) -1 \right] - \\ I_{02}\left[ exp \left( \dfrac{V+IR_{s}}{Na_{2}V_{T}} \right) -1 \right] - \dfrac{V+IR_{s}}{R_{sh}}
-\end{multline}
+%\begin{multline}
+%\label{eq:2d2rmodel}
+%I =I_{ph}-I_{01}\left[ exp \left( \dfrac{V+IR_{s}}{Na_{1}V_{T}} \right) -1 \right] - \\ %I_{02}\left[ exp \left( \dfrac{V+IR_{s}}{Na_{2}V_{T}} \right) -1 \right] - \dfrac{V+IR_{s}}{R_{sh}}
+%\end{multline}
 
-This model has six unknown parameters with two exponential terms. 
-Briefly, both single and double diode models require the knowledge of all unknown parameters, which is usually not provided by manufacturers. Nevertheless, the current-voltage equation is a transcendental expression \cite{Jakhrani}.  
+%This model has six unknown parameters with two exponential terms. 
+%Briefly, both single and double diode models require the knowledge of all unknown parameters, which is usually not provided by manufacturers. Nevertheless, the current-voltage equation is a transcendental expression \cite{Jakhrani}.  
 
-However, regardless of the adopted model, the parameters of the equations must be estimated to adapt the corresponding model to the real behavior of the solar cell/panel. 
+%However, regardless of the adopted model, the parameters of the equations must be estimated to adapt the corresponding model to the real behavior of the solar cell/panel. 
 
-For that reason, researchers gradually focused on searching out the approximate methods for the calculation of unknown parameters and walked through three different paths. The analytical methods give exact solutions by means of algebraic equations, as done by \cite{Cubas} and \cite{Brano}. However, due to implicit nature and nonlinearity of PV cell or module characteristics, it is hard to find out the analytical solution of all unknown parameters, as described by \cite{Hasan}. Thus, numerical methods such as Newton-Raphson method or Levenberg-Marquardt algorithm were preferred, as described by \cite{Mellit}. This happens because numerical methods give approximate solution of the nonlinear problems without searching for exact solutions. However, numerical methods are time consuming and need long term time series data, which is not available in developing countries. \cite{Jakhrani} did a mixed methodology using analytical and numerical steps together.  \cite{Shenawy} create a method to discover the unknown parameters of the PV panels through experimentation (essays). And \cite{Tian} did a mix of analytical and experimental methodology to get the unknown parameters, but samples of the PV modules are necessary to perform some essays, when we use experimental technique. 
+%For that reason, researchers gradually focused on searching out the approximate methods for the calculation of unknown parameters and walked through three different paths. The analytical methods give exact solutions by means of algebraic equations, as done by \cite{Cubas} and \cite{Brano}. However, due to implicit nature and nonlinearity of PV cell or module characteristics, it is hard to find out the analytical solution of all unknown parameters, as described by \cite{Hasan}. Thus, numerical methods such as Newton-Raphson method or Levenberg-Marquardt algorithm were preferred, as described by \cite{Mellit}. This happens because numerical methods give approximate solution of the nonlinear problems without searching for exact solutions. However, numerical methods are time consuming and need long term time series data, which is not available in developing countries. \cite{Jakhrani} did a mixed methodology using analytical and numerical steps together.  \cite{Shenawy} create a method to discover the unknown parameters of the PV panels through experimentation (essays). And \cite{Tian} did a mix of analytical and experimental methodology to get the unknown parameters, but samples of the PV modules are necessary to perform some essays, when we use experimental technique. 
 
-Therefore, a wide variety of models exists for estimation of power output of PV modules (and $I-V$ or $P-V$ curves). However, the present work will rely on the simplified model of 1-diode, that was shown by \cite{Saloux} that has a small error rate, between 0.03\% and 4.68\% from selected PV panels tested. In addition, this mathematical modeling has the advantage of being an explicit model, which does not use iterative numerical calculation. 
+%Therefore, a wide variety of models exists for estimation of power output of PV modules (and $I-V$ or $P-V$ curves). However, the present work will rely on t
+The simplified model of 1-diode was shown by \cite{Saloux} that has a small error rate, between 0.03\% and 4.68\% from selected PV panels tested. In addition, this mathematical modeling has the advantage of being an explicit model, which does not use iterative numerical calculation, which is time-consuming to computing. 
  
 \subsection{Proposed PV Panel Model}
-With the proposed model, an explicit set of equations is derivate from the ideal PV model given by Equation \ref{eq:1d1rmodel}.
+With the proposed model, an explicit set of equations is derivate from the ideal PV model given by Equation \ref{eq:1diodemodel}.
 
 A single-diode without series and shunt resistances is considered. Equation 1 is
 used to write down expressions for currents and voltages at each key point shown in
@@ -909,35 +932,38 @@ N_{PP} \geq N_{PPmin}
 
 
 \subsection{The Battery Storage Model }
-Because of the fluctuating nature of the output delivered by the PV arrays, batteries are necessary in a PV system. Thus, during the hours of sunshine, the PV system feeds directly the load and the excess electrical energy is stored in the battery. During the night, or during a period with low solar irradiation, energy is supplied to the load from the battery \cite{Mellit}.
+%Because of the fluctuating nature of the output delivered by the PV arrays, batteries are necessary in a PV system. Thus, during the hours of sunshine, the PV system feeds directly the load and the excess electrical energy is stored in the battery. During the night, or during a period with low solar irradiation, energy is supplied to the load from the battery \cite{Mellit}.
   
-Several models have been presented in the literature. However, regardless of the model, normally the following parameters are required: 
+Several models have been presented in the literature, as shown by \cite{Copetti}, \cite{Manwell93}, and \cite{Manwell94}. However, regardless of the model, normally the following parameters are required: 
 
 \begin{itemize}
-\item Nominal capacity ($ q_{m} $), is the number of Ampere-hours ($ Ah $) that can maximally be extracted from the battery, under predetermined discharge conditions.
-\item State of charge ($ SOC $), is the ratio between the present capacity and the nominal capacity, i.e., $ SOC = q/q_{max} $. Obviously $ 0<SOC<1 $. If $ SOC=1 $, then the battery is totally charged; and if $ SOC=0 $, the battery is fully discharged
-\item Charge (or discharge) regime.This parameter reflects the relationship between the nominal capacity of a battery and the current at which it is charged (or discharged). It is expressed in hours: for instance, discharge regime is 30h for a battery of 150 Ah that is discharged at 5A.
+\item Nominal capacity ($ q_{max} $), is the number of Ampere-hours ($ Ah $) that can maximally be extracted from the battery
+%, under predetermined discharge conditions.
+\item State of charge ($ SOC $), is the ratio between the present capacity and the nominal capacity, i.e., $ SOC = q/q_{max} $. 
+%Obviously $ 0<SOC<1 $. 
+If $ SOC=1 $, then the battery is totally charged; and if $ SOC=0 $, the battery is fully discharged
+\item Charge (or discharge) regime.This parameter reflects the relationship between the nominal capacity of a battery and the current at which it is charged (or discharged). 
+%It is expressed in hours: for instance, discharge regime is 30h for a battery of 150 Ah that is discharged at 5A.
 \item Efficiency ($\eta_{b}$), is the ratio of the charge extracted during discharge divided by the amount of the charge needed to restore the initial state of charging or discharging current. 
-\item Lifetime, is the number of charge/discharge cycles the battery can sustain before losing 20\% of its nominal capacity.
+%\item Lifetime, is the number of charge/discharge cycles the battery can sustain before losing 20\% of its nominal capacity.
 \end{itemize}
 
-The merit of a stand-alone PV system is evaluated in terms of the reliability of the electricity supply to the load and in terms of the long-term efficiency of the components. The battery efficiency was described in this section, and the liability is quantified by the concept of loss of load probability (LLP). LLP is defined as the ratio between the Ampere-hour deficit and the Ampere-hour demand, both with respect to the load, over a long period of time \cite{Copetti}. 
+%The merit of a stand-alone PV system is evaluated in terms of the reliability of the electricity supply to the load and in terms of the long-term efficiency of the components. The battery efficiency was described in this section, and the liability is quantified by the concept of loss of load probability (LLP). LLP is defined as the ratio between the Ampere-hour deficit and the Ampere-hour demand, both with respect to the load, over a long period of time \cite{Copetti}. 
+%
+%In general, the battery models view the battery as a voltage source $ E $ in series with an internal resistance $ R_{0} $, as shown in Fig. \ref{fig:batteryckt}. 
+%
+%\begin{figure}[h]
+%\includegraphics[width=0.4\textwidth]{batteryckt}
+%\centering
+%\caption{Schematic diagram of the battery (Source: \cite{Hansen})}
+%\label{fig:batteryckt}
+%\end{figure}
+%
+%The terminal voltage of the battery can be expressed in terms of its open circuit voltage and the voltage across the internal resistance of the battery \cite{Sukamongkol}, as shown by Equation 31.  
+%
+%Where $ V_{b} $ is the battery terminal voltage, $ E_{oc} $ is the battery circuit voltage, $ I_{b} $ is the battery current, and $ R_{b} $ is the internal resistance of the battery.
 
-In general, the battery models view the battery as a voltage source $ E $ in series with an internal resistance $ R_{0} $, as shown in Fig. \ref{fig:batteryckt}. 
-
-\begin{figure}[h]
-\includegraphics[width=0.4\textwidth]{batteryckt}
-\centering
-\caption{Schematic diagram of the battery (Source: \cite{Hansen})}
-\label{fig:batteryckt}
-\end{figure}
-
-
-The terminal voltage of the battery can be expressed in terms of its open circuit voltage and the voltage across the internal resistance of the battery \cite{Sukamongkol}, as shown by Equation 31.  
-
-Where $ V_{b} $ is the battery terminal voltage, $ E_{oc} $ is the battery circuit voltage, $ I_{b} $ is the battery current, and $ R_{b} $ is the internal resistance of the battery.
-
-The battery model, which describes the relationship between the voltage, current and the state of charge, can be found in \cite{Copetti}, \cite{Manwell93}, and \cite{Manwell94}.  
+%The battery model, which describes the relationship between the voltage, current and the state of charge, can be found in \cite{Copetti}, \cite{Manwell93}, and \cite{Manwell94}.  
 
 The Kinetic Battery Model (KiBaM) of Manwell and McGowen \cite{Manwell93} was developed at the University of Massachusetts to predict the performance of the battery, based on manufacturer's data. However, it uses some data extracted from tested batteries in laboratory. Therefore is not suitable to this study. 
 
@@ -1018,32 +1044,32 @@ The time constant of the phenomenon ($ \tau $) is reversely proportional to the 
 
 Therefore, to model the voltage ($ V_{c} $) evolution of the battery, equation \ref{eq:Vcbat} can be used up the start of gassing ($ V_{c} \leq V_{g} $). And during overcharging ($ V_{c} > V_{g} $), Equation \ref{eq:Voverc} can be used until a constant final voltage ($ V_{ec} $) is reached.
 
-The storage capacity of the battery can be calculated using Equation \ref{eq:stor}, as defined in \cite{Wenham}.
+%The storage capacity of the battery can be calculated using Equation \ref{eq:stor}, as defined in \cite{Wenham}.
+%
+%\begin{equation}
+%\label{eq:stor}
+%Storage capacity = \dfrac{N_{C}E_{load}}{DOD \eta _{b}}
+%\end{equation}
+%
+%Where $ DOD $ is the maximum possible depth of battery discharge, $ E_{load} $ is the average energy consumed by the load, $ N_{C} $ is the largest number of continuous cloudy days of the area, and $ \eta_{b} $ is the efficiency of the battery.
+%
+%As an example of this formula application, as shown by \cite{Abdulateef}, considering that an off-grid PV system is intended to supply $1.5 kW/48 V$ for 24 hours ($=36 kWh$); The largest number of continuous cloudy days in the selected site is about 1 day; For a maximum depth of discharge for the battery $DOD$ of $0.8$ and battery efficiency $80\%$.
+%
+%Then the storage capacity using Equation \ref{eq:stor} becomes $56.3 kWh$. Since the selected DC bus voltage is $48 V$, then the required Ampere-hours of the battery is $1173 Ah$ ($56.3 kWh/48$). If a single battery of 12 V and 350 Ah is considered, then four batteries are connected in series ($4 \times 350 Ah = 1400 Ah$).
+%
+%At this research, it was considered a simplified model for charging (Equation \ref{eq:charge}) and discharging (Equation \ref{eq:discharge}) of the batteries, even considering that the process is not linear and depends on the temperature. The equations are used to update the $SOC$ of the batteries, and have the number of hours ($ Num_{h} $) as a variable. There is a factor (1.15) which is present at the charging equation, and is necessary to express that during the charging process is usual to reach 115\% of the battery capacity
+%
+%\begin{multline}
+%\label{eq:charge}
+%SOC_{charge} = SOC_{previous} + \\ \dfrac{100*Pm*Num_{h}}{V_{system}*capacity*N_{BP}*1.15}
+%\end{multline}
 
-\begin{equation}
-\label{eq:stor}
-Storage capacity = \dfrac{N_{C}E_{load}}{DOD \eta _{b}}
-\end{equation}
-
-Where $ DOD $ is the maximum possible depth of battery discharge, $ E_{load} $ is the average energy consumed by the load, $ N_{C} $ is the largest number of continuous cloudy days of the area, and $ \eta_{b} $ is the efficiency of the battery.
-
-As an example of this formula application, as shown by \cite{Abdulateef}, considering that an off-grid PV system is intended to supply $1.5 kW/48 V$ for 24 hours ($=36 kWh$); The largest number of continuous cloudy days in the selected site is about 1 day; For a maximum depth of discharge for the battery $DOD$ of $0.8$ and battery efficiency $80\%$.
-
-Then the storage capacity using Equation \ref{eq:stor} becomes $56.3 kWh$. Since the selected DC bus voltage is $48 V$, then the required Ampere-hours of the battery is $1173 Ah$ ($56.3 kWh/48$). If a single battery of 12 V and 350 Ah is considered, then four batteries are connected in series ($4 \times 350 Ah = 1400 Ah$).
-
-At this research, it was considered a simplified model for charging (Equation \ref{eq:charge}) and discharging (Equation \ref{eq:discharge}) of the batteries, even considering that the process is not linear and depends on the temperature. The equations are used to update the $SOC$ of the batteries, and have the number of hours ($ Num_{h} $) as a variable. There is a factor (1.15) which is present at the charging equation, and is necessary to express that during the charging process is usual to reach 115\% of the battery capacity
-
-\begin{multline}
-\label{eq:charge}
-SOC_{charge} = SOC_{previous} + \\ \dfrac{100*Pm*Num_{h}}{V_{system}*capacity*N_{BP}*1.15}
-\end{multline}
-
-\begin{multline}
-\label{eq:discharge}
-SOC_{discharge} = SOC_{previous} - \\ \dfrac{100*I_{drained}*Num_{h}}{capacity}
-\end{multline}
-
-
+%\begin{multline}
+%\label{eq:discharge}
+%SOC_{discharge} = SOC_{previous} - \\ \dfrac{100*I_{drained}*Num_{h}}{capacity}
+%\end{multline}
+%
+%
 Besides the model verification, there is also the prior stage of project sizing check, as did to the solar panel. First is necessary to define the total capacity of the battery bank, as shown by Equation \ref{eq:Cbank}.
 
 \begin{equation}
@@ -1213,15 +1239,15 @@ Absorption - once the batteries reach the programmed absorb voltage, usually som
 Float - upon the completion of the absorption stage, the charge controller will  drop down the voltage and maintain at a steady 13.20 V to 13.38 V (manufacturer's defined value), which is the maximum voltage a 12 volt battery can hold, and begin the float stage. The float stage brings the battery all the way through and maintains $SOC$ at $100\%$. The current will also decrease to a point where it's considered just a pulse. It's essentially the float stage where there is charge going into the battery at all times, but only at a safe rate to ensure a full state of charge and nothing more. Most smart chargers do not turn off at this point, however it is completely safe to leave a battery in float mode for months to even years at a time.
 
 Battery charging technology relies on smart micro-controlled devices. Therefore it is extremely important, that the program settings for the charge controller or inverter/charger are correct, and the list includes the bulk and absorption values. This will help preserve and extend the battery life. There are always default settings to the equipment, set by software, however those settings are not $100\%$ correct because there are difference among models of equipment and among manufacturer's. The ideal is to read the data-sheet from the manufacturers and perform a manual adjust.
-
-There are the possibility to combine batteries in a bank, with parallel and series connections, all depending the sizing of the project:
-
-\begin{itemize}
-\item Batteries connected in parallel are seen by the controller as one large battery of the combined Ah capacity of all the batteries. For example, two 12 V and 220 Ah batteries in parallel are seen as one 12 V and 440 Ah battery;
-\item In the other hand, although the batteries connected in series are also seen as a single battery, the result is different: two 12 V and 220 Ah batteries in series are seen as one 24 V and 220 Ah battery;
-\item In addition, a mixed bank arrangement can be useful: a bank with two 12 V and 220 Ah batteries in series connected in parallel with a similar arrange will produce an equivalent battery of 24 V and 440 Ah.
-\end{itemize}
-
+%
+%There are the possibility to combine batteries in a bank, with parallel and series connections, all depending the sizing of the project:
+%
+%\begin{itemize}
+%\item Batteries connected in parallel are seen by the controller as one large battery of the combined Ah capacity of all the batteries. For example, two 12 V and 220 Ah batteries in parallel are seen as one 12 V and 440 Ah battery;
+%\item In the other hand, although the batteries connected in series are also seen as a single battery, the result is different: two 12 V and 220 Ah batteries in series are seen as one 24 V and 220 Ah battery;
+%\item In addition, a mixed bank arrangement can be useful: a bank with two 12 V and 220 Ah batteries in series connected in parallel with a similar arrange will produce an equivalent battery of 24 V and 440 Ah.
+%\end{itemize}
+%
 
 \subsection{The inverter model}
 As shown by \cite{Mellit}, the PV arrays produce DC and therefore when the PV system contains an AC load, a DC/AC conversion is required. An inverter is a converter, where the power flows from DC to AC side, i.e., having a DC voltage as input; it produces AC voltage, as output. The role of the inverter is to keep the voltage constant on the AC side, i.e., at the rated voltage (127 V or 220 V, for example), and to convert the input power $ P_{in} $ into the output power $ P_{out} $ with the best possible efficiency \cite{Hansen}.
@@ -1354,7 +1380,7 @@ According \cite{UC}, cyber-physical systems (CPS) are integrations of computatio
 
 Energy production, distribution, and optimization are all CPS problems, mas mentioned in \cite{UC}. For example, the smart grid combines multiple electric power production plants with a multiplicity of loads using dynamic load balancing and dynamic pricing with demand-response strategies. Smart buildings integrate sensors into control systems for lighting, HVAC (heating, ventilation, and air conditioning), and safety (as fire monitoring and evacuation). 
 
-Therefore, in the context of this proposal, a cyber-physical system, specifically a solar photovoltaic system, will be mathematically modeled. Then a model checking will be performed to do a verification of the project in order to guarantee that the design of an off-grid SPV solution will meet the requirements, specifications and regulations. 
+Therefore, in the context of this proposal, a cyber-physical system, specifically a solar photovoltaic system, will be mathematically modeled. Then a model checking will be performed to do a verification of the project in order to guarantee that the design of an off-grid PV solution will meet the requirements, specifications and regulations. 
 
 As described in \cite{Alur}, in program verification, it is aimed to check if a program satisfies its logical specification. Contemporary verification tools vary widely in terms of source languages, verification methodology, and the degree of automation, but they all rely on repeatedly invoking an SMT solver. This work tracks the same path. 
 
@@ -1605,7 +1631,7 @@ Therefore, the present work unites the versatility and power of the formal model
 \section{Conclusions and Future Work}
 The proposed framework seems to be a coherent and promising tool to perform verification of a PV project. The next step is the deployment of the solution at the ESBMC environment, and compare the results with a real PV project deployed at the field. 
 
-The framework presented here establishes the automated verification and the project sizing check. However, it is possible to perform the optimum sizing of the PV system. Moreover, the authors target the use of synthesis to perform the optimum sizing. That is an interesting issue, considering that nowadays is possible to choose from many different manufacturers and many different models of equipment of a SPV system,  the idea of just to validate one given solutions is not enough. Probably is more useful to design a tool which starts from a list of commercial equipments, i.e., inputs, where each equipment is verified during synthesis phase and the final solution, which satisfies the specifications (or constraints) of the project, is found from the inputs, automatically. This is what a Counterexample Guided-Inductive Synthesis (CEGIS) does. 
+The framework presented here establishes the automated verification and the project sizing check. However, it is possible to perform the optimum sizing of the PV system. Moreover, the authors target the use of synthesis to perform the optimum sizing. That is an interesting issue, considering that nowadays is possible to choose from many different manufacturers and many different models of equipment of a PV system,  the idea of just to validate one given solutions is not enough. Probably is more useful to design a tool which starts from a list of commercial equipments, i.e., inputs, where each equipment is verified during synthesis phase and the final solution, which satisfies the specifications (or constraints) of the project, is found from the inputs, automatically. This is what a Counterexample Guided-Inductive Synthesis (CEGIS) does. 
 
 In the future, it is possible to expand the type of renewable used for power generation. Allowing the verification of wind generation or even hybrid systems, which can transform the tool into an important instrument to complement the solar PV system design process, ensuring that it does not fail and meets the expected requirements. 
 
@@ -1638,7 +1664,7 @@ Plus (need to think about it): verification in every-hour of a 48h cycle?, PV mo
 
 % use section* for acknowledgment
 \section*{Acknowledgment}
-The authors would like to thank Newton Fund (Star Energy project), Coventry University, and Sustainable Amazonas Foundation (FAS), for the financial support and for the possibility to test the designed model with real data from solar photovoltaic system, deployed in June of 2018 at a small community at Cuieira River, distant around 1.5 hour by speedboat from Manaus city. The authors would like to thank, as well, to FAPEAM (Amazonas State Foundation for Research Support) for the financial support to the research.
+The authors would like to thank Newton Fund (Star Energy project), Coventry University, and Sustainable Amazonas Foundation (FAS), for the financial support and for the possibility to test the framework with real data from deployed PV systems. The authors would like to thank, as well, to FAPEAM (Amazonas State Foundation for Research Support) for the financial support to the research.
 
 
 % Can use something like this to put references on a page

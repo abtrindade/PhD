@@ -14,45 +14,45 @@ Database file #1: trindadeThesis.bib
 Warning--empty title in Alur
 
 Done.
-You've used 74 entries,
+You've used 59 entries,
             4087 wiz_defined-function locations,
-            1309 strings with 20069 characters,
-and the built_in function-call counts, 55582 in all, are:
-= -- 4479
-> -- 1327
-< -- 461
-+ -- 742
-- -- 233
-* -- 2605
-:= -- 8346
-add.period$ -- 147
-call.type$ -- 74
-change.case$ -- 77
-chr.to.int$ -- 1008
-cite$ -- 75
-duplicate$ -- 3967
-empty$ -- 4537
-format.name$ -- 292
-if$ -- 13122
+            1228 strings with 17728 characters,
+and the built_in function-call counts, 45966 in all, are:
+= -- 3685
+> -- 1097
+< -- 402
++ -- 618
+- -- 189
+* -- 2176
+:= -- 6827
+add.period$ -- 117
+call.type$ -- 59
+change.case$ -- 60
+chr.to.int$ -- 879
+cite$ -- 60
+duplicate$ -- 3244
+empty$ -- 3762
+format.name$ -- 237
+if$ -- 10887
 int.to.chr$ -- 0
-int.to.str$ -- 74
-missing$ -- 723
-newline$ -- 249
-num.names$ -- 86
-pop$ -- 1621
+int.to.str$ -- 59
+missing$ -- 574
+newline$ -- 204
+num.names$ -- 71
+pop$ -- 1279
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 2
-skip$ -- 4376
+skip$ -- 3628
 stack$ -- 0
-substring$ -- 2416
-swap$ -- 3275
-text.length$ -- 125
+substring$ -- 2095
+swap$ -- 2712
+text.length$ -- 109
 text.prefix$ -- 0
 top$ -- 5
-type$ -- 74
+type$ -- 59
 warning$ -- 1
-while$ -- 239
-width$ -- 76
-write$ -- 747
+while$ -- 203
+width$ -- 61
+write$ -- 604
 (There was 1 warning)
