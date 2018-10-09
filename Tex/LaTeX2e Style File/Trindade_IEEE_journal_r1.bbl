@@ -28,21 +28,10 @@ S.~Coelho, A.~Sanches-Pereira, L.~Tudeschini, J.~Escobar, M.~Poveda, N.~Coluna,
   \emph{The XI LatinAmerican Congress of Electricity Generation and Transmition
   CLAGTEE}, UNESP, Ed., 2015, pp. 1--8.
 
-\bibitem{Karekesi}
-S.~Karekesi, K.~Lata, and S.~Coelho, \emph{Renewable Energy - A Global Review
-  of Technologies, Policies and Markets}.\hskip 1em plus 0.5em minus
-  0.4em\relax London: Earthscan, 2006, ch. Traditional Biomass Energy:
-  Improving Its Use and Moving to Modern Energy Use, pp. 231--261.
-
 \bibitem{EPIA}
 EPIA, \emph{Global market outlook for photovoltaics 2017-2021}.\hskip 1em plus
   0.5em minus 0.4em\relax Belgium: European Phototoltaic Industry Association,
   2017.
-
-\bibitem{Yatimi}
-H.~Yatimi and E.~Aroudam, ``Modeling and simulation of a stand-alone
-  photovoltaic system,'' in \emph{Xth International Conference on Integrated
-  Design and Production}, T.~Marocco, Ed., 2015.
 
 \bibitem{Noroozian}
 R.~Noroozian and G.~Gharehpetian, ``An investigation on combined operation of
@@ -106,54 +95,21 @@ A.~Hansen, P.~S$\o$rensen, L.~Hansen, and H.~Bindner, \emph{Models for a
   stand-alone PV system}.\hskip 1em plus 0.5em minus 0.4em\relax
   Forskningscenter Risoe, 2001, no. 1219.
 
-\bibitem{Lorenzo}
-E.~Lorenzo, \emph{Solar Electricity Engineering of Photovoltaic Systems}.\hskip
-  1em plus 0.5em minus 0.4em\relax Spain: Artes Gráficas Gala, S.L., 1994.
-
-\bibitem{SamlexSolar}
-SamlexSolar.com, ``Solar (pv) cell, module, array,''
-  http://www.samlexsolar.com/learning-center/solar-cell-module-array.aspx,
-  accessed 28th December, 2017.
-
 \bibitem{Jakhrani}
 A.~Jakhrani, S.~Samo, S.~Kamboh, J.~Labadin, and A.~Rigit, ``An improved
   mathematical model for computing power output of solar photovoltaic
   modules,'' \emph{International Journal of Photoenergy}, vol. 2014, no. ID
   346704, p.~9, 2014.
 
-\bibitem{Durisch}
-W.~Durisch, D.~Tille, A.~Worz, and W.~Plapp, ``Characterisation of photovoltaic
-  generators,'' \emph{Applied Energy}, vol.~65, no. 1-4, pp. 273--284, 2000.
-
-\bibitem{Rajanna}
-S.~Rajanna and R.~Saini, ``Modeling of integrated renewable energy system for
-  electrification of a remote area in india,'' \emph{Renewable Energy},
-  vol.~90, no.~C, pp. 175--187, 2016.
-
-\bibitem{Badejani}
-M.~Badejani, M.~Masoum, and M.~Kalanta, ``Power engineering conference,'' in
-  \emph{AUPEC 2007}, A.~Universities, Ed., 2007, pp. 1--6.
-
-\bibitem{Ferrari}
-S.~Ferrari, M.~L.~V. Piuri, A.~Salman, L.~Cristaldi, M.~Faifer, and S.~Toscani,
-  ``Solar panel modelling through computational intelligence techniques,''
-  \emph{Measurement: Journal of the International Measurement Confederation},
-  no.~93, pp. 572--580, 2016.
+\bibitem{Yatimi}
+H.~Yatimi and E.~Aroudam, ``Modeling and simulation of a stand-alone
+  photovoltaic system,'' in \emph{Xth International Conference on Integrated
+  Design and Production}, T.~Marocco, Ed., 2015.
 
 \bibitem{Saloux}
 E.~Saloux, A.~Teyssedou, and M.~Sorin, ``Explicit model of photovoltaic panels
   to determine voltages and currents at the maximum power point,'' \emph{Solar
   Energy}, vol.~85, no.~5, pp. 713--722, 2011.
-
-\bibitem{Hasan}
-M.~Hasan and S.~Parida, ``An overview of solar photovoltaic panel modeling
-  based on analytical and experimental viewpoint,'' \emph{Renewable and
-  Sustainable Energy Reviews}, vol.~60, pp. 75--83, 2016.
-
-\bibitem{King}
-D.~King, W.~Boyson, and J.~Kratochvill, \emph{Photovoltaic Array Performance
-  Model}.\hskip 1em plus 0.5em minus 0.4em\relax Albuquerque, New Mexico:
-  Sandia National Laboratories, 2004.
 
 \bibitem{Mellit}
 A.~Mellit, M.~Benghanem, and S.~Kalogirou, ``Modeling and simulation of a
@@ -193,38 +149,11 @@ J.~Manwell and J.~McGowan, ``Lead acid battery storage model for hybrid energy
   systems,'' in \emph{5th European Wind Energy Association Conference}, 1994,
   pp. 284--289.
 
-\bibitem{Mahanta}
-P.~Mahanta, K.~Debnath, and M.~Rahman, ``Modeling and simulation of a pv module
-  based power system using matlab/simulink,'' \emph{Dhaka University Journal of
-  Science}, vol.~62, no.~2, pp. 127--132, 2014.
-
-\bibitem{Chauhan}
-A.~Chauhan and R.~Saini, ``Renewable energy based off-grid rural
-  electrification in uttarakhand state of india: Technology options, modelling
-  method, barriers and recommendations,'' \emph{Renewable and Sustainable
-  Energy Reviews}, vol.~51, pp. 662--681, 2015.
-
-\bibitem{Dhanowa}
-A.~Dhanowa and V.~Garg, ``Modeling and simulation of an off grid pv system for
-  with battery backup for remote and rural area network,'' \emph{International
-  Journal of Engineering Research \& Technology (IJERT)}, vol.~4, no.~06, pp.
-  915--918, 2015.
-
 \bibitem{Abdulateef}
 J.~Abdulateef, ``Simulation of solar off- grid photovoltaic system for
   residential unit,'' \emph{International Journal of Sustainable and Green
   Energy. Special Issue: Engineering Solution for High Performance of Solar
   Energy System}, vol.~4, no. 3-1, pp. 29--33, 2014.
-
-\bibitem{Catherine}
-D.~Catherine and K.~Bhaskar, ``Simulation of a solar mppt charger using cuk
-  converter for standalone application,'' \emph{International Journal of
-  Electrical, Electronics and Computer Systems (IJEECS)}, vol.~1, no.~1, 2013.
-
-\bibitem{Haque}
-A.~Haque, ``Maximum power point tracking (mppt) scheme for solar photovoltaic
-  system,'' \emph{Energy Technology \& Policy}, vol.~1, no.~1, pp. 115--122,
-  2014.
 
 \bibitem{Clarke2008}
 E.~Clarke, \emph{25 Years of Model Checking}.\hskip 1em plus 0.5em minus
@@ -246,12 +175,6 @@ M.~Gadelha, L.~Cordeiro, and D.~Nicole, ``Encoding floating-points using the
   smt theory in esbmc: An empirical evaluation over the sv-comp benchmarks,''
   in \emph{20th Brazilian Symposium on Formal Methods (SBMF)}, vol. LNCS 10623,
   2017, pp. 91--106.
-
-\bibitem{Ramalho}
-M.~Ramalho, M.~Freitas, F.~Sousa, H.~Marques, L.~Cordeiro, and B.~Fischer,
-  ``Smt-based bounded model checking of c++ programs,'' in \emph{20th IEEE
-  International Conference and Workshops on Engineering of Computer Based
-  Systems (ECBS)}, 2013, pp. 147--156.
 
 \bibitem{Brummayer}
 R.~Brummayer and A.~Biere, ``Boolector: An efficient smt solver for bit-vectors
@@ -277,34 +200,6 @@ C.~Barrett, C.~Conway, M.~Deters, L.~Hadarean, D.~Jovanovic, T.~King,
   A.~Reynolds, and C.~Tinelli, ``Cvc4,'' in \emph{Computer Aided Verification},
   vol. LNCS 6806, 2011, pp. 171--177.
 
-\bibitem{UC}
-UC, ``Cyber-physical systems,'' http://cyberphysicalsystems.org/, accessed 1st
-  October, 2016.
-
-\bibitem{Alur}
-R.~Alur, R.~Bodik, G.~Juniwal, M.~Martin, M.~Raghothaman, S.~Seshia, R.~Singh,
-  A.~Solar-Lezama, E.~Torlak, and A.~Udupa, in \emph{2013 Formal Methods in
-  ComputerAided Design}, 2013, pp. 1--17.
-
-\bibitem{Schrammel2017}
-\BIBentryALTinterwordspacing
-P.~Schrammel, D.~Kroening, M.~Brain, R.~Martins, T.~Teige, and T.~Bienmüller,
-  ``Incremental bounded model checking for embedded software,'' \emph{Formal
-  Aspects of Computing}, vol.~29, no.~5, pp. 911--931, 2017. [Online].
-  Available: \url{https://doi.org/10.1007/s00165-017-0419-1}
-\BIBentrySTDinterwordspacing
-
-\bibitem{Cordeiro}
-L.~Cordeiro, B.~Fischer, and J.~Marques-Silva, ``Smt-based bounded model
-  checking for embedded ansi-c software,'' \emph{IEEE Transactions on Software
-  Engineering}, vol.~38, no.~4, pp. 957--974, 2012.
-
-\bibitem{GadelhaK}
-M.~Gadelha, H.~Ismail, and L.~Cordeiro, ``Handling loops in bounded model
-  checking of c programs via k-induction,'' \emph{International Journal on
-  Software Tools for Technology Transfer STTT}, vol.~19, no.~1, pp. 97--114,
-  2017.
-
 \bibitem{Bessa}
 I.~Bessa, H.~Ismail, R.~Palhares, L.~Cordeiro, and J.~C. Filho, ``Formal
   nonfragile stability verification of digital control systems with
@@ -322,11 +217,6 @@ E.~Kremers, \emph{Modelling and Simulation of Electrical Systems through a
   Complex Systems Approach using Agent-Based Models}.\hskip 1em plus 0.5em
   minus 0.4em\relax Karlsruhe - Germany: KIT Scientific Publishing, Karlsruhe,
   2013.
-
-\bibitem{Abateetal2014}
-A.~Abate, M.~Fränzle, I.~Hiskens, and M.~Strelec, ``Modeling, verification,
-  and control of complex systems for energy networks,'' \emph{Dagstuhl
-  Reports}, vol.~4, no.~10, pp. 69--97, 2014.
 
 \bibitem{Abate2017}
 A.~Abate, ``Verification of networks of smart energy systems over the cloud,''

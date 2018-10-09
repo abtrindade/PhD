@@ -11,48 +11,46 @@ Database file #1: trindadeThesis.bib
 -- IEEEtran.bst version 1.14 (2015/08/26) by Michael Shell.
 -- http://www.michaelshell.org/tex/ieeetran/bibtex/
 -- See the "IEEEtran_bst_HOWTO.pdf" manual for usage information.
-Warning--empty title in Alur
 
 Done.
-You've used 59 entries,
+You've used 38 entries,
             4087 wiz_defined-function locations,
-            1228 strings with 17728 characters,
-and the built_in function-call counts, 45966 in all, are:
-= -- 3685
-> -- 1097
-< -- 402
-+ -- 618
-- -- 189
-* -- 2176
-:= -- 6827
-add.period$ -- 117
-call.type$ -- 59
-change.case$ -- 60
-chr.to.int$ -- 879
-cite$ -- 60
-duplicate$ -- 3244
-empty$ -- 3762
-format.name$ -- 237
-if$ -- 10887
+            1091 strings with 14055 characters,
+and the built_in function-call counts, 29872 in all, are:
+= -- 2378
+> -- 703
+< -- 261
++ -- 397
+- -- 120
+* -- 1415
+:= -- 4421
+add.period$ -- 76
+call.type$ -- 38
+change.case$ -- 39
+chr.to.int$ -- 576
+cite$ -- 38
+duplicate$ -- 2094
+empty$ -- 2491
+format.name$ -- 151
+if$ -- 7090
 int.to.chr$ -- 0
-int.to.str$ -- 59
-missing$ -- 574
-newline$ -- 204
-num.names$ -- 71
-pop$ -- 1279
+int.to.str$ -- 38
+missing$ -- 369
+newline$ -- 139
+num.names$ -- 48
+pop$ -- 824
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 2
-skip$ -- 3628
+skip$ -- 2365
 stack$ -- 0
-substring$ -- 2095
-swap$ -- 2712
-text.length$ -- 109
+substring$ -- 1369
+swap$ -- 1749
+text.length$ -- 69
 text.prefix$ -- 0
 top$ -- 5
-type$ -- 59
-warning$ -- 1
-while$ -- 203
-width$ -- 61
-write$ -- 604
-(There was 1 warning)
+type$ -- 38
+warning$ -- 0
+while$ -- 132
+width$ -- 40
+write$ -- 396
