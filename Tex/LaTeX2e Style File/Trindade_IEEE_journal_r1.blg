@@ -13,44 +13,44 @@ Database file #1: trindadeThesis.bib
 -- See the "IEEEtran_bst_HOWTO.pdf" manual for usage information.
 
 Done.
-You've used 38 entries,
+You've used 31 entries,
             4087 wiz_defined-function locations,
-            1091 strings with 14055 characters,
-and the built_in function-call counts, 29872 in all, are:
-= -- 2378
-> -- 703
-< -- 261
-+ -- 397
-- -- 120
-* -- 1415
-:= -- 4421
-add.period$ -- 76
-call.type$ -- 38
-change.case$ -- 39
-chr.to.int$ -- 576
-cite$ -- 38
-duplicate$ -- 2094
-empty$ -- 2491
-format.name$ -- 151
-if$ -- 7090
+            1042 strings with 12904 characters,
+and the built_in function-call counts, 24126 in all, are:
+= -- 1900
+> -- 583
+< -- 201
++ -- 323
+- -- 103
+* -- 1147
+:= -- 3587
+add.period$ -- 62
+call.type$ -- 31
+change.case$ -- 33
+chr.to.int$ -- 438
+cite$ -- 31
+duplicate$ -- 1692
+empty$ -- 2045
+format.name$ -- 128
+if$ -- 5721
 int.to.chr$ -- 0
-int.to.str$ -- 38
-missing$ -- 369
-newline$ -- 139
-num.names$ -- 48
-pop$ -- 824
+int.to.str$ -- 31
+missing$ -- 308
+newline$ -- 118
+num.names$ -- 41
+pop$ -- 696
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 2
-skip$ -- 2365
+skip$ -- 1907
 stack$ -- 0
-substring$ -- 1369
-swap$ -- 1749
-text.length$ -- 69
+substring$ -- 1041
+swap$ -- 1398
+text.length$ -- 55
 text.prefix$ -- 0
 top$ -- 5
-type$ -- 38
+type$ -- 31
 warning$ -- 0
-while$ -- 132
-width$ -- 40
-write$ -- 396
+while$ -- 107
+width$ -- 33
+write$ -- 327

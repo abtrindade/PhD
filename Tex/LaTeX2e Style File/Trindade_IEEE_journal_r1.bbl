@@ -33,41 +33,14 @@ EPIA, \emph{Global market outlook for photovoltaics 2017-2021}.\hskip 1em plus
   0.5em minus 0.4em\relax Belgium: European Phototoltaic Industry Association,
   2017.
 
-\bibitem{Noroozian}
-R.~Noroozian and G.~Gharehpetian, ``An investigation on combined operation of
-  active power filter with photovoltaic arrays,'' \emph{International Journal
-  of Electrical Power \& Energy Systems}, vol.~46, pp. 392--399, 2013.
-
-\bibitem{Rawat}
-R.~Rawat, S.~Kaushik, and R.~Lamba, ``A review on modeling, design methodology
-  and size otimization of photovoltaic based motor pumping, standalone and grid
-  connectec system,'' \emph{Renewable and Sustainable Energy Reviews}, vol.~57,
-  pp. 1506--1519, 2016.
-
 \bibitem{Baier}
 C.~Baier and J.-P. Katoen, \emph{Principles of model checking}.\hskip 1em plus
   0.5em minus 0.4em\relax London: The MIT Press, 2008.
-
-\bibitem{Trindade}
-A.~Trindade and L.~Cordeiro, ``Applying smt-based verification to
-  hardware/software partitioning in embedded systems,'' \emph{Design Automation
-  for Embedded Systems (DAES)}, vol.~20, no.~1, pp. 1--19, 2016.
-
-\bibitem{Clarkeetal}
-E.~Clarke, E.~Emerson, and J.~Sifakis, ``Model checking: algorithmic
-  verification and debugging,'' \emph{Communications of the ACM}, vol.~51,
-  no.~11, pp. 74--84, 2009.
 
 \bibitem{Roy}
 T.~Roy, ``Simulation and analysis of photovoltaic stand- alone systems,''
   Technology in Electrical Engineering, Department of Electrical Engineering
   National Institute of Technology, Rourkela, Odisha, India, 2013.
-
-\bibitem{Gules}
-R.~Gules, J.~Pacheco, H.~Hey, and J.~Imhoff, ``A maximum power point tracking
-  system with parallel connection for pv stand alone applications,'' \emph{IEEE
-  Transactions on Industrial Electronics}, vol.~55, no.~7, pp. 2674--2683,
-  2008.
 
 \bibitem{Mohanty}
 P.~Mohanty, K.~Sharma, M.~Gujar, M.~Kolhe, and A.~Azmi, \emph{Solar
@@ -75,31 +48,10 @@ P.~Mohanty, K.~Sharma, M.~Gujar, M.~Kolhe, and A.~Azmi, \emph{Solar
   Springer International Publishing, 2016, ch. PV System Design for Off-Grid
   Applications, pp. 49--83.
 
-\bibitem{Kim}
-S.~Kim, ``Sliding mode controller for the single-phase grid connected
-  photovoltaic system,'' \emph{Applied Energy}, vol.~83, no.~10, pp.
-  1101--1115, 2006.
-
-\bibitem{Pinho}
-J.~Pinho and M.~Galdino, \emph{Manual de Engenharia para Sistemas
-  Fotovoltaicos}.\hskip 1em plus 0.5em minus 0.4em\relax Rio de Janeiro/RJ:
-  CEPEL – CRESESB, 2014.
-
-\bibitem{Brooks}
-W.~Brooks and J.~Dunlop, \emph{NABCEP: PV Installation Professional Resource
-  Guide}.\hskip 1em plus 0.5em minus 0.4em\relax Clifton Park, NY: NABCEP,
-  2013.
-
 \bibitem{Hansen}
 A.~Hansen, P.~S$\o$rensen, L.~Hansen, and H.~Bindner, \emph{Models for a
   stand-alone PV system}.\hskip 1em plus 0.5em minus 0.4em\relax
   Forskningscenter Risoe, 2001, no. 1219.
-
-\bibitem{Jakhrani}
-A.~Jakhrani, S.~Samo, S.~Kamboh, J.~Labadin, and A.~Rigit, ``An improved
-  mathematical model for computing power output of solar photovoltaic
-  modules,'' \emph{International Journal of Photoenergy}, vol. 2014, no. ID
-  346704, p.~9, 2014.
 
 \bibitem{Yatimi}
 H.~Yatimi and E.~Aroudam, ``Modeling and simulation of a stand-alone
@@ -130,10 +82,21 @@ M.~Villalva, J.~Gazoli, and E.~Filho, ``Comprehensive approach to modeling and
   simulation of photovoltaic arrays,'' \emph{IEEE Transactions on Power
   Electronics}, vol.~24, pp. 1198--1208, 2009.
 
+\bibitem{Jakhrani}
+A.~Jakhrani, S.~Samo, S.~Kamboh, J.~Labadin, and A.~Rigit, ``An improved
+  mathematical model for computing power output of solar photovoltaic
+  modules,'' \emph{International Journal of Photoenergy}, vol. 2014, no. ID
+  346704, p.~9, 2014.
+
 \bibitem{Ross}
 R.~Ross, ``Flat-plate photovoltaic array design optimization,'' in \emph{14th
   IEEE Photovoltaic Specialists Conference}, C.~San~Diego, Ed., 1980, pp.
   1126--1132.
+
+\bibitem{Pinho}
+J.~Pinho and M.~Galdino, \emph{Manual de Engenharia para Sistemas
+  Fotovoltaicos}.\hskip 1em plus 0.5em minus 0.4em\relax Rio de Janeiro/RJ:
+  CEPEL – CRESESB, 2014.
 
 \bibitem{Copetti}
 J.~Copetti, E.~Lorenzo, and F.~Chenlo, ``A general battery model for pv system
@@ -143,11 +106,6 @@ J.~Copetti, E.~Lorenzo, and F.~Chenlo, ``A general battery model for pv system
 \bibitem{Manwell93}
 J.~Manwell and J.~McGowan, ``Lead acid battery storage model for hybrid energy
   systems,'' \emph{Solar Energy}, vol.~50, no.~5, pp. 399--405, 1993.
-
-\bibitem{Manwell94}
-------, ``Extension of the kinetic battery model for wind/hybrid power
-  systems,'' in \emph{5th European Wind Energy Association Conference}, 1994,
-  pp. 284--289.
 
 \bibitem{Abdulateef}
 J.~Abdulateef, ``Simulation of solar off- grid photovoltaic system for
@@ -199,6 +157,11 @@ B.~Dutertre, ``Yices 2.2,'' in \emph{Computer Aided Verification (CAV)},
 C.~Barrett, C.~Conway, M.~Deters, L.~Hadarean, D.~Jovanovic, T.~King,
   A.~Reynolds, and C.~Tinelli, ``Cvc4,'' in \emph{Computer Aided Verification},
   vol. LNCS 6806, 2011, pp. 171--177.
+
+\bibitem{Trindade}
+A.~Trindade and L.~Cordeiro, ``Applying smt-based verification to
+  hardware/software partitioning in embedded systems,'' \emph{Design Automation
+  for Embedded Systems (DAES)}, vol.~20, no.~1, pp. 1--19, 2016.
 
 \bibitem{Bessa}
 I.~Bessa, H.~Ismail, R.~Palhares, L.~Cordeiro, and J.~C. Filho, ``Formal

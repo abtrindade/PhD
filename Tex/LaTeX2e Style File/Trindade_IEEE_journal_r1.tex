@@ -472,16 +472,23 @@ Automated verification, model checking, energy systems, solar photovoltaic syste
 \IEEEPARstart{A}{ccording} to \cite{Coelho} there are presently 1.3 billion people with no access to electricity worldwide. 
 %The definition of energy access usually includes both electricity access and access to modern fuels for cooking and heating, in order to replace traditional biomass. 
 %Increased access to energy allows economic growth and poverty alleviation \cite{Karekesi}. 
-
-Among the options of renewable sources, there are hydro, wind, and solar photovoltaic (PV). Only a niche market a few years ago, PV are now becoming a mainstream electricity provider, changing the way the world is powered. Based in data from \cite{EPIA}, there was an increase of approximately 50\% from 2016 to 2017 in terms of new installations of PV. 
+%
+%Among the options of renewable sources, there are hydro, wind, and solar photovoltaic (PV). 
+Only a niche market a few years ago, solar photovoltaic (PV) are now becoming a mainstream electricity provider.
+% changing the way the world is powered. 
+Based in data from \cite{EPIA}, there was an increase of approximately 50\% from 2016 to 2017 in terms of new installations of PV. 
 %The use of the power generation technology with renewable energy source is developing rapidly due to the industrial development \cite{Yatimi}. 
-The renewable energy leads to an advance all over the world by protecting the environment: it is clean,
+%The renewable energy leads to an advance all over the world by protecting the environment: it is clean,
 %(low greenhouse gases emissions)
-operating silently, long lifetime, low maintenance, absence of fuel cost and inexhaustible \cite{Noroozian}. Renewable energy, and particularly the power generation from solar energy using photovoltaic (PV) panels, has emerged as an alternative to fossil or nuclear fuel generation.
+%operating silently, long lifetime, low maintenance, absence of fuel cost and inexhaustible \cite{Noroozian}. 
+%Renewable energy, and particularly the power generation from solar energy using photovoltaic (PV) panels, has emerged as an alternative to fossil or nuclear fuel generation.
 % 
 %The PV cell in a solar photovoltaic system, as defined in \cite{Rawat}, is a semiconductor device, which directly converts the solar radiation into electrical energy. 
 
-Apart from PV modules; the PV systems consist of battery bank, controller, and inverter, plus the load. Moreover, the optimum sizing of these devices is important for reliable operation. Therefore, these systems need to be designed properly according to the site, land area available, load requirement, load pattern, environmental conditions and economics in order to utilize available resources efficiently and economically \cite{Rawat}. Furthermore, there is the need for proper modeling and simulation tools for people involved in their application. In order to validate or even simulate a potential PV solution, there are a myriad of tools.
+%Apart from PV modules; the 
+%PV systems consist of PV modules, battery bank, controller, and inverter, plus the load. %Moreover, the optimum sizing of these devices is important for reliable operation.
+%Therefore, these systems need to be designed properly according to the site, land area available, load requirement, load pattern, environmental conditions and economics in order to utilize available resources efficiently and economically \cite{Rawat}. %Furthermore, there is the need for proper modeling and simulation tools for people involved in their application. 
+In order to validate or even simulate a potential PV solution, there are a myriad of tools available at the market.
 
 %The increase in a number of PV systems installed all over the world brings the need for proper modeling and simulation tools for researcher and practitioners involved in their application. In order to validate or even simulate a potential PV solution, there are a myriad of tools. 
 %However, to the best of our knowledge, this work can be the first work to perform automated verification of a solar PV off-grid project solution.  
@@ -494,18 +501,22 @@ Apart from PV modules; the PV systems consist of battery bank, controller, and i
 
 %PV systems can be classified into grid-connected and stand-alone systems. At this proposal, only off-grid or stand-alone systems will be considered. The utilization of solar energy in off-grid mode has the potential to meet the energy need for remote rural areas of developing countries.  
 
-Desiging any complex system, as a PV for example, more time is spent on verification than on construction, as shown in \cite{Baier}. Formal methods based on model checking offer great potential to obtain a more effective and faster verification in the design process. Programs may be viewed as mathematical objects with behavior that is, in principle, well determined. This makes it possible to specify programs using mathematical logic, which constitutes the intended (correct) behavior. Then, one can try to give a formal proof or otherwise establish that the program meets its specification, as defined by \cite{Trindade}. 
+Desiging any complex system, as a PV, more time is spent on verification than on construction, as shown in \cite{Baier}. Formal methods based on model checking offer great potential to obtain a more effective and faster verification in the design process. Programs may be viewed as mathematical objects. 
+%with behavior that is, in principle, well determined. 
+ This makes it possible to specify systems as programs using mathematical logic, which constitutes the intended (correct) behavior. Then, one can try to give a formal proof or otherwise establish that the program meets its specification.%, as defined by \cite{Trindade}. 
 
-This area of research is referred as formal methods as defined in \cite{Clarkeetal}.
+This area of research is referred as formal methods. % as defined in \cite{Clarkeetal}.
 % Their aim is to establish system correctness with mathematical rigor. 
-In the recent decades, research in formal methods has led to the development of very promising verification techniques that facilitate the early detection of bugs in order to ensure the correctness of the system. 
+In the recent decades, research in formal methods has led to the development of very promising verification techniques.
+% that facilitate the early detection of bugs in order to ensure the correctness of the system. 
 
 Model-based verification techniques are based on models that describe the possible system behavior in a mathematically precise and unambiguous manner. 
 %Thus, such problems as incompleteness, ambiguities, and inconsistencies, which normally are discovered only in later stages of the design, can be detected in advance, as described by \cite{Trindade}. 
 Algorithms can verify the system model through systematically explore all their states. 
 
 %Bringing this technique to solar PV systems, i
-Instead of finding a bug or a software inconsistence, the present work aim to verify a PV system, informing in which condition the project do not meet user requirements or will fail, as shown in Fig.\ref{fig:flowchartgeneral}. 
+%Instead of finding a bug or a software inconsistence, t
+The present work aim to verify a PV system, informing in which condition the project do not meet user requirements or will fail, as shown in Fig.\ref{fig:flowchartgeneral}. 
 %Among the non-deterministic variables considerated, is it worth to mention environmental issues (like solar irradiance, and temperature), and the variation of the electrical load (power consumption) or the battery' state of charge, as shown in Fig.\ref{fig:flowchartgeneral}. 
 That is the main contribution of this paper.
 
@@ -526,16 +537,17 @@ The implementation of the
 % ideas will be 
 proposed framework is done with the efficient SMT-based bounded model checker (ESBMC) tool that uses the front-end of the C Bounded Model Checker (CBMC) or the clang-based front-end, which permits to describe the PV system as a C/C++ language code.
  
-The remainder of this paper is organized as follows: Sect. 2 gives a background of solar PV systems. Section 3 describes the design and validation of a solar PV system. Section 4 describes the formal mathematical modeling of a generic PV system. Section 5 presents the automated verification theory, including details of the ESBMC process. The methodology is presented at Section 6. Section 7 discusses the related work. Section 8 presents the conclusion and describes future work. At the end of the paper, there is a list of all nomenclatures used at the text. 
+The remainder of this paper is organized as follows: Section II gives the background. Section III describes the design and validation of PV system. Section IV describes the mathematical modeling. Section V presents the automated verification. The methodology is presented at section VI. Section VII is devoted to the results, and section VIII to the related work. Section IX presents the conclusion and describes future work.
 
 \section{Solar Photovoltaic System }
-According to \cite{Roy}, a PV system is designed to give the electric supply to a load. This load can be either Alternate Current (AC) type or Direct Current (DC) type. Electric supply can be needed either in daytime or evening time (in particular cases, in both times). %The most basic PV system can give supply only in daytime.  
-For night hours or rainy days, one needed to have batteries, where power can be stored and used \cite{Gules}. 
+According to \cite{Roy}, a PV system is designed to give the electric supply to a load. This load can be either Alternate Current (AC) type or Direct Current (DC) type. Electric supply can be needed either in daytime or evening time. 
+%(in particular cases, in both times). %The most basic PV system can give supply only in daytime.  
+For night hours or rainy days, one needed to have batteries, where power can be stored and used.% \cite{Gules}. 
 
-PV systems are broadly classified into three distinct types, as described by \cite{Mohanty}: Standalone systems, where the energy is generated and consumed in the same place and which does not interact with the main grid, Grid-connected systems, and solar PV hybrid system, where another source(s) of energy, such as wind, biomass or diesel, can work together with the solar PV system to provide the required demand.
-
-As the goal of this work is just the solutions aimed to isolated/ off-grid application, therefore it is not considered the on-grid or hybrid configurations.
-
+PV systems are broadly classified into three distinct types, as described by \cite{Mohanty}: (1) standalone systems, where the energy is generated and consumed in the same place and which does not interact with the main grid, (2) grid-connected systems, and (3) solar PV hybrid system, where another source(s) of energy can work together with the solar PV. % system to provide the required demand.
+%, such as wind, biomass or diesel, 
+%As the goal of this work is just the solutions aimed to isolated/ off-grid application, %therefore it is not considered the on-grid or hybrid configurations.
+%
 %\begin{itemize}
 %\item Standalone systems, where the energy is generated and consumed in the same place and which does not interact with the main grid. Normally, the electricity consuming/utilizing device is part of the system, i.e., solar home systems, solar street lighting system, solar lanterns, and solar power plants; 
 %\item Grid-connected systems, where the solar PV system is connected to the grid. The grid-connected system can be either a grid-tied system, which can only feed power into the grid and such system cannot deliver power locally during blackouts and emergencies since these systems have to be completely disconnected from the grid and have to be shut down as per national and international electrical safety standards. Some grid-connected PV systems, with energy storage, can also provide power locally in an islanding mode; 
@@ -543,11 +555,15 @@ As the goal of this work is just the solutions aimed to isolated/ off-grid appli
 %\end{itemize}
  
 Specifically concerning isolated communities, 
+%standalone systems are one the most used solutions, and 
 % depending on the type of load, cost, resources availability, and requirements of the load, 
-standalone systems can be split into several categories. However, the configuration that is most common nowadays is the regulated standalone system with battery and AC load. This configuration includes PV array, battery, MPPT and AC load. Battery is used to store the extra power of PV system. A charge controller is necessary for this type of system because the useful life of the battery is less than that of the PV module. Extra charging and deep discharging can reduce the battery life \cite{Kim}. Because of the AC load, an inverter (DC to AC converter) is required. 
+%standalone systems 
+%can be split into several categories. However, 
+the configuration that is most common nowadays is the regulated standalone system with battery and AC load. This configuration includes PV array, batteries, charge controller, inverter, and AC load.
+%PV array, battery, MPPT and AC load. Battery is used to store the extra power of PV system. A charge controller is necessary for this type of system because the useful life of the battery is less than that of the PV module. Extra charging and deep discharging can reduce the battery life \cite{Kim}. Because of the AC load, an inverter (DC to AC converter) is required. 
 %This solution has an increase of cost because has more equipment. However, the AC availability brings the advantage of a higher number of AC appliances to use at the houses or consumer units.
- 
-The resource MPPT, called of maximum power point tracking, is an electronic control mechanism that maintains the PV operating in a voltage that correspond to the voltage of maximum power, which maximizes the transfer of power and avoiding lost at the PV cells \cite{Pinho}. %That resource is found at modern PV systems and is strongly indicated due to its advantages.
+%The resource MPPT, called of maximum power point tracking, is an electronic control mechanism that maintains the PV operating in a voltage that correspond to the voltage of maximum power.
+%, which maximizes the transfer of power and avoiding lost at the PV cells \cite{Pinho}. %That resource is found at modern PV systems and is strongly indicated due to its advantages.
 
 %\subsection{Unregulated standalone PV system with DC load }
 %Usually this type of system is for low power applications, as defined by \cite{Roy}. The PV system is directly connected to the load without any MPPT controller, as shown at Fig.\ref{fig:standaloneSPV} letter (a). At night hours, the system will not provide any supply because of the absence of the battery. 
@@ -571,9 +587,12 @@ The resource MPPT, called of maximum power point tracking, is an electronic cont
 %This system is similar to the previous one, but here AC load draws the power from PV system and, because of the AC load, an inverter (DC to AC converter) is required, as seen in Fig.\ref{fig:standaloneSPV} letter (d). This solution has an increase of cost because has more equipments. However, the AC availability brings the advantage of a higher number of AC appliances to use at the houses or consumer units. That configuration is the focus of the present work since it is the most common nowadays all over the world, when off-grid or isolated regions is the target.
 
 \section{Design and Validation of a Solar photovoltaic system}
-The design and validation of a PV system can be done by hand or with the aid of a software tool. 
-
-In order to address different aspects of project system and systems design, there is a myriad of public domain and commercial software available for the PV market. According to \cite{Brooks}, the capabilities of these tools range from simple solar resource and energy production estimation, to site survey and system design tools, to complex financial analysis software (with optimization). 
+%The design and validation of a PV system can be done by hand or with the aid of a software tool. 
+%
+In order to address different aspects of project system and systems design, there is a myriad of tools. 
+%public domain and commercial software available for the PV market. 
+%According to \cite{Brooks}, t
+The capabilities of these tools range from simple solar resource and energy production estimation, to site survey and system design tools, to complex financial analysis software (with optimization). 
 %Some tools also provide support to rebate programs applications and tax incentives (specific to each country or region), while other programs and worksheets focus on the technical aspects of system sizing and design.
 %
 %Manufacturers and integrators have yet their proprietary software to perform inverter string sizing and various system sizing and design tools, with the drawback to just include their own products among the possibilities of choice. 
@@ -606,7 +625,7 @@ In this work, were evaluated the most popular tools, as PVWatts, SAM, Homer Pro,
 %\subsection{Hybrid2}
 %The Hybrid2 software package, as described in \cite{Mills}, is a user-friendly tool to perform detailed long-term performance and economic analysis on a wide variety of hybrid power systems. Hybrid2 is a probabilistic/time series computer model, using time series data for loads, wind speed, solar insolation, and temperature; and the power system is designed or selected by the user, in order to predict the performance of the hybrid power system. Variations in wind speed and in load within each time step are factored into the performance predictions. The code does not consider short-term system fluctuations caused by system dynamics or component transients. This program is not supported anymore and according to \cite{UMASS}, probably after the user performs the free download of the tool, it will not work on Windows platforms later than Windows XP, what is a limitation.
 
-Table \ref{table:softwares} summarizes the off-the-shelf tools mentioned in this paper.  Where just Hybrid2 do not have technical support; only HOMER Pro, and Hybrid2 perform off-grid system or battery backup analysis; all the tools perform solar photovoltaic analysis; and that only HOMER Pro and RETScreen Expert are complete, including economical analysis or even optimization-sensitive analysis. However, only paid version of those softwares have all the features, and they run only at Windows-based operational systems. RETScreen and HOMER have a free web-based version but with limited resources.
+Table \ref{table:softwares} summarizes the off-the-shelf tools mentioned in this paper.  Where just Hybrid2 do not have technical support; only HOMER Pro, and Hybrid2 perform off-grid system or battery backup analysis; all the tools perform solar photovoltaic analysis; and that only HOMER Pro and RETScreen Expert include economical analysis or even optimization-sensitive analysis. However, only paid version of those softwares have all the features, and they run only at Windows operational systems. RETScreen and HOMER have a free web-based version but with limited resources.
 
 \begin{table}[!t]
 %% increase table row spacing, adjust to taste
@@ -665,12 +684,13 @@ The modeling of the PV system is based on modular blocks, as illustrated in Fig.
 In the literature, there are several mathematical models available for each component of PV systems. In this section, the mathematical model for each component is presented. 
 
 \subsection{PV generator (cell, module, array) }
-A photovoltaic PV generator is the whole assembly of solar cells, connections, protective parts, and supports. 
+%A photovoltaic PV generator is the whole assembly of solar cells, connections, protective parts, and supports. 
 %In the present modeling, the focus is only on cell/module/array.
- 
-The basic element of a PV system is the PV cell, also called a solar cell. A PV / solar cell is a semiconductor device that can convert solar energy into DC electricity. 
+%
+The basic element of a PV system is the PV cell, also called a solar cell. A solar cell is a semiconductor device that can convert solar energy into DC electricity. 
 %The semiconductor materials (usually silicon), which are specially treated to form an electric field, positive on one side (backside) and negative on the other (towards the sun). When solar energy (photons) hits the solar cell, electrons are knocked loose from the atoms in the semiconductor material, creating electron-hole pairs \cite{Lorenzo}. If electrical conductors are attached to the positive and negative sides, forming an electrical circuit, the electrons are captured in the form of electric current $ I_{ph} $ (photocurrent).
-To increase their utility, a number of individual PV cells are interconnected together in a sealed, weatherproof package called Panel (or module). 
+To increase their utility, a number of individual PV cells are interconnected together in a %sealed, weatherproof 
+package called panel or module. 
 
 %For instance, a 12 V Panel will have 36 cells connected in series and a 24 V Panel will have 72 PV cells connected in series. In addition, to achieve the desired voltage and current, modules are wired in series and parallel into what is called a PV Array, as shown in Fig.\ref{fig:celmodarray}. The flexibility of the modular PV system allows designers to create PV systems that can meet a wide variety of electrical demands. 
 %
@@ -681,7 +701,8 @@ To increase their utility, a number of individual PV cells are interconnected to
 %\label{fig:celmodarray}
 %\end{figure}
 %
-The PV modules are generally rated under standard test conditions (STC), and the parameters required for the input of the PV modules are relying on the meteorological conditions of the area to be serviced by photovoltaic solution. However, the climatic conditions are unpredictable due to the random nature of their occurrence \cite{Jakhrani}.
+The PV modules are generally rated under standard test conditions (STC), and the parameters required for the input of the PV modules are relying on meteorological conditions.
+%the meteorological conditions of the area to be serviced by PV solution. %However, the climatic conditions are unpredictable due to the random nature of their occurrence \cite{Jakhrani}.
 %, which leads to the following specification by the manufacturers:  solar radiation of 1000 W/m$^{2}$, cell temperature of 25$^{o}$C, and solar spectrum of 1.5. The parameters required for the input of the PV modules are relying on the meteorological conditions of the area to be serviced by photovoltaic solution. However, the climatic conditions are unpredictable due to the random nature of their occurrence \cite{Jakhrani}.
 %
 %These uncertainties lead to either over- or underestimation of energy yield from PV modules. An overestimation up to 40\% was reported as compared to the rated power output of PV modules \cite{Durisch}. The growing demand of photovoltaics technologies led to research in the various aspects of its components from cell technology to the modeling, size optimization, and system performance \cite{Yatimi}, \cite{Saloux}, \cite{Mellit}. 
@@ -702,7 +723,6 @@ The performance of photovoltaic systems, that is, the output current/voltage cur
 \end{figure}
  
 The 1-diode model, shown by Fig. \ref{fig:equivckt}, whose equation to relate the output current, $I$, to the output voltage, $V$, is described in Equation \ref{eq:1diodemodel}. 
-
 \begin{equation}
 \label{eq:1diodemodel}
 I = I_{ph}-I_{D1}=I_{ph}-I_{0}\left[ exp \left( \dfrac{V}{NaV_{T}} \right)  \right] 
@@ -712,14 +732,14 @@ Where:
 \begin{itemize}
 \item $I_{ph}$ is the photocurrent delivered by the constant current source; 
 \item $ I_{0} $ is the reverse saturation current corresponding to the diode; 
-\item $ N $ is the number of series-connected cells in the photovoltaic system to be analyzed;
-	\begin{itemize}
-	\item $ N=1 $ in a single cell configuration. 	
-	\end{itemize}	  
-\item $ a $ is the ideality factor (or quality factor) that takes into account the deviation of the diodes from the Shockley diffusion theory; 
-	\begin{itemize}
-	\item $a=1$ for ideal diodes and between $ 1 $ and $ 2 $ for real diodes. 	
-	\end{itemize}
+\item $ N $ is the number of series-connected cells in the photovoltaic system to be analyzed; $ N=1 $ in a single cell configuration.
+%	\begin{itemize}
+%	\item $ N=1 $ in a single cell configuration. 	
+%	\end{itemize}	  
+\item $ a $ is the ideality factor (or quality factor) that takes into account the deviation of the diodes from the Shockley diffusion theory; $a=1$ for ideal diodes and between $ 1 $ and $ 2 $ for real diodes.
+%	\begin{itemize}
+%	\item $a=1$ for ideal diodes and between $ 1 $ and $ 2 $ for real diodes. 	
+%	\end{itemize}
 \item $V_{T}$ is the thermal voltage ($ V_{T}=k_{B}T/q $);
 	\begin{itemize}
 	\item $ k_{B} $ is the Boltzmann constant ($ 1.3806503\times10^{-23}J $); 
@@ -784,7 +804,6 @@ Equation 1 is used to write down expressions for currents and voltages at each k
 %\end{figure}
 
 Hence, the short-circuit current, the open-circuit voltage, the maximum power voltage and current are written as defined by \cite{Saloux} and shown from Equations \ref{eq:Isc} to \ref{eq:Im}.
-
 \begin{equation}
 \label{eq:Isc}
 I_{sc}=I_{ph}\vert_{V=0}
@@ -833,8 +852,7 @@ Equation \ref{eq:exp} is not explicit with the PV key parameters, therefore need
 %
 %Replacing the Equation \ref{eq:dIdV_Vm} into Equations \ref{eq:Vmderiv} and \ref{eq:Im}, 
 
-As shown by \cite{Saloux} the voltage and the current at the maximum power point and consequently the maximum output power, can be expressed by Equations \ref{eq:Vmfinal}, \ref{eq:Imfinal}, and \ref{eq:Pm}. These equations are used to calculate the key cell parameters at the maximum power point as function cell temperature and parameters from the manufacturer's data-sheet.
-
+As shown by \cite{Saloux} the voltage and the current at the maximum power point and consequently the maximum output power, can be expressed by Equations \ref{eq:Vmfinal}, \ref{eq:Imfinal}, and \ref{eq:Pm}. %These equations are used to calculate the key cell parameters at the maximum power point as function cell temperature and parameters from the manufacturer's data-sheet.
 \begin{equation}
 \label{eq:Vmfinal}
 V_{m}=\dfrac{aNk_{B}T}{q} ln \left( \dfrac{aNk_{B}T}{qI_{0}} \dfrac{I_{sc}}{V_{oc}}  \right) 
@@ -851,7 +869,6 @@ P_{m} = V_{m} I_{m} = \left[ \dfrac{aNk_{B}T}{q} ln \left( \dfrac{aNk_{B}T}{qI_{
 \end{multline}
 
 However, the photocurrent delivered by the constant current source ($ I_{ph} $) or even the reverse saturation current ($ I_{0} $) are not given by PV manufacturers. Therefore, Equation \ref{eq:Iph} is used to calculate the photocurrent as function of irradiance and temperature \cite{Villalva}.
-
 \begin{equation}
 \label{eq:Iph}
 I_{ph}=\dfrac{G}{G_{ref}} \left[ I_{ph,ref} + \mu_{I} \left( T-T_{ref} \right)    \right] 
@@ -859,10 +876,9 @@ I_{ph}=\dfrac{G}{G_{ref}} \left[ I_{ph,ref} + \mu_{I} \left( T-T_{ref} \right)  
 
 Where the reference state (STC) of the cell is given by the solar irradiance $ G_{ref}=1000 W/m^{2} $, and the temperature $ T_{ref}=298.15 K (=25^{o}C) $.
 
-In Equation \ref{eq:Iph}, $ \mu_{I} $ is the short-circuit current temperature coefficient ($A/K$) and corresponds to the photocurrent obtained from a given PV cell working at (STC or standard test conditions) reference conditions (provided by PV manufacturers). $ I_{ph,ref} $ can also be approximated to the reference short-circuit current that is provided by PV manufacturers ($ I_{sc,ref} $) as shown by \cite{Jakhrani}.
+In Equation \ref{eq:Iph}, $ \mu_{I} $ is the short-circuit current temperature coefficient ($A/K$) and corresponds to the photocurrent obtained from a given PV cell working at reference conditions (provided by PV manufacturers). $ I_{ph,ref} $ can also be approximated to the reference short-circuit current that is provided by PV manufacturers ($ I_{sc,ref} $) as shown by \cite{Jakhrani}.
 
 The cell temperature ($ T $) can be obtained from \cite{Ross} and is shown in Equation \ref{eq:Tcell}.
-
 \begin{equation}
 \label{eq:Tcell}
 T = T_{air} + \dfrac{NOCT-20}{800}G
@@ -880,8 +896,8 @@ I_{0} = \dfrac{I_{sc,ref} + \mu_{I}(T - T_{ref})}{exp \left[ \dfrac{q(V_{oc,ref}
 
 Where $ V_{oc,ref} $ is the reference open-circuit voltage, and $ \mu_{V} $ is an open-circuit voltage temperature coefficient ($ V/K $).
 
-The ideality (or quality) factor of the diode $ a $, which is usually considered as a constant \cite{Villalva}, is determined in the reference state. Using the maximum power point current equation (Equation \ref{eq:Pm}) and the saturation current in the reference temperature given by Equation \ref{eq:I0}, the diode quality coefficient is determined by Equation \ref{eq:a}.
-
+%The ideality (or quality) factor of the diode $ a $, which is usually considered as a constant \cite{Villalva}, is determined in the reference state. 
+Using the maximum power point current equation (Equation \ref{eq:Pm}) and the saturation current in the reference temperature given by Equation \ref{eq:I0}, the diode quality (or ideality) coefficient is determined by Equation \ref{eq:a}.
 \begin{equation}
 \label{eq:a}
 a = \dfrac{q(V_{m,ref}-V_{oc,ref})}{Nk_{B}T} \dfrac{1}{ln \left( 1 - \dfrac{I_{m,ref}}{I_{sc,ref}}  \right) }
@@ -911,14 +927,12 @@ Where $ V_{mref} $, $ V_{oc,ref} $, $ I_{m,ref} $, and $ I_{sc,ref} $ are key ce
 Besides the model verification, there is the prior stage of project sizing check, which is simple, based on manufacturer's data and information from the sizing and the site. 
 
 First is necessary to correct the energy consumption that was estimated to the load ($E_{consumption}$). That is done by Equation \ref{eq:Ecorrected}, according \cite{Pinho}. Where the efficiency of batteries ($\eta_{b}$), controller ($\eta_{c}$), and the inverter ($\eta_{i}$) are considered.
-
 \begin{equation}
 \label{eq:Ecorrected}
 E_{corrected} = \dfrac{E_{consumption}}{ \eta_{b} \eta_{c} \eta_{i} }
 \end{equation}
 
 The total minimum number of solar panels necessary($ N_{TPmin} $) is calculated by Equation \ref{eq:NTPmin}, and the check is done with the Equation \ref{eq:NTP}, where the sized number of panels ($ N_{TP} $) must be greater than the result from Equation \ref{eq:NTPmin}.
-
 \begin{equation}
 \label{eq:NTPmin}
 N_{TPmin} = \dfrac{E_{corrected}}{E_{p}}
@@ -930,7 +944,6 @@ N_{TP} \geq N_{TPmin}
 \end{equation}
 
 Particularly, the total number of panels is series ($ N_{PSmin} $) and parallel ($ N_{PPmin} $) are given by the Equations \ref{eq:NPSmin} and \ref{eq:NPPmin}, respectively. With the check did by Equations \ref{eq:NPS} and \ref{eq:NPP}. $ V_{system} $ is the DC voltage of the bus, and is a design decision (normally 12, 24 or 48 V).
-
 \begin{equation}
 \label{eq:NPSmin}
 N_{PSmin} = \dfrac{V_{system}}{V_{m,ref}}
@@ -955,7 +968,9 @@ N_{PP} \geq N_{PPmin}
 \subsection{The Battery Storage Model }
 %Because of the fluctuating nature of the output delivered by the PV arrays, batteries are necessary in a PV system. Thus, during the hours of sunshine, the PV system feeds directly the load and the excess electrical energy is stored in the battery. During the night, or during a period with low solar irradiation, energy is supplied to the load from the battery \cite{Mellit}.
   
-Several models have been presented in the literature, as shown by \cite{Copetti}, \cite{Manwell93}, and \cite{Manwell94}. However, regardless of the model, normally the following parameters are required: 
+Several models have been presented in the literature, as shown by \cite{Copetti}, and \cite{Manwell93}.
+%, and \cite{Manwell94}. 
+However, regardless of the model, normally the following parameters are required: 
 
 \begin{itemize}
 \item Nominal capacity ($ q_{max} $), is the number of Ampere-hours ($ Ah $) that can maximally be extracted from the battery
@@ -963,7 +978,7 @@ Several models have been presented in the literature, as shown by \cite{Copetti}
 \item State of charge ($ SOC $), is the ratio between the present capacity and the nominal capacity, i.e., $ SOC = q/q_{max} $. 
 %Obviously $ 0<SOC<1 $. 
 If $ SOC=1 $, then the battery is totally charged; and if $ SOC=0 $, the battery is fully discharged
-\item Charge (or discharge) regime.This parameter reflects the relationship between the nominal capacity of a battery and the current at which it is charged (or discharged). 
+%\item Charge (or discharge) regime.This parameter reflects the relationship between the nominal capacity of a battery and the current at which it is charged (or discharged). 
 %It is expressed in hours: for instance, discharge regime is 30h for a battery of 150 Ah that is discharged at 5A.
 \item Efficiency ($\eta_{b}$), is the ratio of the charge extracted during discharge divided by the amount of the charge needed to restore the initial state of charging or discharging current. 
 %\item Lifetime, is the number of charge/discharge cycles the battery can sustain before losing 20\% of its nominal capacity.
@@ -983,32 +998,34 @@ If $ SOC=1 $, then the battery is totally charged; and if $ SOC=0 $, the battery
 %The terminal voltage of the battery can be expressed in terms of its open circuit voltage and the voltage across the internal resistance of the battery \cite{Sukamongkol}, as shown by Equation 31.  
 %
 %Where $ V_{b} $ is the battery terminal voltage, $ E_{oc} $ is the battery circuit voltage, $ I_{b} $ is the battery current, and $ R_{b} $ is the internal resistance of the battery.
-
+%
 %The battery model, which describes the relationship between the voltage, current and the state of charge, can be found in \cite{Copetti}, \cite{Manwell93}, and \cite{Manwell94}.  
-
-The Kinetic Battery Model (KiBaM) of Manwell and McGowen \cite{Manwell93} was developed at the University of Massachusetts to predict the performance of the battery, based on manufacturer's data. However, it uses some data extracted from tested batteries in laboratory. Therefore is not suitable to this study. 
-
+%
+%The Kinetic Battery Model (KiBaM) of Manwell and McGowen \cite{Manwell93} was developed at the University of Massachusetts to predict the performance of the battery, based on manufacturer's data. However, it uses some data extracted from tested batteries in laboratory. Therefore is not suitable to this study. 
+%
 Most of the created models were used to simulate and optimize PV storage system based on lead-acid batteries. That kind of battery is the most common used batteries in PV application, owing to their relative low cost and wide availability \cite{Copetti}. 
 
 Here, the model adopted is the based on \cite{Copetti}, who uses manufacturer's data and allows finding relations among voltage, current, state of charge and temperature. 
 
-The discharge voltage equation is shown in Equation \ref{eq:bat_Vd}. The first term represents the voltage variation with the state of charge ($ SOC $), i.e., the electrolyte concentration, and the second is the variation due to internal resistance variation.
-
+The discharge voltage equation is shown in Equation \ref{eq:bat_Vd}. 
+%The first term represents the voltage variation with the state of charge ($ SOC $), i.e., the electrolyte concentration, and the second is the variation due to internal resistance variation.
+%
 \begin{multline}
 \label{eq:bat_Vd}
 V_{d} = \left[ 2.085-0.12(1-SOC) \right] - \\ \dfrac{I}{C_{10}} \left( \dfrac{4}{1+I^{1.3}} + \dfrac{0.27}{SOC^{1.5}}+0.02 \right) (1-0.007 \Delta T)
 \end{multline}
 
-Where $ C_{10} $ means 10h of rated capacity, which is standard on the manufacturer's data-sheet, $ \Delta T $ is temperature variation ($ \Delta T=T-T_{ref} $, $ T_{ref}=25^{o}C $, $ SOC $ indicates how much electric charge is stored in the cell at given time, defined by Equation \ref{eq:SOCbat}.
+Where $ C_{10} $ means 10h of rated capacity, which is standard on the manufacturer's data-sheet, $ \Delta T $ is temperature variation ($ \Delta T=T-T_{ref} $, $ T_{ref}=25^{o}C $). %, $ SOC $ indicates how much electric charge is stored in the cell at given time, defined by Equation \ref{eq:SOCbat}.
+%\begin{equation}
+%\label{eq:SOCbat}
+%SOC = \left( 1 - \dfrac{Q}{C} \right) 
+%\end{equation}
+%
+%Where $ Q $ is the charge delivered at the time of interest ($ Q=It $), and C is the battery capacity.
+%
+%The ratio between $ Q $ and $ C $ represents t
 
-\begin{equation}
-\label{eq:SOCbat}
-SOC = \left( 1 - \dfrac{Q}{C} \right) 
-\end{equation}
-
-Where $ Q $ is the charge delivered at the time of interest ($ Q=It $), and C is the battery capacity.
-
-The ratio between $ Q $ and $ C $ represents the depth of discharge ($ DOD $) or the fraction of discharge, i.e., $ DOC=1-SOC $.
+The depth of discharge ($ DOD $) or the fraction of discharge, is $ DOC=1-SOC $.
 
 %The efficiency of the battery discharge is assumed to be 100\%, according \cite{Copetti}; however, the total amount of useful charge available during discharge is limited by the current rate and temperature given by Equation \ref{eq:CC10}. This equation, called of capacity, is normalized with respect to discharge current corresponding to $ C_{10} $ rated capacity ($ I_{10} $).
 %
@@ -1020,23 +1037,21 @@ The ratio between $ Q $ and $ C $ represents the depth of discharge ($ DOD $) or
 %Note that when the discharge current tends to zero at 25$^{o}$C, the maximum capacity that can be removed is about 67\% over the capacity.
 
 For the charging process, however, the parameters are presented in Equation \ref{eq:Vcbat}.
-
+%
 \begin{multline}
 \label{eq:Vcbat}
 V_{c} = [2+0.16SOC]+ \\ \dfrac{I}{C_{10}} \left( \dfrac{6}{1+I^{0.86}} + \dfrac{0.48}{(1-SOC)^{1.2}} + 0.036  \right) (1-0.025 \Delta T)
 \end{multline}
 
 SOC can be calculated easily at any point during the discharge period; however, during recharge it is much more difficult \cite{Copetti}.
-
-Generally, the efficient region is where $ SOC $ is below $ 0.7 $ and $ V_{c} $ is less than $2.3 V$ per cell. The efficiency drops to zero at full charge and the function that represents the charge efficiency ($ \eta_{c} $) variation with state of charge and current rate is given in Equation \ref{eq:efficcharge}.
-
-\begin{equation}
-\label{eq:efficcharge}
-\eta_{c} = 1 - exp \left[ \dfrac{20.73}{\dfrac{I}{I_{10}}+0.55} (SOC-1) \right] 
-\end{equation}
-
-\cite{Copetti} show that, during overcharge, gassing occur and tests demonstrated that the final charge voltage ($ V_{ec} $) increases with the current intensity and with the decreasing of the temperature (Equation \ref{eq:Vec}). It was created a function for the gassing voltage as well, as shown in Equation \ref{eq:Vg}. In addition, the overcharge phenomenon can be represented by Equation \ref{eq:Voverc}.
-
+%Generally, the efficient region is where $ SOC $ is below $ 0.7 $ and $ V_{c} $ is less than $2.3 V$ per cell. The efficiency drops to zero at full charge and the function that represents the charge efficiency ($ \eta_{c} $) variation with state of charge and current rate is given in Equation \ref{eq:efficcharge}.
+%\begin{equation}
+%\label{eq:efficcharge}
+%\eta_{c} = 1 - exp \left[ \dfrac{20.73}{\dfrac{I}{I_{10}}+0.55} (SOC-1) \right] 
+%\end{equation}
+%
+%\cite{Copetti} show that, 
+During overcharge, gassing occur and tests demonstrated that the final charge voltage ($ V_{ec} $) increases with the current intensity and with the decreasing of the temperature (Equation \ref{eq:Vec}). It was created a function for the gassing voltage as well, as shown in Equation \ref{eq:Vg}. In addition, the overcharge phenomenon can be represented by Equation \ref{eq:Voverc}.
 \begin{equation}
 \label{eq:Vec}
 V_{ec} = \left[ 2.45 + 2.011 ln \left( 1+\dfrac{I}{C_{10}} \right)  \right] (1-0.002 \Delta T)
@@ -1057,7 +1072,6 @@ Where $ Ah_{restored} $ represents the Ampere-hour stored in the battery with re
 The function assumes that 95\% of the capacity was already restored at the start of overcharge.
 
 The time constant of the phenomenon ($ \tau $) is reversely proportional to the charge intensity and can be written by Equation \ref{eq:tau}.
-
 \begin{equation}
 \label{eq:tau}
 \tau = \dfrac{17.3}{1+852 \left( \dfrac{I}{C_{10}} \right) ^{1.67} }
@@ -1092,7 +1106,6 @@ Therefore, to model the voltage ($ V_{c} $) evolution of the battery, equation \
 %
 %
 Besides the model verification, there is also the prior stage of project sizing check, as did to the solar panel. First is necessary to define the total capacity of the battery bank, as shown by Equation \ref{eq:Cbank}.
-
 \begin{equation}
 \label{eq:Cbank}
 C_{bank} = \dfrac{E_{corrected} \times autonomy}{V_{system} \times DOD}
@@ -1101,7 +1114,6 @@ C_{bank} = \dfrac{E_{corrected} \times autonomy}{V_{system} \times DOD}
 The variable $ autonomy $ is a design definition and normally has a value ranging from 6 to 48h. The other variables were discussed previously.
 
 Following, is done the total (minimum) number of batteries, as show by Equation \ref{eq:Nbtotal}. Moreover, the Equation \ref{eq:batcheck} perform the final sizing check, considering the number of batteries in series ($ N_{BS} $) and the number of batteries in parallel ($ N_{BP} $) that were established to the project.
-
 \begin{equation}
 \label{eq:Nbtotal}
 N_{B}total = N_{BS}min \times N_{BP}min = \dfrac{V_{system}}{V_{bat}} \times \dfrac{C_{bank}}{C_{20}}
@@ -1115,7 +1127,10 @@ N_{B}total = N_{BS}min \times N_{BP}min = \dfrac{V_{system}}{V_{bat}} \times \df
 \subsection{Charge Controller Model}
 %Depending on the literature, the controller can receive different names: controller \cite{Hansen}, charge controller \cite{Mahanta} and \cite{Chauhan}, regulator \cite{Mellit}, DC-DC converter with MPPT and switch \cite{Dhanowa}, \cite{Yatimi}, \cite{Abdulateef}, \cite{Roy}. However, in this study, in order to simplify, the term used is controller. 
 
-The charge controller or controller is a set of items (DC-DC converter, a MPPT and switches) and can be defined as the responsible to manage the energy flow to PV system, batteries and loads by collecting information on the battery voltage and knowing the maximum and minimum values acceptable for the battery voltage. According to \cite{Pinho}, controllers aim to protect the battery (or batteries) against the excessive charge and discharge, improving its lifetime. 
+The charge controller or controller is a set of items (DC-DC converter, MPPT, and switches) and can be defined as the responsible to manage the energy flow to PV system, batteries and loads by collecting information on the battery voltage and knowing the maximum and minimum values acceptable for the battery voltage. MPPT, or maximum power point tracking, is an electronic control mechanism that maintains the PV operating at the voltage of maximum power. According to \cite{Pinho}, controllers aim to protect the battery (or batteries) against the excessive charge and discharge, improving its lifetime. 
+%
+%The resource MPPT, called of maximum power point tracking, is an electronic control mechanism that maintains the PV operating in a voltage that correspond to the voltage of maximum power.
+%
 %
 %As defined by \cite{Hansen} and \cite{Mellit}, all power systems must include a control strategy, which describes the interactions between its components. The use of battery as a storage form implies thus the presence of a charge controller. 
 %
@@ -1178,14 +1193,12 @@ Step  & Constraint & Command\\
 Regarding the DC-DC converter, the most basic idea is that the power is converted while altering the current and voltage. 
 
 As shown in \cite{Abdulateef}, the DC-DC converter is used to increase the efficiency of the PV system by matching the voltage generated by PV array to the voltage required by the load. The output power ($ P_{out} $) of DC-DC converter is given by Equation \ref{eq:poutcont}. 
-
 \begin{equation}
 \label{eq:poutcont}
 P_{in = P_{out}}
 \end{equation}
 
 Assuming that the efficiency of the controller ($ \eta_{c} $) is a manufacturer's data, from Equation \ref{eq:poutcont} is possible to reach Equation \ref{eq:potcont}.
-
 \begin{equation}
 \label{eq:potcont}
 V_{in} I_{in} \eta_{c} = V_{out} I_{out}
@@ -1213,21 +1226,18 @@ Where $ V_{in} $ is the voltage across the PV array, $ I_{in} $ is the output cu
 %As the MPPT definition and the equations to get the maximum power from the PV panels was described at the end of the PV panel modeling, the important here is to notice that the Equation \ref{eq:voutvin} defines the relationship between the input signal, the efficiency of the controller and the output power.
  
 One more time, some steps must be done to check the sizing project of the controller, prior the verification phase. Initially the controller must meet the voltage requirement of the PV system, as shown by Equation \ref{eq:vcvsystem}. 
-
 \begin{equation}
 \label{eq:vcvsystem}
 V_{c} = V_{system}
 \end{equation}
 
 Following, the short circuit reference information from the manufacturer's solar panel must be corrected to the cell temperature, as shown by Equation \ref{eq:iscamb}.
-
 \begin{equation}
 \label{eq:iscamb}
 I_{sc,amb} = I_{sc,ref} \times \left[ 1 + \eta_{I} \times (T-25) \right] 
 \end{equation}
 
 The controller must meet the maximum current from the PV array (Equations \ref{eq:icmin} and \ref{eq:icicmin}).
-
 \begin{equation}
 \label{eq:icmin}
 I_{c,min} = I_{sc,amb} \times N_{PP}
@@ -1239,7 +1249,6 @@ I_{c} \geq I_{c,min}
 \end{equation}
 
 The number of controllers required for the off-grid PV system, as defined by \cite{Yatimi}, is calculated using Equation \ref{eq:numberofcmin}. In addition, the final sizing check is did by Equation \ref{eq:numberofc}, who validate the number of controllers adopted.
-
 \begin{multline}
 \label{eq:numberofcmin}
 number_{controllers} = \dfrac{Total \, max \, power \, of \, PV}{Controller \, max \, power} = \\ \dfrac{P_{m,ref} \times N_{TP}}{V_{system} \times I_{controller,max}}
@@ -1250,23 +1259,23 @@ number_{controllers} = \dfrac{Total \, max \, power \, of \, PV}{Controller \, m
 N_{controller} \geq number_{controllers}
 \end{equation}
 
-\subsection{Joint work: charge controller and batteries}
-When batteries are charged, they go through three main different states - bulk, absorption and float, with impact to the inverter and to power supplied to the house.
+%\subsection{Joint work: charge controller and batteries}
+%When batteries are charged, they go through three main different states - bulk, absorption and float, with impact to the inverter and to power supplied to the house.
 %, and it is necessary to understand those three states in order to comprehend the joint work of the controller with the battery. With impact to the inverter and to power supplied to the house. 
 %
 %All the explanation at this section is related to $SOC$ and to the voltage at the DC-bus (controller output, which will be bigger than $V_{system}$) where the batteries are connected, all ruled by the charge controller. Moreover, it is important to mention that smart chargers, the most usual nowadays, will detect voltage and resistance from the battery prior to charging.
-
-Bulk - is the first stage of charging. Bulk begins when the sun comes out.
+%
+%Bulk - is the first stage of charging. Bulk begins when the sun comes out.
 %, or other source of electrical generation is turned on. 
-This stage occurs when the batteries are at a lower $SOC$, generally anything not smaller than $75\%$ to $80\%$ (defined during system sizing). This stage is typically where the highest voltage and current the charger is rated for will actually be used. The bulk stage basically allows the PV panel to put as much current into the batteries as possible. For a typical 12 V battery, the charging voltage going into a battery will reach 14.16 V to 14.40 V at this stage, and there is no risk of overcharging in this stage because the battery hasn't even reached full yet.
-
-Absorption - once the batteries reach the programmed absorb voltage, usually somewhere between 14.16 and 14.40 V, the batteries will go into the absorption stage. Typically, when a battery reaches this stage its $SOC$ is around $85-95\%$. During this stage, the batteries are kept at the programmed voltage, and the current going into the batteries reduces as the batteries become more full. The absorption stage ends after the programmed time is reached or the number of Ampere going into the battery falls below a preset number. The lower current going into the battery safely brings up the charge on the battery without overheating it. 
+%This stage occurs when the batteries are at a lower $SOC$, generally anything not smaller than $75\%$ to $80\%$ (defined during system sizing). This stage is typically where the highest voltage and current the charger is rated for will actually be used. The bulk stage basically allows the PV panel to put as much current into the batteries as possible. For a typical 12 V battery, the charging voltage going into a battery will reach 14.16 V to 14.40 V at this stage, and there is no risk of overcharging in this stage because the battery hasn't even reached full yet.
+%
+%Absorption - once the batteries reach the programmed absorb voltage, usually somewhere between 14.16 and 14.40 V, the batteries will go into the absorption stage. Typically, when a battery reaches this stage its $SOC$ is around $85-95\%$. During this stage, the batteries are kept at the programmed voltage, and the current going into the batteries reduces as the batteries become more full. The absorption stage ends after the programmed time is reached or the number of Ampere going into the battery falls below a preset number. The lower current going into the battery safely brings up the charge on the battery without overheating it. 
 %Usually, this stage takes more time than the bulk stage.
-
-Float - upon the completion of the absorption stage, the charge controller will  drop down the voltage and maintain at a steady 13.20 V to 13.38 V (manufacturer's defined value), which is the maximum voltage that a 12 V battery can hold, and begin the float stage. The float stage brings the battery all the way through and maintains $SOC$ at $100\%$. The current will also decrease to a point where it's considered just a pulse. It's essentially the float stage where there is charge going into the battery at all times, but only at a safe rate to ensure a full state of charge and nothing more. 
+%
+%Float - upon the completion of the absorption stage, the charge controller will  drop down the voltage and maintain at a steady 13.20 V to 13.38 V (manufacturer's defined value), which is the maximum voltage that a 12 V battery can hold, and begin the float stage. The float stage brings the battery all the way through and maintains $SOC$ at $100\%$. The current will also decrease to a point where it's considered just a pulse. It's essentially the float stage where there is charge going into the battery at all times, but only at a safe rate to ensure a full state of charge and nothing more. 
 %Most smart chargers do not turn off at this point, however it is completely safe to leave a battery in float mode for months to even years at a time.
-
-Battery charging technology relies on smart micro-controlled devices. Therefore it is extremely important that the program settings for the charge controller or inverter/charger are correct, and the list includes the bulk and absorption values. 
+%
+%Battery charging technology relies on smart micro-controlled devices. Therefore it is extremely important that the program settings for the charge controller or inverter/charger are correct, and the list includes the bulk and absorption values. 
 %This will help preserve and extend the battery life. There are always default settings to the equipment, set by software, however those settings are not $100\%$ correct because there are difference among models of equipment and among manufacturer's. The ideal is to read the data-sheet from the manufacturers and perform a manual adjust.
 %
 %There are the possibility to combine batteries in a bank, with parallel and series connections, all depending the sizing of the project:
@@ -1278,12 +1287,11 @@ Battery charging technology relies on smart micro-controlled devices. Therefore 
 %\end{itemize}
 %
 \subsection{The inverter model}
-As shown by \cite{Mellit}, the PV arrays produce DC and therefore when the PV system contains an AC load, a DC/AC conversion is required. 
+%As shown by \cite{Mellit}, the PV arrays produce DC and therefore when the PV system contains an AC load, a DC/AC conversion is required. 
 %An inverter is a converter, where the power flows from DC to AC side, i.e., having a DC voltage as input; it produces AC voltage, as output. 
 The role of the inverter is to keep the voltage constant on the AC side, i.e., at the rated voltage (127 V or 220 V, for example), and to convert the input power $ P_{in} $ into the output power $ P_{out} $ with the best possible efficiency \cite{Hansen}.
 
 The inverter is characterized by a power dependent efficiency $ \eta_{i} $ given by \cite{Hansen} as shown by Equation \ref{eq:efficinv}.
-
 \begin{equation}
 \label{eq:efficinv}
 \eta_{i} = \dfrac{P_{out}}{P_{in}} = \dfrac{V_{AC} I_{AC} cos\varphi}{V_{DC}I_{DC}}
@@ -1294,7 +1302,6 @@ Where $ I_{DC} $ is the current required by the inverter from the DC source in o
 %Therefore, with this equation it is possible to simulate the output power of the inverter, based on information from the inverter's data-sheet and from the DC module or the PV panel that feed the inverter (which are obtained by this study model). 
 %
 The sizing project check of the inverter is done through three Equations. Equation \ref{eq:vindc} ensure that the input voltage of the controller meet the voltage of the system. Equation \ref{eq:voutac} ensures that the output voltage of the controller meet the AC voltage of the load. Moreover, Equation \ref{eq:invcheck} ensures that the controller can support the total demand of the load and the surge power.
-
 \begin{equation}
 \label{eq:vindc} 
 V_{in}DC = V_{system}
@@ -1418,16 +1425,16 @@ Finally, the system attempting to determine whether a formula, which is the disj
 %As described in \cite{Alur}, in program verification, it is aimed to check if a program satisfies its logical specification. Contemporary verification tools vary widely in terms of source languages, verification methodology, and the degree of automation, but they all rely on repeatedly invoking an SMT solver. This work tracks the same path. 
 %
 \section{Methodology }
-
-Fig. \ref{fig:statetransition} shows the state diagram for the proposed framework. 
-
-\begin{figure}[h]
-\includegraphics[width=0.5\textwidth]{statetransition}
-\centering
-\caption{State transition diagram to the proposed framework}
-\label{fig:statetransition}
-\end{figure}
-
+%
+%Fig. \ref{fig:statetransition} shows the state diagram for the proposed framework. 
+%
+%\begin{figure}[h]
+%\includegraphics[width=0.5\textwidth]{statetransition}
+%\centering
+%\caption{State transition diagram to the proposed framework}
+%\label{fig:statetransition}
+%\end{figure}
+%
 %It is worth mentioning that the steps described here are carried out shortly after the design of the solar photovoltaic system, as soon as the equipment and equipment specifications are defined; before buying and deploying them, as a way to ensure that the project will not fail. 
 %
 The PV input data (load power demand, load consumption of energy, the PV system project sizing data, and the manufacturer's data-sheet information), the formulas to check the sizing project, the mathematical model, the limits of the non-deterministic variables of the model, are all written as C Programming language code. 
@@ -1440,28 +1447,30 @@ Simply put, instead of the ESBMC find the defect of a software or if a hardware 
 
 \subsection{The case studies and the Algorithm}
 
-At the present work, it was performed two case studies to evaluate the proposed technique: (1) one concerning a PV system (700 W, with 48h autonomy) deployed at four different houses at an indigenous community called Nova Esperan\c{c}a (GPS coordinates 2$^{o}$44'50.0"S 60$^{o}$25'47.8"W) sited around 1.5 h by speedboat from Manaus (Amazonas-Brazil), with each house having a different power demand (253 W, 263 W, 283 W, and 501 W); (2) and one case concerning a system deployed as an individual system at ordinary house in Manaus (GPS coordinates 3$^{o}$4'20.208"S 60$^{o}$0'30.168"W) as an alternative to pay less electric bill, supporting 915 W of the house's load (1,200 W system, but with autonomy of just 6 h). 
+It was performed two case studies: (1) one concerning a PV system (700 W inverter, with 48h autonomy) deployed at four different houses at an indigenous community (GPS coordinates 2$^{o}$44'50.0"S 60$^{o}$25'47.8"W) sited nearby Manaus (Brazil), with each house having a different power demand (253 W, 263 W, 283 W, and 501 W); (2) and one case concerning a system deployed as an individual system in Manaus (GPS coordinates 3$^{o}$4'20.208"S 60$^{o}$0'30.168"W), supporting 915 W of the house's load (1,200 W inverter, but with autonomy of just 6 h). 
 %and as backup at night 
-
-The 700 W system: 3 x 325 W PV panels connected in series, controller of 150 V/35 A with a DC-bus of 24 V, 4 x 220 Ah batteries (2 in series and 2 in parallel arrangement), and inverter of 700 W. 
-
-And the 1,200 W PV system: 4 x 325 W connected in series PV panels, with controller of 150 V/35 A  in a DC-bus of 48 V, 4 batteries of 120 Ah connected in series, and a 1,200 W inverter.
-
+%
+%The 700 W system: 3 x 325 W PV panels connected in series, controller of 150 V/35 A with a DC-bus of 24 V, 4 x 220 Ah batteries (2 in series and 2 in parallel arrangement), and inverter of 700 W. 
+%
+%And the 1,200 W PV system: 4 x 325 W connected in series PV panels, with controller of 150 V/35 A  in a DC-bus of 48 V, 4 batteries of 120 Ah connected in series, and a 1,200 W inverter.
+%
 %As demonstrated at this work, the performance of the system is highly dependent of solar irradiance and temperature, that are specific of the deployed local (latitude and longitude). 
-At both case studies, it was considered historic data from Manaus city (because the indigenous community do not have data and is not far from Manaus). According with X and Y, the minimum average temperature ($T$) during a entire year (21 years on record) is 23$^{o}$C and the maximum average temperature is 32$^{o}$C; and irradiance ($G$)varies from 274 W/m$^{2}$ to 852 W/m$^{2}$ when there is sunlight.  
+
+%At both case studies, it was considered 21 years of historic data from Manaus. 
+According with X and Y, the annual average temperature ($T$) in Manaus is from 23$^{o}$C to 32$^{o}$C; and irradiance ($G$) varies from 274 W/m$^{2}$ to 852 W/m$^{2}$ when there is sunlight.  
 %and irradiance varies from 0 W/m$^{2}$ to 852 W/m$^{2}$ (with minimum of 274 W/m$^{2}$ during the daytime, when there is sunlight). 
 
-Another characteristic of Manaus, is that the PV generation can be despised from 16h to the 8h of the next day, independent of the season.
+Another characteristic of Manaus, is that the PV generation can be despised from 16:00h to the 8:00h of the next day, independent of the season.
 %there is PV generation only between 8:00 h and 16:00 h every day, 
 %with zero electric energy generation from 18:00 h to 6:00 h of the next day; and with insignificant generation from 6:00 h to 8:00 h, and from 16:00 h to 18:00 h of the same day. 
-
 Therefore, in order to reduce the computational effort,
 % caused by the state explosion inherent of the technique, 
-the 24h-day was divided, at the algorithms, in 3 parts of 8 h each (8:00h-16:00h, 16:00h-24:00h, 00:00h-8:00h); and only the 8:00h-16:00h period is where there is PV generation.]
+the 24h-day was divided, at the algorithm, in 3 parts of 8 h each (8:00h-16:00h, 16:00h-24:00h, 00:00h-8:00h); and only the 8:00h-16:00h period with PV generation. 
 % and the non-deterministic variables $G$ and $T$ are considered during the formal verification of the system, otherwise, during the other two periods, there is no PV generation and just the power consumption from the backup batteries. 
-Within this 8h-period, $G$ and $T$ are automated verified with different values, and change their value every 1 h according with the algorithm created using the technique.
+%Within this 8h-period, $G$ and $T$ are automated verified with different values every one hour.
+%, and change their value every 1 h according with the algorithm created using the technique.
 
-Algorithm 1 describes the pseudo code used to perform the automated verification of any PV off-grid system.
+Algorithm 1 describes the pseudo code used to perform the automated verification.
 
  \begin{algorithm}
  \caption{Algorithm to perform automated verification}
@@ -1523,9 +1532,9 @@ Algorithm 1 describes the pseudo code used to perform the automated verification
  \end{algorithmic} 
  \end{algorithm}
 
-There are two premises considering the algorithm: (1) is considered a $SOC$ of 80\% at 8:00 h, and is made the automated evaluation from 8:00 h to 16:00 h, but without to account the battery autonomy (just considering charge and discharge process based on solar irradiation, load and battery charge), but after 16:00h is started the verification for the next hours when there is not solar photovoltaic generation. The process goes on until to verify all the autonomy demanded from the batteries; (2) there is an array, declared at the beginning of the C code, that defines the power demand/consumption at each hour of the day (aka load curve). Those are the same data used during the sizing of the project and ensure to consider the total energy (per day) supplied to the house during the verification. 
+%There are two premises considering the algorithm: (1) is considered a $SOC$ of 80\% at 8:00 h, and is made the automated evaluation from 8:00 h to 16:00 h, but without to account the battery autonomy (just considering charge and discharge process based on solar irradiation, load and battery charge), but after 16:00h is started the verification for the next hours when there is not solar photovoltaic generation. The process goes on until to verify all the autonomy demanded from the batteries; (2) there is an array, declared at the beginning of the C code, that defines the power demand/consumption at each hour of the day (aka load curve). Those are the same data used during the sizing of the project and ensure to consider the total energy (per day) supplied to the house during the verification. 
 
-If the  verification founds a combination ($SOC$, $G$ and $T$) where the electrical demand of the house is not met, then the algorithm presents a counterexample of this combination. And this information can be used by the designer to evaluate the designed system.
+If the  verification founds a situation where the electrical demand of the house is not met, then the algorithm presents a counterexample of this combination. And this information can be used by the designer to improve the system.
 %if it was a project error or if it was a combination of variables from the nature that has a low probability to occur at the field, considering the intermittent characteristic of solar PV generation.
 
 
@@ -1643,21 +1652,21 @@ This section is split into two parts. The setup is described in Section \ref{sec
 \label{sec:setup}
 All experiments were conducted on an otherwise idle Intel Core i7-2600 (8-cores), with 3.4 GHz and 32 GB of RAM, running Ubuntu 18.04.1 LTS 64-bits.
 
-Concerning the SMT tool, ESBMC v5.1 was used. And regarding the solver, version 4.7.1 of Z3 was used.
+Concerning the SMT tool, ESBMC v5.1 was used with the incremental parameter in order to reduce the memory usage. And regarding the solver, version 4.7.1 of Z3 was used.
 
-At the terminal, the command used to perform the verification is:
-\$ esbmc filename.c -\phantom{}-no-bounds-check -\phantom{}-no-pointer-check -\phantom{}-no-div-by-zero-check -\phantom{}-unwind 300 -\phantom{}-smt-during-symex -\phantom{}-smt-symex-guard --z3
-
-Where:
-
-\begin{itemize}
-\item The first three parameters, after the filename, are related to options that are usual to find bug in software, %for example, like bound check to arrays, pointer check, and division by zero, 
-but unnecessary to check at this kind of problem (if not removed, there is lost of performance during the automated verification);
-\item The parameter $unmind$ tells to ESBMC the limit to unroll the loops. This number was optimized (empirically) in order to reduce the running time and avoid to unwind unnecessarily the loops;
-\item The two parameters with $symex$ tell to ESBMC to perform an incremental SMT solving. There are other options, but this parameter is necessary because the complexity of the algorithms. The incremental SMT solving uses few RAM memory, compared with other SMT solving. 
+%At the terminal, the command used to perform the verification is:
+%\$ esbmc filename.c -\phantom{}-no-bounds-check -\phantom{}-no-pointer-check -\phantom{}-no-div-by-zero-check -\phantom{}-unwind 300 -\phantom{}-smt-during-symex -\phantom{}-smt-symex-guard --z3
+%
+%Where:
+%
+%\begin{itemize}
+%\item The first three parameters, after the filename, are related to options that are usual to find bug in software, %for example, like bound check to arrays, pointer check, and division by zero, 
+%but unnecessary to check at this kind of problem (if not removed, there is lost of performance during the automated verification);
+%\item The parameter $unmind$ tells to ESBMC the limit to unroll the loops. This number was optimized (empirically) in order to reduce the running time and avoid to unwind unnecessarily the loops;
+%\item The two parameters with $symex$ tell to ESBMC to perform an incremental SMT solving. There are other options, but this parameter is necessary because the complexity of the algorithms. The incremental SMT solving uses few RAM memory, compared with other SMT solving. 
 %During empirical tests of the algorithms, the incremental solving was the only one who do not demanded 100\% the RAM memory. The use of swap-memory, i.e., the use of hard disk, reduces the performance and must be avoided;
-\item And the last parameter says to the tool that the Z3 SMT solver will be used.
-\end{itemize}
+%\item And the last parameter says to the tool that the Z3 SMT solver will be used.
+%\end{itemize}
 
 \subsection{Experimental results}
 \label{sec:results}
@@ -1665,29 +1674,37 @@ XXX
 
 \section{Related work }
 %The CBMC, it is notable its prominence through international awards received in competitions. 
-In the works related to the CBMC, much of the research is focused on the improvement of the tool (as software and hardware verifier) and its performance in the competitions, without addressing, however, the question of PV system validation, as can be seen in \cite{Kroening}.
+%In the works r
+Related to the CBMC, much of the research is focused on the improvement of the tool (performance mainly), without addressing, however, the question of PV system validation, as can be seen in \cite{Kroening}.
 % For example, in \cite{Schrammel2017}, CBMC received an extension to perform verification of embedded software. 
 
 %ESBMC was developed to perform bounded model checks on both sequential and concurrent programs using a range of SMT solvers, and has a proven track of bug finding in real-world applications \cite{Cordeiro}, \cite{Ramalho}. The tool also implements a technique to prove the correctness of (some) unbounded programs, the k-induction algorithm; this approach has been applied to a large number of benchmarks and has produced more correct results than similar competing tools \cite{GadelhaSBMF}, \cite{GadelhaK}.
-Related to ESBMC, \cite{Trindade} show that is possible to perform the partitioning of hardware-software (optimization) using ESBMC. \cite{Bessa} show that is possible to use ESBMC to check the stability of digital control systems with uncertainty. In addition, \cite{Abateetal2017} show the approach to synthesize safe digital feedback controllers for physical plants represented as linear, time invariant models. However, the use of ESBMC to verify PV systems is unprecedented. 
+Related to ESBMC, \cite{Trindade} show that is possible to perform the partitioning of hardware-software (optimization). \cite{Bessa} show that is possible to use ESBMC to check the stability of digital control systems. In addition, \cite{Abateetal2017} show the approach to synthesize safe digital feedback controllers for physical plants. However, the use of ESBMC to verify PV systems is unprecedented. 
 
-Concerning modeling and simulation of electrical energy systems, \cite{Kremers} used an agent-base model approach to evaluate the effect of loads, shedding, grids, wind power generation, and smart grids, in a dynamic integral multi-scale case study. However, that is a software development approach for the simulation of complex systems, without the formalism of automated verification. 
+%Concerning modeling and simulation of 
+Concerning electrical energy systems, \cite{Kremers} used an agent-base model approach to evaluate the effect of loads, shedding, grids, wind power generation, and smart grids, in a dynamic integral multi-scale case study. However, it was restrict to simulation, without the formalism of automated verification.
+%that is a software development approach for the simulation of complex systems, without the formalism of automated verification. 
 
-In the other hand, the use of formal verification related to modeling and validation or even simulation of power systems or power networks is a young theme of research.
+%In the other hand, the use of formal verification related to modeling and validation or even simulation of power systems is a young theme of research.
 % According \cite{Abateetal2014}, where articles from seminars were issued at this thematic, the actual focus is on optimization and control of microgrids, HVAC systems (diagnostics and maintenance), models of generic wind turbine generation, modeling of transmission networks, and verification of smart grids. 
-In addition, according with \cite{Abate2017}, recent research has attempted to formalize and implement a formal study of large population of PV panels (very common in European Union). The focus have been the modeling of the dynamics of PV panels and their interaction with the power grid. Those models do not use battery array, which is demanding in isolated off-grid places. 
+In addition, according with \cite{Abate2017}, recent research has attempted to formalize and implement a formal study of large population of PV panels.% (very common in European Union). 
+ The focus have been the modeling of the dynamics of PV panels and their interaction with the grid, without batteries.
 %
 %Therefore, the present work unites the versatility and power of the formal models, applied to a formal verification tool, with individual PV systems (off-grid), which is the most indicated and common option to solve the problem of energy in developing countries. Especially those that have isolated communities, either for long distances of the great centers, or for being riverside. This work includes, based on its off-grid characteristic, batteries and charge controllers, differently of on-grid systems of related work. 
 
 
 \section{Conclusions and Future Work}
 %The proposed framework seems to be a coherent and promising tool to perform verification of a PV project. The next step is the deployment of the solution at the ESBMC environment, and compare the results with a real PV project deployed at the field. 
+%
+%The framework presented here establishes the automated verification and the project sizing check. 
+Is was shown that, beside the time-consuming issue of the proposed framework, it overcomes the results of off-the-shelf tools that only simulate the results. The tool was successful in found sizing errors of PV systems and to indicate in which conditions, in terms of temperature and solar irradiation, a PV system can fails.
 
-The framework presented here establishes the automated verification and the project sizing check. Is was shown that, beside the time-consuming issue of the tool, it overcomes the results of off-the-shelf tools that only simulate the results. The tool was successful in found sizing errors of PV systems and to indicate in which conditions, in terms of temperature and solar irradiation, a PV system can fails.
+%However, it is possible to perform the optimum sizing of the PV system. Moreover, 
+%The authors target the use of Counterexample Guided-Inductive Synthesis (CEGIS) to perform the optimum sizing of PV systems. That is an interesting resource, considering that nowadays is possible to choose from many different manufacturers and many different models of equipment of a PV system. 
+The next step is to design a tool which starts from a list of commercial equipment, where each equipment is verified during synthesis phase and the final solution, which satisfies the specifications (or constraints) of the project, is found from the inputs, automatically. This can be done with the Counterexample Guided-Inductive Synthesis (CEGIS), and the result is the optimum sizing of PV systems.
 
-However, it is possible to perform the optimum sizing of the PV system. Moreover, the authors target the use of synthesis to perform the optimum sizing. That is an interesting issue, considering that nowadays is possible to choose from many different manufacturers and many different models of equipment of a PV system. The future target is to design a tool which starts from a list of commercial equipment, i.e., inputs, where each equipment is verified during synthesis phase and the final solution, which satisfies the specifications (or constraints) of the project, is found from the inputs, automatically. This is what a Counterexample Guided-Inductive Synthesis (CEGIS) does. 
-
-In the future, it is possible to expand the type of renewable used for power generation. Allowing the verification of wind generation or even hybrid systems, which can transform the tool into an important instrument to complement the solar PV system design process, ensuring that it does not fail and meets the expected requirements. 
+Furthermore, it is possible to expand the type of renewable used for power generation. And to contemplate hybrid systems, which can transform the framework into a complete tool for design and verification of renewable systems.
+% into an important instrument to complement the solar PV system design process, ensuring that it does not fail and meets the expected requirements. 
 
 %Plus (need to think about it): verification in every-hour of a 48h cycle?, PV model math model can be improved, charge/discharge of batteries can be improved (is a simplified model), house's power consumption is not flat or constant, the dweller can buy more home appliances, synthesis need a data base of components, to test peak (surge) consumption (above the nominal), additional models for on-grid/off-grid farm, hybrid, and on-grid with batteries).
 
@@ -1718,7 +1735,7 @@ In the future, it is possible to expand the type of renewable used for power gen
 
 % use section* for acknowledgment
 \section*{Acknowledgment}
-The authors would like to thank Newton Fund (Star Energy project), Coventry University, and Sustainable Amazonas Foundation (FAS), for the financial support and for the possibility to test the framework with real data from deployed PV systems. The authors would like to thank, as well, to FAPEAM (Amazonas State Foundation for Research Support) for the financial support.
+The authors would like to thank Newton Fund (Star Energy project), Coventry University, Sustainable Amazonas Foundation (FAS), and FAPEAM (Amazonas State Foundation for Research Support), for the financial support and for the possibility to test the framework with real PV systems.
 
 
 % Can use something like this to put references on a page
@@ -1770,12 +1787,12 @@ The authors would like to thank Newton Fund (Star Energy project), Coventry Univ
 % or if you just want to reserve a space for a photo:
 
 \begin{IEEEbiographynophoto}{Alessandro Trindade}
-Alessandro Bezerra Trindade received his BSc and MSc in Electrical Engineering from the Federal University of Amazonas (UFAM) in 1995 and 2015, respectively. Currently, he is pursuing his PhD in Informatics at the UFAM, and hold a position as Assistant Professor at the Electricity Department from the Federal University of Amazonas.
+received his BSc and MSc in Electrical Engineering from the Federal University of Amazonas (UFAM) in 1995 and 2015, respectively. Currently, he is pursuing his PhD in Informatics at the UFAM, and hold a position as Assistant Professor at the Electricity Department from the Federal University of Amazonas.
 \end{IEEEbiographynophoto}
 
 % if you will not have a photo at all:
 \begin{IEEEbiographynophoto}{Lucas Cordeiro}
-Lucas Carvalho Cordeiro received his PhD degree from the University of Southampton in 2011. From 2009 to 2016, he was an Adjunct Professor at the UFAM (he is currently in unpaid leave). Since 2018, he is a Senior Lecturer at the University of Manchester, working with the Formal Methods Group.
+received his PhD degree from the University of Southampton in 2011. From 2009 to 2016, he was an Adjunct Professor at the UFAM (he is currently in unpaid leave). Since 2018, he is a Senior Lecturer at The University of Manchester, working with the Formal Methods Group.
 \end{IEEEbiographynophoto}
 
 % insert where needed to balance the two columns on the last page with
