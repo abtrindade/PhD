@@ -683,13 +683,14 @@ The modeling of the PV system is based on modular blocks, as illustrated in Fig.
 
 In the literature, there are several mathematical models available for each component of PV systems. In this section, the mathematical model for each component is presented. 
 
-\subsection{PV generator (cell, module, array) }
+\subsection{PV generator model}
 %A photovoltaic PV generator is the whole assembly of solar cells, connections, protective parts, and supports. 
 %In the present modeling, the focus is only on cell/module/array.
 %
 The basic element of a PV system is the PV cell, also called a solar cell. A solar cell is a semiconductor device that can convert solar energy into DC electricity. 
 %The semiconductor materials (usually silicon), which are specially treated to form an electric field, positive on one side (backside) and negative on the other (towards the sun). When solar energy (photons) hits the solar cell, electrons are knocked loose from the atoms in the semiconductor material, creating electron-hole pairs \cite{Lorenzo}. If electrical conductors are attached to the positive and negative sides, forming an electrical circuit, the electrons are captured in the form of electric current $ I_{ph} $ (photocurrent).
-To increase their utility, a number of individual PV cells are interconnected together in a sealed, weatherproof package called panel or module. 
+To increase their utility, a number of individual PV cells are interconnected together in a %sealed, weatherproof 
+package called panel or module. 
 
 %For instance, a 12 V Panel will have 36 cells connected in series and a 24 V Panel will have 72 PV cells connected in series. In addition, to achieve the desired voltage and current, modules are wired in series and parallel into what is called a PV Array, as shown in Fig.\ref{fig:celmodarray}. The flexibility of the modular PV system allows designers to create PV systems that can meet a wide variety of electrical demands. 
 %
@@ -710,7 +711,8 @@ The PV modules are generally rated under standard test conditions (STC), and the
 % 
 %Modeling provides the ways to understand the current, voltage, and power relationships of PV systems.
   
-The performance of photovoltaic systems, that is, the output current/voltage curve ($I-V$ curve), is usually studied using an equivalent circuit model, as shown by \cite{Yatimi}, \cite{Saloux}, \cite{Mellit}. This equivalent circuit consists of a current source with one or two diodes connected in parallel, and up to two resistors, one connected in parallel and the other one in series, to take into account energy losses in this model \cite{Cubas}. 
+The performance of photovoltaic systems, %that is, the output current/voltage curve ($I-V$ curve), 
+is usually studied using an equivalent circuit model, as shown by \cite{Yatimi}, \cite{Saloux}, \cite{Mellit}. This equivalent circuit consists of a current source with one or two diodes connected in parallel, and up to two resistors, one connected in parallel and the other one in series, to take into account energy losses in this model \cite{Cubas}. 
 %Based on these electronic components, four basic configurations are normally used when studying photovoltaic systems, as shown by Fig. \ref{fig:equivckt}. 
 
 \begin{figure}[h]
@@ -727,26 +729,27 @@ The 1-diode model, shown by Fig. \ref{fig:equivckt}, whose equation to relate th
 I = I_{ph}-I_{D1}=I_{ph}-I_{0}\left[ exp \left( \dfrac{V}{NaV_{T}} \right)  \right] 
 \end{equation}
 
-Where:
-\begin{itemize}
-\item $I_{ph}$ is the photocurrent delivered by the constant current source; 
-\item $ I_{0} $ is the reverse saturation current corresponding to the diode; 
-\item $ N $ is the number of series-connected cells in the photovoltaic system to be analyzed; $ N=1 $ in a single cell configuration.
+Where: $I_{ph}$ is the photocurrent delivered by the constant current source; $ I_{0} $ is the reverse saturation current corresponding to the diode; $ N $ is the number of series-connected cells in the photovoltaic system to be analyzed ($ N=1 $ in a single cell configuration); $ a $ is the ideality factor (or quality factor) that takes into account the deviation of the diodes from the Shockley diffusion theory ($a=1$ for ideal diodes and between $ 1 $ and $ 2 $ for real diodes); $V_{T}$ is the thermal voltage ($ V_{T}=k_{B}T/q $); $ k_{B} $ is the Boltzmann constant ($ 1.3806503\times10^{-23}J $); $ T $ the temperature of the p-n junction (or cell temperature) expressed in Kelvin; $ q $ is absolute value of the electron's charge ($ -1.60217646\times10^{-19}C $).
+
+%\begin{itemize}
+%\item $I_{ph}$ is the photocurrent delivered by the constant current source; 
+%\item $ I_{0} $ is the reverse saturation current corresponding to the diode; 
+%\item $ N $ is the number of series-connected cells in the photovoltaic system to be analyzed; $ N=1 $ in a single cell configuration.
 %	\begin{itemize}
 %	\item $ N=1 $ in a single cell configuration. 	
 %	\end{itemize}	  
-\item $ a $ is the ideality factor (or quality factor) that takes into account the deviation of the diodes from the Shockley diffusion theory; $a=1$ for ideal diodes and between $ 1 $ and $ 2 $ for real diodes.
+%\item $ a $ is the ideality factor (or quality factor) that takes into account the deviation of the diodes from the Shockley diffusion theory; $a=1$ for ideal diodes and between $ 1 $ and $ 2 $ for real diodes.
 %	\begin{itemize}
 %	\item $a=1$ for ideal diodes and between $ 1 $ and $ 2 $ for real diodes. 	
 %	\end{itemize}
-\item $V_{T}$ is the thermal voltage ($ V_{T}=k_{B}T/q $);
-	\begin{itemize}
-	\item $ k_{B} $ is the Boltzmann constant ($ 1.3806503\times10^{-23}J $); 
-	\item $ T $ the temperature of the p-n junction (or cell temperature) expressed in Kelvin; 
-	\item $ q $ is absolute value of the electron's charge ($ -1.60217646\times10^{-19}C $).	
-	\end{itemize}	 
-\end{itemize}
-
+%\item $V_{T}$ is the thermal voltage ($ V_{T}=k_{B}T/q $);
+%	\begin{itemize}
+%	\item $ k_{B} $ is the Boltzmann constant ($ 1.3806503\times10^{-23}J $); 
+%	\item $ T $ the temperature of the p-n junction (or cell temperature) expressed in Kelvin; 
+%	\item $ q $ is absolute value of the electron's charge ($ -1.60217646\times10^{-19}C $).	
+%	\end{itemize}	 
+%\end{itemize}
+%
 %This model has only three unknown parameters ($ I_{ph}$, $I_{0}$, and $a $), and it assumes that the series resistance is $ zero $ and shunt resistance is $ infinite $ and, thus, both of these parameters are ignored.
 %
 %The 1-diode/1-resistor model, is described by Equation \ref{eq:1d1rmodel}. 
@@ -788,7 +791,7 @@ Where:
 %Therefore, a wide variety of models exists for estimation of power output of PV modules (and $I-V$ or $P-V$ curves). However, the present work will rely on t
 The simplified model of 1-diode was shown by \cite{Saloux} that has a small error rate, between 0.03\% and 4.68\% from selected PV panels tested. In addition, this mathematical modeling has the advantage of being an explicit model, which does not use iterative numerical calculation, which is time-consuming to computing. 
  
-\subsection{PV Panel Model}
+%\subsection{PV Panel Model}
 %With the proposed model, an explicit set of equations is derivate from the ideal PV model given by Equation \ref{eq:1diodemodel}.
 %
 %A single-diode without series and shunt resistances is considered. 
@@ -802,29 +805,29 @@ Equation 1 is used to write down expressions for currents and voltages at each k
 %\label{fig:ivcurve}
 %\end{figure}
 
-Hence, the short-circuit current, the open-circuit voltage, the maximum power voltage and current are written as defined by \cite{Saloux} and shown from Equations \ref{eq:Isc} to \ref{eq:Im}.
-\begin{equation}
-\label{eq:Isc}
-I_{sc}=I_{ph}\vert_{V=0}
-\end{equation}
-
-\begin{equation}
-\label{eq:Voc}
-V_{oc}=\dfrac{aNk_{B}T}{q}ln\left( 1+\dfrac{I_{sc}}{I_{0}} \right) 
-\end{equation}
-
-\begin{equation}
-\label{eq:exp}
-exp\left( \dfrac{qV_{oc}}{aNk_{B}T} \right) = \left(1+\dfrac{qV_{m}}{aNk_{B}T} \right) exp \left( \dfrac{qV_{m}}{aNk_{B}T} \right) 
-\end{equation}
-
-\begin{equation}
-\label{eq:Im}
-I_{m} =I_{ph}-I_{0}\left[ exp \left( \dfrac{qV_{m}}{aNk_{B}T} \right) -1 \right] 
-\end{equation}
-
-Equation \ref{eq:exp} is not explicit with the PV key parameters, therefore need to be rewritten in a different way. 
-
+%Hence, the short-circuit current, the open-circuit voltage, the maximum power voltage and current are written as defined by \cite{Saloux} and shown from Equations \ref{eq:Isc} to \ref{eq:Im}.
+%\begin{equation}
+%\label{eq:Isc}
+%I_{sc}=I_{ph}\vert_{V=0}
+%\end{equation}
+%
+%\begin{equation}
+%\label{eq:Voc}
+%V_{oc}=\dfrac{aNk_{B}T}{q}ln\left( 1+\dfrac{I_{sc}}{I_{0}} \right) 
+%\end{equation}
+%
+%\begin{equation}
+%\label{eq:exp}
+%exp\left( \dfrac{qV_{oc}}{aNk_{B}T} \right) = \left(1+\dfrac{qV_{m}}{aNk_{B}T} \right) exp \left( \dfrac{qV_{m}}{aNk_{B}T} \right) 
+%\end{equation}
+%
+%\begin{equation}
+%\label{eq:Im}
+%I_{m} =I_{ph}-I_{0}\left[ exp \left( \dfrac{qV_{m}}{aNk_{B}T} \right) -1 \right] 
+%\end{equation}
+%
+%Equation \ref{eq:exp} is not explicit with the PV key parameters, therefore need to be rewritten in a different way. 
+%
 %A PV cell has a hybrid behavior, i.e., a current-source at the short-circuit point and voltage-source at the open-circuit point \cite{Saloux}. 
 %These two regions are characterized by two asymptotes of the $ I-V $ curve in Fig. \ref{fig:ivcurve}, where the transition is a compromise between both behaviors. It is interesting to observe that the maximum power point corresponds to a trade-off condition, where the current is still high enough before it starts decreasing with increasing the output voltage (Fig. \ref{fig:ivcurve}).
 %
@@ -1328,16 +1331,16 @@ Simulation may also be used for validation, but it is more problematic for verif
 Testing can also be used for validation, but for the same reasons, it too is problematic for verification.
  
 According \cite{Clarke2008}, verification procedure is an intelligent exhaustive search of the state space of the design. In addition, according to \cite{Forejt2011}, formal verification is a systematic approach that applies mathematical reasoning to obtain guarantees about the correctness of a system. One successful method in this domain is model checking.
-  
-Model checking is an automatic verification technique, as defined by \cite{Clarke2008}. Model checking was originally developed reasoned about finite state of concurrent systems, nowadays is mainly used to hardware and software verification, but can be applied to any kind of system. 
+ % 
+%Model checking is an automatic verification technique, as defined by \cite{Clarke2008}. Model checking was originally developed reasoned about finite state of concurrent systems, nowadays is mainly used to hardware and software verification, but can be applied to any kind of system. 
 
-The process of model checking can be divided in three components: modeling, specification, and verification method. 
+The process of model checking can be divided in three components: modeling, specification, and verification method. In modeling, a model (normally mathematical) of the system is created; in specification, normally a list of properties to be satisfied by the system is established, i.e., the requirements, normally  expressed in temporal logic form ($CTL$).
 
-\begin{itemize}
-\item In modeling, a model (normally mathematical) of the system is created; 
-\item In specification, normally a list of properties to be satisfied by the system is established, i.e., the requirements, as reliability to performance for example. \item Normally is expressed in temporal logic form ($CTL$); 
-\item The model checking is the verification method itself. 
-\end{itemize}
+%\begin{itemize}
+%\item In modeling, a model (normally mathematical) of the system is created; 
+%\item In specification, normally a list of properties to be satisfied by the system is established, i.e., the requirements, as reliability to performance for example. \item Normally is expressed in temporal logic form ($CTL$); 
+%\item The model checking is the verification method itself. 
+%\end{itemize}
 
 The model checking algorithm can be described as:  
 
@@ -1400,8 +1403,7 @@ According \cite{GadelhaSBMF}, ESBMC is an open source, permissively licensed (Ap
 \label{fig:esbmcarch}
 \end{figure}
 
-As shown by \cite{GadelhaSBMF}, ESBMC has two alternative front-ends to parse the input program and generate an Abstract Syntax Tree (AST). One legacy CBMC-based front-end that supports both C and C++ and a new clang-based front-end that currently only supports C. The data types and bit vectors are created in the front-end when parsing the code. 
-
+As shown by \cite{GadelhaSBMF}, ESBMC has two alternative front-ends to parse the input program. % and generate an Abstract Syntax Tree (AST). %One legacy CBMC-based front-end that supports both C and C++ and a new clang-based front-end that currently only supports C. The data types and bit vectors are created in the front-end when parsing the code. 
 Regardless of the chosen front-end, the output is an AST (tree representation of the abstract syntactic structure of source code written in a programming language) that will be used by the GOTO converter to generate a GOTO program, which has simplified control flow and is suitable for bounded unwinding. The next step is the symbolic execution, when the GOTO program is executed (unrolling loops up to the bound $ k $) and converted to Static Single Assignments (SSA) form. SSA form enables the simplification of algorithms and reduction of computational complexity, where each variable is a target of exactly one assignment statement in the program text. 
 %
 %During the symbolic execution, ESBMC aggressively tries to simplify the program \cite{Ramalho}; it propagates all constants and solves any assertions that can be statically determined. This is an important step for the verification, since ESBMC can fully verify programs without calling a solver, if the inputs are deterministic. That characteristic is useful at this work to perform the sizing check of the PV system project. 
@@ -1642,13 +1644,13 @@ If the  verification founds a situation where the electrical demand of the house
 % footnotes above bottom floats. This can be corrected via the
 % \fnbelowfloat command of the stfloats package.
 
-\section{Results}
-
-This section is split into two parts. The setup is described in Section \ref{sec:setup}, while Section \ref{sec:results} describes all experimental results.
-
-
-\subsection{Experimental setup}
-\label{sec:setup}
+\section{Results} \label{sec:results}
+%
+%This section is split into two parts. The setup is described in Section \ref{sec:setup}, while Section \ref{sec:results} describes all experimental results.
+%
+%
+%\subsection{Experimental setup}
+%\label{sec:setup}
 All experiments were conducted on an otherwise idle Intel Core i7-2600 (8-cores), with 3.4 GHz and 32 GB of RAM, running Ubuntu 18.04.1 LTS 64-bits.
 
 Concerning the SMT tool, ESBMC v5.1 was used with the incremental parameter in order to reduce the memory usage. And regarding the solver, version 4.7.1 of Z3 was used.
@@ -1666,9 +1668,10 @@ Concerning the SMT tool, ESBMC v5.1 was used with the incremental parameter in o
 %During empirical tests of the algorithms, the incremental solving was the only one who do not demanded 100\% the RAM memory. The use of swap-memory, i.e., the use of hard disk, reduces the performance and must be avoided;
 %\item And the last parameter says to the tool that the Z3 SMT solver will be used.
 %\end{itemize}
+%
+%\subsection{Experimental results}
+%\label{sec:results}
 
-\subsection{Experimental results}
-\label{sec:results}
 XXX
 
 \section{Related work }
@@ -1678,7 +1681,7 @@ Related to the CBMC, much of the research is focused on the improvement of the t
 % For example, in \cite{Schrammel2017}, CBMC received an extension to perform verification of embedded software. 
 
 %ESBMC was developed to perform bounded model checks on both sequential and concurrent programs using a range of SMT solvers, and has a proven track of bug finding in real-world applications \cite{Cordeiro}, \cite{Ramalho}. The tool also implements a technique to prove the correctness of (some) unbounded programs, the k-induction algorithm; this approach has been applied to a large number of benchmarks and has produced more correct results than similar competing tools \cite{GadelhaSBMF}, \cite{GadelhaK}.
-Related to ESBMC, \cite{Trindade} show that is possible to perform the partitioning of hardware-software (optimization) using ESBMC. \cite{Bessa} show that is possible to use ESBMC to check the stability of digital control systems. In addition, \cite{Abateetal2017} show the approach to synthesize safe digital feedback controllers for physical plants. However, the use of ESBMC to verify PV systems is unprecedented. 
+Related to ESBMC, \cite{Trindade} show that is possible to perform the partitioning of hardware-software (optimization). \cite{Bessa} show that is possible to use ESBMC to check the stability of digital control systems. In addition, \cite{Abateetal2017} show the approach to synthesize safe digital feedback controllers for physical plants. However, the use of ESBMC to verify PV systems is unprecedented. 
 
 %Concerning modeling and simulation of 
 Concerning electrical energy systems, \cite{Kremers} used an agent-base model approach to evaluate the effect of loads, shedding, grids, wind power generation, and smart grids, in a dynamic integral multi-scale case study. However, it was restrict to simulation, without the formalism of automated verification.
@@ -1696,11 +1699,10 @@ In addition, according with \cite{Abate2017}, recent research has attempted to f
 %The proposed framework seems to be a coherent and promising tool to perform verification of a PV project. The next step is the deployment of the solution at the ESBMC environment, and compare the results with a real PV project deployed at the field. 
 %
 %The framework presented here establishes the automated verification and the project sizing check. 
-Is was shown that, beside the time-consuming issue of the proposed framework, it overcomes the results of off-the-shelf tools that only simulate the results. The tool was successful in found sizing errors of PV systems and to indicate in which conditions, in terms of temperature and solar irradiation, a PV system can fails.
-
+It was shown that, beside the time-consuming issue of the proposed framework, it overcomes the results of off-the-shelf tool that only simulate the results. The framework was successful in found sizing errors and to indicate in which conditions, in terms of temperature and solar irradiation, a PV system can fails.
 %However, it is possible to perform the optimum sizing of the PV system. Moreover, 
 %The authors target the use of Counterexample Guided-Inductive Synthesis (CEGIS) to perform the optimum sizing of PV systems. That is an interesting resource, considering that nowadays is possible to choose from many different manufacturers and many different models of equipment of a PV system. 
-The next step is to design a tool which starts from a list of commercial equipment, where each equipment is verified during synthesis phase and the final solution, which satisfies the specifications (or constraints) of the project, is found from the inputs, automatically. This can be done with the Counterexample Guided-Inductive Synthesis (CEGIS), and the result is the optimum sizing of PV systems.
+Next, the framework will be improved to starts from a list of commercial equipment (inputs), where each equipment is verified during synthesis phase and the final solution, which satisfies the specifications (or constraints) of the project, is found from the inputs. This can be done with the Counterexample Guided-Inductive Synthesis (CEGIS), and the result is the optimum sizing of PV systems.
 
 Furthermore, it is possible to expand the type of renewable used for power generation. And to contemplate hybrid systems, which can transform the framework into a complete tool for design and verification of renewable systems.
 % into an important instrument to complement the solar PV system design process, ensuring that it does not fail and meets the expected requirements. 
