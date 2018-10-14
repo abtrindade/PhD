@@ -433,7 +433,7 @@
 % As a general rule, do not put math, special symbols or citations
 % in the abstract or keywords.
 \begin{abstract}
-The deployment of renewable energy in off-grid systems is growing in both developed and developing countries. With declining costs and increasing performance, off-grid renewable energy systems could become an important growth market for the future deployment of renewables according to International Renewable Energy Agency. The impact of off-grid renewable energy systems will not only be measured in terms of their usage or reduced costs for electricity consumption in rural areas, but also in the context of their effect on the lives of more than 1.3 billion people who today do not have access to electricity. Electrification of rural areas can improve the standard of education, health conditions, and living of this population. In addition, depending on the geography of the country, using renewable energy sources in off-grid mode is a feasible solution if compared to grid extension. Tools to aid the design and validation of rural electrification projects are available; however, there is no software that applies formal verification to analyze, and evaluate rural electrification projects. This paper aims to build the framework to apply automated verification methods to mathematical models of a system of rural electrification with solar photovoltaic energy to validate its design from a formal verification perspective. Results show that the proposed tool can find situations where the sized solar photovoltaic system fails to met the requirements demanded to electrify a house, and that simulation made with commercial tools can not find the same fail. Data from practical application of solar systems prove the results obtained by the tool.
+With declining costs and increasing performance, the deployment of renewable energy in off-grid systems is growing in both developed and developing countries, with emphasis to solar photovoltaic systems. Electrification of rural areas can improve the standard of education, health conditions, and living of this population. In addition, depending on the geography of the country, using renewable energy sources in off-grid mode is a feasible solution if compared to grid extension. Tools to aid the design and validation of rural electrification projects are available; however, there is no software that applies formal verification to evaluate rural electrification projects. This paper aims to build the framework to apply automated verification method to mathematical models of a solar photovoltaic system to validate its design from a formal verification perspective. Results show that the proposed tool can find situations where the sized solar photovoltaic system fails to met the requirements demanded to electrify a house, and that simulation made with commercial tools can not find the same fail. Data from practical application of solar systems prove the results obtained by the tool.
 \end{abstract}
 
 % Note that keywords are not normally used for peerreview papers.
@@ -535,7 +535,8 @@ verification tool to solve this kind of problem.
 
 The implementation of the
 % ideas will be 
-proposed framework is done with the efficient SMT-based bounded model checker (ESBMC) tool that uses the front-end of the C Bounded Model Checker (CBMC) or the clang-based front-end, which permits to describe the PV system as a C/C++ language code.
+proposed framework is done with the efficient SMT-based bounded model checker (ESBMC) %tool that uses the front-end of the C Bounded Model Checker (CBMC) or the clang-based front-end, 
+ which permits to describe the PV system as a C/C++ language code.
  
 The remainder of this paper is organized as follows: Section II gives the background. Section III describes the design and validation of PV system. Section IV describes the mathematical modeling. Section V presents the automated verification. The methodology is presented at section VI. Section VII is devoted to the results, and section VIII to the related work. Section IX presents the conclusion and describes future work.
 
@@ -592,7 +593,8 @@ the configuration that is most common nowadays is the regulated standalone syste
 In order to address different aspects of project system and systems design, there is a myriad of tools. 
 %public domain and commercial software available for the PV market. 
 %According to \cite{Brooks}, t
-The capabilities of these tools range from simple solar resource and energy production estimation, to site survey and system design tools, to complex financial analysis software (with optimization). 
+The capabilities of these tools range from simple solar resource and energy production estimation, %to site survey and system design tools,
+ to complex financial analysis software (with optimization). 
 %Some tools also provide support to rebate programs applications and tax incentives (specific to each country or region), while other programs and worksheets focus on the technical aspects of system sizing and design.
 %
 %Manufacturers and integrators have yet their proprietary software to perform inverter string sizing and various system sizing and design tools, with the drawback to just include their own products among the possibilities of choice. 
@@ -625,7 +627,8 @@ In this work, were evaluated the most popular tools, as PVWatts, SAM, Homer Pro,
 %\subsection{Hybrid2}
 %The Hybrid2 software package, as described in \cite{Mills}, is a user-friendly tool to perform detailed long-term performance and economic analysis on a wide variety of hybrid power systems. Hybrid2 is a probabilistic/time series computer model, using time series data for loads, wind speed, solar insolation, and temperature; and the power system is designed or selected by the user, in order to predict the performance of the hybrid power system. Variations in wind speed and in load within each time step are factored into the performance predictions. The code does not consider short-term system fluctuations caused by system dynamics or component transients. This program is not supported anymore and according to \cite{UMASS}, probably after the user performs the free download of the tool, it will not work on Windows platforms later than Windows XP, what is a limitation.
 
-Table \ref{table:softwares} summarizes the off-the-shelf tools mentioned in this paper.  Where just Hybrid2 do not have technical support; only HOMER Pro, and Hybrid2 perform off-grid system or battery backup analysis; all the tools perform solar photovoltaic analysis; and that only HOMER Pro and RETScreen Expert include economical analysis or even optimization-sensitive analysis. However, only paid version of those softwares have all the features, and they run only at Windows operational systems. RETScreen and HOMER have a free web-based version but with limited resources.
+Table \ref{table:softwares} summarizes the off-the-shelf tools mentioned in this paper.  Where just Hybrid2 do not have technical support; only HOMER Pro, and Hybrid2 perform off-grid system or battery backup analysis; %all the tools perform solar photovoltaic analysis; 
+and that only HOMER Pro and RETScreen Expert include economical analysis or even optimization-sensitive analysis. However, only paid version of those softwares have all the features, and they run only at Windows operational systems. RETScreen and HOMER have a free web-based version but with limited resources.
 
 \begin{table}[!t]
 %% increase table row spacing, adjust to taste
@@ -640,7 +643,7 @@ Table \ref{table:softwares} summarizes the off-the-shelf tools mentioned in this
 \begin{tabular}{c | c | c | c | c | c}
 \hline
 \hline
-Characteristic  & \rotatebox{90}{PVWatts} & \rotatebox{90}{SAM} & \rotatebox{90}{HOMER Pro} & \rotatebox{90}{RETScreen Expert} & \rotatebox{90}{Hybrid2}\\
+Characteristic  & \rotatebox{90}{PVWatts} & \rotatebox{90}{SAM} & \rotatebox{90}{HOMER} & \rotatebox{90}{RETScreen} & \rotatebox{90}{Hybrid2}\\
 \hline
 \hline
 Support & X & X & X & X &  \\
@@ -865,20 +868,23 @@ V_{m}=\dfrac{aNk_{B}T}{q} ln \left( \dfrac{aNk_{B}T}{qI_{0}} \dfrac{I_{sc}}{V_{o
 I_{m} = I_{ph} + I_{0} - \dfrac{aNk_{B}T}{q} \left( \dfrac{I_{sc}}{V_{oc}} \right)  
 \end{equation}
 
-\begin{multline}
+\begin{equation}
 \label{eq:Pm}
-P_{m} = V_{m} I_{m} = \left[ \dfrac{aNk_{B}T}{q} ln \left( \dfrac{aNk_{B}T}{qI_{0}} \dfrac{I_{sc}}{V_{oc}}  \right) \right] \times \\ \left[ I_{ph} + I_{0} - \dfrac{aNk_{B}T}{q} \left( \dfrac{I_{sc}}{V_{oc}} \right)  \right] 
-\end{multline}
+P_{m} = V_{m} I_{m}
+\end{equation}
 
+%\begin{multline}
+%\label{eq:Pm}
+%P_{m} = V_{m} I_{m} = \left[ \dfrac{aNk_{B}T}{q} ln \left( \dfrac{aNk_{B}T}{qI_{0}} \dfrac{I_{sc}}{V_{oc}}  \right) \right] \times \\ \left[ I_{ph} + I_{0} - \dfrac{aNk_{B}T}{q} \left( \dfrac{I_{sc}}{V_{oc}} \right)  \right] 
+%\end{multline}
+%
 However, the photocurrent delivered by the constant current source ($ I_{ph} $) or even the reverse saturation current ($ I_{0} $) are not given by PV manufacturers. Therefore, Equation \ref{eq:Iph} is used to calculate the photocurrent as function of irradiance and temperature \cite{Villalva}.
 \begin{equation}
 \label{eq:Iph}
 I_{ph}=\dfrac{G}{G_{ref}} \left[ I_{ph,ref} + \mu_{I} \left( T-T_{ref} \right)    \right] 
 \end{equation}
 
-Where the reference state (STC) of the cell is given by the solar irradiance $ G_{ref}=1000 W/m^{2} $, and the temperature $ T_{ref}=298.15 K (=25^{o}C) $.
-
-In Equation \ref{eq:Iph}, $ \mu_{I} $ is the short-circuit current temperature coefficient ($A/K$) and corresponds to the photocurrent obtained from a given PV cell working at reference conditions (provided by PV manufacturers). $ I_{ph,ref} $ can also be approximated to the reference short-circuit current that is provided by PV manufacturers ($ I_{sc,ref} $) as shown by \cite{Jakhrani}.
+Where the reference state (STC) of the cell is given by the solar irradiance $ G_{ref}=1000 W/m^{2} $, and the temperature $ T_{ref}=298.15 K (=25^{o}C) $; $ \mu_{I} $ is the short-circuit current temperature coefficient ($A/K$) and corresponds to the photocurrent obtained from a given PV cell working at reference conditions (provided by PV manufacturers). $ I_{ph,ref} $ can also be approximated to the reference short-circuit current that is provided by PV manufacturers ($ I_{sc,ref} $) as shown by \cite{Jakhrani}.
 
 The cell temperature ($ T $) can be obtained from \cite{Ross} and is shown in Equation \ref{eq:Tcell}.
 \begin{equation}
@@ -1192,12 +1198,13 @@ Step  & Constraint & Command\\
 \end{tabular}
 \end{table}
 
-Regarding the DC-DC converter, the most basic idea is that the power is converted while altering the current and voltage. 
-
-As shown in \cite{Abdulateef}, the DC-DC converter is used to increase the efficiency of the PV system by matching the voltage generated by PV array to the voltage required by the load. The output power ($ P_{out} $) of DC-DC converter is given by Equation \ref{eq:poutcont}. 
+%Regarding the DC-DC converter, the most basic idea is that the power is converted while altering the current and voltage. 
+%
+%As shown in \cite{Abdulateef}, the DC-DC converter is used to increase the efficiency of the PV system by matching the voltage generated by PV array to the voltage required by the load. 
+The output power ($ P_{out} $) of DC-DC converter is given by Equation \ref{eq:poutcont}. 
 \begin{equation}
 \label{eq:poutcont}
-P_{in = P_{out}}
+P_{in} = P_{out}
 \end{equation}
 
 Assuming that the efficiency of the controller ($ \eta_{c} $) is a manufacturer's data, from Equation \ref{eq:poutcont} is possible to reach Equation \ref{eq:potcont}.
@@ -1250,17 +1257,17 @@ I_{c,min} = I_{sc,amb} \times N_{PP}
 I_{c} \geq I_{c,min}
 \end{equation}
 
-The number of controllers required for the off-grid PV system, as defined by \cite{Yatimi}, is calculated using Equation \ref{eq:numberofcmin}. In addition, the final sizing check is did by Equation \ref{eq:numberofc}, who validate the number of controllers adopted.
-\begin{multline}
-\label{eq:numberofcmin}
-number_{controllers} = \dfrac{Total \, max \, power \, of \, PV}{Controller \, max \, power} = \\ \dfrac{P_{m,ref} \times N_{TP}}{V_{system} \times I_{controller,max}}
-\end{multline}
-
-\begin{equation}
-\label{eq:numberofc}
-N_{controller} \geq number_{controllers}
-\end{equation}
-
+%The number of controllers required for the off-grid PV system, as defined by \cite{Yatimi}, is calculated using Equation \ref{eq:numberofcmin}. In addition, the final sizing check is did by Equation \ref{eq:numberofc}, who validate the number of controllers adopted.
+%\begin{multline}
+%\label{eq:numberofcmin}
+%number_{controllers} = \dfrac{Total \, max \, power \, of \, PV}{Controller \, max \, power} = \\ \dfrac{P_{m,ref} \times N_{TP}}{V_{system} \times I_{controller,max}}
+%\end{multline}
+%
+%\begin{equation}
+%\label{eq:numberofc}
+%N_{controller} \geq number_{controllers}
+%\end{equation}
+%
 %\subsection{Joint work: charge controller and batteries}
 %When batteries are charged, they go through three main different states - bulk, absorption and float, with impact to the inverter and to power supplied to the house.
 %, and it is necessary to understand those three states in order to comprehend the joint work of the controller with the battery. With impact to the inverter and to power supplied to the house. 
@@ -1291,7 +1298,8 @@ N_{controller} \geq number_{controllers}
 \subsection{The inverter model}
 %As shown by \cite{Mellit}, the PV arrays produce DC and therefore when the PV system contains an AC load, a DC/AC conversion is required. 
 %An inverter is a converter, where the power flows from DC to AC side, i.e., having a DC voltage as input; it produces AC voltage, as output. 
-The role of the inverter is to keep the voltage constant on the AC side, i.e., at the rated voltage (127 V or 220 V, for example), and to convert the input power $ P_{in} $ into the output power $ P_{out} $ with the best possible efficiency \cite{Hansen}.
+The role of the inverter is to keep the voltage constant on the AC side, i.e., at the rated voltage, % (127 V or 220 V, for example), 
+and to convert the input power $ P_{in} $ into the output power $ P_{out} $ with the best possible efficiency \cite{Hansen}.
 
 The inverter is characterized by a power dependent efficiency $ \eta_{i} $ given by \cite{Hansen} as shown by Equation \ref{eq:efficinv}.
 \begin{equation}
@@ -1326,9 +1334,8 @@ Validation is the process of determining whether a design meets the needs of the
 If the requirements, specifications, and regulations are given in a formal language, then it may be possible to automate verification, resulting in a process known as formal verification. Verification may form part of a validation process.
 %, but in general, validation cannot be formalized because it relates a system design to intent.  
 
-Simulation may also be used for validation, but it is more problematic for verification. In order to use simulation for verification, it is necessary to ensure adequate coverage of operating conditions, scenarios, and system inputs. 
-
-Testing can also be used for validation, but for the same reasons, it too is problematic for verification.
+%Simulation may also be used for validation, but it is more problematic for verification.
+In order to use simulation for verification, it is necessary to ensure adequate coverage of operating conditions, scenarios, and system inputs. Testing can also be used for validation, but for the same reasons, it too is problematic for verification.
  
 According \cite{Clarke2008}, verification procedure is an intelligent exhaustive search of the state space of the design. In addition, according to \cite{Forejt2011}, formal verification is a systematic approach that applies mathematical reasoning to obtain guarantees about the correctness of a system. One successful method in this domain is model checking.
  % 
@@ -1350,8 +1357,7 @@ The model checking algorithm can be described as:
 \item It returns $YES$ if $ \phi $ is $TRUE$, or returns $NO$ if $ \phi $ is $FALSE$.  
 
 \end{itemize}
-Specifically at the $FALSE$ situation, the algorithm returns a counterexample that is useful as diagnostic of the system, in order to discover in which situation the model is violated. \cite{Clarke2008} consider that the most important advantage of the use of model checking.  
- 
+Specifically at the $FALSE$ situation, the algorithm returns a counterexample that is useful as diagnostic of the system, in order to discover in which situation the model is violated. \cite{Clarke2008} consider that the most important advantage of the use of model checking. 
 %Among the other advantages can be listed: there is no need of proofs (the algorithm is not a deductive procedure), there is no problem with partial specifications of the system, logics can easily express many concurrency properties, is fast (compared to other rigorous methods such as interactive theorem proving). 
 However, there is a main disadvantage of model checking: the state explosion problem. 
 
@@ -1447,8 +1453,7 @@ The non-deterministic variables (solar irradiance, and ambient temperature by de
 Simply put, instead of the ESBMC find the defect of a software or if a hardware does not meet the some requirements, the tool will verify if the requirements of the solar PV project are met. Detailing the condition of violation, i.e., the state of each variable related to the system. 
 
 \subsection{The case studies and the Algorithm}
-
-It was performed two case studies: (1) one concerning a PV system (700 W inverter, with 48h autonomy) deployed at four different houses at an indigenous community (GPS coordinates 2$^{o}$44'50.0"S 60$^{o}$25'47.8"W) sited nearby Manaus (Brazil), with each house having a different power demand (253 W, 263 W, 283 W, and 501 W); (2) and one case concerning a system deployed as an individual system in Manaus (GPS coordinates 3$^{o}$4'20.208"S 60$^{o}$0'30.168"W), supporting 915 W of the house's load (1,200 W inverter, but with autonomy of just 6 h). 
+It was performed five case studies: (1) four concerning a PV system (700 W inverter, with 48h autonomy) deployed at four different houses at an indigenous community (GPS coordinates 2$^{o}$44'50.0"S 60$^{o}$25'47.8"W) sited nearby Manaus (Brazil), with each house having a different power demand (253 W, 263 W, 283 W, and 501 W); (2) and one case concerning a system deployed as an individual system in Manaus (GPS coordinates 3$^{o}$4'20.208"S 60$^{o}$0'30.168"W), supporting 915 W of the house's load (1,200 W inverter, but with autonomy of just 6 h). 
 %and as backup at night 
 %
 %The 700 W system: 3 x 325 W PV panels connected in series, controller of 150 V/35 A with a DC-bus of 24 V, 4 x 220 Ah batteries (2 in series and 2 in parallel arrangement), and inverter of 700 W. 
@@ -1458,7 +1463,8 @@ It was performed two case studies: (1) one concerning a PV system (700 W inverte
 %As demonstrated at this work, the performance of the system is highly dependent of solar irradiance and temperature, that are specific of the deployed local (latitude and longitude). 
 
 %At both case studies, it was considered 21 years of historic data from Manaus. 
-According with X and Y, the annual average temperature ($T$) in Manaus is from 23$^{o}$C to 32$^{o}$C; and irradiance ($G$) varies from 274 W/m$^{2}$ to 852 W/m$^{2}$ when there is sunlight.  
+%According with X and Y, t
+The annual average temperature ($T$) in Manaus is from 23$^{o}$C to 32$^{o}$C; and irradiance ($G$) varies from 274 W/m$^{2}$ to 852 W/m$^{2}$ when there is sunlight.  
 %and irradiance varies from 0 W/m$^{2}$ to 852 W/m$^{2}$ (with minimum of 274 W/m$^{2}$ during the daytime, when there is sunlight). 
 
 Another characteristic of Manaus, is that the PV generation can be despised from 16:00h to the 8:00h of the next day, independent of the season.
@@ -1534,8 +1540,8 @@ Algorithm 1 describes the pseudo code used to perform the automated verification
  \end{algorithm}
 
 %There are two premises considering the algorithm: (1) is considered a $SOC$ of 80\% at 8:00 h, and is made the automated evaluation from 8:00 h to 16:00 h, but without to account the battery autonomy (just considering charge and discharge process based on solar irradiation, load and battery charge), but after 16:00h is started the verification for the next hours when there is not solar photovoltaic generation. The process goes on until to verify all the autonomy demanded from the batteries; (2) there is an array, declared at the beginning of the C code, that defines the power demand/consumption at each hour of the day (aka load curve). Those are the same data used during the sizing of the project and ensure to consider the total energy (per day) supplied to the house during the verification. 
-
-If the  verification founds a situation where the electrical demand of the house is not met, then the algorithm presents a counterexample of this combination. And this information can be used by the designer to improve the system.
+%
+%If the verification founds a situation where the electrical demand of the house is not met, then the algorithm presents a counterexample of this combination. And this information can be used by the designer to improve the system.
 %if it was a project error or if it was a combination of variables from the nature that has a low probability to occur at the field, considering the intermittent characteristic of solar PV generation.
 
 
@@ -1651,9 +1657,15 @@ If the  verification founds a situation where the electrical demand of the house
 %
 %\subsection{Experimental setup}
 %\label{sec:setup}
-All experiments were conducted on an otherwise idle Intel Core i7-2600 (8-cores), with 3.4 GHz and 32 GB of RAM, running Ubuntu 18.04.1 LTS 64-bits.
+All experiments were conducted on an otherwise idle Intel Core i7-2600 (8-cores), with 3.4 GHz and 64 GB of RAM, running Ubuntu 18.04.1 LTS 64-bits.
 
 Concerning the SMT tool, ESBMC v5.1 was used with the incremental parameter in order to reduce the memory usage. And regarding the solver, version 4.7.1 of Z3 was used.
+
+The total were five case studies evaluated by HOMER Pro and by the automated verification tool. Related to the HOMER Pro, the simulation, based on NASA data from the deployed systems (temperature and solar irradiance), shown that the restrictions were met by the five systems, without any indication of sizing error or even of performance.
+
+However, related to the results of the automated verification, the 1,200 W PV system failed during the sizing check. The number of panels in series was not the correct (the verification indicates 3 panels in series and the project has 2 in series and 2 in parallel). That verification took 3 days to be performed. Surveying the owner of the 1,200 W system it was identified that, in fact, the system mostly of the time do not met the battery autonomy (mainly when all the loads are turned on).
+
+And related to the four 700 W PV system, the sizing check was successful, but all the fail occurred during battery autonomy verification. XXXXXXX
 
 %At the terminal, the command used to perform the verification is:
 %\$ esbmc filename.c -\phantom{}-no-bounds-check -\phantom{}-no-pointer-check -\phantom{}-no-div-by-zero-check -\phantom{}-unwind 300 -\phantom{}-smt-during-symex -\phantom{}-smt-symex-guard --z3

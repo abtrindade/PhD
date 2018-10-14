@@ -3,10 +3,11 @@
 \citation{EPIA}
 \citation{Baier}
 \citation{Roy}
+\citation{Mohanty}
 \@writefile{toc}{\contentsline {section}{\numberline {I}Introduction}{1}}
 \@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Flowchart of the proposed computer verification of PV systems}}{1}}
 \newlabel{fig:flowchartgeneral}{{1}{1}}
-\citation{Mohanty}
+\@writefile{toc}{\contentsline {section}{\numberline {II}Solar Photovoltaic System }{1}}
 \citation{Hansen}
 \citation{Hansen}
 \citation{Yatimi}
@@ -16,13 +17,14 @@
 \citation{Cubas}
 \@writefile{lot}{\contentsline {table}{\numberline {I}{\ignorespaces Comparative coverage of reference softwares}}{2}}
 \newlabel{table:softwares}{{I}{2}}
-\@writefile{toc}{\contentsline {section}{\numberline {II}Solar Photovoltaic System }{2}}
 \@writefile{toc}{\contentsline {section}{\numberline {III}Design and Validation of a Solar photovoltaic system}{2}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {\unhbox \voidb@x \hbox {III-A}}Paper Proposal x Reference Tools}{2}}
 \@writefile{toc}{\contentsline {section}{\numberline {IV}Component models for stand-alone PV system }{2}}
 \@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Block diagram for the stand-alone PV system (Source: \cite  {Hansen})}}{2}}
 \newlabel{fig:blockdiagram}{{2}{2}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {\unhbox \voidb@x \hbox {IV-A}}PV generator model}{2}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces  1-diode equivalent PV cell/panel circuit model (Source: \cite  {Cubas})}}{2}}
+\newlabel{fig:equivckt}{{3}{2}}
 \newlabel{eq:1diodemodel}{{1}{2}}
 \citation{Saloux}
 \citation{Saloux}
@@ -31,8 +33,8 @@
 \citation{Ross}
 \citation{Villalva}
 \citation{Pinho}
-\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces  1-diode equivalent PV cell/panel circuit model (Source: \cite  {Cubas})}}{3}}
-\newlabel{fig:equivckt}{{3}{3}}
+\citation{Copetti}
+\citation{Manwell93}
 \newlabel{eq:Vmfinal}{{2}{3}}
 \newlabel{eq:Imfinal}{{3}{3}}
 \newlabel{eq:Pm}{{4}{3}}
@@ -44,17 +46,16 @@
 \newlabel{eq:NTPmin}{{10}{3}}
 \newlabel{eq:NTP}{{11}{3}}
 \newlabel{eq:NPSmin}{{12}{3}}
-\citation{Copetti}
-\citation{Manwell93}
+\newlabel{eq:NPPmin}{{13}{3}}
+\newlabel{eq:NPS}{{14}{3}}
+\newlabel{eq:NPP}{{15}{3}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\unhbox \voidb@x \hbox {IV-B}}The Battery Storage Model }{3}}
 \citation{Copetti}
 \citation{Copetti}
 \citation{Copetti}
 \citation{Pinho}
 \citation{Mellit}
-\newlabel{eq:NPPmin}{{13}{4}}
-\newlabel{eq:NPS}{{14}{4}}
-\newlabel{eq:NPP}{{15}{4}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {\unhbox \voidb@x \hbox {IV-B}}The Battery Storage Model }{4}}
+\citation{Hansen}
 \newlabel{eq:bat_Vd}{{16}{4}}
 \newlabel{eq:Vcbat}{{17}{4}}
 \newlabel{eq:Vec}{{18}{4}}
@@ -68,10 +69,10 @@
 \citation{Hansen}
 \citation{Hansen}
 \citation{Hansen}
-\citation{Abdulateef}
-\citation{Yatimi}
 \citation{Hansen}
-\citation{Hansen}
+\citation{Clarke2008}
+\citation{Forejt2011}
+\citation{Clarke2008}
 \@writefile{lot}{\contentsline {table}{\numberline {II}{\ignorespaces Summary of the controller process (Source: \cite  {Hansen})}}{5}}
 \newlabel{table:controller}{{II}{5}}
 \newlabel{eq:poutcont}{{25}{5}}
@@ -80,16 +81,12 @@
 \newlabel{eq:iscamb}{{28}{5}}
 \newlabel{eq:icmin}{{29}{5}}
 \newlabel{eq:icicmin}{{30}{5}}
-\newlabel{eq:numberofcmin}{{31}{5}}
-\newlabel{eq:numberofc}{{32}{5}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {\unhbox \voidb@x \hbox {IV-D}}The inverter model}{5}}
-\newlabel{eq:efficinv}{{33}{5}}
-\newlabel{eq:vindc}{{34}{5}}
-\newlabel{eq:voutac}{{35}{5}}
-\newlabel{eq:invcheck}{{36}{5}}
-\citation{Clarke2008}
-\citation{Forejt2011}
-\citation{Clarke2008}
+\newlabel{eq:efficinv}{{31}{5}}
+\newlabel{eq:vindc}{{32}{5}}
+\newlabel{eq:voutac}{{33}{5}}
+\newlabel{eq:invcheck}{{34}{5}}
+\@writefile{toc}{\contentsline {section}{\numberline {V}Automated verification}{5}}
 \citation{Clarke2008}
 \citation{Clarke2008}
 \citation{Clarke2008}
@@ -99,31 +96,29 @@
 \citation{GadelhaSBMF}
 \citation{GadelhaSBMF}
 \citation{GadelhaSBMF}
-\@writefile{toc}{\contentsline {section}{\numberline {V}Automated verification}{6}}
-\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Model Checker structure (Source: \cite  {Clarke2008})}}{6}}
-\newlabel{fig:modelcheckstruc}{{4}{6}}
-\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces From real system verification to model checking (adapted from \cite  {Clarke2008})}}{6}}
-\newlabel{fig:systemverif}{{5}{6}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {\unhbox \voidb@x \hbox {V-A}}ESBMC }{6}}
 \citation{Brummayer}
 \citation{DeMoura}
 \citation{Cimatti}
 \citation{Dutertre}
 \citation{Barrett}
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Model Checker structure (Source: \cite  {Clarke2008})}}{6}}
+\newlabel{fig:modelcheckstruc}{{4}{6}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces From real system verification to model checking (adapted from \cite  {Clarke2008})}}{6}}
+\newlabel{fig:systemverif}{{5}{6}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\unhbox \voidb@x \hbox {V-A}}ESBMC }{6}}
+\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces ESBMC architecture (adapted from \cite  {GadelhaSBMF})}}{6}}
+\newlabel{fig:esbmcarch}{{6}{6}}
+\@writefile{toc}{\contentsline {section}{\numberline {VI}Methodology }{6}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\unhbox \voidb@x \hbox {VI-A}}The case studies and the Algorithm}{7}}
+\@writefile{toc}{\contentsline {section}{\numberline {VII}Results}{7}}
+\newlabel{sec:results}{{VII}{7}}
+\@writefile{loa}{\contentsline {algorithm}{\numberline {1}{\ignorespaces Algorithm to perform automated verification}}{7}}
 \citation{Kroening}
 \citation{Trindade}
 \citation{Bessa}
 \citation{Abateetal2017}
 \citation{Kremers}
 \citation{Abate2017}
-\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces ESBMC architecture (adapted from \cite  {GadelhaSBMF})}}{7}}
-\newlabel{fig:esbmcarch}{{6}{7}}
-\@writefile{toc}{\contentsline {section}{\numberline {VI}Methodology }{7}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {\unhbox \voidb@x \hbox {VI-A}}The case studies and the Algorithm}{7}}
-\@writefile{toc}{\contentsline {section}{\numberline {VII}Results}{7}}
-\newlabel{sec:results}{{VII}{7}}
-\@writefile{toc}{\contentsline {section}{\numberline {VIII}Related work }{7}}
-\@writefile{toc}{\contentsline {section}{\numberline {IX}Conclusions and Future Work}{7}}
 \bibstyle{IEEEtran}
 \bibdata{trindadeThesis}
 \bibcite{Coelho}{1}
@@ -142,23 +137,23 @@
 \bibcite{Pinho}{14}
 \bibcite{Copetti}{15}
 \bibcite{Manwell93}{16}
-\bibcite{Abdulateef}{17}
-\bibcite{Clarke2008}{18}
-\@writefile{loa}{\contentsline {algorithm}{\numberline {1}{\ignorespaces Algorithm to perform automated verification}}{8}}
+\bibcite{Clarke2008}{17}
+\bibcite{Forejt2011}{18}
+\bibcite{Kroening}{19}
+\bibcite{GadelhaSBMF}{20}
+\bibcite{Brummayer}{21}
+\bibcite{DeMoura}{22}
+\bibcite{Cimatti}{23}
+\bibcite{Dutertre}{24}
+\bibcite{Barrett}{25}
+\bibcite{Trindade}{26}
+\@writefile{toc}{\contentsline {section}{\numberline {VIII}Related work }{8}}
+\@writefile{toc}{\contentsline {section}{\numberline {IX}Conclusions and Future Work}{8}}
 \@writefile{toc}{\contentsline {section}{References}{8}}
-\bibcite{Forejt2011}{19}
-\bibcite{Kroening}{20}
-\bibcite{GadelhaSBMF}{21}
-\bibcite{Brummayer}{22}
-\bibcite{DeMoura}{23}
-\bibcite{Cimatti}{24}
-\bibcite{Dutertre}{25}
-\bibcite{Barrett}{26}
-\bibcite{Trindade}{27}
-\bibcite{Bessa}{28}
-\bibcite{Abateetal2017}{29}
-\bibcite{Kremers}{30}
-\bibcite{Abate2017}{31}
+\bibcite{Bessa}{27}
+\bibcite{Abateetal2017}{28}
+\bibcite{Kremers}{29}
+\bibcite{Abate2017}{30}
 \@writefile{toc}{\contentsline {section}{Biographies}{9}}
 \@writefile{toc}{\contentsline {subsection}{Alessandro Trindade}{9}}
 \@writefile{toc}{\contentsline {subsection}{Lucas Cordeiro}{9}}
