@@ -33,15 +33,6 @@ EPIA, \emph{Global market outlook for photovoltaics 2017-2021}.\hskip 1em plus
   0.5em minus 0.4em\relax Belgium: European Phototoltaic Industry Association,
   2017.
 
-\bibitem{Baier}
-C.~Baier and J.-P. Katoen, \emph{Principles of model checking}.\hskip 1em plus
-  0.5em minus 0.4em\relax London: The MIT Press, 2008.
-
-\bibitem{Roy}
-T.~Roy, ``Simulation and analysis of photovoltaic stand- alone systems,''
-  Technology in Electrical Engineering, Department of Electrical Engineering
-  National Institute of Technology, Rourkela, Odisha, India, 2013.
-
 \bibitem{Mohanty}
 P.~Mohanty, K.~Sharma, M.~Gujar, M.~Kolhe, and A.~Azmi, \emph{Solar
   Photovoltaic System Applications}.\hskip 1em plus 0.5em minus 0.4em\relax
@@ -128,29 +119,10 @@ M.~Gadelha, L.~Cordeiro, and D.~Nicole, ``Encoding floating-points using the
   in \emph{20th Brazilian Symposium on Formal Methods (SBMF)}, vol. LNCS 10623,
   2017, pp. 91--106.
 
-\bibitem{Brummayer}
-R.~Brummayer and A.~Biere, ``Boolector: An efficient smt solver for bit-vectors
-  and arrays,'' in \emph{Tools and Algorithms for the Construction and Analysis
-  of Systems (TACAS)}, vol. LNCS 5505, 2009, pp. 174--177.
-
 \bibitem{DeMoura}
 L.~D. Moura and N.~Bj$\o$rner, ``Z3: An efficient smt solver,'' in \emph{Tools
   and Algorithms for the Construction and Analysis of Systems (TACAS)}, vol.
   LNCS 4963, 2008, pp. 337--340.
-
-\bibitem{Cimatti}
-A.~Cimatti, A.~Griggio, B.~Schaafsma, and R.~Sebastiani, ``The mathsat5 smt
-  solver,'' in \emph{Tools and Algorithms for the Construction and Analysis of
-  Systems (TACAS)}, vol. LNCS 7795, 2013, pp. 93--107.
-
-\bibitem{Dutertre}
-B.~Dutertre, ``Yices 2.2,'' in \emph{Computer Aided Verification (CAV)},
-  A.~Biere and R.~Bloem, Eds., vol. LNCS 8559, 2014, pp. 734--744.
-
-\bibitem{Barrett}
-C.~Barrett, C.~Conway, M.~Deters, L.~Hadarean, D.~Jovanovic, T.~King,
-  A.~Reynolds, and C.~Tinelli, ``Cvc4,'' in \emph{Computer Aided Verification},
-  vol. LNCS 6806, 2011, pp. 171--177.
 
 \bibitem{Trindade}
 A.~Trindade and L.~Cordeiro, ``Applying smt-based verification to

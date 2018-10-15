@@ -489,7 +489,7 @@ Based on data from \cite{EPIA}, there was an increase of approximately 50\% from
 %Apart from PV modules; the 
 %PV systems consist of PV modules, battery bank, controller, and inverter, plus the load. %Moreover, the optimum sizing of these devices is important for reliable operation.
 %Therefore, these systems need to be designed properly according to the site, land area available, load requirement, load pattern, environmental conditions and economics in order to utilize available resources efficiently and economically \cite{Rawat}. %Furthermore, there is the need for proper modeling and simulation tools for people involved in their application. 
-In order to validate or even simulate a potential PV solution, there are a myriad of tools available at the market \textcolor{red}{cite here those tools}.
+In order to validate or even simulate a potential PV solution, there are a myriad of tools available at the market, as RETScreen, HOMER, PVWatts, SAM, and Hybrid2.
 
 %The increase in a number of PV systems installed all over the world brings the need for proper modeling and simulation tools for researcher and practitioners involved in their application. In order to validate or even simulate a potential PV solution, there are a myriad of tools. 
 %However, to the best of our knowledge, this work can be the first work to perform automated verification of a solar PV off-grid project solution.  
@@ -502,50 +502,51 @@ In order to validate or even simulate a potential PV solution, there are a myria
 
 %PV systems can be classified into grid-connected and stand-alone systems. At this proposal, only off-grid or stand-alone systems will be considered. The utilization of solar energy in off-grid mode has the potential to meet the energy need for remote rural areas of developing countries.  
 
-Desiging any complex system, as a PV, more time is spent on verification than on construction, as described by Baier and Katoen\cite{Baier}. Formal methods based on model checking offer great potential to obtain a more effective and faster verification in the design process. Programs may be viewed as mathematical objects. 
+However, those tools are based in simulation models to validate a PV system. The use of simulation for verification is problematic, because is necessary to ensure the complete coverage of operating conditions, scenarios, and system inputs. 
+
+Formal methods based on model checking offer great potential to obtain a more effective and faster verification in the design process. Programs may be viewed as mathematical objects. 
 %with behavior that is, in principle, well determined. 
  This makes it possible to specify systems as programs using mathematical logic, which constitutes the intended (correct) behavior. Then, one can try to give a formal proof or otherwise establish that the program meets its specification.%, as defined by \cite{Trindade}. 
 %
-This area of research is referred as formal methods. % as defined in \cite{Clarkeetal}.
+%This area of research is referred as formal methods. % as defined in \cite{Clarkeetal}.
 % Their aim is to establish system correctness with mathematical rigor. 
-In the recent decades, research in formal methods has led to the development of very promising verification techniques.
+%In the recent decades, research in formal methods has led to the development of very promising verification techniques.
 % that facilitate the early detection of bugs in order to ensure the correctness of the system. 
-
-Model-based verification techniques are based on models that describe the possible system behavior in a mathematically precise and unambiguous manner. 
+%
+%Model-based verification techniques are based on models that describe the possible system behavior in a mathematically precise and unambiguous manner. 
 %Thus, such problems as incompleteness, ambiguities, and inconsistencies, which normally are discovered only in later stages of the design, can be detected in advance, as described by \cite{Trindade}. 
 Algorithms can verify the system model through systematically explore all their states. 
 
 %Bringing this technique to solar PV systems, i
 %Instead of finding a bug or a software inconsistence, t
-The present work aim to verify a PV system, informing in which condition the project do not meet user requirements or will fail, as shown in Fig.\ref{fig:flowchartgeneral}. 
-%Among the non-deterministic variables considerated, is it worth to mention environmental issues (like solar irradiance, and temperature), and the variation of the electrical load (power consumption) or the battery' state of charge, as shown in Fig.\ref{fig:flowchartgeneral}. 
-That is the main contribution of this paper.
+The present work aim to verify an off-grid PV system, with all their components modelated mathematically, informing in which condition the system do not meet user requirements or will fail, as shown in Fig.\ref{fig:flowchartgeneral}. 
+%Among the non-deterministic variables considerated, is it worth to mention environmental issues (like solar irradiance, and temperature), and the variation of the electrical load (power consumption) or the battery' state of charge, as shown in Fig.\ref{fig:flowchartgeneral}.
+The implementation of the
+% ideas will be 
+proposed framework is done with the efficient SMT-based bounded model checker (ESBMC) %tool that uses the front-end of the C Bounded Model Checker (CBMC) or the clang-based front-end, 
+ which permits to describe the PV system as a C/C++ language code.
+  
+The results prove that the framework is more efficient in different case studies to found not proper functioning of PV systems than simulation with off-the-sheld tool. To the best of our knowledge, this is the first work to use a
+%n SMT-based 
+verification tool to solve this kind of problem. That is the main contribution of this paper.
 
-\textcolor{red}{This introduction is missing the description of the vision, approach and results. In particular, try to match each paragraph to: problem, vision, approach, results and contributions.} 
+%\textcolor{red}{This introduction is missing the description of the vision, approach and results. In particular, try to match each paragraph to: problem, vision, approach, results and contributions.} 
 
 \begin{figure}[h]
 \includegraphics[width=0.4\textwidth]{flowchart_verification.png}
 \centering
-\caption{Flowchart of the proposed computer verification of PV systems}
+\caption{Flowchart of the proposed automated verification of PV systems}
 \label{fig:flowchartgeneral}
 \end{figure}
 
 %The framework provided at this paper outlines the requirements, the process and the mathematical modeling to perform automated formal verification of a PV off-grid system, using the satisfiability modulo theories (SMT)-based verification method.
  
-To the best of our knowledge, this is the first work to use a
-%n SMT-based 
-verification tool to solve this kind of problem. 
-
-The implementation of the
-% ideas will be 
-proposed framework is done with the efficient SMT-based bounded model checker (ESBMC) %tool that uses the front-end of the C Bounded Model Checker (CBMC) or the clang-based front-end, 
- which permits to describe the PV system as a C/C++ language code.
- 
  %This paragraph is useless.
 %The remainder of this paper is organized as follows: Section II gives the background. Section III describes the design and validation of PV system. Section IV describes the mathematical modeling. Section V presents the automated verification. The methodology is presented at section VI. Section VII is devoted to the results, and section VIII to the related work. Section IX presents the conclusion and describes future work.
 
 \section{Solar Photovoltaic System }
-According to \cite{Roy}, a PV system is designed to give the electric supply to a load. This load can be either Alternate Current (AC) type or Direct Current (DC) type. Electric supply can be needed either in daytime or evening time. 
+%According to \cite{Roy}, a 
+A PV system is designed to give the electric supply to a load. This load can be either Alternate Current (AC) type or Direct Current (DC) type. Electric supply can be needed either in daytime or evening time. 
 %(in particular cases, in both times). %The most basic PV system can give supply only in daytime.  
 For night hours or rainy days, one needed to have batteries, where power can be stored and used.% \cite{Gules}. 
 
@@ -978,7 +979,7 @@ N_{PP} \geq N_{PPmin}
 
 
 \subsection{The Battery Storage Model }
-%Because of the fluctuating nature of the output delivered by the PV arrays, batteries are necessary in a PV system. Thus, during the hours of sunshine, the PV system feeds directly the load and the excess electrical energy is stored in the battery. During the night, or during a period with low solar irradiation, energy is supplied to the load from the battery \cite{Mellit}.
+%Because of the fluctuating nature of the output delivered by the PV arrays, batteries are nece\sqrt{•}ry in a PV system. Thus, during the hours of sunshine, the PV system feeds directly the load and the excess electrical energy is stored in the battery. During the night, or during a period with low solar irradiation, energy is supplied to the load from the battery \cite{Mellit}.
   
 Several models have been presented in the literature, as shown by \cite{Copetti}, and \cite{Manwell93}.
 %, and \cite{Manwell94}. 
@@ -1373,15 +1374,16 @@ The model checking problem can be defined as shown in \cite{Clarke2008}:
 \item Find all states $s$ of $M$ such that $M , s \models f$
 \end{itemize}
 
-Fig. \ref{fig:modelcheckstruc} shows the structure of a typical model checking system. A preprocessor extracts a state transition graph from a system (program or circuit).
+%Fig. \ref{fig:modelcheckstruc} shows the structure of a 
+In a typical model checking system, a preprocessor extracts a state transition graph from a system (program or circuit).
 
-\begin{figure}[h]
-\includegraphics[width=0.4\textwidth]{modelcheckstruc}
-\centering
-\caption{Model Checker structure (Source: \cite{Clarke2008})}
-\label{fig:modelcheckstruc}
-\end{figure}
-
+%\begin{figure}[h]
+%\includegraphics[width=0.4\textwidth]{modelcheckstruc}
+%\centering
+%\caption{Model Checker structure (Source: \cite{Clarke2008})}
+%\label{fig:modelcheckstruc}
+%\end{figure}
+%
 %Here it is worth to mention that the term "model" is not the meaning taken from the dictionary. The problem is not dealing with an abstraction of the actual system under study. 
 %
 The Fig. \ref{fig:systemverif} shows the process to convert a real system to a model in order to be verified by a model checking. 
@@ -1414,11 +1416,11 @@ According \cite{GadelhaSBMF}, ESBMC is an open source, permissively licensed (Ap
 \end{figure}
 
 As shown by \cite{GadelhaSBMF}, ESBMC has two alternative front-ends to parse the input program. % and generate an Abstract Syntax Tree (AST). %One legacy CBMC-based front-end that supports both C and C++ and a new clang-based front-end that currently only supports C. The data types and bit vectors are created in the front-end when parsing the code. 
-Regardless of the chosen front-end, the output is an AST (tree representation of the abstract syntactic structure of source code written in a programming language) that will be used by the GOTO converter to generate a GOTO program, which has simplified control flow and is suitable for bounded unwinding. The next step is the symbolic execution, when the GOTO program is executed (unrolling loops up to the bound $ k $) and converted to Static Single Assignments (SSA) form. SSA form enables the simplification of algorithms and reduction of computational complexity, where each variable is a target of exactly one assignment statement in the program text. 
+Regardless of the chosen front-end, the output is an AST (tree representation of the abstract syntactic structure of source code written in a programming language) that will be used by the GOTO converter to generate a GOTO program, which has simplified control flow and is suitable for bounded unwinding. The next step is the symbolic execution, when the GOTO program is executed (unrolling loops up to the bound $ k $) and converted to Static Single Assignments (SSA) form. SSA form enables the simplification of algorithms and reduction of computational complexity. %, where each variable is a target of exactly one assignment statement in the program text. 
 %
 %During the symbolic execution, ESBMC aggressively tries to simplify the program \cite{Ramalho}; it propagates all constants and solves any assertions that can be statically determined. This is an important step for the verification, since ESBMC can fully verify programs without calling a solver, if the inputs are deterministic. That characteristic is useful at this work to perform the sizing check of the PV system project. 
-
-Following, the SSA expressions are then encoded using the chosen SMT solver supported by ESBMC: Boolector (default) \cite{Brummayer}, Z3 \cite{DeMoura}, MathSAT \cite{Cimatti}, Yices \cite{Dutertre} and CVC4 \cite{Barrett}. 
+Following, the SSA expressions are then encoded using the chosen SMT solver supported by ESBMC. At this paper, it was used the Z3 solver as shown by \cite{DeMoura}.
+%: Boolector (default) \cite{Brummayer}, Z3 \cite{DeMoura}, MathSAT \cite{Cimatti}, Yices \cite{Dutertre} and CVC4 \cite{Barrett}. 
 
 Finally, the system attempting to determine whether a formula, which is the disjunction of all possible errors, can be satisfied. If the SMT formula is shown to be satisfiable, a counterexample is presented; if the formula is found to be unsatisfiable, there are no errors up to the unwinding bound, and this result is presented. 
  
@@ -1470,7 +1472,6 @@ It was performed five case studies: (1) four concerning a PV system (700 W inver
 %According with X and Y, t
 The annual average temperature ($T$) in Manaus is from 23$^{o}$C to 32$^{o}$C; and irradiance ($G$) varies from 274 W/m$^{2}$ to 852 W/m$^{2}$ when there is sunlight.  
 %and irradiance varies from 0 W/m$^{2}$ to 852 W/m$^{2}$ (with minimum of 274 W/m$^{2}$ during the daytime, when there is sunlight). 
-
 Another characteristic of Manaus, is that the PV generation can be despised from 16:00h to the 8:00h of the next day, independent of the season.
 %there is PV generation only between 8:00 h and 16:00 h every day, 
 %with zero electric energy generation from 18:00 h to 6:00 h of the next day; and with insignificant generation from 6:00 h to 8:00 h, and from 16:00 h to 18:00 h of the same day. 
@@ -1718,9 +1719,9 @@ In addition, according with \cite{Abate2017}, recent research has attempted to f
 It was shown that, beside the time-consuming issue of the proposed framework, it overcomes the results of off-the-shelf tool that only simulate the results. The framework was successful in found sizing errors and to indicate in which conditions, in terms of temperature and solar irradiation, a PV system can fails.
 %However, it is possible to perform the optimum sizing of the PV system. Moreover, 
 %The authors target the use of Counterexample Guided-Inductive Synthesis (CEGIS) to perform the optimum sizing of PV systems. That is an interesting resource, considering that nowadays is possible to choose from many different manufacturers and many different models of equipment of a PV system. 
-Next, the framework will be improved to starts from a list of commercial equipment (inputs), where each equipment is verified during synthesis phase and the final solution, which satisfies the specifications (or constraints) of the project, is found from the inputs. This can be done with the Counterexample Guided-Inductive Synthesis (CEGIS), and the result is the optimum sizing of PV systems.
+Next, the framework will be improved to start from a list of commercial equipment (inputs), where each equipment is verified during synthesis phase and the final solution, which satisfies the specifications (or constraints) of the project, is found from the inputs. This can be done with the Counterexample Guided-Inductive Synthesis (CEGIS), and the result is the optimum sizing of PV systems.
 
-Furthermore, it is possible to expand the type of renewable used for power generation. And to contemplate hybrid systems, which can transform the framework into a complete tool for design and verification of renewable systems.
+Furthermore, it is possible to contemplate other kinds of renewable energy and even hybrid ones, which can evolve the framework into a complete tool for design and verification for rural electrification.
 % into an important instrument to complement the solar PV system design process, ensuring that it does not fail and meets the expected requirements. 
 
 %Plus (need to think about it): verification in every-hour of a 48h cycle?, PV model math model can be improved, charge/discharge of batteries can be improved (is a simplified model), house's power consumption is not flat or constant, the dweller can buy more home appliances, synthesis need a data base of components, to test peak (surge) consumption (above the nominal), additional models for on-grid/off-grid farm, hybrid, and on-grid with batteries).
