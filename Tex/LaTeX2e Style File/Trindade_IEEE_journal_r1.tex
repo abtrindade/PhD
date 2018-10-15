@@ -349,6 +349,7 @@
 
 %Alessandro input: makecell package to permite line break inside tables
 \usepackage{makecell}
+\usepackage{xcolor}
 
 % correct bad hyphenation here
 \hyphenation{op-tical net-works semi-conduc-tor}
@@ -469,14 +470,14 @@ Automated verification, model checking, energy systems, solar photovoltaic syste
 % 
 % Here we have the typical use of a "T" for an initial drop letter
 % and "HIS" in caps to complete the first word.
-\IEEEPARstart{A}{ccording} to \cite{Coelho} there are presently 1.3 billion people with no access to electricity worldwide. 
+\IEEEPARstart{A}{ccording} to Coelho et al. \cite{Coelho}, there are presently 1.3 billion people with no access to electricity worldwide. 
 %The definition of energy access usually includes both electricity access and access to modern fuels for cooking and heating, in order to replace traditional biomass. 
 %Increased access to energy allows economic growth and poverty alleviation \cite{Karekesi}. 
 %
 %Among the options of renewable sources, there are hydro, wind, and solar photovoltaic (PV). 
 Only a niche market a few years ago, solar photovoltaic (PV) are now becoming a mainstream electricity provider.
 % changing the way the world is powered. 
-Based in data from \cite{EPIA}, there was an increase of approximately 50\% from 2016 to 2017 in terms of new installations of PV. 
+Based on data from \cite{EPIA}, there was an increase of approximately 50\% from 2016 to 2017 in terms of new installations of PV. 
 %The use of the power generation technology with renewable energy source is developing rapidly due to the industrial development \cite{Yatimi}. 
 %The renewable energy leads to an advance all over the world by protecting the environment: it is clean,
 %(low greenhouse gases emissions)
@@ -484,11 +485,11 @@ Based in data from \cite{EPIA}, there was an increase of approximately 50\% from
 %Renewable energy, and particularly the power generation from solar energy using photovoltaic (PV) panels, has emerged as an alternative to fossil or nuclear fuel generation.
 % 
 %The PV cell in a solar photovoltaic system, as defined in \cite{Rawat}, is a semiconductor device, which directly converts the solar radiation into electrical energy. 
-
+%
 %Apart from PV modules; the 
 %PV systems consist of PV modules, battery bank, controller, and inverter, plus the load. %Moreover, the optimum sizing of these devices is important for reliable operation.
 %Therefore, these systems need to be designed properly according to the site, land area available, load requirement, load pattern, environmental conditions and economics in order to utilize available resources efficiently and economically \cite{Rawat}. %Furthermore, there is the need for proper modeling and simulation tools for people involved in their application. 
-In order to validate or even simulate a potential PV solution, there are a myriad of tools available at the market.
+In order to validate or even simulate a potential PV solution, there are a myriad of tools available at the market \textcolor{red}{cite here those tools}.
 
 %The increase in a number of PV systems installed all over the world brings the need for proper modeling and simulation tools for researcher and practitioners involved in their application. In order to validate or even simulate a potential PV solution, there are a myriad of tools. 
 %However, to the best of our knowledge, this work can be the first work to perform automated verification of a solar PV off-grid project solution.  
@@ -501,10 +502,10 @@ In order to validate or even simulate a potential PV solution, there are a myria
 
 %PV systems can be classified into grid-connected and stand-alone systems. At this proposal, only off-grid or stand-alone systems will be considered. The utilization of solar energy in off-grid mode has the potential to meet the energy need for remote rural areas of developing countries.  
 
-Desiging any complex system, as a PV, more time is spent on verification than on construction, as shown in \cite{Baier}. Formal methods based on model checking offer great potential to obtain a more effective and faster verification in the design process. Programs may be viewed as mathematical objects. 
+Desiging any complex system, as a PV, more time is spent on verification than on construction, as described by Baier and Katoen\cite{Baier}. Formal methods based on model checking offer great potential to obtain a more effective and faster verification in the design process. Programs may be viewed as mathematical objects. 
 %with behavior that is, in principle, well determined. 
  This makes it possible to specify systems as programs using mathematical logic, which constitutes the intended (correct) behavior. Then, one can try to give a formal proof or otherwise establish that the program meets its specification.%, as defined by \cite{Trindade}. 
-
+%
 This area of research is referred as formal methods. % as defined in \cite{Clarkeetal}.
 % Their aim is to establish system correctness with mathematical rigor. 
 In the recent decades, research in formal methods has led to the development of very promising verification techniques.
@@ -519,6 +520,8 @@ Algorithms can verify the system model through systematically explore all their 
 The present work aim to verify a PV system, informing in which condition the project do not meet user requirements or will fail, as shown in Fig.\ref{fig:flowchartgeneral}. 
 %Among the non-deterministic variables considerated, is it worth to mention environmental issues (like solar irradiance, and temperature), and the variation of the electrical load (power consumption) or the battery' state of charge, as shown in Fig.\ref{fig:flowchartgeneral}. 
 That is the main contribution of this paper.
+
+\textcolor{red}{This introduction is missing the description of the vision, approach and results. In particular, try to match each paragraph to: problem, vision, approach, results and contributions.} 
 
 \begin{figure}[h]
 \includegraphics[width=0.4\textwidth]{flowchart_verification.png}
@@ -538,7 +541,8 @@ The implementation of the
 proposed framework is done with the efficient SMT-based bounded model checker (ESBMC) %tool that uses the front-end of the C Bounded Model Checker (CBMC) or the clang-based front-end, 
  which permits to describe the PV system as a C/C++ language code.
  
-The remainder of this paper is organized as follows: Section II gives the background. Section III describes the design and validation of PV system. Section IV describes the mathematical modeling. Section V presents the automated verification. The methodology is presented at section VI. Section VII is devoted to the results, and section VIII to the related work. Section IX presents the conclusion and describes future work.
+ %This paragraph is useless.
+%The remainder of this paper is organized as follows: Section II gives the background. Section III describes the design and validation of PV system. Section IV describes the mathematical modeling. Section V presents the automated verification. The methodology is presented at section VI. Section VII is devoted to the results, and section VIII to the related work. Section IX presents the conclusion and describes future work.
 
 \section{Solar Photovoltaic System }
 According to \cite{Roy}, a PV system is designed to give the electric supply to a load. This load can be either Alternate Current (AC) type or Direct Current (DC) type. Electric supply can be needed either in daytime or evening time. 
