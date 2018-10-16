@@ -1,3 +1,5 @@
+*.bbl
+*.bak
 *.aux
 *.blg
 *.synctex.gz
