@@ -489,24 +489,23 @@ Based on data from \cite{EPIA}, there was an increase of approximately 50\% from
 %Apart from PV modules; the 
 %PV systems consist of PV modules, battery bank, controller, and inverter, plus the load. %Moreover, the optimum sizing of these devices is important for reliable operation.
 %Therefore, these systems need to be designed properly according to the site, land area available, load requirement, load pattern, environmental conditions and economics in order to utilize available resources efficiently and economically \cite{Rawat}. %Furthermore, there is the need for proper modeling and simulation tools for people involved in their application. 
-In order to validate or even simulate a potential PV solution, there are a myriad of tools available at the market, as RETScreen, HOMER, PVWatts, SAM, and Hybrid2.
 
+In order to validate or even simulate a potential PV solution, there are a myriad of tools available at the market, as RETScreen, HOMER, PVWatts, SAM, and Hybrid2.
 %The increase in a number of PV systems installed all over the world brings the need for proper modeling and simulation tools for researcher and practitioners involved in their application. In order to validate or even simulate a potential PV solution, there are a myriad of tools. 
 %However, to the best of our knowledge, this work can be the first work to perform automated verification of a solar PV off-grid project solution.  
 %
 %According to \cite{SEIA} and \cite{Chauhan}, solar is the most abundant source of renewable energy on earth. In SPV system, solar radiations are captured from the sun and turned into electricity using SPV cells made of silicon and other materials. SPV...
 %
 %In order to address different aspects of a SPV project, there is a myriad of public domain and commercial software available. According to \cite{Brooks}, the capabilities of these tools range from simple solar resource and energy production estimative, to site survey and system design tools, to complex financial analysis software (with optimization). Some tools also provide support to rebate programs applications and tax incentives (specific to each country or region), while other programs and worksheets focus on the technical aspects of system sizing and design.  
-
+%
 %Manufactures and integrators have yet their proprietary software to perform various system sizing, with the drawback of include just their own products among the possibilities of choice, what restrict the solution. 
-
+%
 %PV systems can be classified into grid-connected and stand-alone systems. At this proposal, only off-grid or stand-alone systems will be considered. The utilization of solar energy in off-grid mode has the potential to meet the energy need for remote rural areas of developing countries.  
-
-However, those tools are based in simulation models to validate a PV system. The use of simulation for verification is problematic, because is necessary to ensure the complete coverage of operating conditions, scenarios, and system inputs. 
+However, those tools are based only in simulation models. The use of simulation for verification is problematic, because is necessary to ensure the complete coverage of operating conditions, scenarios, and system inputs. 
 
 Formal methods based on model checking offer great potential to obtain a more effective and faster verification in the design process. Programs may be viewed as mathematical objects. 
 %with behavior that is, in principle, well determined. 
- This makes it possible to specify systems as programs using mathematical logic, which constitutes the intended (correct) behavior. Then, one can try to give a formal proof or otherwise establish that the program meets its specification.%, as defined by \cite{Trindade}. 
+ This makes it possible to specify systems as programs using mathematical logic, which constitutes the intended (correct) behavior. Then, one can try to give a formal proof or otherwise establish that the program meets its specification. %, as defined by \cite{Trindade}. 
 %
 %This area of research is referred as formal methods. % as defined in \cite{Clarkeetal}.
 % Their aim is to establish system correctness with mathematical rigor. 
@@ -515,7 +514,7 @@ Formal methods based on model checking offer great potential to obtain a more ef
 %
 %Model-based verification techniques are based on models that describe the possible system behavior in a mathematically precise and unambiguous manner. 
 %Thus, such problems as incompleteness, ambiguities, and inconsistencies, which normally are discovered only in later stages of the design, can be detected in advance, as described by \cite{Trindade}. 
-Algorithms can verify the system model through systematically explore all their states. 
+ Algorithms can verify the system model through systematically explore all their states. 
 
 %Bringing this technique to solar PV systems, i
 %Instead of finding a bug or a software inconsistence, t
@@ -526,7 +525,7 @@ The implementation of the
 proposed framework is done with the efficient SMT-based bounded model checker (ESBMC) %tool that uses the front-end of the C Bounded Model Checker (CBMC) or the clang-based front-end, 
  which permits to describe the PV system as a C/C++ language code.
   
-The results prove that the framework is more efficient in different case studies to found not proper functioning of PV systems than simulation with off-the-sheld tool. To the best of our knowledge, this is the first work to use a
+The results prove that the framework is more efficient in different case studies to find not proper functioning of PV systems than simulation with off-the-sheld tool. To the best of our knowledge, this is the first work to use a
 %n SMT-based 
 verification tool to solve this kind of problem. That is the main contribution of this paper.
 
@@ -546,7 +545,7 @@ verification tool to solve this kind of problem. That is the main contribution o
 
 \section{Solar Photovoltaic System }
 %According to \cite{Roy}, a 
-A PV system is designed to give the electric supply to a load. This load can be either Alternate Current (AC) type or Direct Current (DC) type. Electric supply can be needed either in daytime or evening time. 
+A PV system is designed to give the electric supply to a load. This load can be either Alternate Current (AC) or Direct Current (DC) type. Electric supply can be needed either in daytime or evening time. 
 %(in particular cases, in both times). %The most basic PV system can give supply only in daytime.  
 For night hours or rainy days, one needed to have batteries, where power can be stored and used.% \cite{Gules}. 
 
@@ -599,11 +598,11 @@ In order to address different aspects of project system and systems design, ther
 %public domain and commercial software available for the PV market. 
 %According to \cite{Brooks}, t
 The capabilities of these tools range from simple solar resource and energy production estimation, %to site survey and system design tools,
- to complex financial analysis software (with optimization). 
+ to complex financial analysis and project optimization. 
 %Some tools also provide support to rebate programs applications and tax incentives (specific to each country or region), while other programs and worksheets focus on the technical aspects of system sizing and design.
 %
 %Manufacturers and integrators have yet their proprietary software to perform inverter string sizing and various system sizing and design tools, with the drawback to just include their own products among the possibilities of choice. 
-In this work, were evaluated the most popular tools, as PVWatts, SAM, Homer Pro, RETScreen Expert, and Hybrid2.
+In this work, were evaluated the most popular tools, as PVWatts, SAM, HOMER Pro, RETScreen Expert, and Hybrid2.
 
 %\subsection{PVWatts Calculator}
 %According to \cite{Freeman} and \cite{NRELDobos}, it is a web application developed by the National Renewable Energy Laboratory (NREL), which estimates the electricity production of a grid-connected roof- or ground-mounted photovoltaic system based on a few inputs. According to \cite{NRELDobos}, to use the calculator, it is necessary to provide information about the system's location, basic design parameters, and system economics. PVWatts calculates estimated values for the system's annual and monthly electricity production, and for the electricity monetary value. This tool is suitable for very preliminary studies of a potential location for a photovoltaic system that uses crystalline silicon or thin film photovoltaic modules. The production estimates that PVWatts computation do not account for many factors that are important in the design of a photovoltaic system, therefore it is necessary support of an energy expert. The calculator estimates the monthly and annual electricity production of a photovoltaic system using an hour-by-hour simulation over a period of one year. To represent the system's physical characteristics, PVWatts requires values for six inputs: System DC size; Module type; Array type; System losses; Array tilt angle; Array azimuth angle.
@@ -672,15 +671,13 @@ Sensitive analysis &  &  & X & X & \\
 \end{table}
 
 \subsection{Paper Proposal x Reference Tools}
-Considering the focus of this paper, only HOMER and RETScreen remain for comparative. All tools need some parameters inherently from manufacturer's catalog in order to size the system.
+Considering the focus of this paper, only HOMER remain for comparative. All tools need some parameters inherently from manufacturer's catalog in order to size the system.
 %, so the project starts with manufacturers and integrators tool to define the basic items of the project: panels, inverters, controllers, and batteries. 
-After that, the potential solution is analyzed in another tool to validate or even optimize the solution. Therefore, that is the challenge of this work, i.e., to prove that is possible to use automated verification to validate an off-grid PV solution and to prove that this verification is more efficient and complete than the listed-more common tools.
-
-The comparative between the Homer Pro and the automated verification tool is presented at the Section \ref{sec:results}.
+After that, the potential solution is analyzed in another tool to validate or even optimize the solution. Therefore, that is the challenge of this work, i.e., to prove that is possible to use automated verification to validate an off-grid PV solution and to prove that this verification is more efficient and complete than the listed-more common tools. The comparative between the HOMER Pro and the automated verification tool is presented at the Section \ref{sec:results}.
 
 \section{Component models for stand-alone PV system }
 %The main purpose of this section is to describe the models for the elements of a standalone PV system: PV generator, battery, controller, inverter, and load. 
-The modeling of the PV system is based on modular blocks, as illustrated in Fig.\ref{fig:blockdiagram}, from \cite{Hansen}. The modular structure facilitates the modeling of the other system structures and replacing of elements as, for instance, a DC load instead of an AC load. 
+The modeling of the PV system is based on modular blocks, as illustrated in Fig.\ref{fig:blockdiagram}. The modular structure facilitates the modeling of the other system structures and replacing of elements as, for instance, a DC load instead of an AC load. 
 
 \begin{figure}[h]
 \includegraphics[width=0.4\textwidth]{blockdiagramPVS}
@@ -897,7 +894,7 @@ The cell temperature ($ T $) can be obtained from \cite{Ross} and is shown in Eq
 T = T_{air} + \dfrac{NOCT-20}{800}G
 \end{equation}
 
-Where $ T_{air} $ is the ambient temperature, $NOCT$ is the nominal operating cell temperature (in $^{o}$C) that is found at the PV manufacturer's data-sheet, and $G$ is the solar irradiance ($ W/m^{2} $) of the place where the PV system is deployed.
+Where $ T_{air} $ is the ambient temperature, $NOCT$ is the nominal operating cell temperature (in $^{o}$C) that is find at the PV manufacturer's data-sheet, and $G$ is the solar irradiance ($ W/m^{2} $) of the place where the PV system is deployed.
 
 Furthermore, \cite{Villalva} have proposed a relationship, which allows the saturation current ($ I_{0} $) to be expressed as a function of the cell temperature (Equation \ref{eq:I0}). 
 %In this study, this relation is explicitly written based on cell open-circuit conditions using the short-circuit current temperature coefficient as well as the open-circuit voltage temperature coefficient (Equation \ref{eq:I0}).
@@ -1149,8 +1146,8 @@ The charge controller or controller is a set of items (DC-DC converter, MPPT, an
 %
 In general, there are two main operating modes for the controller: normal operating condition, when the battery voltage fluctuates between maximum and minimum voltages; and overcharge or over-discharge conditions, which occur when the battery voltage reaches some critical values. 
 
-In \cite{Mellit} was established that the controller allows the management of energy between the load and the battery. The input signals for regulator model are the battery current ($ I_{br} $), PV generator's voltage ($ V_{PV} $), PV generator's current ($ I_{PV} $), and battery voltage ($ V_{b} $). The outputs are battery ($ I_{rb} $) current and used current ($ I_{u} $). 
-
+In \cite{Mellit} was established that the controller allows the management of energy between the load and the battery. 
+%The input signals for regulator model are the battery current ($ I_{br} $), PV generator's voltage ($ V_{PV} $), PV generator's current ($ I_{PV} $), and battery voltage ($ V_{b} $). The outputs are battery ($ I_{rb} $) current and used current ($ I_{u} $). 
 According \cite{Hansen}, to protect the battery against an excessive charge, the PV arrays are disconnected from the system, when the terminal voltage increases above a certain threshold $ V_{max \textunderscore off} $ and when the current required by the load is less than the current delivered by the PV arrays. PV arrays are connected again when the terminal voltage decreases below a certain value $ V_{max \textunderscore on} $. 
 %This can be done by using a switch with a hysteresis cycle, as illustrated in Fig. \ref{fig:controllerover}. 
 %
@@ -1173,7 +1170,7 @@ To protect the battery against excessive discharge, the load is disconnected whe
 %
 %According to \cite{Lorenzo}, the switches may either be electromechanical (relay, contactors, etc.) or solid state (bipolar transistors, MOSFET's, etc.). 
 %
-%The steps in the modeling of the controller process are summarized in Table \ref{table:controller}.
+The steps in the modeling of the controller process are summarized in Table \ref{table:controller}.
 
 \begin{table}[!t]
 %% increase table row spacing, adjust to taste
@@ -1312,7 +1309,7 @@ The inverter is characterized by a power dependent efficiency $ \eta_{i} $ given
 \eta_{i} = \dfrac{P_{out}}{P_{in}} = \dfrac{V_{AC} I_{AC} cos\varphi}{V_{DC}I_{DC}}
 \end{equation}
 
-Where $ I_{DC} $ is the current required by the inverter from the DC source in order to be able to keep the rated voltage on the AC side, $ V_{DC} $ is the input voltage to the inverter delivered by the DC source (PV panel or battery),  $ V_{AC}  $ and $ I_{AC} $ are the output voltage and current, respectively, and $ cos \varphi $ can be found from the inverter's data-sheet.
+Where $ I_{DC} $ is the current required by the inverter from the DC source in order to be able to keep the rated voltage on the AC side, $ V_{DC} $ is the input voltage to the inverter delivered by the DC source (PV panel or battery),  $ V_{AC}  $ and $ I_{AC} $ are the output voltage and current, respectively, and $ cos \varphi $ can be find from the inverter's data-sheet.
 
 %Therefore, with this equation it is possible to simulate the output power of the inverter, based on information from the inverter's data-sheet and from the DC module or the PV panel that feed the inverter (which are obtained by this study model). 
 %
@@ -1406,7 +1403,9 @@ ESBMC is a context-bounded model checker for embedded C/C++ software based on Sa
 ESBMC comes as an alternative to overcome limitations of the systems modeling, especially considering that the complexity of these is increasing and the SMT method has high level and richer theories than the SAT to represent the models. 
 
 \subsection{ESBMC }
-According \cite{GadelhaSBMF}, ESBMC is an open source, permissively licensed (Apache 2), cross platform bounded model checking for C and C++ programs. the efficient SMT based model checker, is a software verification tool for C and C++ code bases. Fig. \ref{fig:esbmcarch} shows the tool architecture. 
+According \cite{GadelhaSBMF}, ESBMC (or Efficient SMT-based Bounded Model Checker) is an open source, permissively licensed (Apache 2), cross platform bounded model checking for C and C++ programs. 
+%The efficient SMT based model checker, is a software verification tool for C and C++ code bases. 
+Fig. \ref{fig:esbmcarch} shows the tool architecture. 
 
 \begin{figure}[h]
 \includegraphics[width=0.5\textwidth]{ESBMCarch2}
@@ -1422,7 +1421,7 @@ Regardless of the chosen front-end, the output is an AST (tree representation of
 Following, the SSA expressions are then encoded using the chosen SMT solver supported by ESBMC. At this paper, it was used the Z3 solver as shown by \cite{DeMoura}.
 %: Boolector (default) \cite{Brummayer}, Z3 \cite{DeMoura}, MathSAT \cite{Cimatti}, Yices \cite{Dutertre} and CVC4 \cite{Barrett}. 
 
-Finally, the system attempting to determine whether a formula, which is the disjunction of all possible errors, can be satisfied. If the SMT formula is shown to be satisfiable, a counterexample is presented; if the formula is found to be unsatisfiable, there are no errors up to the unwinding bound, and this result is presented. 
+Finally, the system attempting to determine whether a formula, which is the disjunction of all possible errors, can be satisfied. If the SMT formula is shown to be satisfiable, a counterexample is presented; if the formula is find to be unsatisfiable, there are no errors up to the unwinding bound, and this result is presented. 
  
 %ESBMC can be invoked through the command-line interface or configured through the Eclipse plug-in. Specific problems and the solver can be selected that way. 
 %
@@ -1670,7 +1669,7 @@ The total were five case studies evaluated by HOMER Pro and by the automated ver
 
 However, related to the results of the automated verification, the 1,200 W PV system (house 5) failed during the sizing check. The number of panels was not correct (the verification indicates 3 panels in parallel and the project has 2 in series and 2 in parallel). That verification took 63.3 hours to be performed. Surveying the owner of the 1,200 W system it was identified that, in fact, the system mostly of the time do not met the battery autonomy (mainly when all the loads are turned on). But it is understandable that this problem occurs because the system was purchased as an off-the-shelf solution and not as a specific design for the electrical charges of the house.
 
-And related to the four 700 W PV system, the sizing check was successful, but there were  found flaws in everyone, all related with the SOC that reached levels below of 75\%. The framework identified the flaws right after the first night-discharge cycle, before dawn, and before the system start to recharge the batteries. The framework took 409.3 hours to found an error at house 1, and the maximum of 456XXX hours to house 4.  
+And related to the four 700 W PV system, the sizing check was successful, but there were  found flaws in everyone, all related with the SOC that reached levels below of 75\%. The framework identified the flaws right after the first night-discharge cycle, before dawn, and before the system start to recharge the batteries. The framework took 409.3 hours to find an error at house 1, and the maximum of 456XXX hours to house 4.  
 
 %At the terminal, the command used to perform the verification is:
 %\$ esbmc filename.c -\phantom{}-no-bounds-check -\phantom{}-no-pointer-check -\phantom{}-no-div-by-zero-check -\phantom{}-unwind 300 -\phantom{}-smt-during-symex -\phantom{}-smt-symex-guard --z3
@@ -1716,10 +1715,10 @@ In addition, according with \cite{Abate2017}, recent research has attempted to f
 %The proposed framework seems to be a coherent and promising tool to perform verification of a PV project. The next step is the deployment of the solution at the ESBMC environment, and compare the results with a real PV project deployed at the field. 
 %
 %The framework presented here establishes the automated verification and the project sizing check. 
-It was shown that, beside the time-consuming issue of the proposed framework, it overcomes the results of off-the-shelf tool that only simulate the results. The framework was successful in found sizing errors and to indicate in which conditions, in terms of temperature and solar irradiation, a PV system can fails.
+It was shown that, beside the time-consuming issue of the proposed framework, it overcomes the results of off-the-shelf tool that only simulate the results. The framework was successful in find sizing errors and to indicate in which conditions, in terms of temperature and solar irradiation, a PV system can fails.
 %However, it is possible to perform the optimum sizing of the PV system. Moreover, 
 %The authors target the use of Counterexample Guided-Inductive Synthesis (CEGIS) to perform the optimum sizing of PV systems. That is an interesting resource, considering that nowadays is possible to choose from many different manufacturers and many different models of equipment of a PV system. 
-Next, the framework will be improved to start from a list of commercial equipment (inputs), where each equipment is verified during synthesis phase and the final solution, which satisfies the specifications (or constraints) of the project, is found from the inputs. This can be done with the Counterexample Guided-Inductive Synthesis (CEGIS), and the result is the optimum sizing of PV systems.
+Next, the framework will be improved to start from a list of commercial equipment (inputs), where each equipment is verified during synthesis phase and the final solution, which satisfies the specifications (or constraints) of the project, is find from the inputs. This can be done with the Counterexample Guided-Inductive Synthesis (CEGIS), and the result is the optimum sizing of PV systems.
 
 Furthermore, it is possible to contemplate other kinds of renewable energy and even hybrid ones, which can evolve the framework into a complete tool for design and verification for rural electrification.
 % into an important instrument to complement the solar PV system design process, ensuring that it does not fail and meets the expected requirements. 
