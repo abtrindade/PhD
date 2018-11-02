@@ -434,7 +434,7 @@
 % As a general rule, do not put math, special symbols or citations
 % in the abstract or keywords.
 \begin{abstract}
-With declining costs and increasing performance, the deployment of renewable energy in off-grid systems is growing in both developed and developing countries, with particular emphasis on solar photovoltaic systems. Electrification of rural areas can improve the education standard, health conditions, and also the life of this population. In addition, depending on the country geography, using renewable energy sources in off-grid mode is a feasible solution if compared to grid extension. Tools to aid the design and validation of rural electrification projects are available; however, there is no software that applies formal verification to evaluate rural electrification projects. This paper aims to build a framework to apply an automated verification method to mathematical models of a solar photovoltaic system to validate its design from a formal verification perspective. Experimental results show that the proposed approach can find situations where the sized solar photovoltaic system fails to met the requirements demanded to electrify a house, and that simulation made with commercial tools can not find the same failure. Data from practical application of solar systems prove the results obtained by the proposed approach.
+With declining costs and increasing performance, the deployment of renewable energy in off-grid systems is growing in both developed and developing countries, with particular emphasis on solar photovoltaic systems. Electrification of rural areas can improve the education standard, health conditions, and also the life of that population. In addition, depending on the country geography, using renewable energy sources in off-grid mode is a feasible solution if compared to a grid extension. Tools to aid the design and validation of rural electrification projects are available; however, there is no software that applies formal verification to evaluate rural electrification projects. This paper aims to build a framework to apply an automated verification method to mathematical models of a solar photovoltaic system to validate its design from a formal verification perspective. Experimental results show that the proposed approach can find situations where the sized solar photovoltaic system fails to meet the requirements demanded to electrify a house, and that simulation made with commercial tools can not find the same failure. \textcolor{red}{Data from practical application of solar systems prove the results obtained by the proposed approach... this last sentence should be stronger to emphasise your main contribution... maybe you could update this after obtaining the experimental results...}
 \end{abstract}
 
 % Note that keywords are not normally used for peerreview papers.
@@ -477,7 +477,7 @@ Automated verification, model checking, energy systems, solar photovoltaic syste
 %Among the options of renewable sources, there are hydro, wind, and solar photovoltaic (PV). 
 Only a niche market a few years ago, solar photovoltaic (PV) are now becoming a mainstream electricity provider.
 % changing the way the world is powered. 
-Based on data from \cite{EPIA}, there was an increase of approximately 50\% from 2016 to 2017 in terms of new installations of PV. 
+Based on data from \textcolor{red}{from what? please be more formal! can you check the guidelines of the journal to see how you can cite references?}\cite{EPIA}, there was an increase of approximately 50\% from 2016 to 2017 in terms of new installations of PV. 
 %The use of the power generation technology with renewable energy source is developing rapidly due to the industrial development \cite{Yatimi}. 
 %The renewable energy leads to an advance all over the world by protecting the environment: it is clean,
 %(low greenhouse gases emissions)
@@ -490,7 +490,7 @@ Based on data from \cite{EPIA}, there was an increase of approximately 50\% from
 %PV systems consist of PV modules, battery bank, controller, and inverter, plus the load. %Moreover, the optimum sizing of these devices is important for reliable operation.
 %Therefore, these systems need to be designed properly according to the site, land area available, load requirement, load pattern, environmental conditions and economics in order to utilize available resources efficiently and economically \cite{Rawat}. %Furthermore, there is the need for proper modeling and simulation tools for people involved in their application. 
 
-In order to validate or even simulate a potential PV solution, there are a myriad of tools available at the market, as RETScreen, HOMER, PVWatts, SAM, and Hybrid2.
+In order to validate or even simulate a potential PV solution, there are a myriad of tools available in the market, as RETScreen, HOMER, PVWatts, SAM, and Hybrid2.
 %The increase in a number of PV systems installed all over the world brings the need for proper modeling and simulation tools for researcher and practitioners involved in their application. In order to validate or even simulate a potential PV solution, there are a myriad of tools. 
 %However, to the best of our knowledge, this work can be the first work to perform automated verification of a solar PV off-grid project solution.  
 %
@@ -501,9 +501,9 @@ In order to validate or even simulate a potential PV solution, there are a myria
 %Manufactures and integrators have yet their proprietary software to perform various system sizing, with the drawback of include just their own products among the possibilities of choice, what restrict the solution. 
 %
 %PV systems can be classified into grid-connected and stand-alone systems. At this proposal, only off-grid or stand-alone systems will be considered. The utilization of solar energy in off-grid mode has the potential to meet the energy need for remote rural areas of developing countries.  
-However, those tools are based only in simulation models. The use of simulation for verification is problematic, because is necessary to ensure the complete coverage of operating conditions, scenarios, and system inputs. 
+However, those tools are based only on simulation models. \textcolor{red}{I don't understand this sentence since simulation and verification are two different things: The use of simulation for verification is problematic}, because is necessary to ensure the complete coverage of operating conditions, scenarios, and system inputs. 
 
-Formal methods based on model checking offer great potential to obtain a more effective and faster verification in the design process. Programs may be viewed as mathematical objects. 
+Formal methods based on model checking offer great potential to obtain a more effective and faster verification in the design process \textcolor{red}{add citation here...}. \textcolor{red}{What is the relation among formal methods, programs and your work? Programs may be viewed as mathematical objects.} 
 %with behavior that is, in principle, well determined. 
  This makes it possible to specify systems as programs using mathematical logic, which constitutes the intended (correct) behavior. Then, one can try to give a formal proof or otherwise establish that the program meets its specification. %, as defined by \cite{Trindade}. 
 %
@@ -514,18 +514,18 @@ Formal methods based on model checking offer great potential to obtain a more ef
 %
 %Model-based verification techniques are based on models that describe the possible system behavior in a mathematically precise and unambiguous manner. 
 %Thus, such problems as incompleteness, ambiguities, and inconsistencies, which normally are discovered only in later stages of the design, can be detected in advance, as described by \cite{Trindade}. 
- Algorithms can verify the system model through systematically explore all their states. 
+ Algorithms can verify the system model by systematically exploring all their states. 
 
 %Bringing this technique to solar PV systems, i
 %Instead of finding a bug or a software inconsistence, t
-The present work aim to verify an off-grid PV system, with all their components modelated mathematically, informing in which condition the system do not meet user requirements or will fail, as shown in Fig.\ref{fig:flowchartgeneral}. 
+Here we will verify an off-grid PV system, with all their components modelled mathematically, and then report in which conditions the system does not meet user requirements or whether it will fail due to \textcolor{red}{????}, as illustrated in Fig.\ref{fig:flowchartgeneral}. 
 %Among the non-deterministic variables considerated, is it worth to mention environmental issues (like solar irradiance, and temperature), and the variation of the electrical load (power consumption) or the battery' state of charge, as shown in Fig.\ref{fig:flowchartgeneral}.
 The implementation of the
 % ideas will be 
-proposed framework is done with the efficient SMT-based bounded model checker (ESBMC) %tool that uses the front-end of the C Bounded Model Checker (CBMC) or the clang-based front-end, 
- which permits to describe the PV system as a C/C++ language code.
+proposed framework is carried out by means of the efficient SMT-based bounded model checker (ESBMC) %tool that uses the front-end of the C Bounded Model Checker (CBMC) or the clang-based front-end, 
+ which allows one to formally verify the PV system as a C program.
   
-The results prove that the framework is more efficient in different case studies to find not proper functioning of PV systems than simulation with off-the-sheld tool. To the best of our knowledge, this is the first work to use a
+The experimental results show that the proposed framework is more efficient \textcolor{red}{than what?} in different case studies to find not proper functioning of PV systems than simulation with off-the-sheld tool. To the best of our knowledge, this is the first work to use a
 %n SMT-based 
 verification tool to solve this kind of problem. That is the main contribution of this paper.
 
@@ -543,13 +543,18 @@ verification tool to solve this kind of problem. That is the main contribution o
  %This paragraph is useless.
 %The remainder of this paper is organized as follows: Section II gives the background. Section III describes the design and validation of PV system. Section IV describes the mathematical modeling. Section V presents the automated verification. The methodology is presented at section VI. Section VII is devoted to the results, and section VIII to the related work. Section IX presents the conclusion and describes future work.
 
+%--------------------------------------------------------
 \section{Solar Photovoltaic System }
+%--------------------------------------------------------
+
+\textcolor{red}{This section is too short! You should move it to another big section...}
+
 %According to \cite{Roy}, a 
 A PV system is designed to give the electric supply to a load. This load can be either Alternate Current (AC) or Direct Current (DC) type. Electric supply can be needed either in daytime or evening time. 
 %(in particular cases, in both times). %The most basic PV system can give supply only in daytime.  
-For night hours or rainy days, one needed to have batteries, where power can be stored and used.% \cite{Gules}. 
+For night hours or rainy days, one needs to hold batteries, where power can be stored and used.% \cite{Gules}. 
 
-PV systems are broadly classified into three distinct types, as described by \cite{Mohanty}: (1) standalone systems, where the energy is generated and consumed in the same place and which does not interact with the main grid, (2) grid-connected systems, and (3) solar PV hybrid system, where another source(s) of energy can work together with the solar PV. % system to provide the required demand.
+PV systems are broadly classified into three distinct types, as described by \textcolor{red}{who?} \cite{Mohanty}: (1) standalone systems, where the energy is generated and consumed in the same place and which does not interact with the main grid, (2) grid-connected systems, and (3) solar PV hybrid system, where another source(s) of energy can work together with the solar PV. % system to provide the required demand.
 %, such as wind, biomass or diesel, 
 %As the goal of this work is just the solutions aimed to isolated/ off-grid application, %therefore it is not considered the on-grid or hybrid configurations.
 %
