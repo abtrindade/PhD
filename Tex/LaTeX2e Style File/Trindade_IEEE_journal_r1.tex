@@ -607,7 +607,7 @@ The capabilities of these tools range from simple solar resource and energy prod
 %Some tools also provide support to rebate programs applications and tax incentives (specific to each country or region), while other programs and worksheets focus on the technical aspects of system sizing and design.
 %
 %Manufacturers and integrators have yet their proprietary software to perform inverter string sizing and various system sizing and design tools, with the drawback to just include their own products among the possibilities of choice. 
-In this work, were evaluated the most popular tools, as PVWatts, SAM, HOMER Pro, RETScreen Expert, and Hybrid2.
+Here we evaluated the most popular tools, as PVWatts, SAM, HOMER Pro, RETScreen Expert, and Hybrid2.
 
 %\subsection{PVWatts Calculator}
 %According to \cite{Freeman} and \cite{NRELDobos}, it is a web application developed by the National Renewable Energy Laboratory (NREL), which estimates the electricity production of a grid-connected roof- or ground-mounted photovoltaic system based on a few inputs. According to \cite{NRELDobos}, to use the calculator, it is necessary to provide information about the system's location, basic design parameters, and system economics. PVWatts calculates estimated values for the system's annual and monthly electricity production, and for the electricity monetary value. This tool is suitable for very preliminary studies of a potential location for a photovoltaic system that uses crystalline silicon or thin film photovoltaic modules. The production estimates that PVWatts computation do not account for many factors that are important in the design of a photovoltaic system, therefore it is necessary support of an energy expert. The calculator estimates the monthly and annual electricity production of a photovoltaic system using an hour-by-hour simulation over a period of one year. To represent the system's physical characteristics, PVWatts requires values for six inputs: System DC size; Module type; Array type; System losses; Array tilt angle; Array azimuth angle.
@@ -636,8 +636,8 @@ In this work, were evaluated the most popular tools, as PVWatts, SAM, HOMER Pro,
 %\subsection{Hybrid2}
 %The Hybrid2 software package, as described in \cite{Mills}, is a user-friendly tool to perform detailed long-term performance and economic analysis on a wide variety of hybrid power systems. Hybrid2 is a probabilistic/time series computer model, using time series data for loads, wind speed, solar insolation, and temperature; and the power system is designed or selected by the user, in order to predict the performance of the hybrid power system. Variations in wind speed and in load within each time step are factored into the performance predictions. The code does not consider short-term system fluctuations caused by system dynamics or component transients. This program is not supported anymore and according to \cite{UMASS}, probably after the user performs the free download of the tool, it will not work on Windows platforms later than Windows XP, what is a limitation.
 
-Table \ref{table:softwares} summarizes the off-the-shelf tools mentioned in this paper.  Where just Hybrid2 do not have technical support; only HOMER Pro, and Hybrid2 perform off-grid system or battery backup analysis; %all the tools perform solar photovoltaic analysis; 
-and that only HOMER Pro and RETScreen Expert include economical analysis or even optimization-sensitive analysis. However, only paid version of those softwares have all the features, and they run only at Windows operational systems. RETScreen and HOMER have a free web-based version but with limited resources.
+Table~\ref{table:softwares} summarizes the off-the-shelf tools employed in this study, where only Hybrid2 does not have technical support; HOMER Pro and Hybrid2 perform off-grid system or battery backup analysis; %all the tools perform solar photovoltaic analysis; 
+additionally, HOMER Pro and RETScreen Expert include economical analysis or even optimization-sensitive analysis. However, only paid version of those tools have all the features \textcolor{red}{which features?}, and they run only on Windows operating system. RETScreen and HOMER have a free web-based version, but they have limited resources.
 
 \begin{table}[!t]
 %% increase table row spacing, adjust to taste
@@ -675,29 +675,38 @@ Sensitive analysis &  &  & X & X & \\
 \end{tabular}
 \end{table}
 
+%-------------------------------------------------------------------
 \subsection{Paper Proposal x Reference Tools}
-Considering the focus of this paper, only HOMER remain for comparative. All tools need some parameters inherently from manufacturer's catalog in order to size the system.
-%, so the project starts with manufacturers and integrators tool to define the basic items of the project: panels, inverters, controllers, and batteries. 
-After that, the potential solution is analyzed in another tool to validate or even optimize the solution. Therefore, that is the challenge of this work, i.e., to prove that is possible to use automated verification to validate an off-grid PV solution and to prove that this verification is more efficient and complete than the listed-more common tools. The comparative between the HOMER Pro and the automated verification tool is presented at the Section \ref{sec:results}.
+%-------------------------------------------------------------------
 
+Considering the focus of this paper, only HOMER remains for our comparative evaluation. All tools need some parameters inherently from manufacturer's catalog \textcolor{red}{is this the correct term? to size the system}.
+%, so the project starts with manufacturers and integrators tool to define the basic items of the project: panels, inverters, controllers, and batteries. 
+After that, the potential solution is analyzed in another tool to validate or even optimize the solution. Therefore, that is the challenge of this work, i.e., to prove that is possible to use automated verification to validate an off-grid PV solution and to prove that this verification is more efficient and complete than other state-of-the-art tools \textcolor{red}{cite them here...}. The comparative evaluation between the HOMER Pro and the proposed verification tool is presented in Section \ref{sec:results}.
+
+%-------------------------------------------------------------------
 \section{Component models for stand-alone PV system }
+%-------------------------------------------------------------------
+
 %The main purpose of this section is to describe the models for the elements of a standalone PV system: PV generator, battery, controller, inverter, and load. 
-The modeling of the PV system is based on modular blocks, as illustrated in Fig.\ref{fig:blockdiagram}. The modular structure facilitates the modeling of the other system structures and replacing of elements as, for instance, a DC load instead of an AC load. 
+The modeling of the PV system is based on modular blocks, as illustrated in Fig.\ref{fig:blockdiagram} \textcolor{red}{you should explain each element of the figure}. The modular structure facilitates the modeling of the other system structures and replacement of elements such as a DC load instead of an AC load. 
 
 \begin{figure}[h]
 \includegraphics[width=0.4\textwidth]{blockdiagramPVS}
 \centering
-\caption{Block diagram for the stand-alone PV system (Source: \cite{Hansen})}
+\caption{Block diagram for the stand-alone PV system~\cite{Hansen}}.
 \label{fig:blockdiagram}
 \end{figure}
 
 In the literature, there are several mathematical models available for each component of PV systems. In this section, the mathematical model for each component is presented. 
 
+%-------------------------------------------------------------------
 \subsection{PV generator model}
+%-------------------------------------------------------------------
+
 %A photovoltaic PV generator is the whole assembly of solar cells, connections, protective parts, and supports. 
 %In the present modeling, the focus is only on cell/module/array.
 %
-The basic element of a PV system is the PV cell, also called a solar cell. A solar cell is a semiconductor device that can convert solar energy into DC electricity. 
+The basic element of a PV system is a PV cell, also called a solar cell. A solar cell is a semiconductor device that can convert solar energy into DC electricity. 
 %The semiconductor materials (usually silicon), which are specially treated to form an electric field, positive on one side (backside) and negative on the other (towards the sun). When solar energy (photons) hits the solar cell, electrons are knocked loose from the atoms in the semiconductor material, creating electron-hole pairs \cite{Lorenzo}. If electrical conductors are attached to the positive and negative sides, forming an electrical circuit, the electrons are captured in the form of electric current $ I_{ph} $ (photocurrent).
 To increase their utility, a number of individual PV cells are interconnected together in a %sealed, weatherproof 
 package called panel or module. 
@@ -722,13 +731,13 @@ The PV modules are generally rated under standard test conditions (STC), and the
 %Modeling provides the ways to understand the current, voltage, and power relationships of PV systems.
   
 The performance of photovoltaic systems, %that is, the output current/voltage curve ($I-V$ curve), 
-is usually studied using an equivalent circuit model, as shown by \cite{Yatimi}, \cite{Saloux}, \cite{Mellit}. This equivalent circuit consists of a current source with one or two diodes connected in parallel, and up to two resistors, one connected in parallel and the other one in series, to take into account energy losses in this model \cite{Cubas}. 
+is usually studied using an equivalent circuit model, as described in the available literature \cite{Yatimi}, \cite{Saloux}, \cite{Mellit}. This equivalent circuit consists of a current source with one or two diodes connected in parallel, and up to two resistors, one connected in parallel and the other one in series, to take into account energy losses in this model \cite{Cubas}. 
 %Based on these electronic components, four basic configurations are normally used when studying photovoltaic systems, as shown by Fig. \ref{fig:equivckt}. 
 
 \begin{figure}[h]
 \includegraphics[width=0.20\textwidth]{equivckt1D}
 \centering
-\caption{ 1-diode equivalent PV cell/panel circuit model (Source: \cite{Cubas})}
+\caption{ 1-diode equivalent PV cell/panel circuit model~\cite{Cubas}.}
 %\caption{Four different equivalent circuit models: (a) 1-diode; (b) 1-diode/1-resistor; (c) 1-diode/2-resistor; (d) 2-diode/2-resistor (Source: \cite{Cubas})}
 \label{fig:equivckt}
 \end{figure}
@@ -1182,7 +1191,7 @@ The steps in the modeling of the controller process are summarized in Table \ref
 \renewcommand{\arraystretch}{1.3}
 % if using array.sty, it might be a good idea to tweak the value of
 % \extrarowheight as needed to properly center the text within the cells
-\caption{Summary of the controller process (Source: \cite{Hansen})}
+\caption{Summary of the controller process~\cite{Hansen}}
 \label{table:controller}
 \centering
 %% Some packages, such as MDW tools, offer better commands for making tables
@@ -1695,7 +1704,12 @@ And related to the four 700 W PV system, the sizing check was successful, but th
 
 XXX
 
+%-------------------------------------
 \section{Related work }
+%-------------------------------------
+
+\textcolor{red}{This section needs more work. You should describe here studies related to the design, verification or validation of PV systems and not about software model checkers!}
+
 %The CBMC, it is notable its prominence through international awards received in competitions. 
 %In the works r
 Related to the CBMC, much of the research is focused on the improvement of the tool (performance mainly), without addressing, however, the question of PV system validation, as can be seen in \cite{Kroening}.
@@ -1716,7 +1730,10 @@ In addition, according with \cite{Abate2017}, recent research has attempted to f
 %Therefore, the present work unites the versatility and power of the formal models, applied to a formal verification tool, with individual PV systems (off-grid), which is the most indicated and common option to solve the problem of energy in developing countries. Especially those that have isolated communities, either for long distances of the great centers, or for being riverside. This work includes, based on its off-grid characteristic, batteries and charge controllers, differently of on-grid systems of related work. 
 
 
+%-------------------------------------
 \section{Conclusions and Future Work}
+%-------------------------------------
+
 %The proposed framework seems to be a coherent and promising tool to perform verification of a PV project. The next step is the deployment of the solution at the ESBMC environment, and compare the results with a real PV project deployed at the field. 
 %
 %The framework presented here establishes the automated verification and the project sizing check. 
@@ -1759,6 +1776,8 @@ Furthermore, it is possible to contemplate other kinds of renewable energy and e
 \section*{Acknowledgment}
 The authors would like to thank Newton Fund (Star Energy project), Coventry University, Sustainable Amazonas Foundation (FAS), and FAPEAM (Amazonas State Foundation for Research Support), for the financial support and for the possibility to test the framework with real PV systems.
 
+
+\textcolor{red}{You should revise all references according to the journal guideline.}
 
 % Can use something like this to put references on a page
 % by themselves when using endfloat and the captionsoff option.
