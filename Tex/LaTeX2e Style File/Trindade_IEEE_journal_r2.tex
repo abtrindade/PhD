@@ -363,7 +363,8 @@
 % not capitalized unless they are the first or last word of the title.
 % Linebreaks \\ can be used within to get better formatting as desired.
 % Do not put math or special symbols in the title.
-\title{Building a framework to perform automated verification of solar photovoltaic off-grid systems}
+%\title{Building a framework to perform automated verification of solar photovoltaic off-grid systems}
+\title{Automated verification of stand-alone solar photovoltaic systems}
 %
 %
 % author names and IEEE memberships
@@ -439,7 +440,7 @@ With declining costs and increasing performance, the deployment of renewable ene
 
 % Note that keywords are not normally used for peerreview papers.
 \begin{IEEEkeywords}
-Automated verification, model checking, energy systems, solar photovoltaic systems, off-grid systems.
+Photovoltaic power systems, solar power generation, power system modeling, formal verification, model checking.
 \end{IEEEkeywords}
 
 % For peer review papers, you can put extra information on the cover
@@ -491,8 +492,8 @@ There was an increase of approximately 50\% from 2016 to 2017 in terms of new in
 %PV systems consist of PV modules, battery bank, controller, and inverter, plus the load. %Moreover, the optimum sizing of these devices is important for reliable operation.
 %Therefore, these systems need to be designed properly according to the site, land area available, load requirement, load pattern, environmental conditions and economics in order to utilize available resources efficiently and economically \cite{Rawat}. %Furthermore, there is the need for proper modeling and simulation tools for people involved in their application. 
 
-In order to validate or even simulate a potential PV solution, there are a myriad of tools available in the market, as RETScreen, HOMER, PVWatts, SAM, and Hybrid2.
-%The increase in a number of PV systems installed all over the world brings the need for proper modeling and simulation tools for researcher and practitioners involved in their application. In order to validate or even simulate a potential PV solution, there are a myriad of tools. 
+The increase in the number of PV systems installed all over the world brings the need for proper modeling and simulation tools for researchers and practitioners involved in their application. In order to model, simulate or evaluate a PV system, there are a myriad of specialized tools available in the market, as RETScreen, HOMER, PVWatts, SAM, and Hybrid2. And even general purpose simulations as MATLAB/Simulink.
+
 %However, to the best of our knowledge, this work can be the first work to perform automated verification of a solar PV off-grid project solution.  
 %
 %According to \cite{SEIA} and \cite{Chauhan}, solar is the most abundant source of renewable energy on earth. In SPV system, solar radiations are captured from the sun and turned into electricity using SPV cells made of silicon and other materials. SPV...
@@ -502,11 +503,11 @@ In order to validate or even simulate a potential PV solution, there are a myria
 %Manufactures and integrators have yet their proprietary software to perform various system sizing, with the drawback of include just their own products among the possibilities of choice, what restrict the solution. 
 %
 %PV systems can be classified into grid-connected and stand-alone systems. At this proposal, only off-grid or stand-alone systems will be considered. The utilization of solar energy in off-grid mode has the potential to meet the energy need for remote rural areas of developing countries.  
-However, those tools are based only on simulation models. \textcolor{red}{I don't understand this sentence since simulation and verification are two different things: The use of simulation for verification is problematic}, because is necessary to ensure the complete coverage of operating conditions, scenarios, and system inputs. 
+However, those tools are based on running experiments in simulation models. And simulation has the pros of be cheap and be employed before the system is declared concluded, however with the cons of an incomplete coverage, because the verification of all possible iterations and potential failures of systems is rarely pissible or feasible \cite{Clarke2008}.
 
-Formal methods based on model checking offer great potential to obtain a more effective and faster verification in the design process \textcolor{red}{add citation here...}. \textcolor{red}{What is the relation among formal methods, programs and your work? Programs may be viewed as mathematical objects.} 
+Formal methods based on model checking offer great potential to obtain a more effective and faster verification in the design process \cite{Clarke2008}.  
 %with behavior that is, in principle, well determined. 
- This makes it possible to specify systems as programs using mathematical logic, which constitutes the intended (correct) behavior. Then, one can try to give a formal proof or otherwise establish that the program meets its specification. %, as defined by \cite{Trindade}. 
+ Using this technique, systems are specified as programs using mathematical logic, which constitutes the intended (correct) behavior. Then, one can try to give a formal proof or otherwise establish that the program meets its specification. %, as defined by \cite{Trindade}. 
 %
 %This area of research is referred as formal methods. % as defined in \cite{Clarkeetal}.
 % Their aim is to establish system correctness with mathematical rigor. 
@@ -517,32 +518,58 @@ Formal methods based on model checking offer great potential to obtain a more ef
 %Thus, such problems as incompleteness, ambiguities, and inconsistencies, which normally are discovered only in later stages of the design, can be detected in advance, as described by \cite{Trindade}. 
  Algorithms can verify the system model by systematically exploring all their states. 
 
+At this paper, mathematical models of each component of a stand-alone PV system, panel solar, charge controller, batteries, inverter, and load, are translated as a single software program. Those programs are viewed as mathematical objects, and the use of 
 %Bringing this technique to solar PV systems, i
 %Instead of finding a bug or a software inconsistence, t
-Here we will verify an off-grid PV system, with all their components modelled mathematically, and then report in which conditions the system does not meet user requirements or whether it will fail due to \textcolor{red}{????}, as illustrated in Fig.\ref{fig:flowchartgeneral}. 
+%Here it will be verified a stand-alone PV system, with all their components modeled mathematically, 
+and then report in which conditions the system does not meet user requirements (as electrical load, power demand) or whether it will fail due to weather conditions and/or battery autonomy, for example.  
+
 %Among the non-deterministic variables considerated, is it worth to mention environmental issues (like solar irradiance, and temperature), and the variation of the electrical load (power consumption) or the battery' state of charge, as shown in Fig.\ref{fig:flowchartgeneral}.
 The implementation of the
 % ideas will be 
-proposed framework is carried out by means of the efficient SMT-based bounded model checker (ESBMC) %tool that uses the front-end of the C Bounded Model Checker (CBMC) or the clang-based front-end, 
+proposed tool is carried out by means of the efficient SMT-based bounded model checker (ESBMC) %tool that uses the front-end of the C Bounded Model Checker (CBMC) or the clang-based front-end, 
  which allows one to formally verify the PV system as a C program.
+ 
+Formal methods provide facilities for the modeling of each component of any complex system \cite{Hall1990}. It allows for developing models for each component of the system. The behavior of each system can be analyzed and observed with the help of these formal models. A key benefit to this approach is that it helps in the detection of faults and flaws in the design phase of system development, thereby considerably improving system reliability \cite{Akram2018}.
+
+In previous studies, 
+%%%%%%%
+%%%%%%%%
+\textcolor{red}{This section needs more work. You should describe here studies related to the design, verification or validation of PV systems and not about software model checkers!}
+
+%The CBMC, it is notable its prominence through international awards received in competitions. 
+%In the works r
+Related to the CBMC, much of the research is focused on the improvement of the tool (performance mainly) \cite{Kroening}, without addressing, however, the issue of PV system validation.
+% For example, in \cite{Schrammel2017}, CBMC received an extension to perform verification of embedded software. 
+
+%ESBMC was developed to perform bounded model checks on both sequential and concurrent programs using a range of SMT solvers, and has a proven track of bug finding in real-world applications \cite{Cordeiro}, \cite{Ramalho}. The tool also implements a technique to prove the correctness of (some) unbounded programs, the k-induction algorithm; this approach has been applied to a large number of benchmarks and has produced more correct results than similar competing tools \cite{GadelhaSBMF}, \cite{GadelhaK}.
+Related to ESBMC, it is possible to perform the partitioning of hardware-software (optimization) \cite{Trindade}. And it is possible to use ESBMC to check the stability of digital control systems \cite{Bessa}. In addition,  there is the approach to synthesize safe digital feedback controllers for physical plants \cite{Abateetal2017}. However, the use of ESBMC to verify PV systems is unprecedented. 
+
+%Concerning modeling and simulation of 
+Concerning electrical energy systems,  there is the use of agent-base model approach to evaluate the effect of loads, shedding, grids, wind power generation, and smart grids, in a dynamic integral multi-scale case study \cite{Kremers}. However, it was restrict to simulation, without the formalism of automated verification.
+%that is a software development approach for the simulation of complex systems, without the formalism of automated verification. 
+
+%In the other hand, the use of formal verification related to modeling and validation or even simulation of power systems is a young theme of research.
+% According \cite{Abateetal2014}, where articles from seminars were issued at this thematic, the actual focus is on optimization and control of microgrids, HVAC systems (diagnostics and maintenance), models of generic wind turbine generation, modeling of transmission networks, and verification of smart grids. 
+In addition, recent research has attempted to formalize and implement a formal study of large population of PV panels.% (very common in European Union). 
+ The focus have been the modeling of the dynamics of PV panels and their interaction with the grid, without batteries \cite{Abate2017}.
+%
+%Therefore, the present work unites the versatility and power of the formal models, applied to a formal verification tool, with individual PV systems (off-grid), which is the most indicated and common option to solve the problem of energy in developing countries. Especially those that have isolated communities, either for long distances of the great centers, or for being riverside. This work includes, based on its off-grid characteristic, batteries and charge controllers, differently of on-grid systems of related work. 
+
+%%%%%%%%
+%%%%%%%% 
+ 
   
-The experimental results show that the proposed framework is more efficient \textcolor{red}{than what?} in different case studies to find not proper functioning of PV systems than simulation with off-the-shelf tool. To the best of our knowledge, this is the first work to use a
+%The experimental results show that the proposed framework is more efficient \textcolor{red}{than what?} in different case studies to find not proper functioning of PV systems than simulation with off-the-shelf tool. 
+To the best of our knowledge, this is the first work to use a
 %n SMT-based 
 verification tool to solve this kind of problem. That is the main contribution of this paper.
 
 %\textcolor{red}{This introduction is missing the description of the vision, approach and results. In particular, try to match each paragraph to: problem, vision, approach, results and contributions.} 
-
-\begin{figure}[h]
-\includegraphics[width=0.4\textwidth]{flowchart_verification.png}
-\centering
-\caption{Flowchart of the proposed automated verification of PV systems.}
-\label{fig:flowchartgeneral}
-\end{figure}
-
+%
 %The framework provided at this paper outlines the requirements, the process and the mathematical modeling to perform automated formal verification of a PV off-grid system, using the satisfiability modulo theories (SMT)-based verification method.
  
- %This paragraph is useless.
-%The remainder of this paper is organized as follows: Section II gives the background. Section III describes the design and validation of PV system. Section IV describes the mathematical modeling. Section V presents the automated verification. The methodology is presented at section VI. Section VII is devoted to the results, and section VIII to the related work. Section IX presents the conclusion and describes future work.
+The remainder of this paper is organized as follows: Section II gives the background about solar PV systems, design and validation of PV systems, and the mathematical modeling. Section III presents the automated verification technique. The methodology is presented at section IV. Section V is devoted to the results. Section VI presents the conclusion and describes future work.
 
 %--------------------------------------------------------
 \section{Solar Photovoltaic System }
@@ -555,49 +582,49 @@ A PV system is designed to give the electric supply to a load. This load can be 
 %(in particular cases, in both times). %The most basic PV system can give supply only in daytime.  
 For night hours or rainy days, one needs to hold batteries, where power can be stored and used.% \cite{Gules}. 
 
-PV systems are broadly classified into three distinct types \cite{Mohanty}: (1) standalone systems, where the energy is generated and consumed in the same place and which does not interact with the main grid, (2) grid-connected systems, and (3) solar PV hybrid system, where another source(s) of energy can work together with the solar PV. % system to provide the required demand.
+PV systems are broadly classified into three distinct types \cite{Mohanty}: (1) stand-alone systems, where the energy is generated and consumed in the same place and which does not interact with the main grid, (2) grid-connected systems, and (3) solar PV hybrid system, where another source(s) of energy can work together with the solar PV. % system to provide the required demand.
 %, such as wind, biomass or diesel, 
 %As the goal of this work is just the solutions aimed to isolated/ off-grid application, %therefore it is not considered the on-grid or hybrid configurations.
 %
 %\begin{itemize}
-%\item Standalone systems, where the energy is generated and consumed in the same place and which does not interact with the main grid. Normally, the electricity consuming/utilizing device is part of the system, i.e., solar home systems, solar street lighting system, solar lanterns, and solar power plants; 
+%\item Stand-alone systems, where the energy is generated and consumed in the same place and which does not interact with the main grid. Normally, the electricity consuming/utilizing device is part of the system, i.e., solar home systems, solar street lighting system, solar lanterns, and solar power plants; 
 %\item Grid-connected systems, where the solar PV system is connected to the grid. The grid-connected system can be either a grid-tied system, which can only feed power into the grid and such system cannot deliver power locally during blackouts and emergencies since these systems have to be completely disconnected from the grid and have to be shut down as per national and international electrical safety standards. Some grid-connected PV systems, with energy storage, can also provide power locally in an islanding mode; 
 %\item Solar PV hybrid system: In a hybrid system, another source(s) of energy, such as wind, biomass or diesel, can work together with the solar PV system to provide the required demand. In such type of system, main objective is to bring more reliability into the overall system at an affordable way by adding one or more energy sources.
 %\end{itemize}
  
 Specifically concerning isolated communities, 
-%standalone systems are one the most used solutions, and 
+%stand-alone systems are one the most used solutions, and 
 % depending on the type of load, cost, resources availability, and requirements of the load, 
-%standalone systems 
+%stand-alone systems 
 %can be split into several categories. However, 
-the configuration that is most common nowadays is the regulated standalone system with battery and AC load. This configuration includes PV array, batteries, charge controller, inverter, and AC load.
+the configuration that is most common nowadays is the regulated stand-alone system with battery and AC load. This configuration includes PV array, batteries, charge controller, inverter, and AC load.
 %PV array, battery, MPPT and AC load. Battery is used to store the extra power of PV system. A charge controller is necessary for this type of system because the useful life of the battery is less than that of the PV module. Extra charging and deep discharging can reduce the battery life \cite{Kim}. Because of the AC load, an inverter (DC to AC converter) is required. 
 %This solution has an increase of cost because has more equipment. However, the AC availability brings the advantage of a higher number of AC appliances to use at the houses or consumer units.
 %The resource MPPT, called of maximum power point tracking, is an electronic control mechanism that maintains the PV operating in a voltage that correspond to the voltage of maximum power.
 %, which maximizes the transfer of power and avoiding lost at the PV cells \cite{Pinho}. %That resource is found at modern PV systems and is strongly indicated due to its advantages.
 
-%\subsection{Unregulated standalone PV system with DC load }
+%\subsection{Unregulated stand-alone PV system with DC load }
 %Usually this type of system is for low power applications, as defined by \cite{Roy}. The PV system is directly connected to the load without any MPPT controller, as shown at Fig.\ref{fig:standaloneSPV} letter (a). At night hours, the system will not provide any supply because of the absence of the battery. 
  
 %\begin{figure}[h]
 %\includegraphics[width=0.5\textwidth]{reg_unreg4.png}
 %\centering
-%\caption{PV standalone systems: (a) regulated standalone SPV system with DC load; (b) regulated standalone SPV system with DC load; (c) regulated standalone SPV system with battery DC load; and (d) regulated standalone system with battery and AC load  (Source: \cite{Roy}).}
+%\caption{PV stand-alone systems: (a) regulated stand-alone SPV system with DC load; (b) regulated stand-alone SPV system with DC load; (c) regulated stand-alone SPV system with battery DC load; and (d) regulated stand-alone system with battery and AC load  (Source: \cite{Roy}).}
 %\label{fig:standaloneSPV}
 %\end{figure}
 
-%\subsection{Regulated standalone PV system with DC load}
-%It is similar to unregulated standalone system with DC load, but the main difference between this and the previous one is that this system requires a MPPT technique, as illustrated by Fig.\ref{fig:standaloneSPV} letter (b). Usually system with MPPT should have battery; otherwise, extra power will be waste.
+%\subsection{Regulated stand-alone PV system with DC load}
+%It is similar to unregulated stand-alone system with DC load, but the main difference between this and the previous one is that this system requires a MPPT technique, as illustrated by Fig.\ref{fig:standaloneSPV} letter (b). Usually system with MPPT should have battery; otherwise, extra power will be waste.
 
-%\subsection{Regulated standalone system with battery and DC load}
+%\subsection{Regulated stand-alone system with battery and DC load}
 %Configuration with PV array, battery, MPPT and DC load, as shown in Fig.\ref{fig:standaloneSPV} letter (c). Battery is used to store the extra power of PV system. A charge controller is necessary for this type of system because the useful life of the battery is less than that of the PV module. Extra charging and deep discharging can reduce the battery life \cite{Kim}. 
 
-%According to \cite{Pinho}, PV systems that are used to feed loads with low variation on the consumption can be sized to operate without the controller. That is called of self-regulated standalone PV system with battery. However, the voltage from the PV panel must be compatible with the batteries voltage. Normally, the bank of batteries are oversized related to the PV panel and to the load. The drawback is the operation of the batteries, normally overloaded or with excessive discharges (that can damage the batteries).
+%According to \cite{Pinho}, PV systems that are used to feed loads with low variation on the consumption can be sized to operate without the controller. That is called of self-regulated stand-alone PV system with battery. However, the voltage from the PV panel must be compatible with the batteries voltage. Normally, the bank of batteries are oversized related to the PV panel and to the load. The drawback is the operation of the batteries, normally overloaded or with excessive discharges (that can damage the batteries).
 
-%\subsection{Regulated standalone system with battery and AC load}
+%\subsection{Regulated stand-alone system with battery and AC load}
 %This system is similar to the previous one, but here AC load draws the power from PV system and, because of the AC load, an inverter (DC to AC converter) is required, as seen in Fig.\ref{fig:standaloneSPV} letter (d). This solution has an increase of cost because has more equipments. However, the AC availability brings the advantage of a higher number of AC appliances to use at the houses or consumer units. That configuration is the focus of the present work since it is the most common nowadays all over the world, when off-grid or isolated regions is the target.
 
-\section{Design and Validation of a Solar photovoltaic system}
+\subsection{Design and Validation of a Solar photovoltaic system}
 %The design and validation of a PV system can be done by hand or with the aid of a software tool. 
 %
 In order to address different aspects of project system and systems design, there is a myriad of tools. 
@@ -685,10 +712,10 @@ Considering the focus of this paper, only HOMER remains for our comparative eval
 After that, the potential solution is analyzed in another tool to validate or even optimize the solution. Therefore, that is the challenge of this work, i.e., to prove that is possible to use automated verification to validate an off-grid PV solution and to prove that this verification is more efficient and complete than other state-of-the-art tools \textcolor{red}{cite them here...}. The comparative evaluation between the HOMER Pro and the proposed verification tool is presented in Section \ref{sec:results}.
 
 %-------------------------------------------------------------------
-\section{Component models for stand-alone PV system }
+\subsection{Component models for stand-alone PV system }
 %-------------------------------------------------------------------
 
-%The main purpose of this section is to describe the models for the elements of a standalone PV system: PV generator, battery, controller, inverter, and load. 
+%The main purpose of this section is to describe the models for the elements of a stand-alone PV system: PV generator, battery, controller, inverter, and load. 
 The modeling of the PV system is based on modular blocks, as illustrated in Fig.\ref{fig:blockdiagram} \textcolor{red}{you should explain each element of the figure}. The modular structure facilitates the modeling of the other system structures and replacement of elements such as a DC load instead of an AC load. 
 
 \begin{figure}[h]
@@ -1465,6 +1492,15 @@ Finally, the system attempting to determine whether a formula, which is the disj
 %
 The PV input data (load power demand, load consumption of energy, the PV system project sizing data, and the manufacturer's data-sheet information), the formulas to check the sizing project, the mathematical model, the limits of the non-deterministic variables of the model, are all written as C Programming language code. 
 
+, as illustrated in Fig.\ref{fig:flowchartgeneral}
+
+\begin{figure}[h]
+\includegraphics[width=0.4\textwidth]{flowchart_verification.png}
+\centering
+\caption{Flowchart of the proposed automated verification of PV systems.}
+\label{fig:flowchartgeneral}
+\end{figure}
+
 The non-deterministic variables (solar irradiance, and ambient temperature by default) will suffer a heavy test at ESBMC run-time execution. In addition, depending if one of the requirements of the system, as autonomy of the batteries, or the offer of the energy, or even the power supply from the system, is not accomplished or satisfied, the tool accuses a fail, and the diagnostic counterexample shows in which condition the fail/violation happened. 
 %; as the  state of charge of the batteries, load demand of power and the load consumption of energy if defined by the code
 % (as reliability, performance, or safety)
@@ -1669,7 +1705,7 @@ Algorithm 1 describes the pseudo code used to perform the automated verification
 % \fnbelowfloat command of the stfloats package.
 
 %----------------------------------------------
-\section{Experimental Evaluation} \label{sec:results}
+\section{Results and discussions} \label{sec:results}
 %----------------------------------------------
 
 \textcolor{red}{reorganise the results as follows: experimental objectives and setup; results; and threats to validity.}
@@ -1711,34 +1747,11 @@ And related to the four 700 W PV system, the sizing check was successful, but th
 
 XXX
 
-%-------------------------------------
-\section{Related work }
-%-------------------------------------
 
-\textcolor{red}{This section needs more work. You should describe here studies related to the design, verification or validation of PV systems and not about software model checkers!}
-
-%The CBMC, it is notable its prominence through international awards received in competitions. 
-%In the works r
-Related to the CBMC, much of the research is focused on the improvement of the tool (performance mainly) \cite{Kroening}, without addressing, however, the issue of PV system validation.
-% For example, in \cite{Schrammel2017}, CBMC received an extension to perform verification of embedded software. 
-
-%ESBMC was developed to perform bounded model checks on both sequential and concurrent programs using a range of SMT solvers, and has a proven track of bug finding in real-world applications \cite{Cordeiro}, \cite{Ramalho}. The tool also implements a technique to prove the correctness of (some) unbounded programs, the k-induction algorithm; this approach has been applied to a large number of benchmarks and has produced more correct results than similar competing tools \cite{GadelhaSBMF}, \cite{GadelhaK}.
-Related to ESBMC, it is possible to perform the partitioning of hardware-software (optimization) \cite{Trindade}. And it is possible to use ESBMC to check the stability of digital control systems \cite{Bessa}. In addition,  there is the approach to synthesize safe digital feedback controllers for physical plants \cite{Abateetal2017}. However, the use of ESBMC to verify PV systems is unprecedented. 
-
-%Concerning modeling and simulation of 
-Concerning electrical energy systems,  there is the use of agent-base model approach to evaluate the effect of loads, shedding, grids, wind power generation, and smart grids, in a dynamic integral multi-scale case study \cite{Kremers}. However, it was restrict to simulation, without the formalism of automated verification.
-%that is a software development approach for the simulation of complex systems, without the formalism of automated verification. 
-
-%In the other hand, the use of formal verification related to modeling and validation or even simulation of power systems is a young theme of research.
-% According \cite{Abateetal2014}, where articles from seminars were issued at this thematic, the actual focus is on optimization and control of microgrids, HVAC systems (diagnostics and maintenance), models of generic wind turbine generation, modeling of transmission networks, and verification of smart grids. 
-In addition, recent research has attempted to formalize and implement a formal study of large population of PV panels.% (very common in European Union). 
- The focus have been the modeling of the dynamics of PV panels and their interaction with the grid, without batteries \cite{Abate2017}.
-%
-%Therefore, the present work unites the versatility and power of the formal models, applied to a formal verification tool, with individual PV systems (off-grid), which is the most indicated and common option to solve the problem of energy in developing countries. Especially those that have isolated communities, either for long distances of the great centers, or for being riverside. This work includes, based on its off-grid characteristic, batteries and charge controllers, differently of on-grid systems of related work. 
 
 
 %-------------------------------------
-\section{Conclusions and Future Work}
+\section{Conclusion and Future Work}
 %-------------------------------------
 
 %The proposed framework seems to be a coherent and promising tool to perform verification of a PV project. The next step is the deployment of the solution at the ESBMC environment, and compare the results with a real PV project deployed at the field. 
