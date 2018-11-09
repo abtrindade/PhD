@@ -679,7 +679,7 @@ address = {Colorado},
 }
 
 @TechReport{NRELDobos,
-author = {Aron P. Dobos},
+author = {Aron Dobos},
 title = {PVWatts Version 5 Manual},
 institution = {National Renewable Energy Laboratory},
 year = {2014},
@@ -705,7 +705,7 @@ address = {Colorado},
 
 %%%%%%%%%%UPDATED IN NOV/2018
 @Article{Benatiallah2017,
-author = {A. BENATIALLAH, D. Benatiallah, T. Ghaitaoui, A. Harrouz, and S. Mansouri},
+author = {A BENATIALLAH and D Benatiallah and T Ghaitaoui and A Harrouz and S Mansouri},
 title = {Modelling and Simulation of Renewable Energy Systems in Algeria},
 journal = {Int. J. of Sc. and App. Inf. Tech},
 year = {2017},
@@ -715,7 +715,7 @@ pages = {17-22}
 }
 
 @Article{Samrat2014,
-author = {Nahidul Samrat, Norhafizan Ahmad, Imtiaz Choudhury, and Zahari Taha},
+author = {Nahidul Samrat and Norhafizan Ahmad and Imtiaz Choudhury and Zahari Taha},
 title = {Modeling, Control, and Simulation of Battery Storage Photovoltaic-Wave Energy Hybrid Renewable Power Generation Systems for Island Electrification in Malaysia},
 journal = {The Scient. World J.},
 year = {2014},
@@ -726,14 +726,14 @@ pages = {1-21}
 
 
 @InProceedings{Lamnadi2017,
-author = {Mouna Lamnadi, Mourad Trihi, and Abdelkader Boulezhar},
+author = {Mouna Lamnadi and Mourad Trihi and Abdelkader Boulezhar},
 title = {Study of a Hybrid Renewable Energy System for a Rural School in Tagzirt, Morocco},
 booktitle = {Int. Ren. and Sust. Energ. Conf. (IRSEC)},
 year = {2017}
 }
 
 @InProceedings{Sugumar2017,
-author = {Gayathri Sugumar, Rajasekar Selvamuthukumaran, Tomislav Dragicevic, Ulrik Nyman, Kim Larsen and Frede Blaabjerg},
+author = {Gayathri Sugumar and Rajaskar Selvamuthukumaran and Tomislav Dragicevic and Ulrik Nyman and Kim Larsen and Frede Blaabjerg},
 title = {Formal Validation of Supervisory Energy Management Systems for Microgrids},
 booktitle = {IECON 2017 - 43rd Ann. Conf. of the IEEE Ind. Elec. Soc.},
 year = {2017}
@@ -741,15 +741,15 @@ year = {2017}
 
 
 @InProceedings{Driouich2017,
-author = {Y. Driouich, M. Parente, and E. Tronci},
+author = {Y. Driouich and M. Parente and E. Tronci},
 title = {Modeling cyber-physical systems for automatic verification},
-booktitle = {14th International Conference on Synthesis, Modeling, Analysis and Simulation Methods and Applications to Circuit Design (SMACD 2017)},
+booktitle = {14th Int. Conf. on Synth., Mod., An. and Sim. Meth. and Appl. to Circ. Des. (SMACD 2017)},
 pages = {1-4},
 year = {2017}
 }
 
 @InProceedings{Driouich2018,
-author = {Youssef Driouich, Mimmo Parente, and Enrico Tronci},
+author = {Youssef Driouich and Mimmo Parente and Enrico Tronci},
 title = {A methodology for a complete simulation of Cyber-Physical Energy Systems},
 booktitle = {IEEE Work. on Envir., Energ., and Struc. Monit. Syst. (EESMS)},
 year = {2018}
@@ -758,15 +758,15 @@ year = {2018}
 @InProceedings{Natsheh2012,
 author = {E Natsheh and A Albarbar},
 title = {Solar power plant performance evaluation: simulation and experimental validation},
-booktitle = {Journal of Physics: Conference Series},
+booktitle = {J. of Physics: Conf. Ser.},
 year = {2012},
 volume = {364},
 }
 
 @InProceedings{Ammar2016,
-author = {Marwan Ammar, Khaza Hoque, and Otmane Mohamed},
+author = {Marwan Ammar and Khaza Hoque and Otmane Mohamed},
 title = {Formal analysis of fault tree using probabilistic model checking: A solar array case study},
-booktitle = {Annual IEEE Systems Conference (SysCon)},
+booktitle = {Annual IEEE Syst. Conf. (SysCon)},
 year = {2016},
 }
 
@@ -832,12 +832,12 @@ title = {Leveraging Applications of Formal Methods, Verification and Validation}
 chapter = {Modelling and Decentralised Runtime Control of Self-stabilising Power Micro Grids},
 publisher = {Springer},
 year = {2012},
-volume = {5th International Symposium, ISoLA 2012, Proceedings, Part I},
+volume = {5th Int. Symp., ISoLA 2012, Proceedings, Part I},
 pages = {420-439}
 }
 
 @InBook{Wognsen2014,
-author = {Erik Wognsen, Rene Hansen, and Kim Larsen},
+author = {Erik Wognsen and Rene Hansen and Kim Larsen},
 editor = {Tiziana Margaria and Bernhard Steffen},
 title = {Leveraging Applications of Formal Methods, Verification and Validation. Specialized Techniques and Applications},
 chapter = {Battery-Aware Scheduling of Mixed Criticality Systems},
