@@ -495,7 +495,7 @@ There was an increase of approximately 50\% from 2016 to 2017 in terms of new in
 
 The increase in the number of PV systems installed all over the world brings the need for proper modeling and simulation tools for researchers and practitioners involved in their application. In order to model, simulate or evaluate a PV system, there are a myriad of specialized tools available in the market, as RETScreen, HOMER, PVWatts, SAM, and Hybrid2. And even general purpose simulation tools as PSpice, Saber or MATLAB/Simulink package.
 
-%However, to the best of our knowledge, this work can be the first work to perform automated verification of a solar PV off-grid project solution.  
+%However, to the best of our knowledge, this work can be the first work to perform automated verification of a stand-alone solar PV project solution.  
 %
 %According to \cite{SEIA} and \cite{Chauhan}, solar is the most abundant source of renewable energy on earth. In SPV system, solar radiations are captured from the sun and turned into electricity using SPV cells made of silicon and other materials. SPV...
 %
@@ -544,7 +544,7 @@ verification tool to evaluate a stand-alone solar PV systems, with weather condi
 
 %\textcolor{red}{This introduction is missing the description of the vision, approach and results. In particular, try to match each paragraph to: problem, vision, approach, results and contributions.} 
 %
-%The framework provided at this paper outlines the requirements, the process and the mathematical modeling to perform automated formal verification of a PV off-grid system, using the satisfiability modulo theories (SMT)-based verification method.
+%The framework provided at this paper outlines the requirements, the process and the mathematical modeling to perform automated formal verification of a stand-alone PV system, using the satisfiability modulo theories (SMT)-based verification method.
  
 The remainder of this paper is organized as follows: Section II gives the background about solar PV systems, design and validation of PV systems, and the mathematical modeling. Section III presents the automated verification technique. The methodology is presented at section IV. Section V is devoted to the results. Section VI presents the conclusion and describes future work.
 
@@ -557,7 +557,7 @@ The remainder of this paper is organized as follows: Section II gives the backgr
 %(in particular cases, in both times). %The most basic PV system can give supply only in daytime.  
 %For night hours or rainy days, one needs to hold batteries, where power can be stored and used.% \cite{Gules}. 
 
-PV systems are broadly classified into three distinct types \cite{Mohanty}: (1) stand-alone systems, where the energy is generated and consumed in the same place and which does not interact with the main grid, (2) grid-connected systems, and (3) solar PV hybrid system, where another source(s) of energy can work together with the solar PV. % system to provide the required demand.
+PV systems are broadly classified into three distinct types \cite{Mohanty}: (1) stand-alone systems, where the energy is generated and consumed in the same place and which does not interact with the main grid, (2) grid-connected systems, and (3) solar PV hybrid system. %, where another source(s) of energy can work together with the solar PV. % system to provide the required demand.
 %, such as wind, biomass or diesel, 
 %As the goal of this work is just the solutions aimed to isolated/ off-grid application, %therefore it is not considered the on-grid or hybrid configurations.
 %
@@ -566,13 +566,13 @@ PV systems are broadly classified into three distinct types \cite{Mohanty}: (1) 
 %\item Grid-connected systems, where the solar PV system is connected to the grid. The grid-connected system can be either a grid-tied system, which can only feed power into the grid and such system cannot deliver power locally during blackouts and emergencies since these systems have to be completely disconnected from the grid and have to be shut down as per national and international electrical safety standards. Some grid-connected PV systems, with energy storage, can also provide power locally in an islanding mode; 
 %\item Solar PV hybrid system: In a hybrid system, another source(s) of energy, such as wind, biomass or diesel, can work together with the solar PV system to provide the required demand. In such type of system, main objective is to bring more reliability into the overall system at an affordable way by adding one or more energy sources.
 %\end{itemize}
- 
 Specifically concerning isolated communities, 
 %stand-alone systems are one the most used solutions, and 
 % depending on the type of load, cost, resources availability, and requirements of the load, 
 %stand-alone systems 
 %can be split into several categories. However, 
-the configuration that is most common nowadays is the regulated stand-alone system with battery and AC load. This configuration, which is the target of this paper, includes PV array, batteries, charge controller, inverter, and AC load.
+the configuration that is most common is the regulated stand-alone system with battery and AC load. This configuration is the focus of this paper.
+%, which is the target of this paper, includes PV array, batteries, charge controller, inverter, and AC load.
 %PV array, battery, MPPT and AC load. Battery is used to store the extra power of PV system. A charge controller is necessary for this type of system because the useful life of the battery is less than that of the PV module. Extra charging and deep discharging can reduce the battery life \cite{Kim}. Because of the AC load, an inverter (DC to AC converter) is required. 
 %This solution has an increase of cost because has more equipment. However, the AC availability brings the advantage of a higher number of AC appliances to use at the houses or consumer units.
 %The resource MPPT, called of maximum power point tracking, is an electronic control mechanism that maintains the PV operating in a voltage that correspond to the voltage of maximum power.
@@ -640,7 +640,7 @@ Here it was evaluated the most popular tools, as PVWatts, SAM, HOMER Pro, RETScr
 %The Hybrid2 software package, as described in \cite{Mills}, is a user-friendly tool to perform detailed long-term performance and economic analysis on a wide variety of hybrid power systems. Hybrid2 is a probabilistic/time series computer model, using time series data for loads, wind speed, solar insolation, and temperature; and the power system is designed or selected by the user, in order to predict the performance of the hybrid power system. Variations in wind speed and in load within each time step are factored into the performance predictions. The code does not consider short-term system fluctuations caused by system dynamics or component transients. This program is not supported anymore and according to \cite{UMASS}, probably after the user performs the free download of the tool, it will not work on Windows platforms later than Windows XP, what is a limitation.
 
 Table~\ref{table:softwares} summarizes the off-the-shelf tools employed in this study, where only Hybrid2 does not have technical support; HOMER Pro and Hybrid2 perform off-grid system or battery backup analysis; %all the tools perform solar photovoltaic analysis; 
-additionally, HOMER Pro and RETScreen Expert include economical analysis or even optimization-sensitive analysis. However, only paid version of those tools have all the features \textcolor{red}{which features?}, and they run only on Windows operating system. RETScreen and HOMER have a free web-based version, but they have limited resources.
+additionally, HOMER Pro and RETScreen Expert include economical analysis or even optimization-sensitive analysis. However, only paid version (restrict to the Microsoft Windows Operational System) of those tools have all the features, as to save the the project or to upload data from manufacturers. RETScreen and HOMER have a free web-based version, but they have limited resources.
 
 \begin{table}[!t]
 %% increase table row spacing, adjust to taste
@@ -679,28 +679,33 @@ Sensitive analysis &  &  & X & X & \\
 \end{table}
 
 %-------------------------------------------------------------------
-\subsection{Paper Proposal x Reference Tools}
+%\subsection{Paper Proposal x Reference Tools}
 %-------------------------------------------------------------------
-
-Considering the focus of this paper, only HOMER remains for our comparative evaluation. All tools need some parameters inherently from manufacturer's catalog \textcolor{red}{is this the correct term? to size the system}.
+%
+Considering the focus of this paper, only HOMER remains for a comparative with the proposed tool of this paper. %All tools need some parameters inherently from manufacturer's catalog.
 %, so the project starts with manufacturers and integrators tool to define the basic items of the project: panels, inverters, controllers, and batteries. 
-After that, the potential solution is analyzed in another tool to validate or even optimize the solution. Therefore, that is the challenge of this work, i.e., to prove that is possible to use automated verification to validate an off-grid PV solution and to prove that this verification is more efficient and complete than other state-of-the-art tools \textcolor{red}{cite them here...}. The comparative evaluation between the HOMER Pro and the proposed verification tool is presented in Section \ref{sec:results}.
+%After that, the potential solution is analyzed in another tool to simulate or even optimize the proposed solution. Therefore, that is 
+And the challenge of this work is to prove that is possible to use automated verification in stand-alone PV solution and to prove that this evaluation is more efficient and complete than other state-of-the-art tool, as HOMER Pro. The comparative evaluation between the HOMER Pro and the proposed verification tool is presented in Section \ref{sec:results}.
 
 %-------------------------------------------------------------------
 \subsection{Component models for stand-alone PV system }
 %-------------------------------------------------------------------
 
 %The main purpose of this section is to describe the models for the elements of a stand-alone PV system: PV generator, battery, controller, inverter, and load. 
-The modeling of the PV system is based on modular blocks, as illustrated in Fig.\ref{fig:blockdiagram} \textcolor{red}{you should explain each element of the figure}. The modular structure facilitates the modeling of the other system structures and replacement of elements such as a DC load instead of an AC load. 
+The mathematical modeling of the PV system is based on modular blocks, as illustrated in Fig.\ref{fig:blockdiagram}. It is identified the PV generator, batteries, charge controller, inverter, and AC load. 
 
+The PV generator, which can be an panel or a array, is a semiconductor device that can convert solar energy into DC electricity. At the diagram, there are two variables that depend on the site where the system is deployed and from the weather (solar irradiance $ G $ and temperature $ T $). For night hours or rainy days, one needs to hold batteries, where power can be stored and used. The use of battery as a storage form implies thus the presence of a charge controller \cite{Hansen}, \cite{Mellit}. The PV arrays produce DC and therefore when the PV system contains an AC load, a DC/AC conversion is required. That converter is called of inverter. And the AC load dictates the behavior of electrical load from the house that will be feed by the system.
+%
+%The modular structure facilitates the modeling of the other system structures and replacement of elements, such as a DC load instead of an AC load. 
+%
 \begin{figure}[h]
-\includegraphics[width=0.4\textwidth]{blockdiagramPVS}
+\includegraphics[width=0.48\textwidth]{blockdiagramPVS}
 \centering
 \caption{Block diagram for the stand-alone PV system (Source:~\cite{Hansen}).}
 \label{fig:blockdiagram}
 \end{figure}
 
-In the literature, there are several mathematical models available for each component of PV systems. At the next section, the mathematical model for each component is presented. 
+%In the literature, there are several mathematical models available for each component of PV systems. At the next section, the mathematical model for each component is presented. 
 
 %-------------------------------------------------------------------
 \subsection{PV generator model}
@@ -709,10 +714,10 @@ In the literature, there are several mathematical models available for each comp
 %A photovoltaic PV generator is the whole assembly of solar cells, connections, protective parts, and supports. 
 %In the present modeling, the focus is only on cell/module/array.
 %
-The basic element of a PV system is a PV cell, also called a solar cell. A solar cell is a semiconductor device that can convert solar energy into DC electricity. 
+%%%%%%The basic element of a PV system is a PV cell, also called a solar cell. A solar cell is a semiconductor device that can convert solar energy into DC electricity. 
 %The semiconductor materials (usually silicon), which are specially treated to form an electric field, positive on one side (backside) and negative on the other (towards the sun). When solar energy (photons) hits the solar cell, electrons are knocked loose from the atoms in the semiconductor material, creating electron-hole pairs \cite{Lorenzo}. If electrical conductors are attached to the positive and negative sides, forming an electrical circuit, the electrons are captured in the form of electric current $ I_{ph} $ (photocurrent).
-To increase their utility, a number of individual PV cells are interconnected together in a %sealed, weatherproof 
-package called panel or module. 
+%%%%%To increase their utility, a number of individual PV cells are interconnected together in a %sealed, weatherproof 
+%%%%%package called panel or module. 
 
 %For instance, a 12 V Panel will have 36 cells connected in series and a 24 V Panel will have 72 PV cells connected in series. In addition, to achieve the desired voltage and current, modules are wired in series and parallel into what is called a PV Array, as shown in Fig.\ref{fig:celmodarray}. The flexibility of the modular PV system allows designers to create PV systems that can meet a wide variety of electrical demands. 
 %
@@ -723,7 +728,7 @@ package called panel or module.
 %\label{fig:celmodarray}
 %\end{figure}
 %
-The PV modules are generally rated under standard test conditions (STC), and the parameters required for the input of the PV modules are relying on meteorological conditions.
+%%%%%The PV modules are generally rated under standard test conditions (STC), and the parameters required for the input of the PV modules are relying on meteorological conditions.
 %the meteorological conditions of the area to be serviced by PV solution. %However, the climatic conditions are unpredictable due to the random nature of their occurrence \cite{Jakhrani}.
 %, which leads to the following specification by the manufacturers:  solar radiation of 1000 W/m$^{2}$, cell temperature of 25$^{o}$C, and solar spectrum of 1.5. The parameters required for the input of the PV modules are relying on the meteorological conditions of the area to be serviced by photovoltaic solution. However, the climatic conditions are unpredictable due to the random nature of their occurrence \cite{Jakhrani}.
 %
@@ -1114,7 +1119,7 @@ Therefore, to model the voltage ($ V_{c} $) evolution of the battery, (\ref{eq:V
 %
 %Where $ DOD $ is the maximum possible depth of battery discharge, $ E_{load} $ is the average energy consumed by the load, $ N_{C} $ is the largest number of continuous cloudy days of the area, and $ \eta_{b} $ is the efficiency of the battery.
 %
-%As an example of this formula application, as shown by \cite{Abdulateef}, considering that an off-grid PV system is intended to supply $1.5 kW/48 V$ for 24 hours ($=36 kWh$); The largest number of continuous cloudy days in the selected site is about 1 day; For a maximum depth of discharge for the battery $DOD$ of $0.8$ and battery efficiency $80\%$.
+%As an example of this formula application, as shown by \cite{Abdulateef}, considering that a stand-alone PV system is intended to supply $1.5 kW/48 V$ for 24 hours ($=36 kWh$); The largest number of continuous cloudy days in the selected site is about 1 day; For a maximum depth of discharge for the battery $DOD$ of $0.8$ and battery efficiency $80\%$.
 %
 %Then the storage capacity using Equation \ref{eq:stor} becomes $56.3 kWh$. Since the selected DC bus voltage is $48 V$, then the required Ampere-hours of the battery is $1173 Ah$ ($56.3 kWh/48$). If a single battery of 12 V and 350 Ah is considered, then four batteries are connected in series ($4 \times 350 Ah = 1400 Ah$).
 %
@@ -1275,7 +1280,7 @@ I_{c,min} = I_{sc,amb} \times N_{PP}
 I_{c} \geq I_{c,min}
 \end{equation}
 
-%The number of controllers required for the off-grid PV system, as defined by \cite{Yatimi}, is calculated using Equation \ref{eq:numberofcmin}. In addition, the final sizing check is did by Equation \ref{eq:numberofc}, who validate the number of controllers adopted.
+%The number of controllers required for the stand-alone PV system, as defined by \cite{Yatimi}, is calculated using Equation \ref{eq:numberofcmin}. In addition, the final sizing check is did by Equation \ref{eq:numberofc}, who validate the number of controllers adopted.
 %\begin{multline}
 %\label{eq:numberofcmin}
 %number_{controllers} = \dfrac{Total \, max \, power \, of \, PV}{Controller \, max \, power} = \\ \dfrac{P_{m,ref} \times N_{TP}}{V_{system} \times I_{controller,max}}
@@ -1448,18 +1453,18 @@ Finally, the system attempting to determine whether a formula, which is the disj
 %
 %Energy production, distribution, and optimization are all CPS problems, mas mentioned in \cite{UC}. For example, the smart grid combines multiple electric power production plants with a multiplicity of loads using dynamic load balancing and dynamic pricing with demand-response strategies. Smart buildings integrate sensors into control systems for lighting, HVAC (heating, ventilation, and air conditioning), and safety (as fire monitoring and evacuation). 
 %
-%Therefore, in the context of this proposal, a cyber-physical system, specifically a solar photovoltaic system, will be mathematically modeled. Then a model checking will be performed to do a verification of the project in order to guarantee that the design of an off-grid PV solution will meet the requirements, specifications and regulations. 
+%Therefore, in the context of this proposal, a cyber-physical system, specifically a solar photovoltaic system, will be mathematically modeled. Then a model checking will be performed to do a verification of the project in order to guarantee that the design of a stand-alone PV solution will meet the requirements, specifications and regulations. 
 %
 %As described in \cite{Alur}, in program verification, it is aimed to check if a program satisfies its logical specification. Contemporary verification tools vary widely in terms of source languages, verification methodology, and the degree of automation, but they all rely on repeatedly invoking an SMT solver. This work tracks the same path. 
 %
 \section{Methodology }
 %
-%Fig. \ref{fig:statetransition} shows the state diagram for the proposed framework. 
+%Fig. \ref{fig:statetransition} shows the state diagram for the proposed tool. 
 %
 %\begin{figure}[h]
 %\includegraphics[width=0.5\textwidth]{statetransition}
 %\centering
-%\caption{State transition diagram to the proposed framework.}
+%\caption{State transition diagram to the proposed automated verification.}
 %\label{fig:statetransition}
 %\end{figure}
 %
@@ -1701,7 +1706,7 @@ The total were five case studies evaluated by HOMER Pro and by the automated ver
 
 However, related to the results of the automated verification, the 1,200 W PV system (house 5) failed during the sizing check. The number of panels was not correct (the verification indicates 3 panels in parallel and the project has 2 in series and 2 in parallel). That verification took 63.3 hours to be performed. Surveying the owner of the 1,200 W system it was identified that, in fact, the system mostly of the time do not met the battery autonomy (mainly when all the loads are turned on). But it is understandable that this problem occurs because the system was purchased as an off-the-shelf solution and not as a specific design for the electrical charges of the house.
 
-And related to the four 700 W PV system, the sizing check was successful, but there were  found flaws in everyone, all related with the SOC that reached levels below of 75\%. The framework identified the flaws right after the first night-discharge cycle, before dawn, and before the system start to recharge the batteries. The framework took 409.3 hours to find an error at house 1, and the maximum of 456XXX hours to house 4.  
+And related to the four 700 W PV system, the sizing check was successful, but there were  found flaws in everyone, all related with the SOC that reached levels below of 75\%. The automated verification identified the flaws right after the first night-discharge cycle, before dawn, and before the system start to recharge the batteries. The proposed tool took 409.3 hours to find an error at house 1, and the maximum of 456XXX hours to house 4.  
 
 %At the terminal, the command used to perform the verification is:
 %\$ esbmc filename.c -\phantom{}-no-bounds-check -\phantom{}-no-pointer-check -\phantom{}-no-div-by-zero-check -\phantom{}-unwind 300 -\phantom{}-smt-during-symex -\phantom{}-smt-symex-guard --z3
@@ -1729,15 +1734,15 @@ XXX
 \section{Conclusion and Future Work}
 %-------------------------------------
 
-%The proposed framework seems to be a coherent and promising tool to perform verification of a PV project. The next step is the deployment of the solution at the ESBMC environment, and compare the results with a real PV project deployed at the field. 
+%The proposed tool seems to be a coherent and promising tool to perform verification of a PV project. The next step is the deployment of the solution at the ESBMC environment, and compare the results with a real PV project deployed at the field. 
 %
-%The framework presented here establishes the automated verification and the project sizing check. 
-It was shown that, beside the time-consuming issue of the proposed framework, it overcomes the results of off-the-shelf tool that only simulate the results. The framework was successful in find sizing errors and to indicate in which conditions, in terms of temperature and solar irradiation, a PV system can fails.
+%The automated verification tool presented here establishes the automated verification and the project sizing check. 
+It was shown that, beside the time-consuming issue of the proposed automated verification tool, it overcomes the results of off-the-shelf tool that only simulate the results. The proposed tool was successful in find sizing errors and to indicate in which conditions, in terms of temperature and solar irradiation, a PV system can fails.
 %However, it is possible to perform the optimum sizing of the PV system. Moreover, 
 %The authors target the use of Counterexample Guided-Inductive Synthesis (CEGIS) to perform the optimum sizing of PV systems. That is an interesting resource, considering that nowadays is possible to choose from many different manufacturers and many different models of equipment of a PV system. 
-Next, the framework will be improved to start from a list of commercial equipment (inputs), where each equipment is verified during synthesis phase and the final solution, which satisfies the specifications (or constraints) of the project, is find from the inputs. This can be done with the Counterexample Guided-Inductive Synthesis (CEGIS), and the result is the optimum sizing of PV systems.
+Next, the proposed tool will be improved to start from a list of commercial equipment (inputs), where each equipment is verified during synthesis phase and the final solution, which satisfies the specifications (or constraints) of the project, is find from the inputs. This can be done with the Counterexample Guided-Inductive Synthesis (CEGIS), and the result is the optimum sizing of PV systems.
 
-Furthermore, it is possible to contemplate other kinds of renewable energy and even hybrid ones, which can evolve the framework into a complete tool for design and verification for rural electrification.
+Furthermore, it is possible to contemplate other kinds of renewable energy and even hybrid ones, which can evolve the algorithm into a complete tool for design and verification for rural electrification.
 % into an important instrument to complement the solar PV system design process, ensuring that it does not fail and meets the expected requirements. 
 
 %Plus (need to think about it): verification in every-hour of a 48h cycle?, PV model math model can be improved, charge/discharge of batteries can be improved (is a simplified model), house's power consumption is not flat or constant, the dweller can buy more home appliances, synthesis need a data base of components, to test peak (surge) consumption (above the nominal), additional models for on-grid/off-grid farm, hybrid, and on-grid with batteries).
@@ -1769,19 +1774,13 @@ Furthermore, it is possible to contemplate other kinds of renewable energy and e
 
 % use section* for acknowledgment
 \section*{Acknowledgment}
-The authors would like to thank Newton Fund (Star Energy project), Coventry University, Sustainable Amazonas Foundation (FAS), and FAPEAM (Amazonas State Foundation for Research Support), for the financial support and for the possibility to test the framework with real PV systems.
-
-
-\textcolor{red}{You should revise all references according to the journal guideline.}
+The authors would like to thank Newton Fund (Star Energy project), Coventry University, Sustainable Amazonas Foundation (FAS), and FAPEAM (Amazonas State Foundation for Research Support), for the financial support and for the possibility to test the tool with real PV systems.
 
 % Can use something like this to put references on a page
 % by themselves when using endfloat and the captionsoff option.
 %\ifCLASSOPTIONcaptionsoff
 %  \newpage
 %\fi
-
-
-
 % trigger a \newpage just before the given reference
 % number - used to balance the columns on the last page
 % adjust value as needed - may need to be readjusted if
