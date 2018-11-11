@@ -755,7 +755,7 @@ The 1-diode model, shown by Fig. \ref{fig:equivckt}, whose equation to relate th
 I = I_{ph}-I_{D1}=I_{ph}-I_{0}\left[ exp \left( \dfrac{V}{NaV_{T}} \right)  \right] 
 \end{equation}
 
-Where: $I_{ph}$ is the photocurrent delivered by the constant current source; $ I_{0} $ is the reverse saturation current corresponding to the diode; $ N $ is the number of series-connected cells in the PV system to be analyzed ($ N=1 $ in a single cell configuration); $ a $ is the ideality factor (or quality factor) that takes into account the deviation of the diodes from the Shockley diffusion theory ($a=1$ for ideal diodes and between $ 1 $ and $ 2 $ for real diodes); $V_{T}$ is the thermal voltage ($ V_{T}=k_{B}T/q $); $ k_{B} $ is the Boltzmann constant ($ 1.3806503\times10^{-23}J $); $ T $ the temperature of the p-n junction (or cell temperature) expressed in Kelvin; $ q $ is absolute value of the electron's charge ($ -1.60217646\times10^{-19}C $).
+Where: $I_{ph}$ is the photocurrent delivered by the constant current source; $ I_{0} $ is the reverse saturation current corresponding to the diode; $ N $ is the number of series-connected cells in the PV system to be analyzed ($ N=1 $ in a single cell configuration); $ a $ is the ideality factor (or quality factor) that takes into account the deviation of the diodes from the Shockley diffusion theory ($a=1$ for ideal diodes and between $ 1 $ and $ 2 $ for real diodes); $V_{T}$ is the thermal voltage ($ V_{T}=k_{B}T/q $); $ k_{B} $ is the Boltzmann constant ($ 1.3806503\times10^{-23}J $); $ T $ the temperature of the p-n junction (or cell temperature) in Kelvin; $ q $ is absolute value of the electron's charge ($ -1.60217646\times10^{-19}C $).
 
 %\begin{itemize}
 %\item $I_{ph}$ is the photocurrent delivered by the constant current source; 
@@ -880,7 +880,7 @@ Equation (\ref{eq:1diodemodel}) is used to write down expressions for currents a
 %
 %Replacing the Equation \ref{eq:dIdV_Vm} into Equations \ref{eq:Vmderiv} and \ref{eq:Im}, 
 
-The voltage and the current at the maximum power point and consequently the maximum output power, can be expressed by (\ref{eq:Vmfinal}), (\ref{eq:Imfinal}), and (\ref{eq:Pm}) \cite{Saloux}. %These equations are used to calculate the key cell parameters at the maximum power point as function cell temperature and parameters from the manufacturer's data-sheet.
+The voltage and the current at the maximum power point tracking (MPPT), can be expressed by (\ref{eq:Vmfinal}), (\ref{eq:Imfinal}), and (\ref{eq:Pm}) \cite{Saloux}. %These equations are used to calculate the key cell parameters at the maximum power point as function cell temperature and parameters from the manufacturer's data-sheet.
 \begin{equation}
 \label{eq:Vmfinal}
 V_{m}=\dfrac{aNk_{B}T}{q} ln \left( \dfrac{aNk_{B}T}{qI_{0}} \dfrac{I_{sc}}{V_{oc}}  \right) 
@@ -928,7 +928,7 @@ I_{0} = \dfrac{I_{sc,ref} + \mu_{I}(T - T_{ref})}{exp \left[ \dfrac{q(V_{oc,ref}
 Where $ V_{oc,ref} $ is the reference open-circuit voltage, and $ \mu_{V} $ is an open-circuit voltage temperature coefficient ($ V/K $).
 
 %The ideality (or quality) factor of the diode $ a $, which is usually considered as a constant \cite{Villalva}, is determined in the reference state. 
-Using the maximum power point current (\ref{eq:Pm}) and the saturation current in the reference temperature given by (\ref{eq:I0}), the diode quality (or ideality) coefficient is determined by (\ref{eq:a}).
+Using the maximum power point current (\ref{eq:Pm}) and the saturation current in the reference temperature given by (\ref{eq:I0}), the diode ideality factor is determined by (\ref{eq:a}).
 \begin{equation}
 \label{eq:a}
 a = \dfrac{q(V_{m,ref}-V_{oc,ref})}{Nk_{B}T} \dfrac{1}{ln \left( 1 - \dfrac{I_{m,ref}}{I_{sc,ref}}  \right) }
@@ -955,7 +955,7 @@ Where $ V_{mref} $, $ V_{oc,ref} $, $ I_{m,ref} $, and $ I_{sc,ref} $ are key ce
 %
 %Where $ V_{one panel} $ is the voltage from Equation \ref{eq:Vmfinal}.
 
-Besides the model verification, there is the prior stage of project sizing check, which is simple, based on manufacturer's data and information from the sizing and the site. 
+Besides the model verification, there is the prior stage of project sizing check, based on manufacturer's data and information from the sizing and the site. 
 
 First is necessary to correct the energy consumption that was estimated to the load ($E_{consumption}$). That is done by (\ref{eq:Ecorrected}) \cite{Pinho}. Where the efficiency of batteries ($\eta_{b}$), controller ($\eta_{c}$), and the inverter ($\eta_{i}$) are considered.
 \begin{equation}
@@ -999,22 +999,22 @@ N_{PP} \geq N_{PPmin}
 \subsection{The Battery Storage Model }
 %Because of the fluctuating nature of the output delivered by the PV arrays, batteries are nece\sqrt{•}ry in a PV system. Thus, during the hours of sunshine, the PV system feeds directly the load and the excess electrical energy is stored in the battery. During the night, or during a period with low solar irradiation, energy is supplied to the load from the battery \cite{Mellit}.
   
-Several models have been presented in the literature \cite{Copetti}, \cite{Manwell93}.
+Several models have been presented in the literature \cite{Copetti}, \cite{Manwell93}. 
 %, and \cite{Manwell94}. 
-However, regardless of the model, normally the following parameters are required: 
-
-\begin{itemize}
-\item Nominal capacity ($ q_{max} $), is the number of Ampere-hours ($ Ah $) that can maximally be extracted from the battery
+%However, regardless of the model, normally the following parameters are required: 
+%
+%\begin{itemize}
+%\item Nominal capacity ($ q_{max} $), is the number of Ampere-hours ($ Ah $) that can maximally be extracted from the battery
 %, under predetermined discharge conditions.
-\item State of charge ($ SOC $), is the ratio between the present capacity and the nominal capacity, i.e., $ SOC = q/q_{max} $. 
+%\item State of charge ($ SOC $), is the ratio between the present capacity and the nominal capacity, i.e., $ SOC = q/q_{max} $. 
 %Obviously $ 0<SOC<1 $. 
-If $ SOC=1 $, then the battery is totally charged; and if $ SOC=0 $, the battery is fully discharged
+%If $ SOC=1 $, then the battery is totally charged; and if $ SOC=0 $, the battery is fully discharged
 %\item Charge (or discharge) regime.This parameter reflects the relationship between the nominal capacity of a battery and the current at which it is charged (or discharged). 
 %It is expressed in hours: for instance, discharge regime is 30h for a battery of 150 Ah that is discharged at 5A.
-\item Efficiency ($\eta_{b}$), is the ratio of the charge extracted during discharge divided by the amount of the charge needed to restore the initial state of charging or discharging current. 
+%\item Efficiency ($\eta_{b}$), is the ratio of the charge extracted during discharge divided by the amount of the charge needed to restore the initial state of charging or discharging current. 
 %\item Lifetime, is the number of charge/discharge cycles the battery can sustain before losing 20\% of its nominal capacity.
-\end{itemize}
-
+%\end{itemize}
+%
 %The merit of a stand-alone PV system is evaluated in terms of the reliability of the electricity supply to the load and in terms of the long-term efficiency of the components. The battery efficiency was described in this section, and the liability is quantified by the concept of loss of load probability (LLP). LLP is defined as the ratio between the Ampere-hour deficit and the Ampere-hour demand, both with respect to the load, over a long period of time \cite{Copetti}. 
 %
 %In general, the battery models view the battery as a voltage source $ E $ in series with an internal resistance $ R_{0} $, as shown in Fig. \ref{fig:batteryckt}. 
@@ -1034,10 +1034,10 @@ If $ SOC=1 $, then the battery is totally charged; and if $ SOC=0 $, the battery
 %
 %The Kinetic Battery Model (KiBaM) of Manwell and McGowen \cite{Manwell93} was developed at the University of Massachusetts to predict the performance of the battery, based on manufacturer's data. However, it uses some data extracted from tested batteries in laboratory. Therefore is not suitable to this study. 
 %
-Most of the created models were used to simulate and optimize PV storage system based on lead-acid batteries. That kind of battery is the most common used batteries in PV application, owing to their relative low cost and wide availability \cite{Copetti}. 
+Most of the created models were based on lead-acid batteries. That kind of battery is the most common used in PV application, owing to their relative low cost and wide availability \cite{Copetti}. 
 
-Here, the model adopted \cite{Copetti} uses manufacturer's data and allows finding relations among voltage, current, state of charge and temperature. 
-
+Here, the model adopted \cite{Copetti} uses manufacturer's data. % and allows finding relations among voltage, current, state of charge and temperature. 
+%
 The discharge voltage equation is shown in (\ref{eq:bat_Vd}). 
 %The first term represents the voltage variation with the state of charge ($ SOC $), i.e., the electrolyte concentration, and the second is the variation due to internal resistance variation.
 %
@@ -1046,7 +1046,7 @@ The discharge voltage equation is shown in (\ref{eq:bat_Vd}).
 V_{d} = \left[ 2.085-0.12(1-SOC) \right] - \\ \dfrac{I}{C_{10}} \left( \dfrac{4}{1+I^{1.3}} + \dfrac{0.27}{SOC^{1.5}}+0.02 \right) (1-0.007 \Delta T)
 \end{multline}
 
-Where $ C_{10} $ means 10h of rated capacity, which is standard on the manufacturer's data-sheet, $ \Delta T $ is temperature variation ($ \Delta T=T-T_{ref} $, $ T_{ref}=25^{o}C $). %, $ SOC $ indicates how much electric charge is stored in the cell at given time, defined by Equation \ref{eq:SOCbat}.
+Where $ C_{10} $ means 10h of rated capacity, which is standard on the manufacturer's data-sheet, $ \Delta T $ is temperature variation ($ \Delta T=T-T_{ref} $, $ T_{ref}=25^{o}C $), $ SOC $ or state of charge indicates how much electric charge is stored in the cell at given time. Mathematically, is the ratio between the present capacity and the nominal capacity (in $ Ah $, provided by manufacturer). If $ SOC=1 $, then the battery is totally charged; and if $ SOC=0 $, the battery is fully discharged.  %, defined by Equation \ref{eq:SOCbat}.
 %\begin{equation}
 %\label{eq:SOCbat}
 %SOC = \left( 1 - \dfrac{Q}{C} \right) 
@@ -1055,7 +1055,6 @@ Where $ C_{10} $ means 10h of rated capacity, which is standard on the manufactu
 %Where $ Q $ is the charge delivered at the time of interest ($ Q=It $), and C is the battery capacity.
 %
 %The ratio between $ Q $ and $ C $ represents t
-
 The depth of discharge ($ DOD $) or the fraction of discharge, is $ DOC=1-SOC $.
 
 %The efficiency of the battery discharge is assumed to be 100\%, according \cite{Copetti}; however, the total amount of useful charge available during discharge is limited by the current rate and temperature given by Equation \ref{eq:CC10}. This equation, called of capacity, is normalized with respect to discharge current corresponding to $ C_{10} $ rated capacity ($ I_{10} $).
@@ -1074,7 +1073,7 @@ For the charging process, however, the parameters are presented in (\ref{eq:Vcba
 V_{c} = [2+0.16SOC]+ \\ \dfrac{I}{C_{10}} \left( \dfrac{6}{1+I^{0.86}} + \dfrac{0.48}{(1-SOC)^{1.2}} + 0.036  \right) (1-0.025 \Delta T)
 \end{multline}
 
-SOC can be calculated easily at any point during the discharge period; however, during recharge it is much more difficult \cite{Copetti}.
+SOC can be calculated easily at any point during the discharge period, considering the current drained from batteries during a certain time period. %; however, during recharge it is much more difficult \cite{Copetti}.
 %Generally, the efficient region is where $ SOC $ is below $ 0.7 $ and $ V_{c} $ is less than $2.3 V$ per cell. The efficiency drops to zero at full charge and the function that represents the charge efficiency ($ \eta_{c} $) variation with state of charge and current rate is given in Equation \ref{eq:efficcharge}.
 %\begin{equation}
 %\label{eq:efficcharge}
@@ -1082,34 +1081,34 @@ SOC can be calculated easily at any point during the discharge period; however, 
 %\end{equation}
 %
 %\cite{Copetti} show that, 
-During overcharge, gassing occur and tests demonstrated that the final charge voltage ($ V_{ec} $) increases with the current intensity and with the decreasing of the temperature (\ref{eq:Vec}). It was created a function for the gassing voltage as well, as shown in (\ref{eq:Vg}). In addition, the overcharge phenomenon can be represented by (\ref{eq:Voverc}).
-\begin{equation}
-\label{eq:Vec}
-V_{ec} = \left[ 2.45 + 2.011 ln \left( 1+\dfrac{I}{C_{10}} \right)  \right] (1-0.002 \Delta T)
-\end{equation}
-
-\begin{equation}
-\label{eq:Vg}
-V_{g} = \left[ 2.24 + 1.97 ln \left( 1+\dfrac{I}{C_{10}} \right)  \right] (1-0.002 \Delta T)
-\end{equation}
-
-\begin{multline}
-\label{eq:Voverc}
-V_{c} = V_{g} + (V_{ec} - V_{g}) \\ \left[ 1- exp \left( \dfrac{Ah_{restored}-0.95C}{I\tau}  \right)    \right] 
-\end{multline}
-
-Where $ Ah_{restored} $ represents the Ampere-hour stored in the battery with regard to the battery capacity ($ C $) during this hour.
-
-The function assumes that 95\% of the capacity was already restored at the start of overcharge.
-
-The time constant of the phenomenon ($ \tau $) is reversely proportional to the charge intensity and can be written by (\ref{eq:tau}).
-\begin{equation}
-\label{eq:tau}
-\tau = \dfrac{17.3}{1+852 \left( \dfrac{I}{C_{10}} \right) ^{1.67} }
-\end{equation}
-
-Therefore, to model the voltage ($ V_{c} $) evolution of the battery, (\ref{eq:Vcbat}) can be used up the start of gassing ($ V_{c} \leq V_{g} $). And during overcharging ($ V_{c} > V_{g} $), (\ref{eq:Voverc}) can be used until a constant final voltage ($ V_{ec} $) is reached.
-
+%During overcharge, gassing occur and tests demonstrated that the final charge voltage ($ V_{ec} $) increases with the current intensity and with the decreasing of the temperature (\ref{eq:Vec}). It was created a function for the gassing voltage as well, as shown in (\ref{eq:Vg}). In addition, the overcharge phenomenon can be represented by (\ref{eq:Voverc}).
+%\begin{equation}
+%\label{eq:Vec}
+%V_{ec} = \left[ 2.45 + 2.011 ln \left( 1+\dfrac{I}{C_{10}} \right)  \right] (1-0.002 \Delta T)
+%\end{equation}
+%
+%\begin{equation}
+%\label{eq:Vg}
+%V_{g} = \left[ 2.24 + 1.97 ln \left( 1+\dfrac{I}{C_{10}} \right)  \right] (1-0.002 \Delta T)
+%\end{equation}
+%
+%\begin{multline}
+%\label{eq:Voverc}
+%V_{c} = V_{g} + (V_{ec} - V_{g}) \\ \left[ 1- exp \left( \dfrac{Ah_{restored}-0.95C}{I\tau}  \right)    \right] 
+%\end{multline}
+%
+%Where $ Ah_{restored} $ represents the Ampere-hour stored in the battery with regard to the battery capacity ($ C $) during this hour.
+%
+%The function assumes that 95\% of the capacity was already restored at the start of overcharge.
+%
+%The time constant of the phenomenon ($ \tau $) is reversely proportional to the charge intensity and can be written by (\ref{eq:tau}).
+%\begin{equation}
+%\label{eq:tau}
+%\tau = \dfrac{17.3}{1+852 \left( \dfrac{I}{C_{10}} \right) ^{1.67} }
+%\end{equation}
+%
+%Therefore, to model the voltage ($ V_{c} $) evolution of the battery, (\ref{eq:Vcbat}) can be used up the start of gassing ($ V_{c} \leq V_{g} $). And during overcharging ($ V_{c} > V_{g} $), (\ref{eq:Voverc}) can be used until a constant final voltage ($ V_{ec} $) is reached.
+%
 %The storage capacity of the battery can be calculated using Equation \ref{eq:stor}, as defined in \cite{Wenham}.
 %
 %\begin{equation}
@@ -1158,7 +1157,7 @@ N_{B}total = N_{BS}min \times N_{BP}min = \dfrac{V_{system}}{V_{bat}} \times \df
 \subsection{Charge Controller Model}
 %Depending on the literature, the controller can receive different names: controller \cite{Hansen}, charge controller \cite{Mahanta} and \cite{Chauhan}, regulator \cite{Mellit}, DC-DC converter with MPPT and switch \cite{Dhanowa}, \cite{Yatimi}, \cite{Abdulateef}, \cite{Roy}. However, in this study, in order to simplify, the term used is controller. 
 
-The charge controller or controller is a set of items (DC-DC converter, MPPT, and switches) and can be defined as the responsible to manage the energy flow to PV system, batteries and loads by collecting information on the battery voltage and knowing the maximum and minimum values acceptable for the battery voltage. MPPT, or maximum power point tracking, is an electronic control mechanism that maintains the PV operating at the voltage of maximum power. Controllers aim to protect the battery (or batteries) against the excessive charge and discharge \cite{Pinho}, improving its lifetime. 
+%The charge controller or controller is a set of items (DC-DC converter, MPPT, and switches) and can be defined as the responsible to manage the energy flow to PV system, batteries and loads by collecting information on the battery voltage and knowing the maximum and minimum values acceptable for the battery voltage. %MPPT, or maximum power point tracking, is an electronic control mechanism that maintains the PV operating at the voltage of maximum power. Controllers aim to protect the battery (or batteries) against the excessive charge and discharge \cite{Pinho}, improving its lifetime. 
 %
 %The resource MPPT, called of maximum power point tracking, is an electronic control mechanism that maintains the PV operating in a voltage that correspond to the voltage of maximum power.
 %
@@ -1167,7 +1166,7 @@ The charge controller or controller is a set of items (DC-DC converter, MPPT, an
 %
 In general, there are two main operating modes for the controller: normal operating condition, when the battery voltage fluctuates between maximum and minimum voltages; and overcharge or over-discharge conditions, which occur when the battery voltage reaches some critical values. 
 
-The controller allows the management of energy between the load and the battery \cite{Mellit}. 
+%The controller allows the management of energy between the load and the battery \cite{Mellit}. 
 %The input signals for regulator model are the battery current ($ I_{br} $), PV generator's voltage ($ V_{PV} $), PV generator's current ($ I_{PV} $), and battery voltage ($ V_{b} $). The outputs are battery ($ I_{rb} $) current and used current ($ I_{u} $). 
 To protect the battery against an excessive charge, the PV arrays are disconnected from the system, when the terminal voltage increases above a certain threshold $ V_{max \textunderscore off} $ and when the current required by the load is less than the current delivered by the PV arrays \cite{Hansen}. PV arrays are connected again when the terminal voltage decreases below a certain value $ V_{max \textunderscore on} $. 
 %This can be done by using a switch with a hysteresis cycle, as illustrated in Fig. \ref{fig:controllerover}. 
@@ -1322,9 +1321,9 @@ I_{c} \geq I_{c,min}
 %As shown by \cite{Mellit}, the PV arrays produce DC and therefore when the PV system contains an AC load, a DC/AC conversion is required. 
 %An inverter is a converter, where the power flows from DC to AC side, i.e., having a DC voltage as input; it produces AC voltage, as output. 
 The role of the inverter is to keep the voltage constant on the AC side, i.e., at the rated voltage, % (127 V or 220 V, for example), 
-and to convert the input power $ P_{in} $ into the output power $ P_{out} $ with the best possible efficiency \cite{Hansen}.
-
-The inverter is characterized by a power dependent efficiency $ \eta_{i} $ as shown by (\ref{eq:efficinv}) \cite{Hansen}.
+and to convert the input power $ P_{in} $ into the output power $ P_{out} $ with the best possible efficiency $ \eta_{i} $ as shown by (\ref{eq:efficinv}) \cite{Hansen}.
+%
+%The inverter is characterized by a power dependent efficiency $ \eta_{i} $ as shown by (\ref{eq:efficinv}) \cite{Hansen}.
 \begin{equation}
 \label{eq:efficinv}
 \eta_{i} = \dfrac{P_{out}}{P_{in}} = \dfrac{V_{AC} I_{AC} cos\varphi}{V_{DC}I_{DC}}
@@ -1352,7 +1351,7 @@ V_{out}AC = V_{AC}
 
 \section{Automated verification}
 %It is necessary to keep in mind that 
-Validation is the process of determining whether a design meets the needs of the user, whereas verification is the process of determining whether a design meets a set of requirements, specifications, and regulations.  
+Validation is the process of determining whether a design meets the needs of the user, whereas verification is the process of determining whether a design meets a set of requirements, specifications, and regulations \cite{Clarke2008}.  
 
 If the requirements, specifications, and regulations are given in a formal language, then it may be possible to automate verification, resulting in a process known as formal verification. Verification may form part of a validation process.
 %, but in general, validation cannot be formalized because it relates a system design to intent.  
@@ -1470,9 +1469,8 @@ Finally, the system attempting to determine whether a formula, which is the disj
 %
 %It is worth mentioning that the steps described here are carried out shortly after the design of the solar photovoltaic system, as soon as the equipment and equipment specifications are defined; before buying and deploying them, as a way to ensure that the project will not fail. 
 %
-The PV input data (load power demand, load consumption of energy, the PV system project sizing data, and the manufacturer's data-sheet information), the formulas to check the sizing project, the mathematical model, the limits of the non-deterministic variables of the model, are all written as C Programming language code. 
-
-, as illustrated in Fig.\ref{fig:flowchartgeneral}
+The flowchart of the automated verification proposed is illustrated in Fig.\ref{fig:flowchartgeneral}. 
+The PV input data (load power demand, load consumption of energy, the PV system project sizing data, and the manufacturer's data-sheet information), the formulas to check the sizing project, the mathematical model, the limits of the weather non-deterministic variables, are all written as C Programming language code. 
 
 \begin{figure}[h]
 \includegraphics[width=0.4\textwidth]{flowchart_verification.png}
@@ -1481,7 +1479,7 @@ The PV input data (load power demand, load consumption of energy, the PV system 
 \label{fig:flowchartgeneral}
 \end{figure}
 
-The non-deterministic variables (solar irradiance, and ambient temperature by default) will suffer a heavy test at ESBMC run-time execution. In addition, depending if one of the requirements of the system, as autonomy of the batteries, or the offer of the energy, or even the power supply from the system, is not accomplished or satisfied, the tool accuses a fail, and the diagnostic counterexample shows in which condition the fail/violation happened. 
+The weather data (solar irradiance, and ambient temperature by default) will suffer a heavy test at ESBMC run-time execution, based in maximum and minimum values from the site where the PV system will be deployed. In addition, depending if one of the requirements of the system, as autonomy of the batteries, or the offer of the energy, or even the power supply from the system, is not accomplished or satisfied, the tool accuses a fail, and the diagnostic counterexample shows in which condition the fail/violation happened. 
 %; as the  state of charge of the batteries, load demand of power and the load consumption of energy if defined by the code
 % (as reliability, performance, or safety)
 
@@ -1687,26 +1685,30 @@ Algorithm 1 describes the pseudo code used to perform the automated verification
 %----------------------------------------------
 \section{Results and discussions} \label{sec:results}
 %----------------------------------------------
-
-\textcolor{red}{reorganise the results as follows: experimental objectives and setup; results; and threats to validity.}
-
-\textcolor{red}{https://ssvlab.github.io/lucasccordeiro/papers/cav2017.pdf}
-
+%
+%\textcolor{red}{reorganise the results as follows: experimental objectives and setup; results; and threats to validity.}
+%
+%\textcolor{red}{https://ssvlab.github.io/lucasccordeiro/papers/cav2017.pdf}
+%
+\subsection{Experimental objectives and setup}
+Experimental objectives: To evaluate the proposed verification methodology and the respective tool performance, in a comparative with the HOMER Pro tool in five case studies (described in Methodology section). Using functional information collected from owners of those five systems, which were deployed in 2018, serving as cross data about how the systems are behaving during four months of use.
 %
 %This section is split into two parts. The setup is described in Section \ref{sec:setup}, while Section \ref{sec:results} describes all experimental results.
 %
 %
 %\subsection{Experimental setup}
 %\label{sec:setup}
-All experiments were conducted on an otherwise idle Intel Core i7-2600 (8-cores), with 3.4 GHz and 64 GB of RAM, running Ubuntu 18.04.1 LTS 64-bits.
 
-Concerning the SMT tool, ESBMC v5.1 was used with the incremental parameter in order to reduce the memory usage. And regarding the solver, version 4.7.1 of Z3 was used.
+Experimental setup of automated verification tool: all experiments were conducted on an otherwise idle Intel Core i7-2600 (8-cores), with 3.4 GHz and 64 GB of RAM, running Ubuntu 18.04.1 LTS 64-bits. Concerning the SMT tool, ESBMC v5.1 was used with the incremental parameter in order to reduce the memory usage. And regarding the solver, version 4.7.1 of Z3 was used.
 
-The total were five case studies evaluated by HOMER Pro and by the automated verification tool. Related to the HOMER Pro, the simulation, based on NASA data from the deployed systems (temperature and solar irradiance), shown that the restrictions were met by the five systems, without any indication of sizing error or even of performance.
+Experimental setup of HOMER Pro: all experiments were conducted on an otherwise idle Intel Core i5-4210 (4-cores), with 1.7 GHz and 4 GB of RAM, running Microsoft Windows 10. It was used the version 3.12.0 of Homer Pro.
+
+\subsection{Results}
+The total were five case studies evaluated by HOMER Pro and by the automated verification tool. Related to the HOMER Pro, the simulation, based on NASA data from the deployed systems (temperature and solar irradiance), shown that the restrictions were met by four systems, without any indication of sizing error or even of performance. The case study that was not successful during simulation was the 1,200 W (house 5), however without indication what are the fail of this PV system. All the simulations took less than 5 seconds (each) to be performed.
 
 However, related to the results of the automated verification, the 1,200 W PV system (house 5) failed during the sizing check. The number of panels was not correct (the verification indicates 3 panels in parallel and the project has 2 in series and 2 in parallel). That verification took 63.3 hours to be performed. Surveying the owner of the 1,200 W system it was identified that, in fact, the system mostly of the time do not met the battery autonomy (mainly when all the loads are turned on). But it is understandable that this problem occurs because the system was purchased as an off-the-shelf solution and not as a specific design for the electrical charges of the house.
 
-And related to the four 700 W PV system, the sizing check was successful, but there were  found flaws in everyone, all related with the SOC that reached levels below of 75\%. The automated verification identified the flaws right after the first night-discharge cycle, before dawn, and before the system start to recharge the batteries. The proposed tool took 409.3 hours to find an error at house 1, and the maximum of 456XXX hours to house 4.  
+And related to the four 700 W PV system, the sizing check was successful during automated verification, but there were found flaws in everyone, all related with the battery autonomy, when SOC reached levels below of 75\%. The automated verification identified the flaws right after the first night-discharge cycle, before the solar system start to recharge the batteries. The proposed tool took 409.3 hours to find an error at house 1, and the maximum of 456XXX hours to house 4. This functional problem was confirmed with all the four dwellers that use the system: at least once or twice a mouth is usual the system to turn off, normally during raining days or with more clouds in the sky, and after the sun rises the system returns to normal operation.
 
 %At the terminal, the command used to perform the verification is:
 %\$ esbmc filename.c -\phantom{}-no-bounds-check -\phantom{}-no-pointer-check -\phantom{}-no-div-by-zero-check -\phantom{}-unwind 300 -\phantom{}-smt-during-symex -\phantom{}-smt-symex-guard --z3
