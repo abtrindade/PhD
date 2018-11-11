@@ -504,7 +504,7 @@ The increase in the number of PV systems installed all over the world brings the
 %Manufactures and integrators have yet their proprietary software to perform various system sizing, with the drawback of include just their own products among the possibilities of choice, what restrict the solution. 
 %
 %PV systems can be classified into grid-connected and stand-alone systems. At this proposal, only off-grid or stand-alone systems will be considered. The utilization of solar energy in off-grid mode has the potential to meet the energy need for remote rural areas of developing countries.  
-However, those tools are based on running experiments in simulation models. And simulation has the advantage of be cheap and be employed before the system is declared concluded, however with the drawback of an incomplete coverage, because the verification of all possible iterations and potential failures of systems is rarely pissible or feasible \cite{Clarke2008}.
+However, those tools are based on running experiments in simulation models. And simulation has the advantage of be cheap (when compared to test in real systems) and can be employed before the system is declared concluded, however with the drawback of an incomplete coverage, because the verification of all possible iterations and potential failures of systems is rarely pissible or feasible \cite{Clarke2008}.
 
 Formal methods based on model checking offer great potential to obtain a more effective and faster verification in the design process \cite{Clarke2008}.  
 %with behavior that is, in principle, well determined. 
@@ -519,13 +519,13 @@ Formal methods based on model checking offer great potential to obtain a more ef
 %Thus, such problems as incompleteness, ambiguities, and inconsistencies, which normally are discovered only in later stages of the design, can be detected in advance, as described by \cite{Trindade}. 
  And finally, algorithms can verify the system model by systematically exploring all their states. That way, the formal proof can verify if the requirements are met by the system.
 
-Formal methods, in the other hand, provide facilities for the modeling of each component of any complex system \cite{Hall1990}. It allows for developing models for each component of the system. At this paper, a mathematical model of each component of a stand-alone PV system, as panel solar, charge controller, batteries, inverter, and electrical load are created. The behavior of each system can be analyzed and observed with the help of these formal models, as the joint operation of the components, which in this case represent the operation of the solar PV system. A key benefit to this approach is that it helps in the detection of faults and flaws in the design phase of system development, thereby considerably improving system reliability \cite{Akram2018}.
+Formal methods, in the other hand, provide facilities for the modeling of each component of any complex system \cite{Hall1990}. It allows for developing models for each component of the system. At this paper, a mathematical model of each component of a stand-alone PV system, as panel solar, charge controller, batteries, inverter, and electrical load are created. The behavior of each system can be analyzed and observed with the help of these formal models, as the joint operation of the components, which in this case represent the operation of the solar PV system itself. A key benefit to this approach is that it helps in the detection of faults and flaws in the design phase of system development, thereby considerably improving system reliability \cite{Akram2018}.
 
 %Those programs are viewed as mathematical objects, and the use of 
 %Bringing this technique to solar PV systems, i
 %Instead of finding a bug or a software inconsistence, t
 %Here it will be verified a stand-alone PV system, with all their components modeled mathematically, 
-Related to solar PV systems, the project requirements, as state of charge of batteries and power demand, beside weather conditions, as solar irradiance and ambient temperature, are translated as part of the computer program and automated verified during the formal process. The process of model checking reports in which conditions the system does not met the user requirements or whether it will fail due to weather conditions, which aids to improve the project itself.  
+Related to solar PV systems, the project requirements, as battery autonomy and power demand, beside weather conditions, as solar irradiance and ambient temperature, are translated as part of the computer program and automated verified during the formal process. The model checking tool reports in which conditions the system does not met the user requirements or whether it will fail due to weather conditions, which aids to improve the project itself.  
 
 %Among the non-deterministic variables considerated, is it worth to mention environmental issues (like solar irradiance, and temperature), and the variation of the electrical load (power consumption) or the battery' state of charge, as shown in Fig.\ref{fig:flowchartgeneral}.
 The implementation of the
@@ -535,7 +535,7 @@ proposed tool is carried out by means of the efficient SMT-based bounded model c
 
 In mostly of previous studies, the evaluation of PV systems, concerning the meeting of user requirements, were performed by software simulation using MATLAB/Simulink \cite{Benatiallah2017}, \cite{Samrat2014}, and \cite{Natsheh2012} or HOMER Pro \cite{Lamnadi2017}. Some work was done toward the formal modeling of power smart grids \cite{Akram2018}, and to maximize the power point of solar panels \cite{Driouich2017}, however without to perform the automated verification and restrict to solar panels or smart grids. 
 
-In addition, recent research that joint the formal verification to solar energy, has attempted to formalize and implement a formal study of large population of PV panels where the focus have been the modeling of the dynamics of PV panels and their interaction with the grid, without batteries \cite{Abate2017}; or to model a PV system in Modelica, to verify the maximum power point of solar panels with the use of Jmodelica tool \cite{Driouich2018}. Both restrict to the PV panels, and not including batteries, inverters, and charge controllers.
+In addition, recent research that joint the formal verification to solar energy, has attempted to formalize and implement a formal study of large population of PV panels where the focus have been the modeling of the dynamics of PV panels and their interaction with the grid, without batteries \cite{Abate2017}; or to model a PV system in Modelica, to verify the maximum power point of solar panels with the use of Jmodelica tool \cite{Driouich2018}. Both restrict to PV panels, and not including batteries, inverters, and charge controllers.
   
 %The experimental results show that the proposed framework is more efficient \textcolor{red}{than what?} in different case studies to find not proper functioning of PV systems than simulation with off-the-shelf tool. 
 To the best of our knowledge, this is the first work to use a
@@ -571,7 +571,7 @@ Specifically concerning isolated communities,
 % depending on the type of load, cost, resources availability, and requirements of the load, 
 %stand-alone systems 
 %can be split into several categories. However, 
-the configuration that is most common is the regulated stand-alone system with battery and AC load. This configuration is the focus of this paper.
+the configuration that is most common or mode indicated is the regulated stand-alone system with battery and AC load. This configuration is the focus of this paper.
 %, which is the target of this paper, includes PV array, batteries, charge controller, inverter, and AC load.
 %PV array, battery, MPPT and AC load. Battery is used to store the extra power of PV system. A charge controller is necessary for this type of system because the useful life of the battery is less than that of the PV module. Extra charging and deep discharging can reduce the battery life \cite{Kim}. Because of the AC load, an inverter (DC to AC converter) is required. 
 %This solution has an increase of cost because has more equipment. However, the AC availability brings the advantage of a higher number of AC appliances to use at the houses or consumer units.
@@ -682,10 +682,10 @@ Sensitive analysis &  &  & X & X & \\
 %\subsection{Paper Proposal x Reference Tools}
 %-------------------------------------------------------------------
 %
-Considering the focus of this paper, only HOMER remains for a comparative with the proposed tool of this paper. %All tools need some parameters inherently from manufacturer's catalog.
+Considering the focus of this paper, only HOMER remains for a comparative with the proposed automated verification technique of this paper. %All tools need some parameters inherently from manufacturer's catalog.
 %, so the project starts with manufacturers and integrators tool to define the basic items of the project: panels, inverters, controllers, and batteries. 
 %After that, the potential solution is analyzed in another tool to simulate or even optimize the proposed solution. Therefore, that is 
-And the challenge of this work is to prove that is possible to use automated verification in stand-alone PV solution and to prove that this evaluation is more efficient and complete than other state-of-the-art tool, as HOMER Pro. The comparative evaluation between the HOMER Pro and the proposed verification tool is presented in Section \ref{sec:results}.
+And the challenge of this work is to show that is possible to use automated verification in stand-alone PV solution, proving that this evaluation is more efficient and complete than other state-of-the-art tool, as HOMER Pro. The comparative evaluation between the HOMER Pro and the proposed verification tool is presented in Section \ref{sec:results}.
 
 %-------------------------------------------------------------------
 \subsection{Component models for stand-alone PV system }
@@ -694,7 +694,7 @@ And the challenge of this work is to prove that is possible to use automated ver
 %The main purpose of this section is to describe the models for the elements of a stand-alone PV system: PV generator, battery, controller, inverter, and load. 
 The mathematical modeling of the PV system is based on modular blocks, as illustrated in Fig.\ref{fig:blockdiagram}. It is identified the PV generator, batteries, charge controller, inverter, and AC load. 
 
-The PV generator, which can be an panel or a array, is a semiconductor device that can convert solar energy into DC electricity. At the diagram, there are two variables that depend on the site where the system is deployed and from the weather (solar irradiance $ G $ and temperature $ T $). For night hours or rainy days, one needs to hold batteries, where power can be stored and used. The use of battery as a storage form implies thus the presence of a charge controller \cite{Hansen}, \cite{Mellit}. The PV arrays produce DC and therefore when the PV system contains an AC load, a DC/AC conversion is required. That converter is called of inverter. And the AC load dictates the behavior of electrical load from the house that will be feed by the system.
+The PV generator, which can be a panel or an array, is a semiconductor device that can convert solar energy into DC electricity. At the diagram, there are two variables that depend on the site where the system is deployed and from the weather (solar irradiance $ G $ and temperature $ T $). For night hours or rainy days, one needs to hold batteries, where power can be stored and used. The use of battery as a storage form implies thus the presence of a charge controller \cite{Hansen}, \cite{Mellit}. The PV arrays produce DC and therefore when the PV system contains an AC load, a DC/AC conversion is required. That converter is called of inverter. And the AC load dictates the behavior of AC electrical load from the house that will be feed by the system.
 %
 %The modular structure facilitates the modeling of the other system structures and replacement of elements, such as a DC load instead of an AC load. 
 %
@@ -738,7 +738,7 @@ The PV generator, which can be an panel or a array, is a semiconductor device th
 % 
 %Modeling provides the ways to understand the current, voltage, and power relationships of PV systems.
   
-The performance of photovoltaic systems, %that is, the output current/voltage curve ($I-V$ curve), 
+The performance of PV systems %, %that is, the output current/voltage curve ($I-V$ curve), 
 is usually studied using an equivalent circuit model, as described in the available literature \cite{Yatimi}, \cite{Saloux}, \cite{Mellit}. This equivalent circuit consists of a current source with one or two diodes connected in parallel, and up to two resistors, one connected in parallel and the other one in series, to take into account energy losses in this model \cite{Cubas}. 
 %Based on these electronic components, four basic configurations are normally used when studying photovoltaic systems, as shown by Fig. \ref{fig:equivckt}. 
 \begin{figure}[h]
@@ -755,7 +755,7 @@ The 1-diode model, shown by Fig. \ref{fig:equivckt}, whose equation to relate th
 I = I_{ph}-I_{D1}=I_{ph}-I_{0}\left[ exp \left( \dfrac{V}{NaV_{T}} \right)  \right] 
 \end{equation}
 
-Where: $I_{ph}$ is the photocurrent delivered by the constant current source; $ I_{0} $ is the reverse saturation current corresponding to the diode; $ N $ is the number of series-connected cells in the photovoltaic system to be analyzed ($ N=1 $ in a single cell configuration); $ a $ is the ideality factor (or quality factor) that takes into account the deviation of the diodes from the Shockley diffusion theory ($a=1$ for ideal diodes and between $ 1 $ and $ 2 $ for real diodes); $V_{T}$ is the thermal voltage ($ V_{T}=k_{B}T/q $); $ k_{B} $ is the Boltzmann constant ($ 1.3806503\times10^{-23}J $); $ T $ the temperature of the p-n junction (or cell temperature) expressed in Kelvin; $ q $ is absolute value of the electron's charge ($ -1.60217646\times10^{-19}C $).
+Where: $I_{ph}$ is the photocurrent delivered by the constant current source; $ I_{0} $ is the reverse saturation current corresponding to the diode; $ N $ is the number of series-connected cells in the PV system to be analyzed ($ N=1 $ in a single cell configuration); $ a $ is the ideality factor (or quality factor) that takes into account the deviation of the diodes from the Shockley diffusion theory ($a=1$ for ideal diodes and between $ 1 $ and $ 2 $ for real diodes); $V_{T}$ is the thermal voltage ($ V_{T}=k_{B}T/q $); $ k_{B} $ is the Boltzmann constant ($ 1.3806503\times10^{-23}J $); $ T $ the temperature of the p-n junction (or cell temperature) expressed in Kelvin; $ q $ is absolute value of the electron's charge ($ -1.60217646\times10^{-19}C $).
 
 %\begin{itemize}
 %\item $I_{ph}$ is the photocurrent delivered by the constant current source; 
@@ -1383,18 +1383,18 @@ The model checking algorithm can be described as:
 Specifically at the $FALSE$ situation, the algorithm returns a counterexample that is useful as diagnostic of the system, in order to discover in which situation the model is violated. That is the most important advantage of the use of model checking \cite{Clarke2008}. 
 %Among the other advantages can be listed: there is no need of proofs (the algorithm is not a deductive procedure), there is no problem with partial specifications of the system, logics can easily express many concurrency properties, is fast (compared to other rigorous methods such as interactive theorem proving). 
 However, there is a main disadvantage of model checking: the state explosion problem. 
-
-The model checking problem can be defined as \cite{Clarke2008}: 
-
-\begin{itemize}
-\item Let $M$ be a Kripke structure (i.e., state transition graph);
-\item $f$ be the specification in temporal logic (a formula);
-\item Find all states $s$ of $M$ such that $M , s \models f$
-\end{itemize}
+%
+%The model checking problem can be defined as \cite{Clarke2008}: 
+%
+%\begin{itemize}
+%\item Let $M$ be a Kripke structure (i.e., state transition graph);
+%\item $f$ be the specification in temporal logic (a formula);
+%\item Find all states $s$ of $M$ such that $M , s \models f$
+%\end{itemize}
 
 %Fig. \ref{fig:modelcheckstruc} shows the structure of a 
 In a typical model checking system, a preprocessor extracts a state transition graph from a system (program or circuit).
-
+%
 %\begin{figure}[h]
 %\includegraphics[width=0.4\textwidth]{modelcheckstruc}
 %\centering
