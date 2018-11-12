@@ -540,7 +540,8 @@ In addition, recent research that joint the formal verification to solar energy,
 %The experimental results show that the proposed framework is more efficient \textcolor{red}{than what?} in different case studies to find not proper functioning of PV systems than simulation with off-the-shelf tool. 
 To the best of our knowledge, this is the first work to use a
 %n SMT-based 
-verification tool to evaluate a stand-alone solar PV systems, with weather conditions variation. The mains contribution of this paper are the automated verification of the PV system, and the modular modeling of each component of the PV system, which permits to change the mathematical models, besides changing the type of energy generation in the future to another renewable source, for example.
+verification tool to evaluate a stand-alone solar PV systems. %, with weather conditions variation. 
+The mains contribution of this paper are the automated verification of the PV system, and the modular modeling of each component of the PV system, which permits to change the mathematical models, besides changing the type of energy generation in the future to another renewable source, for example.
 
 %\textcolor{red}{This introduction is missing the description of the vision, approach and results. In particular, try to match each paragraph to: problem, vision, approach, results and contributions.} 
 %
@@ -566,7 +567,7 @@ PV systems are broadly classified into three distinct types \cite{Mohanty}: (1) 
 %\item Grid-connected systems, where the solar PV system is connected to the grid. The grid-connected system can be either a grid-tied system, which can only feed power into the grid and such system cannot deliver power locally during blackouts and emergencies since these systems have to be completely disconnected from the grid and have to be shut down as per national and international electrical safety standards. Some grid-connected PV systems, with energy storage, can also provide power locally in an islanding mode; 
 %\item Solar PV hybrid system: In a hybrid system, another source(s) of energy, such as wind, biomass or diesel, can work together with the solar PV system to provide the required demand. In such type of system, main objective is to bring more reliability into the overall system at an affordable way by adding one or more energy sources.
 %\end{itemize}
-Specifically concerning isolated communities, 
+Specifically concerning the energy need for remote rural areas of developing countries or places where the grid extension is not possible or feasible, 
 %stand-alone systems are one the most used solutions, and 
 % depending on the type of load, cost, resources availability, and requirements of the load, 
 %stand-alone systems 
@@ -619,7 +620,7 @@ Here it was evaluated the most popular tools, as PVWatts, SAM, HOMER Pro, RETScr
 %SAM or System Advisor Model is a software from the U.S. Department of Energy and National Renewable Energy Laboratory. According to \cite{NRELBlair} and \cite{Cameron2008}, SAM is intended to help users to determine whether the model meets their project constraints/specifications, and (also) to provide information for readers who do not plan to use the model, but want to learn about its capabilities. SAM is a performance and financial model designed to facilitate decision making for people involved in the renewable energy industry: Project managers and engineers; Financial and policy analysts; Technology developers; and Researchers. SAM makes performance predictions and cost of energy estimates for grid-connected power projects based on installation and operating costs and system design parameters that you specify as inputs to the model. Projects can be either on the customer side of the utility meter, where they buy and sell electricity at retail rates, or on the utility side of the meter, where they sell electricity at a price negotiated through a power purchase agreement. SAM is an electric power generation model and assumes that the renewable energy system delivers power either to an electric grid, or to a grid-connected building or facility to meet electric load. It does not model thermal energy systems that meet a thermal process load. As mentioned in \cite{NRELBlair}, SAM does not model isolated or off-grid power systems, and does not model systems with electricity storage batteries.
 
 %\subsection{HOMER}
-%As defined in \cite{HOMER}, actually is a set of two tools: HOMER Legacy and HOMER Pro. HOMER is an acronym for Hybrid Optimization Model for Multiple Energy Resources. HOMER Legacy is the original HOMER software version created at the National Renewable Energy Laboratory (NREL). HOMER Legacy is a free computer model that simplifies the task of evaluating design options for both off-grid and grid-connected power systems for remote, stand-alone, and distributed generation applications. HOMER's optimization and sensitivity analysis algorithms allow the user to evaluate the economic and technical feasibility of a large number of technology options. Since 2016 Homer Legacy can be found at HOMER web site, but only available for students and nonprofit organizations, as defined in \cite{HOMER}, and has not support available. At the short-time only the commercial version will remain.
+%As defined in \cite{HOMER}, actually is a set of two tools: HOMER Legacy and HOMER Pro. HOMER is an acronym for Hybrid Optimization Model for Multiple Energy Resources. HOMER Legacy is the original HOMER software version created at the National Renewable Energy Laboratory (NREL). HOMER Legacy is a free computer model that simplifies the task of evaluating design options for both off-grid and grid-connected power systems for remote, stand-alone, and distributed generation applications. HOMER's optimization and sensitivity analysis algorithms allow the user to evaluate the economic and technical feasibility of a large number of technology options. Since 2016 HOMER Legacy can be found at HOMER web site, but only available for students and nonprofit organizations, as defined in \cite{HOMER}, and has not support available. At the short-time only the commercial version will remain.
  
 %The commercial version (paid), called HOMER Pro, as defined in \cite{Swarnkar}, is a tool for optimizing micro-grid design in all sectors, from village power and island utilities to grid-connected campuses and military bases. HOMER Pro put together three tools in one product: optimization, simulation, and sensitivity analysis. HOMER Pro provides the detailed rigor of chronological simulation and optimization in a model that is intended to be easy to use. It is adaptable to a wide variety of projects. For a village or community-scale power system, HOMER can model both the technical and economic factors involved in the project. For larger systems, HOMER can provide an overview that compares the cost and feasibility of different configurations. Chronological simulation is essential for modeling variable resources, such as solar and wind power and for combined heat and power applications, where the thermal load is variable. HOMER's sensitivity analysis helps determine the potential impact of uncertain factors such as fuel prices or wind speed on a given system. 
 
@@ -755,7 +756,7 @@ The 1-diode model, shown by Fig. \ref{fig:equivckt}, whose equation to relate th
 I = I_{ph}-I_{D1}=I_{ph}-I_{0}\left[ exp \left( \dfrac{V}{NaV_{T}} \right)  \right] 
 \end{equation}
 
-Where: $I_{ph}$ is the photocurrent delivered by the constant current source; $ I_{0} $ is the reverse saturation current corresponding to the diode; $ N $ is the number of series-connected cells in the PV system to be analyzed ($ N=1 $ in a single cell configuration); $ a $ is the ideality factor (or quality factor) that takes into account the deviation of the diodes from the Shockley diffusion theory ($a=1$ for ideal diodes and between $ 1 $ and $ 2 $ for real diodes); $V_{T}$ is the thermal voltage ($ V_{T}=k_{B}T/q $); $ k_{B} $ is the Boltzmann constant ($ 1.3806503\times10^{-23}J $); $ T $ the temperature of the p-n junction (or cell temperature) in Kelvin; $ q $ is absolute value of the electron's charge ($ -1.60217646\times10^{-19}C $).
+Where: $I_{ph}$ is the photocurrent delivered by the constant current source; $ I_{0} $ is the reverse saturation current corresponding to the diode; $ N $ is the number of series-connected cells ($ N=1 $ in a single cell configuration); $ a $ is the ideality factor (or quality factor) that takes into account the deviation of the diodes from the Shockley diffusion theory ($a=1$ for ideal diodes and between $ 1 $ and $ 2 $ for real diodes); $V_{T}$ is the thermal voltage ($ V_{T}=k_{B}T/q $); $ k_{B} $ is the Boltzmann constant ($ 1.3806503\times10^{-23}J $); $ T $ the temperature of the p-n junction (or cell temperature) in Kelvin; $ q $ is absolute value of the electron's charge ($ -1.60217646\times10^{-19}C $).
 
 %\begin{itemize}
 %\item $I_{ph}$ is the photocurrent delivered by the constant current source; 
@@ -907,7 +908,8 @@ However, the photocurrent delivered by the constant current source ($ I_{ph} $) 
 I_{ph}=\dfrac{G}{G_{ref}} \left[ I_{ph,ref} + \mu_{I} \left( T-T_{ref} \right)    \right] 
 \end{equation}
 
-Where the reference state (STC) of the cell is given by the solar irradiance $ G_{ref}=1000 W/m^{2} $, and the temperature $ T_{ref}=298.15 K (=25^{o}C) $; $ \mu_{I} $ is the short-circuit current temperature coefficient ($A/K$) and corresponds to the photocurrent obtained from a given PV cell working at reference conditions (provided by PV manufacturers). $ I_{ph,ref} $ can also be approximated to the reference short-circuit current \cite{Jakhrani} that is provided by PV manufacturers ($ I_{sc,ref} $).
+Where the reference state (STC) of the cell is given by the solar irradiance $ G_{ref}=1000 W/m^{2} $, and the temperature $ T_{ref}=298.15 K (=25^{o}C) $; $ \mu_{I} $ is the short-circuit current temperature coefficient ($A/K$) %and corresponds to the photocurrent obtained from a given PV cell working at reference conditions 
+(provided by PV manufacturers). $ I_{ph,ref} $ can be approximated to the reference short-circuit current \cite{Jakhrani} that is provided by PV manufacturers ($ I_{sc,ref} $).
 
 The cell temperature ($ T $) is shown in (\ref{eq:Tcell}) \cite{Ross}.
 \begin{equation}
@@ -974,7 +976,7 @@ N_{TPmin} = \dfrac{E_{corrected}}{E_{p}}
 N_{TP} \geq N_{TPmin}
 \end{equation}
 
-Particularly, the total number of panels is series ($ N_{PSmin} $) and parallel ($ N_{PPmin} $) are given by (\ref{eq:NPSmin}) and (\ref{eq:NPPmin}), respectively. With the check done by (\ref{eq:NPS}) and (\ref{eq:NPP}). $ V_{system} $ is the DC voltage of the bus, and is a design decision, normally 12, 24 or 48 V.
+Particularly, the total number of panels is series ($ N_{PSmin} $) and parallel ($ N_{PPmin} $) are given by (\ref{eq:NPSmin}) and (\ref{eq:NPPmin}), respectively. With the check done by (\ref{eq:NPS}) and (\ref{eq:NPP}). $ V_{system} $ is the DC voltage of the bus, normally 12, 24 or 48 V.
 \begin{equation}
 \label{eq:NPSmin}
 N_{PSmin} = \dfrac{V_{system}}{V_{m,ref}}
@@ -1235,7 +1237,7 @@ Assuming that the efficiency of the controller ($ \eta_{c} $) is a manufacturer'
 V_{in} I_{in} \eta_{c} = V_{out} I_{out}
 \end{equation}
 
-Where $ V_{in} $ is the voltage across the PV array, $ I_{in} $ is the output current of PV array, $ V_{out}=V_{b}=V_{system} $ is the  DC bus voltage, and $ I_{out} $ is the output current from the converter, when all the other values are known.
+Where $ V_{in} $ is the voltage across the PV array, $ I_{in} $ is the output current of PV array, $ V_{out}=V_{b}=V_{system} $ is the  DC bus voltage, and $ I_{out} $ is the output current from the converter.
 
 %The output voltage is related to the input voltage as a function of duty cycle of the switch (\cite{Abdulateef}). 
 % 
@@ -1504,7 +1506,7 @@ Another characteristic of Manaus, is that the PV generation can be despised from
 %with zero electric energy generation from 18:00 h to 6:00 h of the next day; and with insignificant generation from 6:00 h to 8:00 h, and from 16:00 h to 18:00 h of the same day. 
 Therefore, in order to reduce the computational effort,
 % caused by the state explosion inherent of the technique, 
-the 24h-day was divided, at the algorithm, in 3 parts of 8 h each (8:00h-16:00h, 16:00h-24:00h, 00:00h-8:00h); and only the 8:00h-16:00h period with PV generation. 
+the 24h-day was divided, at the algorithm, in 3 parts of 8 h each (8:00h-16:00h, 16:00h-24:00h, and 00:00h-8:00h); and only the 8:00h-16:00h period with PV generation. The time step was adjusted to 1 hour. 
 % and the non-deterministic variables $G$ and $T$ are considered during the formal verification of the system, otherwise, during the other two periods, there is no PV generation and just the power consumption from the backup batteries. 
 %Within this 8h-period, $G$ and $T$ are automated verified with different values every one hour.
 %, and change their value every 1 h according with the algorithm created using the technique.
@@ -1564,7 +1566,7 @@ Algorithm 1 describes the pseudo code used to perform the automated verification
   \\
   \STATE assert ($SOC \geq SOC_{limit}$)  
   \\
-  \COMMENT {Perform the 08:00h-16:00h \textbf{for}-LOOP as above}
+  \COMMENT {Perform same 08:00h-16:00h \textbf{for}-LOOP as line 6}
   %%\ENDFOR
   \ENDWHILE
  \RETURN $(\,)$ 
@@ -1576,17 +1578,12 @@ Algorithm 1 describes the pseudo code used to perform the automated verification
 %If the verification founds a situation where the electrical demand of the house is not met, then the algorithm presents a counterexample of this combination. And this information can be used by the designer to improve the system.
 %if it was a project error or if it was a combination of variables from the nature that has a low probability to occur at the field, considering the intermittent characteristic of solar PV generation.
 
-
-
 %\subsection{Subsection Heading Here}
 %Subsection text here.
-
 % needed in second column of first page if using \IEEEpubid
 %\IEEEpubidadjcol
-
 %\subsubsection{Subsubsection Heading Here}
 %Subsubsection text here.
-
 % An example of a floating figure using the graphicx package.
 % Note that \label must occur AFTER (or within) \caption.
 % For figures, \caption should occur after the \includegraphics.
@@ -1609,11 +1606,11 @@ Algorithm 1 describes the pseudo code used to perform the automated verification
 %\caption{Simulation results for the network.}
 %\label{fig_sim}
 %\end{figure}
-
+%
 % Note that the IEEE typically puts floats only at the top, even when this
 % results in a large percentage of a column being occupied by floats.
-
-
+%
+%
 % An example of a double column floating figure using two subfigures.
 % (The subfig.sty package must be loaded for this to work.)
 % The subfigure \label commands are set within each subfloat command,
@@ -1640,8 +1637,8 @@ Algorithm 1 describes the pseudo code used to perform the automated verification
 % labels, the optional argument to \subfloat must be present. If a
 % subcaption is not desired, just leave its contents blank,
 % e.g., \subfloat[].
-
-
+%
+%
 % An example of a floating table. Note that, for IEEE style tables, the
 % \caption command should come BEFORE the table and, given that table
 % captions serve much like titles, are usually capitalized except for words
@@ -1669,9 +1666,7 @@ Algorithm 1 describes the pseudo code used to perform the automated verification
 %\hline
 %\end{tabular}
 %\end{table}
-
-
-
+%
 % Note that the IEEE does not put floats in the very first column
 % - or typically anywhere on the first page for that matter. Also,
 % in-text middle ("here") positioning is typically not used, but it
@@ -1701,14 +1696,14 @@ Experimental objectives: To evaluate the proposed verification methodology and t
 
 Experimental setup of automated verification tool: all experiments were conducted on an otherwise idle Intel Core i7-2600 (8-cores), with 3.4 GHz and 64 GB of RAM, running Ubuntu 18.04.1 LTS 64-bits. Concerning the SMT tool, ESBMC v5.1 was used with the incremental parameter in order to reduce the memory usage. And regarding the solver, version 4.7.1 of Z3 was used.
 
-Experimental setup of HOMER Pro: all experiments were conducted on an otherwise idle Intel Core i5-4210 (4-cores), with 1.7 GHz and 4 GB of RAM, running Microsoft Windows 10. It was used the version 3.12.0 of Homer Pro.
+Experimental setup of HOMER Pro: all experiments were conducted on an otherwise idle Intel Core i5-4210 (4-cores), with 1.7 GHz and 4 GB of RAM, running Microsoft Windows 10. It was used the version 3.12.0 of HOMER Pro.
 
 \subsection{Results}
 The total were five case studies evaluated by HOMER Pro and by the automated verification tool. Related to the HOMER Pro, the simulation, based on NASA data from the deployed systems (temperature and solar irradiance), shown that the restrictions were met by four systems, without any indication of sizing error or even of performance. The case study that was not successful during simulation was the 1,200 W (house 5), however without indication what are the fail of this PV system. All the simulations took less than 5 seconds (each) to be performed.
 
-However, related to the results of the automated verification, the 1,200 W PV system (house 5) failed during the sizing check. The number of panels was not correct (the verification indicates 3 panels in parallel and the project has 2 in series and 2 in parallel). That verification took 63.3 hours to be performed. Surveying the owner of the 1,200 W system it was identified that, in fact, the system mostly of the time do not met the battery autonomy (mainly when all the loads are turned on). But it is understandable that this problem occurs because the system was purchased as an off-the-shelf solution and not as a specific design for the electrical charges of the house.
+However, related to the results of the automated verification, the 1,200 W PV system (house 5) failed during the sizing check. The number of panels was not correct (the verification counterexample demands 3 panels in parallel and the project size has 2 in series and 2 in parallel). That verification took 63.3 hours to be performed. Surveying the owner of the 1,200 W system it was identified that, in fact, the system mostly of the time do not met the battery autonomy (mainly when all the loads are turned on). But it is understandable that this problem occurs because the system was purchased as an off-the-shelf solution and not as a specific design for the electrical charges of the house.
 
-And related to the four 700 W PV system, the sizing check was successful during automated verification, but there were found flaws in everyone, all related with the battery autonomy, when SOC reached levels below of 75\%. The automated verification identified the flaws right after the first night-discharge cycle, before the solar system start to recharge the batteries. The proposed tool took 409.3 hours to find an error at house 1, and the maximum of 456XXX hours to house 4. This functional problem was confirmed with all the four dwellers that use the system: at least once or twice a mouth is usual the system to turn off, normally during raining days or with more clouds in the sky, and after the sun rises the system returns to normal operation.
+Related to the four 700 W PV systems, the sizing check was successful during automated verification, but there were found flaws in everyone, all related with the battery autonomy, when SOC reached levels below of 75\%. The automated verification identified the flaws right after the first night-discharge cycle, before the solar system start to recharge the batteries. The proposed tool took 409.3 hours to find an error at house 1, and the maximum of 456XXX hours to house 4. This functional problem was confirmed with all the four dwellers that use the system: at least once or twice a mouth is usual the system to turn off, normally during raining days or with more clouds in the sky, and after the sun rises the system returns to normal operation.
 
 %At the terminal, the command used to perform the verification is:
 %\$ esbmc filename.c -\phantom{}-no-bounds-check -\phantom{}-no-pointer-check -\phantom{}-no-div-by-zero-check -\phantom{}-unwind 300 -\phantom{}-smt-during-symex -\phantom{}-smt-symex-guard --z3
@@ -1729,13 +1724,9 @@ And related to the four 700 W PV system, the sizing check was successful during 
 
 XXX
 
-
-
-
 %-------------------------------------
 \section{Conclusion and Future Work}
 %-------------------------------------
-
 %The proposed tool seems to be a coherent and promising tool to perform verification of a PV project. The next step is the deployment of the solution at the ESBMC environment, and compare the results with a real PV project deployed at the field. 
 %
 %The automated verification tool presented here establishes the automated verification and the project sizing check. 
