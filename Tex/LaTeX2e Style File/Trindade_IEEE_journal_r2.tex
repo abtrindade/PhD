@@ -554,7 +554,7 @@ The mains contribution of this paper are the automated verification of the PV sy
 %(in particular cases, in both times). %The most basic PV system can give supply only in daytime.  
 %For night hours or rainy days, one needs to hold batteries, where power can be stored and used.% \cite{Gules}. 
 
-PV systems are broadly classified into three distinct types \cite{Mohanty}: (1) stand-alone systems, where the energy is generated and consumed in the same place and which does not interact with the main grid, (2) grid-connected systems, and (3) solar PV hybrid system. %, where another source(s) of energy can work together with the solar PV. % system to provide the required demand.
+PV systems are broadly classified into three distinct types~\cite{Mohanty}: (1) stand-alone systems, where the energy is generated and consumed in the same place and which does not interact with the main grid; (2) grid-connected systems; and (3) solar PV hybrid system. %, where another source(s) of energy can work together with the solar PV. % system to provide the required demand.
 %, such as wind, biomass or diesel, 
 %As the goal of this work is just the solutions aimed to isolated/ off-grid application, %therefore it is not considered the on-grid or hybrid configurations.
 %
@@ -563,12 +563,12 @@ PV systems are broadly classified into three distinct types \cite{Mohanty}: (1) 
 %\item Grid-connected systems, where the solar PV system is connected to the grid. The grid-connected system can be either a grid-tied system, which can only feed power into the grid and such system cannot deliver power locally during blackouts and emergencies since these systems have to be completely disconnected from the grid and have to be shut down as per national and international electrical safety standards. Some grid-connected PV systems, with energy storage, can also provide power locally in an islanding mode; 
 %\item Solar PV hybrid system: In a hybrid system, another source(s) of energy, such as wind, biomass or diesel, can work together with the solar PV system to provide the required demand. In such type of system, main objective is to bring more reliability into the overall system at an affordable way by adding one or more energy sources.
 %\end{itemize}
-Specifically concerning the energy need for remote rural areas of developing countries or places where the grid extension is not possible or feasible, 
+Specifically concerning the energy needed for remote rural areas of developing countries or places where the grid extension is not possible or feasible, 
 %stand-alone systems are one the most used solutions, and 
 % depending on the type of load, cost, resources availability, and requirements of the load, 
 %stand-alone systems 
 %can be split into several categories. However, 
-the configuration that is most common or mode indicated is the regulated stand-alone system with battery and AC load. This configuration is the focus of this paper.
+the configuration that is most common or more suitable is the regulated stand-alone system with battery and AC load. This configuration is the focus of this study.
 %, which is the target of this paper, includes PV array, batteries, charge controller, inverter, and AC load.
 %PV array, battery, MPPT and AC load. Battery is used to store the extra power of PV system. A charge controller is necessary for this type of system because the useful life of the battery is less than that of the PV module. Extra charging and deep discharging can reduce the battery life \cite{Kim}. Because of the AC load, an inverter (DC to AC converter) is required. 
 %This solution has an increase of cost because has more equipment. However, the AC availability brings the advantage of a higher number of AC appliances to use at the houses or consumer units.
@@ -599,7 +599,7 @@ the configuration that is most common or mode indicated is the regulated stand-a
 \subsection{Design and Simulation of Solar PV systems}
 %The design and validation of a PV system can be done by hand or with the aid of a software tool. 
 %
-In order to address different aspects of project system and systems design, there is a myriad of tools. 
+In order to address different aspects of project system and systems design, there are various software tools \textcolor{red}{add citations here}. 
 %public domain and commercial software available for the PV market. 
 %According to \cite{Brooks}, t
 The capabilities of these tools range from simple solar resource and energy production estimation, %to site survey and system design tools,
@@ -607,7 +607,7 @@ The capabilities of these tools range from simple solar resource and energy prod
 %Some tools also provide support to rebate programs applications and tax incentives (specific to each country or region), while other programs and worksheets focus on the technical aspects of system sizing and design.
 %
 %Manufacturers and integrators have yet their proprietary software to perform inverter string sizing and various system sizing and design tools, with the drawback to just include their own products among the possibilities of choice. 
-Here it was evaluated the most popular tools, as PVWatts, SAM, HOMER Pro, RETScreen Expert, and Hybrid2.
+Here it was evaluated the most popular ones, which are PVWatts, SAM, HOMER Pro, RETScreen Expert, and Hybrid2 \textcolor{red}{add citations here}.
 
 %\subsection{PVWatts Calculator}
 %According to \cite{Freeman} and \cite{NRELDobos}, it is a web application developed by the National Renewable Energy Laboratory (NREL), which estimates the electricity production of a grid-connected roof- or ground-mounted photovoltaic system based on a few inputs. According to \cite{NRELDobos}, to use the calculator, it is necessary to provide information about the system's location, basic design parameters, and system economics. PVWatts calculates estimated values for the system's annual and monthly electricity production, and for the electricity monetary value. This tool is suitable for very preliminary studies of a potential location for a photovoltaic system that uses crystalline silicon or thin film photovoltaic modules. The production estimates that PVWatts computation do not account for many factors that are important in the design of a photovoltaic system, therefore it is necessary support of an energy expert. The calculator estimates the monthly and annual electricity production of a photovoltaic system using an hour-by-hour simulation over a period of one year. To represent the system's physical characteristics, PVWatts requires values for six inputs: System DC size; Module type; Array type; System losses; Array tilt angle; Array azimuth angle.
@@ -637,7 +637,7 @@ Here it was evaluated the most popular tools, as PVWatts, SAM, HOMER Pro, RETScr
 %The Hybrid2 software package, as described in \cite{Mills}, is a user-friendly tool to perform detailed long-term performance and economic analysis on a wide variety of hybrid power systems. Hybrid2 is a probabilistic/time series computer model, using time series data for loads, wind speed, solar insolation, and temperature; and the power system is designed or selected by the user, in order to predict the performance of the hybrid power system. Variations in wind speed and in load within each time step are factored into the performance predictions. The code does not consider short-term system fluctuations caused by system dynamics or component transients. This program is not supported anymore and according to \cite{UMASS}, probably after the user performs the free download of the tool, it will not work on Windows platforms later than Windows XP, what is a limitation.
 
 Table~\ref{table:softwares} summarizes the off-the-shelf tools employed in this study, where only Hybrid2 does not have technical support; HOMER Pro and Hybrid2 perform off-grid system or battery backup analysis; %all the tools perform solar photovoltaic analysis; 
-additionally, HOMER Pro and RETScreen Expert include economical analysis or even optimization-sensitive analysis. However, only paid version (restrict to the Microsoft Windows Operational System) of those tools have all the features, as to save the the project or to upload data from manufacturers. RETScreen and HOMER have a free web-based version, but they have limited resources.
+additionally, HOMER Pro and RETScreen Expert include economical analysis or even optimization-sensitive analysis. However, only commercial version (restricted to the Microsoft Windows OS) of those tools have all the features \textcolor{red}{these are really all features that are needed?}: to save the project or to upload data from manufacturers. RETScreen and HOMER have a free web-based version, but they have limited resources.
 
 \begin{table}[!t]
 %% increase table row spacing, adjust to taste
@@ -679,19 +679,19 @@ Sensitive analysis &  &  & X & X & \\
 %\subsection{Paper Proposal x Reference Tools}
 %-------------------------------------------------------------------
 %
-Considering the focus of this paper, only HOMER remains for a comparative with the proposed automated verification technique of this paper. %All tools need some parameters inherently from manufacturer's catalog.
+Considering the focus of this study, only HOMER remains for a comparative evaluation with our proposed automated verification technique. %All tools need some parameters inherently from manufacturer's catalog.
 %, so the project starts with manufacturers and integrators tool to define the basic items of the project: panels, inverters, controllers, and batteries. 
 %After that, the potential solution is analyzed in another tool to simulate or even optimize the proposed solution. Therefore, that is 
-And the challenge of this work is to show that is possible to use automated verification in stand-alone PV solution, proving that this evaluation is more efficient and complete than other state-of-the-art tool, as HOMER Pro. The comparative evaluation between the HOMER Pro and the proposed verification tool is presented in Section \ref{sec:results}.
+The main challenge of this study is to show that it is possible to use automated verification in stand-alone PV solution, thus proving that this evaluation is more efficient and complete than other state-of-the-art tool, as HOMER Pro. The comparative evaluation between the HOMER Pro and the proposed verification tool is presented in Section~\ref{sec:results}.
 
 %-------------------------------------------------------------------
 \subsection{Component models for stand-alone PV system }
 %-------------------------------------------------------------------
 
 %The main purpose of this section is to describe the models for the elements of a stand-alone PV system: PV generator, battery, controller, inverter, and load. 
-The mathematical modeling of the PV system is based on modular blocks, as illustrated in Fig.\ref{fig:blockdiagram}. It is identified the PV generator, batteries, charge controller, inverter, and AC load. 
+The mathematical modeling of the PV system is based on modular blocks, as illustrated in Fig.\ref{fig:blockdiagram}. It identifies the PV generator, batteries, charge controller, inverter, and AC load. 
 
-The PV generator, which can be a panel or an array, is a semiconductor device that can convert solar energy into DC electricity. At the diagram, there are two variables that depend on the site where the system is deployed and from the weather (solar irradiance $ G $ and temperature $ T $). For night hours or rainy days, one needs to hold batteries, where power can be stored and used. The use of battery as a storage form implies thus the presence of a charge controller \cite{Hansen}, \cite{Mellit}. The PV arrays produce DC and therefore when the PV system contains an AC load, a DC/AC conversion is required. That converter is called of inverter. And the AC load dictates the behavior of AC electrical load from the house that will be feed by the system.
+The PV generator, which can be a panel or an array, is a semiconductor device that can convert solar energy into DC electricity. In the diagram, there are two variables that depend on the site where the system is deployed and from the weather (solar irradiance $G$ and temperature $T$). For night hours or rainy days, one needs to hold batteries, where power can be stored and used. The use of battery as a storage form implies thus the presence of a charge controller~\cite{Hansen,Mellit}. The PV arrays produce DC and therefore when the PV system contains an AC load, a DC/AC conversion is required. That converter is called of inverter; and the AC load dictates the behavior of AC electrical load from the house that will be fed by the system.
 %
 %The modular structure facilitates the modeling of the other system structures and replacement of elements, such as a DC load instead of an AC load. 
 %
@@ -736,7 +736,7 @@ The PV generator, which can be a panel or an array, is a semiconductor device th
 %Modeling provides the ways to understand the current, voltage, and power relationships of PV systems.
   
 The performance of PV systems %, %that is, the output current/voltage curve ($I-V$ curve), 
-is usually studied using an equivalent circuit model, as described in the available literature \cite{Yatimi}, \cite{Saloux}, \cite{Mellit}. This equivalent circuit consists of a current source with one or two diodes connected in parallel, and up to two resistors, one connected in parallel and the other one in series, to take into account energy losses in this model \cite{Cubas}. 
+is usually studied using an equivalent circuit model, as described in the available literature~\cite{Yatimi,Saloux,Mellit}. This equivalent circuit consists of a current source with one or two diodes connected in parallel, and up to two resistors, one connected in parallel and the other one in series, in order to take into account energy losses in this model~\cite{Cubas}. 
 %Based on these electronic components, four basic configurations are normally used when studying photovoltaic systems, as shown by Fig. \ref{fig:equivckt}. 
 \begin{figure}[h]
 \includegraphics[width=0.20\textwidth]{equivckt1D}
@@ -746,13 +746,13 @@ is usually studied using an equivalent circuit model, as described in the availa
 \label{fig:equivckt}
 \end{figure}
  
-The 1-diode model, shown by Fig. \ref{fig:equivckt}, whose equation to relate the output current, $I$, to the output voltage, $V$, is described in (\ref{eq:1diodemodel}). 
+The 1-diode model, illustrated in Fig. \ref{fig:equivckt}, whose equation relates the output current, $I$, to the output voltage, $V$, is described in \eqref{eq:1diodemodel}. 
 \begin{equation}
 \label{eq:1diodemodel}
-I = I_{ph}-I_{D1}=I_{ph}-I_{0}\left[ exp \left( \dfrac{V}{NaV_{T}} \right)  \right] 
+I = I_{ph}-I_{D1}=I_{ph}-I_{0}\left[ exp \left( \dfrac{V}{NaV_{T}} \right)  \right], 
 \end{equation}
 
-Where: $I_{ph}$ is the photocurrent delivered by the constant current source; $ I_{0} $ is the reverse saturation current corresponding to the diode; $ N $ is the number of series-connected cells ($ N=1 $ in a single cell configuration); $ a $ is the ideality factor (or quality factor) that takes into account the deviation of the diodes from the Shockley diffusion theory ($a=1$ for ideal diodes and between $ 1 $ and $ 2 $ for real diodes); $V_{T}$ is the thermal voltage ($ V_{T}=k_{B}T/q $); $ k_{B} $ is the Boltzmann constant ($ 1.3806503\times10^{-23}J $); $ T $ the temperature of the p-n junction (or cell temperature) in Kelvin; $ q $ is absolute value of the electron's charge ($ -1.60217646\times10^{-19}C $).
+\noindent where $I_{ph}$ is the photocurrent delivered by the constant current source; $I_{0}$ is the reverse saturation current corresponding to the diode; $N$ is the number of series-connected cells ($N=1$ in a single cell configuration); $a$ is the ideality factor (or quality factor) that takes into account the deviation of the diodes from the Shockley diffusion theory ($a=1$ for ideal diodes and between $1$ and $2$ for real diodes); $V_{T}$ is the thermal voltage ($ V_{T}=k_{B}T/q $); $ k_{B} $ is the Boltzmann constant ($ 1.3806503\times10^{-23}J $); $T$ the temperature of the p-n junction (or cell temperature) in Kelvin; $q$ is absolute value of the electron's charge ($ -1.60217646\times10^{-19}C $).
 
 %\begin{itemize}
 %\item $I_{ph}$ is the photocurrent delivered by the constant current source; 
@@ -812,13 +812,13 @@ Where: $I_{ph}$ is the photocurrent delivered by the constant current source; $ 
 %For that reason, researchers gradually focused on searching out the approximate methods for the calculation of unknown parameters and walked through three different paths. The analytical methods give exact solutions by means of algebraic equations, as done by \cite{Cubas} and \cite{Brano}. However, due to implicit nature and nonlinearity of PV cell or module characteristics, it is hard to find out the analytical solution of all unknown parameters, as described by \cite{Hasan}. Thus, numerical methods such as Newton-Raphson method or Levenberg-Marquardt algorithm were preferred, as described by \cite{Mellit}. This happens because numerical methods give approximate solution of the nonlinear problems without searching for exact solutions. However, numerical methods are time consuming and need long term time series data, which is not available in developing countries. \cite{Jakhrani} did a mixed methodology using analytical and numerical steps together.  \cite{Shenawy} create a method to discover the unknown parameters of the PV panels through experimentation (essays). And \cite{Tian} did a mix of analytical and experimental methodology to get the unknown parameters, but samples of the PV modules are necessary to perform some essays, when we use experimental technique. 
 
 %Therefore, a wide variety of models exists for estimation of power output of PV modules (and $I-V$ or $P-V$ curves). However, the present work will rely on t
-The simplified model of 1-diode was shown that has a small error rate, between 0.03\% and 4.68\% from selected PV panels tested \cite{Saloux}. In addition, this mathematical modeling has the advantage of being an explicit model, which does not use iterative numerical calculation, which is time-consuming to computing. 
+The simplified model of 1-diode has demonstrated that it has a small error rate, between 0.03\% and 4.68\% from selected PV panels tested~\cite{Saloux}. In addition, this mathematical modeling has the advantage of being an explicit model, which does not use iterative numerical calculation, which is time-consuming to computing. 
  
 %\subsection{PV Panel Model}
 %With the proposed model, an explicit set of equations is derivate from the ideal PV model given by Equation \ref{eq:1diodemodel}.
 %
 %A single-diode without series and shunt resistances is considered. 
-Equation (\ref{eq:1diodemodel}) is used to write down expressions for currents and voltages at each key point of characteristic curve from a PV cell.
+Equation \eqref{eq:1diodemodel} is used to express currents and voltages at each key point of the characteristic curve from a PV cell \textcolor{red}{Add citation here}.
 % shown in Fig. \ref{fig:ivcurve}.
 %
 %\begin{figure}[h]
@@ -877,7 +877,7 @@ Equation (\ref{eq:1diodemodel}) is used to write down expressions for currents a
 %
 %Replacing the Equation \ref{eq:dIdV_Vm} into Equations \ref{eq:Vmderiv} and \ref{eq:Im}, 
 
-The voltage and the current at the maximum power point tracking (MPPT), can be expressed by (\ref{eq:Vmfinal}), (\ref{eq:Imfinal}), and (\ref{eq:Pm}) \cite{Saloux}. %These equations are used to calculate the key cell parameters at the maximum power point as function cell temperature and parameters from the manufacturer's data-sheet.
+The voltage and the current at the maximum power point tracking (MPPT), can be expressed by \eqref{eq:Vmfinal}, \eqref{eq:Imfinal}, and \eqref{eq:Pm} \cite{Saloux}. %These equations are used to calculate the key cell parameters at the maximum power point as function cell temperature and parameters from the manufacturer's data-sheet.
 \begin{equation}
 \label{eq:Vmfinal}
 V_{m}=\dfrac{aNk_{B}T}{q} ln \left( \dfrac{aNk_{B}T}{qI_{0}} \dfrac{I_{sc}}{V_{oc}}  \right) 
@@ -898,41 +898,41 @@ P_{m} = V_{m} I_{m}
 %P_{m} = V_{m} I_{m} = \left[ \dfrac{aNk_{B}T}{q} ln \left( \dfrac{aNk_{B}T}{qI_{0}} \dfrac{I_{sc}}{V_{oc}}  \right) \right] \times \\ \left[ I_{ph} + I_{0} - \dfrac{aNk_{B}T}{q} \left( \dfrac{I_{sc}}{V_{oc}} \right)  \right] 
 %\end{multline}
 %
-However, the photocurrent delivered by the constant current source ($ I_{ph} $) or even the reverse saturation current ($ I_{0} $) are not given by PV manufacturers. Therefore, (\ref{eq:Iph}) is used to calculate the photocurrent as function of irradiance and temperature \cite{Villalva}.
+However, the photocurrent delivered by the constant current source ($I_{ph}$) or even the reverse saturation current ($ I_{0} $) are not given by PV manufacturers. Therefore, (\ref{eq:Iph}) is used to calculate the photocurrent as function of irradiance and temperature~\cite{Villalva}.
 \begin{equation}
 \label{eq:Iph}
-I_{ph}=\dfrac{G}{G_{ref}} \left[ I_{ph,ref} + \mu_{I} \left( T-T_{ref} \right)    \right] 
+I_{ph}=\dfrac{G}{G_{ref}} \left[ I_{ph,ref} + \mu_{I} \left( T-T_{ref} \right)    \right], 
 \end{equation}
 
-Where the reference state (STC) of the cell is given by the solar irradiance $ G_{ref}=1000 W/m^{2} $, and the temperature $ T_{ref}=298.15 K (=25^{o}C) $; $ \mu_{I} $ is the short-circuit current temperature coefficient ($A/K$) %and corresponds to the photocurrent obtained from a given PV cell working at reference conditions 
+\noindent where the reference state (STC) of the cell is given by the solar irradiance $ G_{ref}=1000 W/m^{2} $, and the temperature $ T_{ref}=298.15 K (=25^{o}C) $; $ \mu_{I} $ is the short-circuit current temperature coefficient ($A/K$) %and corresponds to the photocurrent obtained from a given PV cell working at reference conditions 
 (provided by PV manufacturers). $ I_{ph,ref} $ can be approximated to the reference short-circuit current \cite{Jakhrani} that is provided by PV manufacturers ($ I_{sc,ref} $).
 
 The cell temperature ($ T $) is shown in (\ref{eq:Tcell}) \cite{Ross}.
 \begin{equation}
 \label{eq:Tcell}
-T = T_{air} + \dfrac{NOCT-20}{800}G
+T = T_{air} + \dfrac{NOCT-20}{800}G,
 \end{equation}
 
-Where $ T_{air} $ is the ambient temperature, $NOCT$ is the nominal operating cell temperature (in $^{o}$C) that is find at the PV manufacturer's data-sheet, and $G$ is the solar irradiance ($ W/m^{2} $) of the place where the PV system is deployed.
+\noindent where $ T_{air} $ is the ambient temperature, $NOCT$ is the nominal operating cell temperature (in $^{o}$C) that is found at the PV manufacturer's data-sheet \textcolor{red}{add citation here}, and $G$ is the solar irradiance ($ W/m^{2} $) of the place where the PV system is deployed.
 
-Furthermore, (\ref{eq:I0}) allows the saturation current ($ I_{0} $) to be expressed as a function of the cell temperature \cite{Villalva}. 
+Furthermore, \eqref{eq:I0} permits the saturation current ($ I_{0} $) to be expressed as a function of the cell temperature~\cite{Villalva}. 
 %In this study, this relation is explicitly written based on cell open-circuit conditions using the short-circuit current temperature coefficient as well as the open-circuit voltage temperature coefficient (Equation \ref{eq:I0}).
 
 \begin{equation}
 \label{eq:I0}
-I_{0} = \dfrac{I_{sc,ref} + \mu_{I}(T - T_{ref})}{exp \left[ \dfrac{q(V_{oc,ref} + \mu_{V} (T - T_{ref}))}{aNk_{B}T}    \right] -1}
+I_{0} = \dfrac{I_{sc,ref} + \mu_{I}(T - T_{ref})}{exp \left[ \dfrac{q(V_{oc,ref} + \mu_{V} (T - T_{ref}))}{aNk_{B}T}    \right] -1},
 \end{equation}
 
-Where $ V_{oc,ref} $ is the reference open-circuit voltage, and $ \mu_{V} $ is an open-circuit voltage temperature coefficient ($ V/K $).
+\noindent where $ V_{oc,ref} $ is the reference open-circuit voltage, and $ \mu_{V} $ is an open-circuit voltage temperature coefficient ($ V/K $).
 
 %The ideality (or quality) factor of the diode $ a $, which is usually considered as a constant \cite{Villalva}, is determined in the reference state. 
 Using the maximum power point current (\ref{eq:Pm}) and the saturation current in the reference temperature given by (\ref{eq:I0}), the diode ideality factor is determined by (\ref{eq:a}).
 \begin{equation}
 \label{eq:a}
-a = \dfrac{q(V_{m,ref}-V_{oc,ref})}{Nk_{B}T} \dfrac{1}{ln \left( 1 - \dfrac{I_{m,ref}}{I_{sc,ref}}  \right) }
+a = \dfrac{q(V_{m,ref}-V_{oc,ref})}{Nk_{B}T} \dfrac{1}{ln \left( 1 - \dfrac{I_{m,ref}}{I_{sc,ref}}  \right) },
 \end{equation}
 
-Where $ V_{mref} $, $ V_{oc,ref} $, $ I_{m,ref} $, and $ I_{sc,ref} $ are key cell values obtained under both actual cell temperature and solar irradiance conditions, usually provided by manufacturers. The model is now completely determined.
+\noindent where $V_{mref}$, $V_{oc,ref}$, $I_{m,ref}$, and $I_{sc,ref}$ are key cell values obtained under both actual cell temperature and solar irradiance conditions, usually provided by manufacturers; the model is now completely determined \textcolor{red}{which model? please be more specific}.
 %; it requires the actual cell temperature (or the air temperature), the actual solar irradiance and common data provided by manufacturers.
 %
 %If the PV cells are in parallel, then there is a parallel array. Therefore, there will be a change at the $ I_{ph} $ and $ I_{0} $and the resulting current is given by Equation \ref{eq:Iarray}, as demonstrated in \cite{Saloux}.
@@ -953,51 +953,53 @@ Where $ V_{mref} $, $ V_{oc,ref} $, $ I_{m,ref} $, and $ I_{sc,ref} $ are key ce
 %
 %Where $ V_{one panel} $ is the voltage from Equation \ref{eq:Vmfinal}.
 
-Besides the model verification, there is the prior stage of project sizing check, based on manufacturer's data and information from the sizing and the site. 
+In addition to the model verification, there is the prior stage of project sizing check, based on manufacturer's data and information from the sizing and the site. 
 
-First is necessary to correct the energy consumption that was estimated to the load ($E_{consumption}$). That is done by (\ref{eq:Ecorrected}) \cite{Pinho}. Where the efficiency of batteries ($\eta_{b}$), controller ($\eta_{c}$), and the inverter ($\eta_{i}$) are considered.
+Firstly, it is necessary to correct the energy consumption that was estimated to the load ($E_{consumption}$). That is done by \eqref{eq:Ecorrected}~\cite{Pinho}, where the efficiency of batteries ($\eta_{b}$), controller ($\eta_{c}$), and the inverter ($\eta_{i}$) are considered.
 \begin{equation}
 \label{eq:Ecorrected}
-E_{corrected} = \dfrac{E_{consumption}}{ \eta_{b} \eta_{c} \eta_{i} }
+E_{corrected} = \dfrac{E_{consumption}}{ \eta_{b} \eta_{c} \eta_{i} }.
 \end{equation}
 
-The total minimum number of solar panels necessary($ N_{TPmin} $) is calculated by  (\ref{eq:NTPmin}), and the check is done with (\ref{eq:NTP}), where the sized number of panels ($ N_{TP} $) must be greater than the result from (\ref{eq:NTPmin}).
+The total minimum number of needed solar panels ($N_{TPmin}$) is computed by \eqref{eq:NTPmin}, and the check is performed using \eqref{eq:NTP}, where the sized number of panels ($ N_{TP} $) must be greater than the result from \eqref{eq:NTPmin}.
 \begin{equation}
 \label{eq:NTPmin}
-N_{TPmin} = \dfrac{E_{corrected}}{E_{p}}
+N_{TPmin} = \dfrac{E_{corrected}}{E_{p}}.
 \end{equation}
 
 \begin{equation}
 \label{eq:NTP}
-N_{TP} \geq N_{TPmin}
+N_{TP} \geq N_{TPmin}.
 \end{equation}
 
-Particularly, the total number of panels is series ($ N_{PSmin} $) and parallel ($ N_{PPmin} $) are given by (\ref{eq:NPSmin}) and (\ref{eq:NPPmin}), respectively. With the check done by (\ref{eq:NPS}) and (\ref{eq:NPP}). $ V_{system} $ is the DC voltage of the bus, normally 12, 24 or 48 V.
+Particularly, the total number of panels is series ($N_{PSmin}$) and parallel ($N_{PPmin}$) are given by \eqref{eq:NPSmin} and \eqref{eq:NPPmin}, respectively. With the check performed by (\ref{eq:NPS}) and (\ref{eq:NPP}). $ V_{system} $ is the DC voltage of the bus, normally $12$, $24$ or $48$ V.
 \begin{equation}
 \label{eq:NPSmin}
-N_{PSmin} = \dfrac{V_{system}}{V_{m,ref}}
+N_{PSmin} = \dfrac{V_{system}}{V_{m,ref}}.
 \end{equation}
 
 \begin{equation}
 \label{eq:NPPmin}
-N_{PPmin} = \dfrac{N_{TPmin}}{N_{PSmin}}
+N_{PPmin} = \dfrac{N_{TPmin}}{N_{PSmin}}.
 \end{equation}
 
 \begin{equation}
 \label{eq:NPS}
-N_{PS} \geq N_{PSmin}
+N_{PS} \geq N_{PSmin}.
 \end{equation}
 
 \begin{equation}
 \label{eq:NPP}
-N_{PP} \geq N_{PPmin}
+N_{PP} \geq N_{PPmin}.
 \end{equation}
 
-
+%------------------------------------------------------------
 \subsection{The Battery Storage Model }
+%------------------------------------------------------------
+
 %Because of the fluctuating nature of the output delivered by the PV arrays, batteries are nece\sqrt{•}ry in a PV system. Thus, during the hours of sunshine, the PV system feeds directly the load and the excess electrical energy is stored in the battery. During the night, or during a period with low solar irradiation, energy is supplied to the load from the battery \cite{Mellit}.
   
-Several models have been presented in the literature \cite{Copetti}, \cite{Manwell93}. 
+Several models have been presented in the literature~\cite{Copetti,Manwell93}. 
 %, and \cite{Manwell94}. 
 %However, regardless of the model, normally the following parameters are required: 
 %
@@ -1032,19 +1034,19 @@ Several models have been presented in the literature \cite{Copetti}, \cite{Manwe
 %
 %The Kinetic Battery Model (KiBaM) of Manwell and McGowen \cite{Manwell93} was developed at the University of Massachusetts to predict the performance of the battery, based on manufacturer's data. However, it uses some data extracted from tested batteries in laboratory. Therefore is not suitable to this study. 
 %
-Most of the created models were based on lead-acid batteries. That kind of battery is the most common used in PV application, owing to their relative low cost and wide availability \cite{Copetti}. 
+Most proposed models are based on lead-acid batteries \textcolor{red}{Add citations here}. That kind of battery is the most common used in PV application, thus owing to their relative low cost and wide availability~\cite{Copetti}. 
 
-Here, the model adopted \cite{Copetti} uses manufacturer's data. % and allows finding relations among voltage, current, state of charge and temperature. 
+Here, the model adopted~\cite{Copetti} uses manufacturer's data. % and allows finding relations among voltage, current, state of charge and temperature. 
 %
-The discharge voltage equation is shown in (\ref{eq:bat_Vd}). 
+The discharge voltage equation is described in \eqref{eq:bat_Vd}. 
 %The first term represents the voltage variation with the state of charge ($ SOC $), i.e., the electrolyte concentration, and the second is the variation due to internal resistance variation.
 %
 \begin{multline}
 \label{eq:bat_Vd}
-V_{d} = \left[ 2.085-0.12(1-SOC) \right] - \\ \dfrac{I}{C_{10}} \left( \dfrac{4}{1+I^{1.3}} + \dfrac{0.27}{SOC^{1.5}}+0.02 \right) (1-0.007 \Delta T)
+V_{d} = \left[ 2.085-0.12(1-SOC) \right] - \\ \dfrac{I}{C_{10}} \left( \dfrac{4}{1+I^{1.3}} + \dfrac{0.27}{SOC^{1.5}}+0.02 \right) (1-0.007 \Delta T),
 \end{multline}
 
-Where $ C_{10} $ means 10h of rated capacity, which is standard on the manufacturer's data-sheet, $ \Delta T $ is temperature variation ($ \Delta T=T-T_{ref} $, $ T_{ref}=25^{o}C $), $ SOC $ or state of charge indicates how much electric charge is stored in the cell at given time. Mathematically, is the ratio between the present capacity and the nominal capacity (in $ Ah $, provided by manufacturer). If $ SOC=1 $, then the battery is totally charged; and if $ SOC=0 $, the battery is fully discharged.  %, defined by Equation \ref{eq:SOCbat}.
+\noindent where $C_{10}$ means 10h of rated capacity, which is standard on the manufacturer's data-sheet, $\Delta T$ is temperature variation ($\Delta T=T-T_{ref} $, $ T_{ref}=25^{o}C $), $ SOC $ or state of charge indicates how much electric charge is stored in the cell at given time. Mathematically, it is the ratio between the present capacity and the nominal capacity (in $ Ah $, provided by manufacturer). If $SOC=1$, then the battery is totally charged; and if $ SOC=0 $, the battery is fully discharged.  %, defined by Equation \ref{eq:SOCbat}.
 %\begin{equation}
 %\label{eq:SOCbat}
 %SOC = \left( 1 - \dfrac{Q}{C} \right) 
@@ -1053,7 +1055,7 @@ Where $ C_{10} $ means 10h of rated capacity, which is standard on the manufactu
 %Where $ Q $ is the charge delivered at the time of interest ($ Q=It $), and C is the battery capacity.
 %
 %The ratio between $ Q $ and $ C $ represents t
-The depth of discharge ($ DOD $) or the fraction of discharge, is $ DOC=1-SOC $.
+The depth of discharge ($DOD$) or the fraction of discharge, is $DOC=1-SOC$.
 
 %The efficiency of the battery discharge is assumed to be 100\%, according \cite{Copetti}; however, the total amount of useful charge available during discharge is limited by the current rate and temperature given by Equation \ref{eq:CC10}. This equation, called of capacity, is normalized with respect to discharge current corresponding to $ C_{10} $ rated capacity ($ I_{10} $).
 %
@@ -1064,7 +1066,7 @@ The depth of discharge ($ DOD $) or the fraction of discharge, is $ DOC=1-SOC $.
 %
 %Note that when the discharge current tends to zero at 25$^{o}$C, the maximum capacity that can be removed is about 67\% over the capacity.
 
-For the charging process, however, the parameters are presented in (\ref{eq:Vcbat}).
+For the charging process, however, the parameters are presented in \eqref{eq:Vcbat}.
 %
 \begin{multline}
 \label{eq:Vcbat}
@@ -1133,26 +1135,29 @@ SOC can be calculated easily at any point during the discharge period, consideri
 %\end{multline}
 %
 %
-Besides the model verification, there is also the prior stage of project sizing check, as did to the solar panel. First is necessary to define the total capacity of the battery bank, as shown by (\ref{eq:Cbank}).
+In addition to the model verification, there is also the prior stage of project sizing check, as performed for the solar panel. Firstly it is necessary to define the total capacity of the battery bank, as described by \eqref{eq:Cbank}.
 \begin{equation}
 \label{eq:Cbank}
-C_{bank} = \dfrac{E_{corrected} \times autonomy}{V_{system} \times DOD}
+C_{bank} = \dfrac{E_{corrected} \times autonomy}{V_{system} \times DOD}.
 \end{equation}
 
-The variable $ autonomy $ is a design definition and normally has a value ranging from 6 to 48h. The other variables were discussed previously.
+The variable $autonomy$ is a design definition and normally has a value ranging from $6$ to $48$h; the other variables were discussed previously \textcolor{red}{can you please refer to the section here?}.
 
-Following, is done the total (minimum) number of batteries, as show by (\ref{eq:Nbtotal}). Moreover, (\ref{eq:batcheck}) perform the final sizing check, considering the number of batteries in series ($ N_{BS} $) and the number of batteries in parallel ($ N_{BP} $) that were established to the project.
+Secondly, the total (minimum) number of batteries is computed, as described in \eqref{eq:Nbtotal}. Moreover, \eqref{eq:batcheck} performs the final sizing check, thus considering the number of batteries in series ($ N_{BS} $) and the number of batteries in parallel ($ N_{BP} $) that are established to the project.
 \begin{equation}
 \label{eq:Nbtotal}
-N_{B}total = N_{BS}min \times N_{BP}min = \dfrac{V_{system}}{V_{bat}} \times \dfrac{C_{bank}}{C_{20}}
+N_{B}total = N_{BS}min \times N_{BP}min = \dfrac{V_{system}}{V_{bat}} \times \dfrac{C_{bank}}{C_{20}}.
 \end{equation}
 
 \begin{equation}
 \label{eq:batcheck}
-\left( N_{BS} \times  N_{BP} \right) \geq N_{B}total
+\left( N_{BS} \times  N_{BP} \right) \geq N_{B}total.
 \end{equation}
 
+%---------------------------------------------------------
 \subsection{Charge Controller Model}
+%---------------------------------------------------------
+
 %Depending on the literature, the controller can receive different names: controller \cite{Hansen}, charge controller \cite{Mahanta} and \cite{Chauhan}, regulator \cite{Mellit}, DC-DC converter with MPPT and switch \cite{Dhanowa}, \cite{Yatimi}, \cite{Abdulateef}, \cite{Roy}. However, in this study, in order to simplify, the term used is controller. 
 
 %The charge controller or controller is a set of items (DC-DC converter, MPPT, and switches) and can be defined as the responsible to manage the energy flow to PV system, batteries and loads by collecting information on the battery voltage and knowing the maximum and minimum values acceptable for the battery voltage. %MPPT, or maximum power point tracking, is an electronic control mechanism that maintains the PV operating at the voltage of maximum power. Controllers aim to protect the battery (or batteries) against the excessive charge and discharge \cite{Pinho}, improving its lifetime. 
@@ -1166,7 +1171,7 @@ In general, there are two main operating modes for the controller: normal operat
 
 %The controller allows the management of energy between the load and the battery \cite{Mellit}. 
 %The input signals for regulator model are the battery current ($ I_{br} $), PV generator's voltage ($ V_{PV} $), PV generator's current ($ I_{PV} $), and battery voltage ($ V_{b} $). The outputs are battery ($ I_{rb} $) current and used current ($ I_{u} $). 
-To protect the battery against an excessive charge, the PV arrays are disconnected from the system, when the terminal voltage increases above a certain threshold $ V_{max \textunderscore off} $ and when the current required by the load is less than the current delivered by the PV arrays \cite{Hansen}. PV arrays are connected again when the terminal voltage decreases below a certain value $ V_{max \textunderscore on} $. 
+To protect the battery against an excessive charge, the PV arrays are disconnected from the system, when the terminal voltage increases above a certain threshold $V_{max \textunderscore off}$ and when the current required by the load is less than the current delivered by the PV arrays~\cite{Hansen}. PV arrays are connected again when the terminal voltage decreases below a certain value $ V_{max \textunderscore on} $. 
 %This can be done by using a switch with a hysteresis cycle, as illustrated in Fig. \ref{fig:controllerover}. 
 %
 %\begin{figure}[h]
@@ -1176,7 +1181,7 @@ To protect the battery against an excessive charge, the PV arrays are disconnect
 %\label{fig:controllerover}
 %\end{figure}
 
-To protect the battery against excessive discharge, the load is disconnected when the terminal voltage falls below a certain threshold $ V_{min \textunderscore off} $ and when the current required by the load is larger than the current delivered by the PV arrays \cite{Hansen}. The load is reconnected to the system, when the terminal voltage is above a certain value $ V_{min \textunderscore on} $.
+In order to protect the battery against excessive discharge, the load is disconnected when the terminal voltage falls below a certain threshold $V_{min \textunderscore off}$ and when the current required by the load is larger than the current delivered by the PV arrays~\cite{Hansen}. The load is reconnected to the system, when the terminal voltage is above a certain value $V_{min \textunderscore on}$.
 %, using a switch with a hysteresis cycle, as shown in Fig. \ref{fig:controllerdisc}. 
 %
 %\begin{figure}[h]
@@ -1188,7 +1193,7 @@ To protect the battery against excessive discharge, the load is disconnected whe
 %
 %According to \cite{Lorenzo}, the switches may either be electromechanical (relay, contactors, etc.) or solid state (bipolar transistors, MOSFET's, etc.). 
 %
-The steps in the modeling of the controller process are summarized in Table \ref{table:controller}.
+The steps in the modeling of the controller process are summarized in Table~\ref{table:controller}.
 
 \begin{table}[!t]
 %% increase table row spacing, adjust to taste
@@ -1221,19 +1226,19 @@ Step  & Constraint & Command\\
 %Regarding the DC-DC converter, the most basic idea is that the power is converted while altering the current and voltage. 
 %
 %As shown in \cite{Abdulateef}, the DC-DC converter is used to increase the efficiency of the PV system by matching the voltage generated by PV array to the voltage required by the load. 
-The output power ($ P_{out} $) of DC-DC converter is given by (\ref{eq:poutcont}). 
+The output power ($ P_{out} $) of DC-DC converter is given by \eqref{eq:poutcont}. 
 \begin{equation}
 \label{eq:poutcont}
-P_{in} = P_{out}
+P_{in} = P_{out}.
 \end{equation}
 
-Assuming that the efficiency of the controller ($ \eta_{c} $) is a manufacturer's data, from (\ref{eq:poutcont}) is possible to reach (\ref{eq:potcont}).
+Assuming that the efficiency of the controller ($ \eta_{c} $) is a manufacturer's data, from \eqref{eq:poutcont} it is possible to reach \eqref{eq:potcont}.
 \begin{equation}
 \label{eq:potcont}
-V_{in} I_{in} \eta_{c} = V_{out} I_{out}
+V_{in} I_{in} \eta_{c} = V_{out} I_{out},
 \end{equation}
 
-Where $ V_{in} $ is the voltage across the PV array, $ I_{in} $ is the output current of PV array, $ V_{out}=V_{b}=V_{system} $ is the  DC bus voltage, and $ I_{out} $ is the output current from the converter.
+\noindent where $ V_{in} $ is the voltage across the PV array, $ I_{in} $ is the output current of PV array, $ V_{out}=V_{b}=V_{system} $ is the  DC bus voltage, and $ I_{out} $ is the output current from the converter.
 
 %The output voltage is related to the input voltage as a function of duty cycle of the switch (\cite{Abdulateef}). 
 % 
@@ -1254,27 +1259,27 @@ Where $ V_{in} $ is the voltage across the PV array, $ I_{in} $ is the output cu
 % 
 %As the MPPT definition and the equations to get the maximum power from the PV panels was described at the end of the PV panel modeling, the important here is to notice that the Equation \ref{eq:voutvin} defines the relationship between the input signal, the efficiency of the controller and the output power.
  
-One more time, some steps must be done to check the sizing project of the controller, prior the verification phase. Initially the controller must meet the voltage requirement of the PV system, as shown by (\ref{eq:vcvsystem}). 
+One more time, some steps must be done to check the sizing project of the controller, prior the verification phase. Initially, the controller must meet the voltage requirement of the PV system, as described in \eqref{eq:vcvsystem}. 
 \begin{equation}
 \label{eq:vcvsystem}
-V_{c} = V_{system}
+V_{c} = V_{system}.
 \end{equation}
 
-Following, the short circuit reference information from the manufacturer's solar panel must be corrected to the cell temperature, as shown by (\ref{eq:iscamb}).
+Following, the short circuit reference information from the manufacturer's solar panel must be corrected to the cell temperature, as shown by \eqref{eq:iscamb}.
 \begin{equation}
 \label{eq:iscamb}
-I_{sc,amb} = I_{sc,ref} \times \left[ 1 + \eta_{I} \times (T-25) \right] 
+I_{sc,amb} = I_{sc,ref} \times \left[ 1 + \eta_{I} \times (T-25) \right]. 
 \end{equation}
 
-The controller must meet the maximum current from the PV array (\ref{eq:icmin}), and (\ref{eq:icicmin}).
+The controller must meet the maximum current from the PV array \eqref{eq:icmin} and \eqref{eq:icicmin}.
 \begin{equation}
 \label{eq:icmin}
-I_{c,min} = I_{sc,amb} \times N_{PP}
+I_{c,min} = I_{sc,amb} \times N_{PP}.
 \end{equation}
 
 \begin{equation}
 \label{eq:icicmin}
-I_{c} \geq I_{c,min}
+I_{c} \geq I_{c,min}.
 \end{equation}
 
 %The number of controllers required for the stand-alone PV system, as defined by \cite{Yatimi}, is calculated using Equation \ref{eq:numberofcmin}. In addition, the final sizing check is did by Equation \ref{eq:numberofc}, who validate the number of controllers adopted.
@@ -1314,8 +1319,9 @@ I_{c} \geq I_{c,min}
 %\item In the other hand, although the batteries connected in series are also seen as a single battery, the result is different: two 12 V and 220 Ah batteries in series are seen as one 24 V and 220 Ah battery;
 %\item In addition, a mixed bank arrangement can be useful: a bank with two 12 V and 220 Ah batteries in series connected in parallel with a similar arrange will produce an equivalent battery of 24 V and 440 Ah.
 %\end{itemize}
-%
+%-----------------------------------------------
 \subsection{The inverter model}
+%-----------------------------------------------
 %As shown by \cite{Mellit}, the PV arrays produce DC and therefore when the PV system contains an AC load, a DC/AC conversion is required. 
 %An inverter is a converter, where the power flows from DC to AC side, i.e., having a DC voltage as input; it produces AC voltage, as output. 
 The role of the inverter is to keep the voltage constant on the AC side, i.e., at the rated voltage, % (127 V or 220 V, for example), 
@@ -1324,27 +1330,27 @@ and to convert the input power $ P_{in} $ into the output power $ P_{out} $ with
 %The inverter is characterized by a power dependent efficiency $ \eta_{i} $ as shown by (\ref{eq:efficinv}) \cite{Hansen}.
 \begin{equation}
 \label{eq:efficinv}
-\eta_{i} = \dfrac{P_{out}}{P_{in}} = \dfrac{V_{AC} I_{AC} cos\varphi}{V_{DC}I_{DC}}
+\eta_{i} = \dfrac{P_{out}}{P_{in}} = \dfrac{V_{AC} I_{AC} cos\varphi}{V_{DC}I_{DC}},
 \end{equation}
 
-Where $ I_{DC} $ is the current required by the inverter from the DC source in order to be able to keep the rated voltage on the AC side, $ V_{DC} $ is the input voltage to the inverter delivered by the DC source (PV panel or battery),  $ V_{AC}  $ and $ I_{AC} $ are the output voltage and current, respectively, and $ cos \varphi $ can be find from the inverter's data-sheet.
+\noindent where $ I_{DC} $ is the current required by the inverter from the DC source to be able to keep the rated voltage on the AC side, $ V_{DC} $ is the input voltage to the inverter delivered by the DC source (PV panel or battery),  $ V_{AC}  $ and $ I_{AC} $ are the output voltage and current, respectively, and $ cos \varphi $ can be find from the inverter's data-sheet.
 
 %Therefore, with this equation it is possible to simulate the output power of the inverter, based on information from the inverter's data-sheet and from the DC module or the PV panel that feed the inverter (which are obtained by this study model). 
 %
-The sizing project check of the inverter is done through three Equations. Equation (\ref{eq:vindc}) ensure that the input voltage of the controller meet the voltage of the system. Equation (\ref{eq:voutac}) ensures that the output voltage of the controller meet the AC voltage of the load. Moreover, (\ref{eq:invcheck}) ensures that the controller can support the total demand of the load and the surge power.
+The sizing project check of the inverter is done through three Equations. Eq. \eqref{eq:vindc} ensures that the input voltage of the controller meet the voltage of the system. Eq. \eqref{eq:voutac} ensures that the output voltage of the controller meet the AC voltage of the load. Moreover, \eqref{eq:invcheck} ensures that the controller can support the total demand of the load and the surge power.
 \begin{equation}
 \label{eq:vindc} 
-V_{in}DC = V_{system}
+V_{in}DC = V_{system}.
 \end{equation}
 
 \begin{equation}
 \label{eq:voutac} 
-V_{out}AC = V_{AC}
+V_{out}AC = V_{AC}.
 \end{equation}
 
 \begin{equation}
 \label{eq:invcheck} 
-\left[ (Demand \leq P_{AC,ref}) \, and \, (P_{surge} \leq MAX_{AC,ref}) \right] 
+\left[ (Demand \leq P_{AC,ref}) \, and \, (P_{surge} \leq MAX_{AC,ref}) \right].
 \end{equation}
 
 %--------------------------------------------------
@@ -1353,15 +1359,17 @@ V_{out}AC = V_{AC}
 %--------------------------------------------------
 
 %It is necessary to keep in mind that 
-Validation is the process of determining whether a design meets the needs of the user, whereas verification is the process of determining whether a design meets a set of requirements, specifications, and regulations \cite{Clarke2008}.  
+Validation is the process of determining whether a design meets the needs of the user, whereas verification is the process of determining whether a design meets a set of requirements, specifications, and regulations~\cite{Clarke2008}.  
+
+\textcolor{red}{I would suggest to replace Clarke2008 by this one https://dblp.uni-trier.de/rec/bibtex/reference/mc/ClarkeHV18. Or at least cite it in the next sentence which is more recent.}
 
 If the requirements, specifications, and regulations are given in a formal language, then it may be possible to automate verification, resulting in a process known as formal verification. Verification may form part of a validation process.
 %, but in general, validation cannot be formalized because it relates a system design to intent.  
 
 %Simulation may also be used for validation, but it is more problematic for verification.
-In order to use simulation for verification, it is necessary to ensure adequate coverage of operating conditions, scenarios, and system inputs. Testing can also be used for validation, but for the same reasons, it too is problematic for verification.
+In order to use simulation for verification, it is necessary to ensure adequate coverage of operating conditions, scenarios, and system inputs. Testing can also be used for validation, but for the same reasons, it is too problematic for verification \textcolor{red}{Why is it problematic?!?}.
  
-Verification procedure is an intelligent exhaustive search of the state space of the design \cite{Clarke2008}. In addition, formal verification is a systematic approach that applies mathematical reasoning to obtain guarantees about the correctness of a system \cite{Forejt2011}. One successful method in this domain is model checking.
+Verification procedure is an intelligent \textcolor{red}{What do you mean by intelligent?} exhaustive search of the state space of the design \cite{Clarke2008}. In addition, formal verification is a systematic approach that applies mathematical reasoning to obtain guarantees about the correctness of a system \cite{Forejt2011}. One successful method in this domain is model checking \textcolor{red}{please cite here the reference given above}.
  % 
 %Model checking is an automatic verification technique, as defined by \cite{Clarke2008}. Model checking was originally developed reasoned about finite state of concurrent systems, nowadays is mainly used to hardware and software verification, but can be applied to any kind of system. 
 
@@ -1373,7 +1381,7 @@ The process of model checking can be divided in three components: modeling, spec
 %\item The model checking is the verification method itself. 
 %\end{itemize}
 
-The model checking algorithm can be described as:  
+The model checking algorithm can be described as \textcolor{red}{add citation here}:  
 
 \begin{itemize}
 \item Given the model $ 'M' $ and a $CTL$ formula $ \phi $ as input;  
@@ -1381,7 +1389,7 @@ The model checking algorithm can be described as:
 \item It returns $YES$ if $ \phi $ is $TRUE$, or returns $NO$ if $ \phi $ is $FALSE$.  
 
 \end{itemize}
-Specifically at the $FALSE$ situation, the algorithm returns a counterexample that is useful as diagnostic of the system, in order to discover in which situation the model is violated. That is the most important advantage of the use of model checking \cite{Clarke2008}. 
+Specifically for the $FALSE$ verification result, the algorithm returns a counterexample that is useful as diagnostic of the system, to discover in which situation the model is violated. That is the most important advantage of the use of model checking \cite{Clarke2008}. 
 %Among the other advantages can be listed: there is no need of proofs (the algorithm is not a deductive procedure), there is no problem with partial specifications of the system, logics can easily express many concurrency properties, is fast (compared to other rigorous methods such as interactive theorem proving). 
 However, there is a main disadvantage of model checking: the state explosion problem. 
 %
@@ -1405,7 +1413,7 @@ In a typical model checking system, a preprocessor extracts a state transition g
 %
 %Here it is worth to mention that the term "model" is not the meaning taken from the dictionary. The problem is not dealing with an abstraction of the actual system under study. 
 %
-The Fig. \ref{fig:systemverif} shows the process to convert a real system to a model in order to be verified by a model checking. 
+Fig.~\ref{fig:systemverif} shows the process to convert a real system to a model to be verified by a model checking procedure \textcolor{red}{Please try to adapt this figure to our context. How can it be applied to verify PV?}. 
 
 \begin{figure}[h]
 \includegraphics[width=0.4\textwidth]{systemverif}
@@ -1414,15 +1422,17 @@ The Fig. \ref{fig:systemverif} shows the process to convert a real system to a m
 \label{fig:systemverif}
 \end{figure}
 
-In order to solve the problem of state explosion, many different techniques were developed at the last decades. One of the promising is the Bounded Model Checking (BMC). BMC is a method that checks the model up to a given path in the path length. BMC algorithms traverses a finite state machine for a fixed number of steps, $ k $, and checks whether violation occurs with this bound. It uses SAT solvers, where SAT means satisfiability. SAT problem is a problem of determining if there are certain conditions or interpretation that satisfy a given Boolean expression \cite{Clarke2008}. %SAT solvers are used in BMC, such that i
+In order to solve the problem of state explosion, many different techniques were developed at the last decades \textcolor{red}{Please cite them here!!!}. One of the promising is the Bounded Model Checking (BMC). BMC is a method that checks the model up to a given path in the path length. BMC algorithms traverses a finite state machine for a fixed number of steps, $ k $, and checks whether violation occurs with this bound. It uses Boolean Satisfiability (SAT) solvers, where SAT means satisfiability. SAT problem is a problem of determining if there are certain conditions or interpretation that satisfy a given Boolean expression \cite{Clarke2008}. %SAT solvers are used in BMC, such that i
 %If there are some Boolean function, t
-The solver would search the model for conditions (value of variables) that would make the formula $TRUE$. If SAT Solver find a substitution for the formula/function then the substitute induces a counterexample.  
+The solver would search the model for conditions (value of variables) that would make the formula $TRUE$. If a SAT Solver find a substitution for the formula/function then the substitute induces a counterexample.  
 
 CBMC is considering the best-known model verification tool to validate code in ANSI-C and C++ \cite{Kroening}. 
 
+\textcolor{red}{ESBMC does not use CBMC as its main frontend. Please take a look at this paper and cite it: https://ssvlab.github.io/lucasccordeiro/papers/ase2018.pdf. I would also suggest to remove the above sentence.}
+
 ESBMC is a context-bounded model checker for embedded C/C++ software based on Satisfiability Modulo Theories (SMT) solver, which can use CBMC as front-end.
 %The use of SMT, instead of Boolean Satisfiability SAT from the original BMC, 
-ESBMC comes as an alternative to overcome limitations of the systems modeling, especially considering that the complexity of these is increasing and the SMT method has high level and richer theories than the SAT to represent the models. 
+ESBMC comes as an alternative to overcome limitations of the systems modeling, especially considering that the complexity of these is increasing and the SMT method has high level and richer theories than the SAT to represent the models \textcolor{red}{add citation here}. 
 
 \subsection{ESBMC }
 ESBMC (or Efficient SMT-based Bounded Model Checker) is an open source, permissively licensed (Apache 2), cross platform bounded model checking for C and C++ programs \cite{GadelhaSBMF}. 
@@ -1432,7 +1442,7 @@ Fig. \ref{fig:esbmcarch} shows the tool architecture.
 \begin{figure}[h]
 \includegraphics[width=0.5\textwidth]{ESBMCarch2}
 \centering
-\caption{ESBMC architecture (adapted from \cite{GadelhaSBMF}).}
+\caption{ESBMC architecture (adapted from \cite{GadelhaSBMF}). \textcolor{red}{This architecture is obsolete. Please see the paper https://ssvlab.github.io/lucasccordeiro/papers/ase2018.pdf}}
 \label{fig:esbmcarch}
 \end{figure}
 
@@ -1726,8 +1736,6 @@ Related to the four 700 W PV systems, the sizing check was successful during aut
 %
 %\subsection{Experimental results}
 %\label{sec:results}
-
-XXX
 
 %-------------------------------------
 \section{Conclusion and Future Work}
