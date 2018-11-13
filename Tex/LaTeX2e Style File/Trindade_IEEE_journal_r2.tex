@@ -472,7 +472,7 @@ Photovoltaic power systems, solar power generation, power system modeling, forma
 % 
 % Here we have the typical use of a "T" for an initial drop letter
 % and "HIS" in caps to complete the first word.
-\IEEEPARstart{A}{ccording} to \cite{Coelho}, there are presently 1.3 billion people with no access to electricity worldwide. 
+\IEEEPARstart{A}{ccording} to Coelho et al.~\cite{Coelho}, there are presently 1.3 billion people with no access to electricity worldwide. 
 %The definition of energy access usually includes both electricity access and access to modern fuels for cooking and heating, in order to replace traditional biomass. 
 %Increased access to energy allows economic growth and poverty alleviation \cite{Karekesi}. 
 %
@@ -493,7 +493,7 @@ There was an increase of approximately 50\% from 2016 to 2017 in terms of new in
 %PV systems consist of PV modules, battery bank, controller, and inverter, plus the load. %Moreover, the optimum sizing of these devices is important for reliable operation.
 %Therefore, these systems need to be designed properly according to the site, land area available, load requirement, load pattern, environmental conditions and economics in order to utilize available resources efficiently and economically \cite{Rawat}. %Furthermore, there is the need for proper modeling and simulation tools for people involved in their application. 
 
-The increase in the number of PV systems installed all over the world brings the need for proper modeling and simulation tools for researchers and practitioners involved in their application. In order to model, simulate or evaluate a PV system, there are a myriad of specialized tools available in the market, as RETScreen, HOMER, PVWatts, SAM, and Hybrid2. And even general purpose simulation tools as PSpice, Saber or MATLAB/Simulink package.
+The increase in the number of PV systems installed all over the world brings the need for proper modeling and simulation tools for researchers and practitioners involved in their application. In order to model, simulate or evaluate a PV system, there are a myriad of specialized tools available in the market, as RETScreen, HOMER, PVWatts, SAM, and Hybrid2 \textcolor{red}{Add citation to all those tools}. And even general purpose simulation tools as PSpice, Saber or MATLAB/Simulink package \textcolor{red}{Add citation to all those tools}.
 
 %However, to the best of our knowledge, this work can be the first work to perform automated verification of a stand-alone solar PV project solution.  
 %
@@ -504,9 +504,9 @@ The increase in the number of PV systems installed all over the world brings the
 %Manufactures and integrators have yet their proprietary software to perform various system sizing, with the drawback of include just their own products among the possibilities of choice, what restrict the solution. 
 %
 %PV systems can be classified into grid-connected and stand-alone systems. At this proposal, only off-grid or stand-alone systems will be considered. The utilization of solar energy in off-grid mode has the potential to meet the energy need for remote rural areas of developing countries.  
-However, those tools are based on running experiments in simulation models. And simulation has the advantage of be cheap (when compared to test in real systems) and can be employed before the system is declared concluded, however with the drawback of an incomplete coverage, because the verification of all possible iterations and potential failures of systems is rarely pissible or feasible \cite{Clarke2008}.
+However, those tools are based on running experiments in simulation models. Simulation has the advantage of being cheap (if compared to test in real systems) and can be employed before the system design is concluded; however, it has the drawback of an incomplete coverage since the verification of all possible combinations and potential failures of systems is rarely possible or even feasible~\cite{Clarke2008}.
 
-Formal methods based on model checking offer great potential to obtain a more effective and faster verification in the design process \cite{Clarke2008}.  
+Formal methods based on software model checking offer great potential to obtain a more effective and faster verification in the design process~\cite{Clarke2008}.  
 %with behavior that is, in principle, well determined. 
  Using this technique, any kind of system can be specified as computer programs using mathematical logic, which constitutes the intended (correct) behavior. Then, one can try to give a formal proof or otherwise establish that the program meets its specification. User or project requirements can be added during the process of coding. %, as defined by \cite{Trindade}. 
 %
@@ -517,40 +517,36 @@ Formal methods based on model checking offer great potential to obtain a more ef
 %
 %Model-based verification techniques are based on models that describe the possible system behavior in a mathematically precise and unambiguous manner. 
 %Thus, such problems as incompleteness, ambiguities, and inconsistencies, which normally are discovered only in later stages of the design, can be detected in advance, as described by \cite{Trindade}. 
- And finally, algorithms can verify the system model by systematically exploring all their states. That way, the formal proof can verify if the requirements are met by the system.
+Finally, model checking algorithms can verify the system model by systematically exploring all their states. That way, the formal proof can verify if the requirements are met by the system.
 
-Formal methods, in the other hand, provide facilities for the modeling of each component of any complex system \cite{Hall1990}. It allows for developing models for each component of the system. At this paper, a mathematical model of each component of a stand-alone PV system, as panel solar, charge controller, batteries, inverter, and electrical load are created. The behavior of each system can be analyzed and observed with the help of these formal models, as the joint operation of the components, which in this case represent the operation of the solar PV system itself. A key benefit to this approach is that it helps in the detection of faults and flaws in the design phase of system development, thereby considerably improving system reliability \cite{Akram2018}.
+Formal methods, alternatively, provide facilities for the modeling of each component of any complex system~\cite{Hall1990}. It allows one to develop models for each component of the system. At this study, a mathematical model of each component of a stand-alone PV system, as panel solar, charge controller, batteries, inverter, and electrical load are created. The behavior of each system can be analyzed and observed with the support of those formal models, as a joint operation of the components, which in this case represents the operation of the solar PV system itself. A key benefit to this approach is that it helps in the detection of faults and flaws in the design phase of system development, thereby considerably improving system reliability~\cite{Akram2018}.
 
 %Those programs are viewed as mathematical objects, and the use of 
 %Bringing this technique to solar PV systems, i
 %Instead of finding a bug or a software inconsistence, t
 %Here it will be verified a stand-alone PV system, with all their components modeled mathematically, 
-Related to solar PV systems, the project requirements, as battery autonomy and power demand, beside weather conditions, as solar irradiance and ambient temperature, are translated as part of the computer program and automated verified during the formal process. The model checking tool reports in which conditions the system does not met the user requirements or whether it will fail due to weather conditions, which aids to improve the project itself.  
+Related to solar PV systems, the project requirements, as battery autonomy and power demand, beside weather conditions, as solar irradiance and ambient temperature, are translated as part of the computer program and automatically verified during the formal process. The model checking tool reports in which conditions a system does not meet the user requirements or whether it will fail due to weather conditions, which aids to improve the project itself.  
 
 %Among the non-deterministic variables considerated, is it worth to mention environmental issues (like solar irradiance, and temperature), and the variation of the electrical load (power consumption) or the battery' state of charge, as shown in Fig.\ref{fig:flowchartgeneral}.
-The implementation of the
-% ideas will be 
-proposed tool is carried out by means of the efficient SMT-based bounded model checker (ESBMC) %tool that uses the front-end of the C Bounded Model Checker (CBMC) or the clang-based front-end, 
- which allows one to formally verify the PV system as a C program.
+The implementation of the proposed tool is carried out by means of the efficient SMT-based bounded model checker (ESBMC), which allows one to formally verify a PV system as a C program.
 
-In mostly of previous studies, the evaluation of PV systems, concerning the meeting of user requirements, were performed by software simulation using MATLAB/Simulink \cite{Benatiallah2017}, \cite{Samrat2014}, and \cite{Natsheh2012} or HOMER Pro \cite{Lamnadi2017}. Some work was done toward the formal modeling of power smart grids \cite{Akram2018}, and to maximize the power point of solar panels \cite{Driouich2017}, however without to perform the automated verification and restrict to solar panels or smart grids. 
+In most prior studies, the evaluation of PV systems, concerning the meeting of user requirements, were performed by software simulation tools using MATLAB/Simulink \cite{Benatiallah2017}, \cite{Samrat2014}, and \cite{Natsheh2012} or HOMER Pro \cite{Lamnadi2017}. Some studies were carried out toward the formal modeling of power smart grids \cite{Akram2018}, and to maximize the power point of solar panels \cite{Driouich2017}; however, those studies do not perform automated verification and they restrict themselves to solar panels or smart grids. 
 
-In addition, recent research that joint the formal verification to solar energy, has attempted to formalize and implement a formal study of large population of PV panels where the focus have been the modeling of the dynamics of PV panels and their interaction with the grid, without batteries \cite{Abate2017}; or to model a PV system in Modelica, to verify the maximum power point of solar panels with the use of Jmodelica tool \cite{Driouich2018}. Both restrict to PV panels, and not including batteries, inverters, and charge controllers.
+In addition, recent research that applies formal verification to solar energy, has attempted to formalize and implement a formal study of large population of PV panels, where the focus have been on the modeling of the dynamics of PV panels and their interaction with the grid, without batteries~\cite{Abate2017}; or to model a PV system in Modelica, to verify the maximum power point of solar panels with the use of Jmodelica tool~\cite{Driouich2018}. Both studies restrict to PV panels, and do not include batteries, inverters, and charge controllers.
   
 %The experimental results show that the proposed framework is more efficient \textcolor{red}{than what?} in different case studies to find not proper functioning of PV systems than simulation with off-the-shelf tool. 
-To the best of our knowledge, this is the first work to use a
-%n SMT-based 
-verification tool to evaluate a stand-alone solar PV systems. %, with weather conditions variation. 
-The mains contribution of this paper are the automated verification of the PV system, and the modular modeling of each component of the PV system, which permits to change the mathematical models, besides changing the type of energy generation in the future to another renewable source, for example.
+To the best of our knowledge, this is the first initiative to use a verification tool to evaluate a stand-alone solar PV systems. %, with weather conditions variation. 
+The mains contribution of this paper are the automated verification of the PV system, and the modular modeling of each component of the PV system, which allows one to change the mathematical models, besides changing the type of energy generation in the future to another renewable source.
 
 %\textcolor{red}{This introduction is missing the description of the vision, approach and results. In particular, try to match each paragraph to: problem, vision, approach, results and contributions.} 
 %
 %The framework provided at this paper outlines the requirements, the process and the mathematical modeling to perform automated formal verification of a stand-alone PV system, using the satisfiability modulo theories (SMT)-based verification method.
  
-The remainder of this paper is organized as follows: Section II gives the background about solar PV systems, design and validation of PV systems, and the mathematical modeling. Section III presents the automated verification technique. The methodology is presented at section IV. Section V is devoted to the results. Section VI presents the conclusion and describes future work.
+\textit{Outline}. Section~\ref{sec:SolarPhotovoltaicSystem} gives the background about solar PV systems, design and validation of PV systems, and the mathematical modeling. Section~\ref{sec:AutomatedVerification} presents the automated verification technique. The methodology is presented at section~\ref{sec:Methodology}. Section~\ref{sec:results} is devoted to the results. Section~\ref{sec:Conclusions} presents the conclusion and describes future work.
 
 %--------------------------------------------------------
 \section{Solar Photovoltaic System }
+\label{sec:SolarPhotovoltaicSystem}
 %--------------------------------------------------------
 
 %According to \cite{Roy}, a 
@@ -1351,7 +1347,11 @@ V_{out}AC = V_{AC}
 \left[ (Demand \leq P_{AC,ref}) \, and \, (P_{surge} \leq MAX_{AC,ref}) \right] 
 \end{equation}
 
+%--------------------------------------------------
 \section{Automated verification}
+\label{sec:AutomatedVerification}
+%--------------------------------------------------
+
 %It is necessary to keep in mind that 
 Validation is the process of determining whether a design meets the needs of the user, whereas verification is the process of determining whether a design meets a set of requirements, specifications, and regulations \cite{Clarke2008}.  
 
@@ -1458,7 +1458,11 @@ Finally, the system attempting to determine whether a formula, which is the disj
 %
 %As described in \cite{Alur}, in program verification, it is aimed to check if a program satisfies its logical specification. Contemporary verification tools vary widely in terms of source languages, verification methodology, and the degree of automation, but they all rely on repeatedly invoking an SMT solver. This work tracks the same path. 
 %
+%----------------------------------------
 \section{Methodology }
+\label{sec:Methodology}
+%----------------------------------------
+
 %
 %Fig. \ref{fig:statetransition} shows the state diagram for the proposed tool. 
 %
@@ -1678,7 +1682,8 @@ Algorithm 1 describes the pseudo code used to perform the automated verification
 % \fnbelowfloat command of the stfloats package.
 
 %----------------------------------------------
-\section{Results and discussions} \label{sec:results}
+\section{Results and discussions} 
+\label{sec:results}
 %----------------------------------------------
 %
 %\textcolor{red}{reorganise the results as follows: experimental objectives and setup; results; and threats to validity.}
@@ -1726,6 +1731,7 @@ XXX
 
 %-------------------------------------
 \section{Conclusion and Future Work}
+\label{sec:Conclusions}
 %-------------------------------------
 %The proposed tool seems to be a coherent and promising tool to perform verification of a PV project. The next step is the deployment of the solution at the ESBMC environment, and compare the results with a real PV project deployed at the field. 
 %
