@@ -1485,8 +1485,8 @@ Finally, the system attempting to determine whether a formula, which is the disj
 %
 %It is worth mentioning that the steps described here are carried out shortly after the design of the solar photovoltaic system, as soon as the equipment and equipment specifications are defined; before buying and deploying them, as a way to ensure that the project will not fail. 
 %
-The flowchart of the automated verification proposed is illustrated in Fig.\ref{fig:flowchartgeneral}. 
-The PV input data (load power demand, load consumption of energy, the PV system project sizing data, and the manufacturer's data-sheet information), the formulas to check the sizing project, the mathematical model, the limits of the weather non-deterministic variables, are all written as C Programming language code. 
+The flowchart of the proposed (automated) verification method is illustrated in Fig.~\ref{fig:flowchartgeneral}. 
+The PV input data (load power demand, load consumption of energy, the PV system project sizing data, and the manufacturer's data-sheet information), the formulas to check the sizing project, the mathematical model, the limits of the weather non-deterministic variables, are all written as an ANSI-C code \textcolor{red}{add citation here to the standard}. 
 
 \begin{figure}[h]
 \includegraphics[width=0.4\textwidth]{flowchart_verification.png}
@@ -1495,14 +1495,17 @@ The PV input data (load power demand, load consumption of energy, the PV system 
 \label{fig:flowchartgeneral}
 \end{figure}
 
-The weather data (solar irradiance, and ambient temperature by default) will suffer a heavy test at ESBMC run-time execution, based in maximum and minimum values from the site where the PV system will be deployed. In addition, depending if one of the requirements of the system, as autonomy of the batteries, or the offer of the energy, or even the power supply from the system, is not accomplished or satisfied, the tool accuses a fail, and the diagnostic counterexample shows in which condition the fail/violation happened. 
+The weather data (solar irradiance, and ambient temperature by default) will be evaluated by the ESBMC verification engine, based on maximum and minimum values from the site, where the PV system will be deployed. In addition, depending on one of the requirements of the system, as autonomy of the batteries, or the offer of the energy, or even the power supply from the system to check whether it is not accomplished or satisfied, the tool accuses a failure, and the diagnostic counterexample shows in which condition the fail/violation happened. 
 %; as the  state of charge of the batteries, load demand of power and the load consumption of energy if defined by the code
 % (as reliability, performance, or safety)
 
-Simply put, instead of the ESBMC find the defect of a software or if a hardware does not meet the some requirements, the tool will verify if the requirements of the solar PV project are met. Detailing the condition of violation, i.e., the state of each variable related to the system. 
+\textcolor{red}{I didn't understand this sentence... it is completely broken...} Simply put, instead of the ESBMC find the defect of a software or if a hardware does not meet the some requirements, the tool will verify if the requirements of the solar PV project are met. Detailing the condition of violation, i.e., the state of each variable related to the system. 
 
+%---------------------------------------------------------------------
 \subsection{The case studies and the Algorithm}
-It was performed five case studies: (1) four concerning a PV system (700 W inverter, with 48h autonomy) deployed at four different houses at an indigenous community (GPS coordinates 2$^{o}$44'50.0"S 60$^{o}$25'47.8"W) sited nearby Manaus (Brazil), with each house having a different power demand (house 1 = 253 W, house 2 = 263 W, house 3 = 283 W, and house 4 = 501 W); (2) and one case concerning a system deployed as an individual system in Manaus (GPS coordinates 3$^{o}$4'20.208"S 60$^{o}$0'30.168"W), supporting 915 W of the house's load (house 5 with 1,200 W inverter, and autonomy of just 6 h). 
+%---------------------------------------------------------------------
+
+We performed five case studies: (1) four concerning a PV system (700 W inverter, with 48h autonomy) deployed at four different houses at an indigenous community (GPS coordinates 2$^{o}$44'50.0"S 60$^{o}$25'47.8"W) sited nearby Manaus (Brazil), with each house having a different power demand (house 1 = 253 W, house 2 = 263 W, house 3 = 283 W, and house 4 = 501 W); (2) and one case concerning a system deployed as an individual system in Manaus (GPS coordinates 3$^{o}$4'20.208"S 60$^{o}$0'30.168"W), supporting 915 W of the house's load (house 5 with 1,200 W inverter, and autonomy of just 6 h). 
 %and as backup at night 
 %
 %The 700 W system: 3 x 325 W PV panels connected in series, controller of 150 V/35 A with a DC-bus of 24 V, 4 x 220 Ah batteries (2 in series and 2 in parallel arrangement), and inverter of 700 W. 
@@ -1525,7 +1528,7 @@ the 24h-day was divided, at the algorithm, in 3 parts of 8 h each (8:00h-16:00h,
 %Within this 8h-period, $G$ and $T$ are automated verified with different values every one hour.
 %, and change their value every 1 h according with the algorithm created using the technique.
 
-Algorithm 1 describes the pseudo code used to perform the automated verification.
+Algorithm~\ref{alg:verification-algorithm} describes the pseudo code used to perform the automated verification. \textcolor{red}{Can you please briefly explain this algorithm?}
 
  \begin{algorithm}
  \caption{Algorithm to perform automated verification}
@@ -1585,6 +1588,7 @@ Algorithm 1 describes the pseudo code used to perform the automated verification
   \ENDWHILE
  \RETURN $(\,)$ 
  \end{algorithmic} 
+ \label{alg:verification-algorithm}
  \end{algorithm}
 
 %There are two premises considering the algorithm: (1) is considered a $SOC$ of 80\% at 8:00 h, and is made the automated evaluation from 8:00 h to 16:00 h, but without to account the battery autonomy (just considering charge and discharge process based on solar irradiation, load and battery charge), but after 16:00h is started the verification for the next hours when there is not solar photovoltaic generation. The process goes on until to verify all the autonomy demanded from the batteries; (2) there is an array, declared at the beginning of the C code, that defines the power demand/consumption at each hour of the day (aka load curve). Those are the same data used during the sizing of the project and ensure to consider the total energy (per day) supplied to the house during the verification. 
