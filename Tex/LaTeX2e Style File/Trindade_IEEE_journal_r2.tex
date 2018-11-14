@@ -493,7 +493,7 @@ There was an increase of approximately 50\% from 2016 to 2017 in terms of new in
 %PV systems consist of PV modules, battery bank, controller, and inverter, plus the load. %Moreover, the optimum sizing of these devices is important for reliable operation.
 %Therefore, these systems need to be designed properly according to the site, land area available, load requirement, load pattern, environmental conditions and economics in order to utilize available resources efficiently and economically \cite{Rawat}. %Furthermore, there is the need for proper modeling and simulation tools for people involved in their application. 
 
-The increase in the number of PV systems installed all over the world brings the need for proper modeling and simulation tools for researchers and practitioners involved in their application. In order to model, simulate or evaluate a PV system, there are a myriad of specialized tools available in the market, as RETScreen, HOMER, PVWatts, SAM, and Hybrid2 \textcolor{red}{Add citation to all those tools}. And even general purpose simulation tools as PSpice, Saber or MATLAB/Simulink package \textcolor{red}{Add citation to all those tools}.
+The increase in the number of PV systems installed all over the world brings the need for proper modeling and simulation tools for researchers and practitioners involved in their application. In order to model, simulate or evaluate a PV system, there are a myriad of specialized tools available in the market, as RETScreen, HOMER, PVWatts, SAM, and Hybrid2 \cite{Pradhan}, \cite{Swarnkar}, \cite{NRELDobos}, \cite{NRELBlair}, and \cite{Mills}. And even general purpose simulation tools as PSpice, Saber or MATLAB/Simulink package \cite{Gow1999}, \cite{Benatiallah2017}.
 
 %However, to the best of our knowledge, this work can be the first work to perform automated verification of a stand-alone solar PV project solution.  
 %
@@ -504,9 +504,9 @@ The increase in the number of PV systems installed all over the world brings the
 %Manufactures and integrators have yet their proprietary software to perform various system sizing, with the drawback of include just their own products among the possibilities of choice, what restrict the solution. 
 %
 %PV systems can be classified into grid-connected and stand-alone systems. At this proposal, only off-grid or stand-alone systems will be considered. The utilization of solar energy in off-grid mode has the potential to meet the energy need for remote rural areas of developing countries.  
-However, those tools are based on running experiments in simulation models. Simulation has the advantage of being cheap (if compared to test in real systems) and can be employed before the system design is concluded; however, it has the drawback of an incomplete coverage since the verification of all possible combinations and potential failures of systems is rarely possible or even feasible~\cite{Clarke2008}.
+However, those tools are based on running experiments in simulation models. Simulation has the advantage of being cheap (if compared to test in real systems) and can be employed before the system design is concluded; however, it has the drawback of an incomplete coverage since the verification of all possible combinations and potential failures of systems is rarely possible or even feasible~\cite{ClarkeHV18}.
 
-Formal methods based on software model checking offer great potential to obtain a more effective and faster verification in the design process~\cite{Clarke2008}.  
+Formal methods based on software model checking offer great potential to obtain a more effective and faster verification in the design process~\cite{ClarkeHV18}.  
 %with behavior that is, in principle, well determined. 
  Using this technique, any kind of system can be specified as computer programs using mathematical logic, which constitutes the intended (correct) behavior. Then, one can try to give a formal proof or otherwise establish that the program meets its specification. User or project requirements can be added during the process of coding. %, as defined by \cite{Trindade}. 
 %
@@ -1359,9 +1359,7 @@ V_{out}AC = V_{AC}.
 %--------------------------------------------------
 
 %It is necessary to keep in mind that 
-Validation is the process of determining whether a design meets the needs of the user, whereas verification is the process of determining whether a design meets a set of requirements, specifications, and regulations~\cite{Clarke2008}.  
-
-\textcolor{red}{I would suggest to replace Clarke2008 by this one https://dblp.uni-trier.de/rec/bibtex/reference/mc/ClarkeHV18. Or at least cite it in the next sentence which is more recent.}
+Validation is the process of determining whether a design meets the needs of the user, whereas verification is the process of determining whether a design meets a set of requirements, specifications, and regulations~\cite{ClarkeHV18}.  
 
 If the requirements, specifications, and regulations are given in a formal language, then it may be possible to automate verification, resulting in a process known as formal verification. Verification may form part of a validation process.
 %, but in general, validation cannot be formalized because it relates a system design to intent.  
@@ -1369,9 +1367,9 @@ If the requirements, specifications, and regulations are given in a formal langu
 %Simulation may also be used for validation, but it is more problematic for verification.
 In order to use simulation for verification, it is necessary to ensure adequate coverage of operating conditions, scenarios, and system inputs. Testing can also be used for validation, but for the same reasons, it is too problematic for verification \textcolor{red}{Why is it problematic?!?}.
  
-Verification procedure is an intelligent \textcolor{red}{What do you mean by intelligent?} exhaustive search of the state space of the design \cite{Clarke2008}. In addition, formal verification is a systematic approach that applies mathematical reasoning to obtain guarantees about the correctness of a system \cite{Forejt2011}. One successful method in this domain is model checking \textcolor{red}{please cite here the reference given above}.
+Verification procedure is an intelligent \textcolor{red}{What do you mean by intelligent?} exhaustive search of the state space of the design \cite{ClarkeHV18}. In addition, formal verification is a systematic approach that applies mathematical reasoning to obtain guarantees about the correctness of a system \cite{Forejt2011}. One successful method in this domain is model checking \textcolor{red}{please cite here the reference given above}.
  % 
-%Model checking is an automatic verification technique, as defined by \cite{Clarke2008}. Model checking was originally developed reasoned about finite state of concurrent systems, nowadays is mainly used to hardware and software verification, but can be applied to any kind of system. 
+%Model checking is an automatic verification technique, as defined by \cite{ClarkeHV18}. Model checking was originally developed reasoned about finite state of concurrent systems, nowadays is mainly used to hardware and software verification, but can be applied to any kind of system. 
 
 The process of model checking can be divided in three components: modeling, specification, and verification method. In modeling, a model (normally mathematical) of the system is created; in specification, normally a list of properties to be satisfied by the system is established, i.e., the requirements, normally  expressed in temporal logic form ($CTL$).
 
@@ -1389,11 +1387,11 @@ The model checking algorithm can be described as \textcolor{red}{add citation he
 \item It returns $YES$ if $ \phi $ is $TRUE$, or returns $NO$ if $ \phi $ is $FALSE$.  
 
 \end{itemize}
-Specifically for the $FALSE$ verification result, the algorithm returns a counterexample that is useful as diagnostic of the system, to discover in which situation the model is violated. That is the most important advantage of the use of model checking \cite{Clarke2008}. 
+Specifically for the $FALSE$ verification result, the algorithm returns a counterexample that is useful as diagnostic of the system, to discover in which situation the model is violated. That is the most important advantage of the use of model checking \cite{ClarkeHV18}. 
 %Among the other advantages can be listed: there is no need of proofs (the algorithm is not a deductive procedure), there is no problem with partial specifications of the system, logics can easily express many concurrency properties, is fast (compared to other rigorous methods such as interactive theorem proving). 
 However, there is a main disadvantage of model checking: the state explosion problem. 
 %
-%The model checking problem can be defined as \cite{Clarke2008}: 
+%The model checking problem can be defined as \cite{ClarkeHV18}: 
 %
 %\begin{itemize}
 %\item Let $M$ be a Kripke structure (i.e., state transition graph);
@@ -1407,7 +1405,7 @@ In a typical model checking system, a preprocessor extracts a state transition g
 %\begin{figure}[h]
 %\includegraphics[width=0.4\textwidth]{modelcheckstruc}
 %\centering
-%\caption{Model Checker structure (Source: \cite{Clarke2008})}
+%\caption{Model Checker structure (Source: \cite{ClarkeHV18})}
 %\label{fig:modelcheckstruc}
 %\end{figure}
 %
@@ -1418,11 +1416,11 @@ Fig.~\ref{fig:systemverif} shows the process to convert a real system to a model
 \begin{figure}[h]
 \includegraphics[width=0.4\textwidth]{systemverif}
 \centering
-\caption{From real system verification to model checking (adapted from \cite{Clarke2008}).}
+\caption{From real system verification to model checking (adapted from \cite{ClarkeHV18}).}
 \label{fig:systemverif}
 \end{figure}
 
-In order to solve the problem of state explosion, many different techniques were developed at the last decades \textcolor{red}{Please cite them here!!!}. One of the promising is the Bounded Model Checking (BMC). BMC is a method that checks the model up to a given path in the path length. BMC algorithms traverses a finite state machine for a fixed number of steps, $ k $, and checks whether violation occurs with this bound. It uses Boolean Satisfiability (SAT) solvers, where SAT means satisfiability. SAT problem is a problem of determining if there are certain conditions or interpretation that satisfy a given Boolean expression \cite{Clarke2008}. %SAT solvers are used in BMC, such that i
+In order to solve the problem of state explosion, many different techniques were developed at the last decades \textcolor{red}{Please cite them here!!!}. One of the promising is the Bounded Model Checking (BMC). BMC is a method that checks the model up to a given path in the path length. BMC algorithms traverses a finite state machine for a fixed number of steps, $ k $, and checks whether violation occurs with this bound. It uses Boolean Satisfiability (SAT) solvers, where SAT means satisfiability. SAT problem is a problem of determining if there are certain conditions or interpretation that satisfy a given Boolean expression \cite{ClarkeHV18}. %SAT solvers are used in BMC, such that i
 %If there are some Boolean function, t
 The solver would search the model for conditions (value of variables) that would make the formula $TRUE$. If a SAT Solver find a substitution for the formula/function then the substitute induces a counterexample.  
 
@@ -1785,7 +1783,7 @@ Furthermore, it is possible to contemplate other kinds of renewable energy and e
 
 % use section* for acknowledgment
 \section*{Acknowledgment}
-The authors would like to thank Newton Fund (Star Energy project), Coventry University, Sustainable Amazonas Foundation (FAS), and FAPEAM (Amazonas State Foundation for Research Support), for the financial support and for the possibility to test the tool with real PV systems.
+The authors would like to thank Newton Fund (Star Energy project), Coventry University, Sustainable Amazonas Foundation (FAS), and FAPEAM (Amazonas State Foundation for Research Support, call 009/2017), for the financial support and for the possibility to test the tool with real PV systems.
 
 % Can use something like this to put references on a page
 % by themselves when using endfloat and the captionsoff option.
@@ -1833,7 +1831,7 @@ The authors would like to thank Newton Fund (Star Energy project), Coventry Univ
 % or if you just want to reserve a space for a photo:
 
 \begin{IEEEbiographynophoto}{Alessandro Trindade}
-received his BSc and MSc in Electrical Engineering from the Federal University of Amazonas (UFAM) in 1995 and 2015, respectively. Currently, he is pursuing his PhD in Informatics at the UFAM, and hold a position as Assistant Professor at the Electricity Department from the Federal University of Amazonas.
+received his BSc and MSc in Electrical Engineering from the Federal University of Amazonas (UFAM) in 1995 and 2015, respectively. Currently, he is pursuing his PhD at the Post-Graduation Program in Informatics (PPGI) at the UFAM, and hold a position as Assistant Professor at the Electricity Department from UFAM. Prior to joining UFAM, he worked 4 years as Consultant of renewable energy to the State Electric Utility and to the Inter-American Institute for Cooperation on Agriculture (IICA); he also worked 12 years as R \& D and project manager at a non-profit foundation (Centre of Analysis, Research and Innovation Technology Foundation). His interest is in renewable energy, automated verification, and model checking.
 \end{IEEEbiographynophoto}
 
 % if you will not have a photo at all:
