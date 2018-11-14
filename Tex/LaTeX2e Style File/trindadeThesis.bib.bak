@@ -37,7 +37,7 @@ pages = {662-681}
 
 @article{Copetti,
 author = {J Copetti and E Lorenzo and F Chenlo},
-title = {A general battery model for PV system simulation},
+title = {A general battery model for {PV} system simulation},
 journal = {Prog. in Photovoltaics: Res. and App.},
 year = {1993},
 volume = {1},
@@ -176,7 +176,7 @@ pages = {392-399}
 
 @Article{Rajanna,
 author = {S Rajanna and R Saini},
-title = {Modeling of integrated renewable energy system for electrification of a remote area in India},
+title = {Modeling of integrated renewable energy system for electrification of a remote area in {I}ndia},
 journal = {Renew. Energ.},
 year = {2016},
 volume = {90},
@@ -425,7 +425,7 @@ author = {H Yatimi and E Aroudam},
 title = {Modeling and Simulation of a Stand-alone Photovoltaic System},
 booktitle = {Xth Int. Conf. on Int. Des. and Prod.},
 year = {2015},
-editor = {Tangier: Marocco}
+editor = {Tangier: {M}arocco}
 }
 
 @InProceedings{Barrett,
@@ -685,7 +685,7 @@ address = {Colorado},
 
 @TechReport{NRELBlair,
 author = {Nate Blair and Aron Dobos and Janine Freeman and Ty Neises and Michael Wagner},
-title = {System Advisor Model, SAM 2014.1.14: General Description},
+title = {System {A}dvisor {M}odel, {SAM} 2014.1.14: {G}eneral {D}escription},
 institution = {National Renewable Energy Laboratory},
 year = {2014},
 address = {Colorado},
@@ -851,9 +851,32 @@ number = {2}
   title     = {Introduction to Model Checking},
   booktitle = {Handbook of Model Checking.},
   pages     = {1--26},
-  year      = {2018},
-  url       = {https://doi.org/10.1007/978-3-319-10575-8\_1},
-  doi       = {10.1007/978-3-319-10575-8\_1},
-  timestamp = {Tue, 29 May 2018 12:30:27 +0200},
-  biburl    = {https://dblp.org/rec/bib/reference/mc/ClarkeHV18}
+  year      = {2018}
+}
+
+@Inbook{Clarke2012,
+author={Edmund Clarke and William Klieber and Milo{\v{s} Nov{\'a}{\v{c}}ek} and Paolo Zuliani},
+editor={Bertrand Meyer and Martin Nordio},
+title={Model Checking and the State Explosion Problem},
+bookTitle={Tools for Practical Software Verification: LASER, International Summer School 2011, Elba Island, Italy, Revised Tutorial Lectures},
+year={2012},
+publisher={Springer},
+address={Berlin},
+pages={1--30}
+}
+
+@InProceedings{esbmc2018,
+    author    = {Mikhail Gadelha and
+                 Felipe Monteiro and
+                 Jeremy Morse and
+                 Lucas Cordeiro and
+                 Bernd Fischer and
+                 Denis Nicole},
+    title     = {{ESBMC} 5.0: An Industrial-Strength {C} Model Checker},
+    booktitle = {$33^{rd}$ ACM/IEEE Int. Conf. on Aut. Soft. Engin. (ASE'18)},
+    pages     = {888--891},
+    doi       = {10.1145/3238147.3240481},
+    year      = {2018},
+    publisher = {ACM},
+    address   = {New York, NY, USA}
 }

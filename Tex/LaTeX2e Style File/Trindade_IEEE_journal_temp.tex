@@ -1370,9 +1370,12 @@ If the requirements, specifications, and regulations are given in a formal langu
 %, but in general, validation cannot be formalized because it relates a system design to intent.  
 While simulation and testing explore some of the possible behaviors and scenarios of the system, leaving open the question of whether the unexplored trajectories may contain a flaw, formal verification conducts an exhaustive exploration of all possible behaviors. Thus, when a design is pronounced correct by a formal verification method, it implies that all behaviors have been explored, and the questions of adequate coverage or a missed behavior become irrelevant \cite{Clarke2012}.
 %Simulation may also be used for validation, but it is more problematic for verification.
-%In order to use simulation for verification, it is necessary to ensure adequate coverage of operating conditions, scenarios, and system inputs. Testing can also be used for validation, however it is not feasible to cover all the aspects of the design space, and some times the real system must be used instead of a computing model.
- 
+
 Formal verification is a systematic approach that applies mathematical reasoning to obtain guarantees about the correctness of a system \cite{Forejt2011}. One successful method in this domain is model checking \cite{Clarke2012}.
+%
+%In order to use simulation for verification, it is necessary to ensure adequate coverage of operating conditions, scenarios, and system inputs. Testing can also be used for validation, however it is not feasible to cover all the aspects of the design space, and some times the real system must be used instead of a computing model.
+% 
+%Verification procedure is an intelligent \textcolor{red}{What do you mean by intelligent?} exhaustive search of the state space of the design \cite{ClarkeHV18}. In addition, formal verification is a systematic approach that applies mathematical reasoning to obtain guarantees about the correctness of a system \cite{Forejt2011}. One successful method in this domain is model checking \textcolor{red}{please cite here the reference given above}.
  % 
 %Model checking is an automatic verification technique, as defined by \cite{ClarkeHV18}. Model checking was originally developed reasoned about finite state of concurrent systems, nowadays is mainly used to hardware and software verification, but can be applied to any kind of system. 
 
@@ -1414,16 +1417,16 @@ In a typical model checking system, a preprocessor extracts a state transition g
 %
 %Here it is worth to mention that the term "model" is not the meaning taken from the dictionary. The problem is not dealing with an abstraction of the actual system under study. 
 %
-Fig.~\ref{fig:systemverif} shows the process to convert a real PV system to a model to be verified by a model checking procedure. % \textcolor{red}{Please try to adapt this figure to our context. How can it be applied to verify PV?}. 
+Fig.~\ref{fig:systemverif} shows the process to convert a real system to a model to be verified by a model checking procedure \textcolor{red}{Please try to adapt this figure to our context. How can it be applied to verify PV?}. 
 
 \begin{figure}[h]
-\includegraphics[width=0.5\textwidth]{systemverif2}
+\includegraphics[width=0.4\textwidth]{systemverif}
 \centering
 \caption{From real system verification to model checking (adapted from \cite{ClarkeHV18}).}
 \label{fig:systemverif}
 \end{figure}
 
-However, there is a main disadvantage of model checking: the state explosion problem. In order to solve this problem, many different techniques were developed at the last decades. One of the first major advances was symbolic model checking with binary decision diagrams (BDDs). In this approach, a set of states is represented by a BDD instead of by listing each state individually, which is often exponentially smaller in practice. Another major advance is the partial order reduction, which exploits the independence of actions in a system with asynchronous composition of processes. A third major advance is counterexample-guided abstraction refinement, which adaptively tries to find an appropriate level refinement, not burdened with irrelevant detail that slows down verification \cite{Clarke2012}. However, one of the promising is the Bounded Model Checking (BMC). 
+However, there is a main disadvantage of model checking: the state explosion problem. In order to solve the problem of state explosion, many different techniques were developed at the last decades. One of the first major advances was symbolic model checking with binary decision diagrams (BDDs). In this approach, a set of states is represented by a BDD instead of by listing each state individually, which is often exponentially smaller in practice. Another major advance is the partial order reduction, which exploits the independence of actions in a system with asynchronous composition of processes. A third major advance is counterexample-guided abstraction refinement, which adaptively tries to find an appropriate level refinement, not burdened with irrelevant detail that slows down verification \cite{Clarke2012}. However, one of the promising is the Bounded Model Checking (BMC). 
 
 BMC is a method that checks the model up to a given path in the path length. BMC algorithms traverses a finite state machine for a fixed number of steps, $ k $, and checks whether violation occurs with this bound. It uses Boolean Satisfiability (SAT) solvers, where SAT means satisfiability. SAT problem is a problem of determining if there are certain conditions or interpretation that satisfy a given Boolean expression \cite{ClarkeHV18}. %SAT solvers are used in BMC, such that i
 %If there are some Boolean function, t
@@ -1431,26 +1434,26 @@ The solver would search the model for conditions (value of variables) that would
 
 CBMC is considering the best-known model verification tool to validate code in ANSI-C and C++ \cite{Kroening}. 
 
-%\textcolor{red}{ESBMC does not use CBMC as its main frontend. Please take a look at this paper and cite it: https://ssvlab.github.io/lucasccordeiro/papers/ase2018.pdf. I would also suggest to remove the above sentence.}
+\textcolor{red}{ESBMC does not use CBMC as its main frontend. Please take a look at this paper and cite it: https://ssvlab.github.io/lucasccordeiro/papers/ase2018.pdf. I would also suggest to remove the above sentence.}
 
-ESBMC is a context-bounded model checker for embedded C/C++ software based on Satisfiability Modulo Theories (SMT) solver. %, which can use CBMC as front-end.
+ESBMC is a context-bounded model checker for embedded C/C++ software based on Satisfiability Modulo Theories (SMT) solver, which can use CBMC as front-end.
 %The use of SMT, instead of Boolean Satisfiability SAT from the original BMC, 
-ESBMC comes as an alternative to overcome limitations of the systems modeling, especially considering that the complexity of these is increasing and the SMT method has high level and richer theories than the SAT to represent the models \cite{esbmc2018}. 
+ESBMC comes as an alternative to overcome limitations of the systems modeling, especially considering that the complexity of these is increasing and the SMT method has high level and richer theories than the SAT to represent the models \textcolor{red}{add citation here}. 
 
 \subsection{ESBMC }
-ESBMC (or Efficient SMT-based Bounded Model Checker) is an open source, permissively licensed (Apache 2), cross platform bounded model checking for C and C++ programs \cite{esbmc2018}. 
+ESBMC (or Efficient SMT-based Bounded Model Checker) is an open source, permissively licensed (Apache 2), cross platform bounded model checking for C and C++ programs \cite{GadelhaSBMF}. 
 %The efficient SMT based model checker, is a software verification tool for C and C++ code bases. 
 Fig. \ref{fig:esbmcarch} shows the tool architecture. 
 
 \begin{figure}[h]
-\includegraphics[width=0.4\textwidth]{ESBMCarch4}
+\includegraphics[width=0.5\textwidth]{ESBMCarch2}
 \centering
-\caption{ESBMC architecture (adapted from \cite{esbmc2018}).}
+\caption{ESBMC architecture (adapted from \cite{GadelhaSBMF}). \textcolor{red}{This architecture is obsolete. Please see the paper https://ssvlab.github.io/lucasccordeiro/papers/ase2018.pdf}}
 \label{fig:esbmcarch}
 \end{figure}
-ESBMC uses clang as front-end, a state-of-the-art compiler suite for C/C++/ObjectiveC/ObjectiveC++ widely used in industry \cite{esbmc2018}. % and generate an Abstract Syntax Tree (AST). %One legacy CBMC-based front-end that supports both C and C++ and a new clang-based front-end that currently only supports C. The data types and bit vectors are created in the front-end when parsing the code. 
-%Regardless of the chosen front-end, 
-The output is an AST (tree representation of the abstract syntactic structure of source code written in a programming language) that will be used by the GOTO converter to generate a GOTO program, which has simplified control flow and is suitable for bounded unwinding. The next step is the symbolic execution, when the GOTO program is executed (unrolling loops up to the bound $ k $) and converted to Static Single Assignments (SSA) form. SSA form enables the simplification of algorithms and reduction of computational complexity. %, where each variable is a target of exactly one assignment statement in the program text. 
+
+ESBMC has two alternative front-ends to parse the input program \cite{GadelhaSBMF}. % and generate an Abstract Syntax Tree (AST). %One legacy CBMC-based front-end that supports both C and C++ and a new clang-based front-end that currently only supports C. The data types and bit vectors are created in the front-end when parsing the code. 
+Regardless of the chosen front-end, the output is an AST (tree representation of the abstract syntactic structure of source code written in a programming language) that will be used by the GOTO converter to generate a GOTO program, which has simplified control flow and is suitable for bounded unwinding. The next step is the symbolic execution, when the GOTO program is executed (unrolling loops up to the bound $ k $) and converted to Static Single Assignments (SSA) form. SSA form enables the simplification of algorithms and reduction of computational complexity. %, where each variable is a target of exactly one assignment statement in the program text. 
 %
 %During the symbolic execution, ESBMC aggressively tries to simplify the program \cite{Ramalho}; it propagates all constants and solves any assertions that can be statically determined. This is an important step for the verification, since ESBMC can fully verify programs without calling a solver, if the inputs are deterministic. That characteristic is useful at this work to perform the sizing check of the PV system project. 
 Following, the SSA expressions are then encoded using the chosen SMT solver supported by ESBMC. At this paper, it was used the Z3 solver \cite{DeMoura}.
@@ -1489,7 +1492,7 @@ Finally, the system attempting to determine whether a formula, which is the disj
 %It is worth mentioning that the steps described here are carried out shortly after the design of the solar photovoltaic system, as soon as the equipment and equipment specifications are defined; before buying and deploying them, as a way to ensure that the project will not fail. 
 %
 The flowchart of the proposed (automated) verification method is illustrated in Fig.~\ref{fig:flowchartgeneral}. 
-The PV input data (load power demand, load consumption of energy, the PV system project sizing data, and the manufacturer's data-sheet information), the formulas to check the sizing project, the mathematical model, the limits of the weather non-deterministic variables, are all written as an ANSI-C code %\cite{ANSIC}. 
+The PV input data (load power demand, load consumption of energy, the PV system project sizing data, and the manufacturer's data-sheet information), the formulas to check the sizing project, the mathematical model, the limits of the weather non-deterministic variables, are all written as an ANSI-C code \textcolor{red}{add citation here to the standard}. 
 
 \begin{figure}[h]
 \includegraphics[width=0.4\textwidth]{flowchart_verification.png}
