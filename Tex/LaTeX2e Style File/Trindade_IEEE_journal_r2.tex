@@ -493,7 +493,7 @@ There was an increase of approximately 50\% from 2016 to 2017 in terms of new in
 %PV systems consist of PV modules, battery bank, controller, and inverter, plus the load. %Moreover, the optimum sizing of these devices is important for reliable operation.
 %Therefore, these systems need to be designed properly according to the site, land area available, load requirement, load pattern, environmental conditions and economics in order to utilize available resources efficiently and economically \cite{Rawat}. %Furthermore, there is the need for proper modeling and simulation tools for people involved in their application. 
 
-The increase in the number of PV systems installed all over the world brings the need for proper modeling and simulation tools for researchers and practitioners involved in their application. In order to model, simulate or evaluate a PV system, there are a myriad of specialized tools available in the market, as RETScreen, HOMER, PVWatts, SAM, and Hybrid2 \cite{Pradhan}, \cite{Swarnkar}, \cite{NRELDobos}, \cite{NRELBlair}, and \cite{Mills}. And even general purpose simulation tools as PSpice, Saber or MATLAB/Simulink package \cite{Gow1999}, \cite{Benatiallah2017}.
+The increase in the number of PV systems installed all over the world brings the need for proper modeling and simulation tools for researchers and practitioners involved in their application. In order to model, simulate or evaluate a PV system, there are a myriad of specialized tools available in the market, as RETScreen, HOMER, PVWatts, SAM, and Hybrid2 \cite{Pradhan}, \cite{Swarnkar}, \cite{NRELDobos}, \cite{NRELBlair}, \cite{Mills}. And even general purpose simulation tools as PSpice, Saber or MATLAB/Simulink package \cite{Gow1999}, \cite{Benatiallah2017}.
 
 %However, to the best of our knowledge, this work can be the first work to perform automated verification of a stand-alone solar PV project solution.  
 %
@@ -599,7 +599,7 @@ the configuration that is most common or more suitable is the regulated stand-al
 \subsection{Design and Simulation of Solar PV systems}
 %The design and validation of a PV system can be done by hand or with the aid of a software tool. 
 %
-In order to address different aspects of project system and systems design, there are various software tools \textcolor{red}{add citations here}. 
+In order to address different aspects of project system and systems design, there are various software tools \cite{Rajanna}, \cite{Rawat}.
 %public domain and commercial software available for the PV market. 
 %According to \cite{Brooks}, t
 The capabilities of these tools range from simple solar resource and energy production estimation, %to site survey and system design tools,
@@ -607,7 +607,7 @@ The capabilities of these tools range from simple solar resource and energy prod
 %Some tools also provide support to rebate programs applications and tax incentives (specific to each country or region), while other programs and worksheets focus on the technical aspects of system sizing and design.
 %
 %Manufacturers and integrators have yet their proprietary software to perform inverter string sizing and various system sizing and design tools, with the drawback to just include their own products among the possibilities of choice. 
-Here it was evaluated the most popular ones, which are PVWatts, SAM, HOMER Pro, RETScreen Expert, and Hybrid2 \textcolor{red}{add citations here}.
+Here it was evaluated the most popular ones, which are PVWatts, SAM, HOMER, RETScreen, and Hybrid2 \cite{NRELDobos}, \cite{NRELBlair}, \cite{Swarnkar}, \cite{Pradhan}, \cite{Mills}.
 
 %\subsection{PVWatts Calculator}
 %According to \cite{Freeman} and \cite{NRELDobos}, it is a web application developed by the National Renewable Energy Laboratory (NREL), which estimates the electricity production of a grid-connected roof- or ground-mounted photovoltaic system based on a few inputs. According to \cite{NRELDobos}, to use the calculator, it is necessary to provide information about the system's location, basic design parameters, and system economics. PVWatts calculates estimated values for the system's annual and monthly electricity production, and for the electricity monetary value. This tool is suitable for very preliminary studies of a potential location for a photovoltaic system that uses crystalline silicon or thin film photovoltaic modules. The production estimates that PVWatts computation do not account for many factors that are important in the design of a photovoltaic system, therefore it is necessary support of an energy expert. The calculator estimates the monthly and annual electricity production of a photovoltaic system using an hour-by-hour simulation over a period of one year. To represent the system's physical characteristics, PVWatts requires values for six inputs: System DC size; Module type; Array type; System losses; Array tilt angle; Array azimuth angle.
@@ -636,8 +636,8 @@ Here it was evaluated the most popular ones, which are PVWatts, SAM, HOMER Pro, 
 %\subsection{Hybrid2}
 %The Hybrid2 software package, as described in \cite{Mills}, is a user-friendly tool to perform detailed long-term performance and economic analysis on a wide variety of hybrid power systems. Hybrid2 is a probabilistic/time series computer model, using time series data for loads, wind speed, solar insolation, and temperature; and the power system is designed or selected by the user, in order to predict the performance of the hybrid power system. Variations in wind speed and in load within each time step are factored into the performance predictions. The code does not consider short-term system fluctuations caused by system dynamics or component transients. This program is not supported anymore and according to \cite{UMASS}, probably after the user performs the free download of the tool, it will not work on Windows platforms later than Windows XP, what is a limitation.
 
-Table~\ref{table:softwares} summarizes the off-the-shelf tools employed in this study, where only Hybrid2 does not have technical support; HOMER Pro and Hybrid2 perform off-grid system or battery backup analysis; %all the tools perform solar photovoltaic analysis; 
-additionally, HOMER Pro and RETScreen Expert include economical analysis or even optimization-sensitive analysis. However, only commercial version (restricted to the Microsoft Windows OS) of those tools have all the features \textcolor{red}{these are really all features that are needed?}: to save the project or to upload data from manufacturers. RETScreen and HOMER have a free web-based version, but they have limited resources.
+Table~\ref{table:softwares} summarizes the off-the-shelf tools employed in this study, where only Hybrid2 does not have technical support; HOMER and Hybrid2 perform off-grid system or battery backup analysis; %all the tools perform solar photovoltaic analysis; 
+additionally, HOMER and RETScreen include economical analysis or even optimization-sensitive analysis. RETScreen and HOMER have a free web-based version, but they have limited resources: it is not allowed to save the projects or even upload data from manufacturers. In other hand, commercial version of those tools, called RETScreen Expert and HOMER Pro, are available only for Microsoft Windows and the annual subscription range from US\$504.00 to US\$657.00.
 
 \begin{table}[!t]
 %% increase table row spacing, adjust to taste
@@ -818,7 +818,7 @@ The simplified model of 1-diode has demonstrated that it has a small error rate,
 %With the proposed model, an explicit set of equations is derivate from the ideal PV model given by Equation \ref{eq:1diodemodel}.
 %
 %A single-diode without series and shunt resistances is considered. 
-Equation \eqref{eq:1diodemodel} is used to express currents and voltages at each key point of the characteristic curve from a PV cell \textcolor{red}{Add citation here}.
+Equation \eqref{eq:1diodemodel} is used to express currents and voltages at each key point of the characteristic curve from a PV cell \cite{Villalva}.
 % shown in Fig. \ref{fig:ivcurve}.
 %
 %\begin{figure}[h]
@@ -913,7 +913,7 @@ The cell temperature ($ T $) is shown in (\ref{eq:Tcell}) \cite{Ross}.
 T = T_{air} + \dfrac{NOCT-20}{800}G,
 \end{equation}
 
-\noindent where $ T_{air} $ is the ambient temperature, $NOCT$ is the nominal operating cell temperature (in $^{o}$C) that is found at the PV manufacturer's data-sheet \textcolor{red}{add citation here}, and $G$ is the solar irradiance ($ W/m^{2} $) of the place where the PV system is deployed.
+\noindent where $ T_{air} $ is the ambient temperature, $NOCT$ is the nominal operating cell temperature (in $^{o}$C) that is found at the PV manufacturer's data-sheet \cite{Ross}, and $G$ is the solar irradiance ($ W/m^{2} $) of the place where the PV system is deployed.
 
 Furthermore, \eqref{eq:I0} permits the saturation current ($ I_{0} $) to be expressed as a function of the cell temperature~\cite{Villalva}. 
 %In this study, this relation is explicitly written based on cell open-circuit conditions using the short-circuit current temperature coefficient as well as the open-circuit voltage temperature coefficient (Equation \ref{eq:I0}).
@@ -932,7 +932,7 @@ Using the maximum power point current (\ref{eq:Pm}) and the saturation current i
 a = \dfrac{q(V_{m,ref}-V_{oc,ref})}{Nk_{B}T} \dfrac{1}{ln \left( 1 - \dfrac{I_{m,ref}}{I_{sc,ref}}  \right) },
 \end{equation}
 
-\noindent where $V_{mref}$, $V_{oc,ref}$, $I_{m,ref}$, and $I_{sc,ref}$ are key cell values obtained under both actual cell temperature and solar irradiance conditions, usually provided by manufacturers; the model is now completely determined \textcolor{red}{which model? please be more specific}.
+\noindent where $V_{mref}$, $V_{oc,ref}$, $I_{m,ref}$, and $I_{sc,ref}$ are key cell values obtained under both actual cell temperature and solar irradiance conditions, usually provided by manufacturers; the PV generator model is now completely determined.
 %; it requires the actual cell temperature (or the air temperature), the actual solar irradiance and common data provided by manufacturers.
 %
 %If the PV cells are in parallel, then there is a parallel array. Therefore, there will be a change at the $ I_{ph} $ and $ I_{0} $and the resulting current is given by Equation \ref{eq:Iarray}, as demonstrated in \cite{Saloux}.
@@ -953,7 +953,7 @@ a = \dfrac{q(V_{m,ref}-V_{oc,ref})}{Nk_{B}T} \dfrac{1}{ln \left( 1 - \dfrac{I_{m
 %
 %Where $ V_{one panel} $ is the voltage from Equation \ref{eq:Vmfinal}.
 
-In addition to the model verification, there is the prior stage of project sizing check, based on manufacturer's data and information from the sizing and the site. 
+In addition to the model verification that will be performed by the proposed technique at this paper, there is the prior stage of PV system sizing check, based on manufacturer's data and information from the sizing and the site. That stage will guarantee if the system was well designed, considering the standard steps of project \cite{Pinho}.
 
 Firstly, it is necessary to correct the energy consumption that was estimated to the load ($E_{consumption}$). That is done by \eqref{eq:Ecorrected}~\cite{Pinho}, where the efficiency of batteries ($\eta_{b}$), controller ($\eta_{c}$), and the inverter ($\eta_{i}$) are considered.
 \begin{equation}
@@ -999,7 +999,7 @@ N_{PP} \geq N_{PPmin}.
 
 %Because of the fluctuating nature of the output delivered by the PV arrays, batteries are nece\sqrt{•}ry in a PV system. Thus, during the hours of sunshine, the PV system feeds directly the load and the excess electrical energy is stored in the battery. During the night, or during a period with low solar irradiation, energy is supplied to the load from the battery \cite{Mellit}.
   
-Several models have been presented in the literature~\cite{Copetti,Manwell93}. 
+Several models have been presented in the literature and the most commum are based on lead-acid batteries ~\cite{Copetti,Manwell93,Pinho}. 
 %, and \cite{Manwell94}. 
 %However, regardless of the model, normally the following parameters are required: 
 %
@@ -1034,9 +1034,9 @@ Several models have been presented in the literature~\cite{Copetti,Manwell93}.
 %
 %The Kinetic Battery Model (KiBaM) of Manwell and McGowen \cite{Manwell93} was developed at the University of Massachusetts to predict the performance of the battery, based on manufacturer's data. However, it uses some data extracted from tested batteries in laboratory. Therefore is not suitable to this study. 
 %
-Most proposed models are based on lead-acid batteries \textcolor{red}{Add citations here}. That kind of battery is the most common used in PV application, thus owing to their relative low cost and wide availability~\cite{Copetti}. 
+That kind of battery has relative low cost and wide availability~\cite{Copetti}. 
 
-Here, the model adopted~\cite{Copetti} uses manufacturer's data. % and allows finding relations among voltage, current, state of charge and temperature. 
+Here, the model adopted~\cite{Copetti} uses only manufacturer's data, without the need of empirical tests. % and allows finding relations among voltage, current, state of charge and temperature. 
 %
 The discharge voltage equation is described in \eqref{eq:bat_Vd}. 
 %The first term represents the voltage variation with the state of charge ($ SOC $), i.e., the electrolyte concentration, and the second is the variation due to internal resistance variation.
