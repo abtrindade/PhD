@@ -435,7 +435,7 @@
 % As a general rule, do not put math, special symbols or citations
 % in the abstract or keywords.
 \begin{abstract}
-With declining costs and increasing performance, the deployment of renewable energy systems is growing in both developed and developing countries, with particular emphasis on stand-alone solar photovoltaic systems where grid extension is not feasible. Tools to evaluate the design and validate electrification projects are available; however, those tools are based on simulation that do not cover all the aspects of the design space. Automated verification using formal methods, in the other hand, is proven to be a reference technique to program verification, and any kind of system can be verified by formal method, including the most complexes. At this paper, each component of a stand-alone solar photovoltaic system, as solar panel, charge controller, battery, inverter, and electric load, were coded as a mathematical model, and a algorithm using automated verification was created in order to validate its design from a formal verification perspective. Case studies, from real photovoltaic systems deployed in five different sites, ranging from 700 W to 1,200 W, were used to evaluate the proposed technique, always comparing the results with the specialized simulation tool HOMER Pro. Data from practical application prove the results obtained by the proposed approach, where specific conditions that lead to failures in a photovoltaic solar system are only detected with the verification tool.
+With declining costs and increasing performance, the deployment of renewable energy systems is growing in both developed and developing countries. Particular attention is being given to stand-alone solar photovoltaic systems in rural areas or where grid extension is not feasible. Tools to evaluate the design and validate electrification projects are available; however, those tools are based on simulation that do not cover all the aspects of the design space. Automated verification using formal methods, in the other hand, is proven to be a reference technique to program verification. However, any kind of system can be verified by formal method, including the most complexes. At this paper, each component of a stand-alone solar photovoltaic system, as solar panel, charge controller, battery, inverter, and electric load, were coded as a mathematical model, and a algorithm using automated verification was created in order to validate its design from a formal verification perspective. Case studies, from real photovoltaic systems deployed in five different sites, ranging from 700 W to 1,200 W, were used to evaluate the proposed technique, always comparing the results with the specialized simulation tool HOMER Pro. Data from practical application prove the results obtained by the proposed approach, where specific conditions that lead to failures in a photovoltaic solar system are only detected with the verification tool.
 %Experimental results show that the proposed approach can find situations where the sized solar photovoltaic system fails to meet the requirements demanded to electrify a house, and that simulation made with commercial tools can not find the same failure. \textcolor{red}{Data from practical application of solar systems prove the results obtained by the proposed approach... this last sentence should be stronger to emphasise your main contribution... maybe you could update this after obtaining the experimental results...}
 \end{abstract}
 
@@ -686,7 +686,7 @@ Sensitive analysis &  &  & X & X & \\
 Considering the focus of this study, only HOMER remains for a comparative evaluation with our proposed automated verification technique. %All tools need some parameters inherently from manufacturer's catalog.
 %, so the project starts with manufacturers and integrators tool to define the basic items of the project: panels, inverters, controllers, and batteries. 
 %After that, the potential solution is analyzed in another tool to simulate or even optimize the proposed solution. Therefore, that is 
-The main challenge of this study is to show that it is possible to use automated verification in stand-alone PV solution, thus proving that this evaluation is more efficient and complete than other state-of-the-art tool, as HOMER Pro. The comparative evaluation between the HOMER Pro and the proposed verification tool is presented in Section~\ref{sec:results}.
+The main challenge of this study is to show that it is possible to use automated verification in stand-alone PV solution, thus proving that this evaluation is more efficient and complete than other state-of-the-art tool, as HOMER Pro. The comparative evaluation between the HOMER Pro and the proposed verification tool is presented in Section~\ref{sec:results_indeed}.
 
 %-------------------------------------------------------------------
 \subsection{Component models for stand-alone PV system }
@@ -1429,8 +1429,8 @@ BMC is a method that checks the model up to a given path in the path length. BMC
 %If there are some Boolean function, t
 The solver would search the model for conditions (value of variables) that would make the formula $TRUE$. If a SAT Solver find a substitution for the formula/function then the substitute induces a counterexample.  
 
-CBMC is considering the best-known model verification tool to validate code in ANSI-C and C++ \cite{Kroening}. 
-
+%CBMC is considering the best-known model verification tool to validate code in ANSI-C and C++ \cite{Kroening}. 
+%
 %\textcolor{red}{ESBMC does not use CBMC as its main frontend. Please take a look at this paper and cite it: https://ssvlab.github.io/lucasccordeiro/papers/ase2018.pdf. I would also suggest to remove the above sentence.}
 
 ESBMC is a context-bounded model checker for embedded C/C++ software based on Satisfiability Modulo Theories (SMT) solver. %, which can use CBMC as front-end.
@@ -1451,7 +1451,7 @@ Fig. \ref{fig:esbmcarch} shows the tool architecture.
 ESBMC uses clang as front-end, a state-of-the-art compiler suite for C/C++/ObjectiveC/ObjectiveC++ widely used in industry \cite{esbmc2018}. % and generate an Abstract Syntax Tree (AST). %One legacy CBMC-based front-end that supports both C and C++ and a new clang-based front-end that currently only supports C. The data types and bit vectors are created in the front-end when parsing the code. 
 %Regardless of the chosen front-end, 
 The output is an AST (tree representation of the abstract syntactic structure of source code written in a programming language) that will be used by the GOTO converter to generate a GOTO program, which has simplified control flow and is suitable for bounded unwinding. The next step is the symbolic execution, when the GOTO program is executed (unrolling loops up to the bound $ k $) and converted to Static Single Assignments (SSA) form. SSA form enables the simplification of algorithms and reduction of computational complexity. %, where each variable is a target of exactly one assignment statement in the program text. 
-The feature called k-induction at Fig. \ref{fig:esbmcarch} allows BMC to find a property violation or even to prove (partial) correctness without fully unwinding loops. 
+The feature called k-induction at Fig. \ref{fig:esbmcarch} allows the model checker to find a property violation or even to prove (partial) correctness without fully unwinding loops. 
 %
 %During the symbolic execution, ESBMC aggressively tries to simplify the program \cite{Ramalho}; it propagates all constants and solves any assertions that can be statically determined. This is an important step for the verification, since ESBMC can fully verify programs without calling a solver, if the inputs are deterministic. That characteristic is useful at this work to perform the sizing check of the PV system project. 
 Following, the SSA expressions are then encoded using the chosen SMT solver supported by ESBMC. At this paper, it was used the Z3 solver \cite{DeMoura}.
@@ -1489,7 +1489,7 @@ Finally, the system attempting to determine whether a formula, which is the disj
 %It is worth mentioning that the steps described here are carried out shortly after the design of the solar photovoltaic system, as soon as the equipment and equipment specifications are defined; before buying and deploying them, as a way to ensure that the project will not fail. 
 %
 The flowchart of the proposed (automated) verification method is illustrated in Fig.~\ref{fig:flowchartgeneral}. 
-The PV input data (load power demand, load consumption of energy, the PV system project sizing data, and the manufacturer's data-sheet information), the formulas to check the sizing project, the mathematical model, the limits of the weather non-deterministic variables, are all written as an ANSI-C code %\cite{ANSIC}. 
+The PV input data (load power demand, load consumption of energy, the PV system project sizing data, and the manufacturer's data-sheet information), the formulas to check the sizing project, the mathematical model, the limits of the weather non-deterministic variables, are all written as an ANSI-C code. %\cite{ANSIC}. 
 
 \begin{figure}[h]
 \includegraphics[width=0.4\textwidth]{flowchart_verification.png}
@@ -1528,8 +1528,8 @@ Another characteristic of Manaus, is that the PV generation can be despised from
 %with zero electric energy generation from 18:00 h to 6:00 h of the next day; and with insignificant generation from 6:00 h to 8:00 h, and from 16:00 h to 18:00 h of the same day. 
 Therefore, in order to reduce the computational effort,
 % caused by the state explosion inherent of the technique, 
-the 24h-day was divided, at the algorithm, in 3 parts of 8 h each (8:00h-16:00h, 16:00h-24:00h, and 00:00h-8:00h); and only the 8:00h-16:00h period with PV generation. The time step was adjusted to 1 hour, and from line 1 to line 29 the algorithm perform the verification from 8;00h to 16:00h, where there is PV generation. Therefore, the model from PV generator is used at the function call of line 11, to produce the voltage and current considering the actual $G$ and $T$. Following, related to every hour considered, the conditional \textit{if-else-endif} statements from lines 12, 17, 23 and 27, will perform the charge and discharge of batteries according the PV generation, the updated state of charge of batteries, the house's load and the set-up information of the system.
-After this process is started the battery autonomy verification, from line 30. Based on the fact that won't be PV generation after 16:00h, the algorithm will only discharge the batteries until a new charging process (at the next day) to start. The formal verification is guaranteed by \textit{assert} macro to specific variables of the model, according lines 
+the 24h-day was divided, at the algorithm, in 3 parts of 8 h each (8:00h-16:00h, 16:00h-24:00h, and 00:00h-8:00h); and only the 8:00h-16:00h period with PV generation. The time step was adjusted to 1 hour, and from line 1 to line 29 the algorithm perform the verification from 8;00h to 16:00h, where there is PV generation. Therefore, the model from PV generator is used at the function call of line 11, to produce the voltage and current considering the actual $G$ and $T$. Following, related to every hour considered, the conditional \textit{if-else-endif} statements from lines 12, 17, 23 and 28, will perform the charge and discharge of batteries according the PV generation, the updated state of charge of batteries, the house's load and the set-up information of the system.
+After this process is started the battery autonomy verification, from line 31. Based on the fact that won't be PV generation after 16:00h, the algorithm will only discharge the batteries until a new charging process (at the next day) to start. The formal verification is guaranteed by \textit{assert} macro to specific variables of the model, according lines 27 and 35.
 % and the non-deterministic variables $G$ and $T$ are considered during the formal verification of the system, otherwise, during the other two periods, there is no PV generation and just the power consumption from the backup batteries. 
 %Within this 8h-period, $G$ and $T$ are automated verified with different values every one hour.
 %, and change their value every 1 h according with the algorithm created using the technique.
@@ -1549,13 +1549,13 @@ After this process is started the battery autonomy verification, from line 30. B
   \FOR {$h = 1$ to $8$}
   \STATE $G \leftarrow nondet \textunderscore uint(\,)$ \COMMENT {$G$ is non-deterministic variable}
   \STATE $T \leftarrow nondet \textunderscore uint(\,)$ \COMMENT {$T$ is non-deterministic variable}
-  \STATE assume ($Gmin \leq G \leq Gmax$) \COMMENT {restricting the values of $G$}
-  \STATE assume ($Tmin \leq T \leq Tmax$) \COMMENT {restricting the values of $T$}
+  \STATE assume ($Gmin \leq G \leq Gmax$) \COMMENT {restricting $G$ values}
+  \STATE assume ($Tmin \leq T \leq Tmax$) \COMMENT {restricting $T$ values}
   \STATE $Imax, Vmax \leftarrow PVgenerationMODEL (G,T)$ 
   \\
   \COMMENT {Now, testing if battery is empty:}
   \IF {($SOC \leq SOC_{limit}$)} 
-    \STATE assert (PV panel is generating energy) \COMMENT {if there is no enough solar energy generation, then FAIL}
+    \STATE assert (PV panel is generating energy?) \COMMENT {FAIL if not}
     \STATE $house \leftarrow energy \, from \, PV \, panels$
     \STATE $battery \leftarrow energy \, from \, PV \, panels$ \COMMENT {bulk stage}
     \STATE $SOC \leftarrow SOC + 1\,h\, charge$
@@ -1566,11 +1566,12 @@ After this process is started the battery autonomy verification, from line 30. B
     \STATE $battery \leftarrow energy \, from \, PV \, panels$ \COMMENT {bulk or floating stage}
     \STATE $SOC \leftarrow SOC + 1\,h\, charge$
   \ELSE
-  	\STATE Adequate the voltage at the DC-bus (battery feed the bus)
+  	\STATE Adequate the voltage of DC-bus (battery feed bus)
 	\STATE $house \leftarrow energy \, from \, batteries$
     \STATE $SOC \leftarrow SOC - 1\,h\, discharge$
+    \STATE assert ($SOC \geq SOC_{limit}$)
     \\
-    \COMMENT {the last case: batteries are charged but the panels are not generating}	  
+    \COMMENT {this ELSE: batteries $\geq SOC_{limit}$ but panels are off}	  
   \ENDIF
   \STATE $h \leftarrow (h+1)$
   \ENDFOR
@@ -1722,6 +1723,7 @@ Experimental setup of automated verification tool: all experiments were conducte
 Experimental setup of HOMER Pro: all experiments were conducted on an otherwise idle Intel Core i5-4210 (4-cores), with 1.7 GHz and 4 GB of RAM, running Microsoft Windows 10. It was used the version 3.12.0 of HOMER Pro.
 
 \subsection{Results}
+\label{sec:results_indeed}
 The total were five case studies evaluated by HOMER Pro and by the automated verification tool. Related to the HOMER Pro, the simulation, based on NASA data from the deployed systems (temperature and solar irradiance), shown that the restrictions were met by four systems, without any indication of sizing error or even of performance. The case study that was not successful during simulation was the 1,200 W (house 5), however without indication what are the fail of this PV system. All the simulations took less than 5 seconds (each) to be performed.
 
 However, related to the results of the automated verification, the 1,200 W PV system (house 5) failed during the sizing check. The number of panels was not correct (the verification counterexample demands 3 panels in parallel and the project size has 2 in series and 2 in parallel). That verification took 63.3 hours to be performed. Surveying the owner of the 1,200 W system it was identified that, in fact, the system mostly of the time do not met the battery autonomy (mainly when all the loads are turned on). But it is understandable that this problem occurs because the system was purchased as an off-the-shelf solution and not as a specific design for the electrical charges of the house.
