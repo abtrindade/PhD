@@ -1451,6 +1451,7 @@ Fig. \ref{fig:esbmcarch} shows the tool architecture.
 ESBMC uses clang as front-end, a state-of-the-art compiler suite for C/C++/ObjectiveC/ObjectiveC++ widely used in industry \cite{esbmc2018}. % and generate an Abstract Syntax Tree (AST). %One legacy CBMC-based front-end that supports both C and C++ and a new clang-based front-end that currently only supports C. The data types and bit vectors are created in the front-end when parsing the code. 
 %Regardless of the chosen front-end, 
 The output is an AST (tree representation of the abstract syntactic structure of source code written in a programming language) that will be used by the GOTO converter to generate a GOTO program, which has simplified control flow and is suitable for bounded unwinding. The next step is the symbolic execution, when the GOTO program is executed (unrolling loops up to the bound $ k $) and converted to Static Single Assignments (SSA) form. SSA form enables the simplification of algorithms and reduction of computational complexity. %, where each variable is a target of exactly one assignment statement in the program text. 
+The feature called k-induction at Fig. \ref{fig:esbmcarch} allows BMC to find a property violation or even to prove (partial) correctness without fully unwinding loops. 
 %
 %During the symbolic execution, ESBMC aggressively tries to simplify the program \cite{Ramalho}; it propagates all constants and solves any assertions that can be statically determined. This is an important step for the verification, since ESBMC can fully verify programs without calling a solver, if the inputs are deterministic. That characteristic is useful at this work to perform the sizing check of the PV system project. 
 Following, the SSA expressions are then encoded using the chosen SMT solver supported by ESBMC. At this paper, it was used the Z3 solver \cite{DeMoura}.
@@ -1475,7 +1476,6 @@ Finally, the system attempting to determine whether a formula, which is the disj
 \section{Methodology }
 \label{sec:Methodology}
 %----------------------------------------
-
 %
 %Fig. \ref{fig:statetransition} shows the state diagram for the proposed tool. 
 %
@@ -1502,7 +1502,7 @@ The weather data (solar irradiance, and ambient temperature by default) will be 
 %; as the  state of charge of the batteries, load demand of power and the load consumption of energy if defined by the code
 % (as reliability, performance, or safety)
 
-\textcolor{red}{I didn't understand this sentence... it is completely broken...} Simply put, instead of the ESBMC find the defect of a software or if a hardware does not meet the some requirements, the tool will verify if the requirements of the solar PV project are met. Detailing the condition of violation, i.e., the state of each variable related to the system. 
+In a nutshell, ESBMC will process the C code with constraints ($C$) and properties ($P$) from the PV system that were inputted by the user, and the tool will verify automatically if the requirements are met. If the return is a fail, then the tool details the condition of violation, i.e., the state of each variable related to the system. That information can be used as a feedback to improve the PV system project. In the other hand, if the verification succeeds, as indicated in Fig. \ref{fig:esbmcarch}, the PV system will present its intended behavior at the field.
 
 %---------------------------------------------------------------------
 \subsection{The case studies and the Algorithm}
@@ -1517,21 +1517,22 @@ We performed five case studies: (1) four concerning a PV system (700 W inverter,
 %
 %As demonstrated at this work, the performance of the system is highly dependent of solar irradiance and temperature, that are specific of the deployed local (latitude and longitude). 
 
+Algorithm~\ref{alg:verification-algorithm} describes the pseudo code used to perform the automated verification. The line 1 indicates function call that performs the size checking of the entire PV system: using \eqref{eq:NTPmin}, \eqref{eq:NTP}, \eqref{eq:NPSmin}, \eqref{eq:NPS}, \eqref{eq:NPP}, and \eqref{eq:NPPmin} to verify the PV panel; using \eqref{eq:Cbank}, \eqref{eq:Nbtotal}, and \eqref{eq:batcheck} to verify the batteries; using \eqref{eq:vcvsystem}, \eqref{eq:icmin}, and \eqref{eq:icicmin} to verify the charge controller; and using \eqref{eq:vindc}, \eqref{eq:voutac}, and \eqref{eq:invcheck} to verify the inverter. The verification is done by standard \textit{assert} macro from C language to each equation. The argument to \textit{assert} must be true when the macro is executed, otherwise the program aborts and prints an error message. If there is no fail, the algorithm goes on and the batteries are assumed to have SOC of 80\% (line 5).
+
 %At both case studies, it was considered 21 years of historic data from Manaus. 
 %According with X and Y, t
-The annual average temperature ($T$) in Manaus is from 23$^{o}$C to 32$^{o}$C; and irradiance ($G$) varies from 274 W/m$^{2}$ to 852 W/m$^{2}$ when there is sunlight.  
+The annual average temperature ($T$) in Manaus is from 23$^{o}$C to 32$^{o}$C; and irradiance ($G$) varies from 274 W/m$^{2}$ to 852 W/m$^{2}$ when there is sunlight. That information is passed to the C code at lines 7 to 10 using the feature of non-deterministic variable from ESBMC to explore all the possible states from the variables and the \textit{assume} macro to limit the values considering a range. 
 %and irradiance varies from 0 W/m$^{2}$ to 852 W/m$^{2}$ (with minimum of 274 W/m$^{2}$ during the daytime, when there is sunlight). 
 Another characteristic of Manaus, is that the PV generation can be despised from 16:00h to the 8:00h of the next day, independent of the season.
 %there is PV generation only between 8:00 h and 16:00 h every day, 
 %with zero electric energy generation from 18:00 h to 6:00 h of the next day; and with insignificant generation from 6:00 h to 8:00 h, and from 16:00 h to 18:00 h of the same day. 
 Therefore, in order to reduce the computational effort,
 % caused by the state explosion inherent of the technique, 
-the 24h-day was divided, at the algorithm, in 3 parts of 8 h each (8:00h-16:00h, 16:00h-24:00h, and 00:00h-8:00h); and only the 8:00h-16:00h period with PV generation. The time step was adjusted to 1 hour. 
+the 24h-day was divided, at the algorithm, in 3 parts of 8 h each (8:00h-16:00h, 16:00h-24:00h, and 00:00h-8:00h); and only the 8:00h-16:00h period with PV generation. The time step was adjusted to 1 hour, and from line 1 to line 29 the algorithm perform the verification from 8;00h to 16:00h, where there is PV generation. Therefore, the model from PV generator is used at the function call of line 11, to produce the voltage and current considering the actual $G$ and $T$. Following, related to every hour considered, the conditional \textit{if-else-endif} statements from lines 12, 17, 23 and 27, will perform the charge and discharge of batteries according the PV generation, the updated state of charge of batteries, the house's load and the set-up information of the system.
+After this process is started the battery autonomy verification, from line 30. Based on the fact that won't be PV generation after 16:00h, the algorithm will only discharge the batteries until a new charging process (at the next day) to start. The formal verification is guaranteed by \textit{assert} macro to specific variables of the model, according lines 
 % and the non-deterministic variables $G$ and $T$ are considered during the formal verification of the system, otherwise, during the other two periods, there is no PV generation and just the power consumption from the backup batteries. 
 %Within this 8h-period, $G$ and $T$ are automated verified with different values every one hour.
 %, and change their value every 1 h according with the algorithm created using the technique.
-
-Algorithm~\ref{alg:verification-algorithm} describes the pseudo code used to perform the automated verification. \textcolor{red}{Can you please briefly explain this algorithm?}
 
  \begin{algorithm}
  \caption{Algorithm to perform automated verification}
