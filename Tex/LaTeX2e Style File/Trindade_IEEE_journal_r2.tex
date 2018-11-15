@@ -740,17 +740,17 @@ The PV generator, which can be a panel or an array, is a semiconductor device th
 %Modeling provides the ways to understand the current, voltage, and power relationships of PV systems.
   
 The performance of PV systems %, %that is, the output current/voltage curve ($I-V$ curve), 
-is usually studied using an equivalent circuit model~\cite{Yatimi,Saloux,Mellit}; this equivalent circuit consists of a current source with one or two diodes connected in parallel, and up to two resistors, one connected in parallel and the other one in series, in order to take into account energy losses in this model~\cite{Cubas}. 
+is usually studied using an equivalent circuit model~\cite{Yatimi,Saloux,Mellit}, which consists of a current source with one or two diodes connected in parallel, and up to two resistors, one connected in parallel and the other one in series, to take into account energy losses in this model~\cite{Cubas}. 
 %Based on these electronic components, four basic configurations are normally used when studying photovoltaic systems, as shown by Fig. \ref{fig:equivckt}. 
 \begin{figure}[h]
 \includegraphics[width=0.20\textwidth]{equivckt1D}
 \centering
-\caption{1-diode equivalent PV cell/panel circuit model (Source:~\cite{Cubas}).}
+\caption{1-diode equivalent PV cell/panel circuit model~\cite{Cubas}.}
 %\caption{Four different equivalent circuit models: (a) 1-diode; (b) 1-diode/1-resistor; (c) 1-diode/2-resistor; (d) 2-diode/2-resistor (Source: \cite{Cubas})}
 \label{fig:equivckt}
 \end{figure}
  
-The 1-diode model, illustrated in Fig. \ref{fig:equivckt}, whose equation relates the output current, $I$, to the output voltage, $V$, is described in \eqref{eq:1diodemodel}. 
+The 1-diode model, illustrated in Fig. \ref{fig:equivckt}, whose equation relates the output current, $I$, to the output voltage, $V$, is described in Eq.~\eqref{eq:1diodemodel}:
 \begin{equation}
 \label{eq:1diodemodel}
 I = I_{ph}-I_{D1}=I_{ph}-I_{0}\left[ exp \left( \dfrac{V}{NaV_{T}} \right)  \right], 
@@ -816,13 +816,13 @@ I = I_{ph}-I_{D1}=I_{ph}-I_{0}\left[ exp \left( \dfrac{V}{NaV_{T}} \right)  \rig
 %For that reason, researchers gradually focused on searching out the approximate methods for the calculation of unknown parameters and walked through three different paths. The analytical methods give exact solutions by means of algebraic equations, as done by \cite{Cubas} and \cite{Brano}. However, due to implicit nature and nonlinearity of PV cell or module characteristics, it is hard to find out the analytical solution of all unknown parameters, as described by \cite{Hasan}. Thus, numerical methods such as Newton-Raphson method or Levenberg-Marquardt algorithm were preferred, as described by \cite{Mellit}. This happens because numerical methods give approximate solution of the nonlinear problems without searching for exact solutions. However, numerical methods are time consuming and need long term time series data, which is not available in developing countries. \cite{Jakhrani} did a mixed methodology using analytical and numerical steps together.  \cite{Shenawy} create a method to discover the unknown parameters of the PV panels through experimentation (essays). And \cite{Tian} did a mix of analytical and experimental methodology to get the unknown parameters, but samples of the PV modules are necessary to perform some essays, when we use experimental technique. 
 
 %Therefore, a wide variety of models exists for estimation of power output of PV modules (and $I-V$ or $P-V$ curves). However, the present work will rely on t
-The simplified model of 1-diode has demonstrated that it has a small error rate, between 0.03\% and 4.68\% from selected PV panels tested~\cite{Saloux}. In addition, this mathematical modeling has the advantage of being an explicit model, which does not use iterative numerical calculation, which is time-consuming to computing. 
+The simplified model of 1-diode has demonstrated that it has a small error rate, between 0.03\% and 4.68\% from selected PV panels tested~\cite{Saloux}. In addition, this mathematical modeling has the advantage of being an explicit model, which does not use iterative numerical calculation, which is time-consuming to computing \textcolor{red}{add citation here}. 
  
 %\subsection{PV Panel Model}
 %With the proposed model, an explicit set of equations is derivate from the ideal PV model given by Equation \ref{eq:1diodemodel}.
 %
 %A single-diode without series and shunt resistances is considered. 
-Equation \eqref{eq:1diodemodel} is used to express currents and voltages at each key point of the characteristic curve from a PV cell \cite{Villalva}.
+Eq.~\eqref{eq:1diodemodel} is used to express currents and voltages at each key point of the characteristic curve from a PV cell \cite{Villalva}.
 % shown in Fig. \ref{fig:ivcurve}.
 %
 %\begin{figure}[h]
@@ -831,7 +831,7 @@ Equation \eqref{eq:1diodemodel} is used to express currents and voltages at each
 %\caption{$ I-V $ characteristic curve of an ideal PV cell (Source: \cite{Saloux})}
 %\label{fig:ivcurve}
 %\end{figure}
-
+%
 %Hence, the short-circuit current, the open-circuit voltage, the maximum power voltage and current are written as defined by \cite{Saloux} and shown from Equations \ref{eq:Isc} to \ref{eq:Im}.
 %\begin{equation}
 %\label{eq:Isc}
@@ -880,7 +880,7 @@ Equation \eqref{eq:1diodemodel} is used to express currents and voltages at each
 %\end{equation}
 %
 %Replacing the Equation \ref{eq:dIdV_Vm} into Equations \ref{eq:Vmderiv} and \ref{eq:Im}, 
-
+%
 The voltage and the current at the maximum power point tracking (MPPT), can be expressed by \eqref{eq:Vmfinal}, \eqref{eq:Imfinal}, and \eqref{eq:Pm} \cite{Saloux}. %These equations are used to calculate the key cell parameters at the maximum power point as function cell temperature and parameters from the manufacturer's data-sheet.
 \begin{equation}
 \label{eq:Vmfinal}
@@ -902,7 +902,7 @@ P_{m} = V_{m} I_{m}.
 %P_{m} = V_{m} I_{m} = \left[ \dfrac{aNk_{B}T}{q} ln \left( \dfrac{aNk_{B}T}{qI_{0}} \dfrac{I_{sc}}{V_{oc}}  \right) \right] \times \\ \left[ I_{ph} + I_{0} - \dfrac{aNk_{B}T}{q} \left( \dfrac{I_{sc}}{V_{oc}} \right)  \right] 
 %\end{multline}
 %
-However, the photocurrent delivered by the constant current source ($I_{ph}$) or even the reverse saturation current ($ I_{0} $) are not given by PV manufacturers. Therefore, (\ref{eq:Iph}) is used to calculate the photocurrent as function of irradiance and temperature~\cite{Villalva}.
+However, the photocurrent delivered by the constant current source ($I_{ph}$) or even the reverse saturation current ($ I_{0} $) are not given by PV manufacturers. Therefore, Eq.~\eqref{eq:Iph} is used to calculate the photocurrent as function of irradiance and temperature~\cite{Villalva}:
 \begin{equation}
 \label{eq:Iph}
 I_{ph}=\dfrac{G}{G_{ref}} \left[ I_{ph,ref} + \mu_{I} \left( T-T_{ref} \right)    \right], 
@@ -910,8 +910,8 @@ I_{ph}=\dfrac{G}{G_{ref}} \left[ I_{ph,ref} + \mu_{I} \left( T-T_{ref} \right)  
 
 \noindent where the reference state (STC) of the cell is given by the solar irradiance $ G_{ref}=1000 W/m^{2} $, and the temperature $ T_{ref}=298.15 K (=25^{o}C) $; $ \mu_{I} $ is the short-circuit current temperature coefficient ($A/K$) %and corresponds to the photocurrent obtained from a given PV cell working at reference conditions 
 (provided by PV manufacturers). $ I_{ph,ref} $ can be approximated to the reference short-circuit current \cite{Jakhrani} that is provided by PV manufacturers ($ I_{sc,ref} $).
-
-The cell temperature ($ T $) is shown in (\ref{eq:Tcell}) \cite{Ross}.
+%
+The cell temperature ($ T $) is described in Eq.~\ref{eq:Tcell}~\cite{Ross}:
 \begin{equation}
 \label{eq:Tcell}
 T = T_{air} + \dfrac{NOCT-20}{800}G,
@@ -919,7 +919,7 @@ T = T_{air} + \dfrac{NOCT-20}{800}G,
 
 \noindent where $ T_{air} $ is the ambient temperature, $NOCT$ is the nominal operating cell temperature (in $^{o}$C) that is found at the PV manufacturer's data-sheet \cite{Ross}, and $G$ is the solar irradiance ($ W/m^{2} $) of the place where the PV system is deployed.
 
-Furthermore, \eqref{eq:I0} permits the saturation current ($ I_{0} $) to be expressed as a function of the cell temperature~\cite{Villalva}. 
+Furthermore, Eq.~\eqref{eq:I0} permits the saturation current ($ I_{0} $) to be expressed as a function of the cell temperature~\cite{Villalva}. 
 %In this study, this relation is explicitly written based on cell open-circuit conditions using the short-circuit current temperature coefficient as well as the open-circuit voltage temperature coefficient (Equation \ref{eq:I0}).
 
 \begin{equation}
@@ -930,7 +930,7 @@ I_{0} = \dfrac{I_{sc,ref} + \mu_{I}(T - T_{ref})}{exp \left[ \dfrac{q(V_{oc,ref}
 \noindent where $ V_{oc,ref} $ is the reference open-circuit voltage, and $ \mu_{V} $ is an open-circuit voltage temperature coefficient ($ V/K $).
 
 %The ideality (or quality) factor of the diode $ a $, which is usually considered as a constant \cite{Villalva}, is determined in the reference state. 
-Using the maximum power point current (\ref{eq:Pm}) and the saturation current in the reference temperature given by (\ref{eq:I0}), the diode ideality factor is determined by (\ref{eq:a}).
+Using the maximum power point current \eqref{eq:Pm} and the saturation current in the reference temperature given by Eq.~\ref{eq:I0}, the diode ideality factor is determined by Eq.~\ref{eq:a}:
 \begin{equation}
 \label{eq:a}
 a = \dfrac{q(V_{m,ref}-V_{oc,ref})}{Nk_{B}T} \dfrac{1}{ln \left( 1 - \dfrac{I_{m,ref}}{I_{sc,ref}}  \right) },
