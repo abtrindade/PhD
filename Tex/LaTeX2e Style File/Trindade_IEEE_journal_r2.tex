@@ -1491,7 +1491,7 @@ The PV input data (load power demand, load consumption of energy, the PV system 
 \begin{figure}[h]
 \includegraphics[width=0.4\textwidth]{flowchart_verification.png}
 \centering
-\caption{Flowchart of the proposed automated verification of PV systems.}
+\caption{Flowchart of the proposed automated verification of PV systems. \textcolor{red}{shall we identify each step with a number? e.g., step 1, step 2, etc?}}
 \label{fig:flowchartgeneral}
 \end{figure}
 
@@ -1499,7 +1499,11 @@ The weather data (solar irradiance, and ambient temperature by default) will be 
 %; as the  state of charge of the batteries, load demand of power and the load consumption of energy if defined by the code
 % (as reliability, performance, or safety)
 
-In a nutshell, ESBMC will process the C code with constraints ($C$) and properties ($P$) from the PV system that were inputted by the user, and the tool will verify automatically if the requirements are met. If the return is a fail, then the tool details the condition of violation, i.e., the state of each variable related to the system. That information can be used as a feedback to improve the PV system project. In the other hand, if the verification succeeds, as indicated in Fig. \ref{fig:esbmcarch}, the PV system will present its intended behavior at the field.
+In a nutshell, ESBMC will process the C code with constraints ($C$) and properties ($P$) from the PV system that were inputted by the user, and the tool will verify automatically if the requirements are met. If the return is a fail, then the tool details the condition of violation, i.e., the state of each variable related to the system. That information can be used as a feedback to improve the PV system project. However, if the verification succeeds, as indicated in Fig. \ref{fig:esbmcarch}, the PV system will present its intended behavior at the field.
+
+\textcolor{red}{The algorithm should be part of the methodology!!!}
+
+\textcolor{red}{The case study should be described in the experimental evaluation section.}
 
 %---------------------------------------------------------------------
 \subsection{The case studies and the Algorithm}
