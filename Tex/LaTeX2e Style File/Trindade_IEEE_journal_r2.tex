@@ -571,7 +571,7 @@ Specifically concerning the energy needed for remote rural areas of developing c
 % depending on the type of load, cost, resources availability, and requirements of the load, 
 %stand-alone systems 
 %can be split into several categories. However, 
-the configuration that is most common or more suitable is the regulated stand-alone system with battery and AC load. This configuration is the focus of this study.
+the most suitable configuration is the regulated stand-alone system with battery and AC load. This configuration is the focus of this study.
 %, which is the target of this paper, includes PV array, batteries, charge controller, inverter, and AC load.
 %PV array, battery, MPPT and AC load. Battery is used to store the extra power of PV system. A charge controller is necessary for this type of system because the useful life of the battery is less than that of the PV module. Extra charging and deep discharging can reduce the battery life \cite{Kim}. Because of the AC load, an inverter (DC to AC converter) is required. 
 %This solution has an increase of cost because has more equipment. However, the AC availability brings the advantage of a higher number of AC appliances to use at the houses or consumer units.
@@ -610,7 +610,7 @@ The capabilities of these tools range from simple solar resource and energy prod
 %Some tools also provide support to rebate programs applications and tax incentives (specific to each country or region), while other programs and worksheets focus on the technical aspects of system sizing and design.
 %
 %Manufacturers and integrators have yet their proprietary software to perform inverter string sizing and various system sizing and design tools, with the drawback to just include their own products among the possibilities of choice. 
-Here it was evaluated the most popular ones, which are PVWatts, SAM, HOMER, RETScreen, and Hybrid2 \cite{NRELDobos}, \cite{NRELBlair}, \cite{Swarnkar}, \cite{Pradhan}, \cite{Mills}.
+Here it was evaluated the most popular ones, which are PVWatts, SAM, HOMER, RETScreen, and Hybrid2 \cite{Pradhan,Swarnkar,NRELDobos,NRELBlair,Mills}.
 
 %\subsection{PVWatts Calculator}
 %According to \cite{Freeman} and \cite{NRELDobos}, it is a web application developed by the National Renewable Energy Laboratory (NREL), which estimates the electricity production of a grid-connected roof- or ground-mounted photovoltaic system based on a few inputs. According to \cite{NRELDobos}, to use the calculator, it is necessary to provide information about the system's location, basic design parameters, and system economics. PVWatts calculates estimated values for the system's annual and monthly electricity production, and for the electricity monetary value. This tool is suitable for very preliminary studies of a potential location for a photovoltaic system that uses crystalline silicon or thin film photovoltaic modules. The production estimates that PVWatts computation do not account for many factors that are important in the design of a photovoltaic system, therefore it is necessary support of an energy expert. The calculator estimates the monthly and annual electricity production of a photovoltaic system using an hour-by-hour simulation over a period of one year. To represent the system's physical characteristics, PVWatts requires values for six inputs: System DC size; Module type; Array type; System losses; Array tilt angle; Array azimuth angle.
@@ -639,8 +639,8 @@ Here it was evaluated the most popular ones, which are PVWatts, SAM, HOMER, RETS
 %\subsection{Hybrid2}
 %The Hybrid2 software package, as described in \cite{Mills}, is a user-friendly tool to perform detailed long-term performance and economic analysis on a wide variety of hybrid power systems. Hybrid2 is a probabilistic/time series computer model, using time series data for loads, wind speed, solar insolation, and temperature; and the power system is designed or selected by the user, in order to predict the performance of the hybrid power system. Variations in wind speed and in load within each time step are factored into the performance predictions. The code does not consider short-term system fluctuations caused by system dynamics or component transients. This program is not supported anymore and according to \cite{UMASS}, probably after the user performs the free download of the tool, it will not work on Windows platforms later than Windows XP, what is a limitation.
 
-Table~\ref{table:softwares} summarizes the off-the-shelf tools employed in this study, where only Hybrid2 does not have technical support; HOMER and Hybrid2 perform off-grid system or battery backup analysis; %all the tools perform solar photovoltaic analysis; 
-additionally, HOMER and RETScreen include economical analysis or even optimization-sensitive analysis. RETScreen and HOMER have a free web-based version, but they have limited resources: it is not allowed to save the projects or even upload data from manufacturers. In other hand, commercial version of those tools, called RETScreen Expert and HOMER Pro, are available only for Microsoft Windows and the annual subscription range from US\$504.00 to US\$657.00.
+Table~\ref{table:softwares} summarizes the off-the-shelf tools employed here, where only Hybrid2 does not have technical support; HOMER and Hybrid2 perform off-grid system or battery backup analysis. %all the tools perform solar photovoltaic analysis; 
+Additionally, HOMER and RETScreen include economical analysis or even optimization-sensitive analysis. RETScreen and HOMER have a free web-based version, but they have limited resources: it is not allowed to save the projects or even upload data from manufacturers. However, commercial version of those tools, called RETScreen Expert and HOMER Pro, are available only for Microsoft Windows and the annual subscription range from US\$504.00 to US\$657.00.
 
 \begin{table}[!t]
 %% increase table row spacing, adjust to taste
@@ -685,7 +685,7 @@ Sensitive analysis &  &  & X & X & \\
 Considering the focus of this study, only HOMER remains for a comparative evaluation with our proposed automated verification technique. %All tools need some parameters inherently from manufacturer's catalog.
 %, so the project starts with manufacturers and integrators tool to define the basic items of the project: panels, inverters, controllers, and batteries. 
 %After that, the potential solution is analyzed in another tool to simulate or even optimize the proposed solution. Therefore, that is 
-The main challenge of this study is to show that it is possible to use automated verification in stand-alone PV solution, thus proving that this evaluation is more efficient and complete than other state-of-the-art tool, as HOMER Pro. The comparative evaluation between the HOMER Pro and the proposed verification tool is presented in Section~\ref{sec:results_indeed}.
+The main challenge here is to demonstrate the use of automated verification in stand-alone PV solution, thus proving that this evaluation is more effective and complete than other state-of-the-art tool, as HOMER Pro. The comparative evaluation between the HOMER Pro and the proposed verification tool is presented in Section~\ref{sec:results_indeed}.
 
 %-------------------------------------------------------------------
 \subsection{Component models for stand-alone PV system }
@@ -694,14 +694,14 @@ The main challenge of this study is to show that it is possible to use automated
 %The main purpose of this section is to describe the models for the elements of a stand-alone PV system: PV generator, battery, controller, inverter, and load. 
 The mathematical modeling of the PV system is based on modular blocks, as illustrated in Fig.\ref{fig:blockdiagram}. It identifies the PV generator, batteries, charge controller, inverter, and AC load. 
 
-The PV generator, which can be a panel or an array, is a semiconductor device that can convert solar energy into DC electricity. In the diagram, there are two variables that depend on the site where the system is deployed and from the weather (solar irradiance $G$ and temperature $T$). For night hours or rainy days, one needs to hold batteries, where power can be stored and used. The use of battery as a storage form implies thus the presence of a charge controller~\cite{Hansen,Mellit}. The PV arrays produce DC and therefore when the PV system contains an AC load, a DC/AC conversion is required. That converter is called of inverter; and the AC load dictates the behavior of AC electrical load from the house that will be fed by the system.
+The PV generator, which can be a panel or an array, is a semiconductor device that can convert solar energy into DC electricity. In the diagram, there are two variables that depend on the site where the system is deployed and from the weather (solar irradiance $G$ and temperature $T$). For night hours or rainy days, one needs to hold batteries, where power can be stored and used. The use of battery as a storage form implies the presence of a charge controller~\cite{Hansen,Mellit}. The PV arrays produce DC and therefore when the PV system contains an AC load, a DC/AC conversion is required. That converter is called of inverter; and the AC load dictates the behavior of AC electrical load from the house that will be fed by the system.
 %
 %The modular structure facilitates the modeling of the other system structures and replacement of elements, such as a DC load instead of an AC load. 
 %
 \begin{figure}[h]
 \includegraphics[width=0.48\textwidth]{blockdiagramPVS}
 \centering
-\caption{Block diagram for the stand-alone PV system (Source:~\cite{Hansen}).}
+\caption{Block diagram for the stand-alone PV system~\cite{Hansen}.}
 \label{fig:blockdiagram}
 \end{figure}
 
@@ -740,7 +740,7 @@ The PV generator, which can be a panel or an array, is a semiconductor device th
 %Modeling provides the ways to understand the current, voltage, and power relationships of PV systems.
   
 The performance of PV systems %, %that is, the output current/voltage curve ($I-V$ curve), 
-is usually studied using an equivalent circuit model, as described in the available literature~\cite{Yatimi,Saloux,Mellit}. This equivalent circuit consists of a current source with one or two diodes connected in parallel, and up to two resistors, one connected in parallel and the other one in series, in order to take into account energy losses in this model~\cite{Cubas}. 
+is usually studied using an equivalent circuit model~\cite{Yatimi,Saloux,Mellit}; this equivalent circuit consists of a current source with one or two diodes connected in parallel, and up to two resistors, one connected in parallel and the other one in series, in order to take into account energy losses in this model~\cite{Cubas}. 
 %Based on these electronic components, four basic configurations are normally used when studying photovoltaic systems, as shown by Fig. \ref{fig:equivckt}. 
 \begin{figure}[h]
 \includegraphics[width=0.20\textwidth]{equivckt1D}
