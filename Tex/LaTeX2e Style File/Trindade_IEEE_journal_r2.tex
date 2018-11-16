@@ -699,7 +699,7 @@ The PV generator, which can be a panel or an array, is a semiconductor device th
 %The modular structure facilitates the modeling of the other system structures and replacement of elements, such as a DC load instead of an AC load. 
 %
 \begin{figure}[h]
-\includegraphics[width=0.48\textwidth]{blockdiagramPVS}
+\includegraphics[width=0.48\textwidth]{blockdiagramPVS2}
 \centering
 \caption{Block diagram for the stand-alone PV system~\cite{Hansen}.}
 \label{fig:blockdiagram}
@@ -1436,29 +1436,36 @@ ESBMC comes as an alternative to overcome limitations of the systems modeling, e
 
 \subsection{ESBMC }
 ESBMC (or Efficient SMT-based Bounded Model Checker) is an open source, permissively licensed (Apache 2), cross platform bounded model checking for C and C++ programs \cite{esbmc2018}. 
-%The efficient SMT based model checker, is a software verification tool for C and C++ code bases. 
-Fig. \ref{fig:esbmcarch} shows the tool architecture. 
 
-\begin{figure}[h]
-\includegraphics[width=0.4\textwidth]{ESBMCarch4}
-\centering
-\caption{ESBMC architecture (adapted from \cite{esbmc2018}).}
-\label{fig:esbmcarch}
-\end{figure}
-ESBMC uses clang as front-end, a state-of-the-art compiler suite for C/C++/ObjectiveC/ObjectiveC++ widely used in industry \cite{esbmc2018}. % and generate an Abstract Syntax Tree (AST). %One legacy CBMC-based front-end that supports both C and C++ and a new clang-based front-end that currently only supports C. The data types and bit vectors are created in the front-end when parsing the code. 
-%Regardless of the chosen front-end, 
-The output is an AST (tree representation of the abstract syntactic structure of source code written in a programming language) that will be used by the GOTO converter to generate a GOTO program, which has simplified control flow and is suitable for bounded unwinding. The next step is the symbolic execution, when the GOTO program is executed (unrolling loops up to the bound $ k $) and converted to Static Single Assignments (SSA) form. SSA form enables the simplification of algorithms and reduction of computational complexity. %, where each variable is a target of exactly one assignment statement in the program text. 
-The feature called k-induction at Fig. \ref{fig:esbmcarch} allows the model checker to find a property violation or even to prove (partial) correctness without fully unwinding loops. 
+ESBMC's architecture can be summarized in three stages: (I) a front-end that can read and compile C/C++ codes, where the formal specification of the system to be verified is first treated; (II) preprocessing steps to deal with the representation of the code, control flow and unwinding of loops, and the simplification of the algorithm, aiming to reduce the computational complexity; and finally (III) the solver, where all the constraints and properties of the system to be verified are coded in SMT format and solved.
 %
-%During the symbolic execution, ESBMC aggressively tries to simplify the program \cite{Ramalho}; it propagates all constants and solves any assertions that can be statically determined. This is an important step for the verification, since ESBMC can fully verify programs without calling a solver, if the inputs are deterministic. That characteristic is useful at this work to perform the sizing check of the PV system project. 
-Following, the SSA expressions are then encoded using the chosen SMT solver supported by ESBMC. At this paper, it was used the Z3 solver \cite{DeMoura}.
-%: Boolector (default) \cite{Brummayer}, Z3 \cite{DeMoura}, MathSAT \cite{Cimatti}, Yices \cite{Dutertre} and CVC4 \cite{Barrett}. 
-
-Finally, the system attempting to determine whether a formula, which is the disjunction of all possible errors, can be satisfied. If the SMT formula is shown to be satisfiable, a counterexample is presented; if the formula is find to be unsatisfiable, there are no errors up to the unwinding bound, and this result is presented. 
- 
-%ESBMC can be invoked through the command-line interface or configured through the Eclipse plug-in. Specific problems and the solver can be selected that way. 
+%%The efficient SMT based model checker, is a software verification tool for C and C++ code bases. 
 %
-%ESBMC aims to support all of ISO/IEC 9899:1999 C programming language standard, and detects errors in software by simulating a finite prefix of the program execution with all possible inputs. Classes of problems that can be detected include: user specified assertion failures, out of bounds array access, illegal pointer dereferences, double-free of malloc'd memory, misaligned memory access; integer overflows, divide by zero, memory leaks, concurrent software, deadlock, and data races (i.e. competing writes). 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Fig. \ref{fig:esbmcarch} shows the tool architecture. 
+%
+%\begin{figure}[h]
+%\includegraphics[width=0.4\textwidth]{ESBMCarch4}
+%\centering
+%\caption{ESBMC architecture (adapted from \cite{esbmc2018}).}
+%\label{fig:esbmcarch}
+%\end{figure}
+%ESBMC uses clang as front-end, a state-of-the-art compiler suite for C/C++/ObjectiveC/ObjectiveC++ widely used in industry \cite{esbmc2018}. % and generate an Abstract Syntax Tree (AST). %%%%%One legacy CBMC-based front-end that supports both C and C++ and a new clang-based front-end that currently only supports C. The data types and bit vectors are created in the front-end when parsing the code. 
+%%%%%%%Regardless of the chosen front-end, 
+%The output is an AST (tree representation of the abstract syntactic structure of source code written in a programming language) that will be used by the GOTO converter to generate a GOTO program, which has simplified control flow and is suitable for bounded unwinding. The next step is the symbolic execution, when the GOTO program is executed (unrolling loops up to the bound $ k $) and converted to Static Single Assignments (SSA) form. SSA form enables the simplification of algorithms and reduction of computational complexity. %%%%%%%%%, where each variable is a target of exactly one assignment statement in the program text. 
+%The feature called k-induction at Fig. \ref{fig:esbmcarch} allows the model checker to find a property violation or even to prove (partial) correctness without fully unwinding loops. 
+%%
+%%%%%%%During the symbolic execution, ESBMC aggressively tries to simplify the program \cite{Ramalho}; it propagates all constants and solves any assertions that can be statically determined. This is an important step for the verification, since ESBMC can fully verify programs without calling a solver, if the inputs are deterministic. That characteristic is useful at this work to perform the sizing check of the PV system project. 
+%Following, the SSA expressions are then encoded using the chosen SMT solver supported by ESBMC. At this paper, it was used the Z3 solver \cite{DeMoura}.
+%%%%%: Boolector (default) \cite{Brummayer}, Z3 \cite{DeMoura}, MathSAT \cite{Cimatti}, Yices \cite{Dutertre} and CVC4 \cite{Barrett}. 
+%
+%Finally, the system attempting to determine whether a formula, which is the disjunction of all possible errors, can be satisfied. 
+If the SMT formula is shown to be satisfiable, a counterexample is presented; if the formula is find to be unsatisfiable, there are no errors up to the unwinding bound, and this result is presented. 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%5%
+%%%%%ESBMC can be invoked through the command-line interface or configured through the Eclipse plug-in. Specific problems and the solver can be selected that way. 
+%
+%ESBMC aims to support all of ISO/IEC 9899:2017 C programming language standard, and detects errors in software by simulating a finite prefix of the program execution with all possible inputs. Classes of problems that can be detected include: user specified assertion failures, out of bounds array access, illegal pointer dereferences, double-free of malloc'd memory, misaligned memory access; integer overflows, divide by zero, memory leaks, concurrent software, deadlock, and data races (i.e. competing writes). 
  
 %\subsection{Cyber-physical systems x Energy x ESBMC}
 %According \cite{UC}, cyber-physical systems (CPS) are integrations of computation, networking, and physical processes. Embedded computers and networks monitor and control the physical processes, with feedback loops where physical processes affect computations and vice-versa. The economic and societal potential of such systems is vastly greater than what has been realized, and major investments are being made worldwide to develop the technology. The technology builds on the discipline of embedded systems (computers and software embedded in devices) whose principle mission is not computation, such as cars, toys, medical devices, and scientific instruments. CPS integrates the dynamics of the physical processes with those of the software and networking, providing abstractions and modeling, design, and analysis techniques for the integrated whole. 
@@ -1485,21 +1492,23 @@ Finally, the system attempting to determine whether a formula, which is the disj
 %
 %It is worth mentioning that the steps described here are carried out shortly after the design of the solar photovoltaic system, as soon as the equipment and equipment specifications are defined; before buying and deploying them, as a way to ensure that the project will not fail. 
 %
-The flowchart of the proposed (automated) verification method is illustrated in Fig.~\ref{fig:flowchartgeneral}. 
-The PV input data (load power demand, load consumption of energy, the PV system project sizing data, and the manufacturer's data-sheet information), the formulas to check the sizing project, the mathematical model, the limits of the weather non-deterministic variables, are all written as an ANSI-C code \cite{ANSI2018}. 
+The flowchart of the proposed automated verification tool is illustrated in Fig.~\ref{fig:flowchartgeneral}. 
+As Step 01, the PV input data (load power demand, load consumption of energy, the PV system project sizing data, and the manufacturer's data-sheet information), the formulas to check the sizing project, the mathematical model, the limits of the weather non-deterministic variables, are all written as an ANSI-C code \cite{ANSI2018}. At Step 02, occurs the sizing check of the PV system to make sure that the components followed accepted international requirements toward a well designed PV project.
 
 \begin{figure}[h]
-\includegraphics[width=0.4\textwidth]{flowchart_verification.png}
+\includegraphics[width=0.4\textwidth]{flowchart_verification3.png}
 \centering
-\caption{Flowchart of the proposed automated verification of PV systems. \textcolor{red}{shall we identify each step with a number? e.g., step 1, step 2, etc?}}
+\caption{Flowchart of the proposed automated verification of PV systems.}
 \label{fig:flowchartgeneral}
 \end{figure}
 
-The weather data (solar irradiance, and ambient temperature by default) will be evaluated by the ESBMC verification engine, based on maximum and minimum values from the site, where the PV system will be deployed. In addition, depending on one of the requirements of the system, as autonomy of the batteries, or the offer of the energy, or even the power supply from the system to check whether it is not accomplished or satisfied, the tool accuses a failure, and the diagnostic counterexample shows in which condition the fail/violation happened. 
+The weather data (solar irradiance, and ambient temperature by default) will be evaluated by the ESBMC verification engine, in Step 03, based on maximum and minimum values from the site, where the PV system will be deployed. In addition, depending on one of the requirements of the system, as autonomy of the batteries, or the offer of the energy, or even the power supply from the system to check whether it is not accomplished or satisfied, the tool accuses a failure, and the diagnostic counterexample shows in which condition the fail/violation happened. 
 %; as the  state of charge of the batteries, load demand of power and the load consumption of energy if defined by the code
 % (as reliability, performance, or safety)
 
-In a nutshell, ESBMC will process the C code with constraints ($C$) and properties ($P$) from the PV system that were inputted by the user, and the tool will verify automatically if the requirements are met. If the return is a fail, then the tool details the condition of violation, i.e., the state of each variable related to the system. That information can be used as a feedback to improve the PV system project. However, if the verification succeeds, as indicated in Fig. \ref{fig:esbmcarch}, the PV system will present its intended behavior at the field.
+In a nutshell, ESBMC will process the C code with constraints %($C$) 
+and properties %($P$) 
+from the PV system that were inputted by the user, and the tool will verify automatically if the requirements are met. If the return is a fail, then the tool details the condition of violation, i.e., the state of each variable related to the system. That information can be used as a feedback to improve the PV system project. However, if the verification succeeds, the PV system will present its intended behavior at the field.
 %
 %
 %---------------------------------------------------------------------
@@ -1521,17 +1530,14 @@ Algorithm~\ref{alg:verification-algorithm} describes the pseudo code used to per
 %According with X and Y, t
 Information related to average temperature ($T$) and solar irradiance ($G$), maximum and minimum annual, are passed to algorithm at lines 7 to 10 using the feature of non-deterministic variable from ESBMC to explore all the possible states from the variables and the \textit{assume} macro to limit the values considering a range. 
 %and irradiance varies from 0 W/m$^{2}$ to 852 W/m$^{2}$ (with minimum of 274 W/m$^{2}$ during the daytime, when there is sunlight). 
-Another characteristic of Manaus, is that the PV generation can be despised from 16:00h to the 8:00h of the next day, independent of the season.
-
-
 %there is PV generation only between 8:00 h and 16:00 h every day, 
 %with zero electric energy generation from 18:00 h to 6:00 h of the next day; and with insignificant generation from 6:00 h to 8:00 h, and from 16:00 h to 18:00 h of the same day. 
-Therefore, in order to reduce the computational effort of the algorithm,
+In order to reduce the computational effort of the algorithm,
 % caused by the state explosion inherent of the technique, 
-every 24h-day was considered as a time-step of 1 hour, and was divided in 2 parts: (a) one where there is PV generation (day-time) of 8 h each (8:00h-16:00h, 16:00h-24:00h, and 00:00h-8:00h); and only the 8:00h-16:00h period with PV generation. The time step was adjusted to 1 hour, and from line 1 to line 29 the algorithm perform the verification from 8;00h to 16:00h, where there is PV generation. 
+every 24h-day was considered as a time-step of 1 hour, and it was divided in 2 parts: (a) one that there is PV generation, during daylight, with a duration in hours depending on each site; and (b) one the includes all the rest of the day (without PV generation). Therefore the proposed methodology depends on the  specific data about the solar irradiation levels in order to define the average amount of hours of PV generation.
 
-Therefore, the model from PV generator is used at the function call of line 11, to produce the voltage and current considering the actual $G$ and $T$. Following, related to every hour considered, the conditional \textit{if-else-endif} statements from lines 12, 17, 23 and 28, will perform the charge and discharge of batteries according the PV generation, the updated state of charge of batteries, the house's load and the set-up information of the system.
-After this process is started the battery autonomy verification, from line 31. Based on the fact that won't be PV generation after 16:00h, the algorithm will only discharge the batteries until a new charging process (at the next day) to start. The formal verification is guaranteed by \textit{assert} macro to specific variables of the model, according lines 27 and 35.
+Following, the model from PV generator is used at the function call of line 11, to produce the voltage and current considering the actual $G$ and $T$. Following, related to every hour considered, the conditional \textit{if-else-endif} statements from lines 12, 17, 23 and 28, will perform the charge and discharge of batteries according the PV generation, the updated state of charge of batteries, the house's load and the set-up information of the system.
+After this process is started the battery autonomy verification, from line 31. Based on the fact that won't be PV generation after a given time of the day, the algorithm will only discharge the batteries until a new charging process (at the next day) to start. The formal verification is guaranteed by \textit{assert} macro to specific variables of the model, according lines 27 and 35.
 % and the non-deterministic variables $G$ and $T$ are considered during the formal verification of the system, otherwise, during the other two periods, there is no PV generation and just the power consumption from the backup batteries. 
 %Within this 8h-period, $G$ and $T$ are automated verified with different values every one hour.
 %, and change their value every 1 h according with the algorithm created using the technique.
@@ -1546,9 +1552,9 @@ After this process is started the battery autonomy verification, from line 31. B
   \STATE exit ("Project sizing error")  
   \ENDIF
   \STATE $SOC \leftarrow 80\%$ \\
-  \COMMENT {First the 08:00h-16:00h of automated verification}
+  \COMMENT {Starting with the PV generation time}
  \\ \textit{LOOP Process}
-  \FOR {$h = 1$ to $8$}
+  \FOR {$h = 1$ to $Hours \, of \, PV \, generation$}
   \STATE $G \leftarrow nondet \textunderscore uint(\,)$ \COMMENT {$G$ is non-deterministic variable}
   \STATE $T \leftarrow nondet \textunderscore uint(\,)$ \COMMENT {$T$ is non-deterministic variable}
   \STATE assume ($Gmin \leq G \leq Gmax$) \COMMENT {restricting $G$ values}
@@ -1559,13 +1565,13 @@ After this process is started the battery autonomy verification, from line 31. B
   \IF {($SOC \leq SOC_{limit}$)} 
     \STATE assert (PV panel is generating energy?) \COMMENT {FAIL if not}
     \STATE $house \leftarrow energy \, from \, PV \, panels$
-    \STATE $battery \leftarrow energy \, from \, PV \, panels$ \COMMENT {bulk stage}
+    \STATE $battery \leftarrow energy \, from \, PV \, panels$ 
     \STATE $SOC \leftarrow SOC + 1\,h\, charge$
   \ELSIF {($PV \, Array  \geq Vbulk$)}
-  	\STATE depending on the $SOC$, decide if Battery enter in absorption or floating stage
-	\STATE adequate the voltage at the DC-bus (PV panel feed the bus)
+  	\STATE depending on $SOC$, Battery enter in absorp. or float.
+	\STATE adequate the voltage at DC-bus (PV panel feed bus)
     \STATE $house \leftarrow energy \, from \, PV \, panels$
-    \STATE $battery \leftarrow energy \, from \, PV \, panels$ \COMMENT {bulk or floating stage}
+    \STATE $battery \leftarrow energy \, from \, PV \, panels$ 
     \STATE $SOC \leftarrow SOC + 1\,h\, charge$
   \ELSE
   	\STATE Adequate the voltage of DC-bus (battery feed bus)
@@ -1583,14 +1589,14 @@ After this process is started the battery autonomy verification, from line 31. B
  \WHILE {$AutonomyCount \leq autonomy$}
   %%\FOR {$Autonomy = 1$ to $auton$}
 
-  \STATE $SOC \leftarrow SOC - 16\,h\, discharge$
-  \STATE $AutonomyCount \leftarrow 16$
+  \STATE $SOC \leftarrow SOC - ( 24 - Hours \, of \, PV \, generation)\,h\, discharge$
+  \STATE $AutonomyCount \leftarrow ( 24 - Hours \, of \, PV \, generation)$
   \\  
-    \COMMENT {autonomy of 16:00h-08:00h discharge period}
+    \COMMENT {autonomy verification during discharge period}
   \\
   \STATE assert ($SOC \geq SOC_{limit}$)  
   \\
-  \COMMENT {Perform same 08:00h-16:00h \textbf{for}-LOOP as line 6}
+  \COMMENT {Perform similar \textbf{for}-LOOP as defined in line 6}
   %%\ENDFOR
   \ENDWHILE
  \RETURN $(\,)$ 
@@ -1720,12 +1726,11 @@ Experimental objectives: To evaluate the proposed verification methodology and t
 %\subsection{Experimental setup}
 %\label{sec:setup}
 
-Experimental setup of automated verification tool: all experiments were conducted on an otherwise idle Intel Core i7-2600 (8-cores), with 3.4 GHz and 64 GB of RAM, running Ubuntu 18.04.1 LTS 64-bits. Concerning the SMT tool, ESBMC v5.1 was used with the incremental parameter in order to reduce the memory usage. And regarding the solver, version 4.7.1 of Z3 was used.
+Experimental setup of automated verification tool: all experiments were conducted on an otherwise idle Intel Core i7-2600 (8-cores), with 3.4 GHz and 64 GB of RAM, running Ubuntu 18.04.1 LTS 64-bits. Concerning the SMT tool, ESBMC v5.1 was used with the incremental parameter in order to reduce the memory usage. At this paper, it was used the Z3 solver \cite{DeMoura} with version 4.7.1.
 
 Experimental setup of HOMER Pro: all experiments were conducted on an otherwise idle Intel Core i5-4210 (4-cores), with 1.7 GHz and 4 GB of RAM, running Microsoft Windows 10. It was used the version 3.12.0 of HOMER Pro.
 
-We performed five case studies: (a) four concerning a PV system (700 W inverter, with 48h autonomy) deployed at four different houses at an indigenous community (GPS coordinates 2$^{o}$44'50.0"S 60$^{o}$25'47.8"W) sited nearby Manaus (Brazil), with each house having a different power demand (house 1 = 253 W, house 2 = 263 W, house 3 = 283 W, and house 4 = 501 W); (b) and one case concerning a system deployed as an individual system in Manaus (GPS coordinates 3$^{o}$4'20.208"S 60$^{o}$0'30.168"W), supporting 915 W of the house's load (house 5 with 1,200 W inverter, and autonomy of just 6 h). The annual average temperature ($T$) in Manaus is from 23$^{o}$C to 32$^{o}$C; and irradiance ($G$) varies from 274 W/m$^{2}$ to 852 W/m$^{2}$ when there is sunlight (that information is inputted at lines 9 and 10 of Algorithm~\ref{alg:verification-algorithm}). Another characteristic of Manaus, based on historic data, is related of the fact that only during 8 hours of the day there is PV generation, from 8:00h to 16:00h (that information is a demand of Algorithm~\ref{alg:verification-algorithm} as well).
-
+We performed five case studies: (a) four concerning a PV system (700 W inverter, with 48h autonomy) deployed at four different houses at an indigenous community (GPS coordinates 2$^{o}$44'50.0"S 60$^{o}$25'47.8"W) sited nearby Manaus (Brazil), with each house having a different power demand (house 1 = 253 W, house 2 = 263 W, house 3 = 283 W, and house 4 = 501 W); (b) and one case concerning a system deployed as an individual system in Manaus (GPS coordinates 3$^{o}$4'20.208"S 60$^{o}$0'30.168"W), supporting 915 W of the house's load (house 5 with 1,200 W inverter, and autonomy of just 6 h). The annual average temperature ($T$) in Manaus is from 23$^{o}$C to 32$^{o}$C; and irradiance ($G$) varies from 274 W/m$^{2}$ to 852 W/m$^{2}$ when there is sunlight (that information is inputted at lines 9 and 10 of Algorithm~\ref{alg:verification-algorithm}). Another characteristic of Manaus, based on historic data of solar irradiance, is related of the fact that only during 8 hours of the day there is PV generation, from 8:00h to 16:00h (that information is a demand of Algorithm~\ref{alg:verification-algorithm} as well).
 \subsection{Results}
 \label{sec:results_indeed}
 The total were five case studies evaluated by HOMER Pro and by the automated verification tool. Related to the HOMER Pro, the simulation, based on NASA data from the deployed systems (temperature and solar irradiance), shown that the restrictions were met by four systems, without any indication of sizing error or even of performance. The case study that was not successful during simulation was the 1,200 W (house 5), however without indication what are the fail of this PV system. All the simulations took less than 5 seconds (each) to be performed.
@@ -1733,7 +1738,6 @@ The total were five case studies evaluated by HOMER Pro and by the automated ver
 However, related to the results of the automated verification, the 1,200 W PV system (house 5) failed during the sizing check. The number of panels was not correct (the verification counterexample demands 3 panels in parallel and the project size has 2 in series and 2 in parallel). That verification took 63.3 hours to be performed. Surveying the owner of the 1,200 W system it was identified that, in fact, the system mostly of the time do not met the battery autonomy (mainly when all the loads are turned on). But it is understandable that this problem occurs because the system was purchased as an off-the-shelf solution and not as a specific design for the electrical charges of the house.
 
 Related to the four 700 W PV systems, the sizing check was successful during automated verification, but there were found flaws in everyone, all related with the battery autonomy, when SOC reached levels below of 75\%. The automated verification identified the flaws right after the first night-discharge cycle, before the solar system start to recharge the batteries. The proposed tool took 409.3 hours to find an error at house 1, and the maximum of 456XXX hours to house 4. This functional problem was confirmed with all the four dwellers that use the system: at least once or twice a mouth is usual the system to turn off, normally during raining days or with more clouds in the sky, and after the sun rises the system returns to normal operation.
-
 %At the terminal, the command used to perform the verification is:
 %\$ esbmc filename.c -\phantom{}-no-bounds-check -\phantom{}-no-pointer-check -\phantom{}-no-div-by-zero-check -\phantom{}-unwind 300 -\phantom{}-smt-during-symex -\phantom{}-smt-symex-guard --z3
 %
@@ -1750,12 +1754,14 @@ Related to the four 700 W PV systems, the sizing check was successful during aut
 %
 %\subsection{Experimental results}
 %\label{sec:results}
-
 %---------------------------------------------------
 \subsection{Threats to Validity}
 %---------------------------------------------------
+\textit{Model precision:} each component received a mathematical model, and the precision of the proposed tool depends on the precision of that model. Probably a evaluation in a laboratory to validate the model could give more reliability to the proposed tool.
 
-\textcolor{red}{Write here threats to validity....}
+\textit{Time step:} The computing complexity is a issue, but the time step of one hours can be evaluated to approximate the algorithm of the real world, where a solar irradiance and ambient temperature can change in minutes.
+
+\textit{Case studies:} The studies were performed only at the municipality of Manaus, at the south hemisphere. A more complete evaluation can be performed if other places around the world could become case studies.
 
 %-------------------------------------
 \section{Conclusion and Future Work}
@@ -1764,7 +1770,7 @@ Related to the four 700 W PV systems, the sizing check was successful during aut
 %The proposed tool seems to be a coherent and promising tool to perform verification of a PV project. The next step is the deployment of the solution at the ESBMC environment, and compare the results with a real PV project deployed at the field. 
 %
 %The automated verification tool presented here establishes the automated verification and the project sizing check. 
-It was shown that, beside the time-consuming issue of the proposed automated verification tool, it overcomes the results of off-the-shelf tool that only simulate the results. The proposed tool was successful in find sizing errors and to indicate in which conditions, in terms of temperature and solar irradiation, a PV system can fails.
+It was shown that, although the time-consuming issue of the proposed automated verification tool, it overcomes the results of off-the-shelf tool that only simulate the results. The proposed tool was successful in find sizing errors and to indicate in which conditions, in terms of temperature and solar irradiation, a PV system can fails.
 %However, it is possible to perform the optimum sizing of the PV system. Moreover, 
 %The authors target the use of Counterexample Guided-Inductive Synthesis (CEGIS) to perform the optimum sizing of PV systems. That is an interesting resource, considering that nowadays is possible to choose from many different manufacturers and many different models of equipment of a PV system. 
 Next, the proposed tool will be improved to start from a list of commercial equipment (inputs), where each equipment is verified during synthesis phase and the final solution, which satisfies the specifications (or constraints) of the project, is find from the inputs. This can be done with the Counterexample Guided-Inductive Synthesis (CEGIS), and the result is the optimum sizing of PV systems.
