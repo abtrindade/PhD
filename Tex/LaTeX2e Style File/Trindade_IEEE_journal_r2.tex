@@ -1500,16 +1500,13 @@ The weather data (solar irradiance, and ambient temperature by default) will be 
 % (as reliability, performance, or safety)
 
 In a nutshell, ESBMC will process the C code with constraints ($C$) and properties ($P$) from the PV system that were inputted by the user, and the tool will verify automatically if the requirements are met. If the return is a fail, then the tool details the condition of violation, i.e., the state of each variable related to the system. That information can be used as a feedback to improve the PV system project. However, if the verification succeeds, as indicated in Fig. \ref{fig:esbmcarch}, the PV system will present its intended behavior at the field.
-
-\textcolor{red}{The algorithm should be part of the methodology!!!}
-
-\textcolor{red}{The case study should be described in the experimental evaluation section.}
-
+%
+%
 %---------------------------------------------------------------------
-\subsection{The case studies and the Algorithm}
+% \subsection{The case studies and the Algorithm}
 %---------------------------------------------------------------------
-
-We performed five case studies: (1) four concerning a PV system (700 W inverter, with 48h autonomy) deployed at four different houses at an indigenous community (GPS coordinates 2$^{o}$44'50.0"S 60$^{o}$25'47.8"W) sited nearby Manaus (Brazil), with each house having a different power demand (house 1 = 253 W, house 2 = 263 W, house 3 = 283 W, and house 4 = 501 W); (2) and one case concerning a system deployed as an individual system in Manaus (GPS coordinates 3$^{o}$4'20.208"S 60$^{o}$0'30.168"W), supporting 915 W of the house's load (house 5 with 1,200 W inverter, and autonomy of just 6 h). 
+%
+% 
 %and as backup at night 
 %
 %The 700 W system: 3 x 325 W PV panels connected in series, controller of 150 V/35 A with a DC-bus of 24 V, 4 x 220 Ah batteries (2 in series and 2 in parallel arrangement), and inverter of 700 W. 
@@ -1522,14 +1519,18 @@ Algorithm~\ref{alg:verification-algorithm} describes the pseudo code used to per
 
 %At both case studies, it was considered 21 years of historic data from Manaus. 
 %According with X and Y, t
-The annual average temperature ($T$) in Manaus is from 23$^{o}$C to 32$^{o}$C; and irradiance ($G$) varies from 274 W/m$^{2}$ to 852 W/m$^{2}$ when there is sunlight. That information is passed to the C code at lines 7 to 10 using the feature of non-deterministic variable from ESBMC to explore all the possible states from the variables and the \textit{assume} macro to limit the values considering a range. 
+Information related to average temperature ($T$) and solar irradiance ($G$), maximum and minimum annual, are passed to algorithm at lines 7 to 10 using the feature of non-deterministic variable from ESBMC to explore all the possible states from the variables and the \textit{assume} macro to limit the values considering a range. 
 %and irradiance varies from 0 W/m$^{2}$ to 852 W/m$^{2}$ (with minimum of 274 W/m$^{2}$ during the daytime, when there is sunlight). 
 Another characteristic of Manaus, is that the PV generation can be despised from 16:00h to the 8:00h of the next day, independent of the season.
+
+
 %there is PV generation only between 8:00 h and 16:00 h every day, 
 %with zero electric energy generation from 18:00 h to 6:00 h of the next day; and with insignificant generation from 6:00 h to 8:00 h, and from 16:00 h to 18:00 h of the same day. 
-Therefore, in order to reduce the computational effort,
+Therefore, in order to reduce the computational effort of the algorithm,
 % caused by the state explosion inherent of the technique, 
-the 24h-day was divided, at the algorithm, in 3 parts of 8 h each (8:00h-16:00h, 16:00h-24:00h, and 00:00h-8:00h); and only the 8:00h-16:00h period with PV generation. The time step was adjusted to 1 hour, and from line 1 to line 29 the algorithm perform the verification from 8;00h to 16:00h, where there is PV generation. Therefore, the model from PV generator is used at the function call of line 11, to produce the voltage and current considering the actual $G$ and $T$. Following, related to every hour considered, the conditional \textit{if-else-endif} statements from lines 12, 17, 23 and 28, will perform the charge and discharge of batteries according the PV generation, the updated state of charge of batteries, the house's load and the set-up information of the system.
+every 24h-day was considered as a time-step of 1 hour, and was divided in 2 parts: (a) one where there is PV generation (day-time) of 8 h each (8:00h-16:00h, 16:00h-24:00h, and 00:00h-8:00h); and only the 8:00h-16:00h period with PV generation. The time step was adjusted to 1 hour, and from line 1 to line 29 the algorithm perform the verification from 8;00h to 16:00h, where there is PV generation. 
+
+Therefore, the model from PV generator is used at the function call of line 11, to produce the voltage and current considering the actual $G$ and $T$. Following, related to every hour considered, the conditional \textit{if-else-endif} statements from lines 12, 17, 23 and 28, will perform the charge and discharge of batteries according the PV generation, the updated state of charge of batteries, the house's load and the set-up information of the system.
 After this process is started the battery autonomy verification, from line 31. Based on the fact that won't be PV generation after 16:00h, the algorithm will only discharge the batteries until a new charging process (at the next day) to start. The formal verification is guaranteed by \textit{assert} macro to specific variables of the model, according lines 27 and 35.
 % and the non-deterministic variables $G$ and $T$ are considered during the formal verification of the system, otherwise, during the other two periods, there is no PV generation and just the power consumption from the backup batteries. 
 %Within this 8h-period, $G$ and $T$ are automated verified with different values every one hour.
@@ -1711,7 +1712,7 @@ After this process is started the battery autonomy verification, from line 31. B
 %\textcolor{red}{https://ssvlab.github.io/lucasccordeiro/papers/cav2017.pdf}
 %
 \subsection{Experimental objectives and setup}
-Experimental objectives: To evaluate the proposed verification methodology and the respective tool performance, in a comparative with the HOMER Pro tool in five case studies (described in Methodology section). Using functional information collected from owners of those five systems, which were deployed in 2018, serving as cross data about how the systems are behaving during four months of use.
+Experimental objectives: To evaluate the proposed verification methodology and the respective tool performance, in a comparative with the HOMER Pro tool in five case studies. Using functional information collected from owners of those five systems, which were deployed in 2018, serving as cross data about how the systems are behaving during four months of use.
 %
 %This section is split into two parts. The setup is described in Section \ref{sec:setup}, while Section \ref{sec:results} describes all experimental results.
 %
@@ -1722,6 +1723,8 @@ Experimental objectives: To evaluate the proposed verification methodology and t
 Experimental setup of automated verification tool: all experiments were conducted on an otherwise idle Intel Core i7-2600 (8-cores), with 3.4 GHz and 64 GB of RAM, running Ubuntu 18.04.1 LTS 64-bits. Concerning the SMT tool, ESBMC v5.1 was used with the incremental parameter in order to reduce the memory usage. And regarding the solver, version 4.7.1 of Z3 was used.
 
 Experimental setup of HOMER Pro: all experiments were conducted on an otherwise idle Intel Core i5-4210 (4-cores), with 1.7 GHz and 4 GB of RAM, running Microsoft Windows 10. It was used the version 3.12.0 of HOMER Pro.
+
+We performed five case studies: (a) four concerning a PV system (700 W inverter, with 48h autonomy) deployed at four different houses at an indigenous community (GPS coordinates 2$^{o}$44'50.0"S 60$^{o}$25'47.8"W) sited nearby Manaus (Brazil), with each house having a different power demand (house 1 = 253 W, house 2 = 263 W, house 3 = 283 W, and house 4 = 501 W); (b) and one case concerning a system deployed as an individual system in Manaus (GPS coordinates 3$^{o}$4'20.208"S 60$^{o}$0'30.168"W), supporting 915 W of the house's load (house 5 with 1,200 W inverter, and autonomy of just 6 h). The annual average temperature ($T$) in Manaus is from 23$^{o}$C to 32$^{o}$C; and irradiance ($G$) varies from 274 W/m$^{2}$ to 852 W/m$^{2}$ when there is sunlight (that information is inputted at lines 9 and 10 of Algorithm~\ref{alg:verification-algorithm}). Another characteristic of Manaus, based on historic data, is related of the fact that only during 8 hours of the day there is PV generation, from 8:00h to 16:00h (that information is a demand of Algorithm~\ref{alg:verification-algorithm} as well).
 
 \subsection{Results}
 \label{sec:results_indeed}
