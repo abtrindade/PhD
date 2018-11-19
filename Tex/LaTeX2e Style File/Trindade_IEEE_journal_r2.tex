@@ -1722,7 +1722,9 @@ Next, representing the time of the day where is not possible PV generation anymo
 %
 %\textcolor{red}{https://ssvlab.github.io/lucasccordeiro/papers/cav2017.pdf}
 %
+%------------------------------------------
 \subsection{Experimental objectives and setup}
+%------------------------------------------
 Experimental objectives: To evaluate the proposed verification methodology and the respective tool performance, in a comparative with the HOMER Pro tool in five case studies. Using functional information collected from owners of those five systems, which were deployed in 2018, serving as cross data about how the systems are behaving during four months of use.
 %
 %This section is split into two parts. The setup is described in Section \ref{sec:setup}, while Section \ref{sec:results} describes all experimental results.
@@ -1736,8 +1738,12 @@ Experimental setup of automated verification tool: all experiments were conducte
 Experimental setup of HOMER Pro: all experiments were conducted on an otherwise idle Intel Core i5-4210 (4-cores), with 1.7 GHz and 4 GB of RAM, running Microsoft Windows 10. It was used the version 3.12.0 of HOMER Pro.
 
 We performed five case studies: (a) four concerning a PV system (700 W inverter, with 48h autonomy) deployed at four different houses at an indigenous community (GPS coordinates 2$^{o}$44'50.0"S 60$^{o}$25'47.8"W) sited nearby Manaus (Brazil), with each house having a different power demand (house 1 = 253 W, house 2 = 263 W, house 3 = 283 W, and house 4 = 501 W); (b) and one case concerning a system deployed as an individual system in Manaus (GPS coordinates 3$^{o}$4'20.208"S 60$^{o}$0'30.168"W), supporting 915 W of the house's load (house 5 with 1,200 W inverter, and autonomy of just 6 h). The annual average temperature ($T$) in Manaus is from 23$^{o}$C to 32$^{o}$C; and irradiance ($G$) varies from 274 W/m$^{2}$ to 852 W/m$^{2}$ when there is sunlight (that information is inputted at Lines 9 and 10 of Algorithm~\ref{alg:verification-algorithm}). Another characteristic of Manaus, based on historic data of solar irradiance, is related of the fact that only during 8 hours of the day there is PV generation, from 8:00h to 16:00h (that information is a demand of Algorithm~\ref{alg:verification-algorithm} as well).
+
+%------------------------------------------
 \subsection{Results}
 \label{sec:results_indeed}
+%------------------------------------------
+
 The total were five case studies evaluated by HOMER Pro and by the automated verification tool. Related to the HOMER Pro, the simulation, based on NASA data from the deployed systems (temperature and solar irradiance), shown that the restrictions were met by four systems, without any indication of sizing error or even of performance. The case study that was not successful during simulation was the 1,200 W (house 5), however without indication what are the fail of this PV system. All the simulations took less than 5 seconds (each) to be performed.
 
 However, related to the results of the automated verification, the 1,200 W PV system (house 5) failed during the sizing check. The number of panels was not correct (the verification counterexample demands 3 panels in parallel and the sized project has 2 in series and 2 in parallel). That verification took 63.3 hours to be performed. Surveying the owner of the 1,200 W system it was identified that, in fact, the system mostly of the time do not met the battery autonomy (mainly when all the loads are turned on). But it is understandable that this problem occurs because the system was purchased as an off-the-shelf solution and not as a specific design for the electrical charges of the house.
@@ -1772,15 +1778,9 @@ Related to the four 700 W PV systems, the sizing check was successful during aut
 \section{Conclusion and Future Work}
 \label{sec:Conclusions}
 %-------------------------------------
-%The proposed tool seems to be a coherent and promising tool to perform verification of a PV project. The next step is the deployment of the solution at the ESBMC environment, and compare the results with a real PV project deployed at the field. 
-%
-%The automated verification tool presented here establishes the automated verification and the project sizing check. 
-It was shown that, although the time-consuming issue of the proposed automated verification tool, it overcomes the results of off-the-shelf tool that only simulate the results. The proposed tool was successful in find sizing errors and to indicate in which conditions, in terms of temperature and solar irradiation, a PV system can fails.
-%However, it is possible to perform the optimum sizing of the PV system. Moreover, 
-%The authors target the use of Counterexample Guided-Inductive Synthesis (CEGIS) to perform the optimum sizing of PV systems. That is an interesting resource, considering that nowadays is possible to choose from many different manufacturers and many different models of equipment of a PV system. 
-Next, the proposed tool will be improved to start from a list of commercial equipment (inputs), where each equipment is verified during synthesis phase and the final solution, which satisfies the specifications (or constraints) of the project, is find from the inputs. This can be done with the Counterexample Guided-Inductive Synthesis (CEGIS), and the result is the optimum sizing of PV systems.
 
-Furthermore, it is possible to contemplate other kinds of renewable energy and even hybrid ones, which can evolve the algorithm into a complete tool for design and verification for rural electrification.
+We have described and evaluated an automated verification method to check whether a given PV system meets its specification using software model checking techniques. We have considered five case studies from real photovoltaic systems deployed in five different sites, ranging from $700$ W to $1,200$ W. Although this verification method takes longer than simulation tools, it is able to find specific conditions that lead to failures in a PV system previously validated by simulation tools. In particular, the proposed method was successful in finding sizing errors and indicating in which conditions, in terms of temperature and solar irradiation, a PV system can fail. As future work, the proposed method will be extended to start from a list of commercial equipment, where each equipment is verified and the final solution, which satisfies the project specification, is found via Counterexample Guided-Inductive Synthesis (CEGIS)~\cite{DBLP:conf/asplos/Solar-LezamaTBSS06}, thus leading to an optimum sizing of PV systems. We also will consider other types of renewable energy and even hybrid ones, which will allow our method to design and verify typical rural electrification.
+
 % into an important instrument to complement the solar PV system design process, ensuring that it does not fail and meets the expected requirements. 
 
 %Plus (need to think about it): verification in every-hour of a 48h cycle?, PV model math model can be improved, charge/discharge of batteries can be improved (is a simplified model), house's power consumption is not flat or constant, the dweller can buy more home appliances, synthesis need a data base of components, to test peak (surge) consumption (above the nominal), additional models for on-grid/off-grid farm, hybrid, and on-grid with batteries).
