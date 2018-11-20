@@ -354,6 +354,7 @@
 % correct bad hyphenation here
 \hyphenation{op-tical net-works semi-conduc-tor}
 
+\renewcommand{\baselinestretch}{0.97}
 
 \begin{document}
 %
@@ -1363,17 +1364,18 @@ V_{out}AC = V_{AC}.
 \label{sec:AutomatedVerification}
 %--------------------------------------------------
 %It is necessary to keep in mind that 
-Validation is the process of determining whether a design meets the needs of the user, whereas verification is the process of determining whether a design meets a set of requirements, specifications, and regulations~\cite{ClarkeHV18}. If the requirements, specifications, and regulations are given in a formal language, then it may be possible to automate verification, thus resulting in a process known as formal verification. Verification may form part of a validation process.
+Validation is the process of determining whether a design meets the needs of the user, whereas verification is the process of determining whether a design meets a set of requirements, specifications, and regulations~\cite{ClarkeHV18}. If the requirements, specifications, and regulations are given in a formal language, then it may be possible to automate the verification process, thus resulting in a process known as \textit{formal verification}. Verification may form part of a validation process.
 %, but in general, validation cannot be formalized because it relates a system design to intent.  
-While simulation and testing explore some of the possible behaviors and scenarios of the system, leaving open the question of whether the unexplored trajectories may contain a flaw, formal verification conducts an exhaustive exploration of all possible behaviors. Thus, when a design is pronounced correct by a formal verification method, it implies that all behaviors have been explored, and the questions of adequate coverage or a missed behavior become irrelevant \cite{Clarke2012}.
+While simulation and testing explore some of the possible behaviors and scenarios of the system, leaving open the question of whether the unexplored trajectories may contain a flaw, formal verification conducts an exhaustive exploration of all possible behaviors. Thus, when a design is pronounced correct by a formal verification method, it implies that all behaviors have been explored, and the questions of adequate coverage or a missed behavior becomes irrelevant \cite{Clarke2012}.
 %Simulation may also be used for validation, but it is more problematic for verification.
 %In order to use simulation for verification, it is necessary to ensure adequate coverage of operating conditions, scenarios, and system inputs. Testing can also be used for validation, however it is not feasible to cover all the aspects of the design space, and some times the real system must be used instead of a computing model.
  %
-Formal verification is a systematic approach that applies mathematical reasoning to obtain guarantees about the correctness of a system \cite{Forejt2011}. One successful method in this domain is model checking \cite{Clarke2012}.
+
+Formal verification is a systematic approach that applies mathematical reasoning to obtain guarantees about the correctness of a system \cite{Forejt2011}; one successful method in this domain is model checking \cite{Clarke2012}.
  % 
 %Model checking is an automatic verification technique, as defined by \cite{ClarkeHV18}. Model checking was originally developed reasoned about finite state of concurrent systems, nowadays is mainly used to hardware and software verification, but can be applied to any kind of system. 
-
-The process of model checking can be divided in three components: modeling, specification, and verification method. In modeling, a model (normally mathematical) of the system is created; in specification, normally a list of properties to be satisfied by the system is established, i.e., the requirements, normally  expressed in temporal logic form ($CTL$).
+%
+The process of model checking can be split into three main components: modeling, specification, and verification method. In modeling, a model (normally mathematical) of the system is created; in specification, normally a list of properties to be satisfied by the system is established, i.e., the requirements, normally  expressed in a temporal logic form (e.g., $CTL$).
 
 %\begin{itemize}
 %\item In modeling, a model (normally mathematical) of the system is created; 
@@ -1388,7 +1390,7 @@ The model checking algorithm can be described as \cite{ClarkeHV18}:
 \item Model checking algorithm provides all the states of model $ M $ which satisfies $ \phi $;  
 \item It returns $YES$ if $ \phi $ is $TRUE$, or returns $NO$ if $ \phi $ is $FALSE$.  
 \end{itemize}
-Specifically for the $FALSE$ verification result, the algorithm returns a counterexample that is useful as diagnostic of the system, to discover in which situation the model is violated. That is the most important advantage of the use of model checking \cite{ClarkeHV18}. 
+Specifically for the $FALSE$ verification result, the algorithm returns a \textit{counterexample} (i.e., a sequence of states that leads to the property violation), which is useful as diagnostic of the system to discover in which situation the model is violated; this is the most important advantage of the use of model checking~\cite{ClarkeHV18}. 
 %Among the other advantages can be listed: there is no need of proofs (the algorithm is not a deductive procedure), there is no problem with partial specifications of the system, logics can easily express many concurrency properties, is fast (compared to other rigorous methods such as interactive theorem proving). 
 %
 %The model checking problem can be defined as \cite{ClarkeHV18}: 
@@ -1420,12 +1422,11 @@ Fig.~\ref{fig:systemverif} shows the process to convert a real PV system to a mo
 \label{fig:systemverif}
 \end{figure}
 
-However, there is a main disadvantage of model checking: the state explosion problem. In order to solve this problem, many different techniques were developed at the last decades. One of the first major advances was symbolic model checking with binary decision diagrams (BDDs). In this approach, a set of states is represented by a BDD instead of by listing each state individually, which is often exponentially smaller in practice. Another major advance is the partial order reduction, which exploits the independence of actions in a system with asynchronous composition of processes. A third major advance is counterexample-guided abstraction refinement, which adaptively tries to find an appropriate level refinement, not burdened with irrelevant detail that slows down verification \cite{Clarke2012}. However, one of the most promising approaches is Bounded Model Checking (BMC)~\cite{DBLP:conf/tacas/BiereCCZ99}. 
+However, there is a main disadvantage of model checking: the state explosion problem. In order to tackle this problem, many different techniques were developed in the last decades. One of the first major advances was symbolic model checking with binary decision diagrams (BDDs). In this approach, a set of states is represented by a BDD instead of by listing each state individually, which is often exponentially smaller in practice. Another major advance is the partial order reduction, which exploits the independence of actions in a system with asynchronous composition of processes \textcolor{red}{add citation here}. A third major advance is counterexample-guided abstraction refinement, which adaptively tries to find an appropriate level of refinement, not burdened with irrelevant detail that slows down verification \cite{Clarke2012}. However, one of the most promising approaches is Bounded Model Checking (BMC)~\cite{DBLP:conf/tacas/BiereCCZ99}. 
 
-BMC is a method that checks the model up to a given path in the path length. BMC algorithms traverse a finite state machine for a fixed number of steps, $ k $, and checks whether violation occurs with this bound. It uses Boolean Satisfiability (SAT) or Satisfiability Module Theories (SMT) solvers. SAT problem is a problem of determining whether there are certain conditions or interpretations that satisfy a given Boolean expression \cite{ClarkeHV18}. 
+BMC is a method that checks a model up to a given path in the path length. BMC algorithms traverse a finite state machine for a fixed number of steps, $ k $, and checks whether violation occurs with this bound. It uses Boolean Satisfiability (SAT) or Satisfiability Module Theories (SMT) solvers. SAT problem is a problem of determining whether there are certain conditions or interpretations that satisfy a given Boolean expression \cite{ClarkeHV18}. 
 SMT decides the satisfiability of first-order formulae using a combination of different background theories and thus generalizes propositional satisfiability by supporting uninterpreted functions, linear and non-linear arithmetic, bit-vectors, tuples, arrays, and other decidable first-order theories~\cite{ClarkeHV18}.
-The SAT or SMT solvers would search the model for conditions (value of variables) that would make the formula satisfiable. If a SAT or SMT solver finds a substitution for the formula/function then the substitute induces a counterexample and is said satisfiable.
-In other words, is satisfiable only if the verified system contains errors.  
+The SAT or SMT solvers search the model for conditions (value of variables) that make the formula satisfiable. If a SAT or SMT solver finds a substitution for the formula/function then the substitute induces a counterexample and is said to be \textit{satisfiable}, i.e., it is satisfiable \textit{iff} the verified system contains errors.  
 %
 %CBMC is considering the best-known model verification tool to validate code in ANSI-C and C++ \cite{Kroening}. 
 %
@@ -1433,7 +1434,7 @@ In other words, is satisfiable only if the verified system contains errors.
 %
 ESBMC is one of the most representatives bounded model checkers for embedded C/C++ software based on SMT solvers~\cite{esbmc2018}. %, which can use CBMC as front-end.
 %The use of SMT, instead of Boolean Satisfiability SAT from the original BMC, 
-ESBMC comes as an alternative to overcome limitations of the systems modeling, especially considering that the complexity of these is increasing and the SMT method has high level and richer theories than the SAT to represent the models. 
+ESBMC comes as an alternative to overcome limitations of the systems modeling, especially considering that the complexity is increasing and the SMT method has high-level and richer theories than SAT to represent models. 
 
 %--------------------------------------
 \subsection{ESBMC}
@@ -1441,7 +1442,7 @@ ESBMC comes as an alternative to overcome limitations of the systems modeling, e
 
 ESBMC (or Efficient SMT-based Bounded Model Checker) is an open source, permissively licensed (Apache 2), cross platform bounded model checking for C and C++ programs \cite{esbmc2018}. 
 %
-ESBMC's architecture can be summarized in three stages: (I) a front-end that can read and compile C/C++ codes, where the formal specification of the system to be verified is first treated; (II) preprocessing steps to deal with the representation of the code, control flow and unwinding of loops, and the simplification of the algorithm, aiming to reduce the computational complexity; and finally (III) the solver, where all the constraints and properties of the system to be verified are encoded into SMT format and solved.
+ESBMC's verification flow can be summarized in three stages: (I) a front-end that can read and compile C/C++ code, where the formal specification of the system to be verified is first treated; (II) preprocessing steps to deal with the representation of the code, control flow and unwinding of loops, and the simplification of the algorithm, aiming to reduce the computational complexity; and finally (III) the solver, where all the constraints and properties of the system to be verified are encoded into SMT and checked for satisfiability.
 %
 %%The efficient SMT based model checker, is a software verification tool for C and C++ code bases. 
 %
@@ -1465,7 +1466,7 @@ ESBMC's architecture can be summarized in three stages: (I) a front-end that can
 %%%%%: Boolector (default) \cite{Brummayer}, Z3 \cite{DeMoura}, MathSAT \cite{Cimatti}, Yices \cite{Dutertre} and CVC4 \cite{Barrett}. 
 %
 %Finally, the system attempting to determine whether a formula, which is the disjunction of all possible errors, can be satisfied. 
-If the SMT formula is shown to be satisfiable (SAT), a counterexample is presented; if the formula is find to be unsatisfiable (UNSAT), there are no errors up to the unwinding bound. 
+If the SMT formula is shown to be satisfiable (SAT), a counterexample is presented; otherwise, the formula is unsatisfiable (UNSAT), i.e., there are no errors up to the given unwinding bound. 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%5%
 %%%%%ESBMC can be invoked through the command-line interface or configured through the Eclipse plug-in. Specific problems and the solver can be selected that way. 
 %
@@ -1513,7 +1514,7 @@ In Step 3, weather variables (e.g., solar irradiance and ambient temperature) wi
 %\textcolor{red}{In the following paragraph you should related the output of our verification engine with the description of the BMC SAT or UNSAR given above. For example, what does a failure mean? is it SAT?}
 In a nutshell, ESBMC will process the C code with constraints %($C$) 
 and properties %($P$) 
-from the PV system that were provided by the user, and the tool will verify automatically if the PV system requirements are met. If the return is a failure (verification satisfiable), then the tool details the condition of violation, i.e., the state of each variable related to the system. That information can be used as a feedback to improve the PV system project. However, if the verification succeeds (said UNSAT or unsatisfiable), there is no failure, therefore the PV system will present its intended behavior at the field.
+from the PV system that were provided by the user, and the tool will verify automatically if the PV system requirements are met. If the return is a failure (i.e., SAT), then the tool details the condition of violation, i.e., the state of each variable related to the system. That information can be used as a feedback to improve the PV system project. However, if the verification succeeds (i.e., UNSAT), there is no failure, therefore the PV system will present its intended behavior up the bound $k$, i.e., it does not give any guarantee that there is no error in bound $k+1$ unless some induction method is employed~\cite{DBLP:journals/sttt/GadelhaIC17}.
 %
 %
 %---------------------------------------------------------------------
@@ -1529,7 +1530,7 @@ from the PV system that were provided by the user, and the tool will verify auto
 %
 %As demonstrated at this work, the performance of the system is highly dependent of solar irradiance and temperature, that are specific of the deployed local (latitude and longitude). 
 
-Algorithm~\ref{alg:verification-algorithm} describes the pseudocode used to perform the automated verification. Line 1 indicates a function call that performs the size checking of the entire PV system: using \eqref{eq:NTPmin}, \eqref{eq:NTP}, \eqref{eq:NPSmin}, \eqref{eq:NPS}, \eqref{eq:NPP}, and \eqref{eq:NPPmin} to verify the PV panel; using \eqref{eq:Cbank}, \eqref{eq:Nbtotal}, and \eqref{eq:batcheck} to verify the batteries; using \eqref{eq:vcvsystem}, \eqref{eq:icmin}, and \eqref{eq:icicmin} to verify the charge controller; and using \eqref{eq:vindc}, \eqref{eq:voutac}, and \eqref{eq:invcheck} to verify the inverter. The verification is performed by the standard \textit{assert} macro from ANSI-C programming language to each equation. The argument to \textit{assert} must be \textit{true} when the macro is executed; otherwise, the program aborts and prints an error message. If there is no fail, the algorithm goes on and the batteries are assumed to have SOC of 80\% (Line 5).
+Algorithm~\ref{alg:verification-algorithm} describes the pseudocode used to perform the automated verification. Line 1 indicates a function call that performs the size checking of the entire PV system: using Equations \eqref{eq:NTPmin}, \eqref{eq:NTP}, \eqref{eq:NPSmin}, \eqref{eq:NPS}, \eqref{eq:NPP}, and \eqref{eq:NPPmin} to verify the PV panel; using \eqref{eq:Cbank}, \eqref{eq:Nbtotal}, and \eqref{eq:batcheck} to verify the batteries; using \eqref{eq:vcvsystem}, \eqref{eq:icmin}, and \eqref{eq:icicmin} to verify the charge controller; and using \eqref{eq:vindc}, \eqref{eq:voutac}, and \eqref{eq:invcheck} to verify the inverter. The verification is performed by the standard \textit{assert} macro from the ANSI-C programming language to each equation. The argument to the \textit{assert} statement must be \textit{true} if the system specification is met; otherwise, the program aborts and prints an error message indicating a property violation. If there is no property violation, then the verification algorithm continues and the batteries are assumed to have SOC of 80\% (Line 5).
 
 %At both case studies, it was considered 21 years of historic data from Manaus. 
 %According with X and Y, t
