@@ -1,3 +1,41 @@
+@article{DBLP:journals/sttt/GadelhaIC17,
+  author    = {Mikhail Y. R. Gadelha and
+               Hussama Ibrahim Ismail and
+               Lucas C. Cordeiro},
+  title     = {Handling loops in bounded model checking of {C} programs via k-induction},
+  journal   = {{STTT}},
+  volume    = {19},
+  number    = {1},
+  pages     = {97--114},
+  year      = {2017}
+}
+
+@inproceedings{DBLP:conf/asplos/Solar-LezamaTBSS06,
+  author    = {Armando Solar{-}Lezama and
+               Liviu Tancau and
+               Rastislav Bod{\'{\i}}k and
+               Sanjit A. Seshia and
+               Vijay A. Saraswat},
+  title     = {Combinatorial sketching for finite programs},
+  publisher = {{ACM}},
+  booktitle = {{ASPLOS}},
+  pages     = {404--415},
+  year      = {2006}
+}
+
+@inproceedings{DBLP:conf/tacas/BiereCCZ99,
+  author    = {Armin Biere and
+               Alessandro Cimatti and
+               Edmund M. Clarke and
+               Yunshan Zhu},
+  title     = {Symbolic {M}odel {C}hecking without {BDD}s},
+  booktitle = {{TACAS}},
+  pages     = {193--207},
+  year      = {1999},
+  series    = {LNCS},
+  volume    = {1579},
+}
+
 @article{Abdulateef,
 author = {J Abdulateef},
 title = {Simulation of solar off- grid photovoltaic system for residential unit},
@@ -677,7 +715,7 @@ address = {Colorado},
 
 @TechReport{NRELDobos,
 author = {Aron Dobos},
-title = {PVWatts Version 5 Manual},
+title = {P{VW}atts {V}ersion 5 {M}anual},
 institution = {National Renewable Energy Laboratory},
 year = {2014},
 address = {Colorado},
@@ -879,4 +917,27 @@ pages={1--30}
     year      = {2018},
     publisher = {ACM},
     address   = {New York, NY, USA}
+}
+
+@electronic{ANSI2018,
+ author   = "International Organization for Standardization",
+ title     = "{ISO/IEC} 9899:2018 {I}nformation {T}echnology -- {P}rogramming {L}anguages -- {C}",
+ url       = "https://www.iso.org/standard/74528.html.",
+ note = {Acessed: 14.11.2018}
+}
+
+@electronic{Temperature,
+  author = "Weatherbase",
+  title = "Manaus, {A}mazonas Travel Weather Averages",
+  url = "http://www.weatherbase.com/weather/weather.php3?s=23328&cityname=Manaus-Amazonas-Brazil.",
+  note = {Acessed: 09.07.2018}
+}
+
+
+@MISC{Irradiance,
+author = {EnergyPlus},
+title = {Weather Data by Location},
+month = jul,
+year = {2018},
+howpublished={\url{https://energyplus.net/weather-location/south_america_wmo_region_3/BRA//BRA_AM_Manaus-Gomez.Intl.AP.817300_INMET}}
 }

@@ -525,7 +525,7 @@ Formal methods based on software model checking offer great potential to obtain 
 %Thus, such problems as incompleteness, ambiguities, and inconsistencies, which normally are discovered only in later stages of the design, can be detected in advance, as described by \cite{Trindade}. 
 Finally, model checking algorithms can verify the system model by systematically exploring all their states. As a result, the formal proof can verify if the requirements are met by the system.
 
-Formal methods, alternatively, provide facilities for the modeling of each component of any complex system~\cite{Hall1990}. It allows one to develop models for each component of the system. In this study, a mathematical model of each component of a stand-alone PV system, as panel solar, charge controller, batteries, inverter, and electrical load are created. The behavior of each system can be analyzed and observed with the support of those formal models, as a joint operation of the components, which in this case represents the operation of the solar PV system itself. A key benefit to this approach is that it helps in the detection of faults and flaws in the design phase of system development, thereby considerably improving system reliability~\cite{Akram2018}.
+Formal methods, alternatively, provide facilities for the modeling of each component of any complex system~\cite{Hall1990}. It allows one to develop models for each component of the system. In this study, a mathematical model of each component of a stand-alone PV system, as panel solar, charge controller, batteries, inverter, and electrical load are created. The behavior of each system can be analyzed and observed with the support of those formal models, as a joint operation of the components, which in this case represents the operation of the solar PV system itself. A key benefit to this approach is that it helps in the detection of flaws in the design phase of system development, thereby considerably improving system reliability~\cite{Akram2018}.
 
 %Those programs are viewed as mathematical objects, and the use of 
 %Bringing this technique to solar PV systems, i
@@ -1425,9 +1425,8 @@ Fig.~\ref{fig:systemverif} shows the process to convert a real PV system to a mo
 
 However, there is a main disadvantage of model checking: the state explosion problem. In order to tackle this problem, many different techniques were developed in the last decades. One of the first major advances was symbolic model checking with binary decision diagrams (BDDs). In this approach, a set of states is represented by a BDD instead of by listing each state individually, which is often exponentially smaller in practice.
 % Another major advance is the partial order reduction, which exploits the independence of actions in a system with asynchronous composition of processes \textcolor{red}{add citation here}. A third major advance is counterexample-guided abstraction refinement, which adaptively tries to find an appropriate level of refinement, not burdened with irrelevant detail that slows down verification \cite{Clarke2012}. 
-Meanwhile, one of the most promising approaches is Bounded Model Checking (BMC)~\cite{DBLP:conf/tacas/BiereCCZ99}. 
 
-BMC is a method that checks a model up to a given path in the path length. BMC algorithms traverse a finite state machine for a fixed number of steps, $ k $, and checks whether violation occurs with this bound. It uses Boolean Satisfiability (SAT) or Satisfiability Module Theories (SMT) solvers. SAT problem is a problem of determining whether there are certain conditions or interpretations that satisfy a given Boolean expression \cite{ClarkeHV18}. 
+Meanwhile, one of the most promising approaches to overcome state explosion problem is Bounded Model Checking (BMC)~\cite{DBLP:conf/tacas/BiereCCZ99}. BMC is a method that checks a model up to a given path in the path length. BMC algorithms traverse a finite state machine for a fixed number of steps, $ k $, and checks whether violation occurs with this bound. It uses Boolean Satisfiability (SAT) or Satisfiability Module Theories (SMT) solvers. SAT problem is a problem of determining whether there are certain conditions or interpretations that satisfy a given Boolean expression \cite{ClarkeHV18}. 
 SMT decides the satisfiability of first-order formulae using a combination of different background theories and thus generalizes propositional satisfiability by supporting uninterpreted functions, linear and non-linear arithmetic, bit-vectors, tuples, arrays, and other decidable first-order theories~\cite{ClarkeHV18}.
 The SAT or SMT solvers search the model for conditions (value of variables) that make the formula satisfiable. If a SAT or SMT solver finds a substitution for the formula/function then the substitute induces a counterexample and is said to be \textit{satisfiable}, i.e., it is satisfiable \textit{iff} the verified system contains errors.  
 %
@@ -1501,7 +1500,7 @@ If the SMT formula is shown to be satisfiable (SAT), a counterexample is present
 %It is worth mentioning that the steps described here are carried out shortly after the design of the solar photovoltaic system, as soon as the equipment and equipment specifications are defined; before buying and deploying them, as a way to ensure that the project will not fail. 
 %
 The flowchart of the proposed automated verification method is illustrated in Fig.~\ref{fig:flowchartgeneral}. 
-In Step 1, the PV input data (e.g., load power demand and load energy consumption) and the formulas to check the sizing project, the mathematical model, the limits of the weather non-deterministic variables, are all written as an ANSI-C code~\cite{ANSI2018}. In Step 2, the sizing check of the PV system takes place to make sure that the components meet international requirements \textcolor{red}{cite here those requirements} toward a well designed PV project.
+In Step 1, the PV input data (e.g., load power demand and load energy consumption) and the formulas to check the sizing project, the mathematical model, the limits of the weather non-deterministic variables, are all written as an ANSI-C code~\cite{ANSI2018}. In Step 2, the sizing check of the PV system takes place to make sure that the components were selected in accordance with recognized design standards \cite{Pinho}.
 \begin{figure}[h]
 \includegraphics[width=0.4\textwidth]{flowchart_verification4.png}
 \centering
@@ -1545,7 +1544,7 @@ In order to reduce the computational effort of the algorithm,
 % caused by the state explosion inherent of the technique, 
 every 24h-day was considered as a time-step of 1 hour, and it was split into two parts: (a) one where it is possible to occur PV generation, during daylight, with a duration in hours depending on each site (but dependent of the sun and weather conditions); and (b) one that includes all the remaining day (without any PV generation). Therefore, the proposed methodology depends on specific data about the solar irradiation levels to define the average amount of hours of PV generation.
 
-After that, the model from PV generator is used in the function call of Line 11, to produce the voltage and current considering the states of $G$ and $T$. Following, related to every hour considered, the conditional \textit{if-else-endif} statements from Lines 12, 17, 23 and 28, will perform the charge or discharge of batteries according to the value of different variables: is there is PV generation (which depends on $G$ and $T$), the updated state of charge from batteries, the house's load and the set-up information of the PV system.
+After that, the model from PV generator is used in the function call of Line 11, to produce the voltage and current considering the states of $G$ and $T$. Following, related to every hour considered, the conditional \textit{if-else-endif} statements from Lines 12, 17, 23 and 28, will perform the charge or discharge of batteries according to the value of different variables: if there is PV generation (which depends on $G$ and $T$), the updated state of charge from batteries, the house's load and the set-up information of the PV system.
 
 Next, representing the time of the day where is not possible PV generation anymore, starting at Line 31, the algorithm will only discharge the batteries (using the 1 hour step) until a new charging process (at the next day) to start. Specific macro commands, the \textit{assert} at Lines 27 and 35, it will check the state of charge from batteries, and it will violate the property if its level reach the minimum that represents a discharged battery. And, therefore, the PV system is not able to supply energy to the house. In the other hand, if the automated tool do not fail, then the code is finalized with success and the PV system do not need improvements or corrections.
 %
@@ -1734,7 +1733,7 @@ Next, representing the time of the day where is not possible PV generation anymo
 
 We have performed five case studies to evaluate our proposed verification method: (a) four PV systems (700 W inverter, with 48h autonomy) deployed in four different houses in an indigenous community (GPS coordinates 2$^{o}$44'50.0"S 60$^{o}$25'47.8"W) situated nearby Manaus (Brazil), with each house having a different power demand (house 1 = 253 W, house 2 = 263 W, house 3 = 283 W, and house 4 = 501 W); and (b) one case concerning a system deployed as an individual system in Manaus (GPS coordinates 3$^{o}$4'20.208"S 60$^{o}$0'30.168"W), supporting 915 W of the house's load (house 5 with 1,200 W inverter, and autonomy of just 6 h). 
 
-Note that the annual average temperature ($T$) in Manaus is from 23$^{o}$C to 32$^{o}$C; and irradiance ($G$) varies from 274 W/m$^{2}$ to 852 W/m$^{2}$ when there is sunlight (that information is provided in Lines 9 and 10 of Algorithm~\ref{alg:verification-algorithm}). Another characteristic of Manaus, based on historical data of solar irradiance \textcolor{red}{Add citation here}, is related to the fact that only during 8 hours of the day there is PV generation, from 8:00h to 16:00h (that information is provided in Algorithm~\ref{alg:verification-algorithm} as well).
+Note that the annual average temperature ($T$) in Manaus is from 23$^{o}$C to 32$^{o}$C; and irradiance ($G$) varies from 274 W/m$^{2}$ to 852 W/m$^{2}$ when there is sunlight (that information is provided in Lines 9 and 10 of Algorithm~\ref{alg:verification-algorithm}). Another characteristic of Manaus, based on historical weather data \cite{Temperature}, \cite{Irradiance}, is related to the fact that only during 8 hours of the day is possible to have PV generation, from 8:00h to 16:00h (that information is provided in Algorithm~\ref{alg:verification-algorithm} as well).
 
 
 %------------------------------------------
@@ -1748,9 +1747,9 @@ Our experimental evaluation aims to answer three research questions:
 \item[RQ2] \textbf{(performance)} How does our approach compare against other existing tools?
 \end{enumerate}
 
-In order to evaluate the proposed verification method and its performance, we have considered five case studies and also compared its performance to the HOMER Pro tool. \textcolor{red}{This sentence is broken... Using functional information collected from owners of those five systems, which were deployed in 2018, serving as cross data about how the systems are behaving during four months of use.}
+In order to evaluate the proposed verification method and its performance, we have considered five case studies and also compared its performance to the HOMER Pro tool. Every dweller, who own a PV system, was interviewed in order to get information about his/her PV system during four months of use. This information was used to know possible flaws from every system at the field.
 
-All experiments were conducted on an otherwise idle Intel Core i7-2600 (8-cores), with 3.4 GHz and 64 GB of RAM, running Ubuntu 18.04.1 LTS 64-bits. Concerning our verification engine, ESBMC v5.1 was used with the SMT incremental mode enabled with the goal of reducing memory usage \textcolor{red}{Can you please add a footnote of how you call the tool?}; we have also used the SMT solver Z3 version 4.7.1~\cite{DeMoura}.
+All experiments were conducted on an otherwise idle Intel Core i7-2600 (8-cores), with 3.4 GHz and 64 GB of RAM, running Ubuntu 18.04.1 LTS 64-bits. Concerning our verification engine, ESBMC v5.1 was used with the SMT incremental mode\footnote{At the terminal, the command used to perform the verification is: \$ esbmc filename.c -\phantom{}-no-bounds-check -\phantom{}-no-pointer-check -\phantom{}-no-div-by-zero-check -\phantom{}-unwind 300 -\phantom{}-smt-during-symex -\phantom{}-smt-symex-guard -\phantom{}-z3} enabled with the goal of reducing memory usage; we have also used the SMT solver Z3 version 4.7.1~\cite{DeMoura}.
 
 Experimental setup of HOMER Pro: all experiments were conducted on an otherwise idle Intel Core i5-4210 (4-cores), with 1.7 GHz and 4 GB of RAM, running Microsoft Windows 10; we have used HOMER Pro v3.12.0.
 
@@ -1758,12 +1757,21 @@ Experimental setup of HOMER Pro: all experiments were conducted on an otherwise 
 \subsection{Results}
 \label{sec:results_indeed}
 %------------------------------------------
+%
+%\textcolor{red}{We should answer the two research questions here... please take a look at https://ssvlab.github.io/lucasccordeiro/papers/cav2017.pdf to check how you can answer.}
+%\begin{enumerate}
+%\item[RQ1] \textbf{(soundness)} Does our approach provide correct results?
+%\item[RQ2] \textbf{(performance)} How does our approach compare against other existing tools?
+%
+We have evaluated five case studies in total. Related to the results of the automated verification and the evaluation if the results are correct: (a) the 1,200 W PV system (house 5) failed during the sizing check. The number of panels was \textit{incorrect}; in particular, the counterexample provided by our verification method indicated 3 PV panels in parallel and the sized project has 2 in series and 2 in parallel. That verification took 63.3 hours to be performed. Surveying the owner of the 1,200 W system it was identified that, in fact, the system mostly of the time do not met the battery autonomy (mainly when all the loads are turned on). That behavior is expected because the system was purchased as an off-the-shelf solution and not as a specific design for the electrical charges of the house; (b) Related to the four 700 W PV systems, just one verification finished its analysis (house 1) considering the time-out of 432 h of computing. The sizing check was successful during automated verification, but there was found flaw related with the battery autonomy, when SOC reached levels below of 75\%. The automated verification identified the flaw right after the first night-discharge cycle, before the solar system start to recharge the batteries. The proposed tool took 409.3 hours to find this error at house 1. This possible flaw was confirmed with the dweller that uses the system: at least once or twice a mouth is usual the system to turn off, normally during raining days or with more clouds in the sky, and after the sun rises the system returns to normal operation. Related to houses 2, 3 and 4, it was considered that the automated verification had a time-out condition, with no conclusive results.
 
-\textcolor{red}{We should answer the two research questions here... please take a look at https://ssvlab.github.io/lucasccordeiro/papers/cav2017.pdf to check how you can answer.}
+We evaluated the same five case studies using HOMER Pro tool. The result of simulation, based on NASA data from the deployed systems (temperature and solar irradiance), shows that the project restrictions were met by four 700 W PV systems (house 1, 2, 3 and 4), without any indication of sizing error or even performance. The case study that was unsuccessful during simulation was the 1,200 W (house 5); however, without any indication about the failures of this PV system. All the simulations took less than 5 seconds (each) to be performed with HOMER Pro.
 
-We have evaluated five case studies in total using the HOMER Pro tool and our automated verification tool. Related to the HOMER Pro, the simulation, based on NASA data from the deployed systems (temperature and solar irradiance), shows that the restrictions were met by four systems \textcolor{red}{which four system? can you please identify each one by a number? they should also be described}, without any indication of sizing error or even performance. The case study that was unsuccessful during simulation was the 1,200 W (house 5); however, without any indication about the failures of this PV system. All the simulations took less than 5 seconds (each) to be performed.
-
-However, related to the results of the automated verification: (a) the 1,200 W PV system (house 5) failed during the sizing check. The number of panels was \textit{incorrect}; in particular, the counterexample provided by our verification method indicated 3 panels in parallel and the sized project has 2 in series and 2 in parallel. That verification took 63.3 hours to be performed. Surveying the owner of the 1,200 W system it was identified that, in fact, the system mostly of the time do not met the battery autonomy (mainly when all the loads are turned on). That behavior is expected because the system was purchased as an off-the-shelf solution and not as a specific design for the electrical charges of the house; (b) Related to the four 700 W PV systems, just one verification finished its analysis (house 1) considering the time-out of 432 h of computing. The sizing check was successful during automated verification, but there was found flaw related with the battery autonomy, when SOC reached levels below of 75\%. The automated verification identified the flaw right after the first night-discharge cycle, before the solar system start to recharge the batteries. The proposed tool took 409.3 hours to find this error at house 1. This possible flaw was confirmed with the dweller that uses the system: at least once or twice a mouth is usual the system to turn off, normally during raining days or with more clouds in the sky, and after the sun rises the system returns to normal operation. Related to houses 2, 3 and 4, it was considered that the automated verification had a time-out condition, with no conclusive results.
+Despite the divergence of results for the house 1, comparing our automated tool with HOMER Pro, it is evident that the information collect from the dweller shows that the automated verification has the correct evaluation of the PV system. House 5 presented flaws from both tools, however only the automated verification showed which system project error was responsible for the flaw (the cause was the number of solar panels in parallel). However, houses 2, 3 and 4 did not have results from the verification tool, considering the established time-out for the experimental evaluation.
+%
+%We have evaluated five case studies in total using the HOMER Pro tool and our automated verification tool. Related to the HOMER Pro, the simulation, based on NASA data from the deployed systems (temperature and solar irradiance), shows that the restrictions were met by four 700 W PV systems (house 1, 2, 3 and 4), without any indication of sizing error or even performance. The case study that was unsuccessful during simulation was the 1,200 W (house 5); however, without any indication about the failures of this PV system. All the simulations took less than 5 seconds (each) to be performed.
+%
+%However, related to the results of the automated verification: (a) the 1,200 W PV system (house 5) failed during the sizing check. The number of panels was \textit{incorrect}; in particular, the counterexample provided by our verification method indicated 3 panels in parallel and the sized project has 2 in series and 2 in parallel. That verification took 63.3 hours to be performed. Surveying the owner of the 1,200 W system it was identified that, in fact, the system mostly of the time do not met the battery autonomy (mainly when all the loads are turned on). That behavior is expected because the system was purchased as an off-the-shelf solution and not as a specific design for the electrical charges of the house; (b) Related to the four 700 W PV systems, just one verification finished its analysis (house 1) considering the time-out of 432 h of computing. The sizing check was successful during automated verification, but there was found flaw related with the battery autonomy, when SOC reached levels below of 75\%. The automated verification identified the flaw right after the first night-discharge cycle, before the solar system start to recharge the batteries. The proposed tool took 409.3 hours to find this error at house 1. This possible flaw was confirmed with the dweller that uses the system: at least once or twice a mouth is usual the system to turn off, normally during raining days or with more clouds in the sky, and after the sun rises the system returns to normal operation. Related to houses 2, 3 and 4, it was considered that the automated verification had a time-out condition, with no conclusive results.
 
 %At the terminal, the command used to perform the verification is:
 %\$ esbmc filename.c -\phantom{}-no-bounds-check -\phantom{}-no-pointer-check -\phantom{}-no-div-by-zero-check -\phantom{}-unwind 300 -\phantom{}-smt-during-symex -\phantom{}-smt-symex-guard --z3
@@ -1784,7 +1792,6 @@ However, related to the results of the automated verification: (a) the 1,200 W P
 %---------------------------------------------------
 \subsection{Threats to Validity}
 %---------------------------------------------------
-
 We have reported a favorable assessment of the proposed verification method over a diverse set of real-world benchmarks. Nevertheless, we have also identified three threats to the validity of our results that can further be assessed.
 
 \textit{Model precision:} each component of the PV system is mathematically modelled, and the precision of the proposed method depends on the precision of that particular model. A careful evaluation in a PV laboratory to validate the model could add more reliability to the results produced by our method.
@@ -1860,13 +1867,13 @@ The authors would like to thank Newton Fund (Star Energy project), Coventry Univ
 % <OR> manually copy in the resultant .bbl file
 % set second argument of \begin to the number of references
 % (used to reserve space for the reference number labels box)
-
+%
 %\begin{thebibliography}{1}
 %\bibitem{IEEEhowto:kopka}
 %H.~Kopka and P.~W. Daly, \emph{A Guide to \LaTeX}, 3rd~ed.\hskip 1em plus
 %  0.5em minus 0.4em\relax Harlow, England: Addison-Wesley, 1999.
 %\end{thebibliography}
-
+%
 %%%%%%%%%%%%%% biography section
 % 
 % If you have an EPS/PDF photo (graphicx package needed) extra braces are
@@ -1877,15 +1884,20 @@ The authors would like to thank Newton Fund (Star Energy project), Coventry Univ
 % simpler here.)
 %\begin{IEEEbiography}[{\includegraphics[width=1in,height=1.25in,clip,keepaspectratio]{mshell}}]{Michael Shell}
 % or if you just want to reserve a space for a photo:
-
-\begin{IEEEbiographynophoto}{Alessandro Trindade}
+\begin{IEEEbiography}
+    [{\includegraphics[width=1in,height=1.25in,clip,keepaspectratio]{alessandro3por4_2}}]{Alessandro Trindade}
 received his BSc and MSc in Electrical Engineering from the Federal University of Amazonas (UFAM) in 1995 and 2015, respectively. Currently, he is pursuing his PhD in the Postgraduate Program in Informatics (PPGI) at UFAM, and holds an Assistant Professor position in the Electricity Department from UFAM. Prior to joining UFAM, he worked 4 years as Consultant of renewable energy to the State Electric Utility and to the Inter-American Institute for Cooperation on Agriculture (IICA); he also worked for 12 years as R\&D and project manager at a non-profit foundation (Centre of Analysis, Research and Innovation Technology Foundation). His interest is in renewable energy, automated verification, and model checking.
-\end{IEEEbiographynophoto}
-
+\end{IEEEbiography}
+%
+%\begin{IEEEbiographynophoto}{Alessandro Trindade}
+%received his BSc and MSc in Electrical Engineering from the Federal University of Amazonas (UFAM) in 1995 and 2015, respectively. Currently, he is pursuing his PhD in the Postgraduate Program in Informatics (PPGI) at UFAM, and holds an Assistant Professor position in the Electricity Department from UFAM. Prior to joining UFAM, he worked 4 years as Consultant of renewable energy to the State Electric Utility and to the Inter-American Institute for Cooperation on Agriculture (IICA); he also worked for 12 years as R\&D and project manager at a non-profit foundation (Centre of Analysis, Research and Innovation Technology Foundation). His interest is in renewable energy, automated verification, and model checking.
+%\end{IEEEbiographynophoto}
+%
 % if you will not have a photo at all:
-\begin{IEEEbiographynophoto}{Lucas Cordeiro}
+\begin{IEEEbiography}
+    [{\includegraphics[width=1in,height=1.25in,clip,keepaspectratio]{lucas3por4}}]{Lucas Cordeiro}
 received his Ph.D. degree in Computer Science in 2011 from the University of Southampton, UK. Currently, he is a Senior Lecturer in the School of Computer Science at the University of Manchester, UK and leads the Systems and Software Verification laboratory. He is also a collaborator in the Postgraduate Program in Electrical Engineering and Informatics at the Federal University of Amazonas (UFAM), Brazil. Prior to joining the University of Manchester, he worked as a researcher / researcher engineer at Oxford University / Diffblue and as an adjunct professor at UFAM; he also worked for 4 years as a software engineer at Siemens Mobile and CT-PIM. His work focuses on software model checking, automated testing, program synthesis, and embedded \& cyber-physical systems.
-\end{IEEEbiographynophoto}
+\end{IEEEbiography}
 
 % insert where needed to balance the two columns on the last page with
 % biographies
