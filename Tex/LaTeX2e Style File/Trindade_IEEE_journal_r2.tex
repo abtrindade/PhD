@@ -1723,26 +1723,30 @@ Next, representing the time of the day where is not possible PV generation anymo
 %\textcolor{red}{https://ssvlab.github.io/lucasccordeiro/papers/cav2017.pdf}
 %
 %------------------------------------------
-\subsection{Experimental objectives and setup}
+\subsection{Objectives and Setup}
 %------------------------------------------
-Experimental objectives: To evaluate the proposed verification methodology and the respective tool performance, in a comparative with the HOMER Pro tool in five case studies. Using functional information collected from owners of those five systems, which were deployed in 2018, serving as cross data about how the systems are behaving during four months of use.
-%
-%This section is split into two parts. The setup is described in Section \ref{sec:setup}, while Section \ref{sec:results} describes all experimental results.
-%
-%
-%\subsection{Experimental setup}
-%\label{sec:setup}
 
-Experimental setup of automated verification tool: all experiments were conducted on an otherwise idle Intel Core i7-2600 (8-cores), with 3.4 GHz and 64 GB of RAM, running Ubuntu 18.04.1 LTS 64-bits. Concerning the SMT tool, ESBMC v5.1 was used with the incremental parameter to reduce the memory usage. At this paper, it was used the Z3 solver \cite{DeMoura} with version 4.7.1.
+Our experimental evaluation aims to answer three research questions:
+%
+\begin{enumerate}
+\item[RQ1] \textbf{(soundness)} Does our approach provide correct results?
+\item[RQ2] \textbf{(performance)} How does our approach compare against other existing tools?
+\end{enumerate}
 
-Experimental setup of HOMER Pro: all experiments were conducted on an otherwise idle Intel Core i5-4210 (4-cores), with 1.7 GHz and 4 GB of RAM, running Microsoft Windows 10. It was used the version 3.12.0 of HOMER Pro.
+In order to evaluate the proposed verification method and its performance, we have considered five case studies and also compared its performance to the HOMER Pro tool. \textcolor{red}{This sentence is broken... Using functional information collected from owners of those five systems, which were deployed in 2018, serving as cross data about how the systems are behaving during four months of use.}
 
-We performed five case studies: (a) four concerning a PV system (700 W inverter, with 48h autonomy) deployed at four different houses at an indigenous community (GPS coordinates 2$^{o}$44'50.0"S 60$^{o}$25'47.8"W) sited nearby Manaus (Brazil), with each house having a different power demand (house 1 = 253 W, house 2 = 263 W, house 3 = 283 W, and house 4 = 501 W); (b) and one case concerning a system deployed as an individual system in Manaus (GPS coordinates 3$^{o}$4'20.208"S 60$^{o}$0'30.168"W), supporting 915 W of the house's load (house 5 with 1,200 W inverter, and autonomy of just 6 h). The annual average temperature ($T$) in Manaus is from 23$^{o}$C to 32$^{o}$C; and irradiance ($G$) varies from 274 W/m$^{2}$ to 852 W/m$^{2}$ when there is sunlight (that information is inputted at Lines 9 and 10 of Algorithm~\ref{alg:verification-algorithm}). Another characteristic of Manaus, based on historic data of solar irradiance, is related of the fact that only during 8 hours of the day there is PV generation, from 8:00h to 16:00h (that information is a demand of Algorithm~\ref{alg:verification-algorithm} as well).
+All experiments were conducted on an otherwise idle Intel Core i7-2600 (8-cores), with 3.4 GHz and 64 GB of RAM, running Ubuntu 18.04.1 LTS 64-bits. Concerning our verification engine, ESBMC v5.1 was used with the SMT incremental mode enabled with the goal of reducing memory usage \textcolor{red}{Can you please add a footnote of how you call the tool?}; we have also used the SMT solver Z3 version 4.7.1~\cite{DeMoura}.
+
+Experimental setup of HOMER Pro: all experiments were conducted on an otherwise idle Intel Core i5-4210 (4-cores), with 1.7 GHz and 4 GB of RAM, running Microsoft Windows 10; we have used HOMER Pro v3.12.0.
+
+We performed five case studies: (a) four PV systems (700 W inverter, with 48h autonomy) deployed in four different houses in an indigenous community (GPS coordinates 2$^{o}$44'50.0"S 60$^{o}$25'47.8"W) situated nearby Manaus (Brazil), with each house having a different power demand (house 1 = 253 W, house 2 = 263 W, house 3 = 283 W, and house 4 = 501 W); and (b) one case concerning a system deployed as an individual system in Manaus (GPS coordinates 3$^{o}$4'20.208"S 60$^{o}$0'30.168"W), supporting 915 W of the house's load (house 5 with 1,200 W inverter, and autonomy of just 6 h). The annual average temperature ($T$) in Manaus is from 23$^{o}$C to 32$^{o}$C; and irradiance ($G$) varies from 274 W/m$^{2}$ to 852 W/m$^{2}$ when there is sunlight (that information is provided in Lines 9 and 10 of Algorithm~\ref{alg:verification-algorithm}). Another characteristic of Manaus, based on historical data of solar irradiance, is related to the fact that only during 8 hours of the day there is PV generation, from 8:00h to 16:00h (that information is provided in Algorithm~\ref{alg:verification-algorithm} as well).
 
 %------------------------------------------
 \subsection{Results}
 \label{sec:results_indeed}
 %------------------------------------------
+
+\textcolor{red}{We should answer the two research questions here... please take a look at https://ssvlab.github.io/lucasccordeiro/papers/cav2017.pdf to check how you can answer.}
 
 We have evaluated five case studies in total using the HOMER Pro tool and our automated verification tool. Related to the HOMER Pro, the simulation, based on NASA data from the deployed systems (temperature and solar irradiance), shows that the restrictions were met by four systems \textcolor{red}{which four system? can you please identify each one by a number? they should also be described}, without any indication of sizing error or even performance. The case study that was unsuccessful during simulation was the 1,200 W (house 5); however, without any indication about the failures of this PV system. All the simulations took less than 5 seconds (each) to be performed.
 
