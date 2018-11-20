@@ -1496,15 +1496,16 @@ If the SMT formula is shown to be satisfiable (SAT), a counterexample is present
 %
 %It is worth mentioning that the steps described here are carried out shortly after the design of the solar photovoltaic system, as soon as the equipment and equipment specifications are defined; before buying and deploying them, as a way to ensure that the project will not fail. 
 %
-The flowchart of the proposed automated verification tool is illustrated in Fig.~\ref{fig:flowchartgeneral}. 
-As Step 1, the PV input data (e.g., load power demand and load consumption of energy), the formulas to check the sizing project, the mathematical model, the limits of the weather non-deterministic variables, are all written as an ANSI-C code~\cite{ANSI2018}. In Step 2, occurs the sizing check of the PV system to make sure that the components accepted international requirements toward a well designed PV project.
+The flowchart of the proposed automated verification method is illustrated in Fig.~\ref{fig:flowchartgeneral}. 
+In Step 1, the PV input data (e.g., load power demand and load energy consumption) and the formulas to check the sizing project, the mathematical model, the limits of the weather non-deterministic variables, are all written as an ANSI-C code~\cite{ANSI2018}. In Step 2, the sizing check of the PV system takes place to make sure that the components meet international requirements \textcolor{red}{cite here those requirements} toward a well designed PV project.
 \begin{figure}[h]
 \includegraphics[width=0.4\textwidth]{flowchart_verification4.png}
 \centering
 \caption{Flowchart of the proposed automated verification of PV systems.}
 \label{fig:flowchartgeneral}
 \end{figure}
-The weather variables (solar irradiance and ambient temperature by default) will be explored in all their states by the ESBMC verification engine, in Step 3, based on maximum and minimum values from the site, where the PV system will be deployed. As a consequence, all the formulas of the mathematical models used will also be updated. In addition, depending on one of the desired properties of the system, as autonomy of the batteries, the offer of the energy, or even the power supply from the system to check, whether it is not accomplished (said satisfied), ESBMC accuses a failure, and the diagnostic counterexample shows in which condition the property violation (system fail) happened. 
+%
+In Step 3, weather variables (e.g., solar irradiance and ambient temperature) will be systematically explored by our verification engine based on maximum and minimum values from the site, where the PV system will be deployed. As a consequence, all the formulas of the employed mathematical models will also be updated. In addition, depending on one of the desired properties of the system, as autonomy of the batteries, the offer of the energy, or even the power supply from the system to check, whether it is not accomplished (said satisfied), ESBMC accuses a failure, and the diagnostic counterexample shows in which condition the property violation (system fail) happened. 
 %; as the  state of charge of the batteries, load demand of power and the load consumption of energy if defined by the code
 % (as reliability, performance, or safety)
 
