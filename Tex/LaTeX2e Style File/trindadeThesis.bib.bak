@@ -934,10 +934,16 @@ pages={1--30}
 }
 
 
-@MISC{Irradiance,
-author = {EnergyPlus},
-title = {Weather Data by Location},
-month = jul,
-year = {2018},
-howpublished={\url{https://energyplus.net/weather-location/south_america_wmo_region_3/BRA//BRA_AM_Manaus-Gomez.Intl.AP.817300_INMET}}
+@electronic{Irradiance,
+  author = "EnergyPlus",
+  title = "Weather Data by Location",
+  url = "https://energyplus.net/weather-location/south_america_wmo_region_3/BRA//BRA_AM_Manaus-Gomez.Intl.AP.817300_INMET.",
+  note = {Acessed: 09.07.2018}
+}
+
+@PhdThesis{BrianGoss2015,
+author = {Brian Goss},
+title = {Design process optimisation of solar photovoltaic systems},
+school = {Loughborough University},
+year = {2015}
 }

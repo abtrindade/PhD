@@ -1441,10 +1441,9 @@ ESBMC comes as an alternative to overcome limitations of the systems modeling, e
 %--------------------------------------
 \subsection{ESBMC}
 %--------------------------------------
-
 ESBMC (or Efficient SMT-based Bounded Model Checker) is an open source, permissively licensed (Apache 2), cross platform bounded model checking for C and C++ programs \cite{esbmc2018}. 
 %
-ESBMC's verification flow can be summarized in three stages: (I) a front-end that can read and compile C/C++ code, where the formal specification of the system to be verified is first treated; (II) preprocessing steps to deal with the representation of the code, control flow and unwinding of loops, and the simplification of the algorithm, aiming to reduce the computational complexity; and finally (III) the solver, where all the constraints and properties of the system to be verified are encoded into SMT and checked for satisfiability.
+ESBMC's verification flow can be summarized in three stages: (I) a front-end that can read and compile C/C++ code, where the formal specification of the system to be verified is first treated; (II) preprocessing steps to deal with the representation of the code, control flow and unwinding of loops, and the simplification of the algorithm, aiming to reduce the computational complexity; and finally (III) the solver, or SMT solver, where all the constraints and properties of the system to be verified are encoded into SMT and checked for satisfiability.
 %
 %%The efficient SMT based model checker, is a software verification tool for C and C++ code bases. 
 %
@@ -1469,6 +1468,10 @@ ESBMC's verification flow can be summarized in three stages: (I) a front-end tha
 %
 %Finally, the system attempting to determine whether a formula, which is the disjunction of all possible errors, can be satisfied. 
 If the SMT formula is shown to be satisfiable (SAT), a counterexample is presented; otherwise, the formula is unsatisfiable (UNSAT), i.e., there are no errors up to the given unwinding bound. 
+
+% incremental ESBMC text here
+Related to the standardized input language to SMT solvers, aka SMTLIB logic format, there is a resource called \textit{assertion stack}. An assertion, in SMT solvers, is a constraint on the variables in formula that must hold if the formula is satisfiable \cite{Morse2015}. New assertions can be added to or old assertions removed from this stack, depending on the evaluated value of variables. This enables the solver to learn from previous checks for future checks, optimizing the search procedure and potentially eliminating a large amount of formula state space to be searched, because it solves and discart data during the process, incrementally. This technique is called "Incremental SMT" \cite{Morse2015}. The process of retraction to build and deconstruct the formula allow reduced SMT-conversion overhead of memory, mainly when the verified system is complex and the computing platform do not have large amount of RAM memory to deal with all the design space state.
+%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%5%
 %%%%%ESBMC can be invoked through the command-line interface or configured through the Eclipse plug-in. Specific problems and the solver can be selected that way. 
 %
