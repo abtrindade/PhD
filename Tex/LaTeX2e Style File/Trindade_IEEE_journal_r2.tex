@@ -479,7 +479,7 @@ Formal verification, model checking, photovoltaic power systems, power system mo
 %Increased access to energy allows economic growth and poverty alleviation \cite{Karekesi}. 
 %
 %Among the options of renewable sources, there are hydro, wind, and solar photovoltaic (PV). 
-Only a niche market a few years ago, solar photovoltaic (PV) are now becoming a mainstream electricity provider. 
+Only a niche market a few years ago, solar photovoltaic (PV) systems are now becoming a mainstream electricity provider. 
 % changing the way the world is powered. 
 %Based on data from \textcolor{red}{from what? please be more formal! can you check the guidelines of the journal to see how you can cite references?}, t
 There was an increase of approximately 50\% from 2016 to 2017 in terms of new installations of PV all over the world \cite{EPIA}. That scenario brings the need for 
@@ -496,11 +496,11 @@ There was an increase of approximately 50\% from 2016 to 2017 in terms of new in
 %Therefore, these systems need to be designed properly according to the site, land area available, load requirement, load pattern, environmental conditions and economics in order to utilize available resources efficiently and economically \cite{Rawat}. %Furthermore, there is the need for proper modeling and simulation tools for people involved in their application. 
 %
 %The increase in the number of PV systems installed and been projected all over the world brings the need for %proper modeling and simulation tools for researchers and practitioners involved in their application. 
-design validation - ensuring the correctness of the design at the earliest stage possible - which is a major challenge in any responsible system development process, and the activities intended for its solution occupy an ever increasing portions of the  development cycle cost and time budgets \cite{ClarkeHV18}. 
+design validation -- ensuring the correctness of the design at the earliest stage possible -- which is a major challenge in any responsible system development process, and the activities intended for its solution occupy an ever increasing portions of the  development cycle cost and time budgets \cite{ClarkeHV18}. 
 %The currently practiced methods for design validation in most sites are still the veteran techniques of simulation and testing \cite{ClarkeHV18}.
 
-In order to model, simulate, or evaluate a PV system, there are a myriad of specialized tools available in the market, as RETScreen, HOMER, PVWatts, SAM, and Hybrid2 \cite{Pradhan}, \cite{Swarnkar}, \cite{NRELDobos}, \cite{NRELBlair}, \cite{Mills}; and even general purpose simulation tools as PSpice, Saber, or MATLAB/Simulink package \cite{Gow1999}, \cite{Benatiallah2017}.
-
+In order to model, simulate, or evaluate a PV system, there are a myriad of specialized tools available in the market, as RETScreen, HOMER, PVWatts, SAM, and Hybrid2 \cite{Pradhan,Swarnkar,NRELDobos,NRELBlair,Mills}; and even general purpose simulation tools as PSpice, Saber, or MATLAB/Simulink package \cite{Gow1999,Benatiallah2017}.
+%
 %However, to the best of our knowledge, this work can be the first work to perform automated verification of a stand-alone solar PV project solution.  
 %
 %According to \cite{SEIA} and \cite{Chauhan}, solar is the most abundant source of renewable energy on earth. In SPV system, solar radiations are captured from the sun and turned into electricity using SPV cells made of silicon and other materials. SPV...
@@ -510,11 +510,11 @@ In order to model, simulate, or evaluate a PV system, there are a myriad of spec
 %Manufactures and integrators have yet their proprietary software to perform various system sizing, with the drawback of include just their own products among the possibilities of choice, what restrict the solution. 
 %
 %PV systems can be classified into grid-connected and stand-alone systems. At this proposal, only off-grid or stand-alone systems will be considered. The utilization of solar energy in off-grid mode has the potential to meet the energy need for remote rural areas of developing countries.  
-However, those tools are based on running experiments in simulation models. Simulation has the advantage of being cheap (if compared to test in real systems) and can be employed before the system design is concluded; however, it has the drawback of an incomplete coverage since the verification of all possible combinations and potential failures of systems is rarely possible or even feasible~\cite{ClarkeHV18}.
+However, those tools are based on running experiments in simulation models. Simulation has the advantage of being cheap (if compared to test in real systems) and can be employed before the system design is concluded but it has the drawback of an incomplete coverage since the verification of all possible combinations and potential failures of systems is rarely possible or even unfeasible~\cite{ClarkeHV18} to be achieved in practice.
 
-Formal methods based on software model checking offer great potential to obtain a more effective and faster verification in the design process~\cite{ClarkeHV18}.  
+Formal methods based on software model checking offer a great potential to obtain a more effective and faster verification in the design process~\cite{ClarkeHV18}.  
 %with behavior that is, in principle, well determined. 
- Using this technique, any kind of system can be specified as computer programs using mathematical logic, which constitutes the intended (correct) behavior. Then, one can try to give a formal proof or otherwise establish that the program meets its specification. User or project requirements can be added during the process of coding. %, as defined by \cite{Trindade}. 
+Any kind of system can be specified as computer programs using mathematical logic, which constitutes the intended (correct) behavior; then, one can try to give a formal proof or otherwise establish that the program meets its specification. User or project requirements can be added during the creation of the formal model to be verified. %, as defined by \cite{Trindade}. 
 %
 %This area of research is referred as formal methods. % as defined in \cite{Clarkeetal}.
 % Their aim is to establish system correctness with mathematical rigor. 
@@ -525,7 +525,7 @@ Formal methods based on software model checking offer great potential to obtain 
 %Thus, such problems as incompleteness, ambiguities, and inconsistencies, which normally are discovered only in later stages of the design, can be detected in advance, as described by \cite{Trindade}. 
 Finally, model checking algorithms can verify the system model by systematically exploring all their states. As a result, the formal proof can verify if the requirements are met by the system.
 
-Formal methods, alternatively, provide facilities for the modeling of each component of any complex system~\cite{Hall1990}. It allows one to develop models for each component of the system. In this study, a mathematical model of each component of a stand-alone PV system, as panel solar, charge controller, batteries, inverter, and electrical load are created. The behavior of each system can be analyzed and observed with the support of those formal models, as a joint operation of the components, which in this case represents the operation of the solar PV system itself. A key benefit to this approach is that it helps in the detection of flaws in the design phase of system development, thereby considerably improving system reliability~\cite{Akram2018}.
+Formal methods, alternatively, provide facilities for the modeling of each component of any complex system~\cite{Hall1990}, allowing the development of models for each system component. In this study, a mathematical model of each component of a stand-alone PV system, as panel solar, charge controller, batteries, inverter, and electrical load are created. The behavior of each system can be analyzed and observed with the support of those formal models, as a joint operation of the components, which in this case represents the operation of the solar PV system itself. A key benefit to this approach is that it helps in the detection of flaws in the design phase of system development, thereby considerably improving system reliability~\cite{Akram2018}.
 
 %Those programs are viewed as mathematical objects, and the use of 
 %Bringing this technique to solar PV systems, i
