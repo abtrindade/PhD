@@ -365,7 +365,7 @@
 % Linebreaks \\ can be used within to get better formatting as desired.
 % Do not put math or special symbols in the title.
 %\title{Building a framework to perform automated verification of solar photovoltaic off-grid systems}
-\title{Automated verification of stand-alone solar photovoltaic systems}
+\title{Automated Verification of Stand-Alone Solar Photovoltaic Systems}
 %
 %
 % author names and IEEE memberships
@@ -542,8 +542,7 @@ In prior studies, the evaluation of PV systems w.r.t. user requirements were per
 In addition, recent research that applies formal verification to solar energy, has attempted to formalize and implement a formal study of large population of PV panels, where the focus has been on the modeling of the dynamics of PV panels and their interaction with the grid, without batteries~\cite{Abate2017}; or to model a PV system in Modelica, to verify the maximum power point of solar panels with the use of Jmodelica tool~\cite{Driouich2018}. Both studies restrict to PV panels, and do not include batteries, inverters, and charge controllers.
   
 %The experimental results show that the proposed framework is more efficient \textcolor{red}{than what?} in different case studies to find not proper functioning of PV systems than simulation with off-the-shelf tool. 
-Given the current knowledge in formal verification, this is the first initiative to use a formal verification tool to evaluate the design of a stand-alone solar PV system. %, with weather conditions variation. 
-The mains contribution of this paper are the automated verification of the PV system, and the modular modeling of each component of the PV system, which allows one to change the mathematical models, besides changing the type of energy generation in the future to another renewable source. \textcolor{red}{why changing the mathematical model is a contribution? Please clarify it further!}
+Given the current knowledge in formal verification, this is the first study to apply a formal verification technique to formally check the design of a stand-alone solar PV system. In summary, this paper makes three original contributions. Firstly, we describe a modular modeling of each component of a PV system by means of mathematical models that can be encoded into first-order theories supported by software model checkers. Secondly, we propose an automated verification method that formally checks the design of a given PV system using incremental model checking based on Satisfiability Module Theories (SMT). Thirdly, experimental results show that this proposed approach can find subtle design errors in PV systems, which are not easily detected by other state-of-the-art approaches based on simulation. 
 
 %\textcolor{red}{This introduction is missing the description of the vision, approach and results. In particular, try to match each paragraph to: problem, vision, approach, results and contributions.} 
 %
@@ -1365,7 +1364,7 @@ V_{out}AC = V_{AC}.
 \end{equation}
 
 %--------------------------------------------------
-\section{Automated verification}
+\section{Automated Verification Using Model Checking}
 \label{sec:AutomatedVerification}
 %--------------------------------------------------
 %It is necessary to keep in mind that 
@@ -1492,7 +1491,7 @@ ESBMC exploits the standardized input language of SMT solvers (SMT-LIB\footnote{
 %As described in \cite{Alur}, in program verification, it is aimed to check if a program satisfies its logical specification. Contemporary verification tools vary widely in terms of source languages, verification methodology, and the degree of automation, but they all rely on repeatedly invoking an SMT solver. This work tracks the same path. 
 %
 %----------------------------------------
-\section{Methodology }
+\section{Model Checking Stand-alone Solar Photovoltaic Systems }
 \label{sec:Methodology}
 %----------------------------------------
 %
@@ -1813,7 +1812,9 @@ We have reported a favorable assessment of the proposed verification method over
 \section{Conclusion and Future Work}
 \label{sec:Conclusions}
 %-------------------------------------
-We have described and evaluated an automated verification method to check whether a given PV system meets its specification using software model checking techniques. We have considered five case studies from real photovoltaic systems deployed in five different sites, ranging from $700$ W to $1,200$ W. Although this verification method takes longer than simulation tools, it is able to find specific conditions that lead to failures in a PV system previously validated by simulation tools. In particular, the proposed method was successful in finding sizing errors and indicating in which conditions a PV system can fail. New tests must be performed, in an improved setup (i.e., better computing performance), aiming to obtain the results in less time. As future work, the proposed method will be extended to start from a list of commercial equipment, where each equipment is verified and the final solution, which satisfies the project specification, is found via Counterexample Guided-Inductive Synthesis (CEGIS)~\cite{DBLP:conf/asplos/Solar-LezamaTBSS06}, thus leading to an optimum sizing of PV systems. We also will consider other types of renewable energy and even hybrid ones, which will allow our method to design and verify typical rural electrification.
+We have described and evaluated an automated verification method to check whether a given PV system meets its specification using software model checking techniques. We have considered five case studies from real photovoltaic systems deployed in five different sites, ranging from $700$ W to $1,200$ W. Although this verification method takes longer than simulation methods, it is able to find specific conditions that lead to failures in a PV system previously validated by a commercial simulation tool. In particular, the proposed method was successful in finding sizing errors and indicating in which conditions a PV system can fail. 
+%New tests must be performed, in an improved setup (i.e., better computing performance) with the goal of obtaining verification results in shorter times than the ones obtained in this study. 
+As future work, the proposed method will be extended to start from a list of commercial equipment, where each equipment is verified and the final solution, which satisfies the project specification, is found via Counterexample Guided-Inductive Synthesis (CEGIS)~\cite{DBLP:conf/asplos/Solar-LezamaTBSS06}, thus leading to an optimum sizing of PV systems. We also will consider other types of renewable energy and even hybrid ones, which will allow our method to design and verify typical rural electrification.
 %
 %It was shown that, although the time-consuming issue of the proposed automated verification tool, it overcomes the results of off-the-shelf tool that only simulate the results. The proposed tool was successful in find sizing errors and to indicate in which conditions a PV system can fails.
 % into an important instrument to complement the solar PV system design process, ensuring that it does not fail and meets the expected requirements. 
