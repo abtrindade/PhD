@@ -354,7 +354,7 @@
 % correct bad hyphenation here
 \hyphenation{op-tical net-works semi-conduc-tor}
 
-\renewcommand{\baselinestretch}{0.96}
+\renewcommand{\baselinestretch}{0.97}
 
 \begin{document}
 %
@@ -1564,13 +1564,13 @@ Next, representing the time of the day where PV generation is not possible anymo
 %Within this 8h-period, $G$ and $T$ are automated verified with different values every one hour.
 %, and change their value every 1 h according with the algorithm created using the technique.
  \begin{algorithm}
- \caption{Algorithm to perform automated verification}
+ \caption{Model checking algorithm for stand-alone PV}
  \begin{algorithmic}[1]
  \renewcommand{\algorithmicrequire}{\textbf{Input:}}
  \renewcommand{\algorithmicensure}{\textbf{Output:}}
   \STATE Perform project sizing verification( )
   \IF {(FAIL verification)} 
-  \STATE exit ("Project sizing error")  
+  \STATE exit (``Project sizing erro'')  
   \ENDIF
   \STATE $SOC \leftarrow 80\%$ \\
   \COMMENT {Starting with the PV generation time}
@@ -1750,16 +1750,16 @@ Note that the annual average temperature ($T$) in Manaus is from 23$^{o}$C to 32
 %------------------------------------------
 \subsection{Objectives and Setup}
 %------------------------------------------
-Our experimental evaluation aims to answer three research questions:
+Our experimental evaluation aims to answer two research questions:
 %
 \begin{enumerate}
 \item[RQ1] \textbf{(soundness)} Does our approach provide correct results?
 \item[RQ2] \textbf{(performance)} How does our approach compare against other existing tools?
 \end{enumerate}
 
-In order to evaluate the proposed verification method and its performance, we have considered five case studies and also compared its performance to the HOMER Pro tool. Every dweller, who own a PV system, was interviewed in order to get information about his/her PV system during four months of use. This information was used to know possible flaws from every system at the field.
+In order to evaluate the proposed verification method and its performance, we have considered five case studies and also compared its performance to the HOMER Pro tool. Every dweller, who owns a PV system, was interviewed to get information about his/her PV system during four months of use. This information was used to know possible flaws from every system in the field.
 
-All experiments were conducted on an otherwise idle Intel Core i7-2600 (8-cores), with 3.4 GHz and 64 GB of RAM, running Ubuntu 18.04.1 LTS 64-bits. Concerning our verification engine, ESBMC v5.1 was used with the SMT incremental mode\footnote{At the terminal, the command used to perform the verification is: \$ esbmc filename.c -\phantom{}-no-bounds-check -\phantom{}-no-pointer-check -\phantom{}-no-div-by-zero-check -\phantom{}-unwind 300 -\phantom{}-smt-during-symex -\phantom{}-smt-symex-guard -\phantom{}-z3} enabled with the goal of reducing memory usage; we have also used the SMT solver Z3 version 4.7.1~\cite{DeMoura}. The experiments were performed without a predefined timeout.
+All experiments were conducted on an otherwise idle Intel Core i7-2600 (8-cores), with 3.4 GHz and 64 GB of RAM, running Ubuntu 18.04.1 LTS 64-bits. Concerning our verification engine, ESBMC v5.1 was used with the SMT incremental mode\footnote{The command-line used to perform the verification is: \$ esbmc filename.c -\phantom{}-no-bounds-check -\phantom{}-no-pointer-check -\phantom{}-no-div-by-zero-check -\phantom{}-unwind 300 -\phantom{}-smt-during-symex -\phantom{}-smt-symex-guard -\phantom{}-z3} enabled with the goal of reducing memory usage; we have also used the SMT solver Z3 version 4.7.1~\cite{DeMoura}. The experiments were performed without a predefined timeout.
 
 Experimental setup of HOMER Pro: all experiments were conducted on an otherwise idle Intel Core i5-4210 (4-cores), with 1.7 GHz and 4 GB of RAM, running Microsoft Windows 10; we have used HOMER Pro v3.12.0.
 
@@ -1773,11 +1773,11 @@ Experimental setup of HOMER Pro: all experiments were conducted on an otherwise 
 %\item[RQ1] \textbf{(soundness)} Does our approach provide correct results?
 %\item[RQ2] \textbf{(performance)} How does our approach compare against other existing tools?
 %
-The description of our experimental results can be broken down into two parts: (a) the 1,200 W PV system (house 5) failed during the sizing check since the number of panels was \textit{incorrectly} sized; in particular, the counterexample provided by our verification engine indicated 3 PV panels in parallel and the actual project has 2 in series and 2 in parallel. This verification took approximately 63.3 hours to be performed. Surveying the owner of the 1,200 W system we identified that, in fact, the system does not meet the battery autonomy most of the time (mainly when all loads are turned on); this behavior is expected since the system was purchased as an off-the-shelf solution and not as a customized design for the electrical charges of the house; (b) For the 700 W PV systems of houses 1, 2, 3, and 4, the sizing check was successful during verification, but our verification engine has found flaws related to the battery autonomy, particularly when SOC reached a empty-battery level. Our verification engine identified those flaws (for all four houses) right after the first night-discharge cycle, i.e., before the solar system started to recharge the batteries. Our verification engine took approximately 409.3 hours to find this flaw in house 1; 611.2 hours for house 2; 615.8 hours for house 3, and 620.8 hours for house 4. These flaws were confirmed with the dwellers who own the systems by an interview process: at least once a mouth is usual the system to turn off, normally in raining or clouds days, thereby reaching the situation described in Step 3 of Table~\ref{table:controller}; after the sun rises, the systems returns to normal condition operation. 
+The description of our experimental results can be broken down into two parts: (a) the 1,200 W PV system (house 5) failed during the sizing check since the number of panels was \textit{incorrectly} sized; in particular, the counterexample provided by our verification engine indicated 3 PV panels in parallel and the actual project has 2 in series and 2 in parallel. This verification took approximately 63.3 hours to be performed. Surveying the owner of the 1,200 W system we identified that, in fact, the system does not meet the battery autonomy most of the time (mainly when all loads are turned on), thus affirming RQ1; this behavior is expected since the system was purchased as an off-the-shelf solution and not as a customized design for the electrical charges of the house; (b) For the 700 W PV systems of houses 1, 2, 3, and 4, the sizing check was successful during verification, but our verification engine has found flaws related to the battery autonomy, particularly when SOC reached a empty-battery level. Our verification engine identified those flaws (for all four houses) right after the first night-discharge cycle, i.e., before the solar system started to recharge the batteries. Our verification engine took approximately 409.3 hours to find this flaw in house 1; 611.2 hours for house 2; 615.8 hours for house 3, and 620.8 hours for house 4. These flaws were confirmed with the dwellers who own the systems by an interview process: at least once a month is usual the system to turn off, normally in raining or clouds days, thereby reaching the situation described in Step 3 of Table~\ref{table:controller}, further affirming RQ1; after the sun rises, the systems returns to normal condition operation. 
 
 The same five case studies were evaluated by HOMER Pro. The simulation results showed that the project restrictions were met by four 700 W PV systems (house 1, 2, 3 and 4), without any indication of sizing error or even performance related issues. The case study that was unsuccessful during simulation was the 1,200 W (house 5); however, without any indication about the failures of this PV system. All the simulations took less than 5 seconds (each) to be performed by HOMER Pro.
 %
-Despite the divergence of results for the houses 1, 2, 3 and 4 w.r.t. our proposed approach, it is evident that the information collected from the dwellers indicate that our approach has the correct evaluation of the PV system. House 5 presented flaws from both tools; however, only our approach indicated which system project error was responsible for the flaw (number of PV panels).
+Despite the divergence of results for the houses 1, 2, 3 and 4 w.r.t. our proposed approach, it is evident that the information collected from the dwellers indicate that our approach provides the correct evaluation of the PV system, thus answering RQ2. House 5 presented flaws from both tools; however, only our approach indicated which design error was responsible for the flaw (number of PV panels), further answering RQ2.
 %
 Note that a PV design always uses daily average values of sun hours to each site, with impact in the PV components. Those hours are based on historical data and, in field, it is not unusual to find days where that number of hours was not reached due to weather conditions. The season has impact since the case studies are from the rain forest, where clouds are always present. As a result, the identified flaws in houses 1, 2, 3, and 4, are justified once again.
 %
@@ -1804,7 +1804,7 @@ Note that a PV design always uses daily average values of sun hours to each site
 %---------------------------------------------------
 \subsection{Threats to Validity}
 %---------------------------------------------------
-We have reported a favorable assessment of the proposed verification method over a diverse set of real-world benchmarks. Nevertheless, we have also identified three threats to the validity of our results that can further be assessed.
+We have reported a favorable assessment of the proposed method over a diverse set of real-world benchmarks. Nevertheless, we have also identified three threats to the validity of our results that can further be assessed.
 
 \textit{Model precision:} each component of the PV system is mathematically modelled, and the precision of the proposed method depends on the precision of that particular model. A careful evaluation in a PV laboratory to validate the model could add more reliability to the results produced by our method.
 
@@ -1816,9 +1816,10 @@ We have reported a favorable assessment of the proposed verification method over
 \section{Conclusion and Future Work}
 \label{sec:Conclusions}
 %-------------------------------------
+
 We have described and evaluated an automated verification method to check whether a given PV system meets its specification using software model checking techniques. We have considered five case studies from real photovoltaic systems deployed in five different sites, ranging from $700$ W to $1,200$ W. Although this verification method takes longer than simulation methods, it is able to find specific conditions that lead to failures in a PV system previously validated by a commercial simulation tool. In particular, the proposed method was successful in finding sizing errors and indicating in which conditions a PV system can fail. 
 %New tests must be performed, in an improved setup (i.e., better computing performance) with the goal of obtaining verification results in shorter times than the ones obtained in this study. 
-As future work, the proposed method will be extended to start from a list of commercial equipment, where each equipment is verified and the final solution, which satisfies the project specification, is found via Counterexample Guided-Inductive Synthesis (CEGIS)~\cite{DBLP:conf/asplos/Solar-LezamaTBSS06}, thus leading to an optimum sizing of PV systems. We also will consider other types of renewable energy and even hybrid ones, which will allow our method to design and verify typical rural electrification.
+As future work, the proposed method will be extended to start from a list of commercial equipment, where each equipment is verified and the final solution, which satisfies the project specification, is found via Counterexample Guided-Inductive Synthesis~\cite{DBLP:conf/asplos/Solar-LezamaTBSS06}, thus leading to an optimum sizing of PV systems. We will also consider other types of renewable energy and even hybrid ones to allow our method to design and verify typical rural electrification.
 %
 %It was shown that, although the time-consuming issue of the proposed automated verification tool, it overcomes the results of off-the-shelf tool that only simulate the results. The proposed tool was successful in find sizing errors and to indicate in which conditions a PV system can fails.
 % into an important instrument to complement the solar PV system design process, ensuring that it does not fail and meets the expected requirements. 
