@@ -1368,7 +1368,7 @@ V_{out}AC = V_{AC}.
 \label{sec:AutomatedVerification}
 %--------------------------------------------------
 %It is necessary to keep in mind that 
-Validation is the process of determining whether a design meets the needs of the user, whereas verification is the process of determining whether a design meets a set of requirements, specifications, and regulations~\cite{ClarkeHV18}. If the requirements, specifications, and regulations are given in a formal language, then it may be possible to automate the verification process, thus resulting in a process known as \textit{formal verification}. Verification may form part of a validation process.
+Validation is the process of determining whether a design meets the user requirements, whereas verification is the process of determining whether a design meets a set of requirements, specifications, and regulations~\cite{ClarkeHV18}. If the requirements, specifications, and regulations are given in a formal language, then it may be possible to automate the verification process, thus resulting in a process known as \textit{formal verification}. Verification may form part of a validation process.
 %, but in general, validation cannot be formalized because it relates a system design to intent.  
 While simulation and testing explore some of the possible behaviors and scenarios of the system, leaving open the question of whether the unexplored trajectories may contain a flaw, formal verification conducts an exhaustive exploration of all possible behaviors. Thus, when a design is pronounced correct by a formal verification method, it implies that all behaviors have been explored, and the questions of adequate coverage or a missed behavior becomes irrelevant \cite{Clarke2012}.
 %Simulation may also be used for validation, but it is more problematic for verification.
@@ -1379,22 +1379,22 @@ Formal verification is a systematic approach that applies mathematical reasoning
  % 
 %Model checking is an automatic verification technique, as defined by \cite{ClarkeHV18}. Model checking was originally developed reasoned about finite state of concurrent systems, nowadays is mainly used to hardware and software verification, but can be applied to any kind of system. 
 %
-The process of model checking can be split into three main components: modeling, specification, and verification method. In modeling, a model (normally mathematical) of the system is created; in specification, normally a list of properties to be satisfied by the system is established, i.e., the requirements, normally  expressed in a temporal logic form (e.g., $CTL$).
-
+The process of model checking can be split into three main components: modeling, specification, and verification method. In modeling, a model (normally mathematical) of the system is created; in specification, normally a list of properties to be satisfied by the system is established, i.e., the requirements, normally  expressed in a temporal logic form (e.g., CTL or LTL).
+%
 %\begin{itemize}
 %\item In modeling, a model (normally mathematical) of the system is created; 
 %\item In specification, normally a list of properties to be satisfied by the system is established, i.e., the requirements, as reliability to performance for example. \item Normally is expressed in temporal logic form ($CTL$); 
 %\item The model checking is the verification method itself. 
 %\end{itemize}
-
+%
 The model checking algorithm can be described as \cite{ClarkeHV18}:  
-
+%
 \begin{itemize}
-\item Given the model $ 'M' $ and a $CTL$ formula $ \phi $ as input;  
+\item Given the model $M$ and a CTL (or LTL) formula $ \phi $ as input;  
 \item Model checking algorithm provides all the states of model $ M $ which satisfies $ \phi $;  
-\item It returns $YES$ if $ \phi $ is $TRUE$, or returns $NO$ if $ \phi $ is $FALSE$.  
+\item It returns \textit{YES} if $ \phi $ is \textit{TRUE}, or returns \textit{NO} if $ \phi $ is \textit{FALSE}.  
 \end{itemize}
-Specifically for the $FALSE$ verification result, the algorithm returns a \textit{counterexample} (i.e., a sequence of states that leads to the property violation), which is useful as diagnostic of the system to discover in which situation the model is violated; this is the most important advantage of the use of model checking~\cite{ClarkeHV18}. 
+Specifically for the \textit{FALSE} verification result, the algorithm returns a \textit{counterexample} (i.e., a sequence of states that leads to a property violation), which is useful as diagnostic of the system to discover in which situation the model is violated; this is the most important advantage of the use of model checking~\cite{ClarkeHV18}. 
 %Among the other advantages can be listed: there is no need of proofs (the algorithm is not a deductive procedure), there is no problem with partial specifications of the system, logics can easily express many concurrency properties, is fast (compared to other rigorous methods such as interactive theorem proving). 
 %
 %The model checking problem can be defined as \cite{ClarkeHV18}: 
@@ -1406,7 +1406,7 @@ Specifically for the $FALSE$ verification result, the algorithm returns a \texti
 %\end{itemize}
 %
 %Fig. \ref{fig:modelcheckstruc} shows the structure of a 
-In a typical model checking system, a preprocessor extracts a state transition graph from a system (program or circuit).
+%In a typical model checking system, a preprocessor extracts a state transition graph from a system (program or circuit).
 %
 %\begin{figure}[h]
 %\includegraphics[width=0.4\textwidth]{modelcheckstruc}
@@ -1428,9 +1428,11 @@ Fig.~\ref{fig:systemverif} shows the process to convert a real PV system to a mo
 
 However, there is a main disadvantage of model checking: the state explosion problem. In order to tackle this problem, many different techniques were developed in the last decades. One of the first major advances was symbolic model checking with binary decision diagrams (BDDs). In this approach, a set of states is represented by a BDD instead of by listing each state individually, which is often exponentially smaller in practice.
 % Another major advance is the partial order reduction, which exploits the independence of actions in a system with asynchronous composition of processes \textcolor{red}{add citation here}. A third major advance is counterexample-guided abstraction refinement, which adaptively tries to find an appropriate level of refinement, not burdened with irrelevant detail that slows down verification \cite{Clarke2012}. 
+%
+Another promising approach to overcome state explosion problem is Bounded Model Checking (BMC)~\cite{DBLP:conf/tacas/BiereCCZ99}. BMC is a method that checks a model up to a given path in the path length. BMC algorithms traverse a finite state machine for a fixed number of steps, $ k $, and checks whether a property violation occurs with this bound. It uses Boolean Satisfiability (SAT) or Satisfiability Module Theories (SMT) solvers to check the generated formula from BMC. 
 
-Meanwhile, one of the most promising approaches to overcome state explosion problem is Bounded Model Checking (BMC)~\cite{DBLP:conf/tacas/BiereCCZ99}. BMC is a method that checks a model up to a given path in the path length. BMC algorithms traverse a finite state machine for a fixed number of steps, $ k $, and checks whether violation occurs with this bound. It uses Boolean Satisfiability (SAT) or Satisfiability Module Theories (SMT) solvers. SAT problem is a problem of determining whether there are certain conditions or interpretations that satisfy a given Boolean expression \cite{ClarkeHV18}. 
-SMT decides the satisfiability of first-order formulae using a combination of different background theories and thus generalizes propositional satisfiability by supporting uninterpreted functions, linear and non-linear arithmetic, bit-vectors, tuples, arrays, and other decidable first-order theories~\cite{ClarkeHV18}.
+SAT problem is a problem of determining whether there are certain conditions or interpretations that satisfy a given Boolean expression \cite{ClarkeHV18}. 
+SMT decides the satisfiability of a fragment of first-order formulae using a combination of different background theories and thus generalizes SAT by supporting uninterpreted functions, linear and non-linear arithmetic, bit-vectors, tuples, arrays, and other decidable first-order theories~\cite{ClarkeHV18}.
 The SAT or SMT solvers search the model for conditions (value of variables) that make the formula satisfiable. If a SAT or SMT solver finds a substitution for the formula/function then the substitute induces a counterexample and is said to be \textit{satisfiable}, i.e., it is satisfiable \textit{iff} the verified system contains errors.  
 %
 %CBMC is considering the best-known model verification tool to validate code in ANSI-C and C++ \cite{Kroening}. 
@@ -1439,14 +1441,14 @@ The SAT or SMT solvers search the model for conditions (value of variables) that
 %
 ESBMC is one of the most representatives bounded model checkers for embedded C/C++ software based on SMT solvers~\cite{esbmc2018}. %, which can use CBMC as front-end.
 %The use of SMT, instead of Boolean Satisfiability SAT from the original BMC, 
-ESBMC comes as an alternative to overcome limitations of the systems modeling, especially considering that the complexity is increasing and the SMT method has high-level and richer theories than SAT to represent models. 
+ESBMC comes as an alternative to overcome limitations of the system modeling, especially considering that the system complexity is increasing and SMT has richer theories than SAT to represent models. 
 
 %--------------------------------------
 \subsection{ESBMC}
 %--------------------------------------
-ESBMC (or Efficient SMT-based Bounded Model Checker) is an open source, permissively licensed (Apache 2), cross platform bounded model checking for C and C++ programs \cite{esbmc2018}. 
+ESBMC (or Efficient SMT-based Bounded Model Checker) is an open source, permissively licensed (Apache 2), cross platform bounded model checking for C and C++ programs~\cite{esbmc2018}, which supports the verification of LTL properties with bounded traces~\cite{DBLP:journals/sosym/MorseCN015}. 
 %
-ESBMC's verification flow can be summarized in three stages: (I) a front-end that can read and compile C/C++ code, where the formal specification of the system to be verified is first treated; (II) preprocessing steps to deal with the representation of the code, control flow and unwinding of loops, and the simplification of the algorithm, aiming to reduce the computational complexity; and finally (III) the solver, or SMT solver, where all the constraints and properties of the system to be verified are encoded into SMT and checked for satisfiability.
+ESBMC's verification flow can be summarized in three stages: (i) a front-end that can read and compile C/C++ code, where the formal specification of the system to be verified is first handled; (ii) preprocessing steps to deal with the representation of the code, control flow and unwinding of loops, and the model simplification, thereby aiming to reduce the verification effort; and finally (iii) the SMT solving stage, where all the constraints and properties of the system to be verified are encoded into SMT and checked for satisfiability.
 %
 %%The efficient SMT based model checker, is a software verification tool for C and C++ code bases. 
 %
