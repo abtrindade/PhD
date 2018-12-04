@@ -1728,7 +1728,8 @@ Next, representing the time of the day where PV generation is not possible anymo
 
 We have performed five case studies to evaluate our proposed verification method: (a) four PV systems (700 W inverter, with 48h autonomy) deployed in four different houses in an indigenous community (GPS coordinates 2$^{o}$44'50.0"S 60$^{o}$25'47.8"W) situated nearby Manaus (Brazil), with each house having a different power demand (house 1 = 253 W, house 2 = 263 W, house 3 = 283 W, and house 4 = 501 W); and (b) one case concerning a system deployed as an individual system in Manaus (GPS coordinates 3$^{o}$4'20.208"S 60$^{o}$0'30.168"W), supporting 915 W of the house's load (house 5 with 1,200 W inverter, and autonomy of just 6 h). 
 
-Note that the annual average temperature ($T$) in Manaus is from 23$^{o}$C to 32$^{o}$C; and irradiance ($G$) varies from 274 W/m$^{2}$ to 852 W/m$^{2}$ when there is sunlight (that information is provided in Lines 9 and 10 of Algorithm~\ref{alg:verification-algorithm}). Another characteristic of Manaus, based on historical weather data \cite{Temperature}, \cite{Irradiance}, is related to the fact that only during 8 hours of the day is possible to have PV generation, from 8:00h to 16:00h (that information is provided in Algorithm~\ref{alg:verification-algorithm} as well).
+Note that the annual average temperature ($T$) in Manaus is from 23$^{o}$C to 32$^{o}$C; and irradiance ($G$) varies from 274 W/m$^{2}$ to 852 W/m$^{2}$ when there is sunlight (that information is provided in Lines 9 and 10 of Algorithm~\ref{alg:verification-algorithm}). Another characteristic of Manaus, based on historical weather data %\cite{Temperature}, 
+\cite{Irradiance}, is related to the fact that only during 8 hours of the day is possible to have PV generation, from 8:00h to 16:00h (that information is provided in Algorithm~\ref{alg:verification-algorithm} as well).
 
 
 %------------------------------------------
@@ -1740,14 +1741,12 @@ Our experimental evaluation aims to answer two research questions:
 \item[RQ1] \textbf{(soundness)} Does our approach provide correct results?
 \item[RQ2] \textbf{(performance)} How does our approach compare against other existing tools?
 \end{enumerate}
-
-In order to evaluate the proposed verification method and its performance, we have considered five case studies and also compared its performance to the HOMER Pro tool. Every dweller, who owns a PV system, was interviewed to get information about his/her PV system during four months of use. This information was used to know possible flaws from every system in the field.
-
 All experiments were conducted on an otherwise idle Intel Core i7-2600 (8-cores), with 3.4 GHz and 64 GB of RAM, running Ubuntu 18.04.1 LTS 64-bits. Concerning our verification engine, ESBMC v5.1 was used with the SMT incremental mode\footnote{The command-line used to perform the verification is: \$ esbmc filename.c -\phantom{}-no-bounds-check -\phantom{}-no-pointer-check -\phantom{}-no-div-by-zero-check -\phantom{}-unwind 300 -\phantom{}-smt-during-symex -\phantom{}-smt-symex-guard -\phantom{}-z3}. 
 % enabled with the goal of reducing memory usage; 
 We have also used the SMT solver Z3 version 4.7.1~\cite{DeMoura}. %The experiments were performed without a predefined timeout.
 
-Experimental setup of HOMER Pro: all experiments were conducted on an otherwise idle Intel Core i5-4210 (4-cores), with 1.7 GHz and 4 GB of RAM, running Microsoft Windows 10; we have used HOMER Pro v3.12.0.
+In order to evaluate the proposed verification method and its performance, we have considered five case studies and also compared its performance to the HOMER Pro tool. %Every dweller, who owns a PV system, was interviewed to get information about his/her PV system during four months of use. This information was used to know possible flaws from every system in the field.
+Experimental setup of HOMER Pro: Intel Core i5-4210 (4-cores), with 1.7 GHz and 4 GB of RAM, running Microsoft Windows 10; we have used HOMER Pro v3.12.0.
 
 %------------------------------------------
 \subsection{Results}
@@ -1759,13 +1758,14 @@ Experimental setup of HOMER Pro: all experiments were conducted on an otherwise 
 %\item[RQ1] \textbf{(soundness)} Does our approach provide correct results?
 %\item[RQ2] \textbf{(performance)} How does our approach compare against other existing tools?
 %
-The description of our experimental results can be broken down into two parts: (a) the 1,200 W PV system (house 5) failed during the sizing check since the number of panels was \textit{incorrectly} sized; in particular, the counterexample provided by our verification engine indicated 3 PV panels in parallel and the actual project has 2 in series and 2 in parallel. This verification took approximately 63.3 hours to be performed. Surveying the owner of the 1,200 W system we identified that, in fact, the system does not meet the battery autonomy most of the time (mainly when all loads are turned on), thus affirming RQ1; this behavior is expected since the system was purchased as an off-the-shelf solution and not as a customized design for the electrical charges of the house; (b) For the 700 W PV systems of houses 1, 2, 3, and 4, the sizing check was successful during verification, but our verification engine has found flaws related to the battery autonomy, particularly when SOC reached a empty-battery level. Our verification engine identified those flaws (for all four houses) right after the first night-discharge cycle, i.e., before the solar system started to recharge the batteries. Our verification engine took approximately 409.3 hours to find this flaw in house 1; 611.2 hours for house 2; 615.8 hours for house 3, and 620.8 hours for house 4. These flaws were confirmed with the dwellers who own the systems by an interview process: at least once a month is usual the system to turn off, normally in raining or clouds days, thereby reaching the situation described in Step 3 of Table~\ref{table:controller}, further affirming RQ1; after the sun rises, the systems returns to normal condition operation. 
+%The description of our experimental results can be broken down into two parts: 
+(a) the 1,200 W PV system (house 5) failed during the sizing check since the number of panels was \textit{incorrectly} sized; in particular, the counterexample provided by our verification engine indicated 3 PV panels in parallel and the actual project has 2 in series and 2 in parallel. This verification took approximately 63.3 hours to be performed. Surveying the owner of the 1,200 W system we identified that, in fact, the system does not meet the battery autonomy most of the time (mainly when all loads are turned on), thus affirming RQ1; this behavior is expected since the system was purchased as an off-the-shelf solution and not as a customized design for the electrical charges of the house; (b) For the 700 W PV systems of houses 1, 2, 3, and 4, the sizing check was successful during verification, but our verification engine has found flaws related to the battery autonomy, particularly when SOC reached a empty-battery level. Our verification engine identified those flaws (for all four houses) right after the first night-discharge cycle, i.e., before the solar system started to recharge the batteries. Our verification engine took approximately 409.3 hours to find this flaw in house 1; 611.2 hours for house 2; 615.8 hours for house 3, and 620.8 hours for house 4. These flaws were confirmed with the dwellers who own the systems by an interview process: at least once a month is usual the system to turn off, normally in raining or clouds days, thereby reaching the situation described in Step 3 of Table~\ref{table:controller}, further affirming RQ1; after the sun rises, the systems returns to normal condition operation. 
 
 The same five case studies were evaluated by HOMER Pro. The simulation results showed that the project restrictions were met by four 700 W PV systems (house 1, 2, 3 and 4), without any indication of sizing error or even performance related issues. The case study that was unsuccessful during simulation was the 1,200 W (house 5); however, without any indication about the failures of this PV system. All the simulations took less than 5 seconds (each) to be performed by HOMER Pro.
 %
 Despite the divergence of results for the houses 1, 2, 3 and 4 w.r.t. our proposed approach, it is evident that the information collected from the dwellers indicate that our approach provides the correct evaluation of the PV system, thus answering RQ2. House 5 presented flaws from both tools; however, only our approach indicated which design error was responsible for the flaw (number of PV panels), further answering RQ2.
 %
-Note that a PV design always uses daily average values of sun hours to each site, with impact in the PV components. Those hours are based on historical data and, in field, it is not unusual to find days where that number of hours was not reached due to weather conditions. The season has impact since the case studies are from the rain forest, where clouds are always present. As a result, the identified flaws in houses 1, 2, 3, and 4, are justified once again.
+%Note that a PV design always uses daily average values of sun hours to each site, with impact in the PV components. Those hours are based on historical data and, in field, it is not unusual to find days where that number of hours was not reached due to weather conditions. The season has impact since the case studies are from the rain forest, where clouds are always present. As a result, the identified flaws in houses 1, 2, 3, and 4, are justified once again.
 %
 %We have evaluated five case studies in total using the HOMER Pro tool and our automated verification tool. Related to the HOMER Pro, the simulation, based on NASA data from the deployed systems (temperature and solar irradiance), shows that the restrictions were met by four 700 W PV systems (house 1, 2, 3 and 4), without any indication of sizing error or even performance. The case study that was unsuccessful during simulation was the 1,200 W (house 5); however, without any indication about the failures of this PV system. All the simulations took less than 5 seconds (each) to be performed.
 %
@@ -1790,57 +1790,50 @@ Note that a PV design always uses daily average values of sun hours to each site
 %---------------------------------------------------
 \subsection{Threats to Validity}
 %---------------------------------------------------
-We have reported a favorable assessment of the proposed method over a diverse set of real-world benchmarks. Nevertheless, we have also identified three threats to the validity of our results that can further be assessed.
+We have reported a favorable assessment of the proposed method. % over a diverse set of real-world benchmarks. 
+Nevertheless, we have also identified three threats to the validity of our results that can further be assessed.
 
-\textit{Model precision:} each component of the PV system is mathematically modelled, and the precision of the proposed method depends on the precision of that particular model. A careful evaluation in a PV laboratory to validate the model could add more reliability to the results produced by our method.
+\textit{Model precision:} each component of the PV system is mathematically modeled. %, and the precision of the proposed method depends on the precision of that particular model. 
+A careful evaluation in a PV laboratory to validate the model could add more reliability to the results produced by our method.
 
 \textit{Time step:} The run-time complexity of our proposed method is an issue; the time step of one hour can be further reduced to approximate the algorithm to the real-world scenario, where a solar irradiance and ambient temperature can change in fractions of minutes.
 
-\textit{Case studies:} Our case studies are performed only in Manaus, in particular in the south hemisphere. A more complete evaluation can be performed if other places around the world could become case studies.
+\textit{Case studies:} Our case studies are performed only in one municipality. A more complete evaluation can be performed if other places around the world could become case studies.
 
 %-------------------------------------
 \section{Conclusion and Future Work}
 \label{sec:Conclusions}
 %-------------------------------------
-
 We have described and evaluated an automated verification method to check whether a given PV system meets its specification using software model checking techniques. We have considered five case studies from real photovoltaic systems deployed in five different sites, ranging from $700$ W to $1,200$ W. Although this verification method takes longer than simulation methods, it is able to find specific conditions that lead to failures in a PV system previously validated by a commercial simulation tool. In particular, the proposed method was successful in finding sizing errors and indicating in which conditions a PV system can fail. 
 %New tests must be performed, in an improved setup (i.e., better computing performance) with the goal of obtaining verification results in shorter times than the ones obtained in this study. 
 As future work, the proposed method will be extended to start from a list of commercial equipment, where each equipment is verified and the final solution, which satisfies the project specification, is found, thus leading to an optimum sizing of PV systems. We will also consider other types of renewable energy and even hybrid ones to allow our method to design and verify typical rural electrification.
 %
 %It was shown that, although the time-consuming issue of the proposed automated verification tool, it overcomes the results of off-the-shelf tool that only simulate the results. The proposed tool was successful in find sizing errors and to indicate in which conditions a PV system can fails.
 % into an important instrument to complement the solar PV system design process, ensuring that it does not fail and meets the expected requirements. 
-
+%
 %Plus (need to think about it): verification in every-hour of a 48h cycle?, PV model math model can be improved, charge/discharge of batteries can be improved (is a simplified model), house's power consumption is not flat or constant, the dweller can buy more home appliances, synthesis need a data base of components, to test peak (surge) consumption (above the nominal), additional models for on-grid/off-grid farm, hybrid, and on-grid with batteries).
-
 % if have a single appendix:
 %\appendix[Proof of the Zonklar Equations]
 % or
 %\appendix  % for no appendix heading
 % do not use \section anymore after \appendix, only \section*
 % is possibly needed
-
 % use appendices with more than one appendix
 % then use \section to start each appendix
 % you must declare a \section before using any
 % \subsection or using \label (\appendices by itself
 % starts a section numbered zero.)
 %
-
-
 %\appendices
 %\section{Proof of the First Zonklar Equation}
 %Appendix one text goes here.
-
 % you can choose not to have a title for an appendix
 % if you want by leaving the argument blank
 %\section{}
 %Appendix two text goes here.
-
-
 % use section* for acknowledgment
 \section*{Acknowledgment}
 To Coventry University and Sustainable Amazonas Foundation (FAS) for the possibility to test real PV systems.
-
 % Can use something like this to put references on a page
 % by themselves when using endfloat and the captionsoff option.
 %\ifCLASSOPTIONcaptionsoff
@@ -1853,9 +1846,7 @@ To Coventry University and Sustainable Amazonas Foundation (FAS) for the possibi
 %\IEEEtriggeratref{8}
 % The "triggered" command can be changed if desired:
 %\IEEEtriggercmd{\enlargethispage{-5in}}
-
 % references section
-
 % can use a bibliography generated by BibTeX as a .bbl file
 % BibTeX documentation can be easily obtained at:
 % http://mirror.ctan.org/biblio/bibtex/contrib/doc/
@@ -1899,30 +1890,20 @@ received his BSc and MSc in Electrical Engineering from the Federal University o
     [{\includegraphics[width=1in,height=1.25in,clip,keepaspectratio]{lucas3por4}}]{Lucas Cordeiro}
 received his Ph.D. degree in Computer Science in 2011 from the University of Southampton, UK. Currently, he is a Senior Lecturer in the School of Computer Science at the University of Manchester, and leads the Systems and Software Verification laboratory. He is also a collaborator in the Postgraduate Program in Electrical Engineering and Informatics at the Federal University of Amazonas (UFAM), Brazil. Prior to joining the University of Manchester, he worked as a researcher at Oxford University / Diffblue and as an adjunct professor at UFAM; he also worked for 4 years as software engineer at industry. His work focuses on software model checking, automated testing, program synthesis, and embedded \& cyber-physical systems.
 \end{IEEEbiography}
-
 % insert where needed to balance the two columns on the last page with
 % biographies
 %\newpage
-
 %\begin{IEEEbiographynophoto}{Jane Doe}
 %Biography text here.
 %\end{IEEEbiographynophoto}
-
 % You can push biographies down or up by placing
 % a \vfill before or after them. The appropriate
 % use of \vfill depends on what kind of text is
 % on the last page and whether or not the columns
 % are being equalized.
-
 %\vfill
-
 % Can be used to pull up biographies so that the bottom of the last one
 % is flush with the other column.
 %\enlargethispage{-5in}
-
-
-
 % that's all folks
 \end{document}
-
-
