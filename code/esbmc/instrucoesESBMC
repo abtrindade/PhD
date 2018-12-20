@@ -53,3 +53,19 @@ criada função POW
 
  ./cbmc ~/Documents/PhD/code/codePVsystem_rev10.c --unwind 400 --z3 -DHOUSE5 > house5_cbmc_24082018.txt
 
+
+---------06/12/2018
+
+--quiet (para diminuir o arquivo de saída)
+time ./esbmc codePVsystem_rev9c.c --no-bounds-check --no-pointer-check --no-div-by-zero-check --quiet --unwind 400 --z3 -DHOUSE1 > house1_icomp09102018.txt
+
+
+---------no esbmc 6
+time ./esbmc codePVsystem_rev9c.c --falsification --interval-analysis --no-bounds-check --no-pointer-check --no-div-by-zero-check --quiet --z3 -DHOUSE1 > house1_icomp09102018.txt
+
+
+--------para gerar o SMT
+./esbmc arq.c --smtlib --output arq.smt
+
+./esbmc codePVsystem_rev9c.c --no-bounds-check --no-pointer-check --no-div-by-zero-check --smtlib --output arq.smt --unwind 2 --z3 -DHOUSE1 &
+
