@@ -1654,7 +1654,7 @@ Our experimental evaluation aims to answer two research questions:
 \item[RQ2] \textbf{(performance)} How does our approach compare against other existing tools?
 \end{enumerate}
 
-All experiments were conducted on an otherwise idle Intel octa core Xeon CPU E5-2640 with 2.4 GHz and 264 GB of RAM, running Ubuntu 18.04.1 LTS 64-bits. Concerning our verification engine, ESBMC v6.0.0 was used \footnote{The command-line used to perform the verification is: \$ esbmc filename.c -\phantom{}-no-bounds-check -\phantom{}-no-pointer-check -\phantom{}-no-div-by-zero-check -\phantom{}-unwind 300 \phantom{}-boolector}. 
+All experiments were conducted on an otherwise idle Intel octa core Xeon CPU E5-2640 with 2.4 GHz and 264 GB of RAM, running Ubuntu 18.04.1 LTS 64-bits. Concerning our verification engine, ESBMC v6.0.0 was used \footnote{The command-line used to perform the verification is: \$ esbmc filename.c -\phantom{}-no-bounds-check -\phantom{}-no-pointer-check -\phantom{}-no-div-by-zero-check -\phantom{}-unwind 300 -\phantom{}-boolector}. 
 % enabled with the goal of reducing memory usage; 
 We have also used the SMT solver Boolector version 2.4.1~\cite{Brummayer}. %The experiments were performed without a predefined timeout.
 
@@ -1680,10 +1680,10 @@ The description of our experimental results can be broken down into two parts: (
 \label{fig:loadcurve}
 \end{figure}
 
-The same five case studies were evaluated by HOMER Pro. The simulation results showed that the project restrictions were met by four 700 W PV systems (house 1, 2, 3 and 4), without any indication of sizing error or even performance related issues. The case study that was unsuccessful during simulation was the 1,200 W (house 5); however, without any indication about the failures of this PV system. All the simulations took less than 5 seconds (each) to be performed by HOMER Pro. Fig. \ref{fig:homerscreen} shows one of the screens presented by HOMER Pro software.
+The same five case studies were evaluated by HOMER Pro. The simulation results showed that the project restrictions were met by four 700 W PV systems (house 1, 2, 3 and 4), without any indication of sizing error or even performance related issues. The case study that was unsuccessful during simulation was the 1,200 W (house 5); however, without any indication about the failures of this PV system. All the simulations took less than 5 seconds (each) to be performed by HOMER Pro. Fig. \ref{fig:homerscreen} shows one of the screens presented by HOMER Pro software, specifically to house 1.
 
 \begin{figure}[h]
-\includegraphics[width=0.4\textwidth]{homer.png}
+\includegraphics[width=0.5\textwidth]{homer.png}
 \centering
 \caption{Homer simulation screen.}
 \label{fig:homerscreen}
