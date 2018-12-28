@@ -931,8 +931,9 @@ Using the maximum power point current (cf. ~\eqref{eq:Imfinal}) and the saturati
 a = \dfrac{q(V_{m,ref}-V_{oc,ref})}{Nk_{B}T} \dfrac{1}{ln \left( 1 - \dfrac{I_{m,ref}}{I_{sc,ref}}  \right) },
 \end{equation}
 
-\noindent where $V_{mref}$, $V_{oc,ref}$, $I_{m,ref}$, and $I_{sc,ref}$ are key cell values obtained under both actual cell temperature and solar irradiance conditions. %, usually provided by manufacturers; the PV generator model is now completely determined.
-%; it requires the actual cell temperature (or the air temperature), the actual solar irradiance and common data provided by manufacturers.
+\noindent where $V_{mref}$, $V_{oc,ref}$, $I_{m,ref}$, and $I_{sc,ref}$ are key cell values obtained under both actual cell temperature and solar irradiance conditions. %, usually provided by manufacturers; t
+
+The PV generator model is now completely determined. It requires the actual cell temperature (or the air temperature), the actual solar irradiance and common data provided by manufacturers.
 %
 %If the PV cells are in parallel, then there is a parallel array. Therefore, there will be a change at the $ I_{ph} $ and $ I_{0} $and the resulting current is given by Equation \ref{eq:Iarray}, as demonstrated in \cite{Saloux}.
 %
@@ -1410,13 +1411,15 @@ ESBMC exploits the standardized input language of SMT solvers (SMT-LIB\footnote{
 %It is worth mentioning that the steps described here are carried out shortly after the design of the solar photovoltaic system, as soon as the equipment and equipment specifications are defined; before buying and deploying them, as a way to ensure that the project will not fail. 
 %
 The flowchart of the proposed automated verification method is illustrated in Fig.~\ref{fig:flowchartgeneral}. 
-In Step 1, the PV input data (e.g., load power demand and load energy consumption) and the formulae to check the sizing project, the mathematical model, the limits of the weather non-deterministic variables, are all written as an ANSI-C code~\cite{ANSI2018}. In Step 2, the sizing check of the PV system takes place to make sure that the components were selected according to critical month method~\cite{Pinho}.
+
 \begin{figure}[h]
 \includegraphics[width=0.4\textwidth]{flowchart_verification5.png}
 \centering
 \caption{Flowchart of the proposed automated verification of PV systems.}
 \label{fig:flowchartgeneral}
 \end{figure}
+
+In Step 1, the PV input data (e.g., load power demand and load energy consumption) and the formulae to check the sizing project, the mathematical model, the limits of the weather non-deterministic variables, are all written as an ANSI-C code~\cite{ANSI2018}. In Step 2, the sizing check of the PV system takes place to make sure that the components were selected according to critical month method~\cite{Pinho}. The equations to check the PV sizing were not presented at this paper, however the standard from Engineering Manual was the reference~\cite{Pinho}.
 %
 In Step 3, weather variables (e.g., solar irradiance and ambient temperature) will be systematically explored by our verification engine based on maximum and minimum values from the site, where the PV system will be deployed. 
 %As a consequence, all the formulae of the employed mathematical models will also be updated. 
@@ -1650,9 +1653,10 @@ Our experimental evaluation aims to answer two research questions:
 \item[RQ1] \textbf{(soundness)} Does our approach provide correct results?
 \item[RQ2] \textbf{(performance)} How does our approach compare against other existing tools?
 \end{enumerate}
-All experiments were conducted on an otherwise idle Intel Core i7-2600 (8-cores), with 3.4 GHz and 64 GB of RAM, running Ubuntu 18.04.1 LTS 64-bits. Concerning our verification engine, ESBMC v5.1 was used with the SMT incremental mode\footnote{The command-line used to perform the verification is: \$ esbmc filename.c -\phantom{}-no-bounds-check -\phantom{}-no-pointer-check -\phantom{}-no-div-by-zero-check -\phantom{}-unwind 300 -\phantom{}-smt-during-symex -\phantom{}-smt-symex-guard -\phantom{}-z3}. 
+
+All experiments were conducted on an otherwise idle Intel octa core Xeon CPU E5-2640 with 2.4 GHz and 264 GB of RAM, running Ubuntu 18.04.1 LTS 64-bits. Concerning our verification engine, ESBMC v6.0.0 was used \footnote{The command-line used to perform the verification is: \$ esbmc filename.c -\phantom{}-no-bounds-check -\phantom{}-no-pointer-check -\phantom{}-no-div-by-zero-check -\phantom{}-unwind 300 \phantom{}-boolector}. 
 % enabled with the goal of reducing memory usage; 
-We have also used the SMT solver Z3 version 4.7.1~\cite{DeMoura}. %The experiments were performed without a predefined timeout.
+We have also used the SMT solver Boolector version 2.4.1~\cite{Brummayer}. %The experiments were performed without a predefined timeout.
 
 In order to evaluate the proposed verification method and its performance, we have considered five case studies and also compared its performance to the HOMER Pro tool. %Every dweller, who owns a PV system, was interviewed to get information about his/her PV system during four months of use. This information was used to know possible flaws from every system in the field.
 Experimental setup of HOMER Pro: Intel Core i5-4210 (4-cores), with 1.7 GHz and 4 GB of RAM, running Microsoft Windows 10; we have used HOMER Pro v3.12.0.
@@ -1667,12 +1671,25 @@ Experimental setup of HOMER Pro: Intel Core i5-4210 (4-cores), with 1.7 GHz and 
 %\item[RQ1] \textbf{(soundness)} Does our approach provide correct results?
 %\item[RQ2] \textbf{(performance)} How does our approach compare against other existing tools?
 %
-%The description of our experimental results can be broken down into two parts: 
-(a) the 1,200 W PV system (house 5) failed during the sizing check since the number of panels was \textit{incorrectly} sized; in particular, the counterexample provided by our verification engine indicated 3 PV panels in parallel and the actual project has 2 in series and 2 in parallel. This verification took approximately 63.3 hours to be performed. Surveying the owner of the 1,200 W system we identified that, in fact, the system does not meet the battery autonomy most of the time (mainly when all loads are turned on), thus affirming RQ1; this behavior is expected since the system was purchased as an off-the-shelf solution and not as a customized design for the electrical charges of the house; (b) For the 700 W PV systems of houses 1, 2, 3, and 4, the sizing check was successful during verification, but our verification engine has found flaws related to the battery autonomy, particularly when SOC reached a empty-battery level. Our verification engine identified those flaws (for all four houses) right after the first night-discharge cycle, i.e., before the solar system started to recharge the batteries. Our verification engine took approximately 409.3 hours to find this flaw in house 1; 611.2 hours for house 2; 615.8 hours for house 3, and 620.8 hours for house 4. These flaws were confirmed with the dwellers who own the systems by an interview process: at least once a month is usual the system to turn off, normally in raining or clouds days, thereby reaching the situation described in Step 3 of Table~\ref{table:controller}, further affirming RQ1; after the sun rises, the systems returns to normal condition operation. 
+The description of our experimental results can be broken down into two parts: (a) the 1,200 W PV system (house 5) failed during the sizing check since the number of panels was \textit{incorrectly} sized; in particular, the counterexample provided by our verification engine indicated 3 PV panels in parallel and the actual project has 2 in series and 2 in parallel. This verification took approximately 0.57 hours to be performed. In order to validate this possible flaw, it was surveyed the owner of the 1,200 W system; we identified that, in fact, the system does not meet the battery autonomy most of the time (mainly when all loads are turned on), and this was double checked with the monitoring system from the charge controller from the manufacturer who showed that the maximum power or surge power were not exceeded, thus affirming RQ1; this behavior is expected since the system was purchased as an off-the-shelf solution and not as a customized design for the electrical charges of the house; (b) For the 700 W PV systems of houses 2, 3, and 4, the sizing check was successful during verification, but our verification engine has found flaws related to the battery autonomy, particularly when SOC reached a empty-battery level. Our verification engine identified those flaws (for those three houses) right after the first night-discharge cycle, i.e., before the solar system started to recharge the batteries. Our verification engine took approximately 5.1 hours to find this flaw in house 2; 5.8 hours for house 3, and 4.4 hours for house 4. These flaws were confirmed with the dwellers who own the systems by an interview process and from a local monitoring system with the Raspberry Pi controller: at least once a month is usual the system to turn off, normally in raining or clouds days, thereby reaching the situation described in Step 3 of Table~\ref{table:controller}, further affirming RQ1; after the sun rises, the systems returns to normal condition operation. One more time the flaws were not caused by misuse of the system by the dwellers. Fig. \ref{fig:loadcurve} shows the monitoring result for the load curve of house 2 from June to July of 2018 (5 weeks), without undesired peaks from power demand of even unexpected energy consumption. The house 1 had an inconclusive result with the automated verification, because the solver did not presented any result from the SMT verification.
 
-The same five case studies were evaluated by HOMER Pro. The simulation results showed that the project restrictions were met by four 700 W PV systems (house 1, 2, 3 and 4), without any indication of sizing error or even performance related issues. The case study that was unsuccessful during simulation was the 1,200 W (house 5); however, without any indication about the failures of this PV system. All the simulations took less than 5 seconds (each) to be performed by HOMER Pro.
+\begin{figure}[h]
+\includegraphics[width=0.4\textwidth]{loadcurve.png}
+\centering
+\caption{Five weeks monitored load curve from House 1.}
+\label{fig:loadcurve}
+\end{figure}
+
+The same five case studies were evaluated by HOMER Pro. The simulation results showed that the project restrictions were met by four 700 W PV systems (house 1, 2, 3 and 4), without any indication of sizing error or even performance related issues. The case study that was unsuccessful during simulation was the 1,200 W (house 5); however, without any indication about the failures of this PV system. All the simulations took less than 5 seconds (each) to be performed by HOMER Pro. Fig. \ref{fig:homerscreen} shows one of the screens presented by HOMER Pro software.
+
+\begin{figure}[h]
+\includegraphics[width=0.4\textwidth]{homer.png}
+\centering
+\caption{Homer simulation screen.}
+\label{fig:homerscreen}
+\end{figure}
 %
-Despite the divergence of results for the houses 1, 2, 3 and 4 w.r.t. our proposed approach, it is evident that the information collected from the dwellers indicate that our approach provides the correct evaluation of the PV system, thus answering RQ2. House 5 presented flaws from both tools; however, only our approach indicated which design error was responsible for the flaw (number of PV panels), further answering RQ2.
+Despite the divergence of results for the houses 2, 3 and 4 w.r.t. our proposed approach, it is evident that the information collected from the dwellers and from the monitoring systems indicate that our approach provides the correct evaluation of the PV system, thus answering RQ2. House 5 presented flaws from both tools; however, only our approach indicated which design error was responsible for the flaw (number of PV panels), further answering RQ2.
 %
 %Note that a PV design always uses daily average values of sun hours to each site, with impact in the PV components. Those hours are based on historical data and, in field, it is not unusual to find days where that number of hours was not reached due to weather conditions. The season has impact since the case studies are from the rain forest, where clouds are always present. As a result, the identified flaws in houses 1, 2, 3, and 4, are justified once again.
 %
@@ -1742,7 +1759,7 @@ As future work, the proposed method will be extended to start from a list of com
 %Appendix two text goes here.
 % use section* for acknowledgment
 \section*{Acknowledgments}
-To Coventry University and Sustainable Amazonas Foundation (FAS) for the possibility to test real PV systems.
+To Coventry University and Sustainable Amazonas Foundation (FAS) for the possibility to use real PV systems.
 % Can use something like this to put references on a page
 % by themselves when using endfloat and the captionsoff option.
 %\ifCLASSOPTIONcaptionsoff
