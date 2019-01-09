@@ -1,6 +1,6 @@
 /* --------------------------------------------------------------------------------------------------------
   Here is the code that performs the automated verification of a stand-alone solar photovoltaic system
----------------------------------------------------------------------by Alessandro Trindade, DEZ 2018 */
+---------------------------------------------------------------------by Alessandro Trindade, JAN 2019 */
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -134,6 +134,8 @@
 #define Imref 8.78
 #define Vmref 37.0
 #define Pmref 325.0
+#define Vmpptmin 33.7
+#define Imp 6.98
 #define np 0.1672
 #define Insol 4.92 //(kWh/m2/day CRESESB 2016)
 #define Ap 1.94432 //(panel area in m2, 1.96x0.992)
@@ -142,6 +144,7 @@
 //controller
 #define nc 0.98
 #define IC 35.0
+#define VCmax 145.0
 
 //global variables
 int Parray, Iarray, Varray;
@@ -215,22 +218,28 @@ void pvmodel (int, int);
 //function that generates the MPPT values (Varray and Iarray) from the PV panel, 
 // considering values of solar irradiance(G) and ambient temperature
 void pvmodel (int Gf, int AMBtemperaturef){
-	float Iphref, kb, q, T, Tk, VT, a, Io, Iph, I, V, Vmax, Imax, Pmax;
+	float Iphref, T, Tk, VT, a, Io, Iph, I, V, Vmax, Imax, Pmax;
+// float kb, q;
+	float kbq, qkb;
 	Iphref = Iscref; //mathematical approximation from the model
 	//set up of parameters
-	kb = 1.3806503*pow(10,-23);  //Boltzmann constant in Joule
-	q = 1.60217646*pow(10,-19);  //absolute value of the electron's charge
+//	kb = 1.3806503*pow(10,-23);  //Boltzmann constant in Joule
+//	q = 1.60217646*pow(10,-19);  //absolute value of the electron's charge
+	kbq = 0.00008617342311;
+	qkb = 11604.5059346;
 	T= AMBtemperaturef + Gf*(NOCT-20)/800; //temperature of the p-n junction or cell temperature
 
 	Tk = T + 273.15; //is the temperaute T in Kelvin
-	VT = kb*Tk/q;
+//	VT = kb*Tk/q;
+	VT = kbq*Tk;
 
 	//a ideality/quality factor
-	a = q*(Vmref-Vocref)/(N*kb*Tk*logESBMC(1-Imref/Iscref));
-
+//	a = q*(Vmref-Vocref)/(N*kb*Tk*logESBMC(1-Imref/Iscref));
+	a = qkb*(Vmref-Vocref)/(N*Tk*logESBMC(1-Imref/Iscref));
 
 	//Io = reverse saturation current of the diode
-	Io = (Iscref+mii*(Tk-Tref))/(expESBMC (q*(Vocref+miv*(Tk-Tref))/(a*N*kb*Tk)) - 1);
+//	Io = (Iscref+mii*(Tk-Tref))/(expESBMC (q*(Vocref+miv*(Tk-Tref))/(a*N*kb*Tk)) - 1);
+	Io = (Iscref+mii*(Tk-Tref))/(expESBMC (qkb*(Vocref+miv*(Tk-Tref))/(a*N*Tk)) - 1);
 
 	//Iph = photocurrent delivered from the model
 	Iph = Gf * (Iphref+ mii*(Tk-Tref))/Gref;
@@ -260,7 +269,7 @@ void pvmodel (int Gf, int AMBtemperaturef){
 
 int sizing_check(void){
 	char NTP;
-	float Ecorrected, Ep, NTPmin, NPSmin, NPPmin, Cbank, NBtotal, ICmin, Iscamb, NBSmin, NBPmin; 
+	float Ecorrected, Ep, NTPmin, NPSmin1, NPSmin2, NPPmin, Cbank, NBtotal, ICmin, Iscamb, NBSmin, NBPmin; 
 
 	//Econsumption = energy consumed in one day from the house
 	Ecorrected = Econsumption / (nb*nc*ni);
@@ -273,11 +282,15 @@ int sizing_check(void){
 	NTP = NPS * NPP;
 	assert (NTP >= NTPmin);
 
-	NPSmin = Vsystem / Vmref;
-	//NPPmin = NTPmin/NPSmin;
+//	NPSmin = Vsystem / Vmref;
+//	NPPmin = NTPmin/NPSmin;
+	NPSmin1 = (Vsystem + 1) / Vmref;
+	NPSmin2 = VCmax / Vmpptmin;
 
-	assert (NPS >= NPSmin);
-	//assert (NPP >= NPPmin);
+	NPPmin = Phouse / (NPS * Pmref);
+
+	assert ((NPS >= NPSmin1) && (NPS <= NPSmin2));
+	assert (NPP >= NPPmin);
 
 	//battery check
 //	Cbank = Ecorrected * auton / (Vsystem*(float)((float)(100-SOClimit)/100.0f));
