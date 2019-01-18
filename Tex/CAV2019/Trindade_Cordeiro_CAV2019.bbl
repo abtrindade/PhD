@@ -1,0 +1,172 @@
+\begin{thebibliography}{10}
+\providecommand{\url}[1]{\texttt{#1}}
+\providecommand{\urlprefix}{URL }
+\providecommand{\doi}[1]{https://doi.org/#1}
+
+\bibitem{Abate2017}
+Abate, A.: Verification of networks of smart energy systems over the cloud. In:
+  Bogomolov, S., Martel, M., Prabhakar, P. (eds.) Num. Soft. Verif. vol. LNCS
+  10152, pp. 1--14 (2017)
+
+\bibitem{Akram2018}
+Akram, W., Niazi, M.A.: A formal specification framework for smart grid
+  components. Complex Adaptive Systems Modeling  \textbf{6}(1), ~5 (Sep 2018)
+
+\bibitem{Benatiallah2017}
+Benatiallah, A., Benatiallah, D., Ghaitaoui, T., Harrouz, A., Mansouri, S.:
+  Modelling and simulation of renewable energy systems in {A}lgeria. Int. J. of
+  Sc. and App. Inf. Tech  \textbf{7}(1),  17--22 (2017)
+
+\bibitem{CEGAR}
+Beyer, D., L\"{o}we, S.: 16th international conference on Fund. Appr. to Soft.
+  Eng., chap. Explicit-State software model checking based on {CEGAR} and
+  interpolation. Springer-Verlag (2013)
+
+\bibitem{DBLP:conf/tacas/BiereCCZ99}
+Biere, A., Cimatti, A., Clarke, E.M., Zhu, Y.: Symbolic {M}odel {C}hecking
+  without {BDD}s. In: {TACAS}. LNCS, vol.~1579, pp. 193--207 (1999)
+
+\bibitem{NRELBlair}
+Blair, N., Dobos, A., Freeman, J., Neises, T., Wagner, M.: System {A}dvisor
+  {M}odel, {SAM} 2014.1.14: {G}eneral {D}escription. Tech. rep., National
+  Renewable Energy Laboratory, Colorado (2014)
+
+\bibitem{Brummayer}
+Brummayer, R., Biere, A.: Boolector: An efficient {SMT} solver for bit-vectors
+  and arrays. In: Tools and Alg. for the Const. and An. of Sys. (TACAS). vol.
+  LNCS 5505, pp. 174--177 (2009)
+
+\bibitem{Cheng2015}
+Cheng, B., Wang, X., Liu, J., Du, D.: Modana: An integrated framework for
+  modeling and analysis of energy-aware {CPS}s. In: IEEE 39th Annual Computer
+  Software and Applications Conference (2015)
+
+\bibitem{Clarke2012}
+Clarke, E., Klieber, W., Milo{\v{s} Nov{\'a}{\v{c}}ek}, Zuliani, P.: Model
+  Checking and the State Explosion Problem, pp. 1--30. Springer, Berlin (2012)
+
+\bibitem{ClarkeHV18}
+Clarke, E.M., Henzinger, T.A., Veith, H.: Introduction to model checking. In:
+  Handbook of Model Checking., pp. 1--26 (2018)
+
+\bibitem{Copetti}
+Copetti, J., Lorenzo, E., Chenlo, F.: A general battery model for {PV} system
+  simulation. Prog. in Photovoltaics: Res. and App.  \textbf{1}(4),  283--292
+  (1993). \doi{10.1002/pip.4670010405}
+
+\bibitem{NRELDobos}
+Dobos, A.: P{VW}atts {V}ersion 5 {M}anual. Tech. rep., National Renewable
+  Energy Laboratory, Colorado (2014)
+
+\bibitem{Driouich2018}
+Driouich, Y., Parente, M., Tronci, E.: A methodology for a complete simulation
+  of cyber-physical energy systems. In: IEEE Work. on Envir., Energ., and
+  Struc. Monit. Syst. (EESMS) (2018)
+
+\bibitem{Irradiance}
+EnergyPlus: Weather data by location, \url{https://goo.gl/A82Jqh}, acessed:
+  09.07.2018
+
+\bibitem{esbmc2018}
+Gadelha, M., Monteiro, F., Morse, J., Cordeiro, L., Fischer, B., Nicole, D.:
+  {ESBMC} 5.0: An industrial-strength {C} model checker. In: $33^{rd}$ ACM/IEEE
+  Int. Conf. on Aut. Soft. Engin. (ASE'18). pp. 888--891. ACM, New York, NY,
+  USA (2018). \doi{10.1145/3238147.3240481}
+
+\bibitem{Gow1999}
+Gow, J., Manning, C.: Development of a photovoltaic array model for use in
+  power-electronics simulation studies. In: Proceedings of the 14th IEE
+  Electric Power Applications Conference. vol.~146, pp. 193--200 (1999)
+
+\bibitem{Hansen}
+Hansen, A., S$\o$rensen, P., Hansen, L., Bindner, H.: Models for a stand-alone
+  PV system. No.~1219, Forskningscenter Risoe (2001)
+
+\bibitem{Automizer2018}
+Heizmann, M., Chen, Y.F., Dietsch, D., Greitschus, M., Hoenicke, J., Li, Y.,
+  Nutz, A., Musa, B., Schilling, C., Schindler, T., Podelski, A.: TACAS 2018,
+  vol. LNCS 10806, chap. Ultimate Automizer and the Search for Perfect
+  Interpolants, pp. 447--451. Springer (2018)
+
+\bibitem{Hussein2012}
+Hussein, M., {Leal Filho}, W.: Analysis of energy as a precondition for
+  improvement of living conditions and poverty reduction in sub-{S}aharan
+  {A}frica. In: Scientific Research and Essays. vol.~7, pp. 2656--2666 (2012)
+
+\bibitem{IEAweo2018}
+{IEA International Energy Agency}: World Energy Outlook 2018. IEA, Paris (2018)
+
+\bibitem{ANSI2018}
+{International Organization for Standardization}: {ISO/IEC} 9899:2018
+  {I}nformation {T}echnology -- {P}rogramming {L}anguages -- {C},
+  \url{https://www.iso.org/standard/74528.html.}, acessed: 14.11.2018
+
+\bibitem{Kroening}
+Kroening, D., Tautschnig, M.: {CBMC} – {C} {B}ounded {M}odel {C}hecker
+  (competition contribution). In: Tools and Alg. for the Const. and An. of Sys.
+  (TACAS). vol. LNCS 8413, pp. 389--391 (2014)
+
+\bibitem{Mills}
+Mills, A., Al-Hallaj, S.: Simulation of hydrogen-based hybrid systems using
+  {H}ybrid2. Int. J. of Hydrog. Energy  \textbf{29}(10),  991--999 (2004)
+
+\bibitem{Mohanty}
+Mohanty, P., Sharma, K., Gujar, M., Kolhe, M., Azmi, A.: Solar Photovoltaic
+  System Applications, chap. PV System Design for Off-Grid Applications, pp.
+  49--83. Springer International Publishing (2016)
+
+\bibitem{Morse2015}
+Morse, J.: Expressive and efficient bounded model checking of concurrent
+  software. Ph.D. thesis, University of Southampton (2015)
+
+\bibitem{DBLP:journals/sosym/MorseCN015}
+Morse, J., Cordeiro, L.C., Nicole, D.A., Fischer, B.: Model checking {LTL}
+  properties over {ANSI-C} programs with bounded traces. Software and System
+  Modeling  \textbf{14}(1),  65--81 (2015)
+
+\bibitem{DeMoura}
+Moura, L.D., Bj$\o$rner, N.: Z3: {A}n {E}fficient {SMT} {S}olver. In: Tools and
+  Alg. for the Const. and An. of Sys. (TACAS). vol. LNCS 4963, pp. 337--340
+  (2008)
+
+\bibitem{Pinho}
+Pinho, J., Galdino, M.: Manual de Engenharia para Sistemas Fotovoltaicos. CEPEL
+  – CRESESB, Rio de Janeiro/RJ (2014)
+
+\bibitem{Pradhan}
+Pradhan, S., Singh, S., Choudhury, M., Dwivedy, D.: Study of cost analysis and
+  emission analysis for grid connected {PV} systems using retscreen 4
+  simulation software. Int. J. of Eng. Res. \& Tech.  \textbf{4}(4),  203--207
+  (2015)
+
+\bibitem{Ross}
+Ross, R.: Flat-plate photovoltaic array design optimization. In: San~Diego, C.
+  (ed.) 14th IEEE Photovoltaic Specialists Conference. pp. 1126--1132 (1980)
+
+\bibitem{Saloux}
+Saloux, E., Teyssedou, A., Sorin, M.: Explicit model of photovoltaic panels to
+  determine voltages and currents at the maximum power point. Solar Energy
+  \textbf{85}(5),  713--722 (2011)
+
+\bibitem{DBLP:journals/fac/SchrammelKBMTB17}
+Schrammel, P., Kroening, D., Brain, M., Martins, R., Teige, T.,
+  Bienm{\"{u}}ller, T.: Incremental bounded model checking for embedded
+  software. Formal Asp. Comput.  \textbf{29}(5),  911--931 (2017)
+
+\bibitem{Sengupta2015}
+Sengupta, A., Mukhopadhyay, S., Sinha, A.: Automated verification of power
+  system protection schemes—{P}art {I}: Modeling and specifications. In: IEEE
+  Tran. on Power Del. vol.~30, pp. 2077--2086 (2015)
+
+\bibitem{Swarnkar}
+Swarnkar, N., Gidwani, L., Sharma, R.: An application of {HOMER P}ro in
+  optimization of hybrid energy system for electrification of technical
+  institute. In: Int. Conf. on Energ. Eff. Tech. for Sust. (ICEETS). pp. 56--61
+  (2016)
+
+\bibitem{Yukseletall2012}
+Yüksel, E., Zhu, H., Nielson, H.R., Huang, H., Nielson, F.: Modelling and
+  analysis of smart grid: A stochastic model checking case study. In: Sixth
+  International Symposium on Theoretical Aspects of Software Engineering (2012)
+
+\end{thebibliography}

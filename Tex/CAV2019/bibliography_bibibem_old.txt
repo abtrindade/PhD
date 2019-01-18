@@ -1,0 +1,56 @@
+\begin{thebibliography}{8}
+
+\bibitem{IEAeao2017}
+BOOK IEA International Energy Agency (2017), Energy Access Outlook-2017, OECD/IEA, Paris. 
+
+\bibitem{Jager-Waldau}
+J\"{a}ger-Waldau, A.: Snapshot of photovoltaics - February 2018. EPJ Photovoltaics \textbf{9}, 6 (2018)
+
+\bibitem{IEAwes2018}
+Book International Energy Agency, Key world energy statistics 2018 (2018).
+
+\bibitem{IEAweo2018}
+BOOK IEA (2018), World Energy Outlook 2018, IEA, Paris, https://doi.org/10.1787/weo-2018-en.
+
+\bibitem{Hussein2012}
+Hussein, M. and Leal Filho, W.: Analysis of energy as a precondition for improvement of living conditions and poverty reduction in sub-Saharan Africa. Scientific Research and Essays Vol. \textbf{7}(30), 2656--2666, (2012)
+
+\bibitem{cbmc}
+Clarke, E., Kroening, D., Lerda, F.: A tool for checking ANSI-C programs. In: Jensen, K., Podelski, A. (eds.) TACAS 2004. LNCS, vol. 2988, pp. 168–176. Springer,
+Heidelberg (2004)
+
+\bibitem{Automizer2018}
+Heizmann M. et al. (2018) Ultimate Automizer and the Search for Perfect Interpolants. In: Beyer D., Huisman M. (eds) Tools and Algorithms for the Construction and Analysis of Systems. TACAS 2018. Lecture Notes in Computer Science, vol 10806. Springer, Cham
+
+\bibitem{CEGAR}
+Dirk Beyer and Stefan Löwe. 2013. Explicit-State software model checking based on CEGAR and interpolation. In Proceedings of the 16th international conference on Fundamental Approaches to Software Engineering (FASE'13), Vittorio Cortellessa and Dániel Varró (Eds.). Springer-Verlag, Berlin, Heidelberg, 146-162.
+
+\bibitem{Sengupta2015}
+Automated Verification of Power System Protection Schemes—Part I: Modeling and Specifications (2015) A. Sengupta ; S. Mukhopadhyay ; A. K. Sinha Fonte: https://ieeexplore.ieee.org/document/6975219
+
+\bibitem{Abate2016}
+Verification of Networks of Smart Energy Systems over the Cloud, ABATE 2016
+
+\bibitem{Yukseletall2012}
+Modelling and Analysis of Smart Grid: A Stochastic Model Checking Case Study (2012)
+Ender Yüksel ; Huibiao Zhu ; Hanne Riis Nielson ; Heqing Huang ; Flemming Nielson https://ieeexplore.ieee.org/document/6269624
+
+\bibitem{Gomez2014}
+A Modelica-Based Execution and Simulation Engine for Automated Power System Model Validation
+(2014) Francisco Gomez and Vanfretti and Olsen
+
+\bibitem{Driouich2018}
+A methodology for a complete simulation of Cyber-Physical Energy Systems (2018)
+Youssef Driouich ; Mimmo Parente ; Enrico Tronci. https://ieeexplore.ieee.org/document/8405826
+
+\bibitem{Cheng2015}
+Modana: An Integrated Framework for Modeling and Analysis of Energy-Aware CPSs  Bei Cheng ; Xiao Wang ; Jufu Liu ; Dehui Du (2015). https://ieeexplore.ieee.org/document/7273610
+
+\bibitem{Akram2018}
+A Formal Specification Framework for Smart Grid Components. Waseem Akram and Muaz A. Niaz. Complex Adapt Syst Model  (2018)
+
+\bibitem{IEA2017}
+New Generation Computational Tools for Building \& Community Energy Systems - Annex 60 Final Report. September 2017 - Michael Wetter and Christoph van Treeck, The International Energy Agency (IEA)
+
+
+\end{thebibliography}
