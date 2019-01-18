@@ -15,8 +15,7 @@
 //case studies concerning the houses at Nova Esperanca (Star Energy Project): 510, 253, 263, and 283W. But with the same PV system (700W)
 //case study at urban area of 915W of demand and 4.88 kWh of energy
 
-//Francisco's house 501W and 3.9kWh
-#ifdef HOUSE1 
+//Francisco's house 501W and 3.9kWh HOUSE1 
   #define Phouse 501
   #define Psurge 501
   #define Econsumption 3900
@@ -31,72 +30,6 @@
   #define NPS 3
   #define VC 24  //controller voltage
   #define Vsystem 24  //DCbus
-#elif HOUSE2
-  //Aldovar's house 253W and 3.6kWh
-  #define Phouse 253
-  #define Psurge 722
-  #define Econsumption 3600
-  #define PACref 700
-  #define MAXACref 1600
-  #define loadcurve {136, 136, 136, 136, 136, 136, 67, 67, 184, 184, 184, 184, 184, 67, 67, 67, 67, 67, 253, 253, 253, 253, 253, 136}
-  #define NBS 2
-  #define NBP 2
-  #define capacity 220
-  #define auton 48
-  #define NPP 1  
-  #define NPS 3
-  #define VC 24  //controller voltage
-  #define Vsystem 24  //DCbus
-#elif HOUSE3
-  //Sandriane's house 263W and 2.5kWh
-  #define Phouse 263
-  #define Psurge 732
-  #define Econsumption 2500
-  #define PACref 700
-  #define MAXACref 1600
-  #define loadcurve {113,113,113,113,113,113,67,67,217,97,97,97,97,97,97,97,97,97,263,113,113,113,113,113}
-  #define NBS 2
-  #define NBP 2
-  #define capacity 220
-  #define auton 48
-  #define NPP 1  
-  #define NPS 3
-  #define VC 24  //controller voltage
-  #define Vsystem 24  //DCbus
-#elif HOUSE4
-  //Marilene's house 322W and 4.3 kWh
-  #define Phouse 322
-  #define Psurge 896
-  #define Econsumption 4300
-  #define PACref 700
-  #define MAXACref 1600
-  #define loadcurve {207,207,207,135,135,135,66,66,161,161,233,253,248,66,66,66,66,66,302,317,322,302,302,207}
-  #define NBS 2
-  #define NBP 2
-  #define capacity 220
-  #define auton 48
-  #define NPP 1  
-  #define NPS 3
-  #define VC 24  //controller voltage
-  #define Vsystem 24  //DCbus
-#elif HOUSE5
-  //Alessandro's house 915W and 4.88 kWh
-  #define Phouse 915
-  #define Psurge 980
-  #define Econsumption 4880
-  #define PACref 1200
-  #define MAXACref 2400
-  #define loadcurve {45,16,16,16,16,16,0,0,0,72,72,222,150,150,0,0,72,72,814,814,814,742,742,16}
-  #define NBS 4
-  #define NBP 1
-  #define capacity 120
-  #define auton 6
-  #define NPP 2  
-  #define NPS 2
-  #define VC 48  //controller voltage
-  #define Vsystem 48  //DCbus
-#endif
-
 //requirements/restrictions
 
 #define bankcapacity (capacity*NBP)
