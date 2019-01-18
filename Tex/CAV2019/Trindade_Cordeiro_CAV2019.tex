@@ -4,6 +4,7 @@
 %
 \documentclass[runningheads]{llncs}
 %
+\usepackage{xcolor}
 \usepackage{graphicx}
 \usepackage{makecell}
 \usepackage{algorithm,algorithmic}
@@ -319,6 +320,10 @@ Next, representing the time of the day where PV generation is not possible anymo
  \label{alg:verification-algorithm}
  \end{algorithm}
 
+
+\textcolor{red}{shall we provide further details about the case studies?}
+
+
 \section{Experimental Evaluation} 
 \label{sec:results}
 %------------------------------------------
@@ -353,6 +358,8 @@ Concerning the low-end configuration: ESBMC v5.1 was used with the SMT increment
 
 In order to evaluate the verification methods and its performance, we have considered five case studies and also compared its performance to the HOMER Pro tool. %Every dweller, who owns a PV system, was interviewed to get information about his/her PV system during four months of use. This information was used to know possible flaws from every system in the field.
 Experimental setup of HOMER Pro: Intel Core i5-4210 (4-cores), with 1.7 GHz and 4 GB of RAM, running Microsoft Windows 10; we have used HOMER Pro v3.12.0. 
+
+\textcolor{red}{What are the command-lines used for all tools? Versions? Solvers? Solvers versions?}
 
 %------------------------------------------
 \subsection{Results}
