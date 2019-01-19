@@ -110,31 +110,6 @@ Formal verification is a systematic approach that applies mathematical reasoning
 %
 The process of model checking can be split into three main components: modeling, specification, and verification method. In modeling, a model (normally mathematical) of the system is created; in specification, normally a list of properties to be satisfied by the system is established, i.e., the requirements, normally  expressed in a temporal logic form as Computational Tree Logic (CTL) or Linear Temporal Logic (LTL).
 %
-%\begin{itemize}
-%\item In modeling, a model (normally mathematical) of the system is created; 
-%\item In specification, normally a list of properties to be satisfied by the system is established, i.e., the requirements, as reliability to performance for example. \item Normally is expressed in temporal logic form ($CTL$); 
-%\item The model checking is the verification method itself. 
-%\end{itemize}
-%
-%%%%%
-%%%%%The model checking algorithm can be described as \cite{ClarkeHV18}:  (i) Given the model $M$ and a CTL (or LTL) formula $ \phi $ as input;  (ii) Model checking algorithm provides all the states of model $ M $ which satisfies $ \phi $;  and (iii) It returns \textit{YES} if $ \phi $ is \textit{TRUE}, or returns \textit{NO} if $ \phi $ is \textit{FALSE}. Specifically for the \textit{FALSE} verification result, the algorithm returns a \textit{counterexample} (i.e., a sequence of states that leads to a property violation), which is useful as diagnostic of the system to discover in which situation the model is violated; this is the most important advantage of the use of model checking~\cite{ClarkeHV18}. 
-%%%%%
-%%%%%%%%%%%%%%%Fig.~\ref{fig:systemverif} shows a real PV system, and Fig.~\ref{fig:systemverif2} the conversion the system to be verified by a model checking procedure. % \textcolor{red}{Please try to adapt this figure to our context. How can it be applied to verify PV?}. 
-%Fig.~\ref{fig:systemverif} shows the process to convert a real PV system to a model to be verified by a model checking procedure. % \textcolor{red}{Please try to adapt this figure to our context. How can it be applied to verify PV?}. 
-%
-%\begin{figure}[h]
-%\includegraphics[width=0.5\textwidth]{system_original_blocks}
-%\centering
-%\caption{Real system verification (adapted from \cite{ClarkeHV18}).}
-%\label{fig:systemverif}
-%\end{figure}
-%
-%\begin{figure}[h]
-%\includegraphics[width=0.4\textwidth]{system_model_blocks}
-%\centering
-%\caption{Model checking verification \cite{ClarkeHV18}.}
-%\label{fig:systemverif2}
-%\end{figure}
 %
 However, there is a main disadvantage of model checking: the state explosion problem. In order to tackle this problem, many different techniques were developed in the last decades. One of the first major advances was symbolic model checking with binary decision diagrams (BDDs). In this approach, a set of states is represented by a BDD instead of by listing each state individually, which is often exponentially smaller in practice.
 % Another major advance is the partial order reduction, which exploits the independence of actions in a system with asynchronous composition of processes \textcolor{red}{add citation here}. A third major advance is counterexample-guided abstraction refinement, which adaptively tries to find an appropriate level of refinement, not burdened with irrelevant detail that slows down verification \cite{Clarke2012}. 
@@ -308,10 +283,6 @@ Next, representing the time of the day where PV generation is not possible anymo
  \label{alg:verification-algorithm}
  \end{algorithm}
 
-
-\textcolor{red}{shall we provide further details about the case studies?}
-
-
 \section{Experimental Evaluation} 
 \label{sec:results}
 %------------------------------------------
@@ -372,8 +343,7 @@ Concerning the low-end configuration: ESBMC v5.1 was used with the SMT increment
 In order to evaluate the verification methods and its performance, we have considered five case studies and also compared its performance to the HOMER Pro tool. %Every dweller, who owns a PV system, was interviewed to get information about his/her PV system during four months of use. This information was used to know possible flaws from every system in the field.
 Experimental setup of HOMER Pro: Intel Core i5-4210 (4-cores), with 1.7 GHz and 4 GB of RAM, running Microsoft Windows 10; we have used HOMER Pro v3.12.0. 
 
-\textcolor{red}{What are the command-lines used for all tools? Versions? Solvers? Solvers versions?}
-
+%\textcolor{red}{What are the command-lines used for all tools? Versions? Solvers? Solvers versions?}
 %------------------------------------------
 \subsection{Results}
 \label{sec:results_indeed}
