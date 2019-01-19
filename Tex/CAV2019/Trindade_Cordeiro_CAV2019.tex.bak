@@ -4,6 +4,7 @@
 %
 \documentclass[runningheads]{llncs}
 %
+\usepackage{xcolor}
 \usepackage{graphicx}
 \usepackage{makecell}
 \usepackage{algorithm,algorithmic}
@@ -60,9 +61,8 @@ Around 1 billion of people do not have electrical energy nowadays on Earth. Ener
 %%%%%Poverty, in other hand, needs to be addressed through socio-economic development. Poverty %is conceptualized in material terms as not having access to adequate levels of food, water, clothing, shelter, sanitation, health care and education. This 
 %%%%%can be translated into people having insufficient income. 
 %
-For numerous people around the world, a better life means getting access to basic needs such as food, health services, housing and clean water. None of these basic needs can be provided without energy. Energy is one of the most essential inputs into sustaining people‘s livelihoods. Lack of access to clean and affordable energy is considered a core dimension of poverty~\cite{Hussein2012}. 
-
-Progress has been made worldwide. The number of people without electricity access fell below 1 billion for the first time in 2017~\cite{IEAweo2018}. To provide universal electricity for all, decentralized systems, led by solar PV in off-grid and mini-grid systems, will be the least-cost solution for three-quarters of the additional connections needed, but that grid extension will still have a role to play, especially in urban areas~\cite{IEAweo2018}.
+%%%%%%%For numerous people around the world, a better life means getting access to basic needs such as food, health services, housing and clean water. None of these basic needs can be provided without energy. Energy is one of the most essential inputs into sustaining people‘s livelihoods. 
+Lack of access to clean and affordable energy is considered a core dimension of poverty~\cite{Hussein2012}. Progress has been made worldwide. The number of people without electricity access fell below 1 billion for the first time in 2017~\cite{IEAweo2018}. To provide universal electricity for all, decentralized systems, led by solar PV in off-grid and mini-grid systems, will be the least-cost solution for three-quarters of the additional connections needed, but that grid extension will still have a role to play, especially in urban areas~\cite{IEAweo2018}.
 
 %With worldwide over 400GW cumulative installed photovoltaic electricity generation capacity installed by the end of 2017, photovoltaics still is a small contributor to the electricity supply with a little of 2\%, but its importance for our future energy mix is now acknowledged and with the fastest growth (32\% whem compared with 2016 numbers)~\cite{Jager-Waldau}.
 %
@@ -203,9 +203,10 @@ In each iteration, Automizer pick a trace (sequence of statements) that leads fr
 \label{sec:Methodology}
 %----------------------------------------
 \subsection{Stand-alone Solar PV Systems}
-PV systems are classified into distinct types~\cite{Mohanty}. Specifically for remote rural areas of developing countries or places where the grid extension is not feasible, the most suitable configuration is the regulated stand-alone system with battery and AC load; this configuration is the focus of case-studies of this work.
-
-The mathematical modeling of the PV system is based on modular blocks, as illustrated in Fig.\ref{fig:blockdiagram}. It identifies the PV generator, batteries, charge controller, inverter, and AC load. The PV generator, which can be a panel or an array, is a semiconductor device that can convert solar energy into DC electricity. In Fig.\ref{fig:blockdiagram}, there are two variables that depend on the site where the system is deployed and the weather (i.e., solar irradiance $G$ and temperature $T$). For night hours or rainy days, we need to hold batteries, where power can be stored and used. The use of battery as a storage form implies the presence of a charge controller~\cite{Hansen}. The PV arrays produce DC and therefore when the PV system contains an AC load, a DC/AC conversion is required. That converter is called of inverter; and the AC load dictates the behavior of AC electrical load from the house that will be fed by the system.
+%%%%%%PV systems are classified into distinct types~\cite{Mohanty}. Specifically for remote rural areas of developing countries or places where the grid extension is not feasible, the most suitable configuration is the regulated stand-alone system with battery and AC load; this configuration is the focus of case-studies of this work.
+%%%%%%
+The mathematical modeling of the PV system is based on modular blocks, as illustrated in Fig.\ref{fig:blockdiagram}. %It identifies the PV generator, batteries, charge controller, inverter, and AC load. 
+The PV generator, which can be a panel or an array, is a semiconductor device that can convert solar energy into DC electricity. In Fig.\ref{fig:blockdiagram}, there are two variables that depend on the site where the system is deployed and the weather (i.e., solar irradiance $G$ and temperature $T$). For night hours or rainy days, we need to hold batteries, where power can be stored and used. The use of battery as a storage form implies the presence of a charge controller~\cite{Hansen}. The PV arrays produce DC and therefore when the PV system contains an AC load, a DC/AC conversion is required. That converter is called of inverter; and the AC load dictates the behavior of AC electrical load from the house that will be fed by the system.
 \begin{figure}[h]
 \includegraphics[width=0.6\textwidth]{blockdiagramPVS2}
 \centering
@@ -214,7 +215,7 @@ The mathematical modeling of the PV system is based on modular blocks, as illust
 \end{figure}
 A wide variety of models exists for estimation of power output of PV modules (and $I-V$ or $P-V$ curves). However, the present work will rely on the simplified model of 1-diode. It was demonstrated that it has a small error rate, between 0.03\% and 4.68\% from selected PV panels tested~\cite{Saloux}. The model uses formulas from different references~\cite{Hansen}, \cite{Saloux}, and \cite{Ross}.
 
-To model the batteries, it was used the most common based on lead-acid~\cite{Copetti}. Related to the charge controller, it was used the 4-steps controller processes with MPPT (maximum power point tracking) to decide if the PV array must be disconnected from the system, or if the PV can be reconnected, or if the load is disconnected and when the load is reconnected~\cite{Hansen}. The inverter model is the simplest and is based on efficiency, i.e., the relation between the AC output power and the DC input power of the component~\cite{Hansen}. The AC load, from every case study, is defined by a 24 hour curve who reflects the estimated use of all electrical loads from the house. Load information was collected during a presential survey performed in each house.
+To model the batteries, it was used the most common based on lead-acid~\cite{Copetti}. Related to the charge controller, it was used the 4-steps controller processes with MPPT (maximum power point tracking) to decide if the PV array must be disconnected from the system, or if the PV can be reconnected, or if the load is disconnected and when the load is reconnected~\cite{Hansen}. The inverter model is based on efficiency, i.e., the relation between the AC output power and the DC input power of the component~\cite{Hansen}. The AC load, from every case study, is defined by a 24 hour curve who reflects the estimated use of all electrical loads from the house. Load information was collected during a presential survey performed in each house.
 
 \subsection{Automated Verification Methodology}
 In order to evaluate the automated tools when verifying stand-alone solar photovoltaic systems, we created a methodology where each tool will process the ANSI-C code with constraints %($C$) 
@@ -257,7 +258,8 @@ Information related to average temperature ($T$) and solar irradiance ($G$), max
 %with zero electric energy generation from 18:00 h to 6:00 h of the next day; and with insignificant generation from 6:00 h to 8:00 h, and from 16:00 h to 18:00 h of the same day. 
 In order to reduce the computational effort of the algorithm,
 % caused by the state explosion inherent of the technique, 
-every 24h-day was considered as a time-step of 1 hour, and it was split into two parts: (a) one where it is possible to occur PV generation, during daylight, with a duration in hours depending on each site (but dependent on the sun and weather conditions); and (b) one that includes all the remaining day (without any PV generation). Therefore, our approach depends on specific data about the solar irradiation levels to define the average amount of hours of PV generation.
+every 24h-day was considered as a time-step of 1 hour, and it was split into two parts: (a) one where it is possible to occur PV generation, during daylight, %with a duration in hours depending on each site (
+but dependent on the sun and weather conditions; and (b) one that includes all the remaining day (without PV generation). Therefore, our approach depends on specific data about the solar irradiation levels to define the average amount of hours of PV generation.
 
 After that, the model from PV generator is used in the function call of Line 7, to produce the voltage and current considering the states of $G$ and $T$. With respect to every hour considered, the conditional \textit{if-else-endif} statements from Lines 8, 11, 13, 16 and 19, will perform the charge or discharge of batteries according to the value of different variables: if there is PV generation (which depends on $G$ and $T$), the updated state of charge from batteries, the house's load and the set-up information of the PV system.
 
@@ -319,6 +321,10 @@ Next, representing the time of the day where PV generation is not possible anymo
  \label{alg:verification-algorithm}
  \end{algorithm}
 
+
+\textcolor{red}{shall we provide further details about the case studies?}
+
+
 \section{Experimental Evaluation} 
 \label{sec:results}
 %------------------------------------------
@@ -326,8 +332,35 @@ Next, representing the time of the day where PV generation is not possible anymo
 %------------------------------------------
 We have performed five case studies to evaluate the tools: (a) four PV systems (three in series 325W PV panels, four 220 Ah batteries in a configuration with two series and two parallel with 48h autonomy, 700 W inverter with surge of 1,600W, charge controller with MPPT with 35A/150V of capacity) deployed in four different houses in an indigenous community (GPS coordinates 2$^{o}$44'50.0"S 60$^{o}$25'47.8"W) situated nearby Manaus (Brazil), with each house having a different power demand (house 1 = 253 W, house 2 = 263 W, house 3 = 283 W, and house 4 = 501 W); and (b) one case concerning a system deployed as an individual system in Manaus (GPS coordinates 3$^{o}$4'20.208"S 60$^{o}$0'30.168"W), supporting 915 W of the house's load (house 5 with four 325W PV panels in a configuration two series and two parallel, four 120Ah batteries in series and autonomy of just 6 h, 1,200 W inverter with surge of 1,600 W, charge controller with MPPT of 150V/35A). 
 
-The annual average temperature ($T$) in Manaus is from 23$^{o}$C to 32$^{o}$C; and irradiance ($G$) varies from 274 W/m$^{2}$ to 852 W/m$^{2}$ when there is sunlight (that information is provided in Lines 5 and 6 of Algorithm~\ref{alg:verification-algorithm}). Another characteristic of Manaus, based on historical weather data %\cite{Temperature}, 
-\cite{Irradiance}, is related to the fact that only during 8 hours of the day is possible to have PV generation, from 8:00h to 16:00h (that information is provided in Algorithm~\ref{alg:verification-algorithm} as well).
+\begin{table}
+\caption{Case studies: stand-alone solar PV systems.}\label{tab2}
+\begin{tabular}{|c|c|c|c|c|c|}
+\hline
+\hline
+Item & House 1 & House 2 & House 3 & House 4 & House 5\\
+\hline
+\hline
+PV Panels &  \multicolumn{4}{|c|}{3x 325W: in series} & 4x 325W: 2x series and 2x parallel \\
+\hline
+Batteries & \multicolumn{4}{|c|}{\makecell{4x220Ah: 2x series and 2x parallel\\ autonomy: 48h}} & \makecell{4x 120Ah batteries in series\\ autonomy: 6h}\\
+\hline
+Charge Controller & \multicolumn{5}{|c|}{With MPPT of 150V/35A}\\
+\hline
+Inverter & \multicolumn{4}{|c|}{700W with surge of 1,600W} & 1,200W with surge of 1,600W\\
+\hline
+Power demand & 253W & 263W & 283W & 501W & 915W\\
+\hline
+GPS Coordinates & \multicolumn{4}{|c|}{\makecell{2$^{o}$44'50.0"S 60$^{o}$25'47.8"W\\Riverside indigenous community}} & \makecell{3$^{o}$4'20.208"S \\60$^{o}$0'30.168"W}\\
+\hline
+GPS Coordinates & \multicolumn{4}{|c|}\makecell{Rural Area of Manaus - Brazil} & \makecell{Urban house \\Manaus-Amazonas-Brazil}\\
+\hline
+\hline
+\end{tabular}
+\end{table}
+
+
+The annual average temperature ($T$) in Manaus is from 23$^{o}$C to 32$^{o}$C; and irradiance ($G$) varies from 274 W/m$^{2}$ to 852 W/m$^{2}$ when there is sunlight (Lines 5 and 6 of Algorithm~\ref{alg:verification-algorithm}). Another characteristic of Manaus, based on historical weather data %\cite{Temperature}, 
+\cite{Irradiance}, is related to the fact that only during 8 hours of the day is possible to have PV generation, from 8:00h to 16:00h. % (that information is provided in Algorithm~\ref{alg:verification-algorithm} as well).
 
 %------------------------------------------
 \subsection{Objectives and Setup}
@@ -341,9 +374,9 @@ Our experimental evaluation aims to answer two research questions:
 
 It was used two different setups of hardware and different verification engines, combined with different Solvers. The aim was to evaluate different environments and possible user limitation in terms of main processor and RAM memory. All the experiments were performed without a predefined timeout.
 
-Mostly of experiments were conducted on an otherwise idle Intel octa core Xeon CPU E5-2640 with 2.4 GHz and 264 GB of RAM, running Ubuntu 18.04.1 LTS 64-bits. It was called high-end setup and the verification engines demanded around 90G bytes of RAM (each process).
+Mostly of experiments were conducted on an otherwise idle Intel octa core Xeon CPU E5-2640 with 2.4 GHz and 264 GB of RAM, running Ubuntu 18.04.1 LTS 64-bits. It was called high-end setup and the verification engines demanded until 90G bytes of RAM.
 
-In addition, it was considered a low-end setup, using specifically the incremental option of ESBMC verification engine, where the demand of memory is very low (2G Bytes of RAM). The experiments were conducted on an otherwise idle Intel Core i7-2600 (8-cores), with 3.4 GHz and 32 GB of RAM, running Ubuntu 18.04.1 LTS 64-bits. 
+In addition, it was considered a low-end setup, using specifically the incremental option of ESBMC verification engine, where the demand of memory is low (2G Bytes of RAM). The experiments were conducted on an Intel Core i7-2600 (8-cores), with 3.4 GHz and 32 GB of RAM, running Ubuntu 18.04.1 LTS 64-bits. 
 
 Concerning the high-end configuration: (i) verification engine ESBMC, version v5.1.0 was used with the SMT solver Boolector version 2.4.1~\cite{Brummayer}\footnote{The command-line used to perform verification: \$ esbmc filename.c -\phantom{}-no-bounds-check -\phantom{}-no-pointer-check -\phantom{}-no-div-by-zero-check -\phantom{}-unwind 300 -\phantom{}-boolector}; (ii) verification engine CBMC 5.6 and MiniSat~\cite{Kroening}\footnote{The command-line used to perform verification: \$ cbmc filename.c --unwind 300}; (iii) Ultimate Automizer version 0.1.24~\cite{Automizer2018}\footnote{The command-line used to perform verification: \$ ./Ultimate -tc config/AutomizerReach.xml -i filename.c}.
  
@@ -354,12 +387,14 @@ Concerning the low-end configuration: ESBMC v5.1 was used with the SMT increment
 In order to evaluate the verification methods and its performance, we have considered five case studies and also compared its performance to the HOMER Pro tool. %Every dweller, who owns a PV system, was interviewed to get information about his/her PV system during four months of use. This information was used to know possible flaws from every system in the field.
 Experimental setup of HOMER Pro: Intel Core i5-4210 (4-cores), with 1.7 GHz and 4 GB of RAM, running Microsoft Windows 10; we have used HOMER Pro v3.12.0. 
 
+\textcolor{red}{What are the command-lines used for all tools? Versions? Solvers? Solvers versions?}
+
 %------------------------------------------
 \subsection{Results}
 \label{sec:results_indeed}
 %------------------------------------------
 %
-The Table~\ref{tab1} summarize the results concerning the use of the automated verification tools applied to the five case-studies of a solar PV system.
+Table~\ref{tab1} summarize the results concerning the use of the automated verification tools applied to the five case-studies of a solar PV system. The time expressed at the Table answer the RQ2. Worth to mention that using simulation tool (HOMER Pro) in all case studies, the 1,200W was the only one that was proved to not meet the requirement of battery autonomy; all the 700W systems had no indication of flaws during simulation. The simulation took less than five seconds to be performed in each case study.
 
 \begin{table}
 \centering
@@ -385,6 +420,14 @@ House 5 & \makecell{0.55h \\(Sizing: number of panels)} & \makecell{Inconclusive
 \hline
 \end{tabular}
 \end{table}
+
+The engines ESBMC and ESBMC Incremental accused that the 1,200W system (House 5) has sizing error related to the right number of solar panels. Related to the 700W systems (Houses 1-4) the verification engines ESBMC and ESBMC incremental indicate that there is a situation of low state of charge from batteries that will cause the cut of the load, just after the 16:00h of the day, when the weather condition was not enough to charge the batteries.
+
+The CBMC tool, was not successful to produce results. It finished the verification of all cases, but the log file indicated that the Solver did not present SAT or UNSAT answer. We tried the MiniSAT and even the Boolector Solvers.
+
+Related to UAutomizer, ....
+
+The flaws from 700W systems were confirmed with the dwellers who own the systems by an interview process and from a local monitoring system with the Raspberry Pi controller: at least once a month is usual the system to turn off, normally in raining or clouds days, further affirming RQ1; related to the 1,200W system, we identified that, in fact, it does not meet the battery autonomy most of the time (mainly when all loads are turned on), and this was double checked with the monitoring system from the charge controller from the manufacturer who showed that the maximum power or surge power were not exceeded, thus affirming RQ1; this behavior is expected since the system was purchased as an off-the-shelf solution and not as a customized design for the electrical charges of the house
 
 \section{Conclusions and Future Work}
 We have described and evaluated different automated verification methods to check whether a given PV system meets its specification using software model checking techniques. We have considered five case studies from real photovoltaic systems deployed in five different sites, ranging from $700$ W to $1,200$ W. ESBMC had the better results, in both setups (high-end and low-end configurations). Although the verification method takes longer than simulation methods, it is able to find specific conditions that lead to failures in a PV system previously validated by a commercial simulation tool. In particular, the proposed method was successful in finding sizing errors and indicating in which conditions a PV system can fail. Future work will focus in other verification engines and different solvers, besides the improvement of the algorithm in order to obtain better performance.

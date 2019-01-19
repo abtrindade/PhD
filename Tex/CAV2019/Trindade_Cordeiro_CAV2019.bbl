@@ -110,11 +110,6 @@ Kroening, D., Tautschnig, M.: {CBMC} – {C} {B}ounded {M}odel {C}hecker
 Mills, A., Al-Hallaj, S.: Simulation of hydrogen-based hybrid systems using
   {H}ybrid2. Int. J. of Hydrog. Energy  \textbf{29}(10),  991--999 (2004)
 
-\bibitem{Mohanty}
-Mohanty, P., Sharma, K., Gujar, M., Kolhe, M., Azmi, A.: Solar Photovoltaic
-  System Applications, chap. PV System Design for Off-Grid Applications, pp.
-  49--83. Springer International Publishing (2016)
-
 \bibitem{Morse2015}
 Morse, J.: Expressive and efficient bounded model checking of concurrent
   software. Ph.D. thesis, University of Southampton (2015)
