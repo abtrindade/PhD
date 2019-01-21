@@ -18,9 +18,8 @@ Benatiallah, A., Benatiallah, D., Ghaitaoui, T., Harrouz, A., Mansouri, S.:
   Sc. and App. Inf. Tech  \textbf{7}(1),  17--22 (2017)
 
 \bibitem{CEGAR}
-Beyer, D., L\"{o}we, S.: 16th international conference on Fund. Appr. to Soft.
-  Eng., chap. Explicit-State software model checking based on {CEGAR} and
-  interpolation. Springer-Verlag (2013)
+Beyer, D., L{\"{o}}we, S.: Explicit-state software model checking based on
+  {CEGAR} and interpolation. In: {FASE}. LNCS, vol.~7793, pp. 146--162 (2013)
 
 \bibitem{DBLP:conf/tacas/BiereCCZ99}
 Biere, A., Cimatti, A., Clarke, E.M., Zhu, Y.: Symbolic {M}odel {C}hecking
@@ -41,13 +40,13 @@ Cheng, B., Wang, X., Liu, J., Du, D.: Modana: An integrated framework for
   modeling and analysis of energy-aware {CPS}s. In: IEEE 39th Annual Computer
   Software and Applications Conference (2015)
 
-\bibitem{Clarke2012}
-Clarke, E., Klieber, W., Milo{\v{s} Nov{\'a}{\v{c}}ek}, Zuliani, P.: Model
-  Checking and the State Explosion Problem, pp. 1--30. Springer, Berlin (2012)
-
 \bibitem{ClarkeHV18}
 Clarke, E.M., Henzinger, T.A., Veith, H.: Introduction to model checking. In:
-  Handbook of Model Checking., pp. 1--26 (2018)
+  Handbook of Model Checking., pp. 1--26. Springer (2018)
+
+\bibitem{Clarke2012}
+Clarke, E.M., Klieber, W., Nov{\'{a}}cek, M., Zuliani, P.: Model checking and
+  the state explosion problem. In: LASER. LNCS, vol.~7682, pp. 1--30 (2011)
 
 \bibitem{Copetti}
 Copetti, J., Lorenzo, E., Chenlo, F.: A general battery model for {PV} system
@@ -83,10 +82,10 @@ Hansen, A., S$\o$rensen, P., Hansen, L., Bindner, H.: Models for a stand-alone
   PV system. No.~1219, Forskningscenter Risoe (2001)
 
 \bibitem{Automizer2018}
-Heizmann, M., Chen, Y.F., Dietsch, D., Greitschus, M., Hoenicke, J., Li, Y.,
-  Nutz, A., Musa, B., Schilling, C., Schindler, T., Podelski, A.: TACAS 2018,
-  vol. LNCS 10806, chap. Ultimate Automizer and the Search for Perfect
-  Interpolants, pp. 447--451. Springer (2018)
+Heizmann, M., Chen, Y., Dietsch, D., Greitschus, M., Hoenicke, J., Li, Y.,
+  Nutz, A., Musa, B., Schilling, C., Schindler, T., Podelski, A.: Ultimate
+  automizer and the search for perfect interpolants - (competition
+  contribution). In: {TACAS}. LNCS, vol. 10806, pp. 447--451 (2018)
 
 \bibitem{Hussein2012}
 Hussein, M., {Leal Filho}, W.: Analysis of energy as a precondition for

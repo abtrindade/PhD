@@ -1,59 +1,51 @@
-This is BibTeX, Version 0.99d (TeX Live 2017/Debian)
-Capacity: max_strings=100000, hash_size=100000, hash_prime=85009
+This is BibTeX, Version 0.99d (TeX Live 2016)
+Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
 The top-level auxiliary file: Trindade_Cordeiro_CAV2019.aux
 The style file: splncs04.bst
 Database file #1: trindadeThesis.bib
-Warning--entry type for "ANSI2018" isn't style-file defined
---line 960 of file trindadeThesis.bib
-Warning--entry type for "Irradiance" isn't style-file defined
---line 975 of file trindadeThesis.bib
-Warning--can't use both author and editor fields in CEGAR
-Warning--can't use both author and editor fields in Clarke2012
-Warning--missing publisher in ClarkeHV18
 Warning--can't use both volume and number fields in Gow1999
 Warning--there's a number but no series in Hansen
-Warning--can't use both author and editor fields in Automizer2018
 Warning--can't use both volume and number fields in Hussein2012
 Warning--can't use both volume and number fields in Sengupta2015
 You've used 34 entries,
             2850 wiz_defined-function locations,
-            830 strings with 10855 characters,
-and the built_in function-call counts, 19573 in all, are:
-= -- 1563
+            827 strings with 10592 characters,
+and the built_in function-call counts, 19884 in all, are:
+= -- 1615
 > -- 607
-< -- 42
+< -- 43
 + -- 252
 - -- 214
-* -- 1223
-:= -- 2453
-add.period$ -- 46
+* -- 1234
+:= -- 2488
+add.period$ -- 50
 call.type$ -- 34
-change.case$ -- 236
+change.case$ -- 245
 chr.to.int$ -- 0
-cite$ -- 42
-duplicate$ -- 1761
-empty$ -- 1797
+cite$ -- 38
+duplicate$ -- 1790
+empty$ -- 1810
 format.name$ -- 242
-if$ -- 4316
+if$ -- 4390
 int.to.chr$ -- 0
 int.to.str$ -- 34
-missing$ -- 368
+missing$ -- 370
 newline$ -- 108
 num.names$ -- 72
-pop$ -- 725
+pop$ -- 726
 preamble$ -- 1
 purify$ -- 173
 quote$ -- 0
-skip$ -- 539
+skip$ -- 557
 stack$ -- 0
-substring$ -- 1028
-swap$ -- 981
-text.length$ -- 42
+substring$ -- 1064
+swap$ -- 1001
+text.length$ -- 43
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 124
-warning$ -- 8
-while$ -- 154
+type$ -- 130
+warning$ -- 4
+while$ -- 158
 width$ -- 36
-write$ -- 352
-(There were 10 warnings)
+write$ -- 355
+(There were 4 warnings)
