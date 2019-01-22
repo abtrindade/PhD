@@ -84,41 +84,19 @@ Although simulation and testing explore possible behaviors and scenarios of a gi
 \subsection{CBMC}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-The C Bounded Model Checker (CBMC) is considering the best-known verifier to check ANSI-C code~\cite{Kroening}. 
-CBMC checks the violation of assertions in C programs, or proves safety of the assertions under a completeness threshold.
-CBMC implements a bit-precise translation of an input C program, annotated with assertions and with loops unrolled 
-up to a given depth, into a logical formula. If the formula is satisfiable, then an execution leading to a violated assertion exists~\cite{Kroening}.
-
-CBMC's verification flow can be summarized in four stages: 
-(i) Front-end that can read, perform parse and type checker of C code; 
-(ii) Intermediate Representation (IR): CBMC uses IR to convert all non-linear control flow, 
-such as \textit{if} or \textit{switch} statements, loops and jumps, into equivalent guarded 
-\textit{goto} statements, thus aiming to reduce the verification effort; 
-(iii) Middle end: CBMC performs symbolic execution by eagerly unwinding loops up to a fixed bound, 
-which can be specified by the user on a per-loop basis or globally, for all loops and finally; 
-(iv) Back-end: With support to SAT and SMT solvers. Conversely, if the formula is unsatisfiable, no assertion can be violated within the given unwinding bounds.
+The C Bounded Model Checker (CBMC) falsifies assertions in C programs or proves that they are safe if a completeness threshold is given~\cite{Kroening}. CBMC implements a bit-precise translation of a C program, annotated with assertions and with loops unrolled up to a given depth, into a logical formula. If the formula is satisfiable, then a failing execution that leads to a violated assertion exists~\cite{Kroening}. CBMC's verification flow can be summarized in three stages: (i) Front-end: scans, parses and type-checks C code; it converts control flow elements, such as \textit{if} or \textit{switch} statements, loops and jumps, into equivalent guarded \textit{goto} statements, thus aiming to reduce verification effort; (ii) Middle-end: performs symbolic execution by eagerly unwinding loops up to a fixed bound, which can be specified by the user on a per-loop basis or globally, for all loops and finally; (iv) Back-end: supports SAT and SMT solvers to discharge verification conditions.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{ESBMC}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-ESBMC (or Efficient SMT-based Bounded Model Checker) is an open source, permissively licensed (Apache 2), cross platform bounded model checking for C and C++ programs~\cite{esbmc2018}, which supports the verification of LTL properties with bounded traces~\cite{DBLP:journals/sosym/MorseCN015}. 
-%The use of SMT, instead of Boolean Satisfiability SAT from the original BMC, 
-ESBMC comes as an alternative to overcome limitations of the system modeling, especially considering that the system complexity is increasing and SMT has richer theories than SAT to represent models. 
-%
-ESBMC's verification flow can be summarized in three stages: (i) a front-end that can read and compile C/C++ code, where the formal specification of the system to be verified is first handled; (ii) preprocessing steps to deal with the representation of the code, control flow and unwinding of loops, and the model simplification, thereby aiming to reduce the verification effort; and finally (iii) the SMT solving stage, where all the constraints and properties of the system to be verified are encoded into SMT and checked for satisfiability.
-If the SMT formula is shown to be satisfiable (SAT), a counterexample is presented; otherwise, the formula is unsatisfiable (UNSAT), i.e., there are no errors up to the given unwinding bound. 
-
-% incremental ESBMC text here
-ESBMC exploits the standardized input language of SMT solvers (SMT-LIB\footnote{http://smtlib.cs.uiowa.edu/} logic format) to make use of a resource called \textit{assertion stack}. An assertion, in SMT solvers, is a constraint over the variables in a formula that must hold if the formula is satisfiable~\cite{Morse2015}. New assertions can be added to or old assertions removed from this stack, depending on the evaluated value of variables. This enables ESBMC, and the respective solver, to learn from previous checks, optimizing the search procedure and potentially eliminating a large amount of formula state space to be searched, because it solves and disregards data during the process, incrementally. This technique is called 'incremental SMT'~\cite{DBLP:journals/fac/SchrammelKBMTB17} and allows us to reduce the memory overhead, mainly when the verified system is complex and the computing platform does not have large amount of memory to deal with all the design space state.
+ESBMC (or Efficient SMT-based Bounded Model Checker) is a bounded and unbounded mdoel checker for C programs~\cite{esbmc2018}, which supports the verification of LTL properties with bounded traces~\cite{DBLP:journals/sosym/MorseCN015}. ESBMC's verification flow can be summarized in three stages: (i) a front-end that can read and compile C code, where the system formal specification is first handled; (ii) preprocessing steps to deal with code representation, control flow and unwinding of loops, and model simplification, thereby aiming to reduce verification effort; and finally (iii) the SMT solving stage, where all constraints and properties of the system are encoded into SMT and checked for satisfiability. ESBMC exploits the standardized input language of SMT solvers (SMT-LIB\footnote{http://smtlib.cs.uiowa.edu/} logic format) to make use of a resource called \textit{assertion stack}~\cite{Morse2015}. This enables ESBMC, and the respective solver, to learn from previous checks, thus optimizing the search procedure and potentially eliminating a large amount of formula state space to be searched, because it solves and disregards data during the process, incrementally. This technique is called ``incremental SMT''~\cite{DBLP:journals/fac/SchrammelKBMTB17} and allows ESBMC to reduce the memory overhead, mainly when the verified system is complex and the computing platform does not have large amount of memory to deal with the entire design space state.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Ultimate Automizer}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-Ultimate Automizer is an automatic software verification tool for C programs that is able to check safety and liveness properties. The tool implements an automata-based instance of the CEGAR scheme. CEGAR or Counterexample-Guides Abstraction Refinement is a technique that iteratively refines an abstract model using counterexamples and use three concepts: precision, feasibility check, and refinement~\cite{CEGAR}.
-
-In each iteration, Automizer pick a trace (sequence of statements) that leads from the initial location to the error location and check whether the trace is feasible or infeasible. If the trace is feasible, an error is reported to the user; otherwise it is computed a sequence of predicates along the trace as a proof of the trace‚Äôs infeasibility. The predicates are a sequence of interpolants since each predicate ‚Äúinterpolates‚Äù between the set of reachable states and the set of states from which we cannot reach the error. In the refinement step of the CEGAR loop, Automizer tries to find all traces whose infeasibility can be shown with the given predicates and subtract these traces from the set of (potentially spurious) error traces that have not yet been analyzed. It is used automata to represent sets of traces. The difference to a classical CEGAR-based predicate abstraction is that Automizer have to do any logical reasoning (e.g., SMT solver calls) that involves predicates of different CEGAR iterations~\cite{Automizer2018}. 
+Ultimate Automizer is an automatic software verification tool for C programs that is able to check safety and liveness properties. The tool implements an automata-based instance of the Counterexample-Guides Abstraction Refinement  (CEGAR) scheme. CEGAR is a technique that iteratively refines an abstract model using counterexamples and use three concepts: precision, feasibility check and refinement~\cite{CEGAR}. In each iteration, Automizer picks a trace (sequence of statements) that leads from the initial location to the error location and check whether the trace is feasible or infeasible. If the trace is feasible, an error is reported to the user; otherwise it is computed a sequence of predicates along the trace as a proof of the trace's infeasibility. The predicates are a sequence of interpolants since each predicate Äú``interpolates''Äù between a set of reachable states and a set of states from which it cannot reach the error. In the refinement step of the CEGAR loop, Automizer tries to find all traces whose infeasibility can be shown with the given predicates and subtract these traces from the set of (potentially spurious) error traces that have not yet been analyzed. It is used automata to represent sets of traces. The difference to a classical CEGAR-based predicate abstraction is that Automizer has to do any logical reasoning (e.g., SMT solver calls) that involves predicates of different CEGAR iterations~\cite{Automizer2018}. 
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -234,11 +212,15 @@ Next, representing the time of the day where PV generation is not possible anymo
  \label{alg:verification-algorithm}
  \end{algorithm}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Experimental Evaluation} 
 \label{sec:results}
-%------------------------------------------
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Description of the Case Studies}
-%------------------------------------------
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 We have performed five case studies to evaluate the tools, as described by Table~\ref{tab2}. 
 \begin{table}
 \caption{Case studies: stand-alone solar PV systems.}\label{tab2}
@@ -269,9 +251,10 @@ Details & \multicolumn{4}{|c|}{\makecell{Riverside indigenous community\\Rural A
 The annual average temperature ($T$) in Manaus is from 23$^{o}$C to 32$^{o}$C; and irradiance ($G$) varies from 274 W/m$^{2}$ to 852 W/m$^{2}$ when there is sunlight (Lines 5 and 6 of Algorithm~\ref{alg:verification-algorithm}). Another characteristic of Manaus, based on historical weather data %\cite{Temperature}, 
 \cite{Irradiance}, is related to the fact that only during 8 hours of the day is possible to have PV generation, from 8:00h to 16:00h. % (that information is provided in Algorithm~\ref{alg:verification-algorithm} as well).
 
-%------------------------------------------
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Objectives and Setup}
-%------------------------------------------
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 Our experimental evaluation aims to answer two research questions:
 %
 \begin{enumerate}
@@ -285,20 +268,22 @@ Mostly of experiments were conducted on an otherwise idle Intel octa core Xeon C
 
 In addition, it was considered a low-end setup, using specifically the incremental option of ESBMC verification engine, where the demand of memory is low (2G Bytes of RAM). The experiments were conducted on an Intel Core i7-2600 (8-cores), with 3.4 GHz and 32 GB of RAM, running Ubuntu 18.04.1 LTS 64-bits. 
 
-Concerning the high-end configuration: (i) verification engine ESBMC, version v5.1.0 was used with the SMT solver Boolector version 2.4.1~\cite{Brummayer}\footnote{The command-line used to perform verification: \$ esbmc filename.c -\phantom{}-no-bounds-check -\phantom{}-no-pointer-check -\phantom{}-no-div-by-zero-check -\phantom{}-unwind 300 -\phantom{}-boolector}; (ii) verification engine CBMC 5.6 and MiniSat~\cite{Kroening}\footnote{The command-line used to perform verification: \$ cbmc filename.c --unwind 300}; (iii) Ultimate Automizer version 0.1.24~\cite{Automizer2018}\footnote{The command-line used to perform verification: \$ ./Ultimate -tc config/AutomizerReach.xml -i filename.c}.
+Concerning the high-end configuration: (i) verification engine ESBMC, version v5.1.0 was used with the SMT solver Boolector version 2.4.1~\cite{Brummayer}\footnote{\$ esbmc filename.c -\phantom{}-no-bounds-check -\phantom{}-no-pointer-check -\phantom{}-no-div-by-zero-check -\phantom{}-unwind 300 -\phantom{}-boolector}; (ii) verification engine CBMC 5.6 and MiniSat~\cite{Kroening}\footnote{\$ cbmc filename.c --unwind 300}; (iii) Ultimate Automizer version 0.1.24~\cite{Automizer2018}\footnote{\$ ./Ultimate -tc config/AutomizerReach.xml -i filename.c}.
  
 % enabled with the goal of reducing memory usage; 
 %The experiments were performed without a predefined timeout.
-Concerning the low-end configuration: ESBMC v5.1 was used with the SMT incremental mode\footnote{The command-line used to perform the verification is: \$ esbmc filename.c -\phantom{}-no-bounds-check -\phantom{}-no-pointer-check -\phantom{}-no-div-by-zero-check -\phantom{}-unwind 300 -\phantom{}-smt-during-symex -\phantom{}-smt-symex-guard -\phantom{}-z3} enabled with the goal of reducing memory usage; we have also used the SMT solver Z3 version 4.7.1~\cite{DeMoura}. 
+Concerning the low-end configuration: ESBMC v5.1 was used with the SMT incremental mode\footnote{\$ esbmc filename.c -\phantom{}-no-bounds-check -\phantom{}-no-pointer-check -\phantom{}-no-div-by-zero-check -\phantom{}-unwind 300 -\phantom{}-smt-during-symex -\phantom{}-smt-symex-guard -\phantom{}-z3} enabled with the goal of reducing memory usage; we have also used the SMT solver Z3 version 4.7.1~\cite{DeMoura}. 
 
 In order to evaluate the verification methods and its performance, we have considered five case studies and also compared its performance to the HOMER Pro tool. %Every dweller, who owns a PV system, was interviewed to get information about his/her PV system during four months of use. This information was used to know possible flaws from every system in the field.
 Experimental setup of HOMER Pro: Intel Core i5-4210 (4-cores), with 1.7 GHz and 4 GB of RAM, running Microsoft Windows 10; we have used HOMER Pro v3.12.0. 
 
 %\textcolor{red}{What are the command-lines used for all tools? Versions? Solvers? Solvers versions?}
-%------------------------------------------
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Results}
 \label{sec:results_indeed}
-%------------------------------------------
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 %
 Table~\ref{tab1} summarize the results concerning the use of the automated verification tools applied to the five case-studies of a solar PV system. The time expressed at the Table answer the RQ2. Worth to mention that using simulation tool (HOMER Pro) in all case studies, the 1,200W was the only one that was proved to not meet the requirement of battery autonomy; all the 700W systems had no indication of flaws during simulation. The simulation took less than five seconds to be performed in each case study.
 
@@ -335,7 +320,10 @@ Related to UAutomizer, ....
 
 The flaws from 700W systems were confirmed with the dwellers who own the systems by an interview process and from a local monitoring system with the Raspberry Pi controller: at least once a month is usual the system to turn off, normally in raining or clouds days, further affirming RQ1; related to the 1,200W system, we identified that, in fact, it does not meet the battery autonomy most of the time (mainly when all loads are turned on), and this was double checked with the monitoring system from the charge controller from the manufacturer who showed that the maximum power or surge power were not exceeded, thus affirming RQ1; this behavior is expected since the system was purchased as an off-the-shelf solution and not as a customized design for the electrical charges of the house
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Conclusions and Future Work}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 We have described and evaluated different automated verification methods to check whether a given PV system meets its specification using software model checking techniques. We have considered five case studies from real photovoltaic systems deployed in five different sites, ranging from $700$ W to $1,200$ W. ESBMC had the better results, in both setups (high-end and low-end configurations). Although the verification method takes longer than simulation methods, it is able to find specific conditions that lead to failures in a PV system previously validated by a commercial simulation tool. In particular, the proposed method was successful in finding sizing errors and indicating in which conditions a PV system can fail. Future work will focus in other verification engines and different solvers, besides the improvement of the algorithm in order to obtain better performance.
 %
 % ---- Bibliography ----
