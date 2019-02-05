@@ -288,7 +288,7 @@ Experimental setup of HOMER Pro: Intel Core i5-4210 (4-cores), with 1.7 GHz and 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %
-Table~\ref{tab1} summarizes the results concerning the use of the automated verification tools applied to the five case-studies of a solar PV system. The time expressed at the Table answer the RQ2. Worth to mention that using simulation tool (HOMER Pro) in all case studies, the 1,200W was the only one that was proved to not meet the requirement of battery autonomy; all the 700W systems had no indication of flaws during simulation. The simulation took less than five seconds to be performed in each case study.
+Table~\ref{tab1} summarizes the results concerning the use of the automated verification tools applied to the five case-studies of a solar PV system. The times reported in Table~\ref{tab1} answer RQ2. Note that if we used HOMER Pro in all case studies, the $1,200$W was the only one that was proved to not meet the requirement of battery autonomy; all the 700W systems had no indication of flaws during simulation. The simulation took less than five seconds to be performed on each case study.
 
 \begin{table}
 \centering
@@ -315,13 +315,13 @@ House 5 & \makecell{0.55h \\(Sizing: number of panels)} & \makecell{Inconclusive
 \end{tabular}
 \end{table}
 
-The engines ESBMC and ESBMC Incremental accused that the 1,200W system (House 5) has sizing error related to the right number of solar panels. Related to the 700W systems (Houses 1-4) the verification engines ESBMC and ESBMC incremental indicate that there is a situation of low state of charge from batteries that will cause the cut of the load, just after the 16:00h of the day, when the weather condition was not enough to charge the batteries.
+ESBMC and ESBMC Incremental indicated that the $1,200$W system (House 5) has sizing error related to the \textcolor{red}{right?} number of solar panels. Related to the 700W systems (Houses 1-4), ESBMC and ESBMC incremental indicated that there is a situation of low state of charge from batteries that will cause the cut of the load, just after the 16:00h of the day, when the weather condition was not enough to charge the batteries.
 
-The CBMC tool, was not successful to produce results. It finished the verification of all cases, but the log file indicated that the Solver did not present SAT or UNSAT answer. We tried the MiniSAT and even the Boolector Solvers.
+CBMC, was not successful to produce any verification result; it finished the verification of all cases, but the log file indicated that the solver did not present SAT or UNSAT answer. We tried the MiniSAT and even the Boolector solvers.
 
 Related to UAutomizer, ....
 
-The flaws from 700W systems were confirmed with the dwellers who own the systems by an interview process and from a local monitoring system with the Raspberry Pi controller: at least once a month is usual the system to turn off, normally in raining or clouds days, further affirming RQ1; related to the 1,200W system, we identified that, in fact, it does not meet the battery autonomy most of the time (mainly when all loads are turned on), and this was double checked with the monitoring system from the charge controller from the manufacturer who showed that the maximum power or surge power were not exceeded, thus affirming RQ1; this behavior is expected since the system was purchased as an off-the-shelf solution and not as a customized design for the electrical charges of the house
+The flaws from 700W systems were confirmed with the dwellers who own the systems by an interview process and from a local monitoring system with the Raspberry Pi controller: at least once a month is usual the system to turn off, normally in rainy or clouds days, further affirming RQ1; related to the $1,200$W system, we identified that, in fact, it does not meet the battery autonomy most of the time (mainly when all loads are turned on), and this was double-checked with the monitoring system from the charge controller from the manufacturer who showed that the maximum power or surge power were not exceeded, thus affirming RQ1; this behavior is expected since the system was purchased as an off-the-shelf solution and not as a customized design for the electrical charges of the house
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Conclusions and Future Work}
