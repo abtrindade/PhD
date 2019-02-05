@@ -224,7 +224,7 @@ Next, representing the time of the day where PV generation is not possible anymo
 \subsection{Description of the Case Studies}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-We have performed five case studies to evaluate the tools, as described by Table~\ref{tab2}. 
+We have performed five case studies to evaluate the tools, as described in Table~\ref{tab2}. 
 \begin{table}
 \caption{Case studies: stand-alone solar PV systems.}\label{tab2}
 \begin{tabular}{|c|c|c|c|c|c|}
@@ -252,7 +252,7 @@ Details & \multicolumn{4}{|c|}{\makecell{Riverside indigenous community\\Rural A
 \end{table}
 
 The annual average temperature ($T$) in Manaus is from 23$^{o}$C to 32$^{o}$C; and irradiance ($G$) varies from 274 W/m$^{2}$ to 852 W/m$^{2}$ when there is sunlight (Lines 5 and 6 of Algorithm~\ref{alg:verification-algorithm}). Another characteristic of Manaus, based on historical weather data %\cite{Temperature}, 
-\cite{Irradiance}, is related to the fact that only during 8 hours of the day is possible to have PV generation, from 8:00h to 16:00h. % (that information is provided in Algorithm~\ref{alg:verification-algorithm} as well).
+\cite{Irradiance}, is related to the fact that only during 8 hours of the day is possible to have PV generation, from 8:00h to 16:00h. \textcolor{red}{why?} % (that information is provided in Algorithm~\ref{alg:verification-algorithm} as well).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Objectives and Setup}
@@ -262,22 +262,22 @@ Our experimental evaluation aims to answer two research questions:
 %
 \begin{enumerate}
 \item[RQ1] \textbf{(soundness)} Does the automated verification provide correct results?
-\item[RQ2] \textbf{(performance)} How does the  tools compare each other?
+\item[RQ2] \textbf{(performance)} How do the verifiers compare to each other?
 \end{enumerate}
 
-It was used two different setups of hardware and different verification engines, combined with different Solvers. The aim was to evaluate different environments and possible user limitation in terms of main processor and RAM memory. All the experiments were performed without a predefined timeout.
+We have used two different setups of hardware and different verification engines, combined with different solvers. The aim was to evaluate different environments and possible user limitation in terms of main processor and RAM memory. All the experiments were performed without a predefined timeout.
 
 Mostly of experiments were conducted on an otherwise idle Intel octa core Xeon CPU E5-2640 with 2.4 GHz and 264 GB of RAM, running Ubuntu 18.04.1 LTS 64-bits. It was called high-end setup and the verification engines demanded until 90G bytes of RAM.
 
 In addition, it was considered a low-end setup, using specifically the incremental option of ESBMC verification engine, where the demand of memory is low (2G Bytes of RAM). The experiments were conducted on an Intel Core i7-2600 (8-cores), with 3.4 GHz and 32 GB of RAM, running Ubuntu 18.04.1 LTS 64-bits. 
 
-Concerning the high-end configuration: (i) verification engine ESBMC, version v5.1.0 was used with the SMT solver Boolector version 2.4.1~\cite{Brummayer}\footnote{\$ esbmc filename.c -\phantom{}-no-bounds-check -\phantom{}-no-pointer-check -\phantom{}-no-div-by-zero-check -\phantom{}-unwind 300 -\phantom{}-boolector}; (ii) verification engine CBMC 5.6 and MiniSat~\cite{Kroening}\footnote{\$ cbmc filename.c --unwind 300}; (iii) Ultimate Automizer version 0.1.24~\cite{Automizer2018}\footnote{\$ ./Ultimate -tc config/AutomizerReach.xml -i filename.c}.
+Concerning the high-end configuration: (i) verification engine ESBMC, version v5.1.0 was used with the SMT solver Boolector version 2.4.1~\cite{Brummayer}\footnote{\$ esbmc filename.c -\phantom{}-no-bounds-check -\phantom{}-no-pointer-check -\phantom{}-no-div-by-zero-check -\phantom{}-unwind 300 -\phantom{}-boolector}; (ii) verification engine CBMC 5.6 and MiniSat \textcolor{red}{which version of minisat?}~\cite{Kroening}\footnote{\$ cbmc filename.c --unwind 300}; (iii) Ultimate Automizer version 0.1.24~\cite{Automizer2018}\footnote{\$ ./Ultimate -tc config/AutomizerReach.xml -i filename.c}.
  
 % enabled with the goal of reducing memory usage; 
 %The experiments were performed without a predefined timeout.
 Concerning the low-end configuration: ESBMC v5.1 was used with the SMT incremental mode\footnote{\$ esbmc filename.c -\phantom{}-no-bounds-check -\phantom{}-no-pointer-check -\phantom{}-no-div-by-zero-check -\phantom{}-unwind 300 -\phantom{}-smt-during-symex -\phantom{}-smt-symex-guard -\phantom{}-z3} enabled with the goal of reducing memory usage; we have also used the SMT solver Z3 version 4.7.1~\cite{DeMoura}. 
 
-In order to evaluate the verification methods and its performance, we have considered five case studies and also compared its performance to the HOMER Pro tool. %Every dweller, who owns a PV system, was interviewed to get information about his/her PV system during four months of use. This information was used to know possible flaws from every system in the field.
+In order to evaluate the verification methods and its performance, we have considered five case studies and also compared their performance to the HOMER Pro tool. %Every dweller, who owns a PV system, was interviewed to get information about his/her PV system during four months of use. This information was used to know possible flaws from every system in the field.
 Experimental setup of HOMER Pro: Intel Core i5-4210 (4-cores), with 1.7 GHz and 4 GB of RAM, running Microsoft Windows 10; we have used HOMER Pro v3.12.0. 
 
 %\textcolor{red}{What are the command-lines used for all tools? Versions? Solvers? Solvers versions?}
@@ -288,7 +288,7 @@ Experimental setup of HOMER Pro: Intel Core i5-4210 (4-cores), with 1.7 GHz and 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %
-Table~\ref{tab1} summarize the results concerning the use of the automated verification tools applied to the five case-studies of a solar PV system. The time expressed at the Table answer the RQ2. Worth to mention that using simulation tool (HOMER Pro) in all case studies, the 1,200W was the only one that was proved to not meet the requirement of battery autonomy; all the 700W systems had no indication of flaws during simulation. The simulation took less than five seconds to be performed in each case study.
+Table~\ref{tab1} summarizes the results concerning the use of the automated verification tools applied to the five case-studies of a solar PV system. The time expressed at the Table answer the RQ2. Worth to mention that using simulation tool (HOMER Pro) in all case studies, the 1,200W was the only one that was proved to not meet the requirement of battery autonomy; all the 700W systems had no indication of flaws during simulation. The simulation took less than five seconds to be performed in each case study.
 
 \begin{table}
 \centering
