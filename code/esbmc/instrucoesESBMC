@@ -74,3 +74,12 @@ time ./esbmc codePVsystem_rev9c.c --falsification --interval-analysis --no-bound
 ./Ultimate -tc config/AutomizerReach.xml -s config/svcomp-Reach-32bit-Automizer_Bitvector.epf -i codePVsystem_rev9cUAH1_with_errorfun_2.c
 ./Ultimate -tc config/AutomizerReach.xml -s config/automizer.epf -i file.c
 
+./Ultimate -tc config/AutomizerReach.xml -s config/svcomp-Reach-32bit-Automizer_Bitvector.epf -i codePVsystem_rev9cUAH1_with_errorfun_3.c
+no ->   --traceabstraction.limit.analysis.time 900 --traceabstraction.stop.after.first.violation.was.found false
+
+Daniel (12-FEB-2019): 
+I increased the memory limit from 2024Mb to 32000MB by
+  sed -i 's/-memory\\:2024/-memory\\:32000/g' config/*.epf
+and I increased the time limit from 2s to 1000s with
+  sed -i 's/-t\\:2000/-t\\:1000000/g' config/*.epf
+
