@@ -4,9 +4,9 @@ The top-level auxiliary file: trindade_ren_and_sust_rev0.aux
 The style file: elsarticle-num.bst
 Database file #1: trindadeThesis.bib
 Warning--entry type for "ANSI2018" isn't style-file defined
---line 960 of file trindadeThesis.bib
+--line 978 of file trindadeThesis.bib
 Warning--entry type for "Irradiance" isn't style-file defined
---line 975 of file trindadeThesis.bib
+--line 993 of file trindadeThesis.bib
 Warning--can't use both volume and number fields in Gow1999
 Warning--empty publisher in ClarkeHV18
 Warning--empty pages in Natsheh2012
@@ -18,37 +18,37 @@ Warning--can't use both author and editor fields in Clarke2012
 Warning--empty chapter and pages in Clarke2012
 You've used 33 entries,
             2937 wiz_defined-function locations,
-            896 strings with 11214 characters,
-and the built_in function-call counts, 10872 in all, are:
-= -- 959
+            914 strings with 11687 characters,
+and the built_in function-call counts, 11412 in all, are:
+= -- 1049
 > -- 360
 < -- 19
 + -- 141
 - -- 108
-* -- 695
-:= -- 1403
-add.period$ -- 35
+* -- 803
+:= -- 1457
+add.period$ -- 53
 call.type$ -- 33
 change.case$ -- 32
 chr.to.int$ -- 0
 cite$ -- 42
 duplicate$ -- 394
-empty$ -- 1314
+empty$ -- 1350
 format.name$ -- 135
-if$ -- 2918
+if$ -- 3044
 int.to.chr$ -- 0
 int.to.str$ -- 33
 missing$ -- 33
-newline$ -- 111
+newline$ -- 129
 num.names$ -- 39
-pop$ -- 273
+pop$ -- 255
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 0
-skip$ -- 774
+skip$ -- 810
 stack$ -- 0
 substring$ -- 471
-swap$ -- 116
+swap$ -- 152
 text.length$ -- 19
 text.prefix$ -- 0
 top$ -- 0
@@ -56,5 +56,5 @@ type$ -- 0
 warning$ -- 9
 while$ -- 76
 width$ -- 35
-write$ -- 294
+write$ -- 330
 (There were 11 warnings)

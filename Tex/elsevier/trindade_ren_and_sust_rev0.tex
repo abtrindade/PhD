@@ -601,7 +601,7 @@ The discharge voltage equation is described by \eqref{eq:bat_Vd}.
 %
 \begin{multline}
 \label{eq:bat_Vd}
-V_{d} = \left[ 2.085-0.12(1-SOC) \right] - \\ \dfrac{I}{C_{10}} \left( \dfrac{4}{1+I^{1.3}} + \dfrac{0.27}{SOC^{1.5}}+0.02 \right) (1-0.007 \Delta T),
+V_{d} = \left[ 2.085-0.12(1-SOC) \right] - \dfrac{I}{C_{10}} \left( \dfrac{4}{1+I^{1.3}} + \dfrac{0.27}{SOC^{1.5}}+0.02 \right) (1-0.007 \Delta T),
 \end{multline}
 
 \noindent where $C_{10}$ means 10h of rated capacity, which is standard on the manufacturer's data-sheet, $\Delta T$ is temperature variation ($\Delta T=T-T_{ref} $%, $ T_{ref}=25^{o}C $
@@ -629,7 +629,7 @@ For the charging process, however, the parameters are described by ~\eqref{eq:Vc
 %
 \begin{multline}
 \label{eq:Vcbat}
-V_{c} = [2+0.16SOC]+ \\ \dfrac{I}{C_{10}} \left( \dfrac{6}{1+I^{0.86}} + \dfrac{0.48}{(1-SOC)^{1.2}} + 0.036  \right) (1-0.025 \Delta T).
+V_{c} = [2+0.16SOC]+ \dfrac{I}{C_{10}} \left( \dfrac{6}{1+I^{0.86}} + \dfrac{0.48}{(1-SOC)^{1.2}} + 0.036  \right) (1-0.025 \Delta T).
 \end{multline}
 
 Note that SOC can be calculated easily at any point during the discharge period, thereby considering the current drained from batteries during a certain time period. %; however, during recharge it is much more difficult \cite{Copetti}.

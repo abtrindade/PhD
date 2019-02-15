@@ -9,8 +9,7 @@
   volume    = {14},
   number    = {1},
   pages     = {65--81},
-  year      = {2015},
-  doi = {10.1007/s10270-013-0366-0}
+  year      = {2015}
 }
 
 @book{DBLP:books/daglib/0019162,
@@ -34,8 +33,7 @@
   volume    = {29},
   number    = {5},
   pages     = {911--931},
-  year      = {2017},
-  doi = {10.1007/s00165-017-0419-1}
+  year      = {2017}
 }
 
 @article{DBLP:journals/sttt/GadelhaIC17,
@@ -452,8 +450,7 @@ title = {Boolector: An Efficient {SMT} Solver for Bit-Vectors and Arrays},
 booktitle = {Tools and Alg. for the Const. and An. of Sys. (TACAS)},
 pages = {174-177},
 year = {2009},
-volume = {LNCS 5505},
-doi = {10.1007/978-3-642-00768-2_16}
+volume = {LNCS 5505}
 }
 
 @InProceedings{DeMoura,
@@ -955,8 +952,7 @@ bookTitle={Tools for Practical Software Verification: LASER, International Summe
 year={2012},
 publisher={Springer},
 address={Berlin},
-pages={1--30},
-doi={10.1007/978-3-642-35746-6_1}
+pages={1--30}
 }
 
 @InProceedings{esbmc2018,
