@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2018.10.25)  15 FEB 2019 12:09
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2018.10.25)  15 FEB 2019 16:06
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -575,14 +575,14 @@ Package pdftex.def Info: ./images/homer.png  used on input line 1289.
                                                   \fi \fi 
 l.1331 
         <./images/homer.png>] (./trindade_ren_and_sust_rev0.bbl [21] [22]
-
-LaTeX Warning: Command \o invalid in math mode on input line 121.
-
 [23]
+
+LaTeX Warning: Command \o invalid in math mode on input line 123.
+
 Missing character: There is no â in font cmr10!
 Missing character: There is no € in font cmr10!
 Missing character: There is no “ in font cmr10!
- [24])
+[24])
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1372.
  [25]
 Package atveryend Info: Empty hook `AfterLastShipout' on input line 1372.
@@ -625,10 +625,10 @@ msfonts/cm/cmti8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts
 /cm/cmti9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmt
 t10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt8.pfb
 >
-Output written on trindade_ren_and_sust_rev0.pdf (25 pages, 738955 bytes).
+Output written on trindade_ren_and_sust_rev0.pdf (25 pages, 739601 bytes).
 PDF statistics:
- 553 PDF objects out of 1000 (max. 8388607)
- 484 compressed objects within 5 object streams
+ 554 PDF objects out of 1000 (max. 8388607)
+ 485 compressed objects within 5 object streams
  134 named destinations out of 1000 (max. 500000)
  172 words of extra memory for PDF output out of 10000 (max. 10000000)
 
