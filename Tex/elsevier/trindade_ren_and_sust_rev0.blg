@@ -18,7 +18,7 @@ Warning--can't use both author and editor fields in Clarke2012
 Warning--empty chapter and pages in Clarke2012
 You've used 33 entries,
             2937 wiz_defined-function locations,
-            915 strings with 11712 characters,
+            915 strings with 11714 characters,
 and the built_in function-call counts, 11442 in all, are:
 = -- 1054
 > -- 360

@@ -1362,7 +1362,7 @@ As future work, the proposed method will be extended to start from a list of com
 %Appendix two text goes here.
 % use section* for acknowledgment
 \section*{Acknowledgments}
-The authors would like to thank Newton Fund (ref. 261881580) for the availability of the case studies (real PV systems) to validate the tool and to support the mobility of the researcher, and FAPEAM (Amazonas State Foundation for Research Support, call 009/2017 and PROTI Pesquisa 2018), for the financial support related to the Virtual Machine leasing, to the one-month PhD scholarship, and to support the mobility of the researcher. And FAS
+The authors would like to thank Newton Fund (ref. 261881580) and Coventry University for the availability of the case studies (real PV systems) to validate the tool and to support the mobility of the researcher. FAPEAM (Amazonas State Foundation for Research Support, call 009/2017 and PROTI Pesquisa 2018), for the financial support related to the Virtual Machine rent, to the one-month PhD scholarship, and to support the mobility of the researcher. And Sustainable Amazonas Foundation (FAS) for the PhD scholarship.
 
 \section*{References}
 
