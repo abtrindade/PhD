@@ -83,3 +83,5 @@ I increased the memory limit from 2024Mb to 32000MB by
 and I increased the time limit from 2s to 1000s with
   sed -i 's/-t\\:2000/-t\\:1000000/g' config/*.epf
 
+Daniel (19-FEB-2019)
+./Ultimate -tc config/AutomizerReach.xml -s config/svcomp-Reach-32bit-Automizer_Default.epf -i codePVsystem_rev9cUAH1_with_errorfun_3.c --traceabstraction.limit.analysis.time 900 --traceabstraction.stop.after.first.violation.was.found false --cacsl2boogietranslator.overapproximate.operations.on.floating.types false --cacsl2boogietranslator.assume.nondeterminstic.values.are.in.range false
