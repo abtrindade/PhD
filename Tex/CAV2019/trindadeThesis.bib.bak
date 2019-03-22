@@ -927,19 +927,23 @@ number = {2}
   title     = {Introduction to Model Checking},
   booktitle = {Handbook of Model Checking.},
   pages     = {1--26},
+  publisher = {Springer},
   year      = {2018}
 }
 
-@Inbook{Clarke2012,
-author={Edmund Clarke and William Klieber and Milo{\v{s} Nov{\'a}{\v{c}}ek} and Paolo Zuliani},
-editor={Bertrand Meyer and Martin Nordio},
-title={Model Checking and the State Explosion Problem},
-bookTitle={Tools for Practical Software Verification: LASER, International Summer School 2011, Elba Island, Italy, Revised Tutorial Lectures},
-year={2012},
-publisher={Springer},
-address={Berlin},
-pages={1--30}
+@inproceedings{Clarke2012,
+  author    = {Edmund M. Clarke and
+               William Klieber and
+               Milos Nov{\'{a}}cek and
+               Paolo Zuliani},
+  title     = {Model Checking and the State Explosion Problem},
+  booktitle = {LASER},
+  pages     = {1--30},
+  year      = {2011},
+  series    = {LNCS},
+  volume    = {7682}
 }
+
 
 @InProceedings{esbmc2018,
     author    = {Mikhail Gadelha and
@@ -957,7 +961,7 @@ pages={1--30}
     address   = {New York, NY, USA}
 }
 
-@electronic{ANSI2018,
+@misc{ANSI2018,
  author   = {{International Organization for Standardization}},
  title     = {{ISO/IEC} 9899:2018 {I}nformation {T}echnology -- {P}rogramming {L}anguages -- {C}},
  url       = {https://www.iso.org/standard/74528.html.},
@@ -972,7 +976,7 @@ pages={1--30}
 }
 
 
-@electronic{Irradiance,
+@misc{Irradiance,
   author = "EnergyPlus",
   title = "Weather Data by Location",
   url = "https://goo.gl/A82Jqh",
@@ -1013,7 +1017,7 @@ address = {Paris}
 
 @Book{IEA2017,
 author = {Michael Wetter and Christoph van Treeck},
-title = {New Generation Computational Tools for Building \& Community Energy Systems - Annex 60 Final Report},
+title = {New Generation Computational Tools for Building \& Community Energy Systems - {A}nnex 60 {F}inal {R}eport},
 publisher = {International Energy Agency (IEA)},
 year = {2017},
 address = {}
@@ -1028,20 +1032,32 @@ volume = {9},
 number = {6}
 }
 
-@InProceedings{Hussein2012,
+@inproceedings{KwiatkowskaNP11,
+  author    = {Marta Z. Kwiatkowska and
+               Gethin Norman and
+               David Parker},
+  title     = {{PRISM} 4.0: Verification of Probabilistic Real-Time Systems},
+  booktitle = {{CAV}},
+  pages     = {585--591},
+  series    = {LNCS},
+  volume    = {6806},
+  year      = {2011}
+}
+
+@article{Hussein2012,
 author = {M. Hussein and W. {Leal Filho}},
-title = {Analysis of energy as a precondition for improvement of living conditions and poverty reduction in sub-Saharan Africa},
-booktitle = {Scientific Research and Essays},
+title = {Analysis of energy as a precondition for improvement of living conditions and poverty reduction in sub-{S}aharan {A}frica},
+journal = {Scientific Research and Essays},
 pages = {2656--2666},
 year = {2012},
 volume = {7},
 number = {30}
 }
 
-@InProceedings{Sengupta2015,
+@article{Sengupta2015,
 author = {A. Sengupta and S. Mukhopadhyay and A. Sinha},
-title = {Automated Verification of Power System Protection Schemes—Part I: Modeling and Specifications},
-booktitle = {IEEE Tran. on Power Del.},
+title = {Automated Verification of Power System Protection Schemes—{P}art {I}: Modeling and Specifications},
+journal = {IEEE Tran. on Power Del.},
 pages = {2077--2086},
 year = {2015},
 volume = {30},
@@ -1064,28 +1080,41 @@ year = {2014}
 
 @InProceedings{Cheng2015,
 author = {Bei Cheng and Xiao Wang and Jufu Liu and Dehui Du},
-title = {Modana: An Integrated Framework for Modeling and Analysis of Energy-Aware CPSs},
+title = {Modana: An Integrated Framework for Modeling and Analysis of Energy-Aware {CPS}s},
 booktitle = {IEEE 39th Annual Computer Software and Applications Conference},
 year = {2015}
 }
 
-@InBook{Automizer2018,
-author = {Matthias Heizmann and Yu-Fang Chen and Daniel Dietsch and Marius Greitschus and Jochen Hoenicke and Yong Li and Alexander Nutz and Betim Musa and Christian Schilling and Tanja Schindler and Andreas Podelski},
-editor = {D. Beyer and M. Huisman},
-title = {TACAS 2018},
-chapter = {Ultimate Automizer and the Search for Perfect Interpolants},
-publisher = {Springer},
-volume = {LNCS 10806},
-year = {2018},
-pages = {447-451}
+@inproceedings{Automizer2018,
+  author    = {Matthias Heizmann and
+               Yu{-}Fang Chen and
+               Daniel Dietsch and
+               Marius Greitschus and
+               Jochen Hoenicke and
+               Yong Li and
+               Alexander Nutz and
+               Betim Musa and
+               Christian Schilling and
+               Tanja Schindler and
+               Andreas Podelski},
+  title     = {Ultimate Automizer and the Search for Perfect Interpolants - (Competition
+               Contribution)},
+  booktitle = {{TACAS}},
+  pages     = {447--451},
+  series    = {LNCS},
+  volume    = {10806},
+  year      = {2018}
 }
 
-@InBook{CEGAR,
-author = {Dirk Beyer and Stefan L\"{o}we},
-editor = {Vittorio Cortellessa and Dániel Varró},
-title = {16th international conference on Fund. Appr. to Soft. Eng.},
-chapter = {Explicit-State software model checking based on CEGAR and interpolation},
-publisher = {Springer-Verlag},
-year = {2013},
-OPTpages = {146-162}
+
+@inproceedings{CEGAR,
+  author    = {Dirk Beyer and
+               Stefan L{\"{o}}we},
+  title     = {Explicit-State Software Model Checking Based on {CEGAR} and Interpolation},
+  booktitle = {{FASE}},
+  pages     = {146--162},
+    series    = {LNCS},
+  volume    = {7793},
+  year      = {2013}
 }
+
