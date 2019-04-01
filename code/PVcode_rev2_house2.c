@@ -2,7 +2,7 @@
  ============================================================================
  Name        : PVcode.c
  Author      : Alessandro
- Version     : rev2 - March 2019
+ Version     : rev2 - April 2019
  Description : New PV code (Universal: CBMC, ESBMC, UAutomizer and CPChecker)
  //assume (exp);  MUST BE REPLACE BY:   if (!expr) { __VERIFIER_error(); }
  ============================================================================*/
@@ -11,23 +11,58 @@
 //HOUSE1 
 // int loadcurve[24] = {118,118,118,46,46,46,95,95,170,170,296,242,242,95,95,95,95,95,342,288,288,288,288,118};
 // int Phouse = 501, Psurge = 501, Econsumption = 3900;
-// int PACref = 700, MAXACref = 1600, NBS = 2, NBP = 2, capacity = 220, auton = 48, NPP = 1, NPS = 3, VC = 24, Vsystem = 24;
+// int PACref = 700, MAXACref = 1600, NBS = 2, NBP = 2, capacity = 220, autonomy = 48, NPP = 1, NPS = 3, VC = 24, Vsystem = 24;
+// int bankcapacity = 440; //(capacity*NBP);
+// int SOClimit = 75, SOCabsorption = 95, SOCfull = 100, Vbat = 12;
+// float Vbulk = 28.80; //(14.40*NBS);
+// float Vfloat = 26.40; //(13.20*NBS);
+// int nb = 1;
+// float ni = 0.93;
+// int VoutAC = 110, VinDC = 24, VAC = 127;
 //HOUSE2 
 // int loadcurve[24] = {136, 136, 136, 136, 136, 136, 67, 67, 184, 184, 184, 184, 184, 67, 67, 67, 67, 67, 253, 253, 253, 253, 253, 136};
 // int Phouse = 253, Psurge = 722, Econsumption = 3600;
-// int PACref = 700, MAXACref = 1600, NBS = 2, NBP = 2, capacity = 220, auton = 48, NPP = 1, NPS = 3, VC = 24, Vsystem = 24;
+// int PACref = 700, MAXACref = 1600, NBS = 2, NBP = 2, capacity = 220, autonomy = 48, NPP = 1, NPS = 3, VC = 24, Vsystem = 24;
+// int bankcapacity = 440; //(capacity*NBP);
+// int SOClimit = 75, SOCabsorption = 95, SOCfull = 100, Vbat = 12;
+// float Vbulk = 28.80; //(14.40*NBS);
+// float Vfloat = 26.40; //(13.20*NBS);
+// int nb = 1;
+// float ni = 0.93;
+// int VoutAC = 110, VinDC = 24, VAC = 127;
 //HOUSE3 
 // int loadcurve[24] = {113,113,113,113,113,113,67,67,217,97,97,97,97,97,97,97,97,97,263,113,113,113,113,113};
 // int Phouse = 263, Psurge = 732, Econsumption = 2500;
-// int PACref = 700, MAXACref = 1600, NBS = 2, NBP = 2, capacity = 220, auton = 48, NPP = 1, NPS = 3, VC = 24, Vsystem = 24;
+// int PACref = 700, MAXACref = 1600, NBS = 2, NBP = 2, capacity = 220, autonomy = 48, NPP = 1, NPS = 3, VC = 24, Vsystem = 24;
+// int bankcapacity = 440; //(capacity*NBP);
+// int SOClimit = 75, SOCabsorption = 95, SOCfull = 100, Vbat = 12;
+// float Vbulk = 28.80; //(14.40*NBS);
+// float Vfloat = 26.40; //(13.20*NBS);
+// int nb = 1;
+// float ni = 0.93;
+// int VoutAC = 110, VinDC = 24, VAC = 127;
 //HOUSE4 
 // int loadcurve[24] = {207,207,207,135,135,135,66,66,161,161,233,253,248,66,66,66,66,66,302,317,322,302,302,207};
 // int Phouse = 322, Psurge = 896, Econsumption = 4300;
-// int PACref = 700, MAXACref = 1600, NBS = 2, NBP = 2, capacity = 220, auton = 48, NPP = 1, NPS = 3, VC = 24, Vsystem = 24;
+// int PACref = 700, MAXACref = 1600, NBS = 2, NBP = 2, capacity = 220, autonomy = 48, NPP = 1, NPS = 3, VC = 24, Vsystem = 24;
+// int bankcapacity = 440; //(capacity*NBP);
+// int SOClimit = 75, SOCabsorption = 95, SOCfull = 100, Vbat = 12;
+// float Vbulk = 28.80; //(14.40*NBS);
+// float Vfloat = 26.40; //(13.20*NBS);
+// int nb = 1;
+// float ni = 0.93;
+// int VoutAC = 110, VinDC = 24, VAC = 127;
 //HOUSE5 
 // int loadcurve[24] = {45,16,16,16,16,16,0,0,0,72,72,222,150,150,0,0,72,72,814,814,814,742,742,16};
 // int Phouse = 915, Psurge = 980, Econsumption = 4880;
-// int PACref = 1200, MAXACref = 2400, NBS = 4, NBP = 1, capacity = 120, auton = 6, NPP = 2, NPS = 2, VC = 48, Vsystem = 48;
+// int PACref = 1200, MAXACref = 2400, NBS = 4, NBP = 1, capacity = 120, autonomy = 6, NPP = 2, NPS = 2, VC = 48, Vsystem = 48;
+// int bankcapacity = 120; //(capacity*NBP);
+// int SOClimit = 75, SOCabsorption = 95, SOCfull = 100, Vbat = 12;
+// float Vbulk = 57.60; //(14.40*NBS);
+// float Vfloat = 52.80; //(13.20*NBS);
+// int nb = 1;
+// float ni = 0.93;
+// int VoutAC = 110, VinDC = 48, VAC = 127;
 
 //data from Manaus
 int minSolarIrrad [24] = {0,0,0,0,0,0,25,135,274,422,509,537,503,505,430,281,80,10,0,0,0,0,0,0};
@@ -37,35 +72,16 @@ int maxTemp [12] = {30,30,30,30,30,30,30,31,32,32,31,30};
 
 
 // CASE DESCRIPTION BELOW
-int Phouse = 501;
-int Psurge = 501;
-int Econsumption = 3900;
-int PACref = 700;
-int MAXACref = 1600;
-int loadcurve [24] = {118,118,118,46,46,46,95,95,170,170,296,242,242,95,95,95,95,95,342,288,288,288,288,118};
-int NBS = 2;
-int NBP = 2;
-int autonomy = 48;
-int capacity = 220;
-int NPP = 1;
-int NPS = 3;
-int VC = 24;  //controller voltage
-int Vsystem = 24;  //DCbus
-
+int loadcurve[24] = {136, 136, 136, 136, 136, 136, 67, 67, 184, 184, 184, 184, 184, 67, 67, 67, 67, 67, 253, 253, 253, 253, 253, 136};
+int Phouse = 253, Psurge = 722, Econsumption = 3600;
+int PACref = 700, MAXACref = 1600, NBS = 2, NBP = 2, capacity = 220, autonomy = 48, NPP = 1, NPS = 3, VC = 24, Vsystem = 24;
 int bankcapacity = 440; //(capacity*NBP);
-int SOClimit = 75;
-int SOCabsorption = 95;
-int SOCfull = 100;
-int Vbat = 12;
+int SOClimit = 75, SOCabsorption = 95, SOCfull = 100, Vbat = 12;
 float Vbulk = 28.80; //(14.40*NBS);
 float Vfloat = 26.40; //(13.20*NBS);
 int nb = 1;
-
-//inverter data (outlet voltage, efficiency)
-int VoutAC = 110;
 float ni = 0.93;
-int VinDC = 24;
-int VAC = 127;
+int VoutAC = 110, VinDC = 24, VAC = 127;
 
 //data sheet information from the PV model Canadian 325W CS6U-325P
 int N = 72;    //N=number of series-connected cells
@@ -93,8 +109,8 @@ float VCmax = 145.0;
 
 //global variables
 float Parray, Iarray, Varray;
-float precisionLN = 0.001;
-float precisionEXP = 0.001;
+double precisionLN = 0.0001;
+double precisionEXP = 0.0001;
 float Vdc,Idc, Idcmin, PinDCmin;
 int SOC = 100; //battery is charged when starts the verification
 
@@ -264,7 +280,7 @@ void PVgeneration (int Gf, int AMBtemperaturef){
 
 	Pmax=0;
 	//sweep the V-I graph to find the MPPT
-	for (V=0; V<= Vocref; V=V+0.2){
+	for (V=0; V<= Vocref; V=V+0.1){
 		//PV panel model: 1-diode model
 		I = Iph - Io*(expFUNC(V/(N*a*VT)) - 1);
 		__VERIFIER_assume ( (I >=0) && (I<=Iscref) );	////calculated current cannot be greater than Iscref or negative
