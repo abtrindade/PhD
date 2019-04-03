@@ -112,7 +112,7 @@ float Parray, Iarray, Varray;
 double precisionLN = 0.0001;
 double precisionEXP = 0.0001;
 float Vdc,Idc, Idcmin, PinDCmin;
-int SOC = 100; //battery is charged when starts the verification
+float SOC = 100; //battery is charged when starts the verification
 
 
 /* start: C compiler */
@@ -156,8 +156,8 @@ int findEndPVGeneration(void){
 }
 
 void dischargeBattery(int hday){
-	int demand, drainedCurrent;
-	float tempf;
+	int demand;
+	float drainedCurrent, tempf;
 	//defining minimum values to met the house requirements, considering demand, output voltage of VoutAC from inverter
 	//at the inverter:
 	demand = loadcurve[hday];
@@ -165,7 +165,7 @@ void dischargeBattery(int hday){
 	//at the charge controller output (Vdc is 12*NBS and Idc must be greater than PinDC/Vdc)
 	Idcmin = PinDCmin / (Vbat*NBS);
 
-	drainedCurrent = demand / VoutAC;
+	drainedCurrent = (float)demand / (float)VoutAC;
 
 	Vdc=Vbat*NBS;
 	Idc=Idcmin;
@@ -173,7 +173,7 @@ void dischargeBattery(int hday){
 	tempf = 100*drainedCurrent*1/bankcapacity;
 		__VERIFIER_assume(tempf>=0 && tempf<=100);
 		__VERIFIER_assume(SOC>=0 && SOC<=100);
-	SOC = SOC - (int)tempf;
+	SOC = SOC - tempf;
 		if ( !(SOC>=SOClimit && SOC<=100)) { __VERIFIER_error(); }
 
 }
@@ -253,7 +253,7 @@ void PVgeneration (int, int);
 //function that generates the MPPT values (Varray and Iarray) from the PV panel,
 // considering values of solar irradiance(G) and ambient temperature
 void PVgeneration (int Gf, int AMBtemperaturef){
-	float Iphref, T, Tk, VT, a, Io, Iph, I, V, Vmax, Imax, Pmax;
+	float Iphref, T, Tk, VT, a, Io, Iph, I=0, V=0, Vmax=0, Imax=0, Pmax=0;
 	float kbq, qkb;
 	Iphref = Iscref; //mathematical approximation from the model
 	//set up of parameters
