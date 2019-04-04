@@ -6,7 +6,10 @@ Database file #1: trindadeThesis.bib
 Warning--entry type for "ANSI2018" isn't style-file defined
 --line 979 of file trindadeThesis.bib
 Warning--entry type for "Irradiance" isn't style-file defined
---line 994 of file trindadeThesis.bib
+--line 993 of file trindadeThesis.bib
+Warning--entry type for "EPE2018" isn't style-file defined
+--line 1110 of file trindadeThesis.bib
+Warning--can't use both volume and number fields in Hussein2012
 Warning--can't use both volume and number fields in Gow1999
 Warning--empty publisher in ClarkeHV18
 Warning--empty pages in Natsheh2012
@@ -16,45 +19,45 @@ Warning--can't use both author and editor fields in Mohanty
 Warning--there's a number but no series in Hansen
 Warning--can't use both author and editor fields in Clarke2012
 Warning--empty chapter and pages in Clarke2012
-You've used 33 entries,
+You've used 35 entries,
             2937 wiz_defined-function locations,
-            915 strings with 11714 characters,
-and the built_in function-call counts, 11442 in all, are:
-= -- 1054
-> -- 360
-< -- 19
-+ -- 141
-- -- 108
-* -- 809
-:= -- 1460
-add.period$ -- 54
-call.type$ -- 33
-change.case$ -- 32
+            923 strings with 11989 characters,
+and the built_in function-call counts, 11742 in all, are:
+= -- 1090
+> -- 340
+< -- 20
++ -- 136
+- -- 101
+* -- 793
+:= -- 1470
+add.period$ -- 55
+call.type$ -- 35
+change.case$ -- 34
 chr.to.int$ -- 0
-cite$ -- 42
-duplicate$ -- 394
-empty$ -- 1352
-format.name$ -- 135
-if$ -- 3051
+cite$ -- 45
+duplicate$ -- 410
+empty$ -- 1411
+format.name$ -- 128
+if$ -- 3154
 int.to.chr$ -- 0
-int.to.str$ -- 33
-missing$ -- 33
-newline$ -- 130
+int.to.str$ -- 35
+missing$ -- 35
+newline$ -- 133
 num.names$ -- 39
-pop$ -- 254
+pop$ -- 273
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 0
-skip$ -- 812
+skip$ -- 857
 stack$ -- 0
-substring$ -- 471
-swap$ -- 154
-text.length$ -- 19
+substring$ -- 501
+swap$ -- 158
+text.length$ -- 20
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 0
-warning$ -- 9
-while$ -- 76
-width$ -- 35
-write$ -- 332
-(There were 11 warnings)
+warning$ -- 10
+while$ -- 78
+width$ -- 37
+write$ -- 343
+(There were 13 warnings)

@@ -5,14 +5,19 @@
 \expandafter\ifx\csname href\endcsname\relax
   \def\href#1#2{#2} \def\path#1{#1}\fi
 
-\bibitem{Coelho}
-S.~Coelho, A.~Sanches-Pereira, L.~Tudeschini, J.~Escobar, M.~Poveda, N.~Coluna,
-  A.~Collin, E.~L. Rovere, A.~Trindade, O.~Pereira, Biomass residues as
-  electricity generation source in low {HD} source in regions of {B}razil, in:
-  UNESP (Ed.), The XI Latin. Cong. of Elec. Gener. and Transm. CLAGTEE, 2015,
-  pp. 1--8.
-\newblock \href {http://dx.doi.org/10.13140/RG.2.1.2747.7208}
-  {\path{doi:10.13140/RG.2.1.2747.7208}}.
+\bibitem{Hussein2012}
+M.~Hussein, W.~{Leal Filho}, Analysis of energy as a precondition for
+  improvement of living conditions and poverty reduction in sub-{S}aharan
+  {A}frica, in: Scientific Research and Essays, Vol.~7, 2012, pp. 2656--2666.
+
+\bibitem{IEAweo2018}
+{IEA International Energy Agency}, World Energy Outlook 2018, IEA, Paris, 2018.
+
+\bibitem{EPE2018}
+{E}mpresa de {P}esquisa~{E}nergética EPE, {S}istemas {I}solados -
+  {P}lanejamento {C}iclo 2018 - 2023,
+  http://www.epe.gov.br/sites-pt/publicacoes-dados-abertos/publicacoes/PublicacoesArquivos/publicacao-346/EPE-NT-Planejamento%20SI-ciclo_2018_rev1.pdf
+  - 2018 [Acessed 04 April 2019].
 
 \bibitem{EPIA}
 EPIA, Global market outlook for photovoltaics 2017-2021, European Phototoltaic
@@ -187,16 +192,13 @@ P.~Schrammel, D.~Kroening, M.~Brain, R.~Martins, T.~Teige, T.~Bienm{\"{u}}ller,
   {\path{doi:10.1007/s00165-017-0419-1}}.
 
 \bibitem{ANSI2018}
-{International Organization for Standardization},
-  \href{https://www.iso.org/standard/74528.html.}{{ISO/IEC} 9899:2018
-  {I}nformation {T}echnology -- {P}rogramming {L}anguages -- {C}}, acessed:
-  14.11.2018.
-\newline\urlprefix\url{https://www.iso.org/standard/74528.html.}
+{International Organization for Standardization}, {ISO/IEC} 9899:2018
+  {I}nformation {T}echnology -- {P}rogramming {L}anguages -- {C},
+  https://www.iso.org/standard/74528.html - 2018 [Acessed 14 November 2018].
 
 \bibitem{Irradiance}
-EnergyPlus, \href{https://goo.gl/A82Jqh}{Weather data by location}, acessed:
-  09.07.2018.
-\newline\urlprefix\url{https://goo.gl/A82Jqh}
+EnergyPlus, Weather data by location, https://goo.gl/A82Jqh - 2018 [Acessed 09
+  July 2018].
 
 \bibitem{Brummayer}
 R.~Brummayer, A.~Biere, Boolector: An efficient {SMT} solver for bit-vectors
