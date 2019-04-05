@@ -83,7 +83,7 @@ Formal verification \sep model checking \sep photovoltaic power systems \sep pow
 \linenumbers
 
 \section{Introduction}
-Lack of access to clean and affordable energy is considered a core dimension of poverty~\cite{Hussein2012}. Progress has been made worldwide; in particular, the number of people without electricity access fell below 1 billion threshold for the first time in 2017~\cite{IEAweo2018}. The share of people without access to electricity from Africa is 58\%, while 19\% of the share comes from developing Asia, and 31\% from Latin America~\cite{IEAweo2018}. Numbers from Brazil show the aim to electrify 270 isolated places and 2.7 million of people until 2023~\cite{EPE2018}. Furthermore, there is a close relationship between the lack of energy and the low HDI (Human Development Index) of those localities.
+Lack of access to clean and affordable energy is considered a core dimension of poverty~\cite{Hussein2012}. Progress has been made worldwide; in particular, the number of people without electricity access fell below 1 billion threshold for the first time in 2017~\cite{IEAweo2018}. The share of people without access to electricity from Africa is 58\%, while 19\% of the share comes from developing Asia, and 31\% from Latin America~\cite{IEAweo2018}. Numbers from Brazil show the aim to electrify 270 isolated places and 2.7 million of people until 2023~\cite{EPE2018}. Furthermore, there is a close relationship between the lack of energy and the low HDI (Human Development Index) of those localities~\cite{Coelho}.
 
 In order to provide universal electricity for all, decentralized systems led by solar photovoltaic (PV) in off-grid and mini-grid systems will be the lowest-cost solution for three-quarters of the additional connections needed; and grid extension will be the standard especially in urban areas~\cite{IEAweo2018}.
 
@@ -534,7 +534,7 @@ a = \dfrac{q(V_{m,ref}-V_{oc,ref})}{Nk_{B}T} \dfrac{1}{ln \left( 1 - \dfrac{I_{m
 
 \noindent where $V_{mref}$, $V_{oc,ref}$, $I_{m,ref}$, and $I_{sc,ref}$ are key cell values obtained under both actual cell temperature and solar irradiance conditions. %, usually provided by manufacturers; t
 
-The PV generator model is now completely determined; it requires the actual cell temperature (or the air temperature), the actual solar irradiance and common data provided by manufacturers.
+The PV generator model is now completely determined; it requires the actual cell temperature (or the air temperature), the actual solar irradiance and common data provided by manufacturers in data-sheets or manuals.
 %
 %If the PV cells are in parallel, then there is a parallel array. Therefore, there will be a change at the $ I_{ph} $ and $ I_{0} $and the resulting current is given by Equation \ref{eq:Iarray}, as demonstrated in \cite{Saloux}.
 %
@@ -701,7 +701,7 @@ Note that SOC can be calculated easily at any point during the discharge period,
 \subsection{Charge Controller Model}
 %---------------------------------------------------------
 %Depending on the literature, the controller can receive different names: controller \cite{Hansen}, charge controller \cite{Mahanta} and \cite{Chauhan}, regulator \cite{Mellit}, DC-DC converter with MPPT and switch \cite{Dhanowa}, \cite{Yatimi}, \cite{Abdulateef}, \cite{Roy}. However, in this study, in order to simplify, the term used is controller. 
-%The charge controller or controller is a set of items (DC-DC converter, MPPT, and switches) and can be defined as the responsible to manage the energy flow to PV system, batteries and loads by collecting information on the battery voltage and knowing the maximum and minimum values acceptable for the battery voltage. %MPPT, or maximum power point tracking, is an electronic control mechanism that maintains the PV operating at the voltage of maximum power. Controllers aim to protect the battery (or batteries) against the excessive charge and discharge \cite{Pinho}, improving its lifetime. 
+The charge controller or controller is a set of items (DC-DC converter, MPPT, and switches) and can be defined as the responsible to manage the energy flow to PV system, batteries and loads by collecting information on the battery voltage and knowing the maximum and minimum values acceptable for the battery voltage. MPPT, or maximum power point tracking, is an electronic control mechanism that maintains the PV operating at the voltage of maximum power. Controllers aim to protect the battery (or batteries) against the excessive charge and discharge \cite{Pinho}, improving its lifetime. 
 %
 %The resource MPPT, called of maximum power point tracking, is an electronic control mechanism that maintains the PV operating in a voltage that correspond to the voltage of maximum power.
 %
@@ -712,6 +712,7 @@ Note that SOC can be calculated easily at any point during the discharge period,
 %
 %The controller allows the management of energy between the load and the battery \cite{Mellit}. 
 %The input signals for regulator model are the battery current ($ I_{br} $), PV generator's voltage ($ V_{PV} $), PV generator's current ($ I_{PV} $), and battery voltage ($ V_{b} $). The outputs are battery ($ I_{rb} $) current and used current ($ I_{u} $). 
+
 To protect the battery against an excessive charge, the PV arrays are disconnected from the system, when the terminal voltage increases above a certain threshold $V_{max \textunderscore off}$ and when the current required by the load is less than the current delivered by the PV arrays~\cite{Hansen}. PV arrays are connected again when the terminal voltage decreases below a certain value $ V_{max \textunderscore on} $. 
 %This can be done by using a switch with a hysteresis cycle, as illustrated in Fig. \ref{fig:controllerover}. 
 %
@@ -779,7 +780,7 @@ Assuming that the efficiency of the controller ($ \eta_{c} $) is a manufacturer'
 V_{in} I_{in} \eta_{c} = V_{out} I_{out},
 \end{equation}
 
-\noindent where $ V_{in} $ is the voltage across the PV array, $ I_{in} $ is the output current of PV array, $ V_{out}=V_{b}=V_{system} $ is the  DC bus voltage, and $ I_{out} $ is the output current from the converter.
+\noindent where $ V_{in} $ is the voltage across the PV array, $ I_{in} $ is the output current of PV array, $ V_{out} $ is the  DC bus voltage, and $ I_{out} $ is the output current from the converter.
 
 %The output voltage is related to the input voltage as a function of duty cycle of the switch (\cite{Abdulateef}). 
 % 
@@ -857,113 +858,14 @@ and to convert the input power $ P_{in} $ into the output power $ P_{out} $ with
 %
 %
 %--------------------------------------------------
-\section{Verification of the PV Project Sizing}
+\subsection{Availability of Stand-alone PV Systems}
 %--------------------------------------------------
-In addition to the verification tool being able to check a PV solar system, as if it were actually being used in the field, indicating the conditions that it does not meet the system user requirements, it is possible to extend the tool, giving it the capacity to carry out the validation of the designed system (a.k.a. sizing check).
-%In addition the fact that the automated verification tool can check the possible failure of the PV system during its use at the field, it is possible as well to use the tool to check if the sizing of the components are correct.
+Each stand-alone PV system, like any other power systems, has a specific level of availability. This reliability level impacts various issues, as system performance, production, feasibility, and investment. The availability of a stand-alone PV system can be defined as the percentage of time at which a power system is capable of meeting the load requirements~\cite{Khatib2014}. The number of hours that the system is available, divided by 8,760 h, gives the annual system availability.
 
-Therefore this is a additional feature included at this paper. The sizing check will be performed, as proposed at the methodology, and the tool will indicate if there is an error of sizing before to perform the automated verification of the system. This stage ensures that the system meets the standard project steps related to the critical design month~\cite{Pinho}.
-%
-Firstly, it is needed to correct the energy consumption estimated to the load ($E_{consumption}$), which is carried out by ~\eqref{eq:Ecorrected}, where the efficiency of batteries ($\eta_{b}$), controller ($\eta_{c}$), and the inverter ($\eta_{i}$) are considered~\cite{Pinho}.
-\begin{equation}
-\label{eq:Ecorrected}
-E_{corrected} = \dfrac{E_{consumption}}{ \eta_{b} \eta_{c} \eta_{i} }.
-\end{equation}
+The system availability definition depends on how critical the load application is. For critical loads, 99\% is considered acceptable. While in a ordinary house electrical load, 95\% is considered acceptable. As an example, a system with 95\% availability is expected to meet the load requirement of 8,322 h during an average year for the entire useful life of the system. An annual availability of 99\% means that the system can operate the load for 8,672 h of the 8,760 h.
 
-The total minimum number of needed solar panels ($N_{TPmin}$) is computed by ~\eqref{eq:NTPmin} and the check is performed using ~\eqref{eq:NTP}, where the sized number of panels ($ N_{TP} $) must be greater than the result from ~\eqref{eq:NTPmin}.
-\begin{equation}
-\label{eq:NTPmin}
-N_{TPmin} = \dfrac{E_{corrected}}{E_{p}}.
-\end{equation}
+With that in mind, it is important to mention that even if a formal verification or a simulation shows that a PV system fails, it doesn't mean that the sizing is wrong. It is important to evaluate how critical the load application is and the horizon of evaluation.
 
-\begin{equation}
-\label{eq:NTP}
-N_{TP} \geq N_{TPmin}.
-\end{equation}
-
-Particularly, the total number of panels in series ($N_{PSmin}$) and parallel ($N_{PPmin}$) are given by~\eqref{eq:NPSmin} and \eqref{eq:NPPmin}, respectively. With the check performed by (\ref{eq:NPS}) and (\ref{eq:NPP}), $ V_{system} $ is the DC voltage of the bus, normally $12$, $24$ or $48$ V.
-\begin{equation}
-\label{eq:NPSmin}
-N_{PSmin} = \dfrac{V_{system}}{V_{m,ref}}.
-\end{equation}
-
-\begin{equation}
-\label{eq:NPPmin}
-N_{PPmin} = \dfrac{N_{TPmin}}{N_{PSmin}}.
-\end{equation}
-
-\begin{equation}
-\label{eq:NPS}
-N_{PS} \geq N_{PSmin}.
-\end{equation}
-
-\begin{equation}
-\label{eq:NPP}
-N_{PP} \geq N_{PPmin}.
-\end{equation}
-
-Related to the batteries, firstly must be defined the total capacity of the battery bank, as described by \eqref{eq:Cbank} as
-\begin{equation}
-\label{eq:Cbank}
-C_{bank} = \dfrac{E_{corrected} \times autonomy}{V_{system} \times DOD}.
-\end{equation}
-%
-\noindent where the variable $autonomy$ is a design definition; % and normally has a value ranging from $6$ to $48$h; 
-the other variables were discussed previously in Section~\ref{sec:PVmodel} and ~\ref{sec:BATmodel}.
-%
-Secondly, the total (minimum) number of batteries is computed, as described by \eqref{eq:Nbtotal}. Additionally, \eqref{eq:batcheck} performs the final sizing check, thus considering the number of batteries in series ($ N_{BS} $) and the number of batteries in parallel ($ N_{BP} $) that are established to the project.
-\begin{equation}
-\label{eq:Nbtotal}
-N_{B}total = N_{BS}min \times N_{BP}min = \dfrac{V_{system}}{V_{bat}} \times \dfrac{C_{bank}}{C_{20}}.
-\end{equation}
-
-\begin{equation}
-\label{eq:batcheck}
-\left( N_{BS} \times  N_{BP} \right) \geq N_{B}total.
-\end{equation}
-
-Related to the charge controller, initially it must meet the voltage requirement of the PV system, as described by ~\eqref{eq:vcvsystem}: 
-\begin{equation}
-\label{eq:vcvsystem}
-V_{c} = V_{system}.
-\end{equation}
-
-Following, the short circuit reference information from the manufacturer's solar panel must be corrected to the cell temperature, as described by \eqref{eq:iscamb}:
-%
-\begin{equation}
-\label{eq:iscamb}
-I_{sc,amb} = I_{sc,ref} \times \left[ 1 + \eta_{I} \times (T-25) \right]. 
-\end{equation}
-
-The controller must meet the maximum current from the PV array given by \eqref{eq:icmin} and \eqref{eq:icicmin}.
-\begin{equation}
-\label{eq:icmin}
-I_{c,min} = I_{sc,amb} \times N_{PP}.
-\end{equation}
-
-\begin{equation}
-\label{eq:icicmin}
-I_{c} \geq I_{c,min}.
-\end{equation}
-
-The sizing project check of the inverter is carried out by means of three equations. Equation~\eqref{eq:vindc} ensures that the input voltage of the controller meets the system voltage. Equation~\eqref{eq:voutac} ensures that the output voltage of the controller meets the AC voltage of the load. Finally, \eqref{eq:invcheck} ensures that the controller can support the total demand of the load and the surge power.
-%
-\begin{equation}
-\label{eq:vindc} 
-V_{in}DC = V_{system}.
-\end{equation}
-%
-\begin{equation}
-\label{eq:voutac} 
-V_{out}AC = V_{AC}.
-\end{equation}
-%
-\begin{equation}
-\label{eq:invcheck} 
-\left[ (Demand \leq P_{AC,ref}) \, and \, (P_{surge} \leq MAX_{AC,ref}) \right].
-\end{equation}
-
-Worth to mention that the charge controller, the battery, and the inverter have a nominal efficiency presented at data sheets, and those numbers are very close to 100\%. However, based on empirical data, those efficiencies must be corrected, according to the loading of each component. If field or essay data is not available, considering that the proposed tools is aimed to be used prior the deployment of the PV system at the field, it is recommended (at least) to correct the battery efficiency ($\eta_{b}$) to 85\%.
 %
 %--------------------------------------------------
 \section{Automated Verification Using Model Checking}
@@ -1105,6 +1007,127 @@ ESBMC exploits the standardized input language of SMT solvers (SMT-LIB\footnote{
 %
 %As described in \cite{Alur}, in program verification, it is aimed to check if a program satisfies its logical specification. Contemporary verification tools vary widely in terms of source languages, verification methodology, and the degree of automation, but they all rely on repeatedly invoking an SMT solver. This work tracks the same path. 
 %
+%--------------------------------------------------
+\section{Stand-alone PV System Sizing and Verification}
+\label{sec:sizingcheck}
+%--------------------------------------------------
+In addition to the verification tool being able to check a PV solar system, as if it were actually being used in the field, indicating the conditions that it does not meet the system user requirements, it is possible to extend the tool, giving it the capacity to carry out the validation of the designed system (a.k.a. sizing check).
+%In addition the fact that the automated verification tool can check the possible failure of the PV system during its use at the field, it is possible as well to use the tool to check if the sizing of the components are correct.
+
+Therefore this is a additional feature included at this paper. The sizing check will be performed by the proposed tool, and it will indicate if there is an error of sizing before to perform the automated verification of the system. This stage ensures that the system meets the standard project steps related to worst monthly average solar energy~\cite{Pinho}. 
+%
+Firstly, it is needed to correct the energy consumption estimated to the load ($E_{consumption}$), which is carried out by ~\eqref{eq:Ecorrected}, where the efficiency of batteries ($\eta_{b}$), controller ($\eta_{c}$), and the inverter ($\eta_{i}$) are considered~\cite{Pinho}.
+\begin{equation}
+\label{eq:Ecorrected}
+E_{corrected} = \dfrac{E_{consumption}}{ \eta_{b} \eta_{c} \eta_{i} }.
+\end{equation}
+
+Following, it is necessary to estimate the energy that can be produced for each panel, called $E_{p}$, in Wh, as defined by~\eqref{eq:Ep}.
+
+\begin{equation}
+\label{eq:Ep}
+E_{p} = Solar\_Irradiance \times Panel\_Area \times \eta_{p} \times 1000,
+\end{equation}
+
+\noindent where the solar irradiance is expressed in terms of $kWh/m^{2}$ and depends on the site where the PV systems will be deployed, the PV panel area is given in $m^{2}$ and corresponds to the size of one PV panel, and $\eta_{p}$ represents the PV panel efficiency.
+
+The total minimum number of needed solar panels ($N_{TPmin}$) is computed by ~\eqref{eq:NTPmin} and the check is performed using ~\eqref{eq:NTP}, where the sized number of panels ($ N_{TP} $) must be greater than the result from ~\eqref{eq:NTPmin}.
+\begin{equation}
+\label{eq:NTPmin}
+N_{TPmin} = \dfrac{E_{corrected}}{E_{p}}.
+\end{equation}
+
+\begin{equation}
+\label{eq:NTP}
+N_{TP} \geq N_{TPmin}.
+\end{equation}
+
+Particularly, the total number of panels in series ($N_{PSmin}$) and parallel ($N_{PPmin}$) are given by~\eqref{eq:NPSmin} and \eqref{eq:NPPmin}, respectively. With the check performed by (\ref{eq:NPS}) and (\ref{eq:NPP}). Where $V_{mppt,max}$ is the maximum operation voltage and $V_{mppt,min}$ is the minimum operation voltage of the charge controller; $V_{maxPower,TempMax}$ and $V_{maxPower,TempMin}$ are the maximum power voltage from the PV module considering the maximum and minimum operational temperature, respectively; $P_{total}$ is the total power demanded from the PV system and $P_{max,ref}$ is the power supplied from one PV panel in $Watts$.
+%, $ V_{system} $ is the DC voltage of the bus, normally $12$, $24$ or $48$ V.
+
+\begin{equation}
+\label{eq:NPSmin}
+\dfrac{V_{mppt,min}}{V_{maxPower,TempMax}}\leq N_{PSmin} \leq \dfrac{V_{mppt,max}}{V_{maxPower,TempMin}}.
+\end{equation}
+
+\begin{equation}
+\label{eq:NPPmin}
+N_{PPmin} = \dfrac{P_{total}}{Number\,Panels\,Series \times P_{max,ref}}.
+\end{equation}
+
+\begin{equation}
+\label{eq:NPS}
+N_{PS} \geq N_{PSmin}.
+\end{equation}
+
+\begin{equation}
+\label{eq:NPP}
+N_{PP} \geq N_{PPmin}.
+\end{equation}
+
+Related to the batteries, firstly must be defined the total capacity of the battery bank, as described by \eqref{eq:Cbank} as
+\begin{equation}
+\label{eq:Cbank}
+C_{bank} = \dfrac{E_{corrected} \times autonomy}{V_{system} \times DOD}.
+\end{equation}
+%
+\noindent where the variable $autonomy$ is a design definition; % and normally has a value ranging from $6$ to $48$h; 
+$ V_{system} $ is the DC voltage of the bus, and the other variables were discussed previously in Section~\ref{sec:PVmodel} and ~\ref{sec:BATmodel}.
+%
+Secondly, the total (minimum) number of batteries is computed, as described by \eqref{eq:Nbtotal}. Additionally, \eqref{eq:batcheck} performs the final sizing check, thus considering the number of batteries in series ($ N_{BS} $) and the number of batteries in parallel ($ N_{BP} $) that are established to the project.
+\begin{equation}
+\label{eq:Nbtotal}
+N_{B}total = N_{BS}min \times N_{BP}min = \dfrac{V_{system}}{V_{bat}} \times \dfrac{C_{bank}}{1 \,Battery \, Capacity}.
+\end{equation}
+
+\begin{equation}
+\label{eq:batcheck}
+\left( N_{BS} \times  N_{BP} \right) \geq N_{B}total.
+\end{equation}
+
+Related to the charge controller, initially it must meet the voltage requirement of the PV system, as described by ~\eqref{eq:vcvsystem} to the charge controller voltage: 
+\begin{equation}
+\label{eq:vcvsystem}
+V_{c} = V_{system}.
+\end{equation}
+
+Following, the short circuit reference information from the manufacturer's solar panel must be corrected to the cell temperature, as described by \eqref{eq:iscamb}:
+%
+\begin{equation}
+\label{eq:iscamb}
+I_{sc,amb} = \dfrac{G}{G_{ref}} \left[ I_{sc,ref} + \mu_{I} \times (T-25) \right]. 
+\end{equation}
+
+The controller must meet the maximum current from the PV array given by \eqref{eq:icmin} and \eqref{eq:icicmin}.
+\begin{equation}
+\label{eq:icmin}
+I_{c,min} = I_{sc,amb} \times N_{PP}.
+\end{equation}
+
+\begin{equation}
+\label{eq:icicmin}
+I_{c} \geq I_{c,min}.
+\end{equation}
+
+The sizing project check of the inverter is carried out by means of three equations. Equation~\eqref{eq:vindc} ensures that the input voltage of the controller meets the system voltage. Equation~\eqref{eq:voutac} ensures that the output voltage of the controller meets the AC voltage of the load. Finally, \eqref{eq:invcheck} ensures that the controller can support the total demand of the load and the surge power. Where $V_{in}DC$ is the nominal input voltage and $V_{out}AC$ is the nominal output voltage of the inverter; $MAX_{AC,ref}$ is the peak power that the inverter can support.
+%
+\begin{equation}
+\label{eq:vindc} 
+V_{in}DC = V_{system}.
+\end{equation}
+%
+\begin{equation}
+\label{eq:voutac} 
+V_{out}AC = V_{AC}.
+\end{equation}
+%
+\begin{equation}
+\label{eq:invcheck} 
+\left[ (Demand \leq P_{AC,ref}) \, and \, (P_{surge} \leq MAX_{AC,ref}) \right].
+\end{equation}
+
+Worth to mention that the charge controller, the battery, and the inverter have a nominal efficiency presented at data sheets, and those numbers are very close to 100\%. However, based on empirical data, those efficiencies must be corrected, according to the loading of each component. If field or essay data is not available, considering that the proposed tools is aimed to be used prior the deployment of the PV system at the field, it is recommended (at least) to correct the battery efficiency ($\eta_{b}$) to 85\%, keeping the remaining efficiencies as expressed by the manufacturers.
+%
 %----------------------------------------
 \section{Model Checking Stand-alone Solar Photovoltaic Systems }
 \label{sec:Methodology}
@@ -1130,7 +1153,7 @@ The flowchart of the proposed automated verification method is illustrated in Fi
 \label{fig:flowchartgeneral}
 \end{figure}
 
-In Step 1, the PV input data (e.g., load power demand and load energy consumption) and the formulae to check the sizing project, the mathematical model, the limits of the weather non-deterministic variables, are all written as an ANSI-C code~\cite{ANSI2018}. In Step 2, the sizing check of the PV system takes place to make sure that the components were selected according to critical month method~\cite{Pinho}. The equations to check the PV sizing were not presented at this paper, however the standard from Engineering Manual was the reference~\cite{Pinho}.
+In Step 1, the PV input data (e.g., load power demand and load energy consumption) and the formulae to check the sizing project, the mathematical model, the limits of the weather non-deterministic variables, are all written as an ANSI-C code~\cite{ANSI2018}. In Step 2, the sizing check of the PV system takes place to make sure that the components were selected according to worst monthly average solar energy method~\cite{Pinho}. The equations to check the PV sizing are present at Section~\ref{sec:sizingcheck}. 
 %
 In Step 3, weather variables (e.g., solar irradiance and ambient temperature) will be systematically explored by our verification engine based on maximum and minimum values from the site, where the PV system will be deployed. 
 %As a consequence, all the formulae of the employed mathematical models will also be updated. 

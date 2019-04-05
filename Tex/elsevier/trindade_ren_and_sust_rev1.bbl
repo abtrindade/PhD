@@ -19,6 +19,15 @@ M.~Hussein, W.~{Leal Filho}, Analysis of energy as a precondition for
   http://www.epe.gov.br/sites-pt/publicacoes-dados-abertos/publicacoes/PublicacoesArquivos/publicacao-346/EPE-NT-Planejamento%20SI-ciclo_2018_rev1.pdf
   - 2018 [Acessed 04 April 2019].
 
+\bibitem{Coelho}
+S.~Coelho, A.~Sanches-Pereira, L.~Tudeschini, J.~Escobar, M.~Poveda, N.~Coluna,
+  A.~Collin, E.~L. Rovere, A.~Trindade, O.~Pereira, Biomass residues as
+  electricity generation source in low {HD} source in regions of {B}razil, in:
+  UNESP (Ed.), The XI Latin. Cong. of Elec. Gener. and Transm. CLAGTEE, 2015,
+  pp. 1--8.
+\newblock \href {http://dx.doi.org/10.13140/RG.2.1.2747.7208}
+  {\path{doi:10.13140/RG.2.1.2747.7208}}.
+
 \bibitem{EPIA}
 EPIA, Global market outlook for photovoltaics 2017-2021, European Phototoltaic
   Industry Association, Belgium, 2017.
@@ -162,6 +171,13 @@ J.~Copetti, E.~Lorenzo, F.~Chenlo, A general battery model for {PV} system
 \bibitem{Pinho}
 J.~Pinho, M.~Galdino, Manual de Engenharia para Sistemas Fotovoltaicos, CEPEL
   – CRESESB, Rio de Janeiro/RJ, 2014.
+
+\bibitem{Khatib2014}
+T.~Khatib, W.~Elmenreich, Optimum availability of standalone photovoltaic power
+  systems for remote housing electrification, Int. Journal of
+  Photoenergy~(Article ID 475080) (2014) 5 pages.
+\newblock \href {http://dx.doi.org/10.1155/2014/475080}
+  {\path{doi:10.1155/2014/475080}}.
 
 \bibitem{Clarke2012}
 E.~Clarke, W.~Klieber, Milo{\v{s} Nov{\'a}{\v{c}}ek}, P.~Zuliani, Model

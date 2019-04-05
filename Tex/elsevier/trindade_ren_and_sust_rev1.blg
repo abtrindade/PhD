@@ -17,47 +17,48 @@ Warning--empty pages in Lamnadi2017
 Warning--empty pages in Driouich2018
 Warning--can't use both author and editor fields in Mohanty
 Warning--there's a number but no series in Hansen
+Warning--there's a number but no volume in Khatib2014
 Warning--can't use both author and editor fields in Clarke2012
 Warning--empty chapter and pages in Clarke2012
-You've used 35 entries,
+You've used 37 entries,
             2937 wiz_defined-function locations,
-            923 strings with 11989 characters,
-and the built_in function-call counts, 11742 in all, are:
-= -- 1090
-> -- 340
-< -- 20
-+ -- 136
-- -- 101
-* -- 793
-:= -- 1470
-add.period$ -- 55
-call.type$ -- 35
-change.case$ -- 34
+            939 strings with 12556 characters,
+and the built_in function-call counts, 12564 in all, are:
+= -- 1158
+> -- 382
+< -- 21
++ -- 151
+- -- 114
+* -- 864
+:= -- 1585
+add.period$ -- 59
+call.type$ -- 37
+change.case$ -- 36
 chr.to.int$ -- 0
-cite$ -- 45
-duplicate$ -- 410
-empty$ -- 1411
-format.name$ -- 128
-if$ -- 3154
+cite$ -- 48
+duplicate$ -- 434
+empty$ -- 1497
+format.name$ -- 143
+if$ -- 3361
 int.to.chr$ -- 0
-int.to.str$ -- 35
-missing$ -- 35
-newline$ -- 133
-num.names$ -- 39
-pop$ -- 273
+int.to.str$ -- 37
+missing$ -- 37
+newline$ -- 141
+num.names$ -- 43
+pop$ -- 287
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 0
-skip$ -- 857
+skip$ -- 907
 stack$ -- 0
-substring$ -- 501
-swap$ -- 158
-text.length$ -- 20
+substring$ -- 534
+swap$ -- 168
+text.length$ -- 21
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 0
-warning$ -- 10
-while$ -- 78
-width$ -- 37
-write$ -- 343
-(There were 13 warnings)
+warning$ -- 11
+while$ -- 84
+width$ -- 39
+write$ -- 364
+(There were 14 warnings)
