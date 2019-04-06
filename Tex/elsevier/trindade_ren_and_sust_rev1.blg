@@ -20,45 +20,45 @@ Warning--there's a number but no series in Hansen
 Warning--there's a number but no volume in Khatib2014
 Warning--can't use both author and editor fields in Clarke2012
 Warning--empty chapter and pages in Clarke2012
-You've used 37 entries,
+You've used 38 entries,
             2937 wiz_defined-function locations,
-            939 strings with 12556 characters,
-and the built_in function-call counts, 12564 in all, are:
-= -- 1158
-> -- 382
-< -- 21
-+ -- 151
-- -- 114
-* -- 864
-:= -- 1585
-add.period$ -- 59
-call.type$ -- 37
-change.case$ -- 36
+            947 strings with 12759 characters,
+and the built_in function-call counts, 13052 in all, are:
+= -- 1206
+> -- 390
+< -- 23
++ -- 154
+- -- 116
+* -- 894
+:= -- 1639
+add.period$ -- 61
+call.type$ -- 38
+change.case$ -- 37
 chr.to.int$ -- 0
-cite$ -- 48
-duplicate$ -- 434
-empty$ -- 1497
-format.name$ -- 143
-if$ -- 3361
+cite$ -- 49
+duplicate$ -- 456
+empty$ -- 1557
+format.name$ -- 147
+if$ -- 3499
 int.to.chr$ -- 0
-int.to.str$ -- 37
-missing$ -- 37
-newline$ -- 141
-num.names$ -- 43
-pop$ -- 287
+int.to.str$ -- 38
+missing$ -- 38
+newline$ -- 145
+num.names$ -- 46
+pop$ -- 298
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 0
-skip$ -- 907
+skip$ -- 946
 stack$ -- 0
-substring$ -- 534
-swap$ -- 168
-text.length$ -- 21
+substring$ -- 558
+swap$ -- 179
+text.length$ -- 23
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 0
 warning$ -- 11
-while$ -- 84
-width$ -- 39
-write$ -- 364
+while$ -- 87
+width$ -- 40
+write$ -- 376
 (There were 14 warnings)

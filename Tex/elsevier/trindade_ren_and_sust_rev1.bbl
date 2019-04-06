@@ -84,6 +84,11 @@ W.~Akram, M.~A. Niazi, A formal specification framework for smart grid
 \newblock \href {http://dx.doi.org/10.1186/s40294-018-0057-3}
   {\path{doi:10.1186/s40294-018-0057-3}}.
 
+\bibitem{Kroening}
+D.~Kroening, M.~Tautschnig, {CBMC} – {C} {B}ounded {M}odel {C}hecker
+  (competition contribution), in: Tools and Alg. for the Const. and An. of Sys.
+  (TACAS), Vol. LNCS 8413, 2014, pp. 389--391.
+
 \bibitem{esbmc2018}
 M.~Gadelha, F.~Monteiro, J.~Morse, L.~Cordeiro, B.~Fischer, D.~Nicole, {ESBMC}
   5.0: An industrial-strength {C} model checker, in: $33^{rd}$ ACM/IEEE Int.
@@ -185,10 +190,6 @@ E.~Clarke, W.~Klieber, Milo{\v{s} Nov{\'a}{\v{c}}ek}, P.~Zuliani, Model
 \newblock \href {http://dx.doi.org/10.1007/978-3-642-35746-6_1}
   {\path{doi:10.1007/978-3-642-35746-6_1}}.
 
-\bibitem{DBLP:conf/tacas/BiereCCZ99}
-A.~Biere, A.~Cimatti, E.~M. Clarke, Y.~Zhu, Symbolic {M}odel {C}hecking without
-  {BDD}s, in: {TACAS}, Vol. 1579 of LNCS, 1999, pp. 193--207.
-
 \bibitem{DBLP:journals/sosym/MorseCN015}
 J.~Morse, L.~C. Cordeiro, D.~A. Nicole, B.~Fischer, Model checking {LTL}
   properties over {ANSI-C} programs with bounded traces, Software and System
@@ -206,6 +207,14 @@ P.~Schrammel, D.~Kroening, M.~Brain, R.~Martins, T.~Teige, T.~Bienm{\"{u}}ller,
   29~(5) (2017) 911--931.
 \newblock \href {http://dx.doi.org/10.1007/s00165-017-0419-1}
   {\path{doi:10.1007/s00165-017-0419-1}}.
+
+\bibitem{Beyer2011}
+D.~Beyer, M.~E. Keremoglu, {CPA}checker: A tool for configurable software
+  verification, in: G.~Gopalakrishnan, S.~Qadeer (Eds.), Lecture {N}otes in
+  {C}omputer {S}cience, Vol. LNCS 6806, Springer, Berlin, Heidelberg, 2011, pp.
+  184--190.
+\newblock \href {http://dx.doi.org/10.1007/978-3-642-22110-1_16}
+  {\path{doi:10.1007/978-3-642-22110-1_16}}.
 
 \bibitem{ANSI2018}
 {International Organization for Standardization}, {ISO/IEC} 9899:2018

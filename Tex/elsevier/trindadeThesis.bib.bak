@@ -1122,3 +1122,15 @@ number = {Article ID 475080},
 pages = {5 pages},
 doi = {10.1155/2014/475080}
 }
+
+@InProceedings{Beyer2011,
+author = {Dirk Beyer and M. Erkan Keremoglu},
+title = {{CPA}checker: A Tool for Configurable Software Verification},
+booktitle = {Lecture {N}otes in {C}omputer {S}cience},
+pages = {184-190},
+year = {2011},
+publisher = {Springer, Berlin, Heidelberg},
+editor = {Gopalakrishnan G. and Qadeer S.},
+volume = {LNCS 6806},
+doi = {10.1007/978-3-642-22110-1_16}
+}

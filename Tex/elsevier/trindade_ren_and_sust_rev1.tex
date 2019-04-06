@@ -69,7 +69,7 @@
 \address[mysecondaryaddress]{University of Manchester, School of Computer Science, Kilburn Building, Manchester M13 9PL}
 
 \begin{abstract}
-With declining costs and increasing performance, the deployment of renewable energy systems is growing faster. In 2017, for the first time, the number of people without access to electricity dipped below 1 billion, but trends on energy access likewise fall short of global goals. Particular attention is given to stand-alone solar photovoltaic systems in rural areas or where grid extension is unfeasible. Tools to evaluate electrification projects are available, but they are based on simulations that do not cover all aspects of the design space. Automated verification using model checking has proven to be an effective technique to any kind of program verification. This paper marks the first application of software model checking to formally verify the design of a stand-alone solar photovoltaic system including solar panel, charge controller, battery, inverter, and electric load. Case studies, from real photovoltaic systems deployed in five different sites, ranging from 700W to 1,200W, were used to evaluate this proposed approach and to compare that with specialized simulation tools. Different verification tools were evaluated as well. Data from practical applications show the effectiveness of our approach, where specific conditions that lead to failures in a photovoltaic solar system are only detailed by the automated verification method.
+With declining costs and increasing performance, the deployment of renewable energy systems is growing faster. In 2017, for the first time, the number of people without access to electricity dipped below 1 billion, but trends on energy access likewise fall short of global goals. Particular attention is given to stand-alone solar photovoltaic systems in rural areas or where grid extension is unfeasible. Tools to evaluate electrification projects are available, but they are based on simulations that do not cover all aspects of the design space. Automated verification using model checking has proven to be an effective technique to any kind of program verification. This paper marks the first application of software model checking to formally verify the design of a stand-alone solar photovoltaic system including solar panel, charge controller, battery, inverter, and electric load. Case studies, from real photovoltaic systems deployed in five different sites, ranging from 700W to 1,200W, were used to evaluate this proposed approach and to compare that with specialized simulation tools. Different verification tools were evaluated as well, in order to compare performance and soundness. Data from practical applications show the effectiveness of our approach, where specific conditions that lead to failures in a photovoltaic solar system are only detailed by the automated verification method.
 \end{abstract}
 
 \begin{keyword}
@@ -127,7 +127,8 @@ In this study, a mathematical model of each component of a stand-alone PV system
 %Instead of finding a bug or a software inconsistence, t
 %Here it will be verified a stand-alone PV system, with all their components modeled mathematically,   
 %Among the non-deterministic variables considerated, is it worth to mention environmental issues (like solar irradiance, and temperature), and the variation of the electrical load (power consumption) or the battery' state of charge, as shown in Fig.\ref{fig:flowchartgeneral}.
-The implementation of the proposed tool is carried out by means of the efficient SMT-based bounded model checker (ESBMC)~\cite{esbmc2018}. %, which allows one to incrementally verify a PV system as an imperative program using a fragment of decidable first-order theories~\cite{DBLP:books/daglib/0019162}.
+The implementation of the proposed tool is carried out by means of an algorithm written in language C, that is executed by three state-of-the-art model checkers to formally verifying PV designs, in order to evaluate performance and correctness: the C Bounded Model Checker (CBMC)~\cite{Kroening}, the Efficient SMT-based Bounded Model Checker (ESBMC)~\cite{esbmc2018}, and the Configurable Program Analysis Checker (CPAchecker).
+%three the efficient SMT-based bounded model checker (ESBMC)~\cite{esbmc2018}. %, which allows one to incrementally verify a PV system as an imperative program using a fragment of decidable first-order theories~\cite{DBLP:books/daglib/0019162}.
 
 In prior studies, the evaluation of PV systems w.r.t. user requirements were performed by simulation tools using MATLAB/Simulink~\cite{Benatiallah2017, Natsheh2012}, or HOMER Pro \cite{Lamnadi2017}. Related to formal methods, studies were carried out toward the modeling of power smart grids~\cite{Akram2018} and solar panels~\cite{Driouich2017}; however, those studies do not perform automated verification. 
 %
@@ -135,14 +136,14 @@ In addition, recent research performed a formal study of PV farms, where the foc
   
 %The experimental results show that the proposed framework is more efficient \textcolor{red}{than what?} in different case studies to find not proper functioning of PV systems than simulation with off-the-shelf tool. 
 %This is the first study to apply a formal verification technique to formally check the design of a stand-alone solar PV system. In summary, t
-This paper makes two original contributions. % Firstly, we describe a modular modeling of each component of a PV system by means of mathematical models that can be encoded into fragments of first-order theories supported by software model checkers. Secondly
-Firstly, we propose an automated verification method that formally checks the design of a given PV system using incremental model checking based on Satisfiability Module Theories (SMT), and that was never did before. Secondly, experimental results show that this proposed approach can find subtle design errors in PV systems, which are not easily detected by other approaches based on simulation. 
+This paper makes three original contributions. % Firstly, we describe a modular modeling of each component of a PV system by means of mathematical models that can be encoded into fragments of first-order theories supported by software model checkers. Secondly
+Firstly, we propose an algorithm written in language C that implements the automated verification method which formally checks the sizing and the operation of a given stand-alone PV system. Secondly, we evaluate the verification method by comparing three state-of-the-art model checkers in five real case studies. Thirdly, experimental results show that this proposed approach can find subtle design errors in stand-alone PV systems, which are not easily detected by other approaches based on simulation. 
 
 %\textcolor{red}{This introduction is missing the description of the vision, approach and results. In particular, try to match each paragraph to: problem, vision, approach, results and contributions.} 
 %
 %The framework provided at this paper outlines the requirements, the process and the mathematical modeling to perform automated formal verification of a stand-alone PV system, using the satisfiability modulo theories (SMT)-based verification method.
  
-\textit{Outline}. Section~\ref{sec:SolarPhotovoltaicSystem} gives the background about solar PV systems, design and validation of PV systems, and the mathematical modeling. Section~\ref{sec:AutomatedVerification} presents the automated verification technique. The methodology is presented in section~\ref{sec:Methodology}. Section~\ref{sec:results} is devoted to the results. Section~\ref{sec:Conclusions} presents the conclusion and describes future work.
+\textit{Outline}. Section~\ref{sec:SolarPhotovoltaicSystem} gives the background about solar PV systems, design and validation of PV systems, and the mathematical modeling. Section~\ref{sec:AutomatedVerification} presents the automated verification technique. Section~\ref{sec:sizingcheck} shows how to perform the sizing of a stand-alone PV system. The methodology is presented in section~\ref{sec:Methodology}. Section~\ref{sec:results} is devoted to the results. Section~\ref{sec:Conclusions} presents the conclusion and describes future work.
 
 %--------------------------------------------------------
 \section{Solar Photovoltaic System }
@@ -864,148 +865,30 @@ Each stand-alone PV system, like any other power systems, has a specific level o
 
 The system availability definition depends on how critical the load application is. For critical loads, 99\% is considered acceptable. While in a ordinary house electrical load, 95\% is considered acceptable. As an example, a system with 95\% availability is expected to meet the load requirement of 8,322 h during an average year for the entire useful life of the system. An annual availability of 99\% means that the system can operate the load for 8,672 h of the 8,760 h.
 
-With that in mind, it is important to mention that even if a formal verification or a simulation shows that a PV system fails, it doesn't mean that the sizing is wrong. It is important to evaluate how critical the load application is and the horizon of evaluation.
-
+With that in mind, it is important to mention that even if a formal verification or a simulation shows that a PV system fails, it doesn't mean that the sizing is wrong. It is important to evaluate how critical the load application is and the horizon of evaluation. However this analysis can be useful, for example, to improve the sized battery autonomy.
 %
-%--------------------------------------------------
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Automated Verification Using Model Checking}
 \label{sec:AutomatedVerification}
-%--------------------------------------------------
-%It is necessary to keep in mind that 
-Validation is the process of determining whether a design meets the user requirements, whereas verification is the process of determining whether a design meets a set of requirements, specifications, and regulations~\cite{ClarkeHV18}. If the requirements, specifications, and regulations are given in a formal language, then it may be possible to automate the verification process, thus resulting in a process known as \textit{formal verification}. Verification may form part of a validation process.
-%, but in general, validation cannot be formalized because it relates a system design to intent.  
-While simulation and testing explore some of the possible behaviors and scenarios of the system, leaving open the question of whether the unexplored trajectories may contain a flaw, formal verification conducts an exhaustive exploration of all possible behaviors. Thus, when a design is pronounced correct by a formal verification method, it implies that all behaviors have been explored, and the questions of adequate coverage or a missed behavior becomes irrelevant \cite{Clarke2012}.
-%Simulation may also be used for validation, but it is more problematic for verification.
-%In order to use simulation for verification, it is necessary to ensure adequate coverage of operating conditions, scenarios, and system inputs. Testing can also be used for validation, however it is not feasible to cover all the aspects of the design space, and some times the real system must be used instead of a computing model.
- %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Although simulation and testing explore possible behaviors and scenarios of a given system, they leave open the question of whether unexplored trajectories may contain a flaw. Formal verification conducts an exhaustive exploration of all possible behaviors; when a design is said to be ``correct'' by a formal verification method, it implies that all behaviors have been explored, and questions regarding adequate coverage or missed behavior becomes irrelevant~\cite{Clarke2012}. Formal verification is a systematic approach that applies mathematical reasoning to obtain guarantees about the correctness of a system; one successful method in this domain is model checking~\cite{Clarke2012}. Here we evaluate three state-of-the-art model checkers to formally verifying PV designs w.r.t. user requirements.
 
-Formal verification is a systematic approach that applies mathematical reasoning to obtain guarantees about the correctness of a system; one successful method in this domain is model checking \cite{Clarke2012}.
-%%%%%%%%Formal verification is a systematic approach that applies mathematical reasoning to obtain guarantees about the correctness of a system \cite{Forejt2011}; one successful method in this domain is model checking \cite{Clarke2012}.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{CBMC}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% 
-%Model checking is an automatic verification technique, as defined by \cite{ClarkeHV18}. Model checking was originally developed reasoned about finite state of concurrent systems, nowadays is mainly used to hardware and software verification, but can be applied to any kind of system. 
-%
-The process of model checking can be split into three main components: modeling, specification, and verification method. In modeling, a model (normally mathematical) of the system is created; in specification, normally a list of properties to be satisfied by the system is established, i.e., the requirements, normally  expressed in a temporal logic form as Computational Tree Logic (CTL) or Linear Temporal Logic (LTL).
-%
-%\begin{itemize}
-%\item In modeling, a model (normally mathematical) of the system is created; 
-%\item In specification, normally a list of properties to be satisfied by the system is established, i.e., the requirements, as reliability to performance for example. \item Normally is expressed in temporal logic form ($CTL$); 
-%\item The model checking is the verification method itself. 
-%\end{itemize}
-%
-The model checking algorithm can be described as \cite{ClarkeHV18}:  
-%
-\begin{itemize}
-\item Given the model $M$ and a CTL (or LTL) formula $ \phi $ as input;  
-\item Model checking algorithm provides all the states of model $ M $ which satisfies $ \phi $;  
-\item It returns \textit{YES} if $ \phi $ is \textit{TRUE}, or returns \textit{NO} if $ \phi $ is \textit{FALSE}.  
-\end{itemize}
-Specifically for the \textit{FALSE} verification result, the algorithm returns a \textit{counterexample} (i.e., a sequence of states that leads to a property violation), which is useful as diagnostic of the system to discover in which situation the model is violated; this is the most important advantage of the use of model checking~\cite{ClarkeHV18}. 
-%Among the other advantages can be listed: there is no need of proofs (the algorithm is not a deductive procedure), there is no problem with partial specifications of the system, logics can easily express many concurrency properties, is fast (compared to other rigorous methods such as interactive theorem proving). 
-%
-%The model checking problem can be defined as \cite{ClarkeHV18}: 
-%
-%\begin{itemize}
-%\item Let $M$ be a Kripke structure (i.e., state transition graph);
-%\item $f$ be the specification in temporal logic (a formula);
-%\item Find all states $s$ of $M$ such that $M , s \models f$
-%\end{itemize}
-%
-%Fig. \ref{fig:modelcheckstruc} shows the structure of a 
-%In a typical model checking system, a preprocessor extracts a state transition graph from a system (program or circuit).
-%
-%\begin{figure}[h]
-%\includegraphics[width=0.4\textwidth]{modelcheckstruc}
-%\centering
-%\caption{Model Checker structure (Source: \cite{ClarkeHV18})}
-%\label{fig:modelcheckstruc}
-%\end{figure}
-%
-%Here it is worth to mention that the term "model" is not the meaning taken from the dictionary. The problem is not dealing with an abstraction of the actual system under study. 
-%
-Fig.~\ref{fig:systemverif} shows a real PV system, and Fig.~\ref{fig:systemverif2} the conversion the system to be verified by a model checking procedure. % \textcolor{red}{Please try to adapt this figure to our context. How can it be applied to verify PV?}. 
-%Fig.~\ref{fig:systemverif} shows the process to convert a real PV system to a model to be verified by a model checking procedure. % \textcolor{red}{Please try to adapt this figure to our context. How can it be applied to verify PV?}. 
+The C Bounded Model Checker (CBMC) falsifies assertions in C programs or proves that they are safe if a completeness threshold is given~\cite{Kroening}. CBMC implements a bit-precise translation of a C program, annotated with assertions and with loops unrolled up to a given depth, into a logical formula. If the formula is satisfiable, then a failing execution that leads to a violated assertion exists~\cite{Kroening}. CBMC's verification flow can be summarized in three stages: (i) Front-end: scans, parses and type-checks C code; it converts control flow elements, such as \textit{if} or \textit{switch} statements, loops and jumps, into equivalent guarded \textit{goto} statements, thus aiming to reduce verification effort; (ii) Middle-end: performs symbolic execution by eagerly unwinding loops up to a fixed bound, which can be specified by the user on a per-loop basis or globally, for all loops and finally; (iv) Back-end: supports SAT and SMT solvers to discharge verification conditions.
 
-\begin{figure}[h]
-\includegraphics[width=0.80\textwidth]{system_original_blocks}
-\centering
-\caption{Real system verification (adapted from \cite{ClarkeHV18}).}
-\label{fig:systemverif}
-\end{figure}
-
-\begin{figure}[h]
-\includegraphics[width=0.75\textwidth]{system_model_blocks}
-\centering
-\caption{Model checking verification \cite{ClarkeHV18}.}
-\label{fig:systemverif2}
-\end{figure}
-
-
-However, there is a main disadvantage of model checking: the state explosion problem. In order to tackle this problem, many different techniques were developed in the last decades. One of the first major advances was symbolic model checking with binary decision diagrams (BDDs). In this approach, a set of states is represented by a BDD instead of by listing each state individually, which is often exponentially smaller in practice.
-% Another major advance is the partial order reduction, which exploits the independence of actions in a system with asynchronous composition of processes \textcolor{red}{add citation here}. A third major advance is counterexample-guided abstraction refinement, which adaptively tries to find an appropriate level of refinement, not burdened with irrelevant detail that slows down verification \cite{Clarke2012}. 
-%
-Another promising approach to overcome state explosion problem is Bounded Model Checking (BMC)~\cite{DBLP:conf/tacas/BiereCCZ99}. BMC is a method that checks a model up to a given path in the path length. BMC algorithms traverse a finite state machine for a fixed number of steps, $ k $, and checks whether a property violation occurs with this bound. It uses Boolean Satisfiability (SAT) or Satisfiability Module Theories (SMT) solvers to check the generated formula from BMC. 
-
-SAT problem is a problem of determining whether there are certain conditions or interpretations that satisfy a given Boolean expression \cite{ClarkeHV18}. 
-SMT decides the satisfiability of a fragment of first-order formulae using a combination of different background theories and thus generalizes SAT by supporting uninterpreted functions, linear and non-linear arithmetic, bit-vectors, tuples, arrays, and other decidable first-order theories~\cite{ClarkeHV18}.
-The SAT or SMT solvers search the model for conditions (value of variables) that make the formula satisfiable. If a SAT or SMT solver finds a substitution for the formula/function then the substitute induces a counterexample and is said to be \textit{satisfiable}, i.e., it is satisfiable \textit{iff} the verified system contains errors.  
-%
-%CBMC is considering the best-known model verification tool to validate code in ANSI-C and C++ \cite{Kroening}. 
-%
-%\textcolor{red}{ESBMC does not use CBMC as its main frontend. Please take a look at this paper and cite it: https://ssvlab.github.io/lucasccordeiro/papers/ase2018.pdf. I would also suggest to remove the above sentence.}
-%
-ESBMC is one of the most representatives bounded model checkers for embedded C/C++ software based on SMT solvers~\cite{esbmc2018}. %, which can use CBMC as front-end.
-%The use of SMT, instead of Boolean Satisfiability SAT from the original BMC, 
-ESBMC comes as an alternative to overcome limitations of the system modeling, especially considering that the system complexity is increasing and SMT has richer theories than SAT to represent models. 
-
-%--------------------------------------
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{ESBMC}
-%--------------------------------------
-ESBMC (or Efficient SMT-based Bounded Model Checker) is an open source, permissively licensed (Apache 2), cross platform bounded model checking for C and C++ programs~\cite{esbmc2018}, which supports the verification of LTL properties with bounded traces~\cite{DBLP:journals/sosym/MorseCN015}. 
-%
-ESBMC's verification flow can be summarized in three stages: (i) a front-end that can read and compile C/C++ code, where the formal specification of the system to be verified is first handled; (ii) preprocessing steps to deal with the representation of the code, control flow and unwinding of loops, and the model simplification, thereby aiming to reduce the verification effort; and finally (iii) the SMT solving stage, where all the constraints and properties of the system to be verified are encoded into SMT and checked for satisfiability.
-%
-%%The efficient SMT based model checker, is a software verification tool for C and C++ code bases. 
-%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%Fig. \ref{fig:esbmcarch} shows the tool architecture. 
-%
-%\begin{figure}[h]
-%\includegraphics[width=0.4\textwidth]{ESBMCarch4}
-%\centering
-%\caption{ESBMC architecture (adapted from \cite{esbmc2018}).}
-%\label{fig:esbmcarch}
-%\end{figure}
-%ESBMC uses clang as front-end, a state-of-the-art compiler suite for C/C++/ObjectiveC/ObjectiveC++ widely used in industry \cite{esbmc2018}. % and generate an Abstract Syntax Tree (AST). %%%%%One legacy CBMC-based front-end that supports both C and C++ and a new clang-based front-end that currently only supports C. The data types and bit vectors are created in the front-end when parsing the code. 
-%%%%%%%Regardless of the chosen front-end, 
-%The output is an AST (tree representation of the abstract syntactic structure of source code written in a programming language) that will be used by the GOTO converter to generate a GOTO program, which has simplified control flow and is suitable for bounded unwinding. The next step is the symbolic execution, when the GOTO program is executed (unrolling loops up to the bound $ k $) and converted to Static Single Assignments (SSA) form. SSA form enables the simplification of algorithms and reduction of computational complexity. %%%%%%%%%, where each variable is a target of exactly one assignment statement in the program text. 
-%The feature called k-induction at Fig. \ref{fig:esbmcarch} allows the model checker to find a property violation or even to prove (partial) correctness without fully unwinding loops. 
-%%
-%%%%%%%During the symbolic execution, ESBMC aggressively tries to simplify the program \cite{Ramalho}; it propagates all constants and solves any assertions that can be statically determined. This is an important step for the verification, since ESBMC can fully verify programs without calling a solver, if the inputs are deterministic. That characteristic is useful at this work to perform the sizing check of the PV system project. 
-%Following, the SSA expressions are then encoded using the chosen SMT solver supported by ESBMC. At this paper, it was used the Z3 solver \cite{DeMoura}.
-%%%%%: Boolector (default) \cite{Brummayer}, Z3 \cite{DeMoura}, MathSAT \cite{Cimatti}, Yices \cite{Dutertre} and CVC4 \cite{Barrett}. 
-%
-%Finally, the system attempting to determine whether a formula, which is the disjunction of all possible errors, can be satisfied. 
-If the SMT formula is shown to be satisfiable (SAT), a counterexample is presented; otherwise, the formula is unsatisfiable (UNSAT), i.e., there are no errors up to the given unwinding bound. 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% incremental ESBMC text here
-ESBMC exploits the standardized input language of SMT solvers (SMT-LIB\footnote{http://smtlib.cs.uiowa.edu/} logic format) to make use of a resource called \textit{assertion stack}. An assertion, in SMT solvers, is a constraint over the variables in a formula that must hold if the formula is satisfiable~\cite{Morse2015}. New assertions can be added to or old assertions removed from this stack, depending on the evaluated value of variables. This enables ESBMC, and the respective solver, to learn from previous checks, optimizing the search procedure and potentially eliminating a large amount of formula state space to be searched, because it solves and disregards data during the process, incrementally. This technique is called ``incremental SMT''~\cite{DBLP:journals/fac/SchrammelKBMTB17} and allows us to reduce the memory overhead, mainly when the verified system is complex and the computing platform does not have large amount of memory to deal with all the design space state.
-
+ESBMC (or Efficient SMT-based Bounded Model Checker) is a bounded and unbounded mdoel checker for C programs~\cite{esbmc2018}, which supports the verification of LTL properties with bounded traces~\cite{DBLP:journals/sosym/MorseCN015}. ESBMC's verification flow can be summarized in three stages: (i) a front-end that can read and compile C code, where the system formal specification is first handled; (ii) preprocessing steps to deal with code representation, control flow and unwinding of loops, and model simplification, thereby aiming to reduce verification effort; and finally (iii) the SMT solving stage, where all constraints and properties of the system are encoded into SMT and checked for satisfiability. ESBMC exploits the standardized input language of SMT solvers (SMT-LIB\footnote{http://smtlib.cs.uiowa.edu/} logic format) to make use of a resource called \textit{assertion stack}~\cite{Morse2015}. This enables ESBMC, and the respective solver, to learn from previous checks, thus optimizing the search procedure and potentially eliminating a large amount of formula state space to be searched, because it solves and disregards data during the process, incrementally. This technique is called ``incremental SMT''~\cite{DBLP:journals/fac/SchrammelKBMTB17} and allows ESBMC to reduce the memory overhead, mainly when the verified system is complex and the computing platform does not have large amount of memory to deal with the entire design space state.
 %
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%5%
-%%%%%ESBMC can be invoked through the command-line interface or configured through the Eclipse plug-in. Specific problems and the solver can be selected that way. 
-%
-%ESBMC aims to support all of ISO/IEC 9899:2017 C programming language standard, and detects errors in software by simulating a finite prefix of the program execution with all possible inputs. Classes of problems that can be detected include: user specified assertion failures, out of bounds array access, illegal pointer dereferences, double-free of malloc'd memory, misaligned memory access; integer overflows, divide by zero, memory leaks, concurrent software, deadlock, and data races (i.e. competing writes). 
- 
-%\subsection{Cyber-physical systems x Energy x ESBMC}
-%According \cite{UC}, cyber-physical systems (CPS) are integrations of computation, networking, and physical processes. Embedded computers and networks monitor and control the physical processes, with feedback loops where physical processes affect computations and vice-versa. The economic and societal potential of such systems is vastly greater than what has been realized, and major investments are being made worldwide to develop the technology. The technology builds on the discipline of embedded systems (computers and software embedded in devices) whose principle mission is not computation, such as cars, toys, medical devices, and scientific instruments. CPS integrates the dynamics of the physical processes with those of the software and networking, providing abstractions and modeling, design, and analysis techniques for the integrated whole. 
-%
-%Energy production, distribution, and optimization are all CPS problems, mas mentioned in \cite{UC}. For example, the smart grid combines multiple electric power production plants with a multiplicity of loads using dynamic load balancing and dynamic pricing with demand-response strategies. Smart buildings integrate sensors into control systems for lighting, HVAC (heating, ventilation, and air conditioning), and safety (as fire monitoring and evacuation). 
-%
-%Therefore, in the context of this proposal, a cyber-physical system, specifically a solar photovoltaic system, will be mathematically modeled. Then a model checking will be performed to do a verification of the project in order to guarantee that the design of a stand-alone PV solution will meet the requirements, specifications and regulations. 
-%
-%As described in \cite{Alur}, in program verification, it is aimed to check if a program satisfies its logical specification. Contemporary verification tools vary widely in terms of source languages, verification methodology, and the degree of automation, but they all rely on repeatedly invoking an SMT solver. This work tracks the same path. 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{CPAchecker}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Configurable program analysis (CPA) provides a conceptual basis for expressing different verification approaches in the same formal setting. The CPA formalism provides an interface for the definition of program analyses; consequently, the tool CPAchecker provides an implementation framework that allows the seamless integration of program analyses that are expressed in the CPA framework. The comparison of different approaches in the same experimental setting is intended to be easy and the experimental results is expected to be more meaningful~\cite{Beyer2011}. Related to the architecture, the central data structure is a set of control-flow automata (CFA), which consist of control-flow locations and control-flow edges. The CPA framework provides interfaces to SMT solvers and interpolation procedures, such that the CPA operators can be written in a concise and convenient way~\cite{Beyer2011}. Currently CPachecker uses MathSAT as an SMT solver, and CSIsat and MathSAT as interpolation procedures~\cite{Beyer2011}. The CPA algorithm performs the reachability analysis, and operates on an object of the abstract data type CPA, i.e., the algorithm applies operations from the CPA interface without knowing which concrete CPA it is analyzing. For most configurations, the concrete CPA will be a composite CPA, which implements the combination of different CPAs. In software verification, its usual to take a considerable amount of effort to convert a verification idea into actual experimental results — and CPAchecker aim to accelerate this process~\cite{Beyer2011}.
 %
 %--------------------------------------------------
 \section{Stand-alone PV System Sizing and Verification}
@@ -1129,7 +1012,7 @@ V_{out}AC = V_{AC}.
 Worth to mention that the charge controller, the battery, and the inverter have a nominal efficiency presented at data sheets, and those numbers are very close to 100\%. However, based on empirical data, those efficiencies must be corrected, according to the loading of each component. If field or essay data is not available, considering that the proposed tools is aimed to be used prior the deployment of the PV system at the field, it is recommended (at least) to correct the battery efficiency ($\eta_{b}$) to 85\%, keeping the remaining efficiencies as expressed by the manufacturers.
 %
 %----------------------------------------
-\section{Model Checking Stand-alone Solar Photovoltaic Systems }
+\section{Proposed Automated Verification Method of PV Systems}
 \label{sec:Methodology}
 %----------------------------------------
 %
@@ -1163,7 +1046,7 @@ In addition, depending on one of the desired properties of the system such as ba
 
 %
 %\textcolor{red}{In the following paragraph you should related the output of our verification engine with the description of the BMC SAT or UNSAR given above. For example, what does a failure mean? is it SAT?}
-In a nutshell, ESBMC will process the ANSI-C code with constraints %($C$) 
+In a nutshell, the model checker will process the ANSI-C code with constraints %($C$) 
 and properties %($P$) 
 from the PV system that are provided by the user, and the tool will automatically verify if the PV system requirements are met. If it returns a failure (i.e., SAT), then the tool provides a counterexample, i.e., a sequence of states that leads to the property violation; this information can be used as a feedback to improve the PV system design. However, if the verification succeeds (i.e., UNSAT), there is no failure up to the bound $k$; therefore, the PV system will present its intended behavior up to the bound $k$.
 %, i.e., our verification engine does not give any guarantee that there is no error in bound $k+1$ unless some induction method is employed~\cite{DBLP:journals/sttt/GadelhaIC17}.
@@ -1188,7 +1071,7 @@ The batteries are assumed to have SOC of 100\% (Line 1), i.e., the batteries are
 
 %At both case studies, it was considered 21 years of historic data from Manaus. 
 %According with X and Y, t
-Information related to average temperature ($T$) and solar irradiance ($G$), maximum and minimum annual, are given to the algorithm in Lines 7 to 10 using non-deterministic variables from ESBMC to explore all possible states and the \textit{assume} macro to constrain the non-deterministic values using a given range. 
+Information related to average temperature ($T$) and solar irradiance ($G$), maximum and minimum annual, are given to the algorithm in Lines 7 to 10 using non-deterministic variables from model checker to explore all possible states and the \textit{assume} macro to constrain the non-deterministic values using a given range. 
 %and irradiance varies from 0 W/m$^{2}$ to 852 W/m$^{2}$ (with minimum of 274 W/m$^{2}$ during the daytime, when there is sunlight). 
 %there is PV generation only between 8:00 h and 16:00 h every day, 
 %with zero electric energy generation from 18:00 h to 6:00 h of the next day; and with insignificant generation from 6:00 h to 8:00 h, and from 16:00 h to 18:00 h of the same day. 
@@ -1209,51 +1092,45 @@ Next, representing the time of the day where PV generation is not possible anymo
  \begin{algorithmic}[1]
  \begin{small}
  
-
  \renewcommand{\algorithmicrequire}{\textbf{Input:}}
  \renewcommand{\algorithmicensure}{\textbf{Output:}}
+  \STATE $declare \, min \, and \, max \, solar \, irradiation[24h], \, and \, temperature[24h]$\\
+  \STATE $declare \, case \, studies \, details: \, sizing \, and \, manufacturers \, data $ \\
+  \STATE $sizing \textunderscore check()$ \\
+  \STATE $startPVgeneration \leftarrow findStartPVgeneration()$ \\
+  \STATE $endPVgeneration \leftarrow findEndPVgeneration()$ \\
   \STATE $SOC \leftarrow 100\%$ \\
+
 %  \COMMENT {Starting with the PV generation time}
 % \\ 
-\textit{LOOP Process}
-  \FOR {$h = 1$ to $Hours \, of \, PV \, generation$}
-  \STATE $G \leftarrow nondet \textunderscore uint(\,)$ \COMMENT {$G$ is non-deterministic variable}
-  \STATE $T \leftarrow nondet \textunderscore uint(\,)$ \COMMENT {$T$ is non-deterministic variable}
-  \STATE assume ($Gmin \leq G \leq Gmax$) \COMMENT {restricting $G$ values}
-  \STATE assume ($Tmin \leq T \leq Tmax$) \COMMENT {restricting $T$ values}
-  \STATE $Imax, Vmax \leftarrow PVgenerationMODEL (G,T)$ 
-  \\
-  \COMMENT {If-then-else sequence to imitate charge controller work}
-  \IF {($battery \, is \, empty$) AND ($PV \, is \, generating$)}
-    \STATE charge battery in 1h
-    \STATE PV feed the house
-  \ELSIF {($battery \, is \, empty$) AND NOT($PV \, is \, generating$)}
-    \STATE FAIL with assert macro
-  \ELSIF {NOT($battery \, is \, empty$) AND ($PV \, is \, generating$)}
-    \STATE stop battery charge
-    \STATE PV feed the house
-  \ELSIF {NOT($battery \, is \, empty$) AND NOT($PV \, is \, generating$)}
-    \STATE discharge battery in 1h
-    \STATE Battery feed the house
-  \ENDIF
-  \STATE $h \leftarrow (h+1)$
+%\textit{LOOP Process}
+ \FOR {$1st \, 24h \, loop$ to $Nth \, 24h \, loop$}
+  \FOR {$endPVgeneration+1$ to $startPVgeneration-1$}
+	  \STATE $dischargeBattery \, in \, 1h()$ \\
+%	  \STATE $autonomyCount \leftarrow autonomyCount+1$ \\
+	  \STATE $assert (SOC \geq SOC \textunderscore min)$ \\
+%	  \STATE $battery \, autonomy \, verification()$ \\
   \ENDFOR
- \\ \textit{Start of battery autonomy verification:}
-%%  initialization\;
-\STATE $AutonomyCount \leftarrow 1$
- \WHILE {$AutonomyCount \leq autonomy$}
-  %%\FOR {$Autonomy = 1$ to $auton$}
-
-  \STATE $SOC \leftarrow SOC - ( 24 - Hours \, of \, PV \, generation)\,h\, discharge$
-  \STATE $AutonomyCount \leftarrow AutonomyCount+1)$
-  \\  
-    \COMMENT {autonomy verification during discharge period}
-  \\
-  \STATE assert NOT($Battery \, empty$)  
-  \\
-  \COMMENT {Perform similar \textbf{for}-LOOP as defined in line 2-21}
-  %%\ENDFOR
-  \ENDWHILE
+  \FOR {$startPVgeneration$ to $endPVgeneration$}
+    \STATE $G \leftarrow nondet \textunderscore uint(\,)$ \COMMENT {$G$ is non-deterministic variable}
+    \STATE $T \leftarrow nondet \textunderscore uint(\,)$ \COMMENT {$T$ is non-deterministic variable}
+    \STATE assume ($Gmin \leq G \leq Gmax$) \COMMENT {restricting $G$ values}
+    \STATE assume ($Tmin \leq T \leq Tmax$) \COMMENT {restricting $T$ values}
+    \STATE $Imax, Vmax \leftarrow PVgenerationMODEL (G,T)$ \\
+    \COMMENT {If-then-else sequence to imitate charge controller work}
+    \IF {($battery \, is \, empty$) AND ($PV \, is \, generating$)}
+      \STATE $chargeBattery \, in \, 1h()$ \COMMENT {PV feed the house}
+    \ELSIF {($battery \, is \, empty$) AND NOT($PV \, is \, generating$)}
+      \STATE FAIL with assert macro \COMMENT {Battery is empty and there is not PV generation}
+    \ELSIF {NOT($battery \, is \, empty$) AND ($PV \, is \, generating$)}
+      \STATE stop battery charge \COMMENT {PV feed the house}
+    \ELSIF {NOT($battery \, is \, empty$) AND NOT($PV \, is \, generating$)}
+      \STATE $dischargeBattery \, in \, 1h()$ \COMMENT {Battery feed the house}
+    \ENDIF
+    \STATE $assert (SOC \geq SOC \textunderscore min)$ \\
+    \STATE $hour \leftarrow hour+1$ \\
+   \ENDFOR
+  \ENDFOR
  \RETURN $(\,)$ 
   \end{small}
  \end{algorithmic} 
@@ -1393,7 +1270,7 @@ Our experimental evaluation aims to answer two research questions:
 \item[RQ2] \textbf{(performance)} How does our approach compare against other existing tools?
 \end{enumerate}
 
-All experiments were conducted on an otherwise idle Intel octa core Xeon CPU E5-2640 with 2.4 GHz and 264 GB of RAM, running Ubuntu 18.04.1 LTS 64-bits. Concerning our verification engine, ESBMC v6.0.0 was used \footnote{The command-line used to perform the verification is: \$ esbmc filename.c -\phantom{}-no-bounds-check -\phantom{}-no-pointer-check -\phantom{}-no-div-by-zero-check -\phantom{}-unwind 300 -\phantom{}-boolector}. 
+All experiments were conducted on an otherwise idle Intel octa core Xeon CPU E5-2640 with 2.4 GHz and 264 GB of RAM, running Ubuntu 18.04.1 LTS 64-bits. Concerning the verification engine, ESBMC v6.0.0 was used \footnote{The command-line used to perform the verification is: \$ esbmc filename.c -\phantom{}-no-bounds-check -\phantom{}-no-pointer-check -\phantom{}-no-div-by-zero-check -\phantom{}-unwind 300 -\phantom{}-boolector}. 
 % enabled with the goal of reducing memory usage; 
 We have also used the SMT solver Boolector version 2.4.1~\cite{Brummayer}. %The experiments were performed without a predefined timeout.
 
