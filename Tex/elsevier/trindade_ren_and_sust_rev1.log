@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2019/dev/Debian) (preloaded format=pdflatex 2019.3.4)  6 APR 2019 12:35
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2019/dev/Debian) (preloaded format=pdflatex 2019.3.4)  6 APR 2019 17:22
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -511,67 +511,99 @@ ne 1033.
 l.1046 
         <./images/flowchart_verification5.png>] [18]
 Package hyperref Info: bookmark level for unknown algorithm defaults to 0 on in
-put line 1091.
+put line 1098.
 
 
-LaTeX Warning: Command \textunderscore invalid in math mode on input line 1099.
-
-
-
-LaTeX Warning: Command \textunderscore invalid in math mode on input line 1111.
+LaTeX Warning: Command \textunderscore invalid in math mode on input line 1106.
 
 
 
-LaTeX Warning: Command \textunderscore invalid in math mode on input line 1115.
+LaTeX Warning: Command \textunderscore invalid in math mode on input line 1118.
 
 
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 1115
+
+LaTeX Warning: Command \textunderscore invalid in math mode on input line 1122.
+
+
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 1122
 .
 (/usr/share/texlive/texmf-dist/tex/latex/base/omscmr.fd
 File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
-LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <9> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 1115.
+LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <7> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 1122.
 
 
 
-LaTeX Warning: Command \textunderscore invalid in math mode on input line 1116.
+LaTeX Warning: Command \textunderscore invalid in math mode on input line 1123.
 
 
 
-LaTeX Warning: Command \textunderscore invalid in math mode on input line 1130.
+LaTeX Warning: Command \textunderscore invalid in math mode on input line 1137.
 
 
-[19] [20] [21]
-<./images/loadcurve.png, id=446, 478.03593pt x 340.27126pt>
+[19] [20]
+Overfull \hbox (10.7264pt too wide) in paragraph at lines 1269--1292
+[][]
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1269--1292
+
+ []
+
+[21pdfTeX warning (ext4): destination with the same identifier (name{table.3}) 
+has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.1309 
+       ]
+Underfull \hbox (badness 1107) in paragraph at lines 1314--1314
+[][][]\OT1/cmr/m/n/8 Command-line: $ scripts/cpa.sh -heap 64000m -stack 10240k 
+-config config/bmc-
+ []
+
+
+Overfull \hbox (0.74307pt too wide) in paragraph at lines 1334--1355
+ [][] 
+ []
+
+[22] [23pdfTeX warning (ext4): destination with the same identifier (name{table
+.4}) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.1358 
+       ]
+<./images/loadcurve.png, id=469, 478.03593pt x 340.27126pt>
 File: ./images/loadcurve.png Graphic file (type png)
 <use ./images/loadcurve.png>
-Package pdftex.def Info: ./images/loadcurve.png  used on input line 1293.
+Package pdftex.def Info: ./images/loadcurve.png  used on input line 1360.
 (pdftex.def)             Requested size: 224.2479pt x 159.62117pt.
+<./images/homer.png, id=471, 710.655pt x 445.665pt>
+File: ./images/homer.png Graphic file (type png)
+<use ./images/homer.png>
+Package pdftex.def Info: ./images/homer.png  used on input line 1369.
+(pdftex.def)             Requested size: 224.2479pt x 140.63002pt.
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[22]
-<./images/homer.png, id=453, 710.655pt x 445.665pt>
-File: ./images/homer.png Graphic file (type png)
-<use ./images/homer.png>
-Package pdftex.def Info: ./images/homer.png  used on input line 1302.
-(pdftex.def)             Requested size: 224.2479pt x 140.63002pt.
- [23pdfTeX warning (ext4): destination with the same identifier (name{figure.4}
-) has been already used, duplicate ignored
+[24pdfTeX warning (ext4): destination with the same identifier (name{figure.4})
+ has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.1315 
-       pdfTeX warning (ext4): destination with the same identifier (name{figure
-.5}) has been already used, duplicate ignored
+l.1382 
+        <./images/loadcurve.png>] [25pdfTeX warning (ext4): destination with th
+e same identifier (name{figure.5}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.1315 
-        <./images/loadcurve.png> <./images/homer.png>] [24]
-(./trindade_ren_and_sust_rev1.bbl
+l.1444 \section
+               *{Acknowledgments} <./images/homer.png>]
+(./trindade_ren_and_sust_rev1.bbl [26]
 Underfull \hbox (badness 1902) in paragraph at lines 17--21
 \OT1/cmr/m/n/10 Ci-clo 2018 - 2023, http://www.epe.gov.br/sites-pt/publicacoes-
 dados-
@@ -582,11 +614,11 @@ Underfull \hbox (badness 10000) in paragraph at lines 17--21
 \OT1/cmr/m/n/10 abertos/publicacoes/PublicacoesArquivos/publicacao-346/EPE-NT-
  []
 
-[25] [26] [27]
+[27] [28]
 
 LaTeX Warning: Command \o invalid in math mode on input line 142.
 
-[28]
+[29]
 Underfull \hbox (badness 3199) in paragraph at lines 220--223
 []\OT1/cmr/m/n/10 International Or-ga-ni-za-tion for Stan-dard-iza-tion, ISO/IE
 C 9899:2018
@@ -603,52 +635,58 @@ Underfull \hbox (badness 1259) in paragraph at lines 220--223
 m-
  []
 
+[30]
+Underfull \hbox (badness 10000) in paragraph at lines 225--227
+[]\OT1/cmr/m/n/10 Weatherbase, Man-aus, Ama-zonas Travel Weather Av-er-ages,
+ []
+
+
+LaTeX Warning: Command \o invalid in math mode on input line 240.
+
 )
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1388.
- [29]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 1388.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1455.
+ [31]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 1455.
  (./trindade_ren_and_sust_rev1.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1388.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1388.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1455.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1455.
 
 Package rerunfilecheck Info: File `trindade_ren_and_sust_rev1.out' has not chan
 ged.
 (rerunfilecheck)             Checksum: 526D8B45AB9C4AC9B08E49BFAC5DA1CB;1491.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1388.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1455.
  ) 
 Here is how much of TeX's memory you used:
- 7246 strings out of 494468
- 102308 string characters out of 6175061
- 203393 words of memory out of 5000000
- 10649 multiletter control sequences out of 15000+600000
- 10101 words of font info for 37 fonts, out of 8000000 for 9000
+ 7259 strings out of 494468
+ 102503 string characters out of 6175061
+ 205590 words of memory out of 5000000
+ 10656 multiletter control sequences out of 15000+600000
+ 8966 words of font info for 33 fonts, out of 8000000 for 9000
  81 hyphenation exceptions out of 8191
- 32i,17n,30p,2461b,730s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 32i,17n,30p,2461b,719s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></us
-r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx9.pfb></usr/share
+r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx7.pfb></usr/share
 /texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texli
 ve/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/tex
-mf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf-dist
-/fonts/type1/public/amsfonts/cm/cmmi9.pfb></usr/share/texlive/texmf-dist/fonts/
+mf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/share/texlive/texmf-dist
+/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf-dist/fonts/
 type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/p
 ublic/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/a
 msfonts/cm/cmr6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/
 cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.
-pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></us
-r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmss8.pfb></usr/share
-/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texli
-ve/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/share/texlive/texm
-f-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/texlive/texmf-dist/
-fonts/type1/public/amsfonts/cm/cmsy9.pfb></usr/share/texlive/texmf-dist/fonts/t
-ype1/public/amsfonts/cm/cmti10.pfb></usr/share/texlive/texmf-dist/fonts/type1/p
-ublic/amsfonts/cm/cmti7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/a
-msfonts/cm/cmti8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts
-/cm/cmtt10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cm
-tt8.pfb>
-Output written on trindade_ren_and_sust_rev1.pdf (29 pages, 694858 bytes).
+pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmss8.pfb></u
+sr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/sha
+re/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/share/texl
+ive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/texlive/tex
+mf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/share/texlive/texmf-dis
+t/fonts/type1/public/amsfonts/cm/cmti7.pfb></usr/share/texlive/texmf-dist/fonts
+/type1/public/amsfonts/cm/cmti8.pfb></usr/share/texlive/texmf-dist/fonts/type1/
+public/amsfonts/cm/cmtt10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public
+/amsfonts/cm/cmtt8.pfb>
+Output written on trindade_ren_and_sust_rev1.pdf (31 pages, 681776 bytes).
 PDF statistics:
- 634 PDF objects out of 1000 (max. 8388607)
- 565 compressed objects within 6 object streams
- 167 named destinations out of 1000 (max. 500000)
+ 654 PDF objects out of 1000 (max. 8388607)
+ 585 compressed objects within 6 object streams
+ 177 named destinations out of 1000 (max. 500000)
  194 words of extra memory for PDF output out of 10000 (max. 10000000)
 

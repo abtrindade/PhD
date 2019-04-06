@@ -5,10 +5,12 @@ The style file: elsarticle-num.bst
 Database file #1: trindadeThesis.bib
 Warning--entry type for "ANSI2018" isn't style-file defined
 --line 979 of file trindadeThesis.bib
+Warning--entry type for "Temperature" isn't style-file defined
+--line 985 of file trindadeThesis.bib
 Warning--entry type for "Irradiance" isn't style-file defined
---line 993 of file trindadeThesis.bib
+--line 992 of file trindadeThesis.bib
 Warning--entry type for "EPE2018" isn't style-file defined
---line 1110 of file trindadeThesis.bib
+--line 1109 of file trindadeThesis.bib
 Warning--can't use both volume and number fields in Hussein2012
 Warning--can't use both volume and number fields in Gow1999
 Warning--empty publisher in ClarkeHV18
@@ -20,45 +22,46 @@ Warning--there's a number but no series in Hansen
 Warning--there's a number but no volume in Khatib2014
 Warning--can't use both author and editor fields in Clarke2012
 Warning--empty chapter and pages in Clarke2012
-You've used 38 entries,
+Warning--empty pages in mathsat5
+You've used 41 entries,
             2937 wiz_defined-function locations,
-            947 strings with 12759 characters,
-and the built_in function-call counts, 13052 in all, are:
-= -- 1206
-> -- 390
-< -- 23
-+ -- 154
-- -- 116
-* -- 894
-:= -- 1639
-add.period$ -- 61
-call.type$ -- 38
-change.case$ -- 37
+            967 strings with 13172 characters,
+and the built_in function-call counts, 14033 in all, are:
+= -- 1288
+> -- 421
+< -- 26
++ -- 166
+- -- 125
+* -- 954
+:= -- 1755
+add.period$ -- 64
+call.type$ -- 41
+change.case$ -- 41
 chr.to.int$ -- 0
-cite$ -- 49
-duplicate$ -- 456
-empty$ -- 1557
-format.name$ -- 147
-if$ -- 3499
+cite$ -- 53
+duplicate$ -- 496
+empty$ -- 1683
+format.name$ -- 159
+if$ -- 3766
 int.to.chr$ -- 0
-int.to.str$ -- 38
-missing$ -- 38
-newline$ -- 145
-num.names$ -- 46
-pop$ -- 298
+int.to.str$ -- 41
+missing$ -- 40
+newline$ -- 154
+num.names$ -- 51
+pop$ -- 330
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 0
-skip$ -- 946
+skip$ -- 1023
 stack$ -- 0
-substring$ -- 558
-swap$ -- 179
-text.length$ -- 23
+substring$ -- 588
+swap$ -- 191
+text.length$ -- 26
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 0
-warning$ -- 11
-while$ -- 87
-width$ -- 40
-write$ -- 376
-(There were 14 warnings)
+warning$ -- 12
+while$ -- 93
+width$ -- 43
+write$ -- 402
+(There were 16 warnings)

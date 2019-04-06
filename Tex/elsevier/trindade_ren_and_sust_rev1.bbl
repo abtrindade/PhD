@@ -221,6 +221,10 @@ D.~Beyer, M.~E. Keremoglu, {CPA}checker: A tool for configurable software
   {I}nformation {T}echnology -- {P}rogramming {L}anguages -- {C},
   https://www.iso.org/standard/74528.html - 2018 [Acessed 14 November 2018].
 
+\bibitem{Temperature}
+Weatherbase, Manaus, {A}mazonas {T}ravel {W}eather {A}verages,
+  https://www.weatherbase.com/ - 2018 [Acessed 09 July 2018].
+
 \bibitem{Irradiance}
 EnergyPlus, Weather data by location, https://goo.gl/A82Jqh - 2018 [Acessed 09
   July 2018].
@@ -231,5 +235,15 @@ R.~Brummayer, A.~Biere, Boolector: An efficient {SMT} solver for bit-vectors
   LNCS 5505, 2009, pp. 174--177.
 \newblock \href {http://dx.doi.org/10.1007/978-3-642-00768-2_16}
   {\path{doi:10.1007/978-3-642-00768-2_16}}.
+
+\bibitem{DeMoura}
+L.~D. Moura, N.~Bj$\o$rner, Z3: {A}n {E}fficient {SMT} {S}olver, in: Tools and
+  Alg. for the Const. and An. of Sys. (TACAS), Vol. LNCS 4963, 2008, pp.
+  337--340.
+
+\bibitem{mathsat5}
+A.~Cimatti, A.~Griggio, B.~Schaafsma, R.~Sebastiani, {The MathSAT5 SMT Solver},
+  in: N.~Piterman, S.~Smolka (Eds.), Proceedings of TACAS, Vol. 7795 of LNCS,
+  Springer, 2013.
 
 \end{thebibliography}

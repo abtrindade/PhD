@@ -1067,21 +1067,28 @@ from the PV system that are provided by the user, and the tool will automaticall
 
 Algorithm~\ref{alg:verification-algorithm} describes the pseudo-code used to perform the automated verification. %Line 1 indicates a function call that performs the size checking of the each component of the PV system. %: using Equations \eqref{eq:NTPmin}, \eqref{eq:NTP}, \eqref{eq:NPSmin}, \eqref{eq:NPS}, \eqref{eq:NPP}, and \eqref{eq:NPPmin} to verify the PV panel; using \eqref{eq:Cbank}, \eqref{eq:Nbtotal}, and \eqref{eq:batcheck} to verify the batteries; using \eqref{eq:vcvsystem}, \eqref{eq:icmin}, and \eqref{eq:icicmin} to verify the charge controller; and using \eqref{eq:vindc}, \eqref{eq:voutac}, and \eqref{eq:invcheck} to verify the inverter. 
 %The verification is carried out by the \textit{assert} macro from the ANSI-C programming language to encode each equation of sizing check. The argument to the \textit{assert} statement must be \textit{true} if the system specification is met; otherwise, the program aborts and prints a counterexample indicating a property violation. If there is no property violation, then the verification algorithm continues and 
-The batteries are assumed to have SOC of 100\% (Line 1), i.e., the batteries are charged. That is important because the system is said ready to use when the batteries are charged.
+In order to reduce the computational effort of the algorithm,
+% caused by the state explosion inherent of the technique, 
+every 24h-day was considered as a time-step of 1 hour, and it was split into two parts: (a) one where it is possible to occur PV generation, during daylight, with a duration in hours depending on each site (but dependent on the sun and weather conditions); and (b) one that includes all the remaining day (without any PV generation), when the batteries are demanded to feed the house.
 
-%At both case studies, it was considered 21 years of historic data from Manaus. 
-%According with X and Y, t
-Information related to average temperature ($T$) and solar irradiance ($G$), maximum and minimum annual, are given to the algorithm in Lines 7 to 10 using non-deterministic variables from model checker to explore all possible states and the \textit{assume} macro to constrain the non-deterministic values using a given range. 
+Lines 1 is devoted to information from the location where the PV system will be/were deployed. Usually the information of annual average minimum and maximum, related to temperature ($T$) and solar irradiance ($G$), hour by hour, are obtained from specific historical weather web sites~\cite{Temperature}, ~\cite{Irradiance}.
+
+Line 2 represents all the information that comes from the PV sizing and from the equipment manufacturers data, as PV panels specification and data, batteries specification and data, inverter details and charge controller details. This item includes as well information from the house's load curve.
+
+The first automated verification is related to the sizing check, according described at Section ~\ref{sec:sizingcheck}. Then two functions, called at lines 4 and 5, are responsible for discover which hour starts the photovoltaic generation and when stops. Those functions get this information from the array inputted to the Algorithm with the solar irradiance values.
+
+The batteries are assumed to have SOC of 100\% (Line 6), i.e., the batteries are charged. That is important because the system is said ready to use when the batteries are charged.
+
+The first for-loop at Line 7 controls how many cycles of 24h will be performed by the Algorithm.  And the for-loop from lines 8 to 11 is responsible to discharge the battery (according the load curve) and verify the state of charge of the battery, hour-by-hour, starting at the first hour of the day after the sun goes down until the next day before the sun goes up (when there is not PV generation). Following, at the next for-loop, from line 12 to 29, is performed the verification where there is solar irradiance and all the PV system works. The Algorithm generates information related to average temperature ($T$) and solar irradiance ($G$), maximum and minimum annual, hour-by-hour, using non-deterministic variables from model checker to explore all possible states and the \textit{assume} macro to constrain the non-deterministic values using a given range (lines 15 and 16). 
 %and irradiance varies from 0 W/m$^{2}$ to 852 W/m$^{2}$ (with minimum of 274 W/m$^{2}$ during the daytime, when there is sunlight). 
 %there is PV generation only between 8:00 h and 16:00 h every day, 
 %with zero electric energy generation from 18:00 h to 6:00 h of the next day; and with insignificant generation from 6:00 h to 8:00 h, and from 16:00 h to 18:00 h of the same day. 
-In order to reduce the computational effort of the algorithm,
-% caused by the state explosion inherent of the technique, 
-every 24h-day was considered as a time-step of 1 hour, and it was split into two parts: (a) one where it is possible to occur PV generation, during daylight, with a duration in hours depending on each site (but dependent on the sun and weather conditions); and (b) one that includes all the remaining day (without any PV generation). Therefore, our approach depends on specific data about the solar irradiation levels to define the average amount of hours of PV generation.
 
-After that, the model from PV generator is used in the function call of Line 7, to produce the voltage and current considering the states of $G$ and $T$. With respect to every hour considered, the conditional \textit{if-else-endif} statements from Lines 8, 11, 13, 16 and 19, will perform the charge or discharge of batteries according to the value of different variables: if there is PV generation (which depends on $G$ and $T$), the updated state of charge from batteries, the house's load and the set-up information of the PV system.
+After that, the model from PV generator is used in the function call of Line 17, to produce the voltage and current considering the states of $G$ and $T$. With respect to every hour considered, the conditional \textit{if-elseif-endif} statements from Lines 18, 20, 22, 24 and 26, will imitate the charge controller work, performing the charge or discharge of batteries according to the value of different variables: if there is PV generation, the updated state of charge from batteries, the house's load and the set-up information of the PV system.
 
-Next, representing the time of the day where PV generation is not possible anymore, starting in Line 22, the algorithm will only discharge the batteries (using the 1 hour step) until a new charging process (at the next day) starts. Specific \textit{assert} in Line 26 will check the state of charging from batteries, and they will violate the property if their levels reach the minimum that represents a discharged battery; therefore, the PV system is unable to supply energy to the house. Nevertheless, if the verification engine does not fail, then we can conclude that the PV system does not need further corrections up to the given bounds.
+At the end of last for-loop, the state of the batteries is verified again (Line 27) and the hour is adjusted to the next loop (Line 28).
+
+Nevertheless, if the verification engine does not fail, then we can conclude that the PV system does not need further corrections up to the given bounds $k$.
 %
 %\textcolor{red}{this sentence is unclear... After this process is started the battery autonomy verification, from line 31}. \textcolor{red}{this sentence is unclear... Based on the fact that won't be PV generation after a given time of the day, the algorithm will only discharge the batteries until a new charging process (at the next day) to start.} \textcolor{red}{what do you mean by The formal verification is guaranteed?...  The formal verification is guaranteed by  macro to specific variables of the model, according lines 27 and 35.}
 % and the non-deterministic variables $G$ and $T$ are considered during the formal verification of the system, otherwise, during the other two periods, there is no PV generation and just the power consumption from the backup batteries. 
@@ -1090,7 +1097,7 @@ Next, representing the time of the day where PV generation is not possible anymo
  \begin{algorithm}
  \caption{Model checking algorithm for stand-alone PV}
  \begin{algorithmic}[1]
- \begin{small}
+ \begin{scriptsize}
  
  \renewcommand{\algorithmicrequire}{\textbf{Input:}}
  \renewcommand{\algorithmicensure}{\textbf{Output:}}
@@ -1132,7 +1139,7 @@ Next, representing the time of the day where PV generation is not possible anymo
    \ENDFOR
   \ENDFOR
  \RETURN $(\,)$ 
-  \end{small}
+  \end{scriptsize}
  \end{algorithmic} 
  \label{alg:verification-algorithm}
  \end{algorithm}
@@ -1253,12 +1260,36 @@ Next, representing the time of the day where PV generation is not possible anymo
 %------------------------------------------
 \subsection{Description of the Case Studies}
 %------------------------------------------
-
-We have performed five case studies to evaluate our proposed verification method: (a) four PV systems (three in series 325W PV panels, four 220 Ah batteries in a configuration with two series and two parallel with 48h autonomy, 700 W inverter with surge of 1,600W, charge controller with MPPT with 35A/150V of capacity) deployed in four different houses in an indigenous community (GPS coordinates 2$^{o}$44'50.0"S 60$^{o}$25'47.8"W) situated nearby Manaus (Brazil), with each house having a different power demand (house 1 = 253 W, house 2 = 263 W, house 3 = 283 W, and house 4 = 501 W); and (b) one case concerning a system deployed as an individual system in Manaus (GPS coordinates 3$^{o}$4'20.208"S 60$^{o}$0'30.168"W), supporting 915 W of the house's load (house 5 with four 325W PV panels in a configuration two series and two parallel, four 120Ah batteries in series and autonomy of just 6 h, 1,200 W inverter with surge of 1,600 W, charge controller with MPPT of 150V/35A). 
-
-Note that the annual average temperature ($T$) in Manaus is from 23$^{o}$C to 32$^{o}$C; and irradiance ($G$) varies from 274 W/m$^{2}$ to 852 W/m$^{2}$ when there is sunlight (that information is provided in Lines 5 and 6 of Algorithm~\ref{alg:verification-algorithm}). Another characteristic of Manaus, based on historical weather data %\cite{Temperature}, 
-\cite{Irradiance}, is related to the fact that only during 8 hours of the day is possible to have PV generation, from 8:00h to 16:00h (that information is provided in Algorithm~\ref{alg:verification-algorithm} as well).
-
+%
+%We have performed five case studies to evaluate our proposed verification method: (a) four PV systems (three in series 325W PV panels, four 220 Ah batteries in a configuration with two series and two parallel with 48h autonomy, 700 W inverter with peak power of 1,600W, charge controller with MPPT with 35A/150V of capacity) deployed in four different houses in an indigenous community (GPS coordinates 2$^{o}$44'50.0"S 60$^{o}$25'47.8"W) situated nearby Manaus (Brazil), with each house having a different power demand (house 1 = 253 W, house 2 = 263 W, house 3 = 283 W, and house 4 = 501 W); and (b) one case concerning a system deployed as an individual system in Manaus (GPS coordinates 3$^{o}$4'20.208"S 60$^{o}$0'30.168"W), supporting 915 W of the house's load (house 5 with four 325W PV panels in a configuration two series and two parallel, four 120Ah batteries in series and autonomy of just 6 h, 1,200 W inverter with surge of 1,600 W, charge controller with MPPT of 150V/35A). 
+We have performed five case studies to evaluate the tools, as described in Table~\ref{tab2}. 
+\begin{table}
+\caption{Case studies: stand-alone solar PV systems.}\label{tab2}
+\begin{scriptsize}
+\begin{tabular}{|c|c|c|c|c|c|}
+\hline
+\hline
+Item & House 1 & House 2 & House 3 & House 4 & House 5\\
+\hline
+\hline
+PV Panels &  \multicolumn{4}{|c|}{3x 325W: in series} & 4x 325W: 2x series, 2x parallel \\
+\hline
+Batteries & \multicolumn{4}{|c|}{\makecell{4x220Ah: 2x series, 2x parallel\\ autonomy: 48h}} & \makecell{4x 120Ah batteries in series\\ autonomy: 6h}\\
+\hline
+Charge Controller & \multicolumn{5}{|c|}{With MPPT of 150V/35A}\\
+\hline
+Inverter & \multicolumn{4}{|c|}{700W with peak of 1,600W} & 1,200W with peak of 1,600W\\
+\hline
+Power demand & 253W & 263W & 283W & 501W & 915W\\
+\hline
+GPS Coordinates & \multicolumn{4}{|c|}{\makecell{2$^{o}$44'50.0"S 60$^{o}$25'47.8"W\\}} & \makecell{3$^{o}$4'20.208"S \\60$^{o}$0'30.168"W}\\
+\hline
+Details & \multicolumn{4}{|c|}{\makecell{Riverside indigenous community\\Rural Area of Manaus - Brazil}} & \makecell{Urban house \\Manaus-Amazonas-Brazil}\\
+\hline
+\hline
+\end{tabular}
+\end{scriptsize}
+\end{table}
 
 %------------------------------------------
 \subsection{Objectives and Setup}
@@ -1266,16 +1297,23 @@ Note that the annual average temperature ($T$) in Manaus is from 23$^{o}$C to 32
 Our experimental evaluation aims to answer two research questions:
 %
 \begin{enumerate}
-\item[RQ1] \textbf{(soundness)} Does our approach provide correct results?
-\item[RQ2] \textbf{(performance)} How does our approach compare against other existing tools?
+\item[RQ1] \textbf{(soundness)} Does the automated verification provide correct results?
+\item[RQ2] \textbf{(performance)} How do the verifiers compare to each other and to a simulation commercial tool?
 \end{enumerate}
 
-All experiments were conducted on an otherwise idle Intel octa core Xeon CPU E5-2640 with 2.4 GHz and 264 GB of RAM, running Ubuntu 18.04.1 LTS 64-bits. Concerning the verification engine, ESBMC v6.0.0 was used \footnote{The command-line used to perform the verification is: \$ esbmc filename.c -\phantom{}-no-bounds-check -\phantom{}-no-pointer-check -\phantom{}-no-div-by-zero-check -\phantom{}-unwind 300 -\phantom{}-boolector}. 
-% enabled with the goal of reducing memory usage; 
-We have also used the SMT solver Boolector version 2.4.1~\cite{Brummayer}. %The experiments were performed without a predefined timeout.
+In order to evaluate the proposed verification method and its performance, we have considered five case studies, three verification engines in different configurations, and also compared the results to the HOMER Pro tool. All the experiments were performed with a timeout of 14,400 seconds (4 hours). %Every dweller, who owns a PV system, was interviewed 
 
-In order to evaluate the proposed verification method and its performance, we have considered five case studies and also compared its performance to the HOMER Pro tool. %Every dweller, who owns a PV system, was interviewed to get information about his/her PV system during four months of use. This information was used to know possible flaws from every system in the field.
-Experimental setup of HOMER Pro: Intel Core i5-4210 (4-cores), with 1.7 GHz and 4 GB of RAM, running Microsoft Windows 10; we have used HOMER Pro v3.12.0.
+All verification engines experiments were conducted on an otherwise idle Intel Xeon CPU E5-4617 (8-cores) with 2.90 GHz and 64 GB of RAM, running Ubuntu 16.04 LTS 64-bits. The setup of HOMER Pro simulation tool: Intel Core i5-4210 (4-cores), with 1.7 GHz and 4 GB of RAM, running Microsoft Windows 10; we have used HOMER Pro v3.12.0.
+
+Verification engine ESBMC, version v6.0.0 was used with the SMT solver Boolector version 3.0.1~\cite{Brummayer}\footnote{Command-line: \$ esbmc filename.c -\phantom{}-no-bounds-check -\phantom{}-no-pointer-check -\phantom{}-unwind 100 -\phantom{}-boolector}; and an alternative ESBMC v6.0.0 was used with the SMT incremental mode\footnote{Command-line: \$ esbmc filename.c -\phantom{}-no-bounds-check -\phantom{}-no-pointer-check -\phantom{}-unwind 100 -\phantom{}-smt-during-symex -\phantom{}-smt-symex-guard -\phantom{}-z3} enabled with the goal of reducing memory usage; we have also used the SMT solver Z3 version 4.7.1~\cite{DeMoura}.
+
+Verification engine CBMC 5.11 and MiniSat 2.2.1 were used in the comparation~\cite{Kroening}\footnote{Command-line: \$ cbmc filename.c --unwind 100 --trace}.
+ 
+% enabled with the goal of reducing memory usage; 
+%The experiments were performed without a predefined timeout.
+Verification engine CPAchecker 1.8 was used \footnote{Command-line: \$ scripts/cpa.sh -heap 64000m -stack 10240k -config config/bmc-incremental.properties -spec config/specification/sv-comp-reachability.spc filename.c}, with the SMT solver MathSAT version 5.5.3~\cite{mathsat5}. An alternative CPAchecker configuration was tried as well, using BMC k-induction option, but without improvements of performance or soundness.
+% enabled with the goal of reducing memory usage; 
+ %The experiments were performed without a predefined timeout.
 
 %------------------------------------------
 \subsection{Results and Discussion}
@@ -1287,6 +1325,35 @@ Experimental setup of HOMER Pro: Intel Core i5-4210 (4-cores), with 1.7 GHz and 
 %\item[RQ1] \textbf{(soundness)} Does our approach provide correct results?
 %\item[RQ2] \textbf{(performance)} How does our approach compare against other existing tools?
 %
+Table~\ref{tab1} summarizes the results concerning the use of the automated verification tools applied to the five case-studies of a solar PV system. The times reported in Table~\ref{tab1} answer RQ2. Note that if we used HOMER Pro in all case studies, the $1,200$W was the only one that was proved to not meet the requirement of battery autonomy; all the 700W systems had no indication of flaws during simulation. The simulation took less than five seconds to be performed on each case study.
+
+\begin{table}
+\centering
+\caption{Summary of the case-studies comparative and the automated tools.}\label{tab1}
+\begin{scriptsize}
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+\hline
+\multicolumn{5}{|c|}{Model Checker (SAT/UNSAT: time and message)}\\
+\hline
+Case &  \makecell{ESBMC 6.0.0\\(Boolector 3.0.1)} & \makecell {ESBMC 6.0.0\\(Z3 4.7.1)} & \makecell{CBMC 5.11\\(MiniSat 2.2.1)} & \makecell{CPAchecker 1.8\\(MathSAT 5.5.3)}\\
+\hline
+\hline
+House 1 &  \makecell{ $\leq$ 6 min \\(Out of Memory)} & \makecell{5m08s \\(SAT)} & \makecell{19m02s \\(SAT)} & \makecell{Time out \\ (UNKNOWN)}\\
+\hline
+House 1 &  \makecell{ $\leq$ 6 min \\(Out of Memory)} & \makecell{4m27s \\(SAT)} & \makecell{18m59s \\(SAT)} & \makecell{Time out \\ (UNKNOWN)}\\
+\hline
+House 3 & \makecell{$\leq$ 6 min \\(Out of Memory)} & \makecell{Unknown \\(during solver)} & XX & \makecell{615.8h \\ (low SOC after 16:00h)}\\
+\hline
+House 4 & \makecell{$\leq$ 6 min \\(Out of Memory)} & \makecell{Unknown \\(during solver)} & XX & \makecell{620.8h \\ (low SOC after 16:00h)}\\
+\hline
+House 5 & \makecell{$\leq$ 6 min \\(Out of Memory)} & \makecell{Unknown \\(during solver)} & XX & \makecell{63.3h \\ (Sizing: number of panels)}\\
+\hline
+\hline
+\end{tabular}
+\end{scriptsize}
+\end{table}
+
 The description of our experimental results can be broken down into two parts: (a) the 1,200 W PV system (house 5) failed during the sizing check since the number of panels was \textit{incorrectly} sized; in particular, the counterexample provided by our verification engine indicated 3 PV panels in parallel and the actual project has 2 in series and 2 in parallel. This verification took approximately 0.57 hours to be performed. In order to validate this possible flaw, it was surveyed the owner of the 1,200 W system; we identified that, in fact, the system does not meet the battery autonomy most of the time (mainly when all loads are turned on), and this was double checked with the monitoring system from the charge controller from the manufacturer who showed that the maximum power or surge power were not exceeded, thus affirming RQ1; this behavior is expected since the system was purchased as an off-the-shelf solution and not as a customized design for the electrical charges of the house; (b) For the 700 W PV systems of houses 2, 3, and 4, the sizing check was successful during verification, but our verification engine has found flaws related to the battery autonomy, particularly when SOC reached a empty-battery level. Our verification engine identified those flaws (for those three houses) right after the first night-discharge cycle, i.e., before the solar system started to recharge the batteries. Our verification engine took approximately 5.1 hours to find this flaw in house 2; 5.8 hours for house 3, and 4.4 hours for house 4. These flaws were confirmed with the dwellers who own the systems by an interview process and from a local monitoring system with the Raspberry Pi controller: at least once a month is usual the system to turn off, normally in raining or clouds days, thereby reaching the situation described in Step 3 of Table~\ref{table:controller}, further affirming RQ1; after the sun rises, the systems returns to normal condition operation. One more time the flaws were not caused by misuse of the system by the dwellers. Fig. \ref{fig:loadcurve} shows the monitoring result for the load curve of house 2 from June to July of 2018 (5 weeks), without undesired peaks from power demand of even unexpected energy consumption. The house 1 had an inconclusive result with the automated verification, because the solver did not presented any result from the SMT verification.
 
 \begin{figure}[h]

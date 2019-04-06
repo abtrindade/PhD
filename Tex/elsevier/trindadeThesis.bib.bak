@@ -985,8 +985,7 @@ doi={10.1007/978-3-642-35746-6_1}
 @electronic{Temperature,
   author = "Weatherbase",
   title = "Manaus, {A}mazonas {T}ravel {W}eather {A}verages",
-  url = "http://www.weatherbase.com/weather/weather.php3?s=23328&cityname=Manaus-Amazonas-Brazil.",
-  note = {[Acessed 09 July 2018]}
+  note = "http://www.weatherbase.com/weather/weather.php3?s=23328&cityname=Manaus-Amazonas-Brazil - 2018 [Acessed 09 July 2018]"
 }
 
 
@@ -1130,7 +1129,7 @@ booktitle = {Lecture {N}otes in {C}omputer {S}cience},
 pages = {184-190},
 year = {2011},
 publisher = {Springer, Berlin, Heidelberg},
-editor = {Gopalakrishnan G. and Qadeer S.},
+editor = {Ganesh Gopalakrishnan and Shaz Qadeer},
 volume = {LNCS 6806},
 doi = {10.1007/978-3-642-22110-1_16}
 }
