@@ -74,7 +74,7 @@ A.~Benatiallah, D.~Benatiallah, T.~Ghaitaoui, A.~Harrouz, S.~Mansouri,
 
 \bibitem{ClarkeHV18}
 E.~M. Clarke, T.~A. Henzinger, H.~Veith, Introduction to model checking, in:
-  Handbook of Model Checking., 2018, pp. 1--26.
+  Handbook of Model Checking., Springer, 2018, pp. 1--26.
 \newblock \href {http://dx.doi.org/10.1007/978-3-319-10575-8_1}
   {\path{doi:10.1007/978-3-319-10575-8_1}}.
 
@@ -99,14 +99,15 @@ M.~Gadelha, F.~Monteiro, J.~Morse, L.~Cordeiro, B.~Fischer, D.~Nicole, {ESBMC}
 
 \bibitem{Natsheh2012}
 E.~Natsheh, A.~Albarbar, Solar power plant performance evaluation: simulation
-  and experimental validation, in: J. of Physics: Conf. Ser., Vol. 364, 2012.
+  and experimental validation, in: J. of Physics: Conf. Ser., Vol. 364, 2012,
+  pp. 1--13.
 \newblock \href {http://dx.doi.org/10.1088/1742-6596/364/1/012122}
   {\path{doi:10.1088/1742-6596/364/1/012122}}.
 
 \bibitem{Lamnadi2017}
 M.~Lamnadi, M.~Trihi, A.~Boulezhar, Study of a hybrid renewable energy system
   for a rural school in {T}agzirt, {M}orocco, in: Int. Ren. and Sust. Energ.
-  Conf. (IRSEC), 2017.
+  Conf. (IRSEC), 2017, pp. 381--386.
 \newblock \href {http://dx.doi.org/10.1109/IRSEC.2016.7984079}
   {\path{doi:10.1109/IRSEC.2016.7984079}}.
 
@@ -127,7 +128,7 @@ A.~Abate, Verification of networks of smart energy systems over the cloud, in:
 \bibitem{Driouich2018}
 Y.~Driouich, M.~Parente, E.~Tronci, A methodology for a complete simulation of
   cyber-physical energy systems, in: IEEE Work. on Envir., Energ., and Struc.
-  Monit. Syst. (EESMS), 2018.
+  Monit. Syst. (EESMS), 2018, pp. 1--5.
 \newblock \href {http://dx.doi.org/10.1109/EESMS.2018.8405826}
   {\path{doi:10.1109/EESMS.2018.8405826}}.
 
@@ -244,6 +245,6 @@ L.~D. Moura, N.~Bj$\o$rner, Z3: {A}n {E}fficient {SMT} {S}olver, in: Tools and
 \bibitem{mathsat5}
 A.~Cimatti, A.~Griggio, B.~Schaafsma, R.~Sebastiani, {The MathSAT5 SMT Solver},
   in: N.~Piterman, S.~Smolka (Eds.), Proceedings of TACAS, Vol. 7795 of LNCS,
-  Springer, 2013.
+  Springer, 2013, pp. 93--107.
 
 \end{thebibliography}

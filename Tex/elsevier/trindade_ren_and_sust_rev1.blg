@@ -1,67 +1,62 @@
-This is BibTeX, Version 0.99d (TeX Live 2016)
-Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+This is BibTeX, Version 0.99d (TeX Live 2019/dev/Debian)
+Capacity: max_strings=100000, hash_size=100000, hash_prime=85009
 The top-level auxiliary file: trindade_ren_and_sust_rev1.aux
 The style file: elsarticle-num.bst
 Database file #1: trindadeThesis.bib
 Warning--entry type for "ANSI2018" isn't style-file defined
---line 979 of file trindadeThesis.bib
+--line 983 of file trindadeThesis.bib
 Warning--entry type for "Temperature" isn't style-file defined
---line 985 of file trindadeThesis.bib
+--line 989 of file trindadeThesis.bib
 Warning--entry type for "Irradiance" isn't style-file defined
---line 992 of file trindadeThesis.bib
+--line 996 of file trindadeThesis.bib
 Warning--entry type for "EPE2018" isn't style-file defined
---line 1109 of file trindadeThesis.bib
+--line 1113 of file trindadeThesis.bib
 Warning--can't use both volume and number fields in Hussein2012
 Warning--can't use both volume and number fields in Gow1999
-Warning--empty publisher in ClarkeHV18
-Warning--empty pages in Natsheh2012
-Warning--empty pages in Lamnadi2017
-Warning--empty pages in Driouich2018
 Warning--can't use both author and editor fields in Mohanty
 Warning--there's a number but no series in Hansen
 Warning--there's a number but no volume in Khatib2014
 Warning--can't use both author and editor fields in Clarke2012
 Warning--empty chapter and pages in Clarke2012
-Warning--empty pages in mathsat5
 You've used 41 entries,
             2937 wiz_defined-function locations,
-            967 strings with 13172 characters,
-and the built_in function-call counts, 14033 in all, are:
-= -- 1288
+            971 strings with 13145 characters,
+and the built_in function-call counts, 14551 in all, are:
+= -- 1357
 > -- 421
-< -- 26
+< -- 30
 + -- 166
 - -- 125
-* -- 954
-:= -- 1755
+* -- 975
+:= -- 1806
 add.period$ -- 64
 call.type$ -- 41
 change.case$ -- 41
 chr.to.int$ -- 0
-cite$ -- 53
-duplicate$ -- 496
-empty$ -- 1683
+cite$ -- 48
+duplicate$ -- 522
+empty$ -- 1726
 format.name$ -- 159
-if$ -- 3766
+if$ -- 3920
 int.to.chr$ -- 0
 int.to.str$ -- 41
 missing$ -- 40
 newline$ -- 154
 num.names$ -- 51
-pop$ -- 330
+pop$ -- 327
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 0
-skip$ -- 1023
+skip$ -- 1066
 stack$ -- 0
-substring$ -- 588
-swap$ -- 191
-text.length$ -- 26
+substring$ -- 666
+swap$ -- 217
+text.length$ -- 30
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 0
-warning$ -- 12
-while$ -- 93
+warning$ -- 7
+while$ -- 101
 width$ -- 43
-write$ -- 402
-(There were 16 warnings)
+write$ -- 406
+(There were 11 warnings)

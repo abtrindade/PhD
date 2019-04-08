@@ -813,6 +813,7 @@ pages = {1-21}
 author = {Mouna Lamnadi and Mourad Trihi and Abdelkader Boulezhar},
 title = {Study of a Hybrid Renewable Energy System for a Rural School in {T}agzirt, {M}orocco},
 booktitle = {Int. Ren. and Sust. Energ. Conf. (IRSEC)},
+pages = {381-386},
 year = {2017},
 doi = {10.1109/IRSEC.2016.7984079}
 }
@@ -846,6 +847,7 @@ doi = {10.1109/EESMS.2018.8405826}
 author = {E Natsheh and A Albarbar},
 title = {Solar power plant performance evaluation: simulation and experimental validation},
 booktitle = {J. of Physics: Conf. Ser.},
+pages = {1-13},
 year = {2012},
 volume = {364},
 doi = {10.1088/1742-6596/364/1/012122}
@@ -944,6 +946,7 @@ doi = { 10.1049/ip-epa:19990116}
   title     = {Introduction to Model Checking},
   booktitle = {Handbook of Model Checking.},
   pages     = {1--26},
+  publisher = {Springer},
   year      = {2018},
   doi = {10.1007/978-3-319-10575-8_1}
 }
@@ -985,7 +988,7 @@ doi={10.1007/978-3-642-35746-6_1}
 @electronic{Temperature,
   author = "Weatherbase",
   title = "Manaus, {A}mazonas {T}ravel {W}eather {A}verages",
-  note = "http://www.weatherbase.com/weather/weather.php3?s=23328&cityname=Manaus-Amazonas-Brazil - 2018 [Acessed 09 July 2018]"
+  note = "https://www.weatherbase.com/ - 2018 [Acessed 09 July 2018]"
 }
 
 
@@ -1132,4 +1135,16 @@ publisher = {Springer, Berlin, Heidelberg},
 editor = {Ganesh Gopalakrishnan and Shaz Qadeer},
 volume = {LNCS 6806},
 doi = {10.1007/978-3-642-22110-1_16}
+}
+
+@inproceedings{mathsat5,
+  author = {Alessandro Cimatti and Alberto Griggio and Bastiaan Schaafsma and Roberto Sebastiani},
+  title = {{The MathSAT5 SMT Solver}},
+  editor = {Nir Piterman and Scott Smolka},
+  booktitle = {Proceedings of TACAS},
+  pages = {93-107},
+  year = {2013},
+  volume = {7795},
+  series = {LNCS},
+  publisher = {Springer}
 }
