@@ -298,9 +298,9 @@ For night hours or rainy days, we need to hold batteries, where power can be sto
 %The modular structure facilitates the modeling of the other system structures and replacement of elements, such as a DC load instead of an AC load. 
 %
 \begin{figure}[h]
-\includegraphics[width=0.70\textwidth]{blockdiagramPVS2}
+\includegraphics[width=0.80\textwidth]{blockdiagramPVS2}
 \centering
-\caption{Block diagram for a typical stand-alone PV system~\cite{Hansen}.}
+\caption{Block diagram for a typical stand-alone PV system (adapted from~\cite{Hansen}).}
 \label{fig:blockdiagram}
 \end{figure}
 %
@@ -340,9 +340,9 @@ A wide variety of models exists for estimation of power output of PV modules (an
 %is usually studied using an equivalent circuit model~\cite{Yatimi}, which consists of a current source with one or two diodes connected in parallel, and up to two resistors, one connected in parallel and the other one in series, to take into account energy losses in this model~\cite{Cubas}. 
 %Based on these electronic components, four basic configurations are normally used when studying photovoltaic systems, as shown by Fig. \ref{fig:equivckt}. 
 \begin{figure}[h]
-\includegraphics[width=0.50\textwidth]{equivckt1D}
+\includegraphics[width=0.40\textwidth]{equivckt1D}
 \centering
-\caption{1-diode equivalent PV cell/panel circuit model~\cite{Cubas}.}
+\caption{1-diode equivalent PV cell/panel circuit model (adapted from~\cite{Cubas}).}
 %\caption{Four different equivalent circuit models: (a) 1-diode; (b) 1-diode/1-resistor; (c) 1-diode/2-resistor; (d) 2-diode/2-resistor (Source: \cite{Cubas})}
 \label{fig:equivckt}
 \end{figure}
@@ -744,7 +744,7 @@ The steps in the modeling of the controller process are summarized in Table~\ref
 \renewcommand{\arraystretch}{1.3}
 % if using array.sty, it might be a good idea to tweak the value of
 % \extrarowheight as needed to properly center the text within the cells
-\caption{Summary of the controller process (Source:~\cite{Hansen})}
+\caption{Summary of the controller process (adapted from~\cite{Hansen})}
 \label{table:controller}
 \centering
 %% Some packages, such as MDW tools, offer better commands for making tables
@@ -1388,7 +1388,7 @@ The same five case studies were evaluated by HOMER Pro (RQ2). The simulation res
 \begin{figure}[h]
 \includegraphics[width=0.8\textwidth]{homer.png}
 \centering
-\caption{Homer simulation screen.}
+\caption{HOMER simulation screen.}
 \label{fig:homerscreen}
 \end{figure}
 %
