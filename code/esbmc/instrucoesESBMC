@@ -97,3 +97,9 @@ Daniel (19-FEB-2019)
 --rcfgbuilder.add.additional.assume.for.each.assert true \
 --rcfgbuilder.simplify.code.blocks true \
 --rcfgbuilder.size.of.a.code.block LoopFreeBlock
+
+------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------How to compile code and check errors in C (without verification):
+------------------------------------------------------------------------------------------------------------------------
+$ gcc --syntax-only --std=c11 file.c
+
