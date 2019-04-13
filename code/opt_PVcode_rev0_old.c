@@ -42,7 +42,7 @@ float Tref = 298.15; //reference temperature is 25oC or 298.15K
 int Phouse = 501, Psurge = 501, Econsumption = 3900;
 
 //must define
-float MaxCost=100; //10 million maximum cost just to control the loop of main function
+float MaxCost=1000000000; //10 million maximum cost just to control the loop of main function
 int Vsystem = 24;  //12V, 24V, 36V or 48V: DC Bus voltage definition
 int autonomy = 48; //autonomy in hours
 int SOClimit = 75, SOCabsorption = 95, SOCfull = 100, Vbat = 12, VAC = 127;
@@ -51,25 +51,25 @@ int SOClimit = 75, SOCabsorption = 95, SOCfull = 100, Vbat = 12, VAC = 127;
 int PanelQuant = 4, BatteryQuant=2, ControllerQuant=4,InverterQuant=2;
 
 // panel data        {area, efficiency, num cells, NOCT, mii, miv, Iscref, Vocref, Pmref, Imref, Vmref, VmpNOCT, cost}
-float PanelData[4][13] = {{1.94432, 0.1620, 72, 45, 0.053, -0.31, 9.18, 45.1, 315, 8.16, 36.6, 33.4, 0.26840},
-                          {1.94432, 0.1646, 72, 45, 0.053, -0.31, 9.26, 45.3, 320, 8.69, 36.8, 33.6, 0.19000},
-                          {1.94432, 0.1672, 72, 45, 0.053, -0.31, 9.34, 45.5, 325, 8.78, 37.0, 33.7, 0.21667},
-			  {1.94432, 0.1697, 72, 45, 0.053, -0.31, 9.45, 45.6, 330, 8.88, 37.2, 33.9, 0.17030}};
+float PanelData[4][13] = {{1.94432, 0.1620, 72, 45, 0.053, -0.31, 9.18, 45.1, 315, 8.16, 36.6, 33.4, 268.40},
+                          {1.94432, 0.1646, 72, 45, 0.053, -0.31, 9.26, 45.3, 320, 8.69, 36.8, 33.6, 190.00},
+                          {1.94432, 0.1672, 72, 45, 0.053, -0.31, 9.34, 45.5, 325, 8.78, 37.0, 33.7, 216.67},
+						  {1.94432, 0.1697, 72, 45, 0.053, -0.31, 9.45, 45.6, 330, 8.88, 37.2, 33.9, 170.30}};
 //
 // battery data  	{efficiency, voltage, capacityC20, Vbulk, Vfloat, cost}
-float BatteryData [2][6] = {{0.85, 12, 105, 14.4, 13.8, 0.19009},
-                            {0.85, 12, 220, 14.4, 13.8, 0.52000}};
+float BatteryData [2][6] = {{0.85, 12, 105, 14.4, 13.8, 190.09},
+                            {0.85, 12, 220, 14.4, 13.8, 520.00}};
 
 
 // controller data  	{efficiency, nominal current, voltage  output, Vmpptmin=vbat+1, Vcmax, cost}
-float ControllerData [4][6] = {{0.98, 35, 24, 13, 145, 0.29495},
-			       {0.98, 15, 24, 13, 75, 0.08840},
-			       {0.98, 15, 24, 13, 100, 0.13770},
-                               {0.98, 50, 24, 13, 100, 0.29495}};
+float ControllerData [4][6] = {{0.98, 35, 24, 13, 145, 294.95},
+							   {0.98, 15, 24, 13, 75, 88.40},
+							   {0.98, 15, 24, 13, 100, 137.70},
+                               {0.98, 50, 24, 13, 100, 294.95}};
 
 // inverter data  	{efficiency, VinDC, VoutAC, PACref, MAXACref, cost}   //???VinDC pode variar tem range!!!!!
-float InverterData [2][6] =   {{0.93, 48, 110, 700, 1600, 0.448},
-			       {0.93, 48, 110, 1200, 2400, 0.701}};
+float InverterData [2][6] =   {{0.93, 48, 110, 700, 1600, 448.00},
+							   {0.93, 48, 110, 1200, 2400, 701.00}};
 
 
 //global variables
@@ -83,9 +83,9 @@ unsigned int nondet_uint();
 /*--------------------------------
             main function
 ----------------------------------*/
-int Faux (float cost){
-	int NTP, NPP, NPS, NBtotal, NBS, NBP, NPPmin, ICmin;
-	float Ecorrected, Ep, NTPmin, NPSmin1, NPSmin2, Cbank, Iscamb, NBSmin, NBPmin, Fobj;
+int Faux (int cost){
+	int NTP, NPP, NPS, NBtotal, NBS, NBP, NPPmin;
+	float Ecorrected, Ep, NTPmin, NPSmin1, NPSmin2, Cbank, ICmin, Iscamb, NBSmin, NBPmin, Fobj;
 	unsigned int PanelChoice, BatteryChoice, ControllerChoice, InverterChoice;
 
 	PanelChoice = nondet_uint();
@@ -154,7 +154,7 @@ int Faux (float cost){
 	NPS = VCmax / Vmref;
 	NPPmin = (int)Phouse / (int)(NPS * Pmref);
 	if (NPPmin == 0) NPP =1;
-	else NPP = (int)NPPmin;
+	NPP = (int)NPPmin;
 			//if( ! (( NPS >= NPSmin1 ) && (NPS <= NPSmin2)) ) { __VERIFIER_error();}
 			//if( ! ( NPP >= NPPmin ) ){ __VERIFIER_error();}
 	NTP = NPS * NPP;
@@ -186,7 +186,7 @@ int Faux (float cost){
 	__VERIFIER_assume ( (Phouse <= PACref) && (Psurge <= MAXACref) ); //Power supported by the inverter must be greater than House's demand
 																	  // and the Peak power from inverter must support the Reak from the house
 
-	// Function objective: minimum acquisition cost
+	// Function objective: minimum aquisition cost
 	Fobj= NTP*PanelCost + NBtotal*BatteryCost + ControllerCost + InverterCost;
 
 	//minimize cost of the solution, considering all the equipment that can be used and was declared at the code
@@ -196,9 +196,6 @@ int Faux (float cost){
 
 
 int main() {
-	float HintCost;
-	for (HintCost = 0; HintCost <= MaxCost; HintCost++){
-		Faux(HintCost);
-	}
+	for (int HintCost = 0; HintCost <= MaxCost; HintCost++) Faux(HintCost);
 	return 0;
 }
