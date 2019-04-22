@@ -97,7 +97,7 @@ The PV generator, which can be a panel or an array, is a semiconductor device th
 \end{figure}
 \\
 
-The sizing check will be performed by the proposed tool, and this stage ensures that the system meets the standard project steps related to critical period solar energy method~\cite{Pinho}. 
+The sizing check will be performed by the proposed tool, and this stage ensures that the system meets the standard project steps related to critical period solar energy method~\cite{Pinho} and adopting MPPT (maximum power point tracking) charge controller, that is the most common nowadays. 
 %
 Firstly, it is needed to correct the energy consumption estimated to the load ($E_{consumption}$), which is carried out by ~\eqref{eq:Ecorrected}, where the efficiency of batteries ($\eta_{b}$), controller ($\eta_{c}$), and the inverter ($\eta_{i}$) are considered~\cite{Pinho}.
 \begin{equation}
@@ -243,8 +243,11 @@ Next, using the equations described at Section~\ref{sec:sizing} are calculated t
 If the algorithm do not find a feasible solution among the item of equipment that were inputted to the code, then the result is an \textit{UNSAT}, i.e., the program finish and do not find an solution. It indicates that was not possible to combine the itens of each equipment and create a feasible solution.
 
 \section{Results and Discussion}
-We have performed two case studies to evaluate the proposed approach of optimization as described in Table~\ref{tab1}. Furthermore, four start-of-art verification tools, as described in Section~\ref{sec:AutomatedVerification} (CBMC, ESBMC, UAutomizer, and CPAchecker), were used to compare the approach effectiveness and efficiency. The case studies are related to a stand-alone PV system with the specifications shown in Table~\ref{tab1}.
+We have performed two case studies to evaluate the proposed approach of optimization as described in Table~\ref{tab1}. Furthermore, four start-of-art verification tools, as described in Section~\ref{sec:AutomatedVerification}: CBMC\footnote{Command-line: \$ cbmc -\phantom{}-unwind 100 filename.c -\phantom{}-trace}, ESBMC\footnote{Command-line: \$ esbmc filename.c -\phantom{}-no-bounds-check -\phantom{}-no-pointer-check -\phantom{}-unwind 100 -\phantom{}-boolector}, UAutomizer\footnote{Command-line: \$ ./Ultimate -tc config/AutomizerReach.xml -s config/svcomp-Reach-32bit-Automizer\_Default.epf -i filename.c -\phantom{}-traceabstraction.limit.analysis.time 900 -\phantom{}-traceabstraction.stop.after.first.violation.was.found false -\phantom{}-cacsl2boogietranslator.overapproximate.operations.on.floating.types false -\phantom{}- cacsl2boogietranslator.assume.nondeterminstic.values.are.in.range false -\phantom{}-rcfgbuilder.add.additional.assume.for.each.assert true -\phantom{}-rcfgbuilder.simplify.code.blocks true -\phantom{}-rcfgbuilder.size.of.a.code.block LoopFreeBlock}, and CPAchecker\footnote{Command-line: \$ scripts/cpa.sh -heap 64000m -config config/bmc-incremental.properties -spec config/specification/sv-comp-reachability.spc filename.c}, were used to compare the approach effectiveness and efficiency. The case studies are related to a stand-alone PV system with the specifications shown in Table~\ref{tab1}.
 
+All experiments were conducted on an otherwise idle Intel Xeon CPU E5-4617 (8-cores) with 2.90 GHz and 64 GB of RAM, running Ubuntu 16.04 LTS 64-bits. The experiments were performed with a predefined timeout of 240 minutes.
+
+%used with the SMT incremental mode\footnote{Command-line: \$ esbmc filename.c -\phantom{}-no-bounds-check -\phantom{}-no-pointer-check -\phantom{}-unwind 100 -\phantom{}-smt-during-symex -\phantom{}-smt-symex-guard -\phantom{}-z3} enabled with the goal of reducing memory usage; we have also used the SMT solver Z3 version 4.7.1~\cite{DeMoura}.
 \begin{table}
 \caption{Case studies and Results: optimization of PV systems.}\label{tab1}
 \begin{scriptsize}
@@ -254,15 +257,15 @@ We have performed two case studies to evaluate the proposed approach of optimiza
  & Case 1 & Case 2\\
 \hline
 \hline
-Tool & \makecell{Demand = 501W \\ Peak = 501W \\ Energy=3900Wh/day} & \makecell{Demand = 915W \\ Peak = 980W \\ Energy=4880Wh/day}\\
+Tool & \makecell{Demand = 501W \\ Peak = 501W \\ Energy=3900Wh/day \\ Battery autonomy=48h} & \makecell{Demand = 915W \\ Peak = 980W \\ Energy=4880Wh/day \\ Battery autonomy=6h}\\
 \hline
-CBMC 5.11 (MiniSat 2.2.1) & x1 & x2 \\
+CBMC 5.11 (MiniSat 2.2.1) & Out of Memory & Out of Memory \\
 \hline
-ESBMC 6.0.0 (Boolector 3.0.1) & x1 & x2 \\
+ESBMC 6.0.0 (Boolector 3.0.1) & Timeout & Timeout \\
 \hline
-UAutomizer 0.1.24 (Z3 4.8.3) & x1 & x2 \\
+UAutomizer 0.1.24 (Z3 4.8.3) & UNKNOWN & UNKNOWN \\
 \hline
-CPAchecker 1.8 (MathSAT 5.5.3) & x2 & x4 \\
+CPAchecker 1.8 (MathSAT 5.5.3) & SAT (65 minutes) & x4 \\
 \hline
 \hline
 \end{tabular}
