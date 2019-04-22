@@ -3,3 +3,11 @@
 
 # Ada Library Information
 *.ali
+
+# Latex files
+*.bak
+*.aux
+*.log
+*.bbl
+*.gz
+
