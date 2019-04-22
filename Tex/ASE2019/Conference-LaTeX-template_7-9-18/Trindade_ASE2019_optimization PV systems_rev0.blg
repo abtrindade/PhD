@@ -1,0 +1,56 @@
+This is BibTeX, Version 0.99d (TeX Live 2019/dev/Debian)
+Capacity: max_strings=100000, hash_size=100000, hash_prime=85009
+The top-level auxiliary file: Trindade_ASE2019_optimization PV systems_rev0.aux
+The style file: IEEEtran.bst
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated wiz_functions (elt_size=4) to 6000 items from 3000.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Database file #1: trindadeThesis.bib
+-- IEEEtran.bst version 1.12 (2007/01/11) by Michael Shell.
+-- http://www.michaelshell.org/tex/ieeetran/bibtex/
+-- See the "IEEEtran_bst_HOWTO.pdf" manual for usage information.
+
+Done.
+You've used 20 entries,
+            4024 wiz_defined-function locations,
+            953 strings with 11205 characters,
+and the built_in function-call counts, 15298 in all, are:
+= -- 1202
+> -- 380
+< -- 124
++ -- 206
+- -- 68
+* -- 733
+:= -- 2273
+add.period$ -- 43
+call.type$ -- 20
+change.case$ -- 16
+chr.to.int$ -- 270
+cite$ -- 20
+duplicate$ -- 1085
+empty$ -- 1304
+format.name$ -- 86
+if$ -- 3561
+int.to.chr$ -- 0
+int.to.str$ -- 20
+missing$ -- 205
+newline$ -- 83
+num.names$ -- 22
+pop$ -- 478
+preamble$ -- 1
+purify$ -- 0
+quote$ -- 2
+skip$ -- 1198
+stack$ -- 0
+substring$ -- 641
+swap$ -- 893
+text.length$ -- 34
+text.prefix$ -- 0
+top$ -- 5
+type$ -- 20
+warning$ -- 0
+while$ -- 68
+width$ -- 22
+write$ -- 215
