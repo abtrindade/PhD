@@ -47,18 +47,23 @@ Our proposal is unprecedented and interesting to streamline the design and analy
 automated verification, model checking, optimization, electrical systems and solar photovoltaic systems.
 \end{IEEEkeywords}
 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Introduction}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\textcolor{red}{What is the relation of this paper with software engineering?}
+
 Lack of access to clean and affordable energy is considered a core dimension of poverty~\cite{Hussein2012}. Progress has been made worldwide; in particular, the number of people without electricity access fell below 1 billion threshold for the first time in 2017~\cite{IEAweo2018}. In order to provide universal electricity for all, decentralized systems led by solar photovoltaic (PV) in off-grid and mini-grid systems will be the lowest-cost solution for three-quarters of the additional connections needed; specifically grid extension will be the standard in urban areas~\cite{IEAweo2018}.
 
 In order to simulate or evaluate a PV system, there exist various specialized tools available in the market, e.g., RETScreen, HOMER, PVWatts, SAM and Hybrid2 \cite{Pradhan,Swarnkar,NRELDobos,NRELBlair,Mills}; and even general purpose simulation tools, e.g. PSpice, Saber or MATLAB/Simulink package \cite{Gow1999,Benatiallah2017}. However, those tools are based on simulation models, which are employed before the system design is concluded; it has the drawback of an incomplete coverage since verification of all possible combinations and potential failures of a system is unfeasible~\cite{ClarkeHV18}.
 
 Formal methods based on \textit{model checking} can offer a great potential to obtain a more effective design process of PV systems~\cite{ClarkeHV18}. In this study, we review verification tools and related them to design and verify PV systems, which was uncommon in prior studies~\cite{abs-1811-09438}. 
 
-To select an optimum combination to meet sizing constraints, it is necessary to evaluate \textit{power reliability} and \textit{system cost} analysis for the recommended system. An ideal combination for any PV system is made by the best compromise between two considered objectives, which is power reliability and system cost~\cite{Alsadi2018}. 
+To select an optimum combination to meet sizing constraints, we need to evaluate \textit{power reliability} and perform \textit{system cost} analysis for the recommended system. An ideal combination for any PV system is made by the best compromise between those two objectives (power reliability and system cost)~\cite{Alsadi2018}. 
+Regarding power reliability, the usual is to use loss of load probability (LOLP) or loss of power supply probability (LPSP). Based on the fact that here we are neither considering site characteristics nor the load changes over time, the reliability analysis will be developed only by the critical period method of PV sizing \textcolor{red}{What does it mean? Remember that we have software engineering audience}. 
 
-Regarding power reliability, the usual is to use loss of load probability (LOLP) or loss of power supply probability (LPSP). Based on the fact that at this paper we are not considering site characteristics and neither the load changes over the time, the reliability analysis will be granted only by the critical period method of PV sizing. 
-
-In the other hand, considering the system cost analysis, it is usual to find related research done with Net Present Cost (NPC), Levelized Cost of Energy (LCOE) or Life Cycle Cost (LCC). Here, one more time, based on the fact that the local of deployment is not specified, this research uses an adapted LCC analysis, where only the deployment cost is considered at the model (without the maintenance or operational costs).
+However, considering the system cost analysis, we usually find related studies done with Net Present Cost (NPC), Levelized Cost of Energy (LCOE) or Life Cycle Cost (LCC). Here, one more time, based on the fact that the local of deployment is not specified, our study uses an adapted LCC analysis, where only the deployment cost is considered about the model, i.e., without the maintenance or operational costs \textcolor{red}{cite a reference here}.
 
 The main contribution of this approach is to allow that a list of PV components (PV panels, charge controllers, inverters and batteries) can be inputted to the system, and the algorithm using automated verification, and written in language C, can find the best technical and financial result.%, using non-deterministic variables and exploring the design-space
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
