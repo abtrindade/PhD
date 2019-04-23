@@ -1,3 +1,6 @@
+# PDF file
+*.pdf
+
 # Object file
 *.o
 
