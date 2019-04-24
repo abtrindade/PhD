@@ -212,9 +212,12 @@ The sizing project check of the inverter is carried out by means of three equati
 \left[ (\scriptstyle Demand \leq \scriptstyle P_{AC,ref}) \, \scriptstyle and \, \scriptstyle (P_{surge} \leq MAX_{AC,ref}) \right].
 \end{equation}
 
-\section{Method}
-Algorithm~\ref{alg:verification-algorithm} describes the pseudo-code used to perform the optimization of stand-alone PV systems using automated verification. 
+%------------------------------------------------------
+\section{Applying Automated Verification to Optimal Sizing of Stand-alone Solar PV Systems}
+%------------------------------------------------------
 
+Algorithm~\ref{alg:verification-algorithm} describes the pseudocode used to optimize stand-alone PV systems using automated verification. 
+%
  \begin{algorithm}
  \caption{Optimization algorithm}
  \begin{algorithmic}[1]
@@ -231,10 +234,10 @@ Algorithm~\ref{alg:verification-algorithm} describes the pseudo-code used to per
   \STATE $declare \, power \, demand, \, power \, peak, \, energy \, consumption $ \\
   \STATE $declare \, battery\,  autonomy, deep \, of \, discharge, AC \, voltage$ \\
   \FOR {$HintCost=0$ to $MaxCost$}
- 	\STATE $declare \, non-deterministic \, variable \, to \, select \, Panel \, from \, list$ \\
- 	\STATE $declare \, non-deterministic \, variable \, to \, select \, Controller \, from \, list $ \\
- 	\STATE $declare \, non-deterministic \, variable \, to \, select \, Battery \, from \, list $ \\
- 	\STATE $declare \, non-deterministic \, variable \, to \, select \, Inverter \, from \, list $ \\ 	
+ 	\STATE $declare \, non-det \, variable \, to \, select \, Panel \, from \, list$ \\
+ 	\STATE $declare \, non-det \, variable \, to \, select \, Controller \, from \, list $ \\
+ 	\STATE $declare \, non-det \, variable \, to \, select \, Battery \, from \, list $ \\
+ 	\STATE $declare \, non-det \, variable \, to \, select \, Inverter \, from \, list $ \\ 	
  	\STATE $calculate \, E_{corrected}, \, E_{p} $ \\
 	\STATE $calculate \, N_{TPmin}, \, N_{PSmin}, N_{PPmin} $ \\
  	\STATE $calculate \, C_{bank}$ \\
@@ -257,15 +260,18 @@ Algorithm~\ref{alg:verification-algorithm} describes the pseudo-code used to per
  \label{alg:verification-algorithm}
  \end{algorithm}
  
-The algorithm starts with the input of manufacturers data and prices of PV panels, batteries, charge controllers and inverters (Lines 2 to 5). Following is necessary to define user requirements (house requirements and design definitions), from Line 6 to 8. 
+Our algorithm starts with the input of manufacturers data and prices of PV panels, batteries, charge controllers and inverters (Lines 2 to 5). After that, we define user requirements, i.e., house requirements and design definitions, from Lines 6 to 8. The \textit{for}-loop started at Line 9 controls the lowest cost to the PV solution. In particular, it starts with cost $0$ and stops only when the algorithm finds a feasible solution in which the cost breaks the assertion stated in Line 28; if that happens, then our algorithm has found an optimum solution, stating that the automatic verification reached a \textit{SAT} (satisfiable) condition. The algorithm uses non-deterministic variables to choose one specific data from a list of PV panels, controllers, batteries and inverters (Lines 10 to 13). That procedure ensures that the automated verification checks all possibilities of items from each equipment, and combine them to assemble a feasible PV solution, which meets the user requirements.
 
-The loop-FOR started at line 9 controls the try to get the lowest cost to the PV solution. It starts with cost of $zero$ and stops only when the algorithm finds a feasible solution which cost breaks the $assert$ of Line 28. When this happens, then the algorithm found the optimum solution and we say that the automatic verification reached a \textit{SAT} (satisfiability) condition. The algorithm uses non-deterministic variables to pick one specific data from a list of PV panels, controllers, batteries and inverters (Lines 10 to 13). That procedure ensures that the automated verification will try all the possibilities of item from each equipment, and combine them in order to mount a feasible PV solution that meet the user requirements.
+Next, we use the equations described in Section~\ref{sec:sizing} \textcolor{red}{which equations? please be more specific?} to calculate the sizing variables (Lines 14 to 20). The directive \textit{assume} (from Line 21 to 25) ensures the compatibility of the chosen items from the list of equipment: the automatic verification uses only the item (among all the possible ones) that satisfies the statements from Line 14 to 20 in addition to the Line 18. Therefore, our algorithm reaches Line 27 with one feasible solution, and the cost of that solution is calculated in $F_{obj}$.
 
-Next, using the equations described at Section~\ref{sec:sizing} are calculated the sizing necessary variables (Lines 14 to 20). The directive \textit{assume} (from Line 21 to 25) ensure the compatibility of the choose item from the list of equipment: the automatic verification uses only the item (among all the possible ones) that satisfies the statements from Line 14 to 20, and more the Line 18. Therefore, the algorithm reaches the Line 27 with one feasible solution, and the cost of that solution is calculated in $F_{obj}$.
+If our algorithm does not find a feasible solution among the item of equipment that were inputted to the code, then the result is an \textit{UNSAT}, i.e., the program finishes and does not find a solution. It indicates that was not possible to combine the itens of each equipment and create a feasible solution.
 
-If the algorithm do not find a feasible solution among the item of equipment that were inputted to the code, then the result is an \textit{UNSAT}, i.e., the program finish and do not find an solution. It indicates that was not possible to combine the itens of each equipment and create a feasible solution.
+\textcolor{red}{What are the main challenges for the verification part?}
 
+%---------------------------------------------------------------------------
 \section{Results and Discussion}
+%---------------------------------------------------------------------------
+
 We have performed two case studies to evaluate the proposed approach of optimization as described in Table~\ref{tab1}. Furthermore, four start-of-art verification tools, as described in Section~\ref{sec:AutomatedVerification}: CBMC\footnote{Command-line: \$ cbmc -\phantom{}-unwind 100 filename.c -\phantom{}-trace}, ESBMC\footnote{Command-line: \$ esbmc filename.c -\phantom{}-no-bounds-check -\phantom{}-no-pointer-check -\phantom{}-unwind 100 -\phantom{}-boolector}, UAutomizer\footnote{Command-line: \$ ./Ultimate -tc config/AutomizerReach.xml -s config/svcomp-Reach-32bit-Automizer\_Default.epf -i filename.c -\phantom{}-traceabstraction.limit.analysis.time 900 -\phantom{}-traceabstraction.stop.after.first.violation.was.found false -\phantom{}-cacsl2boogietranslator.overapproximate.operations.on.floating.types false -\phantom{}- cacsl2boogietranslator.assume.nondeterminstic.values.are.in.range false -\phantom{}-rcfgbuilder.add.additional.assume.for.each.assert true -\phantom{}-rcfgbuilder.simplify.code.blocks true -\phantom{}-rcfgbuilder.size.of.a.code.block LoopFreeBlock}, and CPAchecker\footnote{Command-line: \$ scripts/cpa.sh -heap 64000m -config config/bmc-incremental.properties -spec config/specification/sv-comp-reachability.spc filename.c}, were used to compare the approach effectiveness and efficiency. The case studies are related to a stand-alone PV system with the specifications shown in Table~\ref{tab1}.
 
 All experiments were conducted on an otherwise idle Intel Xeon CPU E5-4617 (8-cores) with 2.90 GHz and 64 GB of RAM, running Ubuntu 16.04 LTS 64-bits. The experiments were performed with a predefined timeout of 240 minutes.
