@@ -61,11 +61,6 @@ In order to simulate or evaluate a PV system, there exist various specialized to
 
 Formal methods based on \textit{model checking} can offer a great potential to obtain a more effective design process of systems~\cite{ClarkeHV18}. Therefore, in the context of this proposal, a cyber-physical system, specifically a PV system, is the target. We review verification tools and related them to design and to verify PV systems, which was uncommon in prior studies~\cite{abs-1811-09438}. 
 
-To select an optimum combination to meet sizing constraints, we need to evaluate \textit{power reliability} and perform \textit{system cost} analysis for the recommended system. An ideal combination for any PV system is made by the best compromise between those two objectives (power reliability and system cost)~\cite{Alsadi2018}. 
-Regarding power reliability, the usual is to use loss of load probability (LOLP) or loss of power supply probability (LPSP). Based on the fact that here we are neither considering site characteristics nor the load changes over time, the reliability analysis will be developed only by the critical period method of PV sizing \textcolor{red}{What does it mean? Remember that we have software engineering audience}. 
-
-However, considering the system cost analysis, we usually find related studies done with Net Present Cost (NPC), Levelized Cost of Energy (LCOE) or Life Cycle Cost (LCC). Here, one more time, based on the fact that the local of deployment is not specified, our study uses an adapted LCC analysis, where only the deployment cost is considered about the model, i.e., without the maintenance or operational costs \textcolor{red}{cite a reference here}.
-
 The main contribution of this approach is to allow that a list of PV components (PV panels, charge controllers, inverters and batteries) can be inputted to the system, and the algorithm using automated verification, and written in language C, can find the best technical and financial result.
 
 \textcolor{red}{We need to make our contributions stronger. Why the SE community would be interested in this paper? What are the main open problems we need them to solve here? Remember that this is a paper for new ideas... we don't need to make questions but we don't need to answer all of them.}
@@ -212,6 +207,14 @@ The sizing project check of the inverter is carried out by means of three equati
 \label{eq:invcheck} 
 \left[ (\scriptstyle Demand \leq \scriptstyle P_{AC,ref}) \, \scriptstyle and \, \scriptstyle (P_{surge} \leq MAX_{AC,ref}) \right].
 \end{equation}
+% -------------------------------------------------------
+\section{Optimum sizing of PV systems}
+% -------------------------------------------------------
+To select an optimum combination of compontntes from a PV system in order to meet sizing constraints, we need to evaluate \textit{power reliability} and perform \textit{system cost} analysis for the recommended system. An ideal combination for any PV system is made by the best compromise between those two objectives (power reliability and system cost)~\cite{Alsadi2018}. 
+
+Regarding power reliability, the usual is to use loss of load probability (LOLP) or loss of power supply probability (LPSP). Based on the fact that here we are neither considering site characteristics nor the load changes over time, the reliability analysis will be developed only by the critical period method of PV sizing \textcolor{red}{What does it mean? Remember that we have software engineering audience}. 
+
+However, considering the system cost analysis, we usually find related studies done with Net Present Cost (NPC), Levelized Cost of Energy (LCOE) or Life Cycle Cost (LCC). Here, one more time, based on the fact that the local of deployment is not specified, our study uses an adapted LCC analysis, where only the deployment cost is considered about the model, i.e., without the operational and maintenance costs~\cite{Alsadi2018}.
 
 %------------------------------------------------------
 \section{Applying Automated Verification to Optimal Sizing of Stand-alone Solar PV Systems}
@@ -253,7 +256,7 @@ Algorithm~\ref{alg:verification-algorithm} describes the pseudocode used to opti
 	\STATE $requeriment \, enforced \, by \, \textbf{assume}(P_{surge})$ \\
 	\STATE $non-det \, variables \, hold \, feasible \, equipment \, and \ cost $ \\
 	\STATE $F_{obj} \leftarrow  N_{TP}*Panel_{Cost} \, + \, N_{TB}*Battery_{Cost} \, + Controller_{Cost} \, + \, Inverter_{Cost}$ \\
-	\STATE $Violation \, check \, with \, \textbf{assert}(F_{obj} \geq HintCost)$ \\
+	\STATE $Violation \, check \, with \, \textbf{assert}(F_{obj} > HintCost)$ \\
   \ENDFOR
  \RETURN $(\,)$ 
   \end{scriptsize}
@@ -263,11 +266,11 @@ Algorithm~\ref{alg:verification-algorithm} describes the pseudocode used to opti
  
 Our algorithm starts with the input of manufacturers data and prices of PV panels, batteries, charge controllers and inverters (Lines 2 to 5). After that, we define user requirements, i.e., house requirements and design definitions, from Lines 6 to 8. The \textit{for}-loop started at Line 9 controls the lowest cost to the PV solution. In particular, it starts with cost $0$ and stops only when the algorithm finds a feasible solution in which the cost breaks the assertion stated in Line 28; if that happens, then our algorithm has found an optimum solution, stating that the automatic verification reached a \textit{SAT} (satisfiable) condition. The algorithm uses non-deterministic variables to choose one specific data from a list of PV panels, controllers, batteries and inverters (Lines 10 to 13). That procedure ensures that the automated verification checks all possibilities of items from each equipment, and combine them to assemble a feasible PV solution, which meets the user requirements.
 
-Next, we use the equations described in Section~\ref{sec:sizing} \textcolor{red}{which equations? please be more specific?} to calculate the sizing variables (Lines 14 to 20). The directive \textit{assume} (from Line 21 to 25) ensures the compatibility of the chosen items from the list of equipment: the automatic verification uses only the item (among all the possible ones) that satisfies the statements from Line 14 to 20 in addition to the Line 18. Therefore, our algorithm reaches Line 27 with one feasible solution, and the cost of that solution is calculated in $F_{obj}$.
+Next, we use Eq.~(\ref{eq:Ecorrected}), Eq.~(\ref{eq:Ep}), Eq.~(\ref{eq:NTPmin}), Eq.~(\ref{eq:NPSmin}), Eq.~(\ref{eq:NPPmin}), Eq.~(\ref{eq:Cbank}), Eq.~(\ref{eq:Nbtotal}), Eq.~(\ref{eq:iscamb}), and Eq.~(\ref{eq:icmin}) to calculate the sizing variables (Lines 14 to 20). The directive \textit{assume} (from Line 21 to 25) ensures the compatibility of the chosen items from the list of equipment: the automatic verification uses only the item (among all the possible ones) that satisfies the statements from Line 14 to 20 in addition to the Line 18. Therefore, our algorithm reaches Line 27 with one feasible solution, and the cost of that solution is calculated in $F_{obj}$.
 
 If our algorithm does not find a feasible solution among the item of equipment that were inputted to the code, then the result is an \textit{UNSAT}, i.e., the program finishes and does not find a solution. It indicates that was not possible to combine the itens of each equipment and create a feasible solution.
 
-\textcolor{red}{What are the main challenges for the verification part?}
+\textcolor{red}{The main challenge for the verification part is to found a feasible solution (technically speaking, regarding the constraints and user requirements) that is the best financial solution at the same time (lowest cost of deployment) from a list of equipment and components that is inputted to the tool}.
 
 %---------------------------------------------------------------------------
 \section{Results and Discussion}
