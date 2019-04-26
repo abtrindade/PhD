@@ -57,17 +57,17 @@ While some research efforts exist to enhance and optimize the software developme
 
 Lack of access to clean and affordable energy is considered a core dimension of poverty~\cite{Hussein2012}. Progress has been made worldwide; in particular, the number of people without electricity access fell below 1 billion threshold for the first time in 2017~\cite{IEAweo2018}. In order to provide universal electricity for all, decentralized systems led by solar photovoltaic (PV) in off-grid and mini-grid systems will be the lowest-cost solution for three-quarters of the additional connections needed; specifically grid extension will be the standard in urban areas~\cite{IEAweo2018}.
 
-In order to simulate or evaluate a PV system, there exist various specialized tools available in the market, e.g., RETScreen, HOMER, PVWatts, SAM and Hybrid2 \cite{Pradhan,Swarnkar,NRELDobos,NRELBlair,Mills}; and even general purpose simulation tools, e.g. PSpice, Saber or MATLAB/Simulink package \cite{Gow1999,Benatiallah2017}. However, those tools are based on simulation models, which are employed before the system design is concluded; it has the drawback of an incomplete coverage since verification of all possible combinations and potential failures of a system is unfeasible~\cite{ClarkeHV18}.
+In order to simulate or evaluate a PV system, there exist various specialized tools available in the market, e.g., RETScreen, HOMER, PVWatts, SAM and Hybrid2 \cite{Pradhan,Swarnkar,NRELDobos,NRELBlair,Mills}; and even general purpose simulation tools, e.g. PSpice, Saber or MATLAB/Simulink package \cite{Gow1999,Benatiallah2017}. However, those tools are based on simulation models; it has the drawback of an incomplete coverage since verification of all possible combinations and potential failures of a system is unfeasible~\cite{ClarkeHV18}.
 
 Formal methods based on \textit{model checking} can offer a great potential to obtain a more effective design process of systems~\cite{ClarkeHV18}. Therefore, in the context of this proposal, a cyber-physical system, specifically a PV system, is the target. We review verification tools and related them to design and to verify PV systems, which was uncommon in prior studies~\cite{abs-1811-09438}. 
 
-The main contribution of this approach is to allow that a list of PV components (PV panels, charge controllers, inverters and batteries) can be inputted to the system, and the algorithm using automated verification, and written in language C, can find the best technical and financial result.
+The main contribution of this approach is to allow that a list of PV components (PV panels, charge controllers, inverters and batteries) can be inputted to the system, and the algorithm using automated verification, and written in language C, can find the best compromise between those two objectives (power reliability and system cost).
 
 \textcolor{red}{We need to make our contributions stronger. Why the SE community would be interested in this paper? What are the main open problems we need them to solve here? Remember that this is a paper for new ideas... we don't need to make questions but we don't need to answer all of them.}
 
 %, using non-deterministic variables and exploring the design-space
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
+\section{Automated Verification}
 \label{sec:AutomatedVerification}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 Although simulation and testing explore possible behaviors and scenarios of a given system, they leave open the question of whether unexplored trajectories may contain a flaw. Formal verification conducts an exhaustive exploration of all possible behaviors; when a design is said to be ``correct'' by a formal verification method, it implies that all behaviors have been explored, and questions regarding adequate coverage or missed behavior becomes irrelevant~\cite{Clarke2012}. Formal verification is a systematic approach that applies mathematical reasoning to obtain guarantees about the correctness of a system; one successful method in this domain is model checking~\cite{Clarke2012}. Here we evaluate three state-of-the-art model checkers to formally optimize the sizing of PV designs w.r.t. user requirements.
@@ -101,9 +101,6 @@ checking. In order to experiment with the trade-off, and in order to be able to 
 \section{Sizing Stand-alone Solar PV Systems}
 \label{sec:sizing}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\textcolor{red}{Do we really need this section? Can't we just cite our technical report in arxiv? Remember that this is a software engineering conference. People are more interested in the software part.}
-
 The modeling of the PV system is based on modular blocks, as illustrated in Fig.\ref{fig:blockdiagram}. %It identifies the PV generator, batteries, charge controller, inverter, and AC load. 
 The PV generator, which can be a panel or an array, is a semiconductor device that can convert solar energy into DC electricity. In Fig.\ref{fig:blockdiagram}, there are two variables that depend on the site where the system is deployed and also the weather (i.e., solar irradiance $G$ and temperature $T$). For night hours or rainy days, we need to hold batteries where power can be stored and used. The use of battery as a storage form implies the presence of a charge controller~\cite{Hansen}. The PV arrays produce DC and therefore when the PV system contains an AC load, a DC/AC conversion is required. That converter is called of inverter; and the AC load dictates the behavior of AC electrical load from the house that will be fed by the system.
 \begin{figure}[h]
@@ -293,19 +290,20 @@ All experiments were conducted on an otherwise idle Intel Xeon CPU E5-4617 (8-co
 \hline
 Tool & \makecell{Demand = 501W \\ Peak = 501W \\ Energy=3900Wh/day \\ Battery autonomy=48h} & \makecell{Demand = 915W \\ Peak = 980W \\ Energy=4880Wh/day \\ Battery autonomy=6h}\\
 \hline
-CBMC 5.11 (MiniSat 2.2.1) & Out of Memory & Out of Memory \\
+\makecell{CBMC 5.11 \\(MiniSat 2.2.1)} & \makecell{UNKNOWN \\(Out of Memory)} & \makecell{UNKNOWN \\(Out of Memory)}\\
 \hline
-ESBMC 6.0.0 (Boolector 3.0.1) & Timeout & Timeout \\
+\makecell{ESBMC 6.0.0 \\(Boolector 3.0.1)} & \makecell{UNKNOWN \\(Timeout)} & \makecell{UNKNOWN \\(Timeout)} \\
 \hline
 %UAutomizer 0.1.24 (Z3 4.8.3) & UNKNOWN & UNKNOWN \\
 %\hline
-CPAchecker 1.8 (MathSAT 5.5.3) & SAT (65 minutes) & x4 \\
+\makecell{CPAchecker 1.8 \\(MathSAT 5.5.3)} & \makecell{SAT (66.18 min) \\ Property violation line 195: \\NTP= 4 $\times$ 320W model (2S-2P)\\NBT= 4 $\times$ 105Ah model (2S-2P)\\ Controller 15A/100V\\Inverter 700VA, 48V \\ Total Cost: US\$ 2,643.00} & \makecell {SAT (35.41 min) \\ Property violation line 195:  \\NTP= 3 $\times$ 320W model (3S)\\NBT= 2 $\times$ 105Ah model (2S)\\ Controller 35A/145V \\ Inverter 1,200VA, 48V \\ Total Cost: US\$ 2,125.00}\\
 \hline
 \hline
 \end{tabular}
 \end{scriptsize}
 \end{table}
 
+More experimentation will be performed with a larger number of case studies and to compare the result with some off-the-shelf software that focus on sizing and optimization (validation of the result). Besides, it will be inputted a larger number of components (panels, batteries, contollers and inverters) to the database (that is limited to 12 items right now). That will bring more complexity to the tool, however will ensure an even better optimization.
 % argument is your BibTeX string definitions and bibliography database(s)
 \bibliography{trindadeThesis}{}
 
