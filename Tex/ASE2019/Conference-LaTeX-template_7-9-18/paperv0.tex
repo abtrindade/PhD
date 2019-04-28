@@ -45,14 +45,8 @@ Currently we have approximately $1$ billion of people who do not have electrical
 energy poverty alleviation has become an important political issue. 
 %Several initiatives and policies have been proposed to deal with poor access to sources of energy in many developing countries. 
 Particular attention is given to renewables and PV systems. 
-Unfortunately, state-of-the-art tools available to evaluate PV designs are mainly based on simulations, 
-which do not cover all aspects of the design-space. 
-The application of automated verification to PV systems is a very recent subject with only a few initiatives. 
-Here we develop an optimization algorithm and report preliminary results using three state-of-art software 
-verifiers with the goal of optimizing the sizing of a PV system. Commercial equipment data is part of our specification 
-and the technical solution is derived from financial analysis of the obtained sizing. Our proposal is novel and 
-unprecedented to streamline the design and analysis of PV systems. 
-Experimental results show that \textcolor{red}{we should describe here a summary of the results}.
+Unfortunately, state-of-the-art tools available to evaluate PV designs are mainly based on simulations, which do not cover all aspects of the design-space. 
+The application of automated verification to PV systems is a very recent subject with only a few initiatives. Here we develop an optimization algorithm and report preliminary results using three state-of-art software verifiers with the goal of optimizing the sizing of a PV system. Commercial equipment data is part of our specification and the technical solution is derived from financial analysis of the obtained sizing. Our proposal is novel and unprecedented to streamline the design and analysis of PV systems. Experimental results show that \textcolor{red}{we should describe here a summary of the results}.
 \end{abstract}
 
 \begin{IEEEkeywords}
@@ -67,21 +61,13 @@ automated verification, model checking, optimization, electrical systems and sol
 
 \textcolor{red}{Software Engineering Meets Control Theory: https://ieeexplore.ieee.org/document/7194659/}
 
-Cyber-Physical Systems  (CPS) are Äúengineered systems, which are built from, and depend upon, 
-the seamless integration of computational  and  physical  componentsÄù~\cite{NSF2015}. 
+Cyber-Physical Systems  (CPS) are engineered systems, which are built from, and depend upon, 
+the seamless integration of computational  and  physical  components~\cite{NSF2015}. 
 During operation, such components must frequently adapt to the executing environment changes 
 faced at run-time (dynamics of the physical processes) and must be able to continue to behave 
-in a controlled and safe way, thus posing novel technical challenges for the software engineering 
-of services and applications for CPS~\cite{Metzger2014}. %Important quality aspects for CPS include scalability, e.g., ensuring that CPS applications can scale to urban-wide deployment environments [Nessi].
+in a controlled and safe way, thus posing novel technical challenges for the software engineering of services and applications for CPS~\cite{Metzger2014}. %Important quality aspects for CPS include scalability, e.g., ensuring that CPS applications can scale to urban-wide deployment environments [Nessi].
 
-While some research efforts do exist to enhance and optimize the software development processes for CPS, 
-further investigation and discussion of better and more effective models are still needed in practice~\cite{Al-Jaroodi2016}. 
-Among the opportunities for enhancements, there exists the need for developing new techniques and tools to support CPS 
-requirements gathering and analysis. The developed techniques need to deal with predefined requirements enforced 
-by the nature and inherited constraints of the target CPS. In addition, they should be able to provide verification 
-and validation mechanisms for completeness, correctness, and consistency~\cite{Al-Jaroodi2016}. 
-Uncertainty and variability, at the same time, can be dealt with formal verification~\cite{NESSI}. 
-Energy production, distribution, and optimization are all CPS problems~\cite{UC}. 
+While some research efforts do exist to enhance and optimize the software development processes for CPS, further investigation and discussion of better and more effective models are still needed in practice~\cite{Al-Jaroodi2016}. Among the opportunities for enhancements, there exists the need for developing new techniques and tools to support CPS requirements gathering and analysis. The developed techniques need to deal with predefined requirements enforced by the nature and inherited constraints of the target CPS. In addition, they should be able to provide verification and validation mechanisms for completeness, correctness, and consistency~\cite{Al-Jaroodi2016}. Uncertainty and variability, at the same time, can be dealt with formal verification~\cite{NESSI}. Energy production, distribution, and optimization are all CPS problems~\cite{UC}. 
 
 Lack of access to clean and affordable energy is considered a core dimension of poverty~\cite{Hussein2012}. 
 Progress has been made worldwide; in particular, the number of people without electricity access 
@@ -90,11 +76,9 @@ In order to provide universal electricity for all, decentralized systems led by 
 in off-grid and mini-grid systems will be the lowest-cost solution for three-quarters of the additional connections needed \textcolor{red}{Add reference here}; 
 specifically grid extension will be the standard in urban areas~\cite{IEAweo2018}.
 
-In order to simulate or evaluate a PV system, there exist various specialized tools available in the market, e.g., 
-RETScreen, and HOMER~\cite{Pradhan,Swarnkar}%, PVWatts, SAM and Hybrid2 \cite{Pradhan,Swarnkar,NRELDobos,NRELBlair,Mills}
+In order to simulate or evaluate a PV system, there exist various specialized tools available in the market, e.g., RETScreen, and HOMER~\cite{Pradhan,Swarnkar}%, PVWatts, SAM and Hybrid2 \cite{Pradhan,Swarnkar,NRELDobos,NRELBlair,Mills}
 ; and even general purpose simulation tools, e.g., MATLAB/Simulink~\cite{Gow1999}. %PSpice, Saber or MATLAB/Simulink package \cite{Gow1999,Benatiallah2017}.
- However, those tools are based on simulation; they have the drawback of an incomplete coverage 
- since verification of all possible combinations and potential failures of a system is unfeasible~\cite{ClarkeHV18}.
+ However, those tools are based on simulation; they have the drawback of an incomplete coverage  since verification of all possible combinations and potential failures of a system is unfeasible~\cite{ClarkeHV18}.
 Formal methods based on \textit{model checking} can offer a great potential to obtain a more effective design process of CPSs~\cite{ClarkeHV18}. %Therefore, in the context of this proposal, a CPS, specifically a PV system, is the target. We review verification tools and related them to design and to PV systems verification, which was uncommon in prior studies~\cite{abs-1811-09438}. 
 
 \textcolor{red}{We should rewrite the following paragraph as follows.}
