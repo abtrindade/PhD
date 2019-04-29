@@ -96,7 +96,7 @@ Our major novel contributions here are (1) to address a CPS,
 allowing that a list of PV components (i.e., PV panels, charge controllers, inverters, and batteries) 
 can be fed to the proposed verification tool together with user requirements and environment constraints, 
 and our verification algorithm based on software model checking can find the best compromise 
-between two objectives: power reliability and system cost, i.e., linking the optimum solution in technical and economical terms; 
+between two objectives: power reliability and system cost, i.e., linking the optimal solution in technical and economical terms; 
 and (2), to evaluate different state-of-art software verifiers with the goal of obtaining the best verification performance. 
 Note that the use of automated verification in electrical systems was uncommon in prior studies~\cite{abs-1811-09438}, 
 and specifically their use in PV sizing is unprecedented.
@@ -219,7 +219,7 @@ Regarding the charge controller, it must initially meet the voltage requirement 
 \scriptstyle V_{c} = \scriptstyle V_{system}.
 \end{equation}
 
-The short circuit reference information from the manufacturer's solar panel must be corrected to the cell temperature \textcolor{red}{why? explain the reason here... since...} as 
+The short circuit reference information from the manufacturer's solar panel must be corrected to the cell temperature, \textcolor{red}{because the field temperature is higher that the nominal or laboratory temperature, and PV system is temperature dependent,} as 
 %
 \begin{equation}
 \label{eq:iscamb}
@@ -254,10 +254,10 @@ The sizing project check of the inverter is carried out by means of three equati
 \left[ (\scriptstyle Demand \leq \scriptstyle P_{AC,ref}) \, \scriptstyle and \, \scriptstyle (P_{surge} \leq MAX_{AC,ref}) \right].
 \end{equation}
 % -------------------------------------------------------
-\subsection{Optimum sizing of PV systems}
+\subsection{Optimal sizing of PV systems}
 % -------------------------------------------------------
 
-To select an optimum \textcolor{red}{optimum or optimal?} combination of components from a PV system to meet sizing constraints, we need to evaluate \textit{power reliability} and perform \textit{system cost} analysis for the recommended system. An ideal combination for any PV system is made by the best compromise between those two objectives (power reliability and system cost)~\cite{Alsadi2018}. 
+To select an optimal combination of components from a PV system to meet sizing constraints, we need to evaluate \textit{power reliability} and perform \textit{system cost} analysis for the recommended system. An ideal combination for any PV system is made by the best compromise between those two objectives (power reliability and system cost)~\cite{Alsadi2018}. 
 
 Regarding power reliability, this work will rely on the critical period solar energy method~\cite{Pinho} as described in section~\ref{sec:sizing}.
 %the usual is to use loss of load probability (LOLP) or loss of power supply probability (LPSP). Based on the fact that here we are neither considering site characteristics nor the load changes over time, the reliability analysis will be developed only by the critical period method of PV sizing \textcolor{red}{What does it mean? Remember that we have software engineering audience}. 
@@ -312,7 +312,7 @@ Algorithm~\ref{alg:verification-algorithm} describes the pseudocode used to opti
  \label{alg:verification-algorithm}
  \end{algorithm}
  
-Our algorithm starts with the input of manufacturers data and prices of PV panels, batteries, charge controllers and inverters (Lines 2 to 5). After that, we define user requirements, i.e., house requirements and design definitions, from Lines 6 to 8. The \textit{for}-loop started at Line 9 controls the lowest cost to the PV solution. In particular, it starts with cost $0$ and stops only when the algorithm finds a feasible solution in which the cost breaks the assertion stated in Line 28; if that happens, then our algorithm has found an optimum solution, stating that the automatic verification reached a \textit{SAT} (satisfiable) condition. The algorithm uses non-deterministic variables to choose one specific data from a list of PV panels, controllers, batteries and inverters (Lines 10 to 13). That procedure ensures that the automated verification checks all possibilities of items from each equipment, and combine them to assemble a feasible PV solution, which meets the user requirements.
+Our algorithm starts with the input of manufacturers data and prices of PV panels, batteries, charge controllers and inverters (Lines 2 to 5). After that, we define user requirements, i.e., house requirements and design definitions, from Lines 6 to 8. The \textit{for}-loop started at Line 9 controls the lowest cost to the PV solution. In particular, it starts with cost $0$ and stops only when the algorithm finds a feasible solution in which the cost breaks the assertion stated in Line 28; if that happens, then our algorithm has found an optimal solution, stating that the automatic verification reached a \textit{SAT} (satisfiable) condition. The algorithm uses non-deterministic variables to choose one specific data from a list of PV panels, controllers, batteries and inverters (Lines 10 to 13). That procedure ensures that the automated verification checks all possibilities of items from each equipment, and combine them to assemble a feasible PV solution, which meets the user requirements.
 
 Next, we use Eq.~(\ref{eq:Ecorrected}), Eq.~(\ref{eq:Ep}), Eq.~(\ref{eq:NTPmin}), Eq.~(\ref{eq:NPSmin}), Eq.~(\ref{eq:NPPmin}), Eq.~(\ref{eq:Cbank}), Eq.~(\ref{eq:Nbtotal}), Eq.~(\ref{eq:iscamb}), and Eq.~(\ref{eq:icmin}) to calculate the sizing variables (Lines 14 to 20). The directive \textit{assume} (from Line 21 to 25) ensures the compatibility of the chosen items from the list of equipment: the automatic verification uses only the item (among all the possible ones) that satisfies the statements from Line 14 to 20 in addition to the Line 18. Therefore, our algorithm reaches Line 27 with one feasible solution, and the cost of that solution is calculated in $F_{obj}$.
 
