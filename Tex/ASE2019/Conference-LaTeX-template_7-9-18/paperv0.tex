@@ -46,7 +46,7 @@ energy poverty alleviation has become an important political issue.
 %Several initiatives and policies have been proposed to deal with poor access to sources of energy in many developing countries. 
 Particular attention is given to renewables and PV systems. 
 Unfortunately, state-of-the-art tools available to evaluate PV designs are mainly based on simulations, which do not cover all aspects of the design-space. 
-The application of automated verification to PV systems is a very recent subject with only a few initiatives. Here we develop an optimization algorithm and report preliminary results using three state-of-art software verifiers with the goal of optimizing the sizing of a PV system. Commercial equipment data is part of our specification and the technical solution is derived from financial analysis of the obtained sizing. Our proposal is novel and unprecedented to streamline the design and analysis of PV systems. Experimental results show that \textcolor{red}{we should describe here a summary of the results}.
+The application of automated verification to PV systems is a very recent subject with only a few initiatives. Here we develop an optimization algorithm and report preliminary results using three state-of-art software verifiers with the goal of optimizing the sizing of a PV system. Commercial equipment data is part of our specification and the technical solution is derived from financial analysis of the obtained sizing. Our proposal is novel and unprecedented to streamline the design and analysis of PV systems. Experimental results show that \textcolor{red}{using the verifier CPAchecker is possible to obtain the optimal PV system sizing of two different case studies from a list of 12 different equipment in a acceptable run-time.}
 \end{abstract}
 
 \begin{IEEEkeywords}
@@ -56,10 +56,7 @@ automated verification, model checking, optimization, electrical systems and sol
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{INTRODUCTION}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\textcolor{red}{Could you please cite this paper?}
-
-\textcolor{red}{Software Engineering Meets Control Theory: https://ieeexplore.ieee.org/document/7194659/}
+\textcolor{red}{Software’s pervasiveness in every context of life places new challenges on Software Engineering. Highly dynamic environments, rapidly changing requirements, unpredictable and uncertain operating conditions demand new paradigms for software design~\cite{Filieri2015}.}
 
 Cyber-Physical Systems  (CPS) are engineered systems, which are built from, and depend upon, 
 the seamless integration of computational  and  physical  components~\cite{NSF2015}. 
@@ -81,25 +78,12 @@ In order to simulate or evaluate a PV system, there exist various specialized to
  However, those tools are based on simulation; they have the drawback of an incomplete coverage  since verification of all possible combinations and potential failures of a system is unfeasible~\cite{ClarkeHV18}.
 Formal methods based on \textit{model checking} can offer a great potential to obtain a more effective design process of CPSs~\cite{ClarkeHV18}. %Therefore, in the context of this proposal, a CPS, specifically a PV system, is the target. We review verification tools and related them to design and to PV systems verification, which was uncommon in prior studies~\cite{abs-1811-09438}. 
 
-\textcolor{red}{We should rewrite the following paragraph as follows.}
-
 \textcolor{red}{In summary, this paper makes the following original contributions.
 \begin{itemize}
-\item First contribution.
-\item Second contribution.
+\item First contribution. The use of automated verification in electrical systems was uncommon in prior studies~\cite{abs-1811-09438}, and specifically their use in PV sizing is unprecedented. Here, a list of PV components (i.e., PV panels, charge controllers, inverters, and batteries) can be fed to the proposed verification tool together with user requirements and environment constraints, and our verification algorithm based on software model checking can find the optimal solution in technical and economical terms.
+\item Second contribution. To evaluate different state-of-art software verifiers with the goal of obtaining the best verification performance.
 \end{itemize}
 }
-
-\textcolor{red}{Address a CPS is not a contribution...}
-
-Our major novel contributions here are (1) to address a CPS, 
-allowing that a list of PV components (i.e., PV panels, charge controllers, inverters, and batteries) 
-can be fed to the proposed verification tool together with user requirements and environment constraints, 
-and our verification algorithm based on software model checking can find the best compromise 
-between two objectives: power reliability and system cost, i.e., linking the optimal solution in technical and economical terms; 
-and (2), to evaluate different state-of-art software verifiers with the goal of obtaining the best verification performance. 
-Note that the use of automated verification in electrical systems was uncommon in prior studies~\cite{abs-1811-09438}, 
-and specifically their use in PV sizing is unprecedented.
 %
 %\textcolor{red}{We need to make our contributions stronger. Why the SE community would be interested in this paper? What are the main open problems we need them to solve here? Remember that this is a paper for new ideas... we don't need to make questions but we don't need to answer all of them.}
 %
@@ -112,10 +96,8 @@ and specifically their use in PV sizing is unprecedented.
 \subsection{Automated Verification}
 \label{sec:AutomatedVerification}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\textcolor{red}{Since this is a software engineering conference, the reviewers already know about this basic background. You could further reduce the following paragraph.}
-
-Although simulation and testing explore possible behaviors and scenarios of a given system, they leave open the question of whether unexplored trajectories may contain a flaw. Formal verification conducts an exhaustive exploration of all possible behaviors; when a design is said to be ``correct'' by a formal verification method, it implies that all behaviors have been explored, and questions regarding adequate coverage or missed behavior becomes irrelevant~\cite{Clarke2012}. Formal verification is a systematic approach that applies mathematical reasoning to obtain guarantees about the correctness of a system; one successful method in this domain is model checking~\cite{Clarke2012}. Here we evaluate three state-of-the-art model checkers to formally optimize the sizing of PV designs w.r.t. user requirements.
+\textcolor{red}{Formal verification is a systematic approach that applies mathematical reasoning to obtain guarantees about the correctness of a system; one successful method in this domain is model checking~\cite{Clarke2012}. Here we evaluate three state-of-the-art model checkers to formally optimize the sizing of PV designs w.r.t. user requirements.}
+%Although simulation and testing explore possible behaviors and scenarios of a given system, they leave open the question of whether unexplored trajectories may contain a flaw. Formal verification conducts an exhaustive exploration of all possible behaviors; when a design is said to be ``correct'' by a formal verification method, it implies that all behaviors have been explored, and questions regarding adequate coverage or missed behavior becomes irrelevant~\cite{Clarke2012}. Formal verification is a systematic approach that applies mathematical reasoning to obtain guarantees about the correctness of a system; one successful method in this domain is model checking~\cite{Clarke2012}. Here we evaluate three state-of-the-art model checkers to formally optimize the sizing of PV designs w.r.t. user requirements.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{CBMC}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -123,7 +105,8 @@ The C Bounded Model Checker (CBMC) falsifies assertions in C programs or proves 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{ESBMC}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-ESBMC (or Efficient SMT-based Bounded Model Checker) is a bounded and unbounded mdoel checker for C programs~\cite{esbmc2018}, which supports the verification of LTL properties with bounded traces~\cite{DBLP:journals/sosym/MorseCN015}. ESBMC's verification flow can be summarized in three stages: (i) a front-end based on clang that can read and compile C code, where the system formal specification is first handled; (ii) preprocessing steps to deal with code representation, control flow and unwinding of loops, and model simplification, thereby aiming to reduce verification effort; (iii) \textcolor{red}{we should describe the symbolic execution with incremental solving phase here...} and finally (iv) the SMT solving stage, where all constraints and properties of the system are encoded into SMT and checked for satisfiability. 
+ESBMC (or Efficient SMT-based Bounded Model Checker) is a bounded and unbounded mdoel checker for C programs~\cite{esbmc2018}, which supports the verification of LTL properties with bounded traces~\cite{DBLP:journals/sosym/MorseCN015}. ESBMC's verification flow can be summarized in three stages: (i) a front-end based on clang that can read and compile C code, where the system formal specification is first handled; (ii) preprocessing steps to deal with code representation, control flow and unwinding of loops, and model simplification, thereby aiming to reduce verification effort; (iii) the SMT solving stage, where all constraints and properties of the system are encoded into SMT and checked for satisfiability. 
+%ESBMC (or Efficient SMT-based Bounded Model Checker) is a bounded and unbounded mdoel checker for C programs~\cite{esbmc2018}, which supports the verification of LTL properties with bounded traces~\cite{DBLP:journals/sosym/MorseCN015}. ESBMC's verification flow can be summarized in three stages: (i) a front-end based on clang that can read and compile C code, where the system formal specification is first handled; (ii) preprocessing steps to deal with code representation, control flow and unwinding of loops, and model simplification, thereby aiming to reduce verification effort; (iii) \textcolor{red}{we should describe the symbolic execution with incremental solving phase here...} and finally (iv) the SMT solving stage, where all constraints and properties of the system are encoded into SMT and checked for satisfiability. 
 %ESBMC exploits the standardized input language of SMT solvers (SMT-LIB\footnote{http://smtlib.cs.uiowa.edu/} logic format) to make use of a resource called \textit{assertion stack}~\cite{Morse2015}. This enables ESBMC, and the respective solver, to learn from previous checks, thus optimizing the search procedure and potentially eliminating a large amount of formula state space to be searched, because it solves and disregards data during the process, incrementally. 
 %This technique is called "incremental SMT"~\cite{DBLP:journals/fac/SchrammelKBMTB17} and allows ESBMC to reduce the memory overhead, mainly when the verified system is complex and the computing platform does not have large amount of memory to deal with the entire design space state.
 
@@ -135,10 +118,9 @@ ESBMC (or Efficient SMT-based Bounded Model Checker) is a bounded and unbounded 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{CPAchecker}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-Automatic program verification requires a choice between precision and efficiency. The
-more precise a method, the fewer false positives it will produce, but also the more expensive it is, and thus applicable to fewer programs. Historically, this trade-off was
-reflected in two major approaches to static verification: program analysis and model
-checking. In order to experiment with the trade-off, and in order to be able to set the dial between the two extreme points, Configurable Program Analysis (CPA) provides a conceptual basis for expressing different verification approaches in the same formal setting. The CPA formalism provides an interface for the definition of program analyses. Consequently, CPAchecker provides an implementation framework that allows the seamless integration of program analyses that are expressed in the CPA framework. The comparison among different approaches in the same experimental setting is intended to be easy and the experimental results are expected to be more meaningful~\cite{Beyer2011}. Related to the architecture, the central data structure is a set of control-flow automata (CFA), which consists of control-flow locations and control-flow edges. The CPA framework provides interfaces to SMT solvers and interpolation procedures~\cite{Beyer2011}. Currently, CPAchecker uses MathSAT as SMT solver; and CSIsat and MathSAT as interpolation procedures~\cite{Beyer2011}. 
+%Automatic program verification requires a choice between precision and efficiency. 
+The more precise a method, the fewer false positives it will produce, but also the more expensive it is.%, and thus applicable to fewer programs. 
+Historically, this trade-off was reflected in two major approaches: program analysis and model checking. In order to experiment with the trade-off, and in order to be able to set the dial between the two extreme points, Configurable Program Analysis (CPA) provides a conceptual basis for expressing different verification approaches in the same formal setting. The CPA formalism provides an interface for the definition of program analyses. Consequently, CPAchecker provides an implementation framework that allows the seamless integration of program analyses that are expressed in the CPA framework. The comparison among different approaches in the same experimental setting is intended to be easy and the experimental results are expected to be more meaningful~\cite{Beyer2011}. Related to the architecture, the central data structure is a set of control-flow automata (CFA). %, which consists of control-flow locations and control-flow edges. The CPA framework provides interfaces to SMT solvers and interpolation procedures~\cite{Beyer2011}. Currently, CPAchecker uses MathSAT as SMT solver; and CSIsat and MathSAT as interpolation procedures~\cite{Beyer2011}. 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Sizing Stand-alone Solar PV Systems}
@@ -231,7 +213,7 @@ The controller must meet the maximum current from the PV array given by Eqs. \eq
 \label{eq:icmin}
 \scriptstyle I_{c,min} = \scriptstyle I_{sc,amb} \times \scriptstyle N_{PP}.
 \end{equation}
-
+%
 \begin{equation}
 \label{eq:icicmin}
 \scriptstyle I_{c} \geq \scriptstyle I_{c,min}.
@@ -259,15 +241,13 @@ The sizing project check of the inverter is carried out by means of three equati
 
 To select an optimal combination of components from a PV system to meet sizing constraints, we need to evaluate \textit{power reliability} and perform \textit{system cost} analysis for the recommended system. An ideal combination for any PV system is made by the best compromise between those two objectives (power reliability and system cost)~\cite{Alsadi2018}. 
 
-Regarding power reliability, this work will rely on the critical period solar energy method~\cite{Pinho} as described in section~\ref{sec:sizing}.
+Regarding power reliability, this work will rely on the critical period solar energy method~\cite{Pinho} as described in section~\ref{sec:sizing}. 
 %the usual is to use loss of load probability (LOLP) or loss of power supply probability (LPSP). Based on the fact that here we are neither considering site characteristics nor the load changes over time, the reliability analysis will be developed only by the critical period method of PV sizing \textcolor{red}{What does it mean? Remember that we have software engineering audience}. 
-
 However, considering the system cost analysis, we usually find related studies done with Net Present Cost (NPC), Levelized Cost of Energy (LCOE) or Life Cycle Cost (LCC). Here, based on the fact that the local of deployment is not specified, our study uses an adapted LCC analysis, where only the deployment cost is considered about the model, i.e., without the operational and maintenance costs~\cite{Alsadi2018}.
 %------------------------------------------------------
 \section{APPLYING AUTOMATED VERIFICATION TO OPTIMAL SIZING OF STAND-ALONE PV SYSTEMS}
 %Applying Automated Verification to Optimal Sizing of Stand-alone Solar PV Systems}
 %------------------------------------------------------
-
 Algorithm~\ref{alg:verification-algorithm} describes the pseudocode used to optimize stand-alone PV systems using automated verification. 
 %
  \begin{algorithm}
@@ -323,9 +303,10 @@ If our algorithm does not find a feasible solution among the item of equipment t
 \section{RESULTS AND DISCUSSION}
 %---------------------------------------------------------------------------
 We have performed two case studies to evaluate the proposed approach of optimization as described in Table~\ref{tab1}. Furthermore, three start-of-art verification tools, as described in Section~\ref{sec:AutomatedVerification}: CBMC\footnote{Command-line: \$ cbmc -\phantom{}-unwind 100 filename.c -\phantom{}-trace}, ESBMC\footnote{Command-line: \$ esbmc filename.c -\phantom{}-no-bounds-check -\phantom{}-no-pointer-check -\phantom{}-unwind 100 -\phantom{}-boolector}, %UAutomizer\footnote{Command-line: \$ ./Ultimate -tc config/AutomizerReach.xml -s config/svcomp-Reach-32bit-Automizer\_Default.epf -i filename.c -\phantom{}-traceabstraction.limit.analysis.time 900 -\phantom{}-traceabstraction.stop.after.first.violation.was.found false -\phantom{}-cacsl2boogietranslator.overapproximate.operations.on.floating.types false -\phantom{}- cacsl2boogietranslator.assume.nondeterminstic.values.are.in.range false -\phantom{}-rcfgbuilder.add.additional.assume.for.each.assert true -\phantom{}-rcfgbuilder.simplify.code.blocks true -\phantom{}-rcfgbuilder.size.of.a.code.block LoopFreeBlock}, 
-and CPAchecker\footnote{Command-line: \$ scripts/cpa.sh -heap 64000m -config config/bmc-incremental.properties -spec config/specification/sv-comp-reachability.spc filename.c}, were used to compare the approach effectiveness and efficiency. The case studies are related to a stand-alone PV system with the specifications shown in Table~\ref{tab1}.
+and CPAchecker\footnote{Command-line: \$ scripts/cpa.sh -heap 64000m -config config/bmc-incremental.properties -spec config/specification/sv-comp-reachability.spc filename.c}, were used to compare the approach effectiveness and efficiency. The case studies are related to a stand-alone PV system with the specifications shown in Table~\ref{tab1}. All experiments were conducted on an otherwise idle Intel Xeon CPU E5-4617 (8-cores) with 2.90 GHz and 64 GB of RAM, running Ubuntu 16.04 LTS 64-bits. The experiments were performed with a predefined timeout of 240 minutes.
 
-All experiments were conducted on an otherwise idle Intel Xeon CPU E5-4617 (8-cores) with 2.90 GHz and 64 GB of RAM, running Ubuntu 16.04 LTS 64-bits. The experiments were performed with a predefined timeout of 240 minutes.
+Only CPAchecker could present the optimal sizing of the two case studies: the result came in 66 minutes and 35 minutes, respectively. %, linking a feasible technical solution with the lowest cost possible, considering the equipment that were inputted to the code. 
+CBMC and ESBMC had UNKNOWN result (timeout or out of memory).
 
 %used with the SMT incremental mode\footnote{Command-line: \$ esbmc filename.c -\phantom{}-no-bounds-check -\phantom{}-no-pointer-check -\phantom{}-unwind 100 -\phantom{}-smt-during-symex -\phantom{}-smt-symex-guard -\phantom{}-z3} enabled with the goal of reducing memory usage; we have also used the SMT solver Z3 version 4.7.1~\cite{DeMoura}.
 \begin{table}
@@ -345,14 +326,14 @@ Tool & \makecell{Demand = 501W \\ Peak = 501W \\ Energy=3900Wh/day \\ Battery au
 \hline
 %UAutomizer 0.1.24 (Z3 4.8.3) & UNKNOWN & UNKNOWN \\
 %\hline
-\makecell{CPAchecker 1.8 \\(MathSAT 5.5.3)} & \makecell{SAT (66.18 min) \\ Property violation line 195: \\NTP= 4 $\times$ 320W model (2S-2P)\\NBT= 4 $\times$ 105Ah model (2S-2P)\\ Controller 15A/100V\\Inverter 700VA, 48V \\ Total Cost: US\$ 2,643.00} & \makecell {SAT (35.41 min) \\ Property violation line 195:  \\NTP= 3 $\times$ 320W model (3S)\\NBT= 2 $\times$ 105Ah model (2S)\\ Controller 35A/145V \\ Inverter 1,200VA, 48V \\ Total Cost: US\$ 2,125.00}\\
+\makecell{CPAchecker 1.8 \\(MathSAT 5.5.3)} & \makecell{SAT (66.18 min) \\ Property violation line 195: \\NTP=4$\times$320W model (2S-2P)\\NBT=4$\times$105Ah model (2S-2P)\\ Controller 15A/100V\\Inverter 700VA, 48V \\ Total Cost=US\$ 2,643.00} & \makecell {SAT (35.41 min) \\ Property violation line 195:  \\NTP=3$\times$320W model (3S)\\NBT=2$\times$105Ah model (2S)\\ Controller 35A/145V \\ Inverter 1,200VA, 48V \\ Total Cost=US\$ 2,125.00}\\
 \hline
 \hline
 \end{tabular}
 \end{scriptsize}
 \end{table}
 
-More experimentation will be performed with a larger number of case studies and to compare the result with some off-the-shelf software that focus on sizing and optimization (validation of the result). Besides, it will be inputted a larger number of components (panels, batteries, contollers and inverters) to the database (that is limited to 12 items right now). That will bring more complexity to the tool, however will ensure an even better optimization.
+More experimentation will be performed with more case studies and to compare the result with some off-the-shelf software that focus on sizing and optimization. Besides, it will be inputted a larger number of components (panels, batteries, controllers and inverters) to the database.
 % argument is your BibTeX string definitions and bibliography database(s)
 \bibliography{trindadeThesis}{}
 
