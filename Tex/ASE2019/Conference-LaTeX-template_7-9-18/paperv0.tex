@@ -13,7 +13,7 @@
 \def \BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
     T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
     
- \renewcommand{\baselinestretch}{0.97}
+ \renewcommand{\baselinestretch}{0.96}
     
 \begin{document}
 
@@ -37,24 +37,21 @@ lucas.cordeiro@manchester.ac.uk }
 \maketitle
 
 \begin{abstract}
-Software verification is on the core of many automated formal synthesis techniques;
-it is used to formally check whether an intricate property hols for a given system. 
-Here our main focus is to formally synthesize optimal sizing of stand-alone solar photovoltaic (PV) systems
-using software model checking techniques. There exist various state-of-the-art tools to evaluate 
-PV designs but  they are mainly based on simulations, which do not cover all aspects of the design-space. 
-The application of software verification to synthesize PV systems is a very recent subject with only a few initiatives. 
-Here we develop and evaluate an automated formal synthesis algorithm and report preliminary results 
+Currently, there exist various state-of-the-art tools to design PV but they are mainly based on simulations, which do not cover all aspects of the design-space. 
+We present a sound and automated approach to synthesize optimal sizing of stand-alone solar photovoltaic (PV) systems.
+The application of automated formal verification to synthesize PV systems is a very recent subject with only a few initiatives. 
+Here we develop and evaluate an automated formal synthesis approach based on program synthesis and report preliminary results 
 using three state-of-art software verifiers with the goal of optimizing the sizing of a PV system. 
 Commercial equipment data is provided to our synthesis engine and the candidate solution is derived 
 from financial analysis of the obtained sizing. Our proposed synthesis method is novel and 
 unprecedented to streamline the design of PV systems. 
-Experimental results show that our synthesis method based on software verification is able to synthesize, 
-in an acceptable run-time, the optimal PV system sizing of two different case studies.
+Experimental results show that our synthesis method, based on software model checking as our verification engine, 
+is able to synthesize, in an acceptable run-time, the optimal PV system sizing of two different case studies.
 \end{abstract}
 
-\begin{IEEEkeywords}
-automated verification, model checking, optimization, electrical systems and solar photovoltaic systems.
-\end{IEEEkeywords}
+%\begin{IEEEkeywords}
+%automated verification, model checking, program synthesis, electrical systems, and solar photovoltaic systems.
+%\end{IEEEkeywords}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{INTRODUCTION}
@@ -65,11 +62,18 @@ the seamless integration of computational  and  physical  components~\cite{NSF20
 During operation, such components must frequently adapt to the executing environment changes 
 faced at run-time (dynamics of the physical processes) and must be able to continue to behave 
 in a controlled and safe way, thus posing novel technical challenges for the software engineering of services and applications for CPS~\cite{Metzger2014}. %Important quality aspects for CPS include scalability, e.g., ensuring that CPS applications can scale to urban-wide deployment environments [Nessi].
-Software pervasiveness in every context of life also places new challenges in Software Engineering. 
-In particular, highly dynamic environments, rapidly changing requirements, unpredictable and uncertain operating conditions demand new paradigms for software design~\cite{Filieri2015}.
+Software pervasiveness in every context of life also places new challenges. 
+In particular, highly dynamic environments, rapidly changing requirements, 
+unpredictable and uncertain operating conditions demand new paradigms for software design~\cite{Filieri2015}.
 
-
-While some research efforts do exist to enhance and optimize the software development processes for CPS, further investigation and discussion of better and more effective models are still needed in practice~\cite{Al-Jaroodi2016}. Among the opportunities for enhancements, there exists the need for developing new techniques and tools to support CPS requirements gathering and analysis. The developed techniques need to deal with predefined requirements enforced by the nature and inherited constraints of the target CPS. In addition, they should be able to provide verification and validation mechanisms for completeness, correctness, and consistency~\cite{Al-Jaroodi2016}. Uncertainty and variability, at the same time, can be dealt with formal verification~\cite{NESSI}. Energy production, distribution, and optimization are all CPS problems~\cite{UC}. 
+While some research efforts do exist to enhance and optimize the software development processes for CPS, 
+further investigation and discussion of better and more effective models are still needed in practice~\cite{Al-Jaroodi2016}. 
+Among the opportunities for enhancements, there exists the need for developing new techniques and tools to support 
+CPS requirements gathering and analysis with the goal of synthesizing correct-by-construction implementations of CPS. 
+The developed techniques need to deal with predefined requirements enforced by the nature and inherited constraints 
+of the target CPS. In addition, they should be able to provide verification and validation mechanisms for completeness, 
+correctness, and consistency~\cite{Al-Jaroodi2016}. Uncertainty and variability, at the same time, can be dealt with formal verification~\cite{NESSI}. 
+Energy production, distribution, and optimization are all CPS problems~\cite{UC}. 
 
 Lack of access to clean and affordable energy is considered a core dimension of poverty~\cite{Hussein2012}. 
 Progress has been made worldwide; in particular, the number of people without electricity access 
@@ -78,54 +82,45 @@ In order to provide universal electricity for all, decentralized systems led by 
 in off-grid and mini-grid systems will be the lowest-cost solution for three-quarters of the additional connections needed \textcolor{red}{Add reference here}; 
 specifically grid extension will be the standard in urban areas~\cite{IEAweo2018}.
 
-In order to simulate or evaluate a PV system, there exist various specialized tools available in the market, e.g., RETScreen and HOMER~\cite{Pradhan,Swarnkar}%, PVWatts, SAM and Hybrid2 \cite{Pradhan,Swarnkar,NRELDobos,NRELBlair,Mills}
+In order to simulate or evaluate a PV system, there exist various specialized tools, e.g., RETScreen and HOMER~\cite{Pradhan,Swarnkar}%, PVWatts, SAM and Hybrid2 \cite{Pradhan,Swarnkar,NRELDobos,NRELBlair,Mills}
 ; and even general purpose simulation tools, e.g., MATLAB/Simulink~\cite{Gow1999}. %PSpice, Saber or MATLAB/Simulink package \cite{Gow1999,Benatiallah2017}.
  However, those tools are based on simulation; they have the drawback of an incomplete coverage  since verification of all possible combinations and potential failures of a system is unfeasible~\cite{ClarkeHV18}.
 Formal methods based on \textit{model checking} can offer a great potential to obtain a more effective design process of CPSs~\cite{ClarkeHV18}. 
+Here, we use program synthesis for synthesizing optimal sizing of stand-alone PV systems using commercial equipment data.
+In particular, given a correctness specification $\sigma$, our method uses that as starting point and then incrementally produce a 
+sequence of candidate solutions that satisfy $\sigma$, by integrating software model checking techniques.
 
-In summary, this paper makes the following original contributions for synthesizing optimal sizing of stand-alone PV systems.
-Firstly, the use of automated formal verification in electrical systems was uncommon in recent prior studies~\cite{abs-1811-09438}, 
+This paper makes the following original contributions.
+Firstly, the use of automated software verification in electrical systems was uncommon in recent prior studies~\cite{abs-1811-09438}, 
 and specifically their use in PV sizing is unprecedented. Here, a list of PV components (i.e., PV panels, charge controllers, inverters, and batteries) 
 can be fed to the proposed synthesis method together with user requirements and environment constraints, 
 and our synthesis algorithm based on software model checking can find the optimal solution in technical and economical terms.
-Secondly, we evaluate different state-of-art software verifiers with the goal of obtaining the best synthesis performance for PV systems.
-%
-%\textcolor{red}{We need to make our contributions stronger. Why the SE community would be interested in this paper? What are the main open problems we need them to solve here? Remember that this is a paper for new ideas... we don't need to make questions but we don't need to answer all of them.}
-%
-%, using non-deterministic variables and exploring the design-space
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Secondly, we evaluate different state-of-art software verifiers with the goal of obtaining the best performance for synthesizing optimal PV systems.
+
+%-----------------------------------------------------------
 \section{BACKGROUND}
 \label{sec:AutomatedVerification}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Automated Verification}
-\label{sec:AutomatedVerification}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\textcolor{red}{Formal verification is a systematic approach that applies mathematical reasoning to obtain guarantees about the correctness of a system; one successful method in this domain is model checking~\cite{Clarke2012}. Here we evaluate three state-of-the-art model checkers to formally optimize the sizing of PV designs w.r.t. user requirements.}
-%Although simulation and testing explore possible behaviors and scenarios of a given system, they leave open the question of whether unexplored trajectories may contain a flaw. Formal verification conducts an exhaustive exploration of all possible behaviors; when a design is said to be ``correct'' by a formal verification method, it implies that all behaviors have been explored, and questions regarding adequate coverage or missed behavior becomes irrelevant~\cite{Clarke2012}. Formal verification is a systematic approach that applies mathematical reasoning to obtain guarantees about the correctness of a system; one successful method in this domain is model checking~\cite{Clarke2012}. Here we evaluate three state-of-the-art model checkers to formally optimize the sizing of PV designs w.r.t. user requirements.
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsubsection{CBMC}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-The C Bounded Model Checker (CBMC) falsifies assertions in C programs or proves that they are safe if a completeness threshold is given~\cite{Kroening}. CBMC implements a bit-precise translation of a C program, annotated with assertions and with loops unrolled up to a given depth, into a logical formula. If the formula is satisfiable, then a failing execution that leads to a violated assertion exists~\cite{Kroening}. CBMC's verification flow can be summarized in three stages: (i) Front-end: scans, parses and type-checks C code; it converts control flow elements, such as \textit{if} or \textit{switch} statements, loops and jumps, into equivalent guarded \textit{goto} statements, thus aiming to reduce verification effort; (ii) Middle-end: performs symbolic execution by eagerly unwinding loops up to a fixed bound, which can be specified by the user on a per-loop basis or globally, for all loops and finally; (iv) Back-end: supports SAT and SMT solvers to discharge verification conditions. 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsubsection{ESBMC}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-ESBMC (or Efficient SMT-based Bounded Model Checker) is a bounded and unbounded mdoel checker for C programs~\cite{esbmc2018}, which supports the verification of LTL properties with bounded traces~\cite{DBLP:journals/sosym/MorseCN015}. ESBMC's verification flow can be summarized in three stages: (i) a front-end based on clang that can read and compile C code, where the system formal specification is first handled; (ii) preprocessing steps to deal with code representation, control flow and unwinding of loops, and model simplification, thereby aiming to reduce verification effort; (iii) the SMT solving stage, where all constraints and properties of the system are encoded into SMT and checked for satisfiability. 
-%ESBMC (or Efficient SMT-based Bounded Model Checker) is a bounded and unbounded mdoel checker for C programs~\cite{esbmc2018}, which supports the verification of LTL properties with bounded traces~\cite{DBLP:journals/sosym/MorseCN015}. ESBMC's verification flow can be summarized in three stages: (i) a front-end based on clang that can read and compile C code, where the system formal specification is first handled; (ii) preprocessing steps to deal with code representation, control flow and unwinding of loops, and model simplification, thereby aiming to reduce verification effort; (iii) \textcolor{red}{we should describe the symbolic execution with incremental solving phase here...} and finally (iv) the SMT solving stage, where all constraints and properties of the system are encoded into SMT and checked for satisfiability. 
-%ESBMC exploits the standardized input language of SMT solvers (SMT-LIB\footnote{http://smtlib.cs.uiowa.edu/} logic format) to make use of a resource called \textit{assertion stack}~\cite{Morse2015}. This enables ESBMC, and the respective solver, to learn from previous checks, thus optimizing the search procedure and potentially eliminating a large amount of formula state space to be searched, because it solves and disregards data during the process, incrementally. 
-%This technique is called "incremental SMT"~\cite{DBLP:journals/fac/SchrammelKBMTB17} and allows ESBMC to reduce the memory overhead, mainly when the verified system is complex and the computing platform does not have large amount of memory to deal with the entire design space state.
+%-----------------------------------------------------------
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% \subsection{Ultimate Automizer}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%Ultimate Automizer is an automatic software verification tool for C programs that is able to check safety and liveness properties. The tool implements an automata-based instance of the Counterexample-Guides Abstraction Refinement (CEGAR) scheme. CEGAR is a technique that iteratively refines an abstract model using counterexamples and use three concepts: precision, feasibility check and refinement~\cite{CEGAR}. In each iteration, Automizer picks a trace (sequence of statements) that leads from the initial location to the error location and check whether the trace is feasible or infeasible. If the trace is feasible, an error is reported to the user; otherwise it is computed a sequence of predicates along the trace as a proof of the trace's infeasibility. The predicates are a sequence of interpolants since each predicate "interpolates" between a set of reachable states and a set of states from which it cannot reach the error. In the refinement step of the CEGAR loop, Automizer tries to find all traces whose infeasibility can be shown with the given predicates and subtract these traces from the set of (potentially spurious) error traces that have not yet been analyzed. It is used automata to represent sets of traces. The difference to a classical CEGAR-based predicate abstraction is that Automizer has to do any logical reasoning (e.g., SMT solver calls) that involves predicates of different CEGAR iterations~\cite{Automizer2018}. 
+%-----------------------------------------------------------
+\subsection{Program Synthesis}
+\label{sec:ProgramSynthesis}
+%-----------------------------------------------------------
+
+The basic idea of program synthesis is to automatically construct a program $P$ that satisfies a correctness specification $\sigma$. In particular, program synthesis is automatically performed by engines that use a correctness specification $\sigma$, as starting point, and then incrementally produce a sequence of candidate solutions that satisfy $\sigma$~\cite{Abateetal2017}. As a result, a given candidate program $p$ is iteratively refined, in order to match $\sigma$ more closely. Counter-Example Guided Inductive Synthesis (CEGIS) represents one of the most popular approaches to program synthesis that are currently used in practice for CPS~\cite{Abateetal2017}, whose basic architecture is shown in Figure~\ref{Counter-Example-Guided-Inductive-Synthesis} and has close connections to algorithmic debugging using counterexamples and abstraction refinement~\cite{Alur13}. 
+
+The correctness specification $\sigma$ provided to a program synthesizer is of the form $\exists \vec{F} .  \forall \vec{x}.  \sigma(\vec{x}, \vec{F})$, where $\vec{F}$ ranges over functions, $\vec{x}$ ranges over ground terms, and $\sigma$ is a quantifier-free formula typically supported by SMT solvers. The ground terms are interpreted over some finite domain $\mathcal{D}$, where $\mathcal{D}$ can be encoded using the SMT's bit-vectors part. The phases {\sc Synthesize} and {\sc Verify}, in Figure~\ref{Counter-Example-Guided-Inductive-Synthesis},  interact via a finite set of test vectors {\sc inputs} that is incrementally updated. Given the correctness specification $\sigma$, the {\sc Synthesize} procedure tries to find an existential witness $\vec{F}$ satisfying the specification $\sigma(\vec{x}, \vec{F})$, for all $\vec{x}$ in {\sc inputs} (as opposed to all $\vec{x} \in \mathcal{D}$). If {\sc synthesize} succeeds in finding a witness~$\vec{F}$, the latter is a candidate solution to the full synthesis formula, which is passed to {\sc verify}, in order to check whether it is a proper solution ({\it i.e.}, $\vec{F}$ satisfies the specification $\sigma(\vec{x}, \vec{F})$ for all $\vec{x}\in\mathcal{D}$). If this is the case, then the algorithm terminates; otherwise, additional information is provided to the phase {\sc synthesize}, in the form of a new counterexample that is added to the {\sc inputs} set and the loop iterates again. 
 %
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsubsection{CPAchecker}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%Automatic program verification requires a choice between precision and efficiency. 
-The more precise a method, the fewer false positives it will produce, but also the more expensive it is.%, and thus applicable to fewer programs. 
-Historically, this trade-off was reflected in two major approaches: program analysis and model checking. In order to experiment with the trade-off, and in order to be able to set the dial between the two extreme points, Configurable Program Analysis (CPA) provides a conceptual basis for expressing different verification approaches in the same formal setting. The CPA formalism provides an interface for the definition of program analyses. Consequently, CPAchecker provides an implementation framework that allows the seamless integration of program analyses that are expressed in the CPA framework. The comparison among different approaches in the same experimental setting is intended to be easy and the experimental results are expected to be more meaningful~\cite{Beyer2011}. Related to the architecture, the central data structure is a set of control-flow automata (CFA). %, which consists of control-flow locations and control-flow edges. The CPA framework provides interfaces to SMT solvers and interpolation procedures~\cite{Beyer2011}. Currently, CPAchecker uses MathSAT as SMT solver; and CSIsat and MathSAT as interpolation procedures~\cite{Beyer2011}. 
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.7\columnwidth]{fig2.jpg}
+	\caption{CounterExample Guided Inductive Synthesis (CEGIS).}
+	\label{Counter-Example-Guided-Inductive-Synthesis}
+\end{figure}
+
+One may notice that each iteration of the CEGIS loop adds a new input to the finite set $\text{\sc inputs}$, which is then used for synthesis.  Given that the full set of inputs $\mathcal{D}$ is finite, this means that the refinement loop can only iterate over a finite number of times; however, $\mathcal{D}$ can represent a large number of elements for the finite set $\text{\sc inputs}$. In order to avoid exploring all possible values, machine learning techniques can be used in the phase {\sc synthesize}, with the goal of learning from experience (input-output samples), {\it i.e.}, learning from counterexamples provided by a verification oracle~\cite{Alur13}. In addition to that, a pre-processing stage could also figure as another block in the scheme shown in Fig. \ref{Counter-Example-Guided-Inductive-Synthesis}, between {\sc verify} and {\sc synthesize}, which would process counterexamples and provide larger and refined information to the latter, according to specification $\sigma$ and domain $\mathcal{D}$, in order to speed-up convergence to a final candidate.
+
+Nowadays, program synthesis engines that implement the CEGIS approach~\cite{sketch} can automatically produce solutions for a large variety of specifications, due to the combination of automated testing, genetic algorithms, and SMT-based automated reasoning~\cite{Sharma14}. Here we used software model checking techniques implemented by different tools: CBMC~\cite{Kroening}, CPAChecker~\cite{Beyer2011}, and ESBMC~\cite{esbmc2018}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Sizing Stand-alone Solar PV Systems}
