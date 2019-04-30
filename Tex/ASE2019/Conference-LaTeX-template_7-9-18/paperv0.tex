@@ -17,7 +17,7 @@
     
 \begin{document}
 
-\title{Verifying Optimal Sizing of Stand-alone Solar Photovoltaic Systems\\
+\title{Synthesizing Optimal Sizing of Stand-alone Solar Photovoltaic Systems\\
 % \thanks{Identify applicable funding agency here. If none, delete this.}
 }
 
@@ -37,16 +37,19 @@ lucas.cordeiro@manchester.ac.uk }
 \maketitle
 
 \begin{abstract}
-Software verification has experienced significant progress over the last two decades. 
-Currently, there exist various software verifies that are able to formally check real-world 
-applications from energy systems, telecommunications, digital control, and medical devices.
-Our main focus here is on renewable and stand-alone solar photovoltaic (PV) systems. 
-Currently we have approximately $1$ billion of people who do not have electrical energy; 
-energy poverty alleviation has become an important political issue. 
-%Several initiatives and policies have been proposed to deal with poor access to sources of energy in many developing countries. 
-Particular attention is given to renewables and PV systems. 
-Unfortunately, state-of-the-art tools available to evaluate PV designs are mainly based on simulations, which do not cover all aspects of the design-space. 
-The application of automated verification to PV systems is a very recent subject with only a few initiatives. Here we develop an optimization algorithm and report preliminary results using three state-of-art software verifiers with the goal of optimizing the sizing of a PV system. Commercial equipment data is part of our specification and the technical solution is derived from financial analysis of the obtained sizing. Our proposal is novel and unprecedented to streamline the design and analysis of PV systems. Experimental results show that \textcolor{red}{using the verifier CPAchecker is possible to obtain the optimal PV system sizing of two different case studies from a list of 12 different equipment in a acceptable run-time.}
+Software verification is on the core of many automated formal synthesis techniques;
+it is used to formally check whether an intricate property hols for a given software system. 
+Our main focus here is on using software verifiers to formally synthesize optimal sizing of stand-alone solar photovoltaic (PV) systems. 
+There exist various state-of-the-art tools to evaluate PV designs but  they are mainly based on simulations, which do not cover all aspects of the design-space. 
+The application of software verification to synthesize PV systems is a very recent subject with only a few initiatives. 
+Here we develop and evaluate an automated formal synthesis algorithm and report preliminary results 
+using three state-of-art software verifiers with the goal of optimizing the sizing of a PV system. 
+Commercial equipment data is part of our specification and the technical solution is derived 
+from financial analysis of the obtained sizing. Our proposed synthesis method is novel and 
+unprecedented to streamline the design of PV systems. 
+Experimental results show that our method allied to a software verifier (CPAchecker) 
+is able to synthesize,in an acceptable run-time, the optimal PV system sizing of two different case studies from a list of $12$ 
+different equipment.
 \end{abstract}
 
 \begin{IEEEkeywords}
@@ -56,13 +59,15 @@ automated verification, model checking, optimization, electrical systems and sol
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{INTRODUCTION}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\textcolor{red}{Software’s pervasiveness in every context of life places new challenges on Software Engineering. Highly dynamic environments, rapidly changing requirements, unpredictable and uncertain operating conditions demand new paradigms for software design~\cite{Filieri2015}.}
 
 Cyber-Physical Systems  (CPS) are engineered systems, which are built from, and depend upon, 
 the seamless integration of computational  and  physical  components~\cite{NSF2015}. 
 During operation, such components must frequently adapt to the executing environment changes 
 faced at run-time (dynamics of the physical processes) and must be able to continue to behave 
 in a controlled and safe way, thus posing novel technical challenges for the software engineering of services and applications for CPS~\cite{Metzger2014}. %Important quality aspects for CPS include scalability, e.g., ensuring that CPS applications can scale to urban-wide deployment environments [Nessi].
+Software pervasiveness in every context of life also places new challenges in Software Engineering. 
+In particular, highly dynamic environments, rapidly changing requirements, unpredictable and uncertain operating conditions demand new paradigms for software design~\cite{Filieri2015}.
+
 
 While some research efforts do exist to enhance and optimize the software development processes for CPS, further investigation and discussion of better and more effective models are still needed in practice~\cite{Al-Jaroodi2016}. Among the opportunities for enhancements, there exists the need for developing new techniques and tools to support CPS requirements gathering and analysis. The developed techniques need to deal with predefined requirements enforced by the nature and inherited constraints of the target CPS. In addition, they should be able to provide verification and validation mechanisms for completeness, correctness, and consistency~\cite{Al-Jaroodi2016}. Uncertainty and variability, at the same time, can be dealt with formal verification~\cite{NESSI}. Energy production, distribution, and optimization are all CPS problems~\cite{UC}. 
 
@@ -73,17 +78,17 @@ In order to provide universal electricity for all, decentralized systems led by 
 in off-grid and mini-grid systems will be the lowest-cost solution for three-quarters of the additional connections needed \textcolor{red}{Add reference here}; 
 specifically grid extension will be the standard in urban areas~\cite{IEAweo2018}.
 
-In order to simulate or evaluate a PV system, there exist various specialized tools available in the market, e.g., RETScreen, and HOMER~\cite{Pradhan,Swarnkar}%, PVWatts, SAM and Hybrid2 \cite{Pradhan,Swarnkar,NRELDobos,NRELBlair,Mills}
+In order to simulate or evaluate a PV system, there exist various specialized tools available in the market, e.g., RETScreen and HOMER~\cite{Pradhan,Swarnkar}%, PVWatts, SAM and Hybrid2 \cite{Pradhan,Swarnkar,NRELDobos,NRELBlair,Mills}
 ; and even general purpose simulation tools, e.g., MATLAB/Simulink~\cite{Gow1999}. %PSpice, Saber or MATLAB/Simulink package \cite{Gow1999,Benatiallah2017}.
  However, those tools are based on simulation; they have the drawback of an incomplete coverage  since verification of all possible combinations and potential failures of a system is unfeasible~\cite{ClarkeHV18}.
-Formal methods based on \textit{model checking} can offer a great potential to obtain a more effective design process of CPSs~\cite{ClarkeHV18}. %Therefore, in the context of this proposal, a CPS, specifically a PV system, is the target. We review verification tools and related them to design and to PV systems verification, which was uncommon in prior studies~\cite{abs-1811-09438}. 
+Formal methods based on \textit{model checking} can offer a great potential to obtain a more effective design process of CPSs~\cite{ClarkeHV18}. 
 
-\textcolor{red}{In summary, this paper makes the following original contributions.
-\begin{itemize}
-\item First contribution. The use of automated verification in electrical systems was uncommon in prior studies~\cite{abs-1811-09438}, and specifically their use in PV sizing is unprecedented. Here, a list of PV components (i.e., PV panels, charge controllers, inverters, and batteries) can be fed to the proposed verification tool together with user requirements and environment constraints, and our verification algorithm based on software model checking can find the optimal solution in technical and economical terms.
-\item Second contribution. To evaluate different state-of-art software verifiers with the goal of obtaining the best verification performance.
-\end{itemize}
-}
+In summary, this paper makes the following original contributions for synthesizing optimal sizing of stand-alone PV systems.
+Firstly, the use of automated formal verification in electrical systems was uncommon in recent prior studies~\cite{abs-1811-09438}, 
+and specifically their use in PV sizing is unprecedented. Here, a list of PV components (i.e., PV panels, charge controllers, inverters, and batteries) 
+can be fed to the proposed synthesis method together with user requirements and environment constraints, 
+and our synthesis algorithm based on software model checking can find the optimal solution in technical and economical terms.
+Secondly, we evaluate different state-of-art software verifiers with the goal of obtaining the best synthesis performance for PV systems.
 %
 %\textcolor{red}{We need to make our contributions stronger. Why the SE community would be interested in this paper? What are the main open problems we need them to solve here? Remember that this is a paper for new ideas... we don't need to make questions but we don't need to answer all of them.}
 %
