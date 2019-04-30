@@ -1,0 +1,18 @@
+resultado CPAchecker em 30/04 para o case 3
+915W
+980W peak
+4880 Wh/dia
+24V DC-bus
+12h autonomy
+
+Panel 320 W (3S)
+Battery 220Ah (2S)
+Controller 35A/145V
+Inverter 48V/1200VA
+
+US$ 2605.94
+SAT in 4327 sec = 72 min
+
+time scripts/cpa.sh -heap 36000m -config config/bmc-incremental.properties -spec config/specification/sv-comp-reachability.spc opt_PVcode_case3_rev2.c > CPA_bmc-incremental_36G_opt_case3_24v_rev2_300402019.txt &
+
+
