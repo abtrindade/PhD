@@ -37,16 +37,7 @@ lucas.cordeiro@manchester.ac.uk }
 \maketitle
 
 \begin{abstract}
-Currently, there exist various state-of-the-art tools to design PV but they are mainly based on simulations, which do not cover all aspects of the design-space. 
-We present a sound and automated approach to synthesize optimal sizing of stand-alone solar photovoltaic (PV) systems.
-The application of automated formal verification to synthesize PV systems is a very recent subject with only a few initiatives. 
-Here we develop and evaluate an automated formal synthesis approach based on program synthesis and report preliminary results 
-using three state-of-art software verifiers with the goal of optimizing the sizing of a PV system. 
-Commercial equipment data is provided to our synthesis engine and the candidate solution is derived 
-from financial analysis of the obtained sizing. Our proposed synthesis method is novel and 
-unprecedented to streamline the design of PV systems. 
-Experimental results show that our synthesis method, based on software model checking as our verification engine, 
-is able to synthesize, in an acceptable run-time, the optimal PV system sizing of two different case studies.
+Currently, there exist various state-of-the-art tools to design PV systems, but they are mainly based on simulations, which do not cover all aspects of the design-space. We present a sound and automated approach to synthesize optimal sizing of stand-alone solar photovoltaic (PV) systems. The application of automated formal verification to synthesize PV systems is a very recent subject with only a few initiatives. Here we develop and evaluate an automated formal synthesis approach based on program synthesis and report preliminary results using three state-of-art software verifiers with the goal of optimizing the sizing of a PV system. Commercial equipment data is provided to our synthesis engine and the candidate solution is derived from financial analysis of the obtained sizing. Our proposed synthesis method is novel and unprecedented to streamline the design of PV systems. Experimental results show that our synthesis method, based on software model checking as our verification engine, is able to synthesize, in an acceptable run-time, the optimal PV system sizing of two different case studies.
 \end{abstract}
 
 %\begin{IEEEkeywords}
@@ -56,7 +47,6 @@ is able to synthesize, in an acceptable run-time, the optimal PV system sizing o
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{INTRODUCTION}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 Cyber-Physical Systems  (CPS) are engineered systems, which are built from, and depend upon, 
 the seamless integration of computational  and  physical  components~\cite{NSF2015}. 
 During operation, such components must frequently adapt to the executing environment changes 
@@ -75,38 +65,26 @@ of the target CPS. In addition, they should be able to provide verification and 
 correctness, and consistency~\cite{Al-Jaroodi2016}. Uncertainty and variability, at the same time, can be dealt with formal verification~\cite{NESSI}. 
 Energy production, distribution, and optimization are all CPS problems~\cite{UC}. 
 
-Lack of access to clean and affordable energy is considered a core dimension of poverty~\cite{Hussein2012}. 
-Progress has been made worldwide; in particular, the number of people without electricity access 
-fell below $1$ billion threshold for the first time in 2017~\cite{IEAweo2018}. 
-In order to provide universal electricity for all, decentralized systems led by solar photovoltaic (PV) 
-in off-grid and mini-grid systems will be the lowest-cost solution for three-quarters of the additional connections needed \textcolor{red}{Add reference here}; 
-specifically grid extension will be the standard in urban areas~\cite{IEAweo2018}.
+Lack of access to clean and affordable energy is considered a core dimension of poverty~\cite{Hussein2012}. Progress has been made worldwide; in particular, the number of people without electricity access fell below $1$ billion threshold for the first time in 2017~\cite{IEAweo2018}. In order to provide universal electricity for all, decentralized systems led by solar photovoltaic (PV) in off-grid and mini-grid systems will be the lowest-cost solution for three-quarters of the additional connections needed~\cite{Hussein2012}; specifically grid extension will be the standard in urban areas~\cite{IEAweo2018}.
 
 In order to simulate or evaluate a PV system, there exist various specialized tools, e.g., RETScreen and HOMER~\cite{Pradhan,Swarnkar}%, PVWatts, SAM and Hybrid2 \cite{Pradhan,Swarnkar,NRELDobos,NRELBlair,Mills}
 ; and even general purpose simulation tools, e.g., MATLAB/Simulink~\cite{Gow1999}. %PSpice, Saber or MATLAB/Simulink package \cite{Gow1999,Benatiallah2017}.
- However, those tools are based on simulation; they have the drawback of an incomplete coverage  since verification of all possible combinations and potential failures of a system is unfeasible~\cite{ClarkeHV18}.
-Formal methods based on \textit{model checking} can offer a great potential to obtain a more effective design process of CPSs~\cite{ClarkeHV18}. 
-Here, we use program synthesis for synthesizing optimal sizing of stand-alone PV systems using commercial equipment data.
-In particular, given a correctness specification $\sigma$, our method uses that as starting point and then incrementally produce a 
-sequence of candidate solutions that satisfy $\sigma$, by integrating software model checking techniques.
+ However, those tools are based on simulation; they have the drawback of an incomplete coverage  since verification of all possible combinations and potential failures of a system is unfeasible~\cite{ClarkeHV18}. \textcolor{red}{On the other hand, optimization of PV systems is not a recent matter, since the 90's different techniques using different criteria in order to find ultimate combinations for design parameters, based on intuitive, numerical and analytical methods were developed~\cite{Alsadi2018}.}
+ 
+However, formal methods based on \textit{model checking} can offer a great potential to obtain a more effective design process of CPSs~\cite{ClarkeHV18}. Here, we use program synthesis for synthesizing optimal sizing of stand-alone PV systems using commercial equipment data. In particular, given a correctness specification $\sigma$, our method uses that as starting point and then incrementally produce a sequence of candidate solutions that satisfy $\sigma$, by integrating software model checking techniques.
 
-This paper makes the following original contributions.
-Firstly, the use of automated software verification in electrical systems was uncommon in recent prior studies~\cite{abs-1811-09438}, 
-and specifically their use in PV sizing is unprecedented. Here, a list of PV components (i.e., PV panels, charge controllers, inverters, and batteries) 
-can be fed to the proposed synthesis method together with user requirements and environment constraints, 
-and our synthesis algorithm based on software model checking can find the optimal solution in technical and economical terms.
-Secondly, we evaluate different state-of-art software verifiers with the goal of obtaining the best performance for synthesizing optimal PV systems.
-
+This paper makes the following original contributions. Firstly, the use of automated software verification in electrical systems was uncommon in recent prior studies~\cite{abs-1811-09438}, and specifically their use in PV sizing is unprecedented. Here, a list of PV components (i.e., PV panels, charge controllers, inverters, and batteries) can be fed to the proposed synthesis method together with user requirements and environment constraints, and our synthesis algorithm based on software model checking can find the optimal solution in technical and economical terms. Secondly, we evaluate different state-of-art software verifiers with the goal of obtaining the best performance for synthesizing optimal PV systems.
+%
 %-----------------------------------------------------------
 \section{BACKGROUND}
 \label{sec:AutomatedVerification}
 %-----------------------------------------------------------
-
+%
 %-----------------------------------------------------------
 \subsection{Program Synthesis}
 \label{sec:ProgramSynthesis}
 %-----------------------------------------------------------
-
+%
 The basic idea of program synthesis is to automatically construct a program $P$ that satisfies a correctness specification $\sigma$. In particular, program synthesis is automatically performed by engines that use a correctness specification $\sigma$, as starting point, and then incrementally produce a sequence of candidate solutions that satisfy $\sigma$~\cite{Abateetal2017}. As a result, a given candidate program $p$ is iteratively refined, in order to match $\sigma$ more closely. Counter-Example Guided Inductive Synthesis (CEGIS) represents one of the most popular approaches to program synthesis that are currently used in practice for CPS~\cite{Abateetal2017}, whose basic architecture is shown in Figure~\ref{Counter-Example-Guided-Inductive-Synthesis} and has close connections to algorithmic debugging using counterexamples and abstraction refinement~\cite{Alur13}. 
 
 \textcolor{red}{Could you please adapt this text to our context?}
@@ -123,7 +101,7 @@ The correctness specification $\sigma$ provided to a program synthesizer is of t
 One may notice that each iteration of the CEGIS loop adds a new input to the finite set $\text{\sc inputs}$, which is then used for synthesis.  Given that the full set of inputs $\mathcal{D}$ is finite, this means that the refinement loop can only iterate over a finite number of times; however, $\mathcal{D}$ can represent a large number of elements for the finite set $\text{\sc inputs}$. In order to avoid exploring all possible values, machine learning techniques can be used in the phase {\sc synthesize}, with the goal of learning from experience (input-output samples), {\it i.e.}, learning from counterexamples provided by a verification oracle~\cite{Alur13}. In addition to that, a pre-processing stage could also figure as another block in the scheme shown in Fig. \ref{Counter-Example-Guided-Inductive-Synthesis}, between {\sc verify} and {\sc synthesize}, which would process counterexamples and provide larger and refined information to the latter, according to specification $\sigma$ and domain $\mathcal{D}$, in order to speed-up convergence to a final candidate.
 
 Nowadays, program synthesis engines that implement the CEGIS approach~\cite{sketch} can automatically produce solutions for a large variety of specifications, due to the combination of automated testing, genetic algorithms, and SMT-based automated reasoning~\cite{Sharma14}. Here we used software model checking techniques implemented by different tools: CBMC~\cite{Kroening}, CPAChecker~\cite{Beyer2011}, and ESBMC~\cite{esbmc2018}.
-
+%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Sizing Stand-alone Solar PV Systems}
 \label{sec:sizing}
@@ -137,7 +115,7 @@ The PV generator, which can be a panel or an array, is a semiconductor device th
 \label{fig:blockdiagram} 
 \end{figure}
 \\
-
+%
 Here the sizing check will be automatically performed by our proposed method; 
 this stage will ensure that the system meets the standard project steps related 
 to critical period solar energy method~\cite{Pinho} and 
@@ -240,7 +218,7 @@ The sizing project check of the inverter is carried out by means of three equati
 % -------------------------------------------------------
 \subsection{Optimal sizing of PV systems}
 % -------------------------------------------------------
-
+%
 To select an optimal combination of components from a PV system to meet sizing constraints, we need to evaluate \textit{power reliability} and perform \textit{system cost} analysis for the recommended system. An ideal combination for any PV system is made by the best compromise between those two objectives (power reliability and system cost)~\cite{Alsadi2018}. 
 
 Regarding power reliability, this work will rely on the critical period solar energy method~\cite{Pinho} as described in section~\ref{sec:sizing}. 
@@ -298,10 +276,7 @@ Our synthesis algorithm starts with the input of manufacturers data and prices o
 
 Next, we use Eq.~(\ref{eq:Ecorrected}), Eq.~(\ref{eq:Ep}), Eq.~(\ref{eq:NTPmin}), Eq.~(\ref{eq:NPSmin}), Eq.~(\ref{eq:NPPmin}), Eq.~(\ref{eq:Cbank}), Eq.~(\ref{eq:Nbtotal}), Eq.~(\ref{eq:iscamb}), and Eq.~(\ref{eq:icmin}) to calculate the sizing variables (Lines 14 to 20). The directive \textit{assume} (from Line 21 to 25) ensures the compatibility of the chosen items from the list of equipment: the automatic verification uses only the item (among all the possible ones) that satisfies the statements from Line 14 to 20 in addition to the Line 18. Therefore, our algorithm reaches Line 27 with one feasible solution, and the cost of that solution is calculated in $F_{obj}$.
 
-If our algorithm does not find a feasible solution among the item of equipment that were provided to our synthesis algorithm, then the result is an unsatisfiable (\textit{UNSAT}), i.e., the program finishes and does not find a solution. It indicates that was not possible to combine the itens of each equipment and create a feasible solution. The main challenge for the verification part is to find a feasible solution (technically speaking, regarding the constraints and user requirements), which is the best financial solution at the same time (lowest cost of deployment) from a list of equipment and components that is provided to our synthesis algorithm. \textcolor{red}{An unfeasible solution happens due to the incomplete list of equipment?} \textcolor{red}{Could we synthesize the equipment that we need to meet the user requirements?}
-
-\textcolor{red}{Could you please reinforce here that our approach is sound and completely automated?}
-
+If our algorithm does not find a feasible solution among the item of equipment that were provided to our synthesis algorithm, then the result is an unsatisfiable (\textit{UNSAT}), i.e., the program finishes and does not find a solution. It indicates that was not possible to combine the itens of each equipment and create a feasible solution. The main challenge for the verification part is to find a feasible solution (technically speaking, regarding the constraints and user requirements), which is the best financial solution at the same time (lowest cost of deployment) from a list of equipment and components that is provided to our synthesis algorithm. \textcolor{red}{Worth to mention that the process described here in completely automated and that a validation was performed by authors to ensure that the approach is sound, considering the case studies described at next section}.
 %---------------------------------------------------------------------------
 \section{Results and Discussion}
 %---------------------------------------------------------------------------
@@ -337,13 +312,11 @@ Tool & \makecell{Demand = 501W \\ Peak = 501W \\ Energy=3900Wh/day \\ Battery au
 \end{scriptsize}
 \end{table}
 
-For future wore, we will perform additional experiments using other case studies and also compare the results of our approach with some off-the-shelf software that focuses on sizing and optimization. 
+For future work, we will perform additional experiments using other case studies and also compare the results of our approach with some off-the-shelf software that focuses on sizing and optimization. 
 Furthermore, we will be provide a larger number of components (panels, batteries, controllers and inverters) to our database to be used by our synthesis engine.
-
-\textcolor{red}{We have to abbreviate our references. Take a look at https://ssvlab.github.io/lucasccordeiro/papers/icse2011.pdf, e.g., I've just put the conference acronym, remove conference place (New York), etc}
-
+%
 % argument is your BibTeX string definitions and bibliography database(s)
-\bibliography{trindadeThesis}{}
+\bibliography{trindadeThesis_menor}{}
 
 \vspace{12pt}
 
