@@ -22,12 +22,12 @@
 }
 
 \author{\IEEEauthorblockN{Alessandro Trindade}
-\IEEEauthorblockA{\textit{Electricity Department} \\
+\IEEEauthorblockA{
 \textit{Federal University of Amazonas}, Brazil \\
 alessandrotrindade@ufam.edu.br}
 \and
 \IEEEauthorblockN{Lucas Cordeiro}
-\IEEEauthorblockA{\textit{School of Computer Science} \\
+\IEEEauthorblockA{
 \textit{University of Manchester}, UK \\
 lucas.cordeiro@manchester.ac.uk }
 }
@@ -65,7 +65,7 @@ In order to simulate or evaluate a PV system, there exist various specialized to
  
 However, formal methods based on \textit{symbolic model checking} and its application to synthesize PV systems have not been further explored yet. Those formal techniques can offer a great potential to obtain a more effective design process of CPSs~\cite{ClarkeHV18}. Here, we use program synthesis for synthesizing optimal sizing of stand-alone PV systems using commercial equipment data. Given a correctness specification $\sigma$, our method uses that as starting point and then incrementally produce a sequence of candidate solutions that satisfy $\sigma$, by integrating symbolic model checking into our synthesis engine.
 
-This paper makes the following original contributions. Firstly, the use of automated symbolic verification in electrical systems was uncommon in recent prior studies~\cite{abs-1811-09438}, and specifically their use in PV sizing is unprecedented. Here, a list of PV components (i.e., PV panels, charge controllers, inverters, and batteries) can be fed to our proposed synthesis method together with user requirements and environment constraints, and our synthesis algorithm based on symbolic model checking can find the optimal solution in technical and economical terms. Secondly, we evaluate different state-of-art symbolic software verifiers with the goal of obtaining the best performance in our verification backend for synthesizing optimal PV systems.
+Our work makes two major contributions. Firstly, the use of automated symbolic verification in electrical systems was uncommon in recent prior studies~\cite{abs-1811-09438}, and specifically their use in PV sizing is unprecedented. Here, a list of PV components (i.e., PV panels, charge controllers, inverters, and batteries) can be fed to our proposed synthesis method together with user requirements and environment constraints, and our synthesis algorithm based on symbolic model checking can find the optimal solution in technical and economical terms. Secondly, we evaluate different state-of-art symbolic software verifiers with the goal of obtaining the best performance in our verification backend for synthesizing optimal PV systems.
 %
 %-----------------------------------------------------------
 \section{BACKGROUND}
@@ -86,14 +86,14 @@ In Figure~\ref{Counter-Example-Guided-Inductive-Synthesis}, the phases {\sc Synt
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=0.85\columnwidth]{fig2_rev.jpg}
-	\caption{Counter-Example Guided Inductive Synthesis (CEGIS) applied to PV system sizing.}
+	\caption{CEGIS applied to PV system sizing.}
 	\label{Counter-Example-Guided-Inductive-Synthesis}
 \end{figure}
 %
 One may notice that each iteration of the CEGIS loop adds a new input to the finite set $\text{\sc inputs}$, which is then used for synthesis.  Given that the full set of inputs $\mathcal{D}$ is finite, this means that the refinement loop can only iterate over a finite number of times; however, $\mathcal{D}$ can represent a large number of elements for the finite set $\text{\sc inputs}$ and our synthesis engine can then conclude that no feasible equipment combination was found. 
 %In order to avoid exploring all possible values, machine learning techniques can be used in the phase {\sc synthesize}, with the goal of learning from experience (input-output samples), {\it i.e.}, learning from counterexamples provided by a verification oracle~\cite{Alur13}. In addition to that, a pre-processing stage could also figure as another block in the scheme shown in Fig. \ref{Counter-Example-Guided-Inductive-Synthesis}, between {\sc verify} and {\sc synthesize}, which would process counterexamples and provide larger and refined information to the latter, according to specification $\sigma$ and domain $\mathcal{D}$, in order to speed-up convergence to a final candidate.
 
-Nowadays, program synthesis engines that implement the CEGIS approach~\cite{sketch} can automatically produce solutions for a large variety of specifications, due to the combination of automated testing, genetic algorithms, and SMT-based automated reasoning~\cite{Sharma14}. In our particular study, we have used symbolic software verifiers based on SMT solvers to reason over QF formulas.%Here we used software model checking techniques implemented by different tools: CBMC~\cite{Kroening}, CPAChecker~\cite{Beyer2011}, and ESBMC~\cite{esbmc2018}.
+Program synthesis engines that implement the CEGIS approach~\cite{sketch} can automatically produce solutions for a large variety of specifications, due to the combination of automated testing, genetic algorithms, and SMT-based reasoning~\cite{Sharma14}; here we have used software verifiers based on SMT solvers.%Here we used software model checking techniques implemented by different tools: CBMC~\cite{Kroening}, CPAChecker~\cite{Beyer2011}, and ESBMC~\cite{esbmc2018}.
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Sizing Stand-alone Solar PV Systems}
@@ -190,7 +190,7 @@ The controller must meet the maximum current from the PV array given by Eqs. \eq
 \scriptstyle I_{c} \geq \scriptstyle I_{c,min}.
 \end{equation}
 
-The sizing project check of the inverter is carried out by means of three equations. Eq.~\eqref{eq:vindc} ensures that the input voltage of the controller meets the system voltage. Eq.~\eqref{eq:voutac} ensures that the output voltage of the controller meets the AC voltage of the load. Finally, Eq.~\eqref{eq:invcheck} ensures that the controller can support the total demand of the load ($Demand$) and the surge power ($P_{surge}$), where $V_{in}DC$ is the nominal input voltage and $V_{out}AC$ is the nominal output voltage of the inverter; $MAX_{AC,ref}$ is the peak power that the inverter can support.
+The inverter sizing check is performed by means of three equations. Eq.~\eqref{eq:vindc} ensures that the input voltage of the controller meets the system voltage. Eq.~\eqref{eq:voutac} ensures that the output voltage of the controller meets the AC voltage of the load. Finally, Eq.~\eqref{eq:invcheck} ensures that the controller can support the total demand of the load ($Demand$) and the surge power ($P_{surge}$), where $V_{in}DC$ is the nominal input voltage and $V_{out}AC$ is the nominal output voltage of the inverter; $MAX_{AC,ref}$ is the peak power that the inverter can support.
 %
 \begin{equation}
 \label{eq:vindc} 
@@ -210,7 +210,7 @@ The sizing project check of the inverter is carried out by means of three equati
 \subsection{Optimal Sizing of PV Systems}
 % -------------------------------------------------------
 %
-To select an optimal combination of components from a PV system, to meet sizing constraints, 
+To select an optimal combination of components from a PV system to meet sizing constraints, 
 %we need to evaluate \textit{power reliability} and perform \textit{system cost} analysis for the recommended system. An ideal combination for any PV system 
 the ideal solution is made by the best compromise between two objectives: power reliability and system cost~\cite{Alsadi2018}. 
 Regarding power reliability, this work will rely on the critical period solar energy method~\cite{Pinho} as described in section~\ref{sec:sizing}. 
@@ -275,13 +275,14 @@ If our algorithm does not find a feasible solution among the item of equipment t
 \section{Results and Discussion}
 %---------------------------------------------------------------------------
 
-Our evaluation aims to answer two research questions: \textit{RQ1} (soundness) Does our automated synthesis approach provide correct results?, and \textit{RQ2} (performance) How do the software verifiers compare to each other?
-We have performed two case studies to evaluate our proposed synthesis approach as described in the first line of Table~\ref{tab1}. Our synthesis algorithm was feed with data and costs of 22 equipment from 9 different manufacturers of PV systems. Furthermore, three start-of-art verification tools, CBMC,\footnote{Command-line: \$ cbmc -\phantom{}-unwind 100 filename.c -\phantom{}-trace} ESBMC,\footnote{Command-line: \$ esbmc filename.c -\phantom{}-no-bounds-check -\phantom{}-no-pointer-check -\phantom{}-unwind 100 -\phantom{}-boolector} %UAutomizer\footnote{Command-line: \$ ./Ultimate -tc config/AutomizerReach.xml -s config/svcomp-Reach-32bit-Automizer\_Default.epf -i filename.c -\phantom{}-traceabstraction.limit.analysis.time 900 -\phantom{}-traceabstraction.stop.after.first.violation.was.found false -\phantom{}-cacsl2boogietranslator.overapproximate.operations.on.floating.types false -\phantom{}- cacsl2boogietranslator.assume.nondeterminstic.values.are.in.range false -\phantom{}-rcfgbuilder.add.additional.assume.for.each.assert true -\phantom{}-rcfgbuilder.simplify.code.blocks true -\phantom{}-rcfgbuilder.size.of.a.code.block LoopFreeBlock}, 
+\textbf{Case studies and setup.} We have performed two case studies to evaluate our proposed synthesis approach as described in the first line of Table~\ref{tab1}. Our synthesis algorithm was feed with data and costs of 22 equipment from 9 different manufacturers of PV systems. Furthermore, three start-of-art verification tools, CBMC,\footnote{Command-line: \$ cbmc -\phantom{}-unwind 100 filename.c -\phantom{}-trace} ESBMC,\footnote{Command-line: \$ esbmc filename.c -\phantom{}-no-bounds-check -\phantom{}-no-pointer-check -\phantom{}-unwind 100 -\phantom{}-boolector} %UAutomizer\footnote{Command-line: \$ ./Ultimate -tc config/AutomizerReach.xml -s config/svcomp-Reach-32bit-Automizer\_Default.epf -i filename.c -\phantom{}-traceabstraction.limit.analysis.time 900 -\phantom{}-traceabstraction.stop.after.first.violation.was.found false -\phantom{}-cacsl2boogietranslator.overapproximate.operations.on.floating.types false -\phantom{}- cacsl2boogietranslator.assume.nondeterminstic.values.are.in.range false -\phantom{}-rcfgbuilder.add.additional.assume.for.each.assert true -\phantom{}-rcfgbuilder.simplify.code.blocks true -\phantom{}-rcfgbuilder.size.of.a.code.block LoopFreeBlock}, 
 and CPAchecker,\footnote{Command-line: \$ scripts/cpa.sh -heap 64000m -config config/bmc-incremental.properties -spec config/specification/sv-comp-reachability.spc filename.c} were used as our verification engine to compare our approach effectiveness and efficiency. 
 The case studies are related to a stand-alone PV system with the specifications shown in Table~\ref{tab1}. All experiments were conducted on an otherwise idle Intel Xeon CPU E5-4617 (8-cores) with 2.90 GHz and 64 GB of RAM, running Ubuntu 16.04 LTS 64-bits. 
 The experiments were performed with a predefined timeout of $240$ minutes.
-%
-Only CPAchecker was able to present the optimal sizing of the two case studies: the result was produced in $50.2$ minutes and $37.2$ minutes, respectively. 
+
+\textbf{Objectives.} Our evaluation aims to answer two research questions: \textit{RQ1} (soundness) Does our automated synthesis approach provide correct results?, and \textit{RQ2} (performance) How do the software verifiers compare to each other?
+
+\textbf{Results.}  CPAchecker was able to synthesize the optimal sizing of both case studies: the result was produced in $50.2$ and $37.2$ minutes, respectively. 
 The violation of line 209 indicated in Table~\ref{tab1} is the $assert$ of line 28 from Algorithm~\ref{alg:verification-algorithm}. The results were tested by manual PV sizing and were sound (\textit{RQ1}). %, linking a feasible technical solution with the lowest cost possible, considering the equipment that were inputted to the code. 
 CBMC and ESBMC produced \textit{UNKNOWN} result (\textit{timeout} or \textit{out of memory}); this partially answers the \textit{RQ2}.
 %
@@ -309,8 +310,8 @@ Tools & \textbf{Result} & \textbf{Result}\\
 \end{tabular}
 \end{scriptsize}
 \end{table}
-%
-We have reported a favorable assessment of the proposed method. Nevertheless, we have also identified four threats to the validity of our results that can further be assessed and it will be future work: (1) improvement of the power reliability analysis: to include loss of load probability or loss of power supply probability, which can make the analysis more accurate; (2) improvement of the system cost analysis: to include criteria as Net Present Cost, or Levelized Cost of Energy, in order to promote the acceptability of investment (or even to include operational and maintenance costs that were not considered here); (3) to increase the equipment and manufactures data base: this will increase the complexity of the optimization but the result will also allow improved sizing; and (4) to compare the results of our approach with some off-the-shelf software that focuses on sizing and optimization: this will validate the results and a simulation-verification comparative.
+
+\textbf{Threats to validity.}  We have reported a favorable assessment of the proposed method. Nevertheless, we have also identified four threats to the validity of our results that can further be assessed and it will be future work: (1) improvement of the power reliability analysis: to include loss of load probability or loss of power supply probability, which can make the analysis more accurate; (2) improvement of the system cost analysis: to include criteria as Net Present Cost, or Levelized Cost of Energy, in order to promote the acceptability of investment (or even to include operational and maintenance costs that were not considered here); (3) to increase the equipment and manufactures data base: this will increase the complexity of the optimization but the result will also allow improved sizing; and (4) to compare the results of our approach with some off-the-shelf software that focuses on sizing and optimization: this will validate the results and a simulation-verification comparative.
 %
 % argument is your BibTeX string definitions and bibliography database(s)
 \bibliography{trindadeThesis_menor}{}
