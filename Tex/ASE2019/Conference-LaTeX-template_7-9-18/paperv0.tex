@@ -232,10 +232,10 @@ Algorithm~\ref{alg:verification-algorithm} describes our pseudocode to synthesiz
  \renewcommand{\algorithmicrequire}{\textbf{Input:}}
  \renewcommand{\algorithmicensure}{\textbf{Output:}}
   \STATE Initialize variables \\
-  \STATE Declare list of PV panels data and cost \\
-  \STATE Declare list of controllers data and cost \\
-  \STATE Declare list of batteries data and cost \\
-  \STATE Declare list of inverters data and cost \\
+  \STATE Declare list of PV panels, controllers, batteries, and inverters data and cost \\
+%  \STATE Declare list of controllers data and cost \\
+%  \STATE Declare list of batteries data and cost \\
+%  \STATE Declare list of inverters data and cost \\
   \STATE Declare the maximum possible cost $MaxCost$  \\
   \STATE Declare power demand, power peak, energy consumption \\
   \STATE Declare battery autonomy, deep of discharge, AC voltage \\
@@ -251,12 +251,12 @@ Algorithm~\ref{alg:verification-algorithm} describes our pseudocode to synthesiz
 	\STATE Requeriment enforced by \textbf{assume}$(V_{c})$ \\
  	\STATE Calculate $I_{sc,amb}$ \\
  	\STATE Calculate $I_{c,min}$ \\
- 	\STATE Requeriment enforced by \textbf{assume}$(I_{c})$ \\
-	\STATE Requeriment enforced by \textbf{assume}$(V_{in}DC)$ \\
-	\STATE Requeriment enforced by \textbf{assume}$(V_{out}AC)$ \\
-	\STATE Requeriment enforced by \textbf{assume}$(Demand)$ \\
-	\STATE Requeriment enforced by \textbf{assume}$(P_{surge})$ \\
-	\STATE non-det variables hold feasible equipment and cost  \\
+ 	\STATE Requeriment enforced by \textbf{assume}$(I_{c} \wedge V_{in}DC \wedge V_{out}AC)$ \\
+%	\STATE Requeriment enforced by \textbf{assume}$(V_{in}DC \wedge V_{out}AC )$ \\
+%	\STATE Requeriment enforced by \textbf{assume}$(V_{out}AC)$ \\
+	\STATE Requeriment enforced by \textbf{assume}$(Demand \wedge P_{surge})$ \\
+%	\STATE Requeriment enforced by \textbf{assume}$(P_{surge})$ \\
+	\STATE non-deterministic variables hold feasible equipment and cost  \\
 	\STATE $F_{obj} \leftarrow  N_{TP}*Panel_{Cost} \, + \, N_{TB}*Battery_{Cost} \, + Controller_{Cost} \, + \, Inverter_{Cost}$ \\
 	\STATE Violation check with \textbf{assert}$(F_{obj} > HintCost)$ \\
   \ENDFOR
@@ -265,6 +265,8 @@ Algorithm~\ref{alg:verification-algorithm} describes our pseudocode to synthesiz
  \end{algorithmic} 
  \label{alg:verification-algorithm}
  \end{algorithm}
+ 
+ \textcolor{red}{Could you please update the lines? I've reduced the number of lines of our algorithm above.}
  
 Our synthesis algorithm will synthesize constant values; it starts with the input of manufacturers data and prices of PV panels, batteries, charge controllers and inverters (Lines 2 to 5). After that, we define user requirements, i.e., house requirements and design definitions, from Lines 6 to 8. The \textit{for}-loop started at Line 9 controls the lowest cost to the PV solution. In particular, it starts with cost $0$ and stops only when the algorithm finds a feasible solution in which the cost breaks the $assertion$ stated in Line 28; if that happens, then our algorithm has found an optimal solution, thereby stating that the {\sc Verify} phase reached a satisfiable condition (\textit{SAT}). Our synthesis algorithm uses non-deterministic variables to choose one specific constant from a given list of PV panels, controllers, batteries and inverters (Lines 10 to 13). That procedure ensures that our synthesis engine checks all combinations of items from each equipment, and combine them to assemble a feasible (candidate) PV solution, which meets the user requirements.
 
