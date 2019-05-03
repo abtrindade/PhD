@@ -56,14 +56,8 @@ Software pervasiveness in every context of life also places new challenges.
 In particular, highly dynamic environments, rapidly changing requirements, 
 unpredictable and uncertain operating conditions demand new paradigms for software design~\cite{Filieri2015}.
 
-While some research efforts do exist to enhance and optimize the software development processes for CPS, 
-further investigation and discussion of better and more effective models are still needed in practice~\cite{Al-Jaroodi2016}. 
-Among the opportunities for enhancements, there exists the need for developing new techniques and tools to support 
-CPS requirements gathering and analysis with the goal of synthesizing correct-by-construction implementations of CPS. 
-The developed techniques need to deal with predefined requirements enforced by the nature and inherited constraints 
-of the target CPS. In addition, they should be able to provide verification and validation mechanisms for completeness, 
-correctness, and consistency~\cite{Al-Jaroodi2016}. Uncertainty and variability, at the same time, can be dealt with formal verification~\cite{NESSI}. 
-Energy production, distribution, and optimization are all CPS problems~\cite{UC}. 
+%While some research efforts do exist to enhance and optimize the software development processes for CPS, further investigation and discussion of better and more effective models are still needed in practice~\cite{Al-Jaroodi2016}. 
+Among the opportunities for enhancements in the software development processes for CPS, there exists the need for developing new techniques and tools to support CPS requirements gathering and analysis with the goal of synthesizing correct-by-construction implementations of CPS. The developed techniques need to deal with predefined requirements enforced by the nature and inherited constraints of the target CPS. In addition, they should be able to provide verification and validation mechanisms for completeness, correctness, and consistency~\cite{Al-Jaroodi2016}. Uncertainty and variability, at the same time, can be dealt with formal verification~\cite{NESSI}. Energy production, distribution, and optimization are all CPS problems~\cite{UC}. 
 
 Lack of access to clean and affordable energy is considered a core dimension of poverty~\cite{Hussein2012}. Progress has been made worldwide; in particular, the number of people without electricity access fell below $1$ billion threshold for the first time in 2017~\cite{IEAweo2018}. In order to provide universal electricity for all, decentralized systems led by solar photovoltaic (PV) in off-grid and mini-grid systems will be the lowest-cost solution for three-quarters of the additional connections needed~\cite{Hussein2012}; specifically grid extension will be the standard in urban areas~\cite{IEAweo2018}.
 
@@ -93,34 +87,31 @@ The correctness specification $\sigma$ provided to a program synthesizer is of t
 %
 \begin{figure}[h]
 	\centering
-	\includegraphics[width=0.7\columnwidth]{fig2.jpg}
-	\caption{CounterExample Guided Inductive Synthesis (CEGIS).}
+	\includegraphics[width=0.85\columnwidth]{fig2_rev.jpg}
+	\caption{Counter-Example Guided Inductive Synthesis (CEGIS) applied to PV system sizing.}
 	\label{Counter-Example-Guided-Inductive-Synthesis}
 \end{figure}
-
+%
 One may notice that each iteration of the CEGIS loop adds a new input to the finite set $\text{\sc inputs}$, which is then used for synthesis.  Given that the full set of inputs $\mathcal{D}$ is finite, this means that the refinement loop can only iterate over a finite number of times; however, $\mathcal{D}$ can represent a large number of elements for the finite set $\text{\sc inputs}$. In order to avoid exploring all possible values, machine learning techniques can be used in the phase {\sc synthesize}, with the goal of learning from experience (input-output samples), {\it i.e.}, learning from counterexamples provided by a verification oracle~\cite{Alur13}. In addition to that, a pre-processing stage could also figure as another block in the scheme shown in Fig. \ref{Counter-Example-Guided-Inductive-Synthesis}, between {\sc verify} and {\sc synthesize}, which would process counterexamples and provide larger and refined information to the latter, according to specification $\sigma$ and domain $\mathcal{D}$, in order to speed-up convergence to a final candidate.
 
-Nowadays, program synthesis engines that implement the CEGIS approach~\cite{sketch} can automatically produce solutions for a large variety of specifications, due to the combination of automated testing, genetic algorithms, and SMT-based automated reasoning~\cite{Sharma14}. Here we used software model checking techniques implemented by different tools: CBMC~\cite{Kroening}, CPAChecker~\cite{Beyer2011}, and ESBMC~\cite{esbmc2018}.
+Nowadays, program synthesis engines that implement the CEGIS approach~\cite{sketch} can automatically produce solutions for a large variety of specifications, due to the combination of automated testing, genetic algorithms, and SMT-based automated reasoning~\cite{Sharma14}. %Here we used software model checking techniques implemented by different tools: CBMC~\cite{Kroening}, CPAChecker~\cite{Beyer2011}, and ESBMC~\cite{esbmc2018}.
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Sizing Stand-alone Solar PV Systems}
 \label{sec:sizing}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 The modeling of the PV system is based on modular blocks, as illustrated in Fig.\ref{fig:blockdiagram}. %It identifies the PV generator, batteries, charge controller, inverter, and AC load. 
-The PV generator, which can be a panel or an array, is a semiconductor device that can convert solar energy into DC electricity. In Fig.\ref{fig:blockdiagram}, there are two variables that depend on the site where the system is deployed and also the weather (i.e., solar irradiance $G$ and temperature $T$). For night hours or rainy days, we hold batteries where power can be stored and used. The use of batteries as a storage form implies the presence of a charge controller~\cite{Hansen}. The PV arrays produce DC and therefore when the PV system contains an AC load, a DC/AC conversion is required. That converter is called of inverter; and the AC load dictates the behavior of AC electrical load from the house that will be fed by the system.
+The PV generator, which can be a panel or an array, is a semiconductor device that can convert solar energy into DC electricity. %In Fig.\ref{fig:blockdiagram}, there are two variables that depend on the site where the system is deployed and also the weather (i.e., solar irradiance $G$ and temperature $T$). 
+For night hours or rainy days, we hold batteries where power can be stored and used. The use of batteries as a storage form implies the presence of a charge controller~\cite{Hansen}. The PV arrays produce DC and therefore when the PV system contains an AC load, a DC/AC conversion is required. That converter is called of inverter; and the AC load dictates the behavior of AC electrical load from the house that will be fed by the system.
 \begin{figure}[h]
-\includegraphics[width=0.4\textwidth]{blockdiagramPVS2}
+\includegraphics[width=0.4\textwidth]{blockdiagramPVS2_rev}
 \centering
 \caption{Block diagram for a typical stand-alone PV system~\cite{Hansen}.}
 \label{fig:blockdiagram} 
 \end{figure}
 \\
 %
-Here the sizing check will be automatically performed by our proposed method; 
-this stage will ensure that the system meets the standard project steps related 
-to critical period solar energy method~\cite{Pinho} and 
-adopting MPPT (Maximum Power Point Tracking) charge controller, 
-which is the most common one in practice. 
+Here the sizing check will be automatically performed by our proposed method; this stage will ensure that the system meets the standard project steps related to critical period solar energy method~\cite{Pinho} and adopting MPPT (Maximum Power Point Tracking) charge controller, which is the most common one in practice. 
 %
 Firstly, we need to correct the energy consumption estimated to the load ($E_{consumption}$), which is carried out by Eq.~\eqref{eq:Ecorrected}, where the efficiency of batteries ($\eta_{b}$), controller ($\eta_{c}$), and the inverter ($\eta_{i}$) are considered~\cite{Pinho} as follows
 \begin{equation}
@@ -228,7 +219,7 @@ However, considering the system cost analysis, we usually find related studies d
 \section{Synthesizing Optimal Sizing of Stand-alone Solar Photovoltaic Systems}
 %Applying Automated Verification to Optimal Sizing of Stand-alone Solar PV Systems}
 %------------------------------------------------------
-Algorithm~\ref{alg:verification-algorithm} describes the pseudocode used to symthesize stand-alone PV systems using software model checking. 
+Algorithm~\ref{alg:verification-algorithm} describes the pseudo-code used to synthesize stand-alone PV systems using software model checking. 
 %
  \begin{algorithm}
  \caption{Synthesis algorithm}
@@ -272,19 +263,18 @@ Algorithm~\ref{alg:verification-algorithm} describes the pseudocode used to symt
  \label{alg:verification-algorithm}
  \end{algorithm}
  
-Our synthesis algorithm starts with the input of manufacturers data and prices of PV panels, batteries, charge controllers and inverters (Lines 2 to 5). After that, we define user requirements, i.e., house requirements and design definitions, from Lines 6 to 8. The \textit{for}-loop started at Line 9 controls the lowest cost to the PV solution. In particular, it starts with cost $0$ and stops only when the algorithm finds a feasible solution in which the cost breaks the assertion stated in Line 28; if that happens, then our algorithm has found an optimal solution, thereby stating that the automatic verification reached a \textit{SAT} (satisfiable) condition. The algorithm uses non-deterministic variables to choose one specific data from a list of PV panels, controllers, batteries and inverters (Lines 10 to 13). That procedure ensures that the automated verification checks all possibilities of items from each equipment, and combine them to assemble a feasible PV solution, which meets the user requirements.
+Our synthesis algorithm starts with the input of manufacturers data and prices of PV panels, batteries, charge controllers and inverters (Lines 2 to 5). After that, we define user requirements, i.e., house requirements and design definitions, from Lines 6 to 8. The \textit{for}-loop started at Line 9 controls the lowest cost to the PV solution. In particular, it starts with cost $0$ and stops only when the algorithm finds a feasible solution in which the cost breaks the $assertion$ stated in Line 28; if that happens, then our algorithm has found an optimal solution, thereby stating that the automatic verification reached a \textit{SAT} (satisfiable) condition. The algorithm uses non-deterministic variables to choose one specific data from a list of PV panels, controllers, batteries and inverters (Lines 10 to 13). That procedure ensures that the automated verification checks all possibilities of items from each equipment, and combine them to assemble a feasible PV solution, which meets the user requirements.
 
 Next, we use Eq.~(\ref{eq:Ecorrected}), Eq.~(\ref{eq:Ep}), Eq.~(\ref{eq:NTPmin}), Eq.~(\ref{eq:NPSmin}), Eq.~(\ref{eq:NPPmin}), Eq.~(\ref{eq:Cbank}), Eq.~(\ref{eq:Nbtotal}), Eq.~(\ref{eq:iscamb}), and Eq.~(\ref{eq:icmin}) to calculate the sizing variables (Lines 14 to 20). The directive \textit{assume} (from Line 21 to 25) ensures the compatibility of the chosen items from the list of equipment: the automatic verification uses only the item (among all the possible ones) that satisfies the statements from Line 14 to 20 in addition to the Line 18. Therefore, our algorithm reaches Line 27 with one feasible solution, and the cost of that solution is calculated in $F_{obj}$.
 
-If our algorithm does not find a feasible solution among the item of equipment that were provided to our synthesis algorithm, then the result is an unsatisfiable (\textit{UNSAT}), i.e., the program finishes and does not find a solution. It indicates that was not possible to combine the itens of each equipment and create a feasible solution. The main challenge for the verification part is to find a feasible solution (technically speaking, regarding the constraints and user requirements), which is the best financial solution at the same time (lowest cost of deployment) from a list of equipment and components that is provided to our synthesis algorithm. \textcolor{red}{Worth to mention that the process described here in completely automated and that a validation was performed by authors to ensure that the approach is sound, considering the case studies described at next section}.
+If our algorithm does not find a feasible solution among the item of equipment that were provided to our synthesis algorithm, then the result is an unsatisfiable (\textit{UNSAT}), i.e., the program finishes and does not find a solution. It indicates that was not possible to combine the items of each equipment and create a feasible solution. The main challenge for the verification part is to find a feasible solution (technically speaking, regarding the constraints and user requirements), which is the best financial solution at the same time (lowest cost of deployment) from a list of equipment and components that is provided to our synthesis algorithm. \textcolor{red}{Worth to mention that the process described here in completely automated and that a validation was performed by authors to ensure that the approach is sound, considering the case studies described at next section}.
 %---------------------------------------------------------------------------
 \section{Results and Discussion}
 %---------------------------------------------------------------------------
-
-We have performed two case studies to evaluate our proposed synthesis approach as described in Table~\ref{tab1}. Furthermore, three start-of-art verification tools, CBMC\footnote{Command-line: \$ cbmc -\phantom{}-unwind 100 filename.c -\phantom{}-trace}, ESBMC\footnote{Command-line: \$ esbmc filename.c -\phantom{}-no-bounds-check -\phantom{}-no-pointer-check -\phantom{}-unwind 100 -\phantom{}-boolector}, %UAutomizer\footnote{Command-line: \$ ./Ultimate -tc config/AutomizerReach.xml -s config/svcomp-Reach-32bit-Automizer\_Default.epf -i filename.c -\phantom{}-traceabstraction.limit.analysis.time 900 -\phantom{}-traceabstraction.stop.after.first.violation.was.found false -\phantom{}-cacsl2boogietranslator.overapproximate.operations.on.floating.types false -\phantom{}- cacsl2boogietranslator.assume.nondeterminstic.values.are.in.range false -\phantom{}-rcfgbuilder.add.additional.assume.for.each.assert true -\phantom{}-rcfgbuilder.simplify.code.blocks true -\phantom{}-rcfgbuilder.size.of.a.code.block LoopFreeBlock}, 
+We have performed two case studies to evaluate our proposed synthesis approach as described in Table~\ref{tab1}, and our code was feed with data and costs of 22 equipment from 9 different manufacturers of PV systems. Furthermore, three start-of-art verification tools, CBMC\footnote{Command-line: \$ cbmc -\phantom{}-unwind 100 filename.c -\phantom{}-trace}, ESBMC\footnote{Command-line: \$ esbmc filename.c -\phantom{}-no-bounds-check -\phantom{}-no-pointer-check -\phantom{}-unwind 100 -\phantom{}-boolector}, %UAutomizer\footnote{Command-line: \$ ./Ultimate -tc config/AutomizerReach.xml -s config/svcomp-Reach-32bit-Automizer\_Default.epf -i filename.c -\phantom{}-traceabstraction.limit.analysis.time 900 -\phantom{}-traceabstraction.stop.after.first.violation.was.found false -\phantom{}-cacsl2boogietranslator.overapproximate.operations.on.floating.types false -\phantom{}- cacsl2boogietranslator.assume.nondeterminstic.values.are.in.range false -\phantom{}-rcfgbuilder.add.additional.assume.for.each.assert true -\phantom{}-rcfgbuilder.simplify.code.blocks true -\phantom{}-rcfgbuilder.size.of.a.code.block LoopFreeBlock}, 
 and CPAchecker\footnote{Command-line: \$ scripts/cpa.sh -heap 64000m -config config/bmc-incremental.properties -spec config/specification/sv-comp-reachability.spc filename.c}, were used to compare our approach effectiveness and efficiency. The case studies are related to a stand-alone PV system with the specifications shown in Table~\ref{tab1}. All experiments were conducted on an otherwise idle Intel Xeon CPU E5-4617 (8-cores) with 2.90 GHz and 64 GB of RAM, running Ubuntu 16.04 LTS 64-bits. The experiments were performed with a predefined timeout of $240$ minutes.
 
-Only CPAchecker could present the optimal sizing of the two case studies: the result came in 66 minutes and 35 minutes, respectively. %, linking a feasible technical solution with the lowest cost possible, considering the equipment that were inputted to the code. 
+Only CPAchecker could present the optimal sizing of the two case studies: the result came in 50.2 minutes and 37.2 minutes, respectively. The violation of line 209 indicated in Table~\ref{tab1} is the $assert$ of line 28 from Algorithm~\ref{alg:verification-algorithm}. %, linking a feasible technical solution with the lowest cost possible, considering the equipment that were inputted to the code. 
 CBMC and ESBMC produced UNKNOWN result (timeout or out of memory).
 
 %used with the SMT incremental mode\footnote{Command-line: \$ esbmc filename.c -\phantom{}-no-bounds-check -\phantom{}-no-pointer-check -\phantom{}-unwind 100 -\phantom{}-smt-during-symex -\phantom{}-smt-symex-guard -\phantom{}-z3} enabled with the goal of reducing memory usage; we have also used the SMT solver Z3 version 4.7.1~\cite{DeMoura}.
@@ -297,7 +287,7 @@ CBMC and ESBMC produced UNKNOWN result (timeout or out of memory).
  & Case 1 & Case 2\\
 \hline
 \hline
-Tool & \makecell{Demand = 501W \\ Peak = 501W \\ Energy=3900Wh/day \\ Battery autonomy=48h} & \makecell{Demand = 915W \\ Peak = 980W \\ Energy=4880Wh/day \\ Battery autonomy=6h}\\
+Tool & \makecell{Demand = 501W \\ Peak = 501W \\ Energy=3,900Wh/day \\ Battery autonomy=48h} & \makecell{Demand = 915W \\ Peak = 980W \\ Energy=4,880Wh/day \\ Battery autonomy=6h}\\
 \hline
 \makecell{CBMC 5.11 \\(MiniSat 2.2.1)} & \makecell{UNKNOWN \\(Out of Memory)} & \makecell{UNKNOWN \\(Out of Memory)}\\
 \hline
@@ -305,7 +295,7 @@ Tool & \makecell{Demand = 501W \\ Peak = 501W \\ Energy=3900Wh/day \\ Battery au
 \hline
 %UAutomizer 0.1.24 (Z3 4.8.3) & UNKNOWN & UNKNOWN \\
 %\hline
-\makecell{CPAchecker 1.8 \\(MathSAT 5.5.3)} & \makecell{SAT (66.18 min) \\ Property violation line 195: \\NTP=4$\times$320W model (2S-2P)\\NBT=4$\times$105Ah model (2S-2P)\\ Controller 15A/100V\\Inverter 700VA, 48V \\ Total Cost=US\$ 2,643.00} & \makecell {SAT (35.41 min) \\ Property violation line 195:  \\NTP=3$\times$320W model (3S)\\NBT=2$\times$105Ah model (2S)\\ Controller 35A/145V \\ Inverter 1,200VA, 48V \\ Total Cost=US\$ 2,125.00}\\
+\makecell{CPAchecker 1.8 \\(MathSAT 5.5.3)} & \makecell{SAT (50.2 min) \\ Property violation line 209: \\NTP=1$\times$330W model (1S)\\NBT=8$\times$105Ah model (2S-4P)\\ Controller 15A/75V\\Inverter 700W, 48V \\ Total Cost=US\$ 1,902.60} & \makecell {SAT (37.2 min) \\ Property violation line 209:  \\NTP=3$\times$330W model (3S)\\NBT=2$\times$105Ah model (2S)\\ Controller 35A/145V \\ Inverter 1,500VA, 24V \\ Total Cost=US\$ 2,235.57}\\
 \hline
 \hline
 \end{tabular}
