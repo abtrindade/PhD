@@ -66,7 +66,7 @@ In order to simulate or evaluate a PV system, there exist various specialized to
  
 However, formal methods based on \textit{symbolic model checking} and its application to synthesize PV systems have not been further explored, which can offer a great potential to obtain a more effective design process to PV systems~\cite{ClarkeHV18}. Here, we use counterexample guided inductive synthesis (CEGIS) for synthesizing optimal sizing of stand-alone PV systems using commercial equipment data. Given a correctness specification $\sigma$, our method uses that as starting point and then incrementally produce a sequence of candidate solutions that satisfy $\sigma$. In particular, we synthesize sizing of stand-alone PV systems but that may not achieve the lowest cost. The optimal solution is then verified via symbolic model checking; if the verification step fails, a counterexample is provided to the synthesis engine and the process iterates until an optimal sizing is obtained from financial analysis.
 
-Our work makes two major contributions. Firstly, the use of automated symbolic verification in electrical systems was uncommon in recent prior studies~\cite{abs-1811-09438}, and specifically their use in synthesizing PV sizing is unprecedented. Here, a list of PV components (i.e., PV panels, charge controllers, inverters, and batteries) can be fed to our proposed synthesis method together with user requirements and environment constraints, and our synthesis algorithm based on symbolic model checking can find the optimal solution in technical and economical terms. Secondly, we evaluate different state-of-art symbolic software verifiers with the goal of obtaining the best performance in our verification backend for synthesizing optimal PV systems.
+Our work makes two major contributions. Firstly, the use of automated symbolic verification in electrical systems was uncommon in recent prior studies~\cite{abs-1811-09438}, and specifically their use in synthesizing PV sizing is unprecedented. Here, a list of PV components (i.e., PV panels, charge controllers, inverters, and batteries) can be fed to our proposed synthesis method together with user requirements and environment constraints, and our synthesis algorithm based on symbolic model checking can find the optimal solution in technical and economical terms. Secondly, we evaluate different state-of-art symbolic software verifiers with the goal of obtaining the best performance in our verification back-end for synthesizing optimal PV systems.
 %
 %-----------------------------------------------------------
 \section{BACKGROUND}
@@ -221,7 +221,7 @@ Considering the system cost analysis, based on the fact that the deployment loca
 \section{Synthesizing Optimal Sizing of Stand-alone Solar Photovoltaic Systems}
 %Applying Automated Verification to Optimal Sizing of Stand-alone Solar PV Systems}
 %------------------------------------------------------
-Algorithm~\ref{alg:verification-algorithm} describes our pseudocode to synthesize stand-alone PV systems using symbolic model checking. 
+Algorithm~\ref{alg:verification-algorithm} describes our pseudo-code to synthesize stand-alone PV systems using symbolic model checking. 
 %
  \begin{algorithm}
  \caption{Synthesis algorithm}
@@ -249,10 +249,10 @@ Algorithm~\ref{alg:verification-algorithm} describes our pseudocode to synthesiz
 	\STATE Requeriment enforced by \textbf{assume}$(V_{c})$ \\
  	\STATE Calculate $I_{sc,amb}$ \\
  	\STATE Calculate $I_{c,min}$ \\
- 	\STATE Requeriment enforced by \textbf{assume}$(I_{c} \wedge V_{in}DC \wedge V_{out}AC)$ \\
+ 	\STATE Requirement enforced by \textbf{assume}$(I_{c} \wedge V_{in}DC \wedge V_{out}AC)$ \\
 %	\STATE Requeriment enforced by \textbf{assume}$(V_{in}DC \wedge V_{out}AC )$ \\
 %	\STATE Requeriment enforced by \textbf{assume}$(V_{out}AC)$ \\
-	\STATE Requeriment enforced by \textbf{assume}$(Demand \wedge P_{surge})$ \\
+	\STATE Requirement enforced by \textbf{assume}$(Demand \wedge P_{surge})$ \\
 %	\STATE Requeriment enforced by \textbf{assume}$(P_{surge})$ \\
 	\STATE non-deterministic variables hold feasible equipment and cost  \\
 	\STATE $F_{obj} \leftarrow  N_{TP}*Panel_{Cost} \, + \, N_{TB}*Battery_{Cost} \, + Controller_{Cost} \, + \, Inverter_{Cost}$ \\
