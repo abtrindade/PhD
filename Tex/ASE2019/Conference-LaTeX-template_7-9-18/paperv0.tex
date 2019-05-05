@@ -294,7 +294,7 @@ CBMC and ESBMC produced \textit{UNKNOWN} result (\textit{timeout} or \textit{out
 %used with the SMT incremental mode\footnote{Command-line: \$ esbmc filename.c -\phantom{}-no-bounds-check -\phantom{}-no-pointer-check -\phantom{}-unwind 100 -\phantom{}-smt-during-symex -\phantom{}-smt-symex-guard -\phantom{}-z3} enabled with the goal of reducing memory usage; we have also used the SMT solver Z3 version 4.7.1~\cite{DeMoura}.
 \begin{table}
 \caption{Case studies and Results: optimization of PV systems.}\label{tab1}
-\begin{scriptsize}
+%\begin{scriptsize}
 \begin{tabular}{|c|c|c|}
 \hline
 \hline
@@ -309,18 +309,16 @@ Tools & \textbf{Result} & \textbf{Result}\\
 \hline
 %UAutomizer 0.1.24 (Z3 4.8.3) & UNKNOWN & UNKNOWN \\
 %\hline
-\makecell{CPAchecker 1.8 \\(MathSAT 5.5.3)} & \makecell{SAT (50.2 min) \\ Property violation line 209: \\NTP=1$\times$330W model (1S)\\NBT=8$\times$105Ah model (2S-4P)\\ Controller 15A/75V\\Inverter 700W, 48V \\ Total Cost=US\$ 1,902.60} & \makecell {SAT (37.2 min) \\ Property violation line 209:  \\NTP=3$\times$330W model (3S)\\NBT=2$\times$105Ah model (2S)\\ Controller 35A/145V \\ Inverter 1,500VA, 24V \\ Total Cost=US\$ 2,235.57}\\
+\makecell{CPAchecker 1.8\\(MathSAT 5.5.3)} & \makecell{SAT (50.2 min) \\Property violation line 209\\NTP=1$\times$330W (1S)\\NBT=8$\times$105Ahm (2S-4P)\\Controller 15A/75V\\Inverter 700W/48V\\Total Cost=US\$ 1,902.60} & \makecell {SAT (37.2 min) \\Property violation line 209\\NTP=3$\times$330W (3S)\\NBT=2$\times$105Ah (2S)\\Controller 35A/145V\\Inverter 1,500VA/24V \\Total Cost=US\$ 2,235.57}\\
 \hline
 \hline
 \end{tabular}
-\end{scriptsize}
+%\end{scriptsize}
 \end{table}
 
-\textbf{Threats to validity.}  We have reported a favorable assessment of the proposed method. Nevertheless, we have also identified four threats to the validity of our results that can further be assessed and it will be future work: (1) improvement of the power reliability analysis: to include loss of load probability or loss of power supply probability, which can make the analysis more accurate; (2) improvement of the system cost analysis: using Net Present Cost (NPC), or Levelized Cost of Energy (LCOE) criteria, in order to promote the acceptability of investment, or to include operational and maintenance costs to the adopted Life Cycle Cost (LCC) analysis performed at this paper; (3) to increase the equipment and manufactures data base: this will increase the complexity of the optimization but the result will also allow improved sizing; and (4) to compare the results of our approach with some off-the-shelf software that focuses on sizing and optimization of PV systems: this will validate the results obtained and it allows a simulation-verification comparative.
+\textbf{Threats to validity.}  We have reported a favorable assessment of the proposed method. Nevertheless, we have also identified four threats to the validity of our results that can further be assessed and it will be future work: (1) improvement of the power reliability analysis: to include loss of load probability or loss of power supply probability, which can make the analysis more accurate; (2) improvement of the system cost analysis: using Net Present Cost (NPC), or Levelized Cost of Energy (LCOE) criteria, in order to promote the acceptability of investment, or to include operational and maintenance costs to the adopted Life Cycle Cost (LCC) analysis performed at this paper; (3) to increase the equipment and manufactures data base: this will increase the complexity of the optimization but the result will also allow improved sizing; and (4) to compare the results of our approach with a off-the-shelf PV sizing/optimization software: this will validate the results obtained and it allows a simulation-verification comparative.
 %
 % argument is your BibTeX string definitions and bibliography database(s)
 \bibliography{trindadeThesis_menor}{}
-
 \vspace{12pt}
-
 \end{document}
