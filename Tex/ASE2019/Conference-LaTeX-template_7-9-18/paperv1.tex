@@ -1,0 +1,323 @@
+\documentclass[10pt,conference]{IEEEtran}
+% \documentclass[conference]{IEEEtran}
+\IEEEoverridecommandlockouts
+% The preceding line is only needed to identify funding in the first footnote. If that is unneeded, please comment it out.
+\bibliographystyle{IEEEtran}
+\usepackage{cite}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{algorithm,algorithmic}
+\usepackage{graphicx}
+\usepackage{makecell}
+\usepackage{textcomp}
+\usepackage{xcolor}
+\def \BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
+    T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
+    
+ \renewcommand{\baselinestretch}{0.965}
+    
+\begin{document}
+
+\title{Automated Formal Synthesis of Optimal Sizing for Stand-alone Solar Photovoltaic Systems\\
+% \thanks{Identify applicable funding agency here. If none, delete this.}
+}
+%
+%\author{\IEEEauthorblockN{Alessandro Trindade}
+%\IEEEauthorblockA{
+%\textit{Federal University of Amazonas}, Brazil \\
+%alessandrotrindade@ufam.edu.br}
+%\and
+%\IEEEauthorblockN{Lucas Cordeiro}
+%\IEEEauthorblockA{
+%\textit{University of Manchester}, UK \\
+%lucas.cordeiro@manchester.ac.uk }
+%}
+%
+\maketitle
+
+\begin{abstract}
+Currently, there exist various state-of-the-art tools to design solar photovoltaic (PV) systems, but they are mainly based on simulations, which do not cover all aspects of the design-space. We present a sound and automated approach to synthesize optimal sizing of stand-alone PV systems using program synthesis. 
+In particular, our counterexample guided inductive synthesis (CEGIS) approach has two phases: we synthesize sizing of stand-alone PV systems but that may not achieve the lowest cost. The optimal solution is then verified via symbolic model checking; if the verification step fails, a counterexample is provided to the synthesis engine and the process iterates until an optimal sizing is obtained. Commercial equipment data is provided to our synthesis engine and candidate solutions are derived from financial analysis of the obtained sizing. Our synthesis method is novel and unprecedented to streamline the design of PV systems. Experimental results show that our synthesis method is able to synthesize within an acceptable run-time the optimal PV system sizing of two different intricate case studies.
+\end{abstract}
+
+\begin{IEEEkeywords}
+automated verification, model checking, program synthesis, electrical systems, and solar photovoltaic systems.
+\end{IEEEkeywords}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{INTRODUCTION}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Cyber-Physical Systems  (CPS) are engineered systems, which are built from, and depend upon, 
+the seamless integration of computational  and  physical  components~\cite{NSF2015}. 
+During operation, such components must frequently adapt to the executing environment changes 
+faced at run-time (dynamics of the physical processes) and must be able to continue to behave 
+in a controlled and safe way, thus posing novel technical challenges for the software engineering of services and applications for CPS~\cite{Metzger2014}. %Important quality aspects for CPS include scalability, e.g., ensuring that CPS applications can scale to urban-wide deployment environments [Nessi].
+%Software pervasiveness in CPS places new challenges; in particular, highly dynamic environments, rapidly changing requirements, 
+%unpredictable and uncertain operating conditions demand new paradigms for software design~\cite{Filieri2015}.
+%
+%While some research efforts do exist to enhance and optimize the software development processes for CPS, further investigation and discussion of better and more effective models are still needed in practice~\cite{Al-Jaroodi2016}. 
+Among the opportunities for enhancements in the software development processes for CPS, there exists the need for developing new techniques and tools to support CPS requirements gathering and analysis with the goal of synthesizing correct-by-construction implementations of CPS. Those techniques need to deal with predefined requirements enforced by the nature and inherited constraints of the target CPS. In addition, they should be able to provide verification and validation mechanisms for completeness, correctness, and consistency~\cite{Al-Jaroodi2016}. Uncertainty and variability, at the same time, can be dealt with formal verification~\cite{NESSI}. Energy production, distribution, and optimization are all CPS problems~\cite{UC}. 
+
+Lack of access to clean and affordable energy is considered a core dimension of poverty~\cite{Hussein2012}. Progress has been made worldwide; in particular, the number of people without electricity access fell below $1$ billion threshold for the first time in 2017~\cite{IEAweo2018}. To provide universal electricity for all, decentralized systems led by solar photovoltaic (PV) in off-grid and mini-grid systems will be the lowest-cost solution for three-quarters of the additional connections needed~\cite{Hussein2012}; specifically grid extension will be the standard in urban areas~\cite{IEAweo2018}.
+
+In order to simulate or evaluate a PV system, there exist various specialized tools, e.g., RETScreen and HOMER~\cite{Pradhan,Swarnkar}%, PVWatts, SAM and Hybrid2 \cite{Pradhan,Swarnkar,NRELDobos,NRELBlair,Mills}
+; and even general purpose simulation tools, e.g., MATLAB/Simulink~\cite{Gow1999}. %PSpice, Saber or MATLAB/Simulink package \cite{Gow1999,Benatiallah2017}.
+ However, those tools are based on simulation; they have the drawback of an incomplete coverage  since verification of all possible combinations and potential failures of a system is unfeasible~\cite{ClarkeHV18}. 
+ Optimization of PV systems is not a recent topic; since the 90's different techniques using different criteria to find ultimate combinations for design parameters, based on intuitive, numerical and analytical methods were proposed and developed~\cite{Alsadi2018}.
+ 
+However, formal methods based on \textit{symbolic model checking} and its application to synthesize PV systems have not been further explored, which can offer a great potential to obtain a more effective design process to PV systems~\cite{ClarkeHV18}. Here, we use counterexample guided inductive synthesis (CEGIS) for synthesizing optimal sizing of stand-alone PV systems using commercial equipment data. Given a correctness specification $\sigma$, our method uses that as starting point and then incrementally produce a sequence of candidate solutions that satisfy $\sigma$. In particular, we synthesize sizing of stand-alone PV systems but that may not achieve the lowest cost. The optimal solution is then verified via symbolic model checking; if the verification step fails, a counterexample is provided to the synthesis engine and the process iterates until an optimal sizing is obtained from financial analysis.
+
+Our work makes two major contributions. Firstly, the use of automated symbolic verification in electrical systems was uncommon in recent prior studies~\cite{abs-1811-09438}, and specifically their use in synthesizing PV sizing is unprecedented. Here, a list of PV components (i.e., PV panels, charge controllers, inverters, and batteries) can be fed to our proposed synthesis method together with user requirements and environment constraints, and our synthesis algorithm based on symbolic model checking can find the optimal solution in technical and economical terms. Secondly, we evaluate different state-of-art symbolic software verifiers with the goal of obtaining the best performance in our verification back-end for synthesizing optimal PV systems.
+%
+%-----------------------------------------------------------
+\section{BACKGROUND}
+\label{sec:AutomatedVerification}
+%-----------------------------------------------------------
+%
+%-----------------------------------------------------------
+\subsection{Program Synthesis}
+\label{sec:ProgramSynthesis}
+%-----------------------------------------------------------
+%
+The basic idea of program synthesis is to automatically construct a program $P$ that satisfies a correctness specification $\sigma$. In particular, program synthesis is automatically performed by engines that use a correctness specification $\sigma$, as starting point, and then incrementally produce a sequence of candidate solutions that satisfy $\sigma$~\cite{Abateetal2017}. As a result, a given candidate program $p$ is iteratively refined, in order to match $\sigma$ more closely. CEGIS represents one of the most popular approaches to program synthesis that are currently used in practice for CPS~\cite{Abateetal2017}, whose basic architecture is illustrated in Figure~\ref{Counter-Example-Guided-Inductive-Synthesis} and has close connections to algorithmic debugging using counterexamples and abstraction refinement~\cite{Alur13}. 
+
+The correctness specification $\sigma$ provided to our program synthesizer is of the form $\exists \vec{F} .  \forall \vec{x}.  \sigma(\vec{x}, \vec{F})$, where $\vec{F}$ ranges over functions, $\vec{x}$ ranges over ground terms, and $\sigma$ is a quantifier-free (QF) formula typically supported by SMT solvers. The ground terms are interpreted over some finite domain $\mathcal{D}$, where $\mathcal{D}$ can be encoded using the SMT's bit-vectors part. Examples of specification used by our method include house demand, energy, and battery autonomy; we also provide a list of equipment specification and price from different manufacturers and models.
+
+In Figure~\ref{Counter-Example-Guided-Inductive-Synthesis}, the phases {\sc Synthesize} and {\sc Verify} interact via a finite set of test vectors {\sc inputs} that is incrementally updated. Given the correctness specification $\sigma$, the {\sc Synthesize} procedure tries to find an existential witness $\vec{F}$ satisfying the specification $\sigma(\vec{x}, \vec{F})$, for all $\vec{x}$ in {\sc inputs} (as opposed to all $\vec{x} \in \mathcal{D}$). If {\sc synthesize} succeeds in finding a witness~$\vec{F}$, the latter is a candidate solution (i.e., feasible combination of equipment) to the full synthesis formula, which is passed to {\sc verify}, in order to check whether it is a proper solution ({\it i.e.}, $\vec{F}$ satisfies the specification $\sigma(\vec{x}, \vec{F})$ for all $\vec{x}\in\mathcal{D}$). If this is the case, then the algorithm terminates, i.e., we have found a feasible equipment with the lowest cost; otherwise, additional information is provided to the phase {\sc synthesize}, in the form of a new counterexample that is added to the {\sc inputs} set and the loop iterates again. 
+%
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.85\columnwidth]{fig2_rev.jpg}
+	\caption{CEGIS applied to PV system sizing.}
+	\label{Counter-Example-Guided-Inductive-Synthesis}
+\end{figure}
+%
+One may notice that each iteration of the CEGIS loop adds a new input to the finite set $\text{\sc inputs}$, which is then used for synthesis.  Given that the full set of inputs $\mathcal{D}$ is finite, this means that the refinement loop can only iterate over a finite number of times; however, $\mathcal{D}$ can represent a large number of elements for the finite set $\text{\sc inputs}$ and our synthesis engine can then conclude that no feasible equipment combination was found. 
+%In order to avoid exploring all possible values, machine learning techniques can be used in the phase {\sc synthesize}, with the goal of learning from experience (input-output samples), {\it i.e.}, learning from counterexamples provided by a verification oracle~\cite{Alur13}. In addition to that, a pre-processing stage could also figure as another block in the scheme shown in Fig. \ref{Counter-Example-Guided-Inductive-Synthesis}, between {\sc verify} and {\sc synthesize}, which would process counterexamples and provide larger and refined information to the latter, according to specification $\sigma$ and domain $\mathcal{D}$, in order to speed-up convergence to a final candidate.
+
+Program synthesis engines that implement the CEGIS approach~\cite{sketch} can automatically produce solutions for a large variety of specifications, due to the combination of automated testing, genetic algorithms, and SMT-based reasoning~\cite{Sharma14}; here we have used software verifiers based on SMT solvers.%Here we used software model checking techniques implemented by different tools: CBMC~\cite{Kroening}, CPAChecker~\cite{Beyer2011}, and ESBMC~\cite{esbmc2018}.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Sizing Stand-alone Solar PV Systems}
+\label{sec:sizing}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+A PV system is illustrated in Fig.\ref{fig:blockdiagram}. %It identifies the PV generator, batteries, charge controller, inverter, and AC load. 
+The PV generator, which can be a panel or an array, is a semiconductor device that can convert solar energy into Direct Current (DC) electricity. %In Fig.\ref{fig:blockdiagram}, there are two variables that depend on the site where the system is deployed and also the weather (i.e., solar irradiance $G$ and temperature $T$). 
+For night hours or rainy days, we hold batteries where power can be stored and used. The use of batteries as a storage form implies the presence of a charge controller~\cite{Hansen}. The PV arrays produce DC and therefore when the PV system contains an Alternating Current (AC) load, a DC/AC conversion is required. That converter is called of inverter; and the AC load dictates the behavior of AC electrical load from the house that will be fed by the system.
+\begin{figure}[h]
+\includegraphics[width=0.4\textwidth]{blockdiagramPVS2_rev}
+\centering
+\caption{Block diagram for a typical stand-alone PV system~\cite{Hansen}.}
+\label{fig:blockdiagram} 
+\end{figure}
+\\
+%
+Here the sizing check will be automatically performed by our proposed method; this stage will ensure that the system meets the standard project steps related to critical period solar energy method~\cite{Pinho} and adopting MPPT (Maximum Power Point Tracking) charge controller, which is the most common one in practice. 
+%
+Firstly, we need to correct the energy consumption estimated to the load ($E_{consumption}$), which is carried out by Eq.~\eqref{eq:Ecorrected}, where the efficiency of batteries ($\eta_{b}$), controller ($\eta_{c}$), and inverter ($\eta_{i}$) are considered~\cite{Pinho} as follows
+\begin{equation}
+\label{eq:Ecorrected}
+\scriptstyle E_{corrected} = \dfrac{\scriptstyle E_{consumption}}{ \scriptstyle \eta_{b} \eta_{c} \eta_{i} }.
+\end{equation}
+%
+We also need to estimate the energy that can be produced for each panel, called $E_{p}$, in Wh, defined as
+%
+\begin{equation}
+\label{eq:Ep}
+\scriptstyle E_{p} = \scriptstyle Solar\_Irradiance \times Panel\_Area \times \eta_{p} \times 1000,
+\end{equation}
+%
+\noindent where the solar irradiance is expressed in terms of $kWh/m^{2}$ and depends on the site where the PV system will be deployed; 
+the PV panel area is given in $m^{2}$ and corresponds to the size of one PV panel, and $\eta_{p}$ represents the PV panel efficiency.
+%
+The total minimum number of needed solar panels ($N_{TPmin}$) is computed as
+%
+\begin{equation}
+\label{eq:NTPmin}
+\scriptstyle N_{TPmin} = \dfrac{\scriptstyle E_{corrected}}{\scriptstyle E_{p}}.
+\end{equation}
+%
+Particularly, the total number of panels in series ($N_{PSmin}$) and parallel ($N_{PPmin}$) are respectively given by
+%
+\begin{equation}
+\label{eq:NPSmin}
+\dfrac{\scriptstyle V_{mppt,min}}{\scriptstyle V_{maxPower,TempMax}} \scriptstyle \leq \scriptstyle N_{PSmin} \leq \dfrac{\scriptstyle V_{mppt,max}}{\scriptstyle V_{maxPower,TempMin}},
+\end{equation}
+%
+\begin{equation}
+\label{eq:NPPmin}
+\scriptstyle N_{PPmin} = \dfrac{\scriptstyle P_{total}}{\scriptstyle Number\,Panels\,Series \scriptstyle \times \scriptstyle P_{max,ref}},
+\end{equation}
+%
+\noindent where $V_{mppt,max}$ is the maximum operation voltage and $V_{mppt,min}$ is the minimum operation voltage of the charge controller; $V_{maxPower,TempMax}$ and $V_{maxPower,TempMin}$ are the maximum power voltage from the PV module considering the maximum and minimum operational temperature, respectively; $P_{total}$ is the total power demanded from the PV system and $P_{max,ref}$ is the power supplied from one PV panel in $Watts$.
+%, $ V_{system} $ is the DC voltage of the bus, normally $12$, $24$ or $48$ V.
+%
+Regarding batteries, we must first define the total capacity of the battery bank, which can be described as
+\begin{equation}
+\label{eq:Cbank}
+\scriptstyle C_{bank} \scriptstyle = \dfrac{\scriptstyle E_{corrected} \scriptstyle \times \scriptstyle autonomy}{\scriptstyle V_{system} \scriptstyle \times \scriptstyle DOD},
+\end{equation}
+%
+\noindent where the variable $autonomy$ is a design definition; % and normally has a value ranging from $6$ to $48$h; 
+$ V_{system} $ is the DC voltage of the bus, and $ DOD $ is the battery deep of discharge (considered of maximum of 25\% here).
+%
+Secondly, the total (minimum) number of batteries is computed as 
+\begin{equation}
+\label{eq:Nbtotal}
+\scriptstyle N_{B}total = \scriptstyle N_{BS}min \scriptstyle \times \scriptstyle N_{BP}min = \dfrac{\scriptstyle V_{system}}{\scriptstyle V_{bat}} \scriptstyle \times \dfrac{\scriptstyle C_{bank}}{\scriptstyle 1 \,Battery \, Capacity}.
+\end{equation}
+%
+Regarding the charge controller, it must initially meet the voltage requirement of the PV system, as described by Eq.~\eqref{eq:vcvsystem} to the charge controller voltage: 
+\begin{equation}
+\label{eq:vcvsystem}
+\scriptstyle V_{c} = \scriptstyle V_{system}.
+\end{equation}
+%
+The short circuit reference information from the manufacturer's solar panel must be corrected to the cell temperature because the field temperature is higher than the nominal or laboratory temperature, and PV system is temperature dependent, as 
+%
+\begin{equation}
+\label{eq:iscamb}
+\scriptstyle I_{sc,amb} = \dfrac{\scriptstyle G}{\scriptstyle G_{ref}} \left[ \scriptstyle I_{sc,ref} + \scriptstyle \mu_{I} \scriptstyle \times \scriptstyle (T-25) \right]. 
+\end{equation}
+%
+The controller must meet the maximum current from the PV array given by Eqs. \eqref{eq:icmin} and \eqref{eq:icicmin} as
+\begin{equation}
+\label{eq:icmin}
+\scriptstyle I_{c,min} = \scriptstyle I_{sc,amb} \times \scriptstyle N_{PP},
+\end{equation}
+%
+\begin{equation}
+\label{eq:icicmin}
+\scriptstyle I_{c} \geq \scriptstyle I_{c,min}.
+\end{equation}
+%
+The inverter sizing check is performed by means of three equations. Eq.~\eqref{eq:vindc} ensures that the input voltage of the controller meets the system voltage. Eq.~\eqref{eq:voutac} ensures that the output voltage of the controller meets the AC voltage of the load. Finally, Eq.~\eqref{eq:invcheck} ensures that the controller can support the total demand of the load ($Demand$) and the surge power ($P_{surge}$), where $V_{in}DC$ is the nominal input voltage and $V_{out}AC$ is the nominal output voltage of the inverter; $MAX_{AC,ref}$ is the peak power that the inverter can support.
+%
+\begin{equation}
+\label{eq:vindc} 
+\scriptstyle V_{in}DC = \scriptstyle V_{system}.
+\end{equation}
+%
+\begin{equation}
+\label{eq:voutac} 
+\scriptstyle V_{out}AC = \scriptstyle V_{AC}.
+\end{equation}
+%
+\begin{equation}
+\label{eq:invcheck} 
+\left[ (\scriptstyle Demand \leq \scriptstyle P_{AC,ref}) \, \scriptstyle and \, \scriptstyle (P_{surge} \leq MAX_{AC,ref}) \right].
+\end{equation}
+% -------------------------------------------------------
+\subsection{Optimal Sizing of PV Systems}
+% -------------------------------------------------------
+%
+To select an optimal combination of components from a PV system to meet sizing constraints, 
+%we need to evaluate \textit{power reliability} and perform \textit{system cost} analysis for the recommended system. An ideal combination for any PV system 
+the ideal solution is made by the best compromise between two objectives: power reliability and system cost~\cite{Alsadi2018}. 
+Regarding power reliability, this work will rely on the critical period solar energy method~\cite{Pinho} as described in section~\ref{sec:sizing}. 
+%the usual is to use loss of load probability (LOLP) or loss of power supply probability (LPSP). Based on the fact that here we are neither considering site characteristics nor the load changes over time, the reliability analysis will be developed only by the critical period method of PV sizing \textcolor{red}{What does it mean? Remember that we have software engineering audience}. 
+%However, considering the system cost analysis, we usually find related studies done with Net Present Cost (NPC), Levelized Cost of Energy (LCOE), or Life Cycle Cost (LCC). Here, based on the fact that the deployment location is not specified, our study uses an adapted LCC analysis, where only the deployment cost is considered about the model, i.e., without the operational and maintenance costs~\cite{Alsadi2018}.
+Considering the system cost analysis, based on the fact that the deployment location is not specified, our study uses an adapted Life Cycle Cost (LCC) analysis, where only the deployment cost is considered about the model, i.e., without the operational and maintenance costs~\cite{Alsadi2018}.
+%------------------------------------------------------
+\section{Synthesizing Optimal Sizing of Stand-alone Solar Photovoltaic Systems}
+%Applying Automated Verification to Optimal Sizing of Stand-alone Solar PV Systems}
+%------------------------------------------------------
+Algorithm~\ref{alg:verification-algorithm} describes our pseudo-code to synthesize stand-alone PV systems using symbolic model checking. 
+%
+ \begin{algorithm}
+ \caption{Synthesis algorithm}
+ \begin{algorithmic}[1]
+ \begin{scriptsize}
+ \renewcommand{\algorithmicrequire}{\textbf{Input:}}
+ \renewcommand{\algorithmicensure}{\textbf{Output:}}
+  \STATE Initialize variables \\
+  \STATE Declare list of PV panels, controllers, batteries, and inverters data and cost \\
+%  \STATE Declare list of controllers data and cost \\
+%  \STATE Declare list of batteries data and cost \\
+%  \STATE Declare list of inverters data and cost \\
+  \STATE Declare the maximum possible cost $MaxCost$  \\
+  \STATE Declare power demand, power peak, energy consumption \\
+  \STATE Declare battery autonomy, deep of discharge, AC voltage \\
+  \FOR {$HintCost=0$ to $MaxCost$}
+ 	\STATE Declare non-deterministic variable to select PV Panel from list \\
+ 	\STATE Declare non-deterministic variable to select Controller from list \\
+ 	\STATE Declare non-deterministic variable to select Battery from list \\
+ 	\STATE Declare non-deterministic variable to select Inverter from list \\ 	
+ 	\STATE Calculate $E_{corrected}, \, E_{p} $ \\
+	\STATE Calculate $N_{TPmin}, \, N_{PSmin}, N_{PPmin} $ \\
+ 	\STATE Calculate $C_{bank}$ \\
+	\STATE Calculate $N_{BS}min, \, N_{BP}min, \, N_{B}total$ \\
+	\STATE Requirement enforced by \textbf{assume}$(V_{c})$ \\
+ 	\STATE Calculate $I_{sc,amb}$ \\
+ 	\STATE Calculate $I_{c,min}$ \\
+ 	\STATE Requirement enforced by \textbf{assume}$(I_{c} \wedge V_{in}DC \wedge V_{out}AC)$ \\
+%	\STATE Requirement enforced by \textbf{assume}$(V_{in}DC \wedge V_{out}AC )$ \\
+%	\STATE Requirement enforced by \textbf{assume}$(V_{out}AC)$ \\
+	\STATE Requirement enforced by \textbf{assume}$(Demand \wedge P_{surge})$ \\
+%	\STATE Requirement enforced by \textbf{assume}$(P_{surge})$ \\
+	\STATE non-deterministic variables hold feasible equipment and cost  \\
+	\STATE $F_{obj} \leftarrow  N_{TP}*Panel_{Cost} \, + \, N_{TB}*Battery_{Cost} \, + Controller_{Cost} \, + \, Inverter_{Cost}$ \\
+	\STATE Violation check with \textbf{assert}$(F_{obj} > HintCost)$ \\
+  \ENDFOR
+ \RETURN $(\,)$ 
+  \end{scriptsize}
+ \end{algorithmic} 
+ \label{alg:verification-algorithm}
+ \end{algorithm}
+%
+
+Our synthesis algorithm will synthesize constant values; it starts with the input of manufacturers data and prices of PV panels, batteries, charge controllers and inverters (Line 2). After that, we define user requirements, i.e., house requirements and design definitions, from Lines 4 and 5. 
+
+The \textit{for}-loop started at Line 6 controls the lowest cost to the PV solution. In particular, it starts with cost $0$ and stops only when the algorithm finds a feasible solution in which the cost breaks the $assertion$ stated in Line 22; if that happens, then our algorithm has found an optimal solution, thereby stating that the {\sc Verify} phase reached a satisfiable condition (\textit{SAT}). The $MaxCost$ value at Line 6 is just a very high value put as a limit to the \textit{for}-loop, that never will be reached because the optimal solution will be found first.
+
+Our synthesis algorithm uses non-deterministic variables to choose one specific constant from a given list of PV panels, controllers, batteries and inverters (Lines 7 to 10). That procedure ensures that our synthesis engine checks all combinations of items from each equipment, and combine them to assemble a feasible (candidate) PV solution, which meets the user requirements.
+
+Next, we use Eq.~\eqref{eq:Ecorrected}, Eq.~\eqref{eq:Ep}, Eq.~\eqref{eq:NTPmin}, Eq.~\eqref{eq:NPSmin}, Eq.~\eqref{eq:NPPmin}, Eq.~\eqref{eq:Cbank}, Eq.~\eqref{eq:Nbtotal}, Eq.~\eqref{eq:iscamb}, and Eq.~\eqref{eq:icmin} to calculate the sizing variables (Lines 11 to 17). The directive \textit{assume} (Lines 15, 18 and 19) ensures the compatibility of the chosen items from the list of equipment: the {\sc Verify} phase uses only the item (among all the possible ones) that satisfies the statements of Lines 15, 18 and 19. Therefore, our synthesis algorithm reaches Line 20 with one feasible solution, and the cost of that solution is calculated in $F_{obj}$ (Line 21). 
+
+If our algorithm does not find a feasible solution among the item of equipment that were provided to our {\sc Synthesize} phase,  then the result is an unsatisfiable (\textit{UNSAT}), i.e., the program finishes and does not find a solution. It indicates that was not possible to combine the items of each equipment and create a feasible solution. 
+
+The main challenge for the {\sc Verify} phase is to find a feasible candidate solution regarding the constraints and user requirements, which is the best financial solution at the same time (lowest cost of deployment) from a list of equipment and components that is provided to our {\sc Synthesize} phase. 
+Note that the process described here in completely automated and that a validation is performed by our {\sc Verify} phase to ensure that the approach is sound.
+%---------------------------------------------------------------------------
+\section{Results and Discussion}
+%---------------------------------------------------------------------------
+\textbf{Case studies and setup.} We have performed two stand-alone PV system case studies to evaluate our proposed synthesis approach as described in the first line of Table~\ref{tab1}. Our synthesis algorithm was fed with data and costs of twenty-two equipment items from nine different manufacturers of PV systems. Furthermore, three start-of-art verification tools, CBMC (command-line: \$ cbmc -\phantom{}-unwind 100 file.c), ESBMC (command-line: \$ esbmc file.c -\phantom{}-no-bounds-check -\phantom{}-no-pointer-check -\phantom{}-unwind 100 -\phantom{}-boolector), %UAutomizer\footnote{Command-line: \$ ./Ultimate -tc config/AutomizerReach.xml -s config/svcomp-Reach-32bit-Automizer\_Default.epf -i filename.c -\phantom{}-traceabstraction.limit.analysis.time 900 -\phantom{}-traceabstraction.stop.after.first.violation.was.found false -\phantom{}-cacsl2boogietranslator.overapproximate.operations.on.floating.types false -\phantom{}- cacsl2boogietranslator.assume.nondeterminstic.values.are.in.range false -\phantom{}-rcfgbuilder.add.additional.assume.for.each.assert true -\phantom{}-rcfgbuilder.simplify.code.blocks true -\phantom{}-rcfgbuilder.size.of.a.code.block LoopFreeBlock}, 
+and CPAchecker (command-line: \$ scripts/cpa.sh -heap 64000m -config config/bmc-incremental.properties -spec config/specification/sv-comp-reachability.spc file.c) were used as our verification engine to compare our approach effectiveness and efficiency. 
+All experiments were conducted on an otherwise idle Intel Xeon CPU E5-4617 (8-cores) with 2.90 GHz and 64 GB of RAM, running Ubuntu 16.04 LTS 64-bits. The experiments were performed with a predefined timeout of $240$ minutes.
+
+\textbf{Objectives.} Our evaluation aims to answer two research questions: \textit{RQ1} (soundness) Does our automated synthesis approach provide correct results?, and \textit{RQ2} (performance) How do the software verifiers compare to each other?
+
+\textbf{Results.}  CPAchecker was able to synthesize the optimal sizing of both case studies: the result was produced in $50.2$ and $37.2$ minutes, respectively. 
+The violation of line 209 indicated in Table~\ref{tab1} is the $assert$ of line 22 from Algorithm~\ref{alg:verification-algorithm}. The results were tested by manual PV sizing and were sound (\textit{RQ1}). %, linking a feasible technical solution with the lowest cost possible, considering the equipment that were inputted to the code. 
+CBMC and ESBMC produced \textit{UNKNOWN} result (\textit{timeout} or \textit{out of memory}); this partially answers the \textit{RQ2}.
+%
+%used with the SMT incremental mode\footnote{Command-line: \$ esbmc filename.c -\phantom{}-no-bounds-check -\phantom{}-no-pointer-check -\phantom{}-unwind 100 -\phantom{}-smt-during-symex -\phantom{}-smt-symex-guard -\phantom{}-z3} enabled with the goal of reducing memory usage; we have also used the SMT solver Z3 version 4.7.1~\cite{DeMoura}.
+\begin{table}
+\caption{Case studies and Results: optimization of PV systems.}\label{tab1}
+%\begin{scriptsize}
+\begin{tabular}{|c|c|c|}
+\hline
+\hline
+Specification & \makecell{ \textbf{Case Study 1} \\ Demand=501W \\ Peak=501W \\ Energy=3,900Wh/day\\Battery autonomy=48h\\AC Voltage=120V\\DoD=25\%\\Vsystem=24V DC} & \makecell{\textbf{Case Study 2}\\ Demand=915W \\ Peak=980W \\Energy=4,880Wh/day\\Battery autonomy=6h\\AC Voltage=120V\\DoD=25\%\\Vsystem=24V DC}\\
+\hline
+\hline
+Tools & \textbf{Result} & \textbf{Result}\\
+\hline
+\makecell{CBMC 5.11 \\(MiniSat 2.2.1)} & \makecell{UNKNOWN \\(Out of Memory)} & \makecell{UNKNOWN \\(Out of Memory)}\\
+\hline
+\makecell{ESBMC 6.0.0 \\(Boolector 3.0.1)} & \makecell{UNKNOWN \\(Timeout)} & \makecell{UNKNOWN \\(Timeout)} \\
+\hline
+%UAutomizer 0.1.24 (Z3 4.8.3) & UNKNOWN & UNKNOWN \\
+%\hline
+\makecell{CPAchecker 1.8\\(MathSAT 5.5.3)} & \makecell{SAT (50.2 min) \\Property violation line 209\\NTP=1$\times$330W (1S)\\NBT=8$\times$105Ahm (2S-4P)\\Controller 15A/75V\\Inverter 700W/48V\\Total Cost=US\$ 1,902.60} & \makecell {SAT (37.2 min) \\Property violation line 209\\NTP=3$\times$330W (3S)\\NBT=2$\times$105Ah (2S)\\Controller 35A/145V\\Inverter 1,500VA/24V \\Total Cost=US\$ 2,235.57}\\
+\hline
+\hline
+\end{tabular}
+%\end{scriptsize}
+\end{table}
+
+\textbf{Threats to validity.}  We have reported a favorable assessment of the proposed method. Nevertheless, we have also identified four threats to the validity of our results that can further be assessed and it will be future work: (1) improvement of the power reliability analysis: to include loss of load probability or loss of power supply probability, which can make the analysis more accurate; (2) improvement of the system cost analysis: using Net Present Cost (NPC), or Levelized Cost of Energy (LCOE) criteria, in order to promote the acceptability of investment, or to include operational and maintenance costs to the adopted Life Cycle Cost (LCC) analysis performed at this paper; (3) to increase the equipment and manufactures data base: this will increase the complexity of the optimization but the result will also allow improved sizing; and (4) to compare the results of our approach with a off-the-shelf PV sizing/optimization software: this will validate the results obtained and it allows a simulation-verification comparative.
+%
+% argument is your BibTeX string definitions and bibliography database(s)
+\bibliography{trindadeThesis_menor}{}
+\vspace{12pt}
+\end{document}
