@@ -3,7 +3,7 @@
 \usepackage{lineno,hyperref}
 \modulolinenumbers[5]
 
-\journal{Renewable \& Sustainable Energy Reviews}
+%\journal{Renewable \& Sustainable Energy Reviews}
 
 %%%%%%%%%%%%%%%%%%%%%%%
 %% Elsevier bibliography styles
@@ -70,11 +70,11 @@
 \address[mysecondaryaddress]{University of Manchester, School of Computer Science, Kilburn Building, Manchester M13 9PL}
 
 \begin{abstract}
-With declining costs and increasing performance, the deployment of renewable energy systems is growing faster. In 2017, for the first time, the number of people without access to electricity dipped below 1 billion, but trends on energy access likewise fall short of global goals. Particular attention is given to stand-alone solar photovoltaic systems in rural areas or where grid extension is unfeasible. Tools to evaluate electrification projects are available, but they are based on simulations that do not cover all aspects of the design space. Automated verification using model checking has proven to be an effective technique to any kind of program verification. This paper marks the first application of software model checking to formally verify the design of a stand-alone solar photovoltaic system including solar panel, charge controller, battery, inverter, and electric load. Case studies, from real photovoltaic systems deployed in five different sites, ranging from 700W to 1,200W, were used to evaluate this proposed approach and to compare that with specialized simulation tools. Different verification tools were evaluated as well, in order to compare performance and soundness. Data from practical applications show the effectiveness of our approach, where specific conditions that lead to failures in a photovoltaic solar system are only detailed by the automated verification method.
+With declining costs and increasing performance, the deployment of renewable energy systems is growing faster. In 2017, for the first time, the number of people without access to electricity dipped below 1 billion, but trends on energy access likewise fall short of global goals. Particular attention is given to stand-alone solar photovoltaic systems in rural areas or where grid extension is unfeasible. Tools to evaluate electrification projects are available, but they are based on simulations that do not cover all aspects of the design space. Automated verification using model checking has proven to be an effective technique to validate any kind of system. This paper marks the first application of software model checking to formally verify the design of a stand-alone solar photovoltaic system including solar panel, charge controller, battery, inverter, and electric load. Case studies, from real photovoltaic systems deployed in five different sites, ranging from 700W to 1,200W, were used to evaluate this proposed approach and to compare that with specialized simulation tools. Different verification tools were evaluated as well, in order to compare performance and soundness. Data from practical applications show the effectiveness of our approach, where specific conditions that lead to failures in a photovoltaic solar system are only detailed by the automated verification method.
 \end{abstract}
 
 \begin{keyword}
-Formal verification \sep model checking \sep photovoltaic power systems \sep power system modeling \sep solar power generation
+Formal verification \sep model checking \sep photovoltaic power systems
 %\texttt{elsarticle.cls}\sep \LaTeX\sep Elsevier \sep template
 %\MSC[2010] 00-01\sep  99-00
 \end{keyword}
@@ -82,9 +82,10 @@ Formal verification \sep model checking \sep photovoltaic power systems \sep pow
 \end{frontmatter}
 
 \section{Introduction}
-Lack of access to clean and affordable energy is considered a core dimension of poverty~\cite{Hussein2012}. Progress has been made worldwide; in particular, the number of people without electricity access fell below 1 billion threshold for the first time in 2017~\cite{IEAweo2018}. The share of people without access to electricity from Africa is 58\%, while 19\% of the share comes from developing Asia, and 31\% from Latin America~\cite{IEAweo2018}. Numbers from Brazil show the aim to electrify 270 isolated places and 2.7 million of people until 2023~\cite{EPE2018}. Furthermore, there is a close relationship between the lack of energy and the low HDI (Human Development Index) of those localities~\cite{Coelho}.
+Lack of access to clean and affordable energy is considered a core dimension of poverty~\cite{Hussein2012}. Progress has been made worldwide; in particular, the number of people without electricity access fell below 1 billion threshold for the first time in 2017~\cite{IEAweo2018}. %The share of people without access to electricity from Africa is 58\%, while 19\% of the share comes from developing Asia, and 31\% from Latin America~\cite{IEAweo2018}. Numbers from Brazil show the aim to electrify 270 isolated places and 2.7 million of people until 2023~\cite{EPE2018}. 
+Furthermore, there is a close relationship between the lack of energy and the low HDI (Human Development Index) of those localities~\cite{Coelho}.
 
-In order to provide universal electricity for all, decentralized systems led by solar photovoltaic (PV) in off-grid and mini-grid systems will be the lowest-cost solution for three-quarters of the additional connections needed; and grid extension will be the standard especially in urban areas~\cite{IEAweo2018}.
+In order to provide universal electricity, decentralized systems led by solar photovoltaic (PV) in off-grid and mini-grid systems will be the lowest-cost solution for three-quarters of the additional connections needed; and grid extension will be the standard especially in urban areas~\cite{IEAweo2018}.
 
 %The definition of energy access usually includes both electricity access and access to modern fuels for cooking and heating, in order to replace traditional biomass. 
 %Increased access to energy allows economic growth and poverty alleviation \cite{Karekesi}. 
@@ -120,7 +121,8 @@ Any kind of system can be specified as computer programs using mathematical logi
 %
 %Formal methods, alternatively, provide facilities for the modeling of each component of any complex system~\cite{Hall1990}. 
 %
-In this study, a mathematical model of each component of a stand-alone PV system, as panel solar, charge controller, batteries, inverter, and electrical load is created. The behavior of each system component can be analyzed and observed with the support of those formal models, as a joint operation of the components, which in this case represents the operation of the solar PV system itself. The project requirements, as battery autonomy and power demand, besides weather conditions, as solar irradiance and ambient temperature, are translated as part of the computer program and automatically verified during the formal process. The model checking tool reports in which conditions a system does not meet the user requirements. A key benefit to this approach is that it helps in the detection of flaws in the design phase of system development, thereby considerably improving system reliability~\cite{Akram2018}. 
+In this study, a mathematical model of each component of a stand-alone PV system, as panel solar, charge controller, batteries, inverter, and electrical load is used. %The behavior of each system component can be analyzed and observed with the support of those formal models, as a joint operation of the components, which in this case represents the operation of the solar PV system itself. 
+The project requirements, as battery autonomy and power demand, besides weather conditions, as solar irradiance and ambient temperature, are inputted to the proposed tool and automatically verified during the formal process. The model checking tool reports in which conditions a system does not meet the user requirements. A key benefit to this approach is that it helps in the detection of flaws in the design phase of system development, thereby considerably improving system reliability~\cite{Akram2018}. 
 %Those programs are viewed as mathematical objects, and the use of 
 %Bringing this technique to solar PV systems, i
 %Instead of finding a bug or a software inconsistence, t
@@ -148,12 +150,12 @@ Firstly, we propose an algorithm written in language C that implements the autom
 \section{Solar Photovoltaic System }
 \label{sec:SolarPhotovoltaicSystem}
 %--------------------------------------------------------
-
+%
 %According to \cite{Roy}, a 
 %A PV system is designed to give the electric supply to a load. This load can be either Alternate Current (AC) or Direct Current (DC) type. Electric supply can be needed either in daytime or evening time. 
 %(in particular cases, in both times). %The most basic PV system can give supply only in daytime.  
 %For night hours or rainy days, one needs to hold batteries, where power can be stored and used.% \cite{Gules}. 
-
+%
 PV systems are classified into distinct types~\cite{Mohanty}. %: (1) stand-alone systems, where the energy is generated and consumed in the same place and which do not interact with the main grid; (2) grid-connected systems; and (3) solar PV hybrid system. %, where another source(s) of energy can work together with the solar PV. % system to provide the required demand.
 %, such as wind, biomass or diesel, 
 %As the goal of this work is just the solutions aimed to isolated/ off-grid application, %therefore it is not considered the on-grid or hybrid configurations.
@@ -197,7 +199,7 @@ the most suitable configuration is the regulated stand-alone system with battery
 %This system is similar to the previous one, but here AC load draws the power from PV system and, because of the AC load, an inverter (DC to AC converter) is required, as seen in Fig.\ref{fig:standaloneSPV} letter (d). This solution has an increase of cost because has more equipments. However, the AC availability brings the advantage of a higher number of AC appliances to use at the houses or consumer units. That configuration is the focus of the present work since it is the most common nowadays all over the world, when off-grid or isolated regions is the target.
 
 \subsection{Design and Simulation of Solar PV systems}
-%The design and validation of a PV system can be done by hand or with the aid of a software tool. 
+The design and validation of a PV system can be done by hand or with the aid of a software tool. The PV sizing can be done using different methods, and here we reference the critical period as an effective one~\cite{Pinho}.
 %
 %In order to address different aspects of the PV system design, there are various software tools available in the literature~\cite{Rajanna,Rawat}.
 %public domain and commercial software available for the PV market. 
@@ -207,7 +209,7 @@ the most suitable configuration is the regulated stand-alone system with battery
 %Some tools also provide support to rebate programs applications and tax incentives (specific to each country or region), while other programs and worksheets focus on the technical aspects of system sizing and design.
 %
 %Manufacturers and integrators have yet their proprietary software to perform inverter string sizing and various system sizing and design tools, with the drawback to just include their own products among the possibilities of choice. 
-Here we evaluated the most popular tools available in the literature and summarized at Table~\ref{table:softwares}: PVWatts, SAM, HOMER, RETScreen, and Hybrid2~\cite{Pradhan,Swarnkar,NRELDobos,NRELBlair,Mills}.
+This section we evaluated the most popular tools available in the literature and summarized at Table~\ref{table:softwares}: PVWatts, SAM, HOMER, RETScreen, and Hybrid2~\cite{Pradhan,Swarnkar,NRELDobos,NRELBlair,Mills}.
 
 %\subsection{PVWatts Calculator}
 %According to \cite{Freeman} and \cite{NRELDobos}, it is a web application developed by the National Renewable Energy Laboratory (NREL), which estimates the electricity production of a grid-connected roof- or ground-mounted photovoltaic system based on a few inputs. According to \cite{NRELDobos}, to use the calculator, it is necessary to provide information about the system's location, basic design parameters, and system economics. PVWatts calculates estimated values for the system's annual and monthly electricity production, and for the electricity monetary value. This tool is suitable for very preliminary studies of a potential location for a photovoltaic system that uses crystalline silicon or thin film photovoltaic modules. The production estimates that PVWatts computation do not account for many factors that are important in the design of a photovoltaic system, therefore it is necessary support of an energy expert. The calculator estimates the monthly and annual electricity production of a photovoltaic system using an hour-by-hour simulation over a period of one year. To represent the system's physical characteristics, PVWatts requires values for six inputs: System DC size; Module type; Array type; System losses; Array tilt angle; Array azimuth angle.
@@ -304,8 +306,8 @@ For night hours or rainy days, we need to hold batteries, where power can be sto
 %
 %In the literature, there are several mathematical models available for each component of PV systems. At the next section, the mathematical model for each component is presented. 
 %-------------------------------------------------------------------
-\subsection{PV generator model}
-\label{sec:PVmodel}
+\subsection{PV system model}
+\label{sec:PVsystemmodel}
 %-------------------------------------------------------------------
 %A photovoltaic PV generator is the whole assembly of solar cells, connections, protective parts, and supports. 
 %In the present modeling, the focus is only on cell/module/array.
@@ -332,7 +334,9 @@ For night hours or rainy days, we need to hold batteries, where power can be sto
 %Modeling PV modules is one of the major components responsible for proper functioning of PV systems. However, the estimation of models is affected by various intrinsic and extrinsic factors, which ultimately influence the behavior of current and voltage. Therefore, perfect modeling is essential to estimate the performance of PV modules in different environmental conditions \cite{Jakhrani}.
 % 
 %Modeling provides the ways to understand the current, voltage, and power relationships of PV systems.
-A wide variety of models exists for estimation of power output of PV modules (and $I-V$ or $P-V$ curves). However, the present work will rely on the simplified model of 1-diode. It was demonstrated that it has a small error rate, between 0.03\% and 4.68\% from selected PV panels tested~\cite{Saloux}.
+Mathematical models are required in order to allow the formal specification of the PV system. At this section we will summarize the models adopted at the paper.
+
+Related to \textbf{PV modules}, a wide variety of models exists for estimation of its power output  (and $I-V$ or $P-V$ curves). However, the present work will rely on the simplified model of 1-diode. It was demonstrated that it has a small error rate, between 0.03\% and 4.68\% from selected PV panels tested~\cite{Saloux}.
 
 %The performance of PV systems %, %that is, the output current/voltage curve ($I-V$ curve), 
 %is usually studied using an equivalent circuit model~\cite{Yatimi}, which consists of a current source with one or two diodes connected in parallel, and up to two resistors, one connected in parallel and the other one in series, to take into account energy losses in this model~\cite{Cubas}. 
@@ -534,7 +538,7 @@ a = \dfrac{q(V_{m,ref}-V_{oc,ref})}{Nk_{B}T} \dfrac{1}{ln \left( 1 - \dfrac{I_{m
 
 \noindent where $V_{mref}$, $V_{oc,ref}$, $I_{m,ref}$, and $I_{sc,ref}$ are key cell values obtained under both actual cell temperature and solar irradiance conditions. %, usually provided by manufacturers; t
 
-The PV generator model is now completely determined; it requires the actual cell temperature (or the air temperature), the actual solar irradiance and common data provided by manufacturers in data-sheets or manuals.
+%The PV generator model is now completely determined; it requires the actual cell temperature (or the air temperature), the actual solar irradiance and common data provided by manufacturers in data-sheets or manuals.
 %
 %If the PV cells are in parallel, then there is a parallel array. Therefore, there will be a change at the $ I_{ph} $ and $ I_{0} $and the resulting current is given by Equation \ref{eq:Iarray}, as demonstrated in \cite{Saloux}.
 %
@@ -554,13 +558,9 @@ The PV generator model is now completely determined; it requires the actual cell
 %
 %Where $ V_{one panel} $ is the voltage from Equation \ref{eq:Vmfinal}.
 %------------------------------------------------------------
-\subsection{The Battery Storage Model }
-\label{sec:BATmodel}
-%------------------------------------------------------------
-
 %Because of the fluctuating nature of the output delivered by the PV arrays, batteries are nece\sqrt{•}ry in a PV system. Thus, during the hours of sunshine, the PV system feeds directly the load and the excess electrical energy is stored in the battery. During the night, or during a period with low solar irradiation, energy is supplied to the load from the battery \cite{Mellit}.
   
-Various models have been described in the literature and the most common ones are based on lead-acid batteries~\cite{Copetti,Pinho};
+Related to the \textbf{batteries}, various models have been described in the literature and the most common ones are based on lead-acid batteries~\cite{Copetti,Pinho};
 %, and \cite{Manwell93, Manwell94}. 
 %However, regardless of the model, normally the following parameters are required: 
 %
@@ -698,10 +698,10 @@ Note that SOC can be calculated easily at any point during the discharge period,
 %
 %
 %---------------------------------------------------------
-\subsection{Charge Controller Model}
 %---------------------------------------------------------
 %Depending on the literature, the controller can receive different names: controller \cite{Hansen}, charge controller \cite{Mahanta} and \cite{Chauhan}, regulator \cite{Mellit}, DC-DC converter with MPPT and switch \cite{Dhanowa}, \cite{Yatimi}, \cite{Abdulateef}, \cite{Roy}. However, in this study, in order to simplify, the term used is controller. 
-The charge controller or controller is a set of items (DC-DC converter, MPPT, and switches) and can be defined as the responsible to manage the energy flow to PV system, batteries and loads by collecting information on the battery voltage and knowing the maximum and minimum values acceptable for the battery voltage. MPPT, or maximum power point tracking, is the electronic control mechanism mostly used nowadays and that maintains the PV operating at the voltage of maximum power. Controllers aim to protect the battery (or batteries) against the excessive charge and discharge \cite{Pinho}, improving its lifetime. 
+
+The \textbf{charge controller} or controller is a set of items (DC-DC converter, MPPT, and switches) and can be defined as the responsible to manage the energy flow to PV system, batteries and loads by collecting information on the battery voltage and knowing the maximum and minimum values acceptable for the battery voltage. MPPT, or maximum power point tracking, is the electronic control mechanism mostly used nowadays and that maintains the PV operating at the voltage of maximum power. Controllers aim to protect the battery (or batteries) against the excessive charge and discharge \cite{Pinho}, improving its lifetime. 
 %
 %The resource MPPT, called of maximum power point tracking, is an electronic control mechanism that maintains the PV operating in a voltage that correspond to the voltage of maximum power.
 %
@@ -839,11 +839,10 @@ V_{in} I_{in} \eta_{c} = V_{out} I_{out},
 %\item In addition, a mixed bank arrangement can be useful: a bank with two 12 V and 220 Ah batteries in series connected in parallel with a similar arrange will produce an equivalent battery of 24 V and 440 Ah.
 %\end{itemize}
 %-----------------------------------------------
-\subsection{The inverter model}
 %-----------------------------------------------
 %As shown by \cite{Mellit}, the PV arrays produce DC and therefore when the PV system contains an AC load, a DC/AC conversion is required. 
 %An inverter is a converter, where the power flows from DC to AC side, i.e., having a DC voltage as input; it produces AC voltage, as output. 
-The role of the inverter is to keep the voltage constant on the AC side, i.e., at the rated voltage, % (127 V or 220 V, for example), 
+The role of the \textbf{inverter} is to keep the voltage constant on the AC side, i.e., at the rated voltage, % (127 V or 220 V, for example), 
 and to convert the input power $ P_{in} $ into the output power $ P_{out} $ with the best possible efficiency $ \eta_{i} $ as described by \eqref{eq:efficinv} \cite{Hansen}:
 %
 %The inverter is characterized by a power dependent efficiency $ \eta_{i} $ as shown by (\ref{eq:efficinv}) \cite{Hansen}.
@@ -894,126 +893,6 @@ reflected in two major approaches to static verification: program analysis and m
 checking. In order to experiment with the trade-off, and in order to be able to set the dial between the two extreme points, Configurable Program Analysis (CPA) provides a conceptual basis for expressing different verification approaches in the same formal setting. The CPA formalism provides an interface for the definition of program analyses. Consequently, CPAchecker provides an implementation framework that allows the seamless integration of program analyses that are expressed in the CPA framework. The comparison among different approaches in the same experimental setting is intended to be easy and the experimental results are expected to be more meaningful~\cite{Beyer2011}. Related to the architecture, the central data structure is a set of control-flow automata (CFA), which consists of control-flow locations and control-flow edges. The CPA framework provides interfaces to SMT solvers and interpolation procedures~\cite{Beyer2011}. Currently, CPAchecker uses MathSAT as SMT solver; and CSIsat and MathSAT as interpolation procedures~\cite{Beyer2011}. %CPAchecker performs reachability analysis and operates on an object of the abstract data type CPA, i.e., the underlying verification algorithm applies operations from the CPA interface without knowing which concrete CPA it is analyzing. For most configurations, the concrete CPA will be a composite CPA, which implements the combination of different CPAs. \textcolor{red}{It is unclear what a CPA is.}
 %In software verification, it is usual to take a considerable amount of effort to convert a verification idea into actual experimental results and CPAchecker aims to accelerate this process~\cite{Beyer2011}.
 %
-%--------------------------------------------------
-\section{Stand-alone PV System Sizing and Verification}
-\label{sec:sizingcheck}
-%--------------------------------------------------
-In addition to the verification tool being able to check a PV solar system, as if it were actually being used in the field, indicating the conditions that it does not meet the system user requirements, it is possible to extend the tool, giving it the capacity to carry out the validation of the designed system (a.k.a. sizing check).
-%In addition the fact that the automated verification tool can check the possible failure of the PV system during its use at the field, it is possible as well to use the tool to check if the sizing of the components are correct.
-
-Therefore this is a additional feature included at this paper. The sizing check will be performed by the proposed tool, and it will indicate if there is an error of sizing before to perform the automated verification of the system. This stage ensures that the system meets the standard project steps related to critical period method of sizing~\cite{Pinho}. 
-%
-Firstly, it is needed to correct the energy consumption estimated to the load ($E_{consumption}$), which is carried out by ~\eqref{eq:Ecorrected}, where the efficiency of batteries ($\eta_{b}$), controller ($\eta_{c}$), and the inverter ($\eta_{i}$) are considered~\cite{Pinho}.
-\begin{equation}
-\label{eq:Ecorrected}
-E_{corrected} = \dfrac{E_{consumption}}{ \eta_{b} \eta_{c} \eta_{i} }.
-\end{equation}
-
-Following, it is necessary to estimate the energy that can be produced for each panel, called $E_{p}$, in Wh, as defined by~\eqref{eq:Ep}.
-
-\begin{equation}
-\label{eq:Ep}
-E_{p} = Solar\_Irradiance \times Panel\_Area \times \eta_{p} \times 1000,
-\end{equation}
-
-\noindent where the solar irradiance is expressed in terms of $kWh/m^{2}$ and depends on the site where the PV systems will be deployed, the PV panel area is given in $m^{2}$ and corresponds to the size of one PV panel, and $\eta_{p}$ represents the PV panel efficiency.
-
-The total minimum number of needed solar panels ($N_{TPmin}$) is computed by ~\eqref{eq:NTPmin} and the check is performed using ~\eqref{eq:NTP}, where the sized number of panels ($ N_{TP} $) must be greater than the result from ~\eqref{eq:NTPmin}.
-\begin{equation}
-\label{eq:NTPmin}
-N_{TPmin} = \dfrac{E_{corrected}}{E_{p}}.
-\end{equation}
-
-\begin{equation}
-\label{eq:NTP}
-N_{TP} \geq N_{TPmin}.
-\end{equation}
-
-Particularly, the total number of panels in series ($N_{PSmin}$) and parallel ($N_{PPmin}$) are given by~\eqref{eq:NPSmin} and \eqref{eq:NPPmin}, respectively. With the check performed by (\ref{eq:NPS}) and (\ref{eq:NPP}). Where $V_{mppt,max}$ is the maximum operation voltage and $V_{mppt,min}$ is the minimum operation voltage of the charge controller; $V_{maxPower,TempMax}$ and $V_{maxPower,TempMin}$ are the maximum power voltage from the PV module considering the maximum and minimum operational temperature, respectively; $P_{total}$ is the total power demanded from the PV system and $P_{max,ref}$ is the power supplied from one PV panel in $Watts$.
-%, $ V_{system} $ is the DC voltage of the bus, normally $12$, $24$ or $48$ V.
-
-\begin{equation}
-\label{eq:NPSmin}
-\dfrac{V_{mppt,min}}{V_{maxPower,TempMax}}\leq N_{PSmin} \leq \dfrac{V_{mppt,max}}{V_{maxPower,TempMin}}.
-\end{equation}
-
-\begin{equation}
-\label{eq:NPPmin}
-N_{PPmin} = \dfrac{P_{total}}{Number\,Panels\,Series \times P_{max,ref}}.
-\end{equation}
-
-\begin{equation}
-\label{eq:NPS}
-N_{PS} \geq N_{PSmin}.
-\end{equation}
-
-\begin{equation}
-\label{eq:NPP}
-N_{PP} \geq N_{PPmin}.
-\end{equation}
-
-Related to the batteries, firstly must be defined the total capacity of the battery bank, as described by \eqref{eq:Cbank} as
-\begin{equation}
-\label{eq:Cbank}
-C_{bank} = \dfrac{E_{corrected} \times autonomy}{V_{system} \times DOD}.
-\end{equation}
-%
-\noindent where the variable $autonomy$ is a design definition; % and normally has a value ranging from $6$ to $48$h; 
-$ V_{system} $ is the DC voltage of the bus, and the other variables were discussed previously in Section~\ref{sec:PVmodel} and ~\ref{sec:BATmodel}.
-%
-Secondly, the total (minimum) number of batteries is computed, as described by \eqref{eq:Nbtotal}. Additionally, \eqref{eq:batcheck} performs the final sizing check, thus considering the number of batteries in series ($ N_{BS} $) and the number of batteries in parallel ($ N_{BP} $) that are established to the project.
-\begin{equation}
-\label{eq:Nbtotal}
-N_{B}total = N_{BS}min \times N_{BP}min = \dfrac{V_{system}}{V_{bat}} \times \dfrac{C_{bank}}{1 \,Battery \, Capacity}.
-\end{equation}
-
-\begin{equation}
-\label{eq:batcheck}
-\left( N_{BS} \times  N_{BP} \right) \geq N_{B}total.
-\end{equation}
-
-Related to the charge controller, here the model with MPPT is adopted and initially it must meet the voltage requirement of the PV system, as described by ~\eqref{eq:vcvsystem} to the charge controller voltage: 
-\begin{equation}
-\label{eq:vcvsystem}
-V_{c} = V_{system}.
-\end{equation}
-
-Following, the short circuit reference information from the manufacturer's solar panel must be corrected to the cell temperature, as described by \eqref{eq:iscamb}:
-%
-\begin{equation}
-\label{eq:iscamb}
-I_{sc,amb} = \dfrac{G}{G_{ref}} \left[ I_{sc,ref} + \mu_{I} \times (T-25) \right]. 
-\end{equation}
-
-The controller must meet the maximum current from the PV array given by \eqref{eq:icmin} and \eqref{eq:icicmin}.
-\begin{equation}
-\label{eq:icmin}
-I_{c,min} = I_{sc,amb} \times N_{PP}.
-\end{equation}
-
-\begin{equation}
-\label{eq:icicmin}
-I_{c} \geq I_{c,min}.
-\end{equation}
-
-The sizing project check of the inverter is carried out by means of three equations. Equation~\eqref{eq:vindc} ensures that the input voltage of the controller meets the system voltage. Equation~\eqref{eq:voutac} ensures that the output voltage of the controller meets the AC voltage of the load. Finally, \eqref{eq:invcheck} ensures that the controller can support the total demand of the load and the surge power. Where $V_{in}DC$ is the nominal input voltage and $V_{out}AC$ is the nominal output voltage of the inverter; $MAX_{AC,ref}$ is the peak power that the inverter can support.
-%
-\begin{equation}
-\label{eq:vindc} 
-V_{in}DC = V_{system}.
-\end{equation}
-%
-\begin{equation}
-\label{eq:voutac} 
-V_{out}AC = V_{AC}.
-\end{equation}
-%
-\begin{equation}
-\label{eq:invcheck} 
-\left[ (Demand \leq P_{AC,ref}) \, and \, (P_{surge} \leq MAX_{AC,ref}) \right].
-\end{equation}
-
-Worth to mention that the charge controller, the battery, and the inverter have a nominal efficiency presented at data sheets, and those numbers are very close to 100\%. However, based on empirical data, those efficiencies must be corrected, according to the loading of each component. If field or essay data is not available, considering that the proposed tools is aimed to be used prior the deployment of the PV system at the field, it is recommended (at least) to correct the battery efficiency ($\eta_{b}$) to 85\%, keeping the remaining efficiencies as expressed by the manufacturers.
 %
 %----------------------------------------
 \section{Proposed Automated Verification Method of PV Systems}
@@ -1040,7 +919,7 @@ The flowchart of the proposed automated verification method is illustrated in Fi
 \label{fig:flowchartgeneral}
 \end{figure}
 
-In Step 1, the PV input data (e.g., load power demand and load energy consumption) and the formulae to check the sizing project, the mathematical model, the limits of the weather non-deterministic variables, are all written as an ANSI-C code~\cite{ANSI2018}. In Step 2, the sizing check of the PV system takes place to make sure that the components were selected according to worst monthly average solar energy method~\cite{Pinho}. The equations to check the PV sizing are present at Section~\ref{sec:sizingcheck}. 
+In Step 1, the PV input data (e.g., load power demand and load energy consumption) and the formulae to check the sizing project, the mathematical model, the limits of the weather non-deterministic variables, are all written as an ANSI-C code~\cite{ANSI2018}. In Step 2, the sizing check of the PV system takes place. Therefore this is a additional feature included at this paper. The sizing check will be performed by the proposed tool, and it will indicate if there is an error of sizing before to perform the automated verification of the system. This stage ensures that the system meets the standard project steps related to critical period method of sizing~\cite{Pinho}. 
 %
 In Step 3, weather variables (e.g., solar irradiance and ambient temperature) will be systematically explored by our verification engine based on maximum and minimum values from the site, where the PV system will be deployed. 
 %As a consequence, all the formulae of the employed mathematical models will also be updated. 
