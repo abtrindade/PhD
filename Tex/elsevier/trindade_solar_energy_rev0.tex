@@ -1,7 +1,8 @@
 \documentclass[review]{elsarticle}
 
 \usepackage{lineno,hyperref}
-\modulolinenumbers[5]
+\modulolinenumbers[1]
+\linenumbers
 
 %\journal{Renewable \& Sustainable Energy Reviews}
 
@@ -22,10 +23,10 @@
 %\bibliographystyle{model2-names.bst}\biboptions{authoryear}
 
 %% Vancouver numbered
-\usepackage{numcompress}\bibliographystyle{model3-num-names}
+%\usepackage{numcompress}\bibliographystyle{model3-num-names}
 
 %% Vancouver name/year
-%\usepackage{numcompress}\bibliographystyle{model4-names}\biboptions{authoryear}
+\usepackage{numcompress}\bibliographystyle{model4-names}\biboptions{authoryear}
 
 %% APA style
 %\bibliographystyle{model5-names}\biboptions{authoryear}
@@ -70,7 +71,7 @@
 \address[mysecondaryaddress]{University of Manchester, School of Computer Science, Kilburn Building, Manchester M13 9PL}
 
 \begin{abstract}
-With declining costs and increasing performance, the deployment of renewable energy systems is growing faster. In 2017, for the first time, the number of people without access to electricity dipped below 1 billion, but trends on energy access likewise fall short of global goals. Particular attention is given to stand-alone solar photovoltaic systems in rural areas or where grid extension is unfeasible. Tools to evaluate electrification projects are available, but they are based on simulations that do not cover all aspects of the design space. Automated verification using model checking has proven to be an effective technique to validate any kind of system. This paper marks the first application of software model checking to formally verify the design of a stand-alone solar photovoltaic system including solar panel, charge controller, battery, inverter, and electric load. Case studies, from real photovoltaic systems deployed in five different sites, ranging from 700W to 1,200W, were used to evaluate this proposed approach and to compare that with specialized simulation tools. Different verification tools were evaluated as well, in order to compare performance and soundness. Data from practical applications show the effectiveness of our approach, where specific conditions that lead to failures in a photovoltaic solar system are only detailed by the automated verification method.
+With declining costs and increasing performance, the deployment of renewable energy systems is growing faster. In 2017, for the first time, the number of people without access to electricity dipped below 1 billion, but trends on energy access likewise fall short of global goals. Particular attention is given to stand-alone solar photovoltaic systems in rural areas or where grid extension is unfeasible. Tools to evaluate electrification projects are available, but they are based on simulations that do not cover all aspects of the design space. Automated verification using model checking has proven to be an effective technique to validate any kind of system. This paper marks the first application of software model checking to formally verify the design of a stand-alone solar photovoltaic system including solar panel, charge controller, battery, inverter, and electric load. Case studies, from real photovoltaic systems deployed in five different sites, ranging from 700 W to 1,200 W, were used to evaluate this proposed approach and to compare that with specialized simulation tools. Different verification tools were evaluated as well, in order to compare performance and soundness. Data from practical applications show the effectiveness of our approach, where specific conditions that lead to failures in a photovoltaic solar system are only detailed by the automated verification method.
 \end{abstract}
 
 \begin{keyword}
@@ -82,18 +83,18 @@ Formal verification \sep model checking \sep photovoltaic power systems
 \end{frontmatter}
 
 \section{Introduction}
-Lack of access to clean and affordable energy is considered a core dimension of poverty~\cite{Hussein2012}. Progress has been made worldwide; in particular, the number of people without electricity access fell below 1 billion threshold for the first time in 2017~\cite{IEAweo2018}. %The share of people without access to electricity from Africa is 58\%, while 19\% of the share comes from developing Asia, and 31\% from Latin America~\cite{IEAweo2018}. Numbers from Brazil show the aim to electrify 270 isolated places and 2.7 million of people until 2023~\cite{EPE2018}. 
-Furthermore, there is a close relationship between the lack of energy and the low HDI (Human Development Index) of those localities~\cite{Coelho}.
+Lack of access to clean and affordable energy is considered a core dimension of poverty~\citep{Hussein2012}. There is a close relationship between the lack of energy and the low HDI (Human Development Index)~\citep{Coelho}. Progress has been made worldwide; in particular, the number of people without electricity access fell below 1 billion threshold for the first time in 2017~\citep{IEAweo2018}. %The share of people without access to electricity from Africa is 58\%, while 19\% of the share comes from developing Asia, and 31\% from Latin America~\cite{IEAweo2018}. Numbers from Brazil show the aim to electrify 270 isolated places and 2.7 million of people until 2023~\cite{EPE2018}. 
+%Furthermore, there is a close relationship between the lack of energy and the low HDI (Human Development Index) of those localities~\cite{Coelho}.
 
-In order to provide universal electricity, decentralized systems led by solar photovoltaic (PV) in off-grid and mini-grid systems will be the lowest-cost solution for three-quarters of the additional connections needed; and grid extension will be the standard especially in urban areas~\cite{IEAweo2018}.
+In order to provide universal electricity, decentralized systems led by solar photovoltaic (PV) in off-grid and mini-grid systems will be the lowest-cost solution for three-quarters of the additional connections needed; and grid extension will be the standard especially in urban areas~\citep{IEAweo2018}.
 
 %The definition of energy access usually includes both electricity access and access to modern fuels for cooking and heating, in order to replace traditional biomass. 
 %Increased access to energy allows economic growth and poverty alleviation \cite{Karekesi}. 
 %
 %Among the options of renewable sources, there are hydro, wind, and solar photovoltaic (PV). 
-Only a niche market a few years ago, solar PV systems are now becoming a mainstream electricity provider, with an increase of approximately 50\% from 2016 to 2017 in terms of new installations of PV~\cite{EPIA}. %However, this growth is not driven by stand-alone systems.
+Only a niche market a few years ago, solar PV systems are now becoming a mainstream electricity provider, with an increase of approximately 50\% from 2016 to 2017 in terms of new installations of PV~\citep{EPIA}. %However, this growth is not driven by stand-alone systems.
 
-In order to simulate or evaluate a PV system there are a myriad of specialized tools available in the market, such as RETScreen, HOMER, PVWatts, SAM, and Hybrid2 \cite{Pradhan,Swarnkar,NRELDobos,NRELBlair,Mills}; and even general purpose simulation tools such as PSpice, and MATLAB/Simulink package \cite{Gow1999,Benatiallah2017}.
+In order to simulate or evaluate a PV system there are a myriad of specialized tools available in the market, such as RETScreen, HOMER, PVWatts, SAM, and Hybrid2 \citep{Pradhan,Swarnkar,NRELDobos,NRELBlair,Mills}; and even general purpose simulation tools such as PSpice, and MATLAB/Simulink package \citep{Gow1999,Benatiallah2017}.
 %
 %However, to the best of our knowledge, this work can be the first work to perform automated verification of a stand-alone solar PV project solution.  
 %
@@ -105,9 +106,9 @@ In order to simulate or evaluate a PV system there are a myriad of specialized t
 %
 %PV systems can be classified into grid-connected and stand-alone systems. At this proposal, only off-grid or stand-alone systems will be considered. The utilization of solar energy in off-grid mode has the potential to meet the energy need for remote rural areas of developing countries.  
 However, those tools are based on running experiments in simulation models. Simulation has the advantage of being cheap (if compared to test in real systems) %and can be employed before the system design is concluded 
-but it has the drawback of an incomplete coverage since the verification of all possible combinations and potential failures of a system is unfeasible~\cite{ClarkeHV18}.
+but it has the drawback of an incomplete coverage since the verification of all possible combinations and potential failures of a system is unfeasible~\citep{ClarkeHV18}.
 
-Formal methods based on model checking offer a great potential to obtain a more effective and faster verification in the design process~\cite{ClarkeHV18}.  
+Formal methods based on model checking offer a great potential to obtain a more effective and faster verification in the design process~\citep{ClarkeHV18}.  
 %with behavior that is, in principle, well determined. 
 Any kind of system can be specified as computer programs using mathematical logic, which constitutes the intended (correct) behavior; then, one can try to give a formal proof or otherwise establish that the program meets its specification. %User or project requirements can be added during the creation of the formal model to be verified. %, as defined by \cite{Trindade}. 
 %
@@ -123,27 +124,27 @@ Any kind of system can be specified as computer programs using mathematical logi
 %Formal methods, alternatively, provide facilities for the modeling of each component of any complex system~\cite{Hall1990}. 
 %
 In this study, a mathematical model of each component of a stand-alone PV system, as panel solar, charge controller, batteries, inverter, and electrical load is used. %The behavior of each system component can be analyzed and observed with the support of those formal models, as a joint operation of the components, which in this case represents the operation of the solar PV system itself. 
-The project requirements, as battery autonomy and power demand, besides weather conditions, as solar irradiance and ambient temperature, are inputted to the proposed tool and automatically verified during the formal process. The model checking tool reports in which conditions a system does not meet the user requirements. A key benefit to this approach is that it helps in the detection of flaws in the design phase of system development, thereby considerably improving system reliability~\cite{Akram2018}. 
+The project requirements, as battery autonomy and power demand, besides weather conditions, as solar irradiance and ambient temperature, are inputted to the proposed tool and automatically verified during the formal process. The model checking tool reports in which conditions a system does not meet the user requirements. A key benefit to this approach is that it helps in the detection of flaws in the design phase of system development, thereby considerably improving system reliability~\citep{Akram2018}. 
 %Those programs are viewed as mathematical objects, and the use of 
 %Bringing this technique to solar PV systems, i
 %Instead of finding a bug or a software inconsistence, t
 %Here it will be verified a stand-alone PV system, with all their components modeled mathematically,   
 %Among the non-deterministic variables considerated, is it worth to mention environmental issues (like solar irradiance, and temperature), and the variation of the electrical load (power consumption) or the battery' state of charge, as shown in Fig.\ref{fig:flowchartgeneral}.
-The implementation of the proposed tool is carried out by means of an algorithm written in language C, that is executed by three state-of-the-art model checkers to formally verifying PV designs, in order to evaluate performance and correctness: the C Bounded Model Checker (CBMC)~\cite{Kroening}, the Efficient SMT-based Bounded Model Checker (ESBMC)~\cite{esbmc2018}, and the Configurable Program Analysis Checker (CPAchecker).
+The implementation of the proposed tool is carried out by means of an algorithm in language C, that is executed by three state-of-the-art model checkers to formally verifying PV designs, in order to evaluate performance and correctness: the C Bounded Model Checker (CBMC)~\citep{Kroening}, the Efficient SMT-based Bounded Model Checker (ESBMC)~\citep{esbmc2018}, and the Configurable Program Analysis Checker (CPAchecker).
 %three the efficient SMT-based bounded model checker (ESBMC)~\cite{esbmc2018}. %, which allows one to incrementally verify a PV system as an imperative program using a fragment of decidable first-order theories~\cite{DBLP:books/daglib/0019162}.
 
-In prior studies, the evaluation of PV systems w.r.t. user requirements were performed by simulation tools using MATLAB/Simulink~\cite{Benatiallah2017, Natsheh2012}, or HOMER Pro \cite{Lamnadi2017}. Related to formal methods, in 2015, an approach for applying Monte-Carlo simulation to power system protection schemes presented limitations of incomplete coverage of all possible operating conditions~\cite{Sengupta2015}. The authors proposed an automated simulation-based verification technique to verify correctness of protection settings efficiently using hybrid automata-temporal-logic framework. Other related study from 2015 include a framework named Modana to achieve an integrated process from modeling with SysML/MARTE to analysis with statistical model checking the non-functional properties such as time and energy~\cite{Cheng2015}. In order to demonstrate Modana's capability, the authors modelled energy-aware buildings as a case study, and discussed the analysis on energy consumption in different scenarios. The focus here is on HVAC (heating, ventilation, and air conditioning) systems. In 2017, a researcher suggested the application of formal methods to verify and control the behavior of computational devices interacting over a shared and smart infrastructure~\cite{Abate2017}. The author discussed the aggregation of large populations of thermostatically-controlled loads and of PV panels, and the corresponding problems of energy management in smart buildings, of demand-response on smart grids, and respectively of frequency stabilization and grid robustness. The focus was on controlling the behavior of components, thereby verifying the smart grid as a ``system of systems'' within the context of ``internet of things''. The author used approximate model checking of stochastic and hybrid models. In 2018, a verification methodology was proposed with applications to PV panels and its distributed power point tracking~\cite{Driouich2018}. This approach relied on representing unpredictable behavior of the environment to cover all possible feasible scenarios. The simulation results obtained by JModelica covered the system's complete dynamic behavior; however, it was evident the time consuming issue with almost three days of computer effort to verify the design space of one operation hour of the PV panels behavior. Another work from 2018 was the approach to modeling smart grid components using a formal specification. The authors used a state-based formal specification language named Z; they demonstrated the application of Z to four smart grid components~\cite{Akram2018}. The presented formal specification can be considered as a first step towards modeling of smart grid using formal methods. This approach is based on Petri nets and from the premise that modeling of the smart home leads to clear understanding of the overall behavior of the smart grid.
+In prior studies, the evaluation of PV systems w.r.t. user requirements were performed by simulation tools using MATLAB/Simulink~\citep{Benatiallah2017, Natsheh2012}, or HOMER Pro \citep{Lamnadi2017}, where some mathematical model was adopted and the tool simulated the PV behavior over the time. Related to formal methods, in 2015, an approach for applying Monte-Carlo simulation to power system protection schemes presented limitations of incomplete coverage of all possible operating conditions~\citep{Sengupta2015}. The authors proposed an automated simulation-based verification technique to verify correctness of protection settings using hybrid automata-temporal-logic framework. In 2017, a researcher suggested the application of formal methods to verify and control the behavior of computational devices interacting over a shared-smart infrastructure~\citep{Abate2017}. The author discussed the aggregation of large populations of thermostatically-controlled loads and of PV panels, and the corresponding problems of energy management in smart buildings and smart grids. The author used approximate model checking of stochastic and hybrid models. In 2018, a verification methodology was proposed with applications to PV panels and its distributed power point tracking~\citep{Driouich2018}. This approach relied on representing unpredictable behavior of the environment to cover all possible feasible scenarios. The simulation results obtained by JModelica had evident time consuming issue with almost three days of computer effort to verify the design space of one operation hour of the PV panels behavior. Another work from 2018 was the approach to modeling smart grid components using a formal specification. The authors used a state-based formal specification language named Z; they demonstrated the application to four smart grid components~\citep{Akram2018}. This approach is based on Petri nets.
 %%%%%%%%%%%%%
 %The experimental results show that the proposed framework is more efficient \textcolor{red}{than what?} in different case studies to find not proper functioning of PV systems than simulation with off-the-shelf tool. 
 %This is the first study to apply a formal verification technique to formally check the design of a stand-alone solar PV system. In summary, t
 
-This paper makes three contributions. % Firstly, we describe a modular modeling of each component of a PV system by means of mathematical models that can be encoded into fragments of first-order theories supported by software model checkers. Secondly
-Firstly, we propose an algorithm written in language C that implements the automated verification method which formally checks the sizing and the operation of a given stand-alone PV system. Secondly, we evaluate the verification method by comparing three state-of-the-art model checkers in five real case studies. Thirdly, experimental results show that this proposed approach can find subtle design errors in stand-alone PV systems, which are not easily detected by other approach based on simulation. 
+This paper makes two main contributions. % Firstly, we describe a modular modeling of each component of a PV system by means of mathematical models that can be encoded into fragments of first-order theories supported by software model checkers. Secondly
+Firstly, we propose an algorithm written in language C that implements the automated verification method which formally checks the sizing and the operation of a given stand-alone PV system. Secondly, we evaluate the verification method by comparing three state-of-the-art model checkers in five real case studies. %Thirdly, experimental results show that this proposed approach can find subtle design errors in stand-alone PV systems, which are not easily detected by other approach based on simulation. 
 
 %\textcolor{red}{This introduction is missing the description of the vision, approach and results. In particular, try to match each paragraph to: problem, vision, approach, results and contributions.} 
 %
 %The framework provided at this paper outlines the requirements, the process and the mathematical modeling to perform automated formal verification of a stand-alone PV system, using the satisfiability modulo theories (SMT)-based verification method.
-%\textit{Outline}. Section~\ref{sec:SolarPhotovoltaicSystem} gives the background about solar PV systems, design and validation of PV systems, and the mathematical modeling. Section~\ref{sec:AutomatedVerification} presents the automated verification technique. Section~\ref{sec:sizingcheck} shows how to perform the sizing of a stand-alone PV system. The methodology is presented in section~\ref{sec:Methodology}. Section~\ref{sec:results} is devoted to the results. Section~\ref{sec:Conclusions} presents the conclusion and describes future work.
+\textit{Outline}. Section~\ref{sec:SolarPhotovoltaicSystem} gives the background about solar PV systems, design and validation of PV systems, and the mathematical modeling. Section~\ref{sec:AutomatedVerification} presents the automated verification technique. The methodology is presented in section~\ref{sec:Methodology}. Section~\ref{sec:results} is devoted to the results. Section~\ref{sec:Conclusions} presents the conclusion and describes future work.
 %
 %--------------------------------------------------------
 \section{Solar Photovoltaic System }
@@ -155,7 +156,7 @@ Firstly, we propose an algorithm written in language C that implements the autom
 %(in particular cases, in both times). %The most basic PV system can give supply only in daytime.  
 %For night hours or rainy days, one needs to hold batteries, where power can be stored and used.% \cite{Gules}. 
 %
-PV systems are classified into distinct types~\cite{Mohanty}. %: (1) stand-alone systems, where the energy is generated and consumed in the same place and which do not interact with the main grid; (2) grid-connected systems; and (3) solar PV hybrid system. %, where another source(s) of energy can work together with the solar PV. % system to provide the required demand.
+PV systems are classified into distinct types~\citep{Mohanty}. %: (1) stand-alone systems, where the energy is generated and consumed in the same place and which do not interact with the main grid; (2) grid-connected systems; and (3) solar PV hybrid system. %, where another source(s) of energy can work together with the solar PV. % system to provide the required demand.
 %, such as wind, biomass or diesel, 
 %As the goal of this work is just the solutions aimed to isolated/ off-grid application, %therefore it is not considered the on-grid or hybrid configurations.
 %
@@ -169,7 +170,7 @@ Specifically for remote rural areas of developing countries or places where the 
 % depending on the type of load, cost, resources availability, and requirements of the load, 
 %stand-alone systems 
 %can be split into several categories. However, 
-the most suitable configuration is the regulated stand-alone system with battery and AC load; this configuration is the focus of this study.
+the most suitable configuration is the regulated stand-alone system with battery and AC load. %; this configuration is the focus of this study.
 %, which is the target of this paper, includes PV array, batteries, charge controller, inverter, and AC load.
 %PV array, battery, MPPT and AC load. Battery is used to store the extra power of PV system. A charge controller is necessary for this type of system because the useful life of the battery is less than that of the PV module. Extra charging and deep discharging can reduce the battery life \cite{Kim}. Because of the AC load, an inverter (DC to AC converter) is required. 
 %This solution has an increase of cost because has more equipment. However, the AC availability brings the advantage of a higher number of AC appliances to use at the houses or consumer units.
@@ -197,8 +198,8 @@ the most suitable configuration is the regulated stand-alone system with battery
 %\subsection{Regulated stand-alone system with battery and AC load}
 %This system is similar to the previous one, but here AC load draws the power from PV system and, because of the AC load, an inverter (DC to AC converter) is required, as seen in Fig.\ref{fig:standaloneSPV} letter (d). This solution has an increase of cost because has more equipments. However, the AC availability brings the advantage of a higher number of AC appliances to use at the houses or consumer units. That configuration is the focus of the present work since it is the most common nowadays all over the world, when off-grid or isolated regions is the target.
 
-\subsection{Sizing and Simulation of Solar PV systems}
-The sizing and validation of a PV system can be done by hand or with the aid of tools. Here we reference the critical period~\cite{Pinho} as an effective method to PV sizing.
+\subsection{Sizing and Simulation of Stand-alone Solar PV systems}
+The sizing and validation of a PV system can be done by hand or with the aid of tools. Here we reference the critical period~\citep{Pinho} as an effective method to stand-alone PV sizing.
 %
 %In order to address different aspects of the PV system design, there are various software tools available in the literature~\cite{Rajanna,Rawat}.
 %public domain and commercial software available for the PV market. 
@@ -209,7 +210,7 @@ The sizing and validation of a PV system can be done by hand or with the aid of 
 %
 %Manufacturers and integrators have yet their proprietary software to perform inverter string sizing and various system sizing and design tools, with the drawback to just include their own products among the possibilities of choice. 
 
-The most popular softwares are summarized at Table~\ref{table:softwares}: PVWatts, SAM, HOMER, RETScreen, and Hybrid2~\cite{Pradhan,Swarnkar,NRELDobos,NRELBlair,Mills}.
+The most popular softwares are summarized at Table~\ref{table:softwares}: PVWatts, SAM, HOMER, RETScreen, and Hybrid2~\citep{Pradhan,Swarnkar,NRELDobos,NRELBlair,Mills}.
 %\subsection{PVWatts Calculator}
 %According to \cite{Freeman} and \cite{NRELDobos}, it is a web application developed by the National Renewable Energy Laboratory (NREL), which estimates the electricity production of a grid-connected roof- or ground-mounted photovoltaic system based on a few inputs. According to \cite{NRELDobos}, to use the calculator, it is necessary to provide information about the system's location, basic design parameters, and system economics. PVWatts calculates estimated values for the system's annual and monthly electricity production, and for the electricity monetary value. This tool is suitable for very preliminary studies of a potential location for a photovoltaic system that uses crystalline silicon or thin film photovoltaic modules. The production estimates that PVWatts computation do not account for many factors that are important in the design of a photovoltaic system, therefore it is necessary support of an energy expert. The calculator estimates the monthly and annual electricity production of a photovoltaic system using an hour-by-hour simulation over a period of one year. To represent the system's physical characteristics, PVWatts requires values for six inputs: System DC size; Module type; Array type; System losses; Array tilt angle; Array azimuth angle.
 %
@@ -246,7 +247,7 @@ Additionally, HOMER and RETScreen include economical analysis or even optimizati
 \renewcommand{\arraystretch}{1.3}
 % if using array.sty, it might be a good idea to tweak the value of
 % \extrarowheight as needed to properly center the text within the cells
-\caption{Comparative coverage of reference software}
+\caption{Comparative coverage of reference simulation software}
 \label{table:softwares}
 \centering
 %% Some packages, such as MDW tools, offer better commands for making tables
@@ -281,7 +282,7 @@ Sensitive analysis &  &  & X & X & \\
 %\subsection{Paper Proposal x Reference Tools}
 %-------------------------------------------------------------------
 %
-In this study, only HOMER has the minimum features for a comparative with our proposed verification approach. That evaluation is presented in Section~\ref{sec:results_indeed}.%All tools need some parameters inherently from manufacturer's catalog.
+In this study, HOMER was chosen to comparative with our proposed verification approach (Section~\ref{sec:results_indeed}).%All tools need some parameters inherently from manufacturer's catalog.
 %, so the project starts with manufacturers and integrators tool to define the basic items of the project: panels, inverters, controllers, and batteries. 
 %After that, the potential solution is analyzed in another tool to simulate or even optimize the proposed solution. Therefore, that is 
 %Thus, the main challenge here is to demonstrate the application of software model checking to formally verify a stand-alone PV solution, thus proving that this approach is more effective and complete than other state-of-the-art tool such as HOMER Pro. The comparative evaluation between HOMER Pro and our approach is presented in Section~\ref{sec:results_indeed}.
@@ -291,15 +292,15 @@ In this study, only HOMER has the minimum features for a comparative with our pr
 %-------------------------------------------------------------------
 %The main purpose of this section is to describe the models for the elements of a stand-alone PV system: PV generator, battery, controller, inverter, and load. 
 %The mathematical modeling of the PV system is based on modular blocks, as illustrated in Fig.\ref{fig:blockdiagram}. It identifies the PV generator, batteries, charge controller, inverter, and AC load. 
-A stand-alone PV system is illustrated in Fig.\ref{fig:blockdiagram}. The PV generator (panel or array) is a semiconductor device that can convert solar energy into DC electricity. %In Fig.\ref{fig:blockdiagram}, there are two variables that depend on the site where the system is deployed and the weather (i.e., solar irradiance $G$ and temperature $T$). 
-For night hours or rainy days, we need to hold batteries, where power can be stored and used. The use of battery as a storage form implies the presence of a charge controller~\cite{Hansen}. The PV arrays produce DC and therefore when the PV system contains an AC load, a DC/AC conversion is required (inverter). The AC load dictates the behavior of AC electrical load from the house that will be fed by the system.
+A stand-alone PV system is illustrated in Fig.\ref{fig:blockdiagram}. The PV generator is a semiconductor device that can convert solar energy into DC electricity. %In Fig.\ref{fig:blockdiagram}, there are two variables that depend on the site where the system is deployed and the weather (i.e., solar irradiance $G$ and temperature $T$). 
+For night hours or rainy days, power stored in batteries can be used and it implies the presence of a charge controller~\citep{Hansen}. The PV arrays produce DC and therefore when the PV system contains an AC load, a DC/AC conversion is required (inverter). The AC load dictates the behavior of AC electrical load from the house that will be fed by the system.
 %
 %The modular structure facilitates the modeling of the other system structures and replacement of elements, such as a DC load instead of an AC load. 
 %
 \begin{figure}[h]
 \includegraphics[width=0.80\textwidth]{blockdiagramPVS2}
 \centering
-\caption{Block diagram for a typical stand-alone PV system (adapted from~\cite{Hansen}).}
+\caption{Block diagram for a typical stand-alone PV system (adapted from~\citep{Hansen}).}
 \label{fig:blockdiagram}
 \end{figure}
 %
@@ -335,7 +336,8 @@ For night hours or rainy days, we need to hold batteries, where power can be sto
 %Modeling provides the ways to understand the current, voltage, and power relationships of PV systems.
 Mathematical models are required in order to allow the formal specification of the PV system. At this section we will summarize the models adopted at the paper.
 
-Related to \textbf{PV modules}, a wide variety of models exists for estimation of its power output  (and $I-V$ or $P-V$ curves). However, the present work will rely on the simplified model of 1-diode. It was demonstrated that it has a small error rate, between 0.03\% and 4.68\% from selected PV panels tested~\cite{Saloux}.
+\textbf{PV modules}: a wide variety of models exists. % for estimation of its power output  (and $I-V$ or $P-V$ curves). 
+However, the present work will rely on the simplified model of 1-diode, illustrated in Fig. \ref{fig:equivckt}. This model has a small error rate, between 0.03\% and 4.68\% from selected PV panels tested~\citep{Saloux}.
 
 %The performance of PV systems %, %that is, the output current/voltage curve ($I-V$ curve), 
 %is usually studied using an equivalent circuit model~\cite{Yatimi}, which consists of a current source with one or two diodes connected in parallel, and up to two resistors, one connected in parallel and the other one in series, to take into account energy losses in this model~\cite{Cubas}. 
@@ -343,19 +345,19 @@ Related to \textbf{PV modules}, a wide variety of models exists for estimation o
 \begin{figure}[h]
 \includegraphics[width=0.40\textwidth]{equivckt1D}
 \centering
-\caption{1-diode equivalent PV cell/panel circuit model (adapted from~\cite{Cubas}).}
+\caption{1-diode equivalent PV cell/panel circuit model (adapted from~\citep{Cubas}).}
 %\caption{Four different equivalent circuit models: (a) 1-diode; (b) 1-diode/1-resistor; (c) 1-diode/2-resistor; (d) 2-diode/2-resistor (Source: \cite{Cubas})}
 \label{fig:equivckt}
 \end{figure}
 
-The 1-diode model, illustrated in Fig. \ref{fig:equivckt}, whose equation relates the output current, $I$, to the output voltage, $V$, is described by ~\eqref{eq:1diodemodel}. %This model has a small error rate, between 0.03\% and 4.68\% from selected PV panels tested~\cite{Saloux}. %In addition, this mathematical modeling has the advantage of being an explicit model, which does not use iterative numerical calculation, which is time-consuming to computing~\cite{Cubas}.
+The Eq. \eqref{eq:1diodemodel} relates the output current, $I$, to the output voltage, $V$. %This model has a small error rate, between 0.03\% and 4.68\% from selected PV panels tested~\cite{Saloux}. %In addition, this mathematical modeling has the advantage of being an explicit model, which does not use iterative numerical calculation, which is time-consuming to computing~\cite{Cubas}.
 \begin{equation}
 \label{eq:1diodemodel}
 I = I_{ph}-I_{D1}=I_{ph}-I_{0}\left[ exp \left( \dfrac{V}{NaV_{T}} \right)  \right], 
 \end{equation}
 
 \noindent where $I_{ph}$ is the photocurrent delivered by the constant current source; $I_{0}$ is the reverse saturation current corresponding to the diode; $N$ is the number of series-connected cells; %($N=1$ in a single cell configuration); 
-$a$ is the ideality or quality factor ($a=1$ for ideal diodes and between $1$ and $2$ for real diodes); $V_{T}$ is the thermal voltage ($ V_{T}=k_{B}T/q $); $ k_{B} $ is the Boltzmann constant ($ 1.3806503\times10^{-23}J/K $); $T$ the temperature of cell in Kelvin; $q$ is absolute value of the electron's charge ($ -1.60217646\times10^{-19}C $).
+$a$ is the ideality or quality factor ($a=1$ for ideal diodes and between $1$ and $2$ for real diodes); $V_{T}$ is the thermal voltage ($ V_{T}=k_{B}T/q $); $ k_{B} $ is the Boltzmann constant ($ 1.3806503\times10^{-23}\:J/K $); $T$ the temperature of cell in Kelvin; $q$ is absolute value of the electron's charge ($ -1.60217646\times10^{-19}\:C $).
 
 %\begin{itemize}
 %\item $I_{ph}$ is the photocurrent delivered by the constant current source; 
@@ -479,7 +481,7 @@ $a$ is the ideality or quality factor ($a=1$ for ideal diodes and between $1$ an
 %
 %Replacing the Equation \ref{eq:dIdV_Vm} into Equations \ref{eq:Vmderiv} and \ref{eq:Im}, 
 %
-The voltage and the current at the maximum power point tracking (MPPT), can be described by \eqref{eq:Vmfinal}, \eqref{eq:Imfinal}, and \eqref{eq:Pm}  as follows~\cite{Saloux}: %These equations are used to calculate the key cell parameters at the maximum power point as function cell temperature and parameters from the manufacturer's data-sheet.
+The voltage and the current at the maximum power point tracking (MPPT), can be described by Eq. \eqref{eq:Vmfinal}, and Eq. \eqref{eq:Imfinal}~\citep{Saloux}: %, and Eq. \eqref{eq:Pm} as follows~\cite{Saloux}: %These equations are used to calculate the key cell parameters at the maximum power point as function cell temperature and parameters from the manufacturer's data-sheet.
 \begin{equation}
 \label{eq:Vmfinal}
 V_{m}=\dfrac{aNk_{B}T}{q} ln \left( \dfrac{aNk_{B}T}{qI_{0}} \dfrac{I_{sc}}{V_{oc}}  \right). 
@@ -490,28 +492,28 @@ V_{m}=\dfrac{aNk_{B}T}{q} ln \left( \dfrac{aNk_{B}T}{qI_{0}} \dfrac{I_{sc}}{V_{o
 I_{m} = I_{ph} + I_{0} - \dfrac{aNk_{B}T}{q} \left( \dfrac{I_{sc}}{V_{oc}} \right).  
 \end{equation}
 
-\begin{equation}
-\label{eq:Pm}
-P_{m} = V_{m} I_{m}.
-\end{equation}
-
+%\begin{equation}
+%\label{eq:Pm}
+%P_{m} = V_{m} I_{m}.
+%\end{equation}
+%
 %\begin{multline}
 %\label{eq:Pm}
 %P_{m} = V_{m} I_{m} = \left[ \dfrac{aNk_{B}T}{q} ln \left( \dfrac{aNk_{B}T}{qI_{0}} \dfrac{I_{sc}}{V_{oc}}  \right) \right] \times \\ \left[ I_{ph} + I_{0} - \dfrac{aNk_{B}T}{q} \left( \dfrac{I_{sc}}{V_{oc}} \right)  \right] 
 %\end{multline}
 %
-However, the photo-current delivered by the constant current source ($I_{ph}$) or even the reverse saturation current ($ I_{0} $) are not given by PV manufacturers. Therefore, ~\eqref{eq:Iph} is used to calculate the photo-current as function of irradiance and temperature~\cite{Villalva}:
+However, the photo-current delivered by the constant current source ($I_{ph}$) or even the reverse saturation current ($ I_{0} $) are not given by PV manufacturers. Therefore, Eq. ~\eqref{eq:Iph} is used to calculate the photo-current as function of irradiance and temperature~\citep{Villalva}:
 \begin{equation}
 \label{eq:Iph}
 I_{ph}=\dfrac{G}{G_{ref}} \left[ I_{ph,ref} + \mu_{I} \left( T-T_{ref} \right)    \right], 
 \end{equation}
 
-\noindent where the reference state (STC) of the cell is given by the solar irradiance $ G_{ref}=1000 W/m^{2} $ and the temperature $ T_{ref}=298.15 K (=25^{o}C) $; $ \mu_{I} $ is the short-circuit current temperature coefficient ($A/K$); %and corresponds to the photocurrent obtained from a given PV cell working at reference conditions.
-$ I_{ph,ref} $ can be approximated to the reference short-circuit current ($ I_{sc,ref} $)\cite{Villalva}.
+\noindent where the reference state (STC) of the cell is given by the solar irradiance $ G_{ref}=1000\:W/m^{2} $ and the temperature $ T_{ref}=298.15 K (=25^{o}\:C) $; $ \mu_{I} $ is the short-circuit current temperature coefficient ($A/K$); %and corresponds to the photocurrent obtained from a given PV cell working at reference conditions.
+$ I_{ph,ref} $ can be approximated to the reference short-circuit current ($ I_{sc,ref} $)\citep{Villalva}.
 % that is provided by PV manufacturers ($ I_{sc,ref} $).
 %\cite{Jakhrani} that is provided by PV manufacturers ($ I_{sc,ref} $).
 %%
-The cell temperature ($ T $) in degree Celsius is described by ~\ref{eq:Tcell}~\cite{Ross}:
+The cell temperature ($ T $) in degree Celsius is described by Eq. \ref{eq:Tcell}~\citep{Ross}:
 \begin{equation}
 \label{eq:Tcell}
 T = T_{air} + \dfrac{NOCT-20}{800}G,
@@ -519,7 +521,7 @@ T = T_{air} + \dfrac{NOCT-20}{800}G,
 
 \noindent where $ T_{air} $ is the ambient temperature, $NOCT$ is the nominal operating cell temperature (in $^{o}$C), and $G$ is the solar irradiance ($ W/m^{2} $) of the place where the PV system is deployed.
 
-Furthermore, ~\eqref{eq:I0} permits the saturation current ($ I_{0} $) to be expressed as a function of the cell temperature as~\cite{Villalva} 
+Furthermore, Eq. ~\eqref{eq:I0} permits the saturation current ($ I_{0} $) to be expressed as a function of the cell temperature as~\citep{Villalva} 
 %In this study, this relation is explicitly written based on cell open-circuit conditions using the short-circuit current temperature coefficient as well as the open-circuit voltage temperature coefficient (Equation \ref{eq:I0}).
 
 \begin{equation}
@@ -530,7 +532,7 @@ I_{0} = \dfrac{I_{sc,ref} + \mu_{I}(T - T_{ref})}{exp \left[ \dfrac{q(V_{oc,ref}
 \noindent where $ V_{oc,ref} $ is the reference open-circuit voltage and $ \mu_{V} $ is an open-circuit voltage temperature coefficient ($ V/K $).
 
 %The ideality (or quality) factor of the diode $ a $, which is usually considered as a constant \cite{Villalva}, is determined in the reference state. 
-Using the maximum power point current (cf. ~\eqref{eq:Imfinal}) and the saturation current in the reference temperature given by ~\eqref{eq:I0}, the diode ideality factor~\cite{Saloux} is determined by ~\eqref{eq:a}:
+Using the maximum power point current, cf. Eq.~\eqref{eq:Imfinal}, and the saturation current in the reference temperature given by Eq.~\eqref{eq:I0}, the diode ideality factor~\citep{Saloux} is determined by Eq.~\eqref{eq:a}:
 \begin{equation}
 \label{eq:a}
 a = \dfrac{q(V_{m,ref}-V_{oc,ref})}{Nk_{B}T} \dfrac{1}{ln \left( 1 - \dfrac{I_{m,ref}}{I_{sc,ref}}  \right) },
@@ -560,7 +562,7 @@ a = \dfrac{q(V_{m,ref}-V_{oc,ref})}{Nk_{B}T} \dfrac{1}{ln \left( 1 - \dfrac{I_{m
 %------------------------------------------------------------
 %Because of the fluctuating nature of the output delivered by the PV arrays, batteries are nece\sqrt{•}ry in a PV system. Thus, during the hours of sunshine, the PV system feeds directly the load and the excess electrical energy is stored in the battery. During the night, or during a period with low solar irradiation, energy is supplied to the load from the battery \cite{Mellit}.
   
-Related to the \textbf{batteries}, various models have been described in the literature and the most common ones are based on lead-acid batteries~\cite{Copetti,Pinho};
+Related to the \textbf{batteries}, various models have been described in the literature and the most common ones are based on lead-acid batteries~\citep{Copetti,Pinho};
 %, and \cite{Manwell93, Manwell94}. 
 %However, regardless of the model, normally the following parameters are required: 
 %
@@ -595,11 +597,11 @@ Related to the \textbf{batteries}, various models have been described in the lit
 %
 %The Kinetic Battery Model (KiBaM) of Manwell and McGowen \cite{Manwell93} was developed at the University of Massachusetts to predict the performance of the battery, based on manufacturer's data. However, it uses some data extracted from tested batteries in laboratory. Therefore is not suitable to this study. 
 %
-that kind of battery has relative low cost and wide availability~\cite{Copetti}. 
+that kind of battery has relative low cost and wide availability~\citep{Copetti}. 
 %
-Here, the model adopted uses only manufacturer's data without empirical tests~\cite{Copetti}. % and allows finding relations among voltage, current, state of charge and temperature. 
+Here, the model adopted uses only manufacturer's data without empirical tests~\citep{Copetti}. % and allows finding relations among voltage, current, state of charge and temperature. 
 %
-The discharge voltage equation is described by \eqref{eq:bat_Vd}.
+The discharge voltage is described by Eq. \eqref{eq:bat_Vd}.
 %The first term represents the voltage variation with the state of charge ($ SOC $), i.e., the electrolyte concentration, and the second is the variation due to internal resistance variation.
 %
 \begin{multline}
@@ -607,9 +609,9 @@ The discharge voltage equation is described by \eqref{eq:bat_Vd}.
 V_{d} = \left[ 2.085-0.12(1-SOC) \right] - \dfrac{I}{C_{10}} \left( \dfrac{4}{1+I^{1.3}} + \dfrac{0.27}{SOC^{1.5}}+0.02 \right) (1-0.007 \Delta T),
 \end{multline}
 
-\noindent where $C_{10}$ means 10h of rated capacity, which is standard on the manufacturer's data-sheet, $\Delta T$ is temperature variation ($\Delta T=T-T_{ref} $%, $ T_{ref}=25^{o}C $
-), $ SOC $ or state of charge indicates how much electric charge is stored in the cell at a given time. Mathematically, it is the ratio between the present capacity and the nominal capacity% (in $ Ah $, provided by manufacturer)
-. If $SOC=1$, then the battery is totally charged; and if $ SOC=0 $, then the battery is fully discharged.  %, defined by Equation \ref{eq:SOCbat}.
+\noindent where $C_{10}$ means 10 h of rated capacity (manufacturer's data-sheet), $\Delta T$ is temperature variation ($\Delta T=T-T_{ref} $%, $ T_{ref}=25^{o}C $
+), $ SOC $ or state of charge indicates how much electric charge is stored in the cell at a given time. %Mathematically, it is the ratio between the present capacity and the nominal capacity% (in $ Ah $, provided by manufacturer)
+%If $SOC=1$, then the battery is totally charged; and if $ SOC=0 $, then the battery is fully discharged.  %, defined by Equation \ref{eq:SOCbat}.
 %\begin{equation}
 %\label{eq:SOCbat}
 %SOC = \left( 1 - \dfrac{Q}{C} \right) 
@@ -628,7 +630,7 @@ The depth of discharge ($DOD$) or the fraction of discharge, is $DOC=1-SOC$.
 %\end{equation}
 %
 %Note that when the discharge current tends to zero at 25$^{o}$C, the maximum capacity that can be removed is about 67\% over the capacity.
-For the charging process, however, the parameters are described by ~\eqref{eq:Vcbat} as
+For the charging process, the parameters are described by Eq.~\eqref{eq:Vcbat} as
 %
 \begin{multline}
 \label{eq:Vcbat}
@@ -701,7 +703,7 @@ V_{c} = [2+0.16SOC]+ \dfrac{I}{C_{10}} \left( \dfrac{6}{1+I^{0.86}} + \dfrac{0.4
 %---------------------------------------------------------
 %Depending on the literature, the controller can receive different names: controller \cite{Hansen}, charge controller \cite{Mahanta} and \cite{Chauhan}, regulator \cite{Mellit}, DC-DC converter with MPPT and switch \cite{Dhanowa}, \cite{Yatimi}, \cite{Abdulateef}, \cite{Roy}. However, in this study, in order to simplify, the term used is controller. 
 
-The \textbf{charge controller} or controller can be defined as the responsible to manage the energy flow to PV system, batteries and loads by collecting information on the battery voltage and knowing the maximum and minimum values acceptable for the battery voltage. MPPT, or maximum power point tracking, is the electronic control mechanism mostly used nowadays and that maintains the PV operating at the stage of maximum power. %Controllers aim to protect the battery (or batteries) against the excessive charge and discharge \cite{Pinho}, improving its lifetime. 
+The \textbf{charge controller} or controller is the responsible to manage the energy flow to PV system, batteries and loads by collecting information on the battery voltage and knowing the maximum and minimum values acceptable for the battery voltage. Controllers with MPPT mechanism are the mostly used nowadays,  and it maintains the PV operating at the stage of maximum power. %Controllers aim to protect the battery (or batteries) against the excessive charge and discharge \cite{Pinho}, improving its lifetime. 
 %
 %The resource MPPT, called of maximum power point tracking, is an electronic control mechanism that maintains the PV operating in a voltage that correspond to the voltage of maximum power.
 %
@@ -713,7 +715,7 @@ The \textbf{charge controller} or controller can be defined as the responsible t
 %The controller allows the management of energy between the load and the battery \cite{Mellit}. 
 %The input signals for regulator model are the battery current ($ I_{br} $), PV generator's voltage ($ V_{PV} $), PV generator's current ($ I_{PV} $), and battery voltage ($ V_{b} $). The outputs are battery ($ I_{rb} $) current and used current ($ I_{u} $). 
 
-To protect the battery against an excessive charge, the PV arrays are disconnected from the system, when the terminal voltage increases above a certain threshold $V_{max \_ off}$ and when the current required by the load is less than the current delivered by the PV arrays~\cite{Hansen}. PV arrays are connected again when the terminal voltage decreases below a certain value $ V_{max \_ on} $. 
+The steps in the modeling of the controller process are summarized in Table~\ref{table:controller}. To protect the battery against an excessive charge, the PV arrays are disconnected from the system, when the terminal voltage increases above a certain threshold $V_{max \_ off}$ and when the current required by the load is less than the current delivered by the PV arrays~\citep{Hansen}. PV arrays are connected again when the terminal voltage decreases below a certain value $ V_{max \_ on} $. 
 %This can be done by using a switch with a hysteresis cycle, as illustrated in Fig. \ref{fig:controllerover}. 
 %
 %\begin{figure}[h]
@@ -723,7 +725,7 @@ To protect the battery against an excessive charge, the PV arrays are disconnect
 %\label{fig:controllerover}
 %\end{figure}
 %
-In order to protect the battery against excessive discharge, the load is disconnected when the terminal voltage falls below a certain threshold $V_{min \_ off}$ and when the current required by the load is larger than the current delivered by the PV arrays~\cite{Hansen}. The load is reconnected to the system, when the terminal voltage is above a certain value $V_{min \_ on}$.
+In order to protect the battery against excessive discharge, the load is disconnected when the terminal voltage falls below a certain threshold $V_{min \_ off}$ and when the current required by the load is larger than the current delivered by the PV arrays~\citep{Hansen}. The load is reconnected to the system, when the terminal voltage is above a certain value $V_{min \_ on}$.
 %, using a switch with a hysteresis cycle, as shown in Fig. \ref{fig:controllerdisc}. 
 %
 %\begin{figure}[h]
@@ -735,14 +737,12 @@ In order to protect the battery against excessive discharge, the load is disconn
 %
 %According to \cite{Lorenzo}, the switches may either be electromechanical (relay, contactors, etc.) or solid state (bipolar transistors, MOSFET's, etc.). 
 %
-The steps in the modeling of the controller process are summarized in Table~\ref{table:controller}.
-
 \begin{table}[!t]
 %% increase table row spacing, adjust to taste
 \renewcommand{\arraystretch}{1.3}
 % if using array.sty, it might be a good idea to tweak the value of
 % \extrarowheight as needed to properly center the text within the cells
-\caption{Summary of the controller process (adapted from~\cite{Hansen})}
+\caption{Summary of the controller process (adapted from~\citep{Hansen})}
 \label{table:controller}
 \centering
 %% Some packages, such as MDW tools, offer better commands for making tables
@@ -768,13 +768,13 @@ Step  & Constraint & Command\\
 %Regarding the DC-DC converter, the most basic idea is that the power is converted while altering the current and voltage. 
 %
 %As shown in \cite{Abdulateef}, the DC-DC converter is used to increase the efficiency of the PV system by matching the voltage generated by PV array to the voltage required by the load. 
-The output power ($ P_{out} $) of controller is given by \eqref{eq:poutcont}.
+The output power ($ P_{out} $) of controller is given by Eq. \eqref{eq:poutcont}.
 \begin{equation}
 \label{eq:poutcont}
 P_{in} \eta_{c} = P_{out}.
 \end{equation}
 
-Assuming that the efficiency of the controller ($ \eta_{c} $) is a manufacturer's data, from \eqref{eq:poutcont} we compute \eqref{eq:potcont}.
+Assuming that the efficiency of the controller ($ \eta_{c} $) is a manufacturer's data, from Eq. \eqref{eq:poutcont} we compute Eq. \eqref{eq:potcont}.
 \begin{equation}
 \label{eq:potcont}
 V_{in} I_{in} \eta_{c} = V_{out} I_{out},
@@ -842,8 +842,8 @@ V_{in} I_{in} \eta_{c} = V_{out} I_{out},
 %-----------------------------------------------
 %As shown by \cite{Mellit}, the PV arrays produce DC and therefore when the PV system contains an AC load, a DC/AC conversion is required. 
 %An inverter is a converter, where the power flows from DC to AC side, i.e., having a DC voltage as input; it produces AC voltage, as output. 
-The role of the \textbf{inverter} is to keep the voltage constant on the AC side, i.e., at the rated voltage, % (127 V or 220 V, for example), 
-and to convert the input power $ P_{in} $ into the output power $ P_{out} $ with the best possible efficiency $ \eta_{i} $ as described by \eqref{eq:efficinv} \cite{Hansen}:
+The role of the \textbf{inverter} is to keep the voltage constant on the AC side, %, i.e., at the rated voltage, % (127 V or 220 V, for example), 
+and to convert the input power $ P_{in} $ into the output power $ P_{out} $ with the best possible efficiency $ \eta_{i} $ as described by \eqref{eq:efficinv} \citep{Hansen}:
 %
 %The inverter is characterized by a power dependent efficiency $ \eta_{i} $ as shown by (\ref{eq:efficinv}) \cite{Hansen}.
 \begin{equation}
@@ -851,7 +851,7 @@ and to convert the input power $ P_{in} $ into the output power $ P_{out} $ with
 \eta_{i} = \dfrac{P_{out}}{P_{in}} = \dfrac{V_{AC} I_{AC} cos\varphi}{V_{DC}I_{DC}},
 \end{equation}
 
-\noindent where $ I_{DC} $ is the current required by the inverter from the DC source to be able to keep the rated voltage on the AC side, $ V_{DC} $ is the input voltage to the inverter delivered by the DC source (PV panel or battery),  $ V_{AC}  $ and $ I_{AC} $ are the output voltage and current, respectively, and $ cos \varphi $ can be obtained from the inverter's data-sheet.
+\noindent where $ I_{DC} $ is the current required by the inverter from the DC source to be able to keep the rated voltage on the AC side, $ V_{DC} $ is the input voltage to the inverter delivered by the DC source (PV panel or battery),  $ V_{AC}  $ and $ I_{AC} $ are the output voltage and current, respectively, and $ cos \varphi $ can be obtained from the inverter's manual.
 
 %Therefore, with this equation it is possible to simulate the output power of the inverter, based on information from the inverter's data-sheet and from the DC module or the PV panel that feed the inverter (which are obtained by this study model). 
 %
@@ -861,8 +861,8 @@ and to convert the input power $ P_{in} $ into the output power $ P_{out} $ with
 \label{sec:availability}
 %--------------------------------------------------
 %Each stand-alone PV system, like any other power systems, has a specific level of availability. This reliability level impacts various issues, as system performance, production, feasibility, and investment. 
-The availability of a stand-alone PV system can be defined as the percentage of time at which a power system is capable of meeting the load requirements~\cite{Khatib2014}. The number of hours that the system is available, divided by 8,760 h, gives the annual system availability.
-The system availability definition depends on how critical the load application is. For critical loads, 99\% is considered acceptable. While in a ordinary house electrical load, 95\% is considered acceptable. As an example, a system with 95\% availability is expected to meet the load requirement of 8,322 h during an average year for the entire useful life of the system. An annual availability of 99\% means that the system can operate the load for 8,672 h of the 8,760 h.
+The availability of a stand-alone PV system can be defined as the percentage of time at which a power system is capable of meeting the load requirements~\citep{Khatib2014}. The number of hours that the system is available, divided by 8,760 h, gives the annual system availability.
+The system availability definition depends on how critical the load application is. For critical loads, 99\% is considered acceptable. While in a ordinary house electrical load, 95\% is considered acceptable. %As an example, a system with 95\% availability is expected to meet the load requirement of 8,322 h during an average year for the entire useful life of the system. An annual availability of 99\% means that the system can operate the load for 8,672 h of the 8,760 h.
 %
 %With that in mind, it is important to mention that even if a formal verification or a simulation shows that a PV system fails, it doesn't mean that the sizing is wrong. It is important to evaluate how critical the load application is and the horizon of evaluation. However this analysis can be useful, for example, to improve the sized battery autonomy.
 %
@@ -870,27 +870,23 @@ The system availability definition depends on how critical the load application 
 \section{Automated Verification Using Model Checking}
 \label{sec:AutomatedVerification}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-Although simulation and testing explore possible behaviors and scenarios of a given system, they leave open the question of whether unexplored trajectories may contain a flaw~\cite{ClarkeHV18}. Formal verification conducts an exhaustive exploration of all possible behaviors; when a design is said to be ``correct'' by a formal verification method, it implies that all behaviors have been explored; questions regarding adequate coverage or missed behavior becomes irrelevant~\cite{Clarke2012}. Formal verification is a systematic approach that applies mathematical reasoning to obtain guarantees about the correctness of a system; one successful method in this domain is model checking~\cite{Clarke2012}. Here we evaluate three state-of-the-art model checkers to formally verifying PV designs w.r.t. user requirements.
+Although simulation and testing explore possible behaviors and scenarios of a given system, they leave open the question of whether unexplored trajectories may contain a flaw~\citep{ClarkeHV18}. Formal verification conducts an exhaustive exploration of all possible behaviors; when a design is said to be ``correct'' by a formal verification method, it implies that all behaviors have been explored; questions regarding adequate coverage or missed behavior becomes irrelevant~\citep{Clarke2012}. Formal verification is a systematic approach that applies mathematical reasoning to obtain guarantees about the correctness of a system; one successful method in this domain is model checking~\citep{Clarke2012}. Here we evaluate three state-of-the-art model checkers to formally verifying PV designs w.r.t. user requirements.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{CBMC}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-The C Bounded Model Checker (CBMC) falsifies assertions in C programs or proves that they are safe if a completeness threshold is given~\cite{Kroening}. CBMC implements a bit-precise translation of a C program, annotated with assertions and with loops unrolled up to a given depth, into a logical formula. If the formula is satisfiable, then a failing execution that leads to a violated assertion exists~\cite{Kroening}. CBMC's verification flow can be summarized in three stages: (i) Front-end: scans, parses and type-checks C code; it converts control flow elements, such as \textit{if} or \textit{switch} statements, loops and jumps, into equivalent guarded \textit{goto} statements, thus aiming to reduce verification effort; (ii) Middle-end: performs symbolic execution by eagerly unwinding loops up to a fixed bound, which can be specified by the user on a per-loop basis or globally, for all loops and finally; (iv) Back-end: supports SAT and SMT solvers to discharge verification conditions.
+The C Bounded Model Checker (CBMC) falsifies assertions in C programs or proves that they are safe if a completeness threshold is given~\citep{Kroening}. CBMC implements a bit-precise translation of a C program, annotated with assertions and with loops unrolled up to a given depth, into a logical formula. If the formula is satisfiable, then a failing execution that leads to a violated assertion exists~\citep{Kroening}. CBMC's verification flow can be summarized in three stages: (i) Front-end: scans, parses and type-checks C code; it converts control flow elements, such as \textit{if} or \textit{switch} statements, loops and jumps, into equivalent guarded \textit{goto} statements, thus aiming to reduce verification effort; (ii) Middle-end: performs symbolic execution by eagerly unwinding loops up to a fixed bound, which can be specified by the user on a per-loop basis or globally, for all loops and finally; (iv) Back-end: supports SAT and SMT solvers to discharge verification conditions.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{ESBMC}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-The Efficient SMT-based Bounded Model Checker (ESBMC) is a bounded and unbounded model checker for C programs~\cite{esbmc2018}, which supports the verification of LTL properties with bounded traces~\cite{DBLP:journals/sosym/MorseCN015}. ESBMC's verification flow can be summarized in three stages: (i) a front-end that can read and compile C code, where the system formal specification is first handled; (ii) preprocessing steps to deal with code representation, control flow and unwinding of loops, and model simplification, thereby aiming to reduce verification effort; and finally (iii) the SMT solving stage, where all constraints and properties of the system are encoded into SMT and checked for satisfiability. ESBMC exploits the standardized input language of SMT solvers (SMT-LIB\footnote{http://smtlib.cs.uiowa.edu/} logic format) to make use of a resource called \textit{assertion stack}~\cite{Morse2015}. This enables ESBMC, and the respective solver, to learn from previous checks, thus optimizing the search procedure and potentially eliminating a large amount of formula state space to be searched, because it solves and disregards data during the process, incrementally. This technique is called ``incremental SMT''~\cite{DBLP:journals/fac/SchrammelKBMTB17} and allows ESBMC to reduce the memory overhead, mainly when the verified system is complex and the computing platform does not have large amount of memory to deal with the entire design space state.
+The Efficient SMT-based Bounded Model Checker (ESBMC) is a bounded and unbounded model checker for C programs~\citep{esbmc2018}, which supports the verification of LTL properties with bounded traces~\citep{DBLP:journals/sosym/MorseCN015}. ESBMC's verification flow can be summarized in three stages: (i) a front-end that can read and compile C code, where the system formal specification is first handled; (ii) preprocessing steps to deal with code representation, control flow and unwinding of loops, and model simplification, thereby aiming to reduce verification effort; and finally (iii) the SMT solving stage, where all constraints and properties of the system are encoded into SMT and checked for satisfiability. ESBMC exploits the standardized input language of SMT solvers (SMT-LIB\footnote{http://smtlib.cs.uiowa.edu/} logic format) to make use of a resource called \textit{assertion stack}~\citep{Morse2015}. This enables ESBMC, and the respective solver, to learn from previous checks, thus optimizing the search procedure and potentially eliminating a large amount of formula state space to be searched, because it solves and disregards data during the process, incrementally. This technique is called ``incremental SMT''~\citep{DBLP:journals/fac/SchrammelKBMTB17} and allows ESBMC to reduce the memory overhead, mainly when the verified system is complex and the computing platform does not have large amount of memory to deal with the entire design space state.
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{CPAchecker}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-Automatic program verification requires a choice between precision and efficiency. The
-more precise a method, the fewer false positives it will produce, but also the more expensive it is, and thus applicable to fewer programs. Historically, this trade-off was
-reflected in two major approaches to static verification: program analysis and model
-checking. In order to experiment with the trade-off, and in order to be able to set the dial between the two extreme points, Configurable Program Analysis (CPA) provides a conceptual basis for expressing different verification approaches in the same formal setting. The CPA formalism provides an interface for the definition of program analyses. Consequently, CPAchecker provides an implementation framework that allows the seamless integration of program analyses that are expressed in the CPA framework. The comparison among different approaches in the same experimental setting is intended to be easy and the experimental results are expected to be more meaningful~\cite{Beyer2011}. Related to the architecture, the central data structure is a set of control-flow automata (CFA), which consists of control-flow locations and control-flow edges. The CPA framework provides interfaces to SMT solvers and interpolation procedures~\cite{Beyer2011}. %Currently, CPAchecker uses MathSAT as SMT solver; and CSIsat and MathSAT as interpolation procedures~\cite{Beyer2011}. %CPAchecker performs reachability analysis and operates on an object of the abstract data type CPA, i.e., the underlying verification algorithm applies operations from the CPA interface without knowing which concrete CPA it is analyzing. For most configurations, the concrete CPA will be a composite CPA, which implements the combination of different CPAs. \textcolor{red}{It is unclear what a CPA is.}
+Automatic program verification requires a choice between precision and efficiency. %The more precise a method, the fewer false positives it will produce, but also the more expensive it is, and thus applicable to fewer programs. 
+Historically, this trade-off was reflected in two major approaches to static verification: program analysis and model checking. In order to experiment with the trade-off, and in order to be able to set the dial between the two extreme points, Configurable Program Analysis (CPA) provides a conceptual basis for expressing different verification approaches in the same formal setting. The CPA formalism provides an interface for the definition of program analyses. Consequently, CPAchecker provides an implementation framework that allows the seamless integration of program analyses that are expressed in the CPA framework. The comparison among different approaches in the same experimental setting is intended to be easy and the experimental results are expected to be more meaningful~\citep{Beyer2011}. Related to the architecture, the central data structure is a set of control-flow automata (CFA), which consists of control-flow locations and control-flow edges. The CPA framework provides interfaces to SMT solvers and interpolation procedures~\citep{Beyer2011}. %Currently, CPAchecker uses MathSAT as SMT solver; and CSIsat and MathSAT as interpolation procedures~\cite{Beyer2011}. %CPAchecker performs reachability analysis and operates on an object of the abstract data type CPA, i.e., the underlying verification algorithm applies operations from the CPA interface without knowing which concrete CPA it is analyzing. For most configurations, the concrete CPA will be a composite CPA, which implements the combination of different CPAs. \textcolor{red}{It is unclear what a CPA is.}
 %In software verification, it is usual to take a considerable amount of effort to convert a verification idea into actual experimental results and CPAchecker aims to accelerate this process~\cite{Beyer2011}.
 %
 %
@@ -920,7 +916,7 @@ The flowchart of the automated verification method is illustrated in Fig.~\ref{f
 \end{figure}
 
 In Step 1, the PV input data %(e.g., load power demand and load energy consumption) 
-and the formulae to check the sizing project, the mathematical model, the limits of the weather non-deterministic variables, are all written as an ANSI-C code~\cite{ANSI2018}. In Step 2, the sizing check of the PV system takes place. Therefore this is a additional feature included at this paper. The sizing check will be performed by the proposed tool, and it will indicate if there is an error of sizing before to perform the automated verification of the system. This stage ensures that the system meets the standard project steps related to critical period method of sizing~\cite{Pinho}. 
+and the formulae to check the sizing project, the mathematical model, the limits of the weather non-deterministic variables, are all written as an ANSI-C code~\citep{ANSI2018}. In Step 2, the sizing check of the PV system takes place: it will indicate if there is an error of sizing before to perform the automated verification of the system. This stage ensures that the system meets the standard project steps related to critical period method of sizing~\citep{Pinho}. 
 %
 In Step 3, weather variables (e.g., solar irradiance and ambient temperature) will be systematically explored by our verification engine based on maximum and minimum values from the site, where the PV system will be deployed. 
 %As a consequence, all the formulae of the employed mathematical models will also be updated. 
@@ -932,7 +928,7 @@ In addition, depending on one of the desired properties of the system such as ba
 %\textcolor{red}{In the following paragraph you should related the output of our verification engine with the description of the BMC SAT or UNSAR given above. For example, what does a failure mean? is it SAT?}
 In a nutshell, the model checker will process the ANSI-C code with constraints %($C$) 
 and properties %($P$) 
-from the PV system that are provided by the user, and the tool will automatically verify if the PV system requirements are met. If it returns a failure (i.e., SAT), then the tool provides a counterexample, i.e., a sequence of states that leads to the property violation; this information can be used as a feedback to improve the PV system design. However, if the verification succeeds (i.e., UNSAT), there is no failure up to the bound $k$; therefore, the PV system will present its intended behavior up to the bound $k$.
+from the PV system, and the tool will automatically verify if the PV system requirements are met. If it returns a failure (i.e., SAT), then the tool provides a counterexample, i.e., a sequence of states that leads to the property violation; this information can be used as a feedback to improve the PV system design. However, if the verification succeeds (i.e., UNSAT), there is no failure up to the bound $k$; therefore, the PV system will present its intended behavior up to the bound $k$.
 %, i.e., our verification engine does not give any guarantee that there is no error in bound $k+1$ unless some induction method is employed~\cite{DBLP:journals/sttt/GadelhaIC17}.
 %
 %
@@ -949,21 +945,21 @@ from the PV system that are provided by the user, and the tool will automaticall
 %
 %As demonstrated at this work, the performance of the system is highly dependent of solar irradiance and temperature, that are specific of the deployed local (latitude and longitude). 
 
-Algorithm~\ref{alg:verification-algorithm} describes the pseudo-code used to perform the automated verification. %Line 1 indicates a function call that performs the size checking of the each component of the PV system. %: using Equations \eqref{eq:NTPmin}, \eqref{eq:NTP}, \eqref{eq:NPSmin}, \eqref{eq:NPS}, \eqref{eq:NPP}, and \eqref{eq:NPPmin} to verify the PV panel; using \eqref{eq:Cbank}, \eqref{eq:Nbtotal}, and \eqref{eq:batcheck} to verify the batteries; using \eqref{eq:vcvsystem}, \eqref{eq:icmin}, and \eqref{eq:icicmin} to verify the charge controller; and using \eqref{eq:vindc}, \eqref{eq:voutac}, and \eqref{eq:invcheck} to verify the inverter. 
+Algorithm~\ref{alg:verification-algorithm} describes the equivalent pseudo-code. %Line 1 indicates a function call that performs the size checking of the each component of the PV system. %: using Equations \eqref{eq:NTPmin}, \eqref{eq:NTP}, \eqref{eq:NPSmin}, \eqref{eq:NPS}, \eqref{eq:NPP}, and \eqref{eq:NPPmin} to verify the PV panel; using \eqref{eq:Cbank}, \eqref{eq:Nbtotal}, and \eqref{eq:batcheck} to verify the batteries; using \eqref{eq:vcvsystem}, \eqref{eq:icmin}, and \eqref{eq:icicmin} to verify the charge controller; and using \eqref{eq:vindc}, \eqref{eq:voutac}, and \eqref{eq:invcheck} to verify the inverter. 
 %The verification is carried out by the \textit{assert} macro from the ANSI-C programming language to encode each equation of sizing check. The argument to the \textit{assert} statement must be \textit{true} if the system specification is met; otherwise, the program aborts and prints a counterexample indicating a property violation. If there is no property violation, then the verification algorithm continues and 
 In order to reduce the computational effort of the algorithm,
 % caused by the state explosion inherent of the technique, 
-every 24h-day was considered as a time-step of 1 hour, and it was split into two parts: (a) one where it is possible to occur PV generation, during daylight, with a duration in hours depending on each site (but dependent on the sun and weather conditions); and (b) one that includes all the remaining day (without any PV generation), when the batteries are demanded to feed the house.
+every 24 h-day was considered as a time-step of 1 hour, and it was split into two parts: (a) one where it is possible to occur PV generation, during daylight, with a duration in hours depending on each site (but dependent on the sun and weather conditions); and (b) one that includes all the remaining day (without any PV generation), when the batteries are demanded to feed the house.
 
-Lines 1 is devoted to information from the location where the PV system will be/were deployed. Usually the information of annual average minimum and maximum, related to temperature ($T$) and solar irradiance ($G$), hour by hour, are obtained from specific historical weather web sites~\cite{Temperature}, ~\cite{Irradiance}.
+Lines 1 is devoted to information from the location where the PV system will be/were deployed. We use annual average minimum and maximum, related to temperature ($T$) and solar irradiance ($G$), hour by hour, from~\citep{Temperature}, and ~\citep{Irradiance}.
 
-Line 2 represents all the information that comes from the PV sizing and from the equipment manufacturers data, as PV panels specification and data, batteries specification and data, inverter details and charge controller details. This item includes as well information from the house's load curve.
+Line 2 represents all the information that comes from the PV sizing and from the equipment manufacturers data: specification and data from PV, batteries, inverter and charge controller. This item includes as information from the house's load curve.
 
-The first automated verification is related to the sizing check (line 3). Then two functions, called at lines 4 and 5, are responsible for discover which hour starts the PV generation and when stops. Those functions get this information from the array inputted to the Algorithm with the solar irradiance values.
+The first automated verification is related to the sizing check (line 3), if an error is found then the algorithm stops. Then two functions, called at lines 4 and 5, are responsible for discover which hour starts the PV generation and when stops. Those functions get this information from the array inputted to the Algorithm with the solar irradiance values.
 
 The batteries are assumed to be charged, i.e., with SOC of 100\% (line 6).
 
-The first for-loop at line 7 controls how many cycles of 24h will be performed by the Algorithm.  And the for-loop from lines 8 to 11 is responsible to discharge the battery (according the load curve) and verify the state of charge of the battery, hour-by-hour, starting at the first hour of the day after the sun goes down until the next day before the sun goes up (when there is not PV generation). Following, at the next for-loop, from line 12 to 29, is performed the verification where there is solar irradiance and all the PV system works. The Algorithm generates information related to average temperature ($T$) and solar irradiance ($G$), maximum and minimum annual, hour-by-hour, using non-deterministic variables from model checker to explore all possible states and the \textit{assume} macro to constrain the non-deterministic values using a given range (lines 15 and 16). 
+The first for-loop at line 7 controls how many cycles of 24 h will be performed by the Algorithm.  And the for-loop from lines 8 to 11 is responsible to discharge the battery (according the load curve) and verify the state of charge of the battery, hour-by-hour, starting at the first hour of the day after the sun goes down until the next day before the sun goes up (without PV generation). Following, at the next for-loop, from line 12 to 29, is performed the verification where there is solar irradiance and all the PV system works. The Algorithm generates information related to average temperature ($T$) and solar irradiance ($G$), hour-by-hour, using non-deterministic variables from model checker to explore all possible states and the \textit{assume} macro to constrain the non-deterministic values using a given range (lines 15 and 16). 
 %and irradiance varies from 0 W/m$^{2}$ to 852 W/m$^{2}$ (with minimum of 274 W/m$^{2}$ during the daytime, when there is sunlight). 
 %there is PV generation only between 8:00 h and 16:00 h every day, 
 %with zero electric energy generation from 18:00 h to 6:00 h of the next day; and with insignificant generation from 6:00 h to 8:00 h, and from 16:00 h to 18:00 h of the same day. 
@@ -972,7 +968,7 @@ After that, the model from PV generator is used in the function call of line 17,
 
 At the end of last for-loop, the state of the batteries is verified again (line 27) and the hour is adjusted to the next loop (line 28).
 
-Nevertheless, if the verification engine does not fail, then we can conclude that the PV system does not need further corrections up to the given bounds $k$.
+Nevertheless, if the verification engine does not fail, we can conclude that the PV system does not need further corrections up to the given bound $k$.
 %
 %\textcolor{red}{this sentence is unclear... After this process is started the battery autonomy verification, from line 31}. \textcolor{red}{this sentence is unclear... Based on the fact that won't be PV generation after a given time of the day, the algorithm will only discharge the batteries until a new charging process (at the next day) to start.} \textcolor{red}{what do you mean by The formal verification is guaranteed?...  The formal verification is guaranteed by  macro to specific variables of the model, according lines 27 and 35.}
 % and the non-deterministic variables $G$ and $T$ are considered during the formal verification of the system, otherwise, during the other two periods, there is no PV generation and just the power consumption from the backup batteries. 
@@ -982,7 +978,6 @@ Nevertheless, if the verification engine does not fail, then we can conclude tha
  \caption{Model checking algorithm for stand-alone PV}
  \begin{algorithmic}[1]
  \begin{scriptsize}
- 
  \renewcommand{\algorithmicrequire}{\textbf{Input:}}
  \renewcommand{\algorithmicensure}{\textbf{Output:}}
   \STATE $declare \, min \, and \, max \, solar \, irradiation[24h], \, and \, temperature[24h]$\\
@@ -991,7 +986,6 @@ Nevertheless, if the verification engine does not fail, then we can conclude tha
   \STATE $startPVgeneration \leftarrow findStartPVgeneration()$ \\
   \STATE $endPVgeneration \leftarrow findEndPVgeneration()$ \\
   \STATE $SOC \leftarrow 100\%$ \\
-
 %  \COMMENT {Starting with the PV generation time}
 % \\ 
 %\textit{LOOP Process}
@@ -1031,7 +1025,7 @@ Nevertheless, if the verification engine does not fail, then we can conclude tha
 %
 %If the verification founds a situation where the electrical demand of the house is not met, then the algorithm presents a counterexample of this combination. And this information can be used by the designer to improve the system.
 %if it was a project error or if it was a combination of variables from the nature that has a low probability to occur at the field, considering the intermittent characteristic of solar PV generation.
-
+%
 %\subsection{Subsection Heading Here}
 %Subsection text here.
 % needed in second column of first page if using \IEEEpubid
@@ -1140,13 +1134,12 @@ Nevertheless, if the verification engine does not fail, then we can conclude tha
 %
 %\textcolor{red}{https://ssvlab.github.io/lucasccordeiro/papers/cav2017.pdf}
 %
-
 %------------------------------------------
 \subsection{Description of the Case Studies}
 %------------------------------------------
 %
 %We have performed five case studies to evaluate our proposed verification method: (a) four PV systems (three in series 325W PV panels, four 220 Ah batteries in a configuration with two series and two parallel with 48h autonomy, 700 W inverter with peak power of 1,600W, charge controller with MPPT with 35A/150V of capacity) deployed in four different houses in an indigenous community (GPS coordinates 2$^{o}$44'50.0"S 60$^{o}$25'47.8"W) situated nearby Manaus (Brazil), with each house having a different power demand (house 1 = 253 W, house 2 = 263 W, house 3 = 283 W, and house 4 = 501 W); and (b) one case concerning a system deployed as an individual system in Manaus (GPS coordinates 3$^{o}$4'20.208"S 60$^{o}$0'30.168"W), supporting 915 W of the house's load (house 5 with four 325W PV panels in a configuration two series and two parallel, four 120Ah batteries in series and autonomy of just 6 h, 1,200 W inverter with surge of 1,600 W, charge controller with MPPT of 150V/35A). 
-We have performed five case studies to evaluate the proposed approach as described in Table~\ref{tab2}. Furthermore, three start-of-art verification tools, as described in Section~\ref{sec:AutomatedVerification} (ESBMC, CBMC, and CPAchecker), and HOMER Pro simulation tool were used to compare the approach effectiveness and efficiency.
+We have performed five case studies to evaluate the proposed approach as described in Table~\ref{tab2}. %Furthermore, three start-of-art verification tools, as described in Section~\ref{sec:AutomatedVerification} (ESBMC, CBMC, and CPAchecker), and HOMER Pro simulation tool were used to compare the approach effectiveness and efficiency.
 \begin{table}
 \caption{Case studies: stand-alone solar PV systems.}\label{tab2}
 \begin{scriptsize}
@@ -1156,15 +1149,15 @@ We have performed five case studies to evaluate the proposed approach as describ
 Item & House 1 & House 2 & House 3 & House 4 & House 5\\
 \hline
 \hline
-PV Panels &  \multicolumn{4}{|c|}{3x 325W: in series} & 4x 325W: 2x series, 2x parallel \\
+PV Panels &  \multicolumn{4}{|c|}{3x 325 W: in series} & 4x 325 W: 2x series, 2x parallel \\
 \hline
-Batteries & \multicolumn{4}{|c|}{\makecell{4x220Ah: 2x series, 2x parallel\\ autonomy: 48h}} & \makecell{4x 120Ah batteries in series\\ autonomy: 6h}\\
+Batteries & \multicolumn{4}{|c|}{\makecell{4x220 Ah: 2x series, 2x parallel\\ autonomy: 48 h}} & \makecell{4x 120 Ah batteries in series\\ autonomy: 6 h}\\
 \hline
-Charge Controller & \multicolumn{5}{|c|}{With MPPT of 150V/35A}\\
+Charge Controller & \multicolumn{5}{|c|}{With MPPT of 150 V/35 A}\\
 \hline
-Inverter & \multicolumn{4}{|c|}{700W with peak of 1,600W} & 1,200W with peak of 1,600W\\
+Inverter & \multicolumn{4}{|c|}{700 W, peak of 1,600 W} & 1,200 W, peak of 1,600 W\\
 \hline
-Power demand & 253W & 263W & 283W & 501W & 915W\\
+Power demand & 253 W & 263 W & 283 W & 501 W & 915 W\\
 \hline
 GPS Coordinates & \multicolumn{4}{|c|}{\makecell{2$^{o}$44'50.0"S 60$^{o}$25'47.8"W\\}} & \makecell{3$^{o}$4'20.208"S \\60$^{o}$0'30.168"W}\\
 \hline
@@ -1174,7 +1167,6 @@ Details & \multicolumn{4}{|c|}{\makecell{Riverside indigenous community\\Rural A
 \end{tabular}
 \end{scriptsize}
 \end{table}
-
 %------------------------------------------
 \subsection{Objectives and Setup}
 \label{sec:setup}
@@ -1190,13 +1182,14 @@ Our experimental evaluation aims to answer two research questions:
 %
 All experiments were conducted on an otherwise idle Intel Xeon CPU E5-4617 (8-cores) with 2.90 GHz and 64 GB of RAM, running Ubuntu 16.04 LTS 64-bits. The setup of HOMER Pro v3.12.0: Intel Core i5-4210 (4-cores), with 1.7 GHz and 4 GB of RAM, running Windows 10. The experiments were performed with timeout of 14,400 seconds.
 
-Verification engine ESBMC, version v6.0.0 was used with the SMT solver Boolector version 3.0.1~\cite{Brummayer}\footnote{Command-line: \$ esbmc filename.c -\phantom{}-no-bounds-check -\phantom{}-no-pointer-check -\phantom{}-unwind 100 -\phantom{}-boolector}; and an alternative ESBMC v6.0.0 was used with the SMT incremental mode\footnote{Command-line: \$ esbmc filename.c -\phantom{}-no-bounds-check -\phantom{}-no-pointer-check -\phantom{}-unwind 100 -\phantom{}-smt-during-symex -\phantom{}-smt-symex-guard -\phantom{}-z3} enabled with the goal of reducing memory usage; we have also used the SMT solver Z3 version 4.7.1~\cite{DeMoura}.
+Verification engine ESBMC, version v6.0.0 was used with the SMT solver Boolector version 3.0.1~\citep{Brummayer}\footnote{Command-line: \$ esbmc filename.c -\phantom{}-no-bounds-check -\phantom{}-no-pointer-check -\phantom{}-unwind 100 -\phantom{}-boolector}; and an alternative ESBMC v6.0.0 was used with the SMT incremental mode\footnote{Command-line: \$ esbmc filename.c -\phantom{}-no-bounds-check -\phantom{}-no-pointer-check -\phantom{}-unwind 100 -\phantom{}-smt-during-symex -\phantom{}-smt-symex-guard -\phantom{}-z3} enabled; % with the goal of reducing memory usage; we have also used 
+with SMT solver Z3 version 4.7.1~\citep{DeMoura}.
 
-Verification engine CBMC 5.11 and MiniSat 2.2.1 were used in the comparison~\cite{Kroening}\footnote{Command-line: \$ cbmc filename.c -\phantom{}-unwind 100 -\phantom{}-trace}.
+Verification engine CBMC 5.11 and MiniSat 2.2.1 were used in the comparison~\citep{Kroening}\footnote{Command-line: \$ cbmc filename.c -\phantom{}-unwind 100 -\phantom{}-trace}.
  
 % enabled with the goal of reducing memory usage; 
 %The experiments were performed without a predefined timeout.
-Verification engine CPAchecker 1.8 was used \footnote{Command-line: \$ scripts/cpa.sh -heap 64000m -stack 10240k -config config/bmc-incremental.properties -spec config/specification/sv-comp-reachability.spc filename.c}, with the SMT solver MathSAT version 5.5.3~\cite{mathsat5}. An alternative CPAchecker configuration was tried as well, using BMC k-induction option, but without improvements of performance or soundness.
+Verification engine CPAchecker 1.8 was used \footnote{Command-line: \$ scripts/cpa.sh -heap 64000m -stack 10240k -config config/bmc-incremental.properties -spec config/specification/sv-comp-reachability.spc filename.c}, with the SMT solver MathSAT version 5.5.3~\citep{mathsat5}. An alternative CPAchecker configuration was tried as well, using BMC k-induction option, but without improvements of performance or soundness.
 % enabled with the goal of reducing memory usage; 
  %The experiments were performed without a predefined timeout.
 
@@ -1211,7 +1204,7 @@ Verification engine CPAchecker 1.8 was used \footnote{Command-line: \$ scripts/c
 %\item[RQ2] \textbf{(performance)} How does our approach compare against other existing tools?
 %
 Table~\ref{cases} summarizes the results. The times reported in Table~\ref{cases} answer RQ2. 
-Note that an UNKNOWN result from our verification engines does not mean that a failure was found (i.e., SAT) neither that the verification is successful (i.e., UNSAT). An UNKNOWN result indicates that the verification engine led to  an \textit{out of memory} or a \textit{time out} situation.
+Note that an UNKNOWN result from our verification engines does not mean that a failure was found neither that the verification is successful: it indicates that the verification engine led to an \textit{out of memory} or a \textit{time out} situation.
 
 %HOMER Pro result: the $1,200$W was the only one that was proved to not meet the requirement of battery autonomy; all the 700W systems had no indication of flaws during simulation. The simulation took less than five seconds to be performed on each case study.
 %
@@ -1227,13 +1220,13 @@ Note that an UNKNOWN result from our verification engines does not mean that a f
 Case &  \makecell{ESBMC 6.0.0\\(Boolector 3.0.1)} & \makecell {ESBMC 6.0.0\\(Z3 4.7.1)} & \makecell{CBMC 5.11\\(MiniSat 2.2.1)} & \makecell{CPAchecker 1.8\\(MathSAT 5.5.3)}\\
 \hline
 \hline
-House 1 &  \makecell{Out of memory \\(UNKNOWN)} & \makecell{5m08s \\(UNSAT)} & \makecell{19m02s \\(UNSAT)} & \makecell{Time out \\ (UNKNOWN)}\\
+House 1 &  \makecell{Out of memory \\(UNKNOWN)} & \makecell{05 m 08 s \\(UNSAT)} & \makecell{19 m 02 s \\(UNSAT)} & \makecell{Time out \\ (UNKNOWN)}\\
 \hline
-House 2 &  \makecell{Out of memory \\(UNKNOWN)} & \makecell{4m27s \\(UNSAT)} & \makecell{18m59s \\(UNSAT)} & \makecell{Time out \\ (UNKNOWN)}\\
+House 2 &  \makecell{Out of memory \\(UNKNOWN)} & \makecell{04 m 27 s \\(UNSAT)} & \makecell{18 m 59 s \\(UNSAT)} & \makecell{Time out \\ (UNKNOWN)}\\
 \hline
-House 3 &  \makecell{Out of memory \\(UNKNOWN)} & \makecell{5m07s \\(UNSAT)} & \makecell{18m39s \\(UNSAT)} & \makecell{Time out \\ (UNKNOWN)}\\
+House 3 &  \makecell{Out of memory \\(UNKNOWN)} & \makecell{05 m 07 s \\(UNSAT)} & \makecell{18 m 39 s \\(UNSAT)} & \makecell{Time out \\ (UNKNOWN)}\\
 \hline
-House 4 &  \makecell{Out of memory \\(UNKNOWN)} & \makecell{4m37s \\(UNSAT)} & \makecell{18m36s \\(UNSAT)} & \makecell{Time out \\ (UNKNOWN)}\\
+House 4 &  \makecell{Out of memory \\(UNKNOWN)} & \makecell{04 m 37 s \\(UNSAT)} & \makecell{18 m 36 s \\(UNSAT)} & \makecell{Time out \\ (UNKNOWN)}\\
 \hline
 House 5 &  \makecell{Out of memory \\(UNKNOWN)} & \makecell{$\leq$ 1 sec \\(SAT Line 337)} & \makecell{$\leq$ 1 sec \\(SAT Line 337)} & \makecell{6 sec \\ (SAT line 337)}\\
 \hline
@@ -1244,14 +1237,14 @@ House 5 &  \makecell{Out of memory \\(UNKNOWN)} & \makecell{$\leq$ 1 sec \\(SAT 
 
 The description of our experimental results can be broken down into three parts, one for each verification engine: ESBMC, CBMC, and CPAchecker. 
 
-Related to ESBMC, we have tried two possibilities: one with Boolector and another one with Z3. The incremental option, which uses less memory, can be performed with Z3 only since ESBMC does not support the incremental mode with Boolector yet. Using ESBMC with Boolector led to an out of memory situation in all the case studies. This result was obtained in less than six minutes of execution, i.e., the 64GB of RAM were consumed by the verification engine and the processes were killed, thus leading to an UNKNOWN result returned by ESBMC as shown in the first column of Table~\ref{cases}. However, running the same version of ESBMC but using incremental solving with Z3, the experimentation returned SAT or UNSAT to all the case studies. Related to the cases that use a 700 W PV system, ESBMC could not reach an error in all the four houses and the execution time took from 4m27s to 5m08s. However the 1,200 W PV system (house 5) failed (SAT) in line 337 of the code, thereby indicating that the system is \textit{incorrectly} sized; in particular, the counterexample provided by the verification engine indicated that the nominal current from the charge controller is less than the minimum current demanded by the PV system, therefore the equipment chosen is not suitable to meet the design requirements.
-This verification took less than 1s to be performed, as indicated in the last line of Table~\ref{cases}, and it is faster than the previous analysis because ESBMC stops during the sizing check, which is in line 3 of Algorithm~\ref{alg:verification-algorithm}, and does not perform the rest of verification code. 
+Related to ESBMC, we have tried two possibilities: one with Boolector and another one with Z3. The incremental option, which uses less memory, can be performed with Z3 only since ESBMC does not support the incremental mode with Boolector yet. Using ESBMC with Boolector led to an out of memory situation in all the case studies. This result was obtained in less than six minutes of execution, i.e., the 64 GB of RAM were consumed by the verification engine and the processes were killed, thus leading to an UNKNOWN result returned by ESBMC as shown in the first column of Table~\ref{cases}. However, running the same version of ESBMC but using incremental solving with Z3, the experimentation returned SAT or UNSAT to all the case studies. Related to the cases that use a 700 W PV system, ESBMC could not reach an error in all the four houses and the execution time took from 04 m 27 s to 05 m 08 s. However the 1,200 W PV system (house 5) failed (SAT) in line 337 of the code, thereby indicating that the system is \textit{incorrectly} sized; in particular, the counterexample provided by the verification engine indicated that the nominal current from the charge controller is less than the minimum current demanded by the PV system, therefore the equipment chosen is not suitable to meet the design requirements.
+This verification took less than 1 s to be performed, as indicated in the last line of Table~\ref{cases}, and it is faster than the previous analysis because ESBMC stops during the sizing check, which is in line 3 of Algorithm~\ref{alg:verification-algorithm}, and does not perform the rest of verification code. 
 
-Concerning the CBMC tool, similar results were obtained, but with some slower time. The experimentation returned SAT or UNSAT to all the case studies. Related to the 700 W PV systems, the tool could not reach an error in all the four houses and the execution time took from 18m36s to 19m02s. However the 1,200 W PV system (house 5) failed (SAT) in line 337 of the code; with the same counterexample presented by ESBMC. This verification took less than 1s to be performed as well. 
+Concerning the CBMC tool, similar results were obtained, but with some slower time. The experimentation returned SAT or UNSAT to all the case studies. Related to the 700 W PV systems, the tool could not reach an error in all the four houses and the execution time took from 18 m 36 s to 19 m 02 s. However the 1,200 W PV system (house 5) failed (SAT) in line 337 of the code; with the same counterexample presented by ESBMC. This verification took less than 1 s to be performed as well. 
 
-Finally, the CPAchecker tool presented some different results. Even using two different configuration possibilities, as described in Section~\ref{sec:setup}, the verification engine presented an UNKNOWN result for all the 700W systems. This is because the \textit{time out} limit was reached, i.e., after 4 hours of execution the tool was unable to decide if the verification was SAT or UNSAT. However, when verifying the 1,200W PV system, the tool presented a SAT message equal to the other engines. 
+Finally, the CPAchecker tool presented some different results. Even using two different configuration possibilities, as described in Section~\ref{sec:setup}, the verification engine presented an UNKNOWN result for all the 700 W systems. This is because the \textit{time out} limit was reached, i.e., after 4 hours of execution the tool was unable to decide if the verification was SAT or UNSAT. However, when verifying the 1,200 W PV system, the tool presented a SAT message equal to the other engines. 
 
-In order to validate the possible flaw from house 5, we have surveyed the owner of the 1,200 W system. We identified that, in fact, the system does not meet the battery autonomy when all loads are turned on, and this was double checked with the monitoring system from the charge controller, which showed that the maximum power or surge power were not exceeded, thus affirming RQ1; this behavior is expected since the system was purchased as an off-the-shelf solution and not as a customized design for the electrical charges of the house. The same process of validation was done to the houses 1, 2, 3 and 4, which use the 700 W PV systems: from July of 2018 to March 2019, a monthly visiting was performed to apply a survey to the dwellers and to collect data from a local monitoring system: not every month the four dwellers reported some energy interruption of the PV system, normally in raining or clouds days, thereby reaching the situation described in Step 3 of Table~\ref{table:controller}. However, even when an interruption is reported in a month, this represents around 3.33\% of interruption for the entire period ($1/30$), which indicates 96.97\% of availability of the PV system %($96.67\% = 100\%-3.33\%$) 
+In order to validate the possible flaw from house 5, we have surveyed the owner of the 1,200 W system. We identified that, in fact, the system does not meet the battery autonomy when all loads are turned on, and this was double checked with the monitoring system from the charge controller, which showed that the maximum power or surge power were not exceeded, thus affirming RQ1; this behavior is expected since the system was purchased as an off-the-shelf solution and not as a customized design for the electrical charges of the house. The same process of validation was done to the houses 1, 2, 3 and 4, which use the 700 W PV systems: from July of 2018 to March 2019, a monthly visiting was performed to apply surveys to the dwellers and to collect data from a local monitoring system: not every month were reported some energy interruption of the PV systems. However, even when one interruption is reported in a month, this represents around 3.33\% of interruption for the entire period ($1/30$), which indicates 96.97\% of availability of the PV system %($96.67\% = 100\%-3.33\%$) 
 and it is in accordance to what was described in Section~\ref{sec:availability}, because the type of electrical load of the houses is not critical; this situation is considered an energy interruption, but is not considered a system flaw, further affirming RQ1.
 %\begin{figure}[h]
 %\includegraphics[width=0.65\textwidth]{loadcurve.png}
@@ -1311,7 +1304,7 @@ The adoption of more complex models, or even an evaluation in a PV laboratory to
 \section{Conclusions and Future Work}
 \label{sec:Conclusions}
 %-------------------------------------
-We have described and evaluated an automated verification method to check whether a given PV system meets its specification using software model checking techniques. We have considered five case studies from real PV systems deployed in five different sites, ranging from $700$ W to $1,200$ W; and three state-of-art verification engines were considered (ESBMC, CBMC, and CPAchecker). Although the verification method proposed takes longer than simulation methods, it is able to present details (counterexample) that lead to failures in a PV system that is not a feature presented in commercial simulation tool. In particular, the proposed method was successful in finding sizing errors and indicating in which conditions a PV system can fail. Related to the verification engines comparative, the ESBMC tool with the Z3 solver executed in the incremental configuration presented the better performance (around four times faster than CBMC), used less RAM memory (less than 2GB when compared to 9.2GB of CBMC and 19.2GB of CPAchecker), and all the results were correct because the simulation tool presented the same results, besides the fact that interviews with the dwellers validated the possible flaws that the system could be presenting in the field.
+We have described and evaluated an automated verification method to check whether a given PV system meets its specification using software model checking techniques. We have considered five case studies from real PV systems deployed in five different sites, ranging from $700$ W to $1,200$ W; and three state-of-art verification engines were considered (ESBMC, CBMC, and CPAchecker). Although the verification method proposed takes longer than simulation methods, it is able to present details that lead to failures in a PV system that is not a feature presented in commercial simulation tool. In particular, the proposed method was successful in finding sizing errors and indicating in details. Related to the verification engines comparative, the ESBMC with the Z3 solver executed in the incremental configuration presented the better performance (around four times faster than CBMC), used less RAM memory (less than 2GB when compared to 9.2GB of CBMC and 19.2GB of CPAchecker), and all the results were sound because the PV owners and the monitoring system validated the possible flaws that the system could be presenting in the field.
 %New tests must be performed, in an improved setup (i.e., better computing performance) with the goal of obtaining verification results in shorter times than the ones obtained in this study. 
 As future work, we will also consider other types of renewable energy and even hybrid ones to allow our method to verify typical rural electrification.
 %the proposed method will be extended to start from a list of commercial equipment, where each equipment is verified and the final solution, which satisfies the project specification, is found, thus leading to an optimum sizing of PV systems. 
@@ -1342,7 +1335,7 @@ As future work, we will also consider other types of renewable energy and even h
 %Appendix two text goes here.
 % use section* for acknowledgment
 \section*{Acknowledgments}
-The authors would like to thank Coventry University for the availability of the case studies  and to support the research mobility. This work was supported by Newton Fund [grant number 261881580] with the research mobility; FAPEAM - Amazonas State Foundation for Research Support [grants from call 009/2017 and PROTI Pesquisa 2018], for the financial support related to the Virtual Machine (DEC-2018 to JAN-2019), for the DCTIEX II scholarship (NOV-2018), and for support the research mobility to UK; and FAS - Sustainable Amazonas Foundation for the PhD scholarship (NOV-2017 to MAR-2019).
+The authors would like to thank: (i) Coventry University for the case studies and for the research mobility; (ii) Newton Fund [grant number 261881580] for the research mobility support; (iii) FAPEAM - Amazonas State Foundation for Research Support [grants 009/2017 and PROTI-Pesquisa 2018], for the Virtual Machine rent (DEC-2018 to JAN-2019), for the DCTIEX II scholarship (NOV-2018), and for support the research mobility to UK; and (iv) FAS - Sustainable Amazonas Foundation for the PhD scholarship (NOV-2017 to MAR-2019).
 
 %\section*{References}
 
