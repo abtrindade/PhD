@@ -1,0 +1,50 @@
+rev4 - 40 equipment list
+
+Case 1-----------------------------------
+
+PanelChoice: 4U
+BatteryChoice: 1U
+ControllerChoice: 1U
+InverterChoice: 2U
+NTP: 1
+NPS: 1
+NPPmin: 1
+NPP: 1
+NBS: 2
+NBP: 4
+NBtotal: 8
+USD: 1,952.60
+Time:4518 s = 75.3 min
+
+
+Case 2-----------------------------------
+PanelChoice: 5U
+BatteryChoice: 6U
+ControllerChoice: 6U
+InverterChoice: 2U
+NTP: 3
+NPS: 3
+NPPmin: 1
+NPP: 1
+NBS: 2
+NBP: 1
+NBtotal: 2
+Fobj: USD 1,810.75
+Time:4353 s = 72.55 min
+
+Case 3-----------------------------------
+PanelChoice: 0U
+BatteryChoice: 7U
+ControllerChoice: 3U
+InverterChoice: 2U
+NTP: 2
+NPS: 2
+NPPmin: 1
+NPP: 1
+NBS: 2
+NBP: 1
+NBtotal: 2
+Fobj: 1.8317501544952393
+Time: 4098 s = 68.3 min
+
+
