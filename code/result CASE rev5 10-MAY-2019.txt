@@ -1,0 +1,31 @@
+CASE 5: 40 equipment, improved loop to HintCost
+
+CASE 1-------------------------------
+PanelChoice: 4U Kyocera KU340-8BCA
+BatteryChoice: 1U Moura 12MF105
+ControllerChoice: 1U 1U (victron MPPT 15-75)
+InverterChoice: 0U Phoenix 24-800
+NTP: 1 (1S)
+NBtotal: 8 (2S-4P)
+Fobj: 1902.5999755859375
+Time: 9383 s = 156.38 min = 2.60 h
+
+CASE 2-------------------------------
+PanelChoice: 0U (Canadian CS6U-315)
+BatteryChoice: 1U Moura 12MF105
+ControllerChoice: 4U Epever (TRIRON 2210N 20A 12/24V)
+InverterChoice: 2U (Epever IP1500-11)
+NTP: 2 (2S)
+NBtotal: 2 (2S)
+Fobj: 1419.050048828125
+Time: 8738 = 145.3 min = 2.42h
+
+CASE 3-------------------------------
+PanelChoice: 8U (Risen RSM36-6-150P)
+BatteryChoice: 0U (moura (12MF80)
+ControllerChoice: 1U (victron MPPT 15-75)
+InverterChoice: 2U (Epever IP1500-11)
+NTP: 4 (4S)
+NBtotal: 4 (2S-2P)
+Fobj: 1441.4000244140625
+Time: 9883 s = 164.72 min = 2.74h
