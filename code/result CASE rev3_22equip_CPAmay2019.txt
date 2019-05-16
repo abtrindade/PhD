@@ -1,0 +1,31 @@
+REV 3 - 22 equipamentos de 9 fabricantes (antes eram 12 equipamentos de 4 fabricantes)
+
+CASE 1
+PanelChoice: 4U (330W Canadian)
+BatteryChoice: 0U (Heliar 105Ah)
+ControllerChoice: 1U (Victron 15A/75V)
+InverterChoice: 0U (Victron 48V/700W)
+NTP: 1 (1S)
+NBtotal: 8 (2S-4P)
+Fobj: U$D 1,902.60
+Time: 3015 s = 50.25min
+
+CASE 2
+PanelChoice: 4U (330W canadian)
+BatteryChoice: 0U (Heliar 105Ah)
+ControllerChoice: 0U (Victron 35A/145V)
+InverterChoice: 2U (Epever IP1500-11)
+NTP: 3 (3S)
+NBtotal: 2 (2S)
+Fobj: US$ 1,687.55
+time: 2235.57 s = 37.25min
+
+CASE3 (same of CASE 2, but with autonomy of 12h)
+PanelChoice: 1U (Canadian 320W)
+BatteryChoice: 0U (Heliar 105Ah)
+ControllerChoice: 0U (Victron 35A/145V))
+InverterChoice: 2U (Epever IP1500-11)
+NTP: 3 (3S)
+NBtotal: 4 (2S-2P)
+Fobj: 1.9149501323699951
+time: 3046s = 50.76m
