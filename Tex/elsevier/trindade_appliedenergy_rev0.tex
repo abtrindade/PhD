@@ -93,9 +93,9 @@ Among the opportunities for enhancements in the software development processes f
 
 Lack of access to clean and affordable energy is considered a core dimension of poverty~\cite{Hussein2012}. Progress has been made worldwide; in particular, the number of people without electricity access fell below $1$ billion threshold for the first time in 2017~\cite{IEAweo2018}. To provide universal electricity for all, decentralized systems led by solar photovoltaic (PV) in off-grid and mini-grid systems will be the lowest-cost solution for three-quarters of the additional connections needed~\cite{Hussein2012}; specifically grid extension will be the standard in urban areas~\cite{IEAweo2018}.
 
-In order to simulate or evaluate a PV system, there exist various specialized tools, e.g., RETScreen, HOMER, PVWatts, SAM and Hybrid2 \cite{Pradhan,Swarnkar,NRELDobos,NRELBlair,Mills}
-; and even general purpose simulation tools, e.g., PSpice, Saber or MATLAB/Simulink package \cite{Gow1999,Benatiallah2017}.  However, these tools are based on simulation; they have the drawback of an incomplete coverage  since verification of all possible combinations and potential failures of a system is unfeasible~\cite{ClarkeHV18}. 
- Optimization of PV systems is not a recent topic; since the 90's different techniques using different criteria to find ultimate combinations for design parameters, based on intuitive, numerical and analytical methods were proposed and developed. An ideal combination of any PV system is made by the best compromise between two considered objectives, which is power reliability and system cost~\cite{Alsadi2018}.
+In order to simulate or evaluate a PV system, there exist various specialized tools, e.g., RETScreen, HOMER, PVWatts, SAM and Hybrid2 \cite{Pradhan,Swarnkar,NRELDobos,NRELBlair,Mills}; and even general purpose simulation tools, e.g., PSpice, Saber or MATLAB/Simulink package \cite{Gow1999,Benatiallah2017}.  However, these tools are based on simulation; they have the drawback of an incomplete coverage  since verification of all possible combinations and potential failures of a system is unfeasible~\cite{ClarkeHV18}. 
+
+Optimization of PV systems is not a recent topic; since the 90's different techniques using different criteria to find ultimate combinations for design parameters, based on intuitive, numerical and analytical methods were proposed and developed. An ideal combination of any PV system is made by the best compromise between two considered objectives, which is power reliability and system cost~\cite{Alsadi2018}.
  
 However, formal methods based on \textit{symbolic model checking} and its application to synthesize PV systems have not been further explored, which can offer a great potential to obtain a more effective design process to PV systems~\cite{ClarkeHV18}. Here, we use counterexample guided inductive synthesis (CEGIS) for synthesizing optimal sizing of stand-alone PV systems using commercial equipment data. Given a correctness specification $\sigma$, our method uses that as starting point and then iteratively produces a sequence of candidate solutions that satisfy $\sigma$, related to power reliability. In particular, in each iteration, we synthesize sizing of stand-alone PV systems but that may not achieve the lowest cost. The candidate solution is then verified via symbolic model checking with a lower bound that serve as the minimum cost of reference; if the verification do not fails, the lower bound is adjusted. And if it fails then a counterexample is provided with the optimal sizing that meet power reliability and system cost.
 
@@ -122,6 +122,29 @@ In 2017, a researcher suggested the application of formal methods to verify and 
 In 2018, a verification methodology was proposed for the Cyber Physical Energy Systems (CPES) with applications to PV panels and its distributed power point tracking~\cite{Driouich2018}. This approach relied on representing unpredictable behavior of the environment to cover all possible feasible scenarios. The simulation results obtained by JModelica covered the system's complete dynamic behavior; however, it was evident the time consuming issue with almost three days of computer effort to verify the design space of one operation hour of the PV panels behavior. The work did not include the other components of a stand-alone solar PV system.
 
 Another work from 2018 was the approach to modeling smart grid components using a formal specification. The authors used a state-based formal specification language named Z; they demonstrated the application of Z to four smart grid components~\cite{Akram2018}. The presented formal specification can be considered as a first step towards modeling of smart grid using formal methods. The starting point of this study was that a smart home can be considered as an integrated system consisting of various objects and system, which communicates and interacts with each other. This approach is base on Petri nets and from the premise that modeling of the smart home leads to clear understanding of the overall behavior of the smart grid.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Automated Verification Using Model Checking}
+\label{sec:AutomatedVerification}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Although simulation and testing explore possible behaviors and scenarios of a given system, they leave open the question of whether unexplored trajectories may contain a flaw. Formal verification conducts an exhaustive exploration of all possible behaviors; when a design is said to be ``correct'' by a formal verification method, it implies that all behaviors have been explored, and questions regarding adequate coverage or missed behavior becomes irrelevant~\cite{Clarke2012}. Formal verification is a systematic approach that applies mathematical reasoning to obtain guarantees about the correctness of a system; one successful method in this domain is model checking~\cite{Clarke2012}. Here we evaluate three state-of-the-art model checkers to formally verifying PV designs w.r.t. user requirements.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection{CBMC}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+The C Bounded Model Checker (CBMC) falsifies assertions in C programs or proves that they are safe if a completeness threshold is given~\cite{Kroening}. CBMC implements a bit-precise translation of a C program, annotated with assertions and with loops unrolled up to a given depth, into a logical formula. If the formula is satisfiable, then a failing execution that leads to a violated assertion exists~\cite{Kroening}. CBMC's verification flow can be summarized in three stages: (i) Front-end: scans, parses and type-checks C code; it converts control flow elements, such as \textit{if} or \textit{switch} statements, loops and jumps, into equivalent guarded \textit{goto} statements, thus aiming to reduce verification effort; (ii) Middle-end: performs symbolic execution by eagerly unwinding loops up to a fixed bound, which can be specified by the user on a per-loop basis or globally, for all loops and finally; (iv) Back-end: supports SAT and SMT solvers to discharge verification conditions.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection{ESBMC}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ESBMC (or Efficient SMT-based Bounded Model Checker) is a bounded and unbounded mdoel checker for C programs~\cite{esbmc2018}, which supports the verification of LTL properties with bounded traces~\cite{DBLP:journals/sosym/MorseCN015}. ESBMC's verification flow can be summarized in three stages: (i) a front-end that can read and compile C code, where the system formal specification is first handled; (ii) preprocessing steps to deal with code representation, control flow and unwinding of loops, and model simplification, thereby aiming to reduce verification effort; and finally (iii) the SMT solving stage, where all constraints and properties of the system are encoded into SMT and checked for satisfiability. ESBMC exploits the standardized input language of SMT solvers (SMT-LIB\footnote{http://smtlib.cs.uiowa.edu/} logic format) to make use of a resource called \textit{assertion stack}~\cite{Morse2015}. This enables ESBMC, and the respective solver, to learn from previous checks, thus optimizing the search procedure and potentially eliminating a large amount of formula state space to be searched, because it solves and disregards data during the process, incrementally. This technique is called ``incremental SMT''~\cite{DBLP:journals/fac/SchrammelKBMTB17} and allows ESBMC to reduce the memory overhead, mainly when the verified system is complex and the computing platform does not have large amount of memory to deal with the entire design space state.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection{CPAchecker}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Automatic program verification requires a choice between precision and efficiency. The more precise a method, the fewer false positives it will produce, but also the more expensive it is, and thus applicable to fewer programs. 
+Historically, this trade-off was reflected in two major approaches to static verification: program analysis and model checking. In order to experiment with the trade-off, and in order to be able to set the dial between the two extreme points, Configurable Program Analysis (CPA) provides a conceptual basis for expressing different verification approaches in the same formal setting. The CPA formalism provides an interface for the definition of program analyses. Consequently, CPAchecker provides an implementation framework that allows the seamless integration of program analyses that are expressed in the CPA framework. The comparison among different approaches in the same experimental setting is intended to be easy and the experimental results are expected to be more meaningful~\citep{Beyer2011}. Related to the architecture, the central data structure is a set of control-flow automata (CFA), which consists of control-flow locations and control-flow edges. The CPA framework provides interfaces to SMT solvers and interpolation procedures~\citep{Beyer2011}. Currently, CPAchecker uses MathSAT as SMT solver; and CSIsat and MathSAT as interpolation procedures~\cite{Beyer2011}. %CPAchecker performs reachability analysis and operates on an object of the abstract data type CPA, i.e., the underlying verification algorithm applies operations from the CPA interface without knowing which concrete CPA it is analyzing. For most configurations, the concrete CPA will be a composite CPA, which implements the combination of different CPAs. \textcolor{red}{It is unclear what a CPA is.}
+%In software verification, it is usual to take a considerable amount of effort to convert a verification idea into actual experimental results and CPAchecker aims to accelerate this process~\cite{Beyer2011}.
 %-----------------------------------------------------------
 \subsection{Program Synthesis}
 \label{sec:ProgramSynthesis}
@@ -135,7 +158,7 @@ In Figure~\ref{Counter-Example-Guided-Inductive-Synthesis}, the phases {\sc Synt
 %
 \begin{figure}[h]
 	\centering
-	\includegraphics[width=0.85\columnwidth]{fig2_rev.jpg}
+	\includegraphics[width=0.75\columnwidth]{fig2_rev.jpg}
 	\caption{CEGIS applied to PV system sizing.}
 	\label{Counter-Example-Guided-Inductive-Synthesis}
 \end{figure}
@@ -278,12 +301,10 @@ NPC is the total present value of a time series. The net present worth is found 
 LCOE is defined as the average cost per kWh of useful electrical energy produced by the PV system when a lifetime, investment cost, replacement, operation and maintenance, and capital cost is considered [91]. LCOE method is useful in comparing different generation technologies with different operating characteristics [6].
 
 LCC is the estimation of sum of installation cost, operating and maintenance of a PV system for a period of time, and expressed in today's value [92]. Eq.~\ref{eq:LCC} is used to calculate LCC of a PV system,
-
 \begin{equation}
 \label{eq:LCC}
 LCC = C_{PV} + C_{bat} + C_{charger} + C_{inv} + C_{installation} + C_{batrep} + C_{PWO\&M},
 \end{equation}
-
 \noindent where $C_{PV}$ is PV array cost, $C_{bat}$ is initial cost of batteries, $C_{charger}$ is cost of charger, $C_{inv}$ is inverter cost, $C_{installation}$ is installation cost, $C_{batrep}$ is battery replacement cost in present value, and $C_{PWO\&M}$ is operation and maintenance costs in present worth.
 
 %
@@ -342,7 +363,7 @@ Algorithm~\ref{alg:verification-algorithm} describes our pseudo-code to synthesi
 	\STATE Requirement enforced by \textbf{assume}$(Demand \wedge P_{surge})$ \\
 %	\STATE Requirement enforced by \textbf{assume}$(P_{surge})$ \\
 	\STATE non-deterministic variables hold feasible equipment and cost  \\
-	\STATE $F_{obj} \leftarrow  N_{TP}*Panel_{Cost} \, + \, N_{TB}*Battery_{Cost} \, + Controller_{Cost} \, + \, Inverter_{Cost}$ \\
+	\STATE $F_{obj} \leftarrow  N_{TP}*Panel_{Cost} \, + \, N_{TB}*Battery_{Cost} \, + Controller_{Cost} \, + \, Inverter_{Cost} \, + \, Installation_{Cost} \, + \, batrep_{Cost} \, + \, PWO\&M_{Cost}$ \\
 	\STATE Violation check with \textbf{assert}$(F_{obj} > HintCost)$ \\
   \ENDFOR
  \RETURN $(\,)$ 
@@ -366,11 +387,11 @@ The main challenge for the {\sc Synthesize} phase is to find a feasible candidat
 Note that the process described here in completely automated and that a validation is performed by our {\sc Verify} phase to ensure that the approach is sound.
 
 \subsection{Assumptions and Premises}
-Regarding the line 2 of Algorithm~\ref{alg:verification-algorithm}, a list of forty equipment from ten different manufacturers was inputted to the code in order to allow the choice of the every item of PV sizing. Data sheet from each item is necessary to collect the technical data. And the price of each item was collected using the internet (in US dollars).
+Regarding the line 2 of Algorithm~\ref{alg:verification-algorithm}, a list of forty equipment from ten different manufacturers was inputted to the code in order to allow the choice of every item of PV sizing. Data sheet from each item is necessary to collect the technical information. And the price of each item was collected using the internet (in US dollars).
 
-Regarding power reliability, this work will rely on the critical period solar energy method~\cite{Pinho} as described in section~\ref{sec:sizing}. The usual is to use loss of load probability (LOLP) or loss of power supply probability (LPSP). However, based on the fact that here we are neither considering site characteristics nor the load changes over time, which demands historical data, the reliability analysis will be developed only by the critical period method of PV sizing.
+With respect to power reliability, this work will rely on the critical period solar energy method~\cite{Pinho} as described in section~\ref{sec:sizing}. The usual is to use loss of load probability (LOLP) or loss of power supply probability (LPSP). However, based on the fact that here we are neither considering site characteristics nor the load changes over time, which demands historical data, the reliability analysis will be developed only by the critical period method of PV sizing.
 
-Regarding the financial analysis:
+Regarding financial analysis:
 \begin{itemize}
 	\item LCOE lifetime considered: 20 years;
 	\item Battery lifetime: 4 years for lead-acid batteries. Therefore will be performed three battery bank replacements;
@@ -380,29 +401,21 @@ Regarding the financial analysis:
 	\item Operation and maintenance costs: based on past PV projects in the Amazon region of Brazil, will be adopted the value of USD [Agrener2013].
 \end{itemize}
 
-Regarding the PV system optimization technique, it will be adopted at this work the intuitive method, because is used the average value daily of solar irradiance at the mathematical model, without consider the battery's state of charge, or even the random nature of solar irradiation and meteorological conditions. Therefore all the computation effort will be at the automated synthesis algorithm.
+On the subject of PV system optimization technique, it will be adopted at this work the intuitive method, because is used the average value daily of solar irradiance at the mathematical model, without consider the battery's state of charge, or even the random nature of solar irradiation and meteorological conditions. Therefore all the computation effort will be at the automated synthesis algorithm.
 
-Regarding all case studies, it was assumed that the minimum state of charge of batteries is 75\% (DOD maximum of 25\%), the voltage of the system is set in 24 V DC, and the AC voltage from the inverter is 120 V.
+Regarding all case studies, it was defined that the minimum state of charge of batteries is 75\% (DOD maximum of 25\%), the voltage of the system is set in 24 V DC, and the AC voltage from the inverter is 120 V.
+
+Related to off-the-shelf simulation tools only HOMER Pro and Hybrid2 perform off-grid system with battery backup analysis. %all the tools perform solar photovoltaic analysis; 
+Additionally, HOMER and RETScreen include economical analysis or even optimization-sensitive analysis. Therefore, at this work, HOMER Pro will be the simulation tool used to compare with our automated synthesis method. Worth to mention that HOMER Pro is available only for Microsoft Windows and the annual standard subscription costs US\$ 504.00.
 
 %---------------------------------------------------------------------------
 \section{RESULTS AND DISCUSSION}
 \label{sec:Results}
 %---------------------------------------------------------------------------
-\textbf{Case studies.} We have performed seven stand-alone PV system case studies to evaluate our proposed synthesis approach as described in the first line of Table~\ref{tab1}. Our synthesis algorithm was fed with data and costs of forty equipment items from ten different manufacturers of PV systems. Furthermore, three start-of-art verification tools, CBMC,\footnote{Command-line: \$ cbmc -\phantom{}-unwind 100 filename.c -\phantom{}-trace} ESBMC,\footnote{Command-line: \$ esbmc filename.c -\phantom{}-no-bounds-check -\phantom{}-no-pointer-check -\phantom{}-unwind 100 -\phantom{}-boolector} %UAutomizer\footnote{Command-line: \$ ./Ultimate -tc config/AutomizerReach.xml -s config/svcomp-Reach-32bit-Automizer\_Default.epf -i filename.c -\phantom{}-traceabstraction.limit.analysis.time 900 -\phantom{}-traceabstraction.stop.after.first.violation.was.found false -\phantom{}-cacsl2boogietranslator.overapproximate.operations.on.floating.types false -\phantom{}- cacsl2boogietranslator.assume.nondeterminstic.values.are.in.range false -\phantom{}-rcfgbuilder.add.additional.assume.for.each.assert true -\phantom{}-rcfgbuilder.simplify.code.blocks true -\phantom{}-rcfgbuilder.size.of.a.code.block LoopFreeBlock}, 
-and CPAchecker,\footnote{Command-line: \$ scripts/cpa.sh -heap 64000m -config config/bmc-incremental.properties -spec config/specification/sv-comp-reachability.spc filename.c} were used as our verification engine to compare our approach effectiveness and efficiency. 
+\textbf{Case studies.} We have performed seven stand-alone PV system case studies to evaluate our proposed synthesis approach as described in the first column of Table~\ref{tab1} (Specification). 
 
-\textbf{Setup.} All experiments were conducted on an otherwise idle Intel Xeon CPU E5-4617 (8-cores) with 2.90 GHz and 64 GB of RAM, running Ubuntu 16.04 LTS 64-bits. 
-The experiments were performed with a predefined timeout of $240$ minutes.
-
-\textbf{Objectives.} Our evaluation aims to answer two research questions: \textit{RQ1} (soundness) Does our automated synthesis approach provide correct results?, and \textit{RQ2} (performance) How do the software verifiers compare to each other?
-
-\textbf{Results.}  CPAchecker was able to synthesize the optimal sizing of both case studies: the result was produced in $50.2$ and $37.2$ minutes, respectively. 
-The violation of line 209 indicated in Table~\ref{tab1} is the $assert$ of line 22 from Algorithm~\ref{alg:verification-algorithm}. The results were tested by manual PV sizing and were sound (\textit{RQ1}). %, linking a feasible technical solution with the lowest cost possible, considering the equipment that were inputted to the code. 
-CBMC and ESBMC produced \textit{UNKNOWN} result (\textit{timeout} or \textit{out of memory}); this partially answers the \textit{RQ2}.
-%
-%used with the SMT incremental mode\footnote{Command-line: \$ esbmc filename.c -\phantom{}-no-bounds-check -\phantom{}-no-pointer-check -\phantom{}-unwind 100 -\phantom{}-smt-during-symex -\phantom{}-smt-symex-guard -\phantom{}-z3} enabled with the goal of reducing memory usage; we have also used the SMT solver Z3 version 4.7.1~\cite{DeMoura}.
 \begin{table}
-\caption{Case studies and results: optimization of PV systems.}\label{tab1}
+\caption{Case studies and results: optimization of stand-alone PV systems.}\label{tab1}
 \begin{scriptsize}
 \begin{tabular}{|c|c|c|c|c|}
 \hline
@@ -412,29 +425,39 @@ Tools & \makecell{CBMC 5.11 \\(MiniSat 2.2.1)} & \makecell{ESBMC 6.0.0 \\(Boolec
 \hline
 Specification & Result & Result & Result & Result \\
 \hline
-\makecell{\textbf{Case Study 1}\\Demand:501W\\Peak:501W \\E:3,900Wh/day\\Autonomy:48h} & OM & IF & \makecell{SAT (50.2 min) \\NTP=1$\times$330W (1S)\\NBT=8$\times$105Ah (2S-4P)\\Controller 15A/75V\\Inverter 700W/48V\\Cost=US\$ 1,902.60} & XYZ \\
+\makecell{\textbf{Case Study 1}\\Demand:501W\\Peak:501W \\E:3,900Wh/day\\Autonomy:48h} & OM & IF & \makecell{SAT (146.13 min) \\NTP:1$\times$340W (1S)\\NBT:8$\times$105Ah (2S-4P)\\Controller 15A/75V\\Inverter 700W/48V\\LCC:US\$ 1,902.60} & XYZ \\
 \hline
-\makecell{\textbf{Case Study 2}\\Demand:915W\\Peak:980W\\E:4,880Wh/day\\Autonomy:6h} & OM & IF & \makecell {SAT (37.2 min) \\NTP=3$\times$330W (3S)\\NBT=2$\times$105Ah (2S)\\Controller 35A/145V\\Inverter 1,500VA/24V \\Cost=US\$ 2,235.57} & XYZ \\
+\makecell{\textbf{Case Study 2}\\Demand:915W\\Peak:980W\\E:4,880Wh/day\\Autonomy:6h} & OM & IF & \makecell {SAT (105.06 min) \\NTP:3$\times$275W (3S)\\NBT:2$\times$80Ah (2S)\\Controller 30A/100V\\Inverter 1,200W/24V \\LCC:US\$ 1,323.00} & XYZ \\
 \hline
-\makecell{\textbf{Case Study 3}\\Demand:915W\\Peak:980W\\E:4,880Wh/day\\Autonomy:6h} & OM & IF & SAT & XYZ \\
+\makecell{\textbf{Case Study 3}\\Demand:915W\\Peak:980W\\E:4,880Wh/day\\Autonomy:12h} & OM & IF & \makecell {SAT (131.38 min) \\NTP:3$\times$330W (3S)\\NBT:2$\times$80Ah (2S)\\Controller 35A/145V\\Inverter 1,200W/24V \\LCC:US\$ 1,441.40} & XYZ \\
 \hline
-\makecell{\textbf{Case Study 4}\\Demand:915W\\Peak:980W\\E:4,880Wh/day\\Autonomy:6h} & OM & IF & SAT & XYZ \\
+\makecell{\textbf{Case Study 4}\\Demand:253W\\Peak:722W\\E:3,600Wh/day\\Autonomy:48h} & OM & IF & \makecell {SAT (145.57 min) \\NTP:4$\times$150W (4S)\\NBT:10$\times$80Ah (2S-5P)\\Controller 15A/75V\\Inverter 280W/24V \\LCC:US\$ 1,927.15} & XYZ \\
 \hline
-\makecell{\textbf{Case Study 5}\\Demand:915W\\Peak:980W\\E:4,880Wh/day\\Autonomy:6h} & OM & IF & SAT & XYZ \\
+\makecell{\textbf{Case Study 5}\\Demand:263W\\Peak:732W\\E:2,500Wh/day\\Autonomy:48h} & OM & IF & \makecell {SAT (133.90 min) \\NTP:1$\times$340W (1S)\\NBT:6$\times$105Ah (2S-3P)\\Controller 15A/75V\\Inverter 400W/24V \\LCC:US\$ 1,389.85} & XYZ \\
 \hline
-\makecell{\textbf{Case Study 6}\\Demand:915W\\Peak:980W\\E:4,880Wh/day\\Autonomy:6h} & OM & IF & SAT & XYZ \\
+\makecell{\textbf{Case Study 6}\\Demand:322W\\Peak:896W\\E:4,300Wh/day\\Autonomy:48h} & OM & IF & \makecell {SAT (234.00 min) \\NTP:2$\times$200W (2S)\\NBT:10$\times$105Ah (2S-5P)\\Controller 15A/75V\\Inverter 400W/24V \\LCC:US\$ 2,375.65} & XYZ \\
 \hline
-\makecell{\textbf{Case Study 7}\\Demand:915W\\Peak:980W\\E:4,880Wh/day\\Autonomy:6h} & OM & TO & TO & XYZ \\
+\makecell{\textbf{Case Study 7}\\Demand:1,800W\\Peak:2,900W\\E:14,000Wh/day\\Autonomy:48h} & OM & TO & TO & XYZ \\
 \hline
 \hline
 \end{tabular}
-\\Legend: OM (out of memory), TO (timeout), IF (internal failure), E (energy).
+\\Legend: OM = out of memory; TO = timeout; IF = internal failure, E = energy.
 \end{scriptsize}
 \end{table}
 
-%
+\textbf{Verification Tools.} Three start-of-art verification tools, CBMC,\footnote{Command-line: \$ cbmc -\phantom{}-unwind 100 filename.c -\phantom{}-trace} ESBMC,\footnote{Command-line: \$ esbmc filename.c -\phantom{}-no-bounds-check -\phantom{}-no-pointer-check -\phantom{}-unwind 100 -\phantom{}-boolector} %UAutomizer\footnote{Command-line: \$ ./Ultimate -tc config/AutomizerReach.xml -s config/svcomp-Reach-32bit-Automizer\_Default.epf -i filename.c -\phantom{}-traceabstraction.limit.analysis.time 900 -\phantom{}-traceabstraction.stop.after.first.violation.was.found false -\phantom{}-cacsl2boogietranslator.overapproximate.operations.on.floating.types false -\phantom{}- cacsl2boogietranslator.assume.nondeterminstic.values.are.in.range false -\phantom{}-rcfgbuilder.add.additional.assume.for.each.assert true -\phantom{}-rcfgbuilder.simplify.code.blocks true -\phantom{}-rcfgbuilder.size.of.a.code.block LoopFreeBlock}, 
+and CPAchecker,\footnote{Command-line: \$ scripts/cpa.sh -heap 64000m -config config/bmc-incremental.properties -spec config/specification/sv-comp-reachability.spc filename.c} were used as our verification engine to compare our approach effectiveness and efficiency. Simulation tool HOMER Pro version 3.13.1 was used as well.
 
-\textbf{Threats to validity.}  We have reported a favorable assessment of the proposed method. Nevertheless, we have also identified four threats to the validity of our results that can be further assessed and constitute future work: (1) improvement of the power reliability analysis: to include loss of load probability or loss of power supply probability, which can make the analysis more accurate; (2) improvement of the system cost analysis: using Net Present Cost (NPC), or Levelized Cost of Energy (LCOE) criteria, in order to promote the acceptability of investment, or to include operational and maintenance costs to the adopted Life Cycle Cost (LCC) analysis performed at this paper; (3) to increase the equipment and manufacturers data base: this will increase the complexity of the optimization but the result will also allow improved sizing; and (4) to compare the results of our approach with an off-the-shelf PV sizing/optimization software: this will validate the results obtained and it allows a simulation-verification comparative.
+\textbf{Setup.} All experiments regarding the verification tools were conducted on an otherwise idle Intel Xeon CPU E5-4617 (8-cores) with 2.90 GHz and 64 GB of RAM, running Ubuntu 16.04 LTS 64-bits. Related to HOMER Pro, it was used an Intel Core i5-4210 (4-cores), with 1.7 GHz and 4 GB of RAM, running Windows 10. The experiments were performed with a predefined timeout of $240$ minutes.
+
+\textbf{Objectives.} Our evaluation aims to answer two research questions: \textit{RQ1} (soundness) Does our automated synthesis approach provide correct results?, and \textit{RQ2} (performance) How do the software verifiers compare to each other?
+
+\textbf{Results.}  CPAchecker was able to synthesize the optimal sizing of both case studies: the result was produced in $50.2$ and $37.2$ minutes, respectively. 
+The violation of line 209 indicated in Table~\ref{tab1} is the $assert$ of line 22 from Algorithm~\ref{alg:verification-algorithm}. The results were tested by manual PV sizing and were sound (\textit{RQ1}). %, linking a feasible technical solution with the lowest cost possible, considering the equipment that were inputted to the code. 
+CBMC and ESBMC produced \textit{UNKNOWN} result (\textit{timeout} or \textit{out of memory}); this partially answers the \textit{RQ2}.
+
+%used with the SMT incremental mode\footnote{Command-line: \$ esbmc filename.c -\phantom{}-no-bounds-check -\phantom{}-no-pointer-check -\phantom{}-unwind 100 -\phantom{}-smt-during-symex -\phantom{}-smt-symex-guard -\phantom{}-z3} enabled with the goal of reducing memory usage; we have also used the SMT solver Z3 version 4.7.1~\cite{DeMoura}.
+\textbf{Threats to validity.}  We have reported a favorable assessment of the proposed method. Nevertheless, we have also identified two threats to the validity of our results that can be further assessed and constitute future work: (1) improvement of the power reliability analysis: to include loss of load probability or loss of power supply probability, which can make the analysis more accurate; (2) ????
 
 \section{CONCLUSIONS}
 Conclusions here
