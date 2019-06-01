@@ -294,13 +294,13 @@ LCC = C_{PV} + C_{bat} + C_{charger} + C_{inv} + C_{installation} + C_{batrep} +
 %the usual is to use loss of load probability (LOLP) or loss of power supply probability (LPSP). Based on the fact that here we are neither considering site characteristics nor the load changes over time, the reliability analysis will be developed only by the critical period method of PV sizing \textcolor{red}{What does it mean? Remember that we have software engineering audience}. 
 %However, considering the system cost analysis, we usually find related studies done with Net Present Cost (NPC), Levelized Cost of Energy (LCOE), or Life Cycle Cost (LCC). Here, based on the fact that the deployment location is not specified, our study uses an adapted LCC analysis, where only the deployment cost is considered about the model, i.e., without the operational and maintenance costs~\cite{Alsadi2018}.
 \subsection{Stand-alone PV System Optimization Technique}
-To recommend an optimal configuration for PV systems, the designer has to evaluate the design based on optimization variables. As number of optimization variables increases, the computation effort will exponentially increase [6]. Hence, to obtain the best PV system design as well as simplified sizing process, past work introduced three main techniques for system sizing calculation [???], namely intuitive, numerical, and analytical methods.
+To recommend an optimal configuration for PV systems, the designer has to evaluate the design based on optimization variables. As number of optimization variables increases, the computation effort will increase as well. Hence, to obtain the best PV system design as well as simplified sizing process, past work introduced three main techniques for system sizing calculation, namely intuitive, numerical, and analytical methods~\cite{Alsadi2018}[6].
 
 Intuitive method is simple, easy to be implemented, and can be used to give rough suggestion for preliminary design. The sizing rules are based on designer's experience, using lowest performance either in a time period data or by directly using average value (daily, monthly, or annual) of solar irradiance. This method do not the battery's state of charge, or even the random nature of solar irradiation and meteorological conditions~\cite{Alsadi2018}.
 
 Numerical method the design is simulated for each time step within a period. State of charge of batteries is calculated and investigated. It is very accurate, however is complex, demanding more time for calculation.
 
-Analytical methods is used to obtain a close relation of correlation in a form of equation between capacities and reliabilities. The sizing task become much simpler, however the relation cannot be applied at different sites, because is specific to one specific place of deployment of the PV system, demanding adaptation if another site is analyzed.
+Analytical methods is used to obtain a close relation or correlation in a form of equation between capacities and reliabilities. The sizing task become much simpler, however the relation cannot be applied at different sites, because is specific to one specific place of deployment of the PV system, demanding adaptation if another site is analyzed.
 
 %------------------------------------------------------
 \section{METHOD}
@@ -366,8 +366,23 @@ The main challenge for the {\sc Synthesize} phase is to find a feasible candidat
 Note that the process described here in completely automated and that a validation is performed by our {\sc Verify} phase to ensure that the approach is sound.
 
 \subsection{Assumptions and Premises}
+Regarding the line 2 of Algorithm~\ref{alg:verification-algorithm}, a list of forty equipment from ten different manufacturers was inputted to the code in order to allow the choice of the every item of PV sizing. Data sheet from each item is necessary to collect the technical data. And the price of each item was collected using the internet (in US dollars).
+
 Regarding power reliability, this work will rely on the critical period solar energy method~\cite{Pinho} as described in section~\ref{sec:sizing}. The usual is to use loss of load probability (LOLP) or loss of power supply probability (LPSP). However, based on the fact that here we are neither considering site characteristics nor the load changes over time, which demands historical data, the reliability analysis will be developed only by the critical period method of PV sizing.
 
+Regarding the financial analysis:
+\begin{itemize}
+	\item LCOE lifetime considered: 20 years;
+	\item Battery lifetime: 4 years for lead-acid batteries. Therefore will be performed three battery bank replacements;
+	\item Installation costs: includes delivery at the isolated community and installation costs itself, 5\% of total cost [Agrener2013];
+	\item Electrical protection and complementary electrical item: 7\% of equipment cost [Agrener2013]. Includes circuit breakers, surge protection devices, electrical grounding, DC fuses, main switchboard, string boxes;
+	\item Value of the discount rate or interest rate: 10\%, what is a good rate considering financial investments in developing countries;
+	\item Operation and maintenance costs: based on past PV projects in the Amazon region of Brazil, will be adopted the value of USD [Agrener2013].
+\end{itemize}
+
+Regarding the PV system optimization technique, it will be adopted at this work the intuitive method, because is used the average value daily of solar irradiance at the mathematical model, without consider the battery's state of charge, or even the random nature of solar irradiation and meteorological conditions. Therefore all the computation effort will be at the automated synthesis algorithm.
+
+Regarding all case studies, it was assumed that the minimum state of charge of batteries is 75\% (DOD maximum of 25\%), the voltage of the system is set in 24 V DC, and the AC voltage from the inverter is 120 V.
 
 %---------------------------------------------------------------------------
 \section{RESULTS AND DISCUSSION}
@@ -387,28 +402,36 @@ CBMC and ESBMC produced \textit{UNKNOWN} result (\textit{timeout} or \textit{out
 %
 %used with the SMT incremental mode\footnote{Command-line: \$ esbmc filename.c -\phantom{}-no-bounds-check -\phantom{}-no-pointer-check -\phantom{}-unwind 100 -\phantom{}-smt-during-symex -\phantom{}-smt-symex-guard -\phantom{}-z3} enabled with the goal of reducing memory usage; we have also used the SMT solver Z3 version 4.7.1~\cite{DeMoura}.
 \begin{table}
-\caption{Case studies and Results: optimization of PV systems.}\label{tab1}
-%\begin{scriptsize}
-\begin{tabular}{|c|c|c|}
+\caption{Case studies and results: optimization of PV systems.}\label{tab1}
+\begin{scriptsize}
+\begin{tabular}{|c|c|c|c|c|}
 \hline
 \hline
-Specification & \makecell{ \textbf{Case Study 1} \\ Demand=501W \\ Peak=501W \\ Energy=3,900Wh/day\\Battery autonomy=48h\\AC Voltage=120V\\DoD=25\%\\Vsystem=24V DC} & \makecell{\textbf{Case Study 2}\\ Demand=915W \\ Peak=980W \\Energy=4,880Wh/day\\Battery autonomy=6h\\AC Voltage=120V\\DoD=25\%\\Vsystem=24V DC}\\
+Tools & \makecell{CBMC 5.11 \\(MiniSat 2.2.1)} & \makecell{ESBMC 6.0.0 \\(Boolector 3.0.1)} & \makecell{CPAchecker 1.8\\(MathSAT 5.5.3)} & HOMER Pro \\
 \hline
 \hline
-Tools & \textbf{Result} & \textbf{Result}\\
+Specification & Result & Result & Result & Result \\
 \hline
-\makecell{CBMC 5.11 \\(MiniSat 2.2.1)} & \makecell{UNKNOWN \\(Out of Memory)} & \makecell{UNKNOWN \\(Out of Memory)}\\
+\makecell{\textbf{Case Study 1}\\Demand:501W\\Peak:501W \\E:3,900Wh/day\\Autonomy:48h} & OM & IF & \makecell{SAT (50.2 min) \\NTP=1$\times$330W (1S)\\NBT=8$\times$105Ah (2S-4P)\\Controller 15A/75V\\Inverter 700W/48V\\Cost=US\$ 1,902.60} & XYZ \\
 \hline
-\makecell{ESBMC 6.0.0 \\(Boolector 3.0.1)} & \makecell{UNKNOWN \\(Timeout)} & \makecell{UNKNOWN \\(Timeout)} \\
+\makecell{\textbf{Case Study 2}\\Demand:915W\\Peak:980W\\E:4,880Wh/day\\Autonomy:6h} & OM & IF & \makecell {SAT (37.2 min) \\NTP=3$\times$330W (3S)\\NBT=2$\times$105Ah (2S)\\Controller 35A/145V\\Inverter 1,500VA/24V \\Cost=US\$ 2,235.57} & XYZ \\
 \hline
-%UAutomizer 0.1.24 (Z3 4.8.3) & UNKNOWN & UNKNOWN \\
-%\hline
-\makecell{CPAchecker 1.8\\(MathSAT 5.5.3)} & \makecell{SAT (50.2 min) \\Property violation line 209\\NTP=1$\times$330W (1S)\\NBT=8$\times$105Ahm (2S-4P)\\Controller 15A/75V\\Inverter 700W/48V\\Total Cost=US\$ 1,902.60} & \makecell {SAT (37.2 min) \\Property violation line 209\\NTP=3$\times$330W (3S)\\NBT=2$\times$105Ah (2S)\\Controller 35A/145V\\Inverter 1,500VA/24V \\Total Cost=US\$ 2,235.57}\\
+\makecell{\textbf{Case Study 3}\\Demand:915W\\Peak:980W\\E:4,880Wh/day\\Autonomy:6h} & OM & IF & SAT & XYZ \\
+\hline
+\makecell{\textbf{Case Study 4}\\Demand:915W\\Peak:980W\\E:4,880Wh/day\\Autonomy:6h} & OM & IF & SAT & XYZ \\
+\hline
+\makecell{\textbf{Case Study 5}\\Demand:915W\\Peak:980W\\E:4,880Wh/day\\Autonomy:6h} & OM & IF & SAT & XYZ \\
+\hline
+\makecell{\textbf{Case Study 6}\\Demand:915W\\Peak:980W\\E:4,880Wh/day\\Autonomy:6h} & OM & IF & SAT & XYZ \\
+\hline
+\makecell{\textbf{Case Study 7}\\Demand:915W\\Peak:980W\\E:4,880Wh/day\\Autonomy:6h} & OM & TO & TO & XYZ \\
 \hline
 \hline
 \end{tabular}
-%\end{scriptsize}
+\\Legend: OM (out of memory), TO (timeout), IF (internal failure), E (energy).
+\end{scriptsize}
 \end{table}
+
 %
 
 \textbf{Threats to validity.}  We have reported a favorable assessment of the proposed method. Nevertheless, we have also identified four threats to the validity of our results that can be further assessed and constitute future work: (1) improvement of the power reliability analysis: to include loss of load probability or loss of power supply probability, which can make the analysis more accurate; (2) improvement of the system cost analysis: using Net Present Cost (NPC), or Levelized Cost of Energy (LCOE) criteria, in order to promote the acceptability of investment, or to include operational and maintenance costs to the adopted Life Cycle Cost (LCC) analysis performed at this paper; (3) to increase the equipment and manufacturers data base: this will increase the complexity of the optimization but the result will also allow improved sizing; and (4) to compare the results of our approach with an off-the-shelf PV sizing/optimization software: this will validate the results obtained and it allows a simulation-verification comparative.
