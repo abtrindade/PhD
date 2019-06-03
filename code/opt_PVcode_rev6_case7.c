@@ -1,6 +1,6 @@
 /*
  ============================================================================
- Name        : opt_PVcode_rev5_improved database.c CASE 1
+ Name        : opt_PVcode_rev5_improved database.c CASE HOUSE5
  Author      : Alessandro Trindade
  Version     : rev5 - May 2019: 40 equipment, lowerbound defined by SW, better HintCost
  Description : stand-alone PV sizing optimization (Universal: CBMC, ESBMC, UAutomizer and CPChecker)
@@ -39,7 +39,7 @@ int Gref = 1000; //reference irradiance is 1000 W/m²
 float Tref = 298.15; //reference temperature is 25oC or 298.15K
 
 //data from the house
-int Phouse = 501, Psurge = 501, Econsumption = 3900;
+int Phouse = 1800, Psurge = 2900, Econsumption = 14000;
 
 //must define
 int MaxCost=10000; //10 million maximum cost just to control the loop of main function
@@ -125,7 +125,7 @@ int FHintCost(void){
 	for (cont=1; cont <= 9; cont++) {
 		if ((int)BatteryData[cont][5] < lowervalue) lowervalue=(int)BatteryData[cont][5];
 	}
-	cost = cost+lowervalue;
+	cost = cost+lowervalue+lowervalue*3; //Cbatrep 3x in 20 years
 	lowervalue=(int)ControllerData[0][5];
 	for (cont=1; cont <= 9; cont++) {
 		if ((int)ControllerData[cont][5] < lowervalue) lowervalue=(int)ControllerData[cont][5];

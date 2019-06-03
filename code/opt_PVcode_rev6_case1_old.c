@@ -1,6 +1,6 @@
 /*
  ============================================================================
- Name        : opt_PVcode_rev5_improved database.c CASE 1
+ Name        : opt_PVcode_rev4_improved database.c CASE 1
  Author      : Alessandro Trindade
  Version     : rev5 - May 2019: 40 equipment, lowerbound defined by SW, better HintCost
  Description : stand-alone PV sizing optimization (Universal: CBMC, ESBMC, UAutomizer and CPChecker)
@@ -42,7 +42,7 @@ float Tref = 298.15; //reference temperature is 25oC or 298.15K
 int Phouse = 501, Psurge = 501, Econsumption = 3900;
 
 //must define
-int MaxCost=10000; //10 million maximum cost just to control the loop of main function
+float LimLoop=10000; //50 thousand USD maximum cost just to control the loop of main function
 int Vsystem = 24;  //12V, 24V, 36V or 48V: DC Bus voltage definition
 int autonomy = 48; //autonomy in hours
 int SOClimit = 75, SOCabsorption = 95, SOCfull = 100, Vbat = 12, VAC = 127;
@@ -136,15 +136,13 @@ int FHintCost(void){
 		if ((int)InverterData[cont][5] < lowervalue) lowervalue=(int)InverterData[cont][5];
 	}
 	cost = cost+lowervalue;
-	cost = cost + cost*0.05; //installation cost of 5%
-	cost = cost + 20*289.64; //O&M cost of 289.64 in 20 years
 	return(cost);
 }
 
 /*--------------------------------
             Auxiliary function
 ----------------------------------*/
-int Faux (int cost){
+int Faux (int costL, int costH){
 	int NTP, NPP, NPS, NBtotal, NBS, NBP, NPPmin, ICmin;
 	float Ecorrected, Ep, NTPmin, NPSmin1, NPSmin2, Cbank, Iscamb, NBSmin, NBPmin, Fobj;
 	unsigned char PanelChoice, BatteryChoice, ControllerChoice, InverterChoice;
@@ -176,6 +174,7 @@ int Faux (int cost){
 	float Vmref = PanelData[PanelChoice][10];
 	float VmpNOCT = PanelData[PanelChoice][11];
 	float PanelCost = PanelData[PanelChoice][12];
+//	__VERIFIER_assume(costH >= PanelCost);
 
 	//battery information
 	float nb = BatteryData [BatteryChoice][0];
@@ -184,6 +183,7 @@ int Faux (int cost){
 	float Vbulk = BatteryData [BatteryChoice][3]; //(14.40*NBS);
 	float Vfloat = BatteryData [BatteryChoice][4]; //(13.20*NBS);
 	float BatteryCost = BatteryData [BatteryChoice][5];
+//	__VERIFIER_assume(costH >= BatteryCost);
 
 	// charge controller
 	float nc = ControllerData[ControllerChoice][0];
@@ -192,6 +192,7 @@ int Faux (int cost){
 	int Vmpptmin = (int)ControllerData[ControllerChoice][3];
 	float VCmax = ControllerData[ControllerChoice][4];
 	float ControllerCost = ControllerData[ControllerChoice][5];
+//	__VERIFIER_assume(costH >= ControllerCost);
 
 	//inverter
 	float ni = InverterData[InverterChoice][0];
@@ -200,6 +201,10 @@ int Faux (int cost){
 	int PACref = (int)InverterData[InverterChoice][3];
 	int MAXACref = (int)InverterData[InverterChoice][4];
 	float InverterCost = InverterData[InverterChoice][5];
+//	__VERIFIER_assume(costH >= InverterCost);
+
+//	__VERIFIER_assume(costL <= (PanelCost+BatteryCost+ControllerCost+InverterCost));
+//	__VERIFIER_assume(costH >= (PanelCost+BatteryCost+ControllerCost+InverterCost));
 
 	//Econsumption = energy consumed in one day from the house
 	Ecorrected = Econsumption / (nb*nc*ni);
@@ -250,20 +255,36 @@ int Faux (int cost){
 
 	// Function objective: minimum acquisition cost
 	Fobj= NTP*PanelCost + NBtotal*BatteryCost + ControllerCost + InverterCost;
-	Fobj= Fobj+Fobj*0.05+3*(NBtotal*BatteryCost)+20*289.64; //cost = equipment + 5% of installation + 3*batrep + O&M cost
-	__VERIFIER_assume ( ( Fobj >= (cost-500) ) );
 
 	//minimize cost of the solution, considering all the equipment that can be used and was declared at the code
-	if (!(Fobj > cost)) { __VERIFIER_error(); }
+	if (!(Fobj > costL)) { __VERIFIER_error(); }
 	return 0;
 }
 
 /* ----------- MAIN FUNCTION --------- */
 int main() {
-	int HintCost;
-	HintCost = FHintCost()+500;
-	for (; HintCost <= MaxCost; HintCost=HintCost+500){
-		Faux(HintCost);
+	int HintCost, Vmax, Vmin, step=500, cont;
+	HintCost = FHintCost();
+	Vmin = HintCost-1;
+//	Vmax = HintCost+step;
+	for (; HintCost <= LimLoop; HintCost=HintCost+step){
+//		Vmax = HintCost+step;
+		Faux(Vmin, (Vmin+step/2));
+		Faux((Vmin+step/2), (Vmin+step/2+step/4));
+		Faux((Vmin+step/2+step/4), (Vmin+step/2+step/4+step/8));
+		Faux((Vmin+step/2+step/4+step/8), (Vmin+step/2+step/4+step/8+step/16));
+		Faux((Vmin+step/2+step/4+step/8+step/16),(Vmin+step/2+step/4+step/8+step/16+step/32));
+		Faux((Vmin+step/2+step/4+step/8+step/16+step/32),(Vmin+step/2+step/4+step/8+step/16+step/32+step/64));
+		Faux((Vmin+step/2+step/4+step/8+step/16+step/32+step/64),(Vmin+step/2+step/4+step/8+step/16+step/32+step/64+step/128));
+		Faux((Vmin+step/2+step/4+step/8+step/16+step/32+step/64+step/128),(Vmin+step/2+step/4+step/8+step/16+step/32+step/64+step/128+step/256));
+		Faux((Vmin+step/2+step/4+step/8+step/16+step/32+step/64+step/128+step/256),(Vmin+step/2+step/4+step/8+step/16+step/32+step/64+step/128+step/256+step/512));
+		Vmin = HintCost + step;
+//		for (cont=2; cont <=512; cont= cont*2){
+//			if (cont > step) return 0;
+//			Vmax = Vmax + step/cont;
+//			Faux(Vmin,Vmax);
+//			Vmin=Vmax;
+//		}
 	}
 	return 0;
 }
