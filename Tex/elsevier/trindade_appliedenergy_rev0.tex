@@ -393,12 +393,11 @@ With respect to power reliability, this work will rely on the critical period so
 
 Regarding financial analysis:
 \begin{itemize}
-	\item LCOE lifetime considered: 20 years;
-	\item Battery lifetime: 4 years for lead-acid batteries. Therefore will be performed three battery bank replacements;
+	\item LCC lifetime considered: 20 years;
 	\item Installation costs: includes delivery at the isolated community and installation costs itself, 5\% of total cost~\cite{Agrener2013};
 %	\item Electrical protection and complementary electrical item: 7\% of equipment cost [Agrener2013]. Includes circuit breakers, surge protection devices, electrical grounding, DC fuses, main switchboard, string boxes;
 	\item Value of the discount rate or interest rate: 10\%, what is a good rate considering financial investments in developing countries;
-	\item Operation and maintenance annual costs: based on past PV projects in the Amazon region of Brazil, will be adopted the value of US\$ 289.64~\citep{Agrener2013}.
+	\item Operation and maintenance annual costs: based on past PV projects in the Amazon region of Brazil, will be adopted the value of US\$ 289.64~\citep{Agrener2013}. This cost includes the battery lifetime (4 years for lead-acid batteries). Therefore will be performed three battery bank replacements during the LCC analysis.
 \end{itemize}
 
 On the subject of PV system optimization technique, it will be adopted at this work the intuitive method, because is used the average value daily of solar irradiance at the mathematical model, without consider the battery's state of charge, or even the random nature of solar irradiation and meteorological conditions. Therefore all the computation effort will be at the automated synthesis algorithm.
@@ -425,9 +424,9 @@ Tools & \makecell{CBMC 5.11 \\(MiniSat 2.2.1)} & \makecell{ESBMC 6.0.0 \\(Boolec
 \hline
 Specification & Result & Result & Result & Result \\
 \hline
-\makecell{\textbf{Case Study 1}\\Demand:501W\\Peak:501W \\E:3,900Wh/day\\Autonomy:48h} & OM & IF & \makecell{SAT (146.13 min) \\NTP:1$\times$340W (1S)\\NBT:8$\times$105Ah (2S-4P)\\Controller 15A/75V\\Inverter 700W/48V\\LCC:US\$ 1,902.60} & XYZ \\
+\makecell{\textbf{Case Study 1}\\Demand:501W\\Peak:501W \\E:3,900Wh/day\\Autonomy:48h} & OM & IF & \makecell{SAT (172.03 min) \\NTP:1$\times$340W (1S)\\NBT:8$\times$105Ah (2S-4P)\\Controller 15A/75V\\Inverter 700W/48V\\LCC:US\$ 7,790.53} & XYZ \\
 \hline
-\makecell{\textbf{Case Study 2}\\Demand:915W\\Peak:980W\\E:4,880Wh/day\\Autonomy:6h} & OM & IF & \makecell {SAT (105.06 min) \\NTP:3$\times$275W (3S)\\NBT:2$\times$80Ah (2S)\\Controller 30A/100V\\Inverter 1,200W/24V \\LCC:US\$ 1,323.00} & XYZ \\
+\makecell{\textbf{Case Study 2}\\Demand:915W\\Peak:980W\\E:4,880Wh/day\\Autonomy:6h} & OM & IF & \makecell {SAT (105.06 min) \\NTP:2$\times$320W (2S)\\NBT:2$\times$80Ah (2S)\\Controller 40A/100V DC\\Inverter 1,200W/24V \\LCC:US\$ 7,133.39} & XYZ \\
 \hline
 \makecell{\textbf{Case Study 3}\\Demand:915W\\Peak:980W\\E:4,880Wh/day\\Autonomy:12h} & OM & IF & \makecell {SAT (131.38 min) \\NTP:3$\times$330W (3S)\\NBT:2$\times$80Ah (2S)\\Controller 35A/145V\\Inverter 1,200W/24V \\LCC:US\$ 1,441.40} & XYZ \\
 \hline

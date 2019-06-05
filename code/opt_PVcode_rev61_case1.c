@@ -107,6 +107,7 @@ float InverterData [10][6] =   {{0.93, 48, 110, 700, 1600, 400.00},
 
 //global variables
 float SOC = 100; //battery is charged when starts the verification
+float LCC;
 
 extern void __VERIFIER_error() __attribute__ ((__noreturn__));
 extern void __VERIFIER_assume(int expression);
@@ -136,8 +137,6 @@ int FHintCost(void){
 		if ((int)InverterData[cont][5] < lowervalue) lowervalue=(int)InverterData[cont][5];
 	}
 	cost = cost+lowervalue;
-	cost = cost + cost*0.05; //installation cost of 5%
-	cost = cost + 20*289.64; //O&M cost of 289.64 in 20 years
 	return(cost);
 }
 
@@ -250,8 +249,8 @@ int Faux (int cost){
 
 	// Function objective: minimum acquisition cost
 	Fobj= NTP*PanelCost + NBtotal*BatteryCost + ControllerCost + InverterCost;
-	Fobj= Fobj+Fobj*0.05+3*(NBtotal*BatteryCost)+20*289.64; //cost = equipment + 5% of installation + 3*batrep + O&M cost
-	__VERIFIER_assume ( ( Fobj >= (cost-800) ) );
+	LCC= Fobj+Fobj*0.05+20*289.64; //cost = equipment + 5% of installation + 3*batrep + O&M cost [out: 3*(NBtotal*BatteryCost)+]
+	__VERIFIER_assume ( ( Fobj >= (cost-500) ) );
 
 	//minimize cost of the solution, considering all the equipment that can be used and was declared at the code
 	if (!(Fobj > cost)) { __VERIFIER_error(); }
@@ -261,8 +260,8 @@ int Faux (int cost){
 /* ----------- MAIN FUNCTION --------- */
 int main() {
 	int HintCost;
-	HintCost = FHintCost()+800;
-	for (; HintCost <= MaxCost; HintCost=HintCost+800){
+	HintCost = FHintCost()+500;
+	for (; HintCost <= MaxCost; HintCost=HintCost+500){
 		Faux(HintCost);
 	}
 	return 0;

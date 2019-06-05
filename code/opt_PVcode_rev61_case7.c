@@ -1,8 +1,8 @@
 /*
  ============================================================================
- Name        : opt_PVcode_rev5_improved database.c CASE 1
+ Name        : opt_PVcode_rev61_improved database.c CASE HOUSE5
  Author      : Alessandro Trindade
- Version     : rev5 - May 2019: 40 equipment, lowerbound defined by SW, better HintCost
+ Version     : rev61 - Jun 2019: 40 equipment, lowerbound defined by SW, better HintCost
  Description : stand-alone PV sizing optimization (Universal: CBMC, ESBMC, UAutomizer and CPChecker)
  //assume (exp);  MUST BE REPLACE BY:   if (!expr) { __VERIFIER_error(); }
  ============================================================================*/
@@ -39,7 +39,7 @@ int Gref = 1000; //reference irradiance is 1000 W/m²
 float Tref = 298.15; //reference temperature is 25oC or 298.15K
 
 //data from the house
-int Phouse = 501, Psurge = 501, Econsumption = 3900;
+int Phouse = 1800, Psurge = 2900, Econsumption = 14000;
 
 //must define
 int MaxCost=10000; //10 million maximum cost just to control the loop of main function
@@ -125,7 +125,7 @@ int FHintCost(void){
 	for (cont=1; cont <= 9; cont++) {
 		if ((int)BatteryData[cont][5] < lowervalue) lowervalue=(int)BatteryData[cont][5];
 	}
-	cost = cost+lowervalue;
+	cost = cost+lowervalue+lowervalue*3; //Cbatrep 3x in 20 years
 	lowervalue=(int)ControllerData[0][5];
 	for (cont=1; cont <= 9; cont++) {
 		if ((int)ControllerData[cont][5] < lowervalue) lowervalue=(int)ControllerData[cont][5];
@@ -136,8 +136,6 @@ int FHintCost(void){
 		if ((int)InverterData[cont][5] < lowervalue) lowervalue=(int)InverterData[cont][5];
 	}
 	cost = cost+lowervalue;
-	cost = cost + cost*0.05; //installation cost of 5%
-	cost = cost + 20*289.64; //O&M cost of 289.64 in 20 years
 	return(cost);
 }
 
@@ -250,8 +248,7 @@ int Faux (int cost){
 
 	// Function objective: minimum acquisition cost
 	Fobj= NTP*PanelCost + NBtotal*BatteryCost + ControllerCost + InverterCost;
-	Fobj= Fobj+Fobj*0.05+3*(NBtotal*BatteryCost)+20*289.64; //cost = equipment + 5% of installation + 3*batrep + O&M cost
-	__VERIFIER_assume ( ( Fobj >= (cost-800) ) );
+	__VERIFIER_assume ( ( Fobj >= (cost-500) ) );
 
 	//minimize cost of the solution, considering all the equipment that can be used and was declared at the code
 	if (!(Fobj > cost)) { __VERIFIER_error(); }
@@ -261,8 +258,8 @@ int Faux (int cost){
 /* ----------- MAIN FUNCTION --------- */
 int main() {
 	int HintCost;
-	HintCost = FHintCost()+800;
-	for (; HintCost <= MaxCost; HintCost=HintCost+800){
+	HintCost = FHintCost()+500;
+	for (; HintCost <= MaxCost; HintCost=HintCost+500){
 		Faux(HintCost);
 	}
 	return 0;
