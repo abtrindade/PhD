@@ -386,21 +386,22 @@ V_{out}AC = V_{AC}.
 \end{equation}
 
 \subsection{PV systems Optimization Criteria}
-In order to select an optimal combination to meet sizing constraints, it is necessary to evaluate power reliability and system cost analysis for the system. An ideal combination for any PV system is made by the best compromise between those two objectives.
+In order to select an optimal combination to meet sizing constraints, it is necessary to evaluate power reliability and system cost analysis for the underlying system. An ideal combination for any PV system is made by the best compromise between these two objectives.
 
-During the PV system design, one of the most important aspects to ensure power system security is to analyze power supply availability. The reason is because solar energy production is intermittent and, therefore, the energy generated usually will not match with the load demand. A reliable power is a generation system that has sufficient power to feed load demand in a period. 
+During the PV system design, one of the most important aspects to ensure power system security \textcolor{red}{what do you define as ``power system security''? Should it be ``safety''?} is to analyze power supply availability. The reason is because solar energy production is intermittent and, therefore, the energy generated usually will not match with the load demand. A reliable power is a generation system that has sufficient power to feed load demand in a period. 
 
-There are different methods to express system reliability, the most popular are the loss of load probability (LOLP) and the loss of power supply probability (LPSP)~\cite{Alsadi2018}. In both methods, if the probability is zero, then the load will always be fulfilled; while in the opposite (probability of one) then the load will never be fulfilled.
+There are different methods to express system reliability, the most popular ones are the loss of load probability (LOLP) and the loss of power supply probability (LPSP)~\cite{Alsadi2018}. In both methods, if the probability is zero, then the load will always be fulfilled; otherwise (i.e., probability of one) the load will never be fulfilled.
 
-LOLP is the probability for the case when a load demand exceeds the generation power by the PV system. And we say that we have a reliable PV system when it is able to generate sufficient power to fulfill the demanded load within a time span. On the other hand, LPSP is defined as the probability of the case when system generates insufficient power to satisfy the load demand. The main approaches to LPSP demand chronological simulation or probabilistic technique. In both, time series data is necessary, and dynamic behavior analysis. Data is not always available and dynamic analysis is complex, and this is a drawback.
+LOLP is the probability for the case when a load demand exceeds the generation power by the PV system. On one hand, we say that we have a reliable PV system when it is able to generate sufficient power to fulfill the demanded load within a time span. On the other hand, LPSP is defined as the probability of the case when system generates insufficient power to satisfy the load demand. The main approaches to LPSP demand chronological simulation or probabilistic technique. \textcolor{red}{this sentence is unclar... In both, time series data is necessary, and dynamic behavior analysis}. Data is not always available and dynamic analysis is complex, and this is a drawback \textcolor{red}{add citation}.
 
-Related to economic analysis, there are several methods available. The aim is to determine wheter the project has or has not acceptable investment, and the usual is to perform economic analysis after reliability analysis in order to propose a system with high reliability and lowest cost~\cite{Alsadi2018}. Frequently are used the Net Present Cost (NPC), the Levelized Cost of Energy (LCOE), or the Life Cycle Cost (LCC).
+Related to economic analysis, there exist various methods available. The main objective is to determine whether the project has an acceptable investment; the usual way is to perform economic analysis after reliability analysis with the goal of proposing a system with high reliability and lowest cost~\cite{Alsadi2018}. The common methods include: Net Present Cost (NPC) \textcolor{red}{add citation}, the Levelized Cost of Energy (LCOE) \textcolor{red}{add citation}, or the Life Cycle Cost (LCC) \textcolor{red}{add citation}.
 
 NPC is the total present value of a time series. The net present worth is found by discounting all cash inflows and outflows, including cost of installation, replacement and maintenance of the PV system, at an interest rate of internal rate of return (IRR)~\cite{Park2004}.
 
-LCOE is defined as the average cost per kWh of useful electrical energy produced by the PV system when a lifetime, investment cost, replacement, operation and maintenance, and capital cost is considered~\cite{Kamel2005}. LCOE method is useful in comparing different generation technologies with different operating characteristics~\cite{Zhou2010}.
+LCOE is defined as the average cost per kWh of useful electrical energy produced by the PV system when a lifetime, investment cost, replacement, operation and maintenance, and capital cost are considered~\cite{Kamel2005}. LCOE method is useful in comparing different generation technologies with different operating characteristics~\cite{Zhou2010}.
 
 LCC is the estimation of sum of installation cost, operating and maintenance of a PV system for a period of time, and expressed in today's value~\cite{Applasamy2011}. Eq.~\ref{eq:LCC} is used to calculate LCC of a PV system,
+%
 \begin{equation}
 \label{eq:LCC}
 LCC = C_{PV} + C_{bat} + C_{charger} + C_{inv} + C_{installation} + C_{batrep} + C_{PWO\&M},
@@ -414,14 +415,18 @@ LCC = C_{PV} + C_{bat} + C_{charger} + C_{inv} + C_{installation} + C_{batrep} +
 %Regarding power reliability, this work will rely on the critical period solar energy method~\cite{Pinho} as described in section~\ref{sec:sizing}. 
 %the usual is to use loss of load probability (LOLP) or loss of power supply probability (LPSP). Based on the fact that here we are neither considering site characteristics nor the load changes over time, the reliability analysis will be developed only by the critical period method of PV sizing \textcolor{red}{What does it mean? Remember that we have software engineering audience}. 
 %However, considering the system cost analysis, we usually find related studies done with Net Present Cost (NPC), Levelized Cost of Energy (LCOE), or Life Cycle Cost (LCC). Here, based on the fact that the deployment location is not specified, our study uses an adapted LCC analysis, where only the deployment cost is considered about the model, i.e., without the operational and maintenance costs~\cite{Alsadi2018}.
+
+%----------------------------------------------------------------------------------------------
 \subsection{Stand-alone PV System Optimization Technique}
-To recommend an optimal configuration for PV systems, the designer has to evaluate the design based on optimization variables. As number of optimization variables increases, the computation effort will increase as well. Hence, to obtain the best PV system design as well as simplified sizing process, past work introduced three main techniques for system sizing calculation, namely intuitive, numerical, and analytical methods~\cite{Alsadi2018}[6].
+%----------------------------------------------------------------------------------------------
 
-Intuitive method is simple, easy to be implemented, and can be used to give rough suggestion for preliminary design. The sizing rules are based on designer's experience, using lowest performance either in a time period data or by directly using average value (daily, monthly, or annual) of solar irradiance. This method do not consider the battery's state of charge, or even the random nature of solar irradiation and meteorological conditions~\cite{Alsadi2018}.
+In order to recommend an optimal configuration for PV systems, the designer has to evaluate the design based on optimization variables. As number of optimization variables increases, the computation effort will increase as well. Hence, to obtain the best PV system design as well as simplified sizing process, prior work introduced three main techniques for system sizing calculation, namely intuitive, numerical, and analytical methods~\cite{Alsadi2018} \textcolor{red}{why [6]?}.
 
-Numerical method the design is simulated for each time step within a period. State of charge of batteries is calculated and investigated. It is very accurate, however is complex, demanding more time for calculation.
+Intuitive method is simple, easy to be implemented, and can be used to give rough suggestion for preliminary design. The sizing rules are based on designer's experience, using lowest performance either in a time period data or by directly using average value (daily, monthly, or annual) of solar irradiance. This method does not consider the battery's state of charge, or even the random nature of solar irradiation and meteorological conditions~\cite{Alsadi2018}.
 
-Analytical methods is used to obtain a close relation or correlation in a form of equation between capacities and reliabilities. The sizing task become much simpler, however the relation cannot be applied at different sites, because is specific to one specific place of deployment of the PV system, demanding adaptation if another site is analyzed.
+For numerical method, the design is simulated for each time step within a period. State of charge of batteries is calculated and investigated. It is very accurate, however is complex, demanding more time for calculation \textcolor{red}{add citation}.
+
+Analytical methods is used to obtain a close relation or correlation in a form of equation between capacities and reliabilities. The sizing task becomes much simpler \textcolor{red}{than what?}, however the relation cannot be applied to different sites, because it is specific to one place of deployment of the PV system, thereby demanding adaptation if another site is analyzed.
 
 %------------------------------------------------------
 \section{Synthesizing Optimal Sizing of Stand-alone Solar Photovoltaic Systems}
