@@ -424,12 +424,10 @@ Numerical method the design is simulated for each time step within a period. Sta
 Analytical methods is used to obtain a close relation or correlation in a form of equation between capacities and reliabilities. The sizing task become much simpler, however the relation cannot be applied at different sites, because is specific to one specific place of deployment of the PV system, demanding adaptation if another site is analyzed.
 
 %------------------------------------------------------
-\section{METHOD}
+\section{Synthesizing Optimal Sizing of Stand-alone Solar Photovoltaic Systems}
 \label{sec:Method}
-
-\subsection{Synthesizing Optimal Sizing of Stand-alone Solar Photovoltaic Systems}
-%Applying Automated Verification to Optimal Sizing of Stand-alone Solar PV Systems}
 %------------------------------------------------------
+
 Algorithm~\ref{alg:verification-algorithm} describes our pseudo-code to synthesize stand-alone PV systems using symbolic model checking. 
 %
  \begin{algorithm}
@@ -487,9 +485,9 @@ The main challenge for the {\sc Synthesize} phase is to find a feasible candidat
 Note that the process described here in completely automated and that a validation is performed by our {\sc Verify} phase to ensure that the approach is sound.
 
 \subsection{Assumptions and Premises}
-Regarding the line 2 of Algorithm~\ref{alg:verification-algorithm}, a list of forty equipment from ten different manufacturers was inputted to the code in order to allow the choice of every item of PV sizing. Data sheet from each item was necessary to collect the technical information. Moreover, the price of each item was collected using the internet (in US dollars).
+Regarding the line 2 of Algorithm~\ref{alg:verification-algorithm}, a list of forty equipment from ten different manufacturers was provided to the code in order to allow the choice of every item of PV sizing. Data sheet from each item was necessary to collect the technical information. Moreover, the price of each item was collected using the internet (in US dollars) \textcolor{red}{add references here?}.
 
-With respect to power reliability, this work will rely on the critical period solar energy method~\cite{Pinho} as described in section~\ref{sec:sizing}. The usual is to use loss of load probability (LOLP) or loss of power supply probability (LPSP). However, based on the fact that here we are neither considering site characteristics nor the load changes over time, which demands historical data, the reliability analysis will be developed only by the critical period method of PV sizing.
+With respect to power reliability, this work will rely on the critical period solar energy method~\cite{Pinho} as described in section~\ref{sec:sizing} \textcolor{red}{Could you check in the journal guidelines whether we should refer as ``section~\ref{sec:sizing}'' or ``Section~\ref{sec:sizing}''. Then update the entire manuscript with this standard}. The usual is to use loss of load probability (LOLP) or loss of power supply probability (LPSP). However, based on the fact that here we are neither considering site characteristics nor the load changes over time, which demands historical data, the reliability analysis will be developed only by the critical period method of PV sizing.
 
 Regarding financial analysis:
 \begin{itemize}
@@ -500,18 +498,23 @@ Regarding financial analysis:
 	\item Operation and maintenance annual costs: based on past PV projects in the Amazon region of Brazil, will be adopted the value of US\$ 289.64~\citep{Agrener2013}. This cost includes the battery lifetime (4 years for lead-acid batteries). Therefore will be performed three battery bank replacements during the LCC analysis.
 \end{itemize}
 
-On the subject of PV system optimization technique, it will be adopted at this work the intuitive method, because is used the average value daily of solar irradiance at the mathematical model, without consider the battery's state of charge, or even the random nature of solar irradiation and meteorological conditions. Therefore all the computation effort will be at the automated synthesis algorithm.
+On the subject of PV system optimization technique, we will adopt here the intuitive method since the average value daily of solar irradiance is used at the mathematical model, without considering the battery's state of charge, or even the random nature of solar irradiation and meteorological conditions. Therefore, all the computational effort will be concentrated in our automated synthesis algorithm.
 
-Regarding all case studies, it was defined that the minimum state of charge of batteries is 75\% (DOD maximum of 25\%), the voltage of the system is set in 24 V DC, and the AC voltage from the inverter is 120 V.
+Regarding all case studies, it was defined that the minimum state of charge of batteries is 75\% (DOD maximum of 25\%), the voltage of the system is set in 24 V DC, and the AC voltage from the inverter is 120 V \textcolor{red}{why do we define these parameters? Give a rationale here}.
 
 Related to off-the-shelf simulation tools only HOMER Pro and Hybrid2 perform off-grid system with battery backup analysis. %all the tools perform solar photovoltaic analysis; 
-Additionally, HOMER and RETScreen include economical analysis or even optimization-sensitive analysis. Therefore, at this work, HOMER Pro will be the simulation tool used to compare with our automated synthesis method. Worth to mention that HOMER Pro is available only for Microsoft Windows and the annual standard subscription costs US\$ 504.00.
+Additionally, HOMER and RETScreen include economical analysis or even optimization-sensitive analysis. Therefore, in this study, HOMER Pro will be the simulation tool used to compare with our automated synthesis method. Note that that HOMER Pro is available only for Microsoft Windows and the annual standard subscription costs US\$ $504.00$ \textcolor{red}{cite reference}.
 
 %---------------------------------------------------------------------------
-\section{RESULTS AND DISCUSSION}
+\section{Experimental Evaluation}
 \label{sec:Results}
 %---------------------------------------------------------------------------
-\textbf{Case studies.} We have performed seven stand-alone PV system case studies to evaluate our proposed synthesis approach as described in the first column of Table~\ref{tab1} (Specification). 
+
+%---------------------------------------------------------------------------
+\subsection{Case studies} 
+%---------------------------------------------------------------------------
+
+We have performed seven stand-alone PV system case studies to evaluate our proposed synthesis approach as described in the first column of Table~\ref{tab1} (Specification) \textcolor{red}{why did you choose these case studies?}. 
 
 \begin{table}
 \caption{Case studies and results: optimization of stand-alone PV systems.}\label{tab1}
@@ -544,14 +547,39 @@ Specification & Result & Result & Result & Result \\
 \end{scriptsize}
 \end{table}
 
-\textbf{Verification Tools.} Three start-of-art verification tools, CBMC,\footnote{Command-line: \$ cbmc -\phantom{}-unwind 100 filename.c -\phantom{}-trace} ESBMC,\footnote{Command-line: \$ esbmc filename.c -\phantom{}-no-bounds-check -\phantom{}-no-pointer-check -\phantom{}-unwind 100 -\phantom{}-boolector} %UAutomizer\footnote{Command-line: \$ ./Ultimate -tc config/AutomizerReach.xml -s config/svcomp-Reach-32bit-Automizer\_Default.epf -i filename.c -\phantom{}-traceabstraction.limit.analysis.time 900 -\phantom{}-traceabstraction.stop.after.first.violation.was.found false -\phantom{}-cacsl2boogietranslator.overapproximate.operations.on.floating.types false -\phantom{}- cacsl2boogietranslator.assume.nondeterminstic.values.are.in.range false -\phantom{}-rcfgbuilder.add.additional.assume.for.each.assert true -\phantom{}-rcfgbuilder.simplify.code.blocks true -\phantom{}-rcfgbuilder.size.of.a.code.block LoopFreeBlock}, 
+
+%---------------------------------------------------------------------------
+\subsection{Verification Tools} 
+%---------------------------------------------------------------------------
+
+Three start-of-art verification tools, CBMC,\footnote{Command-line: \$ cbmc -\phantom{}-unwind 100 filename.c -\phantom{}-trace} ESBMC,\footnote{Command-line: \$ esbmc filename.c -\phantom{}-no-bounds-check -\phantom{}-no-pointer-check -\phantom{}-unwind 100 -\phantom{}-boolector} %UAutomizer\footnote{Command-line: \$ ./Ultimate -tc config/AutomizerReach.xml -s config/svcomp-Reach-32bit-Automizer\_Default.epf -i filename.c -\phantom{}-traceabstraction.limit.analysis.time 900 -\phantom{}-traceabstraction.stop.after.first.violation.was.found false -\phantom{}-cacsl2boogietranslator.overapproximate.operations.on.floating.types false -\phantom{}- cacsl2boogietranslator.assume.nondeterminstic.values.are.in.range false -\phantom{}-rcfgbuilder.add.additional.assume.for.each.assert true -\phantom{}-rcfgbuilder.simplify.code.blocks true -\phantom{}-rcfgbuilder.size.of.a.code.block LoopFreeBlock}, 
 and CPAchecker,\footnote{Command-line: \$ scripts/cpa.sh -heap 64000m -config config/bmc-incremental.properties -spec config/specification/sv-comp-reachability.spc filename.c} were used as our verification engine to compare our approach effectiveness and efficiency. Simulation tool HOMER Pro version 3.13.1 was used as well.
 
-\textbf{Setup.} All experiments regarding the verification tools were conducted on an otherwise idle Intel Xeon CPU E5-4617 (8-cores) with 2.90 GHz and 64 GB of RAM, running Ubuntu 16.04 LTS 64-bits. Related to HOMER Pro, it was used an Intel Core i5-4210 (4-cores), with 1.7 GHz and 4 GB of RAM, running Windows 10. The experiments were performed with a predefined timeout of $240$ minutes.
+%---------------------------------------------------------------------------
+\subsection{Setup} 
+%---------------------------------------------------------------------------
 
-\textbf{Objectives.} Our evaluation aims to answer two research questions: \textit{RQ1} (soundness) Does our automated synthesis approach provide correct results?, and \textit{RQ2} (performance) How do the software verifiers compare to each other?
+All experiments regarding the verification tools were conducted on an otherwise idle Intel Xeon CPU E5-4617 (8-cores) with 2.90 GHz and 64 GB of RAM, running Ubuntu 16.04 LTS 64-bits. Related to HOMER Pro, it was used an Intel Core i5-4210 (4-cores), with 1.7 GHz and 4 GB of RAM, running Windows 10. The experiments were performed with a predefined timeout of $240$ minutes.
 
-\textbf{Results.}  CPAchecker was able to synthesize the optimal sizing in six of seven case studies: the result was produced in time that varied from $105.06$ to $235.75$ minutes. Only case 7 presented a \textit{timeout} result.
+%---------------------------------------------------------------------------
+\subsection{Objectives} 
+%---------------------------------------------------------------------------
+
+Our evaluation aims to answer two research questions: 
+
+\begin{enumerate}
+
+\item[RQ1] \textbf{(soundness)} does our automated synthesis approach provide correct results?
+
+\item[RQ2] \textbf{(performance)} how do the software verifiers compare to each other?
+
+\end{enumerate}
+
+%---------------------------------------------------------------------------
+\subsection{Results}  
+%---------------------------------------------------------------------------
+
+CPAchecker was able to synthesize the optimal sizing in six of seven case studies: the result was produced in time that varied from $105.06$ to $235.75$ minutes. Only case 7 presented a \textit{timeout} result.
 The violation (SAT result) indicated in Table~\ref{tab1} is the $assert$ of line 22 from Algorithm~\ref{alg:verification-algorithm}. %The results were tested by manual PV sizing and were sound (\textit{RQ1}). %, linking a feasible technical solution with the lowest cost possible, considering the equipment that were inputted to the code. 
 
 CBMC and ESBMC were not capable to produce some conclusive results. Situations of \textit{internal failure} or \textit{timeout} or \textit{out of memory} occurred; this partially answers the \textit{RQ2}. Worth to mention that the internal failure presented by the ESBMC verifier was a Z3 solver issue (a bug), and this will demand an updated version of the ESBMC.
