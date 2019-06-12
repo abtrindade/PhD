@@ -88,7 +88,7 @@ During operation, such components must frequently adapt to the executing environ
 faced at run-time (dynamics of the physical processes) and must be able to continue to behave 
 in a controlled and safe way, thus posing novel technical challenges for the software engineering 
 of services and applications for CPS~\cite{Metzger2014}. Important quality aspects for CPS include scalability, 
-e.g., ensuring that CPS applications can scale to urban-wide deployment environments~\cite{NESSI} \textcolor}{red}{only scalability?}.
+e.g., ensuring that CPS applications can scale to urban-wide deployment environments~\cite{NESSI} \textcolor{red}{only scalability?}.
 Software pervasiveness in CPS places new challenges; in particular, highly dynamic environments, 
 rapidly changing requirements, unpredictable and uncertain operating conditions demand new paradigms for software design~\cite{Filieri2015}.
 
@@ -162,20 +162,64 @@ results and discussions. Section~\ref{sec:Conclusion} presents the conclusion an
 \section{BACKGROUND}
 \label{sec:Background}
 %-----------------------------------------------------------
-%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{State-of-art in Automated Verification of Electrical Systems}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-The conversion of traditional power grid into a smart grid, a fundamental example of a CPS, raises a number of issues that requires novel methods and applications. In 2012, a Chinese smart grid implementation was considered as case study to address the verification problem for performance and energy consumption~\cite{Yukseletall2012}. The authors employed a stochastic model checking approach and presented a modelling and analysis study using PRISM~\cite{KwiatkowskaNP11}. The focus of this study was on how CPS integrate information and communication technology functions to the physical elements of a system for monitoring and controlling purposes; here the authors employed automated verification of certain quantitative properties of the system, as 	probability	of	node	failure	in	the	long run, impact	of	repair	service	on	the	failure	risk, and expected energy consumption, with no interest in power generation or even solar PV systems.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-In 2015, an approach for applying Monte-Carlo simulation to power system protection schemes presented limitations of incomplete coverage of all possible operating conditions~\cite{Sengupta2015}. The authors proposed an automated simulation-based verification technique to verify correctness of protection settings efficiently using hybrid automata-temporal-logic framework. The initial focus was on relay operations and test-case generation to ensure early detection of design errors. The study was limited to power system protection and did not deal with electricity generation or even solar PV systems.
+The conversion of traditional power grid into a smart grid, a fundamental example of a CPS, 
+raises a number of issues that requires novel methods and applications. 
+In 2012, a Chinese smart grid implementation was considered as case study 
+to address the verification problem for performance and energy consumption~\cite{Yukseletall2012}. 
+The authors employed a stochastic model checking approach and presented 
+a modelling and analysis study using PRISM~\cite{KwiatkowskaNP11}. 
+The focus of this study was on how CPSs integrate information and 
+communication technology functions to the physical elements 
+of a system for monitoring and controlling purposes; here the authors 
+employed automated verification of certain quantitative properties of the system, 
+as probability of	 node failure in the long run, impact of repair service on the failure risk, 
+and expected energy consumption, with no interest in power generation or even solar PV systems.
 
-Other related studies from 2015 include a framework named Modana to achieve an integrated process from modeling with SysML/MARTE to analysis with statistical model checking for CPS in terms of non-functional properties such as time and energy~\cite{Cheng2015}. In order to demonstrate Modana's capability, the authors modelled energy-aware buildings as a case study, and discussed the analysis on energy consumption in different scenarios. The focus here is on smart buildings and HVAC (heating, ventilation, and air conditioning) systems. The research did no deal with solar PV systems. 
+In 2015, an approach for applying Monte-Carlo simulation to power system protection schemes 
+presented limitations of incomplete coverage of all possible operating conditions~\cite{Sengupta2015}. 
+The authors proposed an automated simulation-based verification technique to verify correctness 
+of protection settings efficiently using hybrid automata-temporal-logic framework. 
+The initial focus was on relay operations and test-case generation to ensure early detection of design errors. 
+However, this study was limited to power system protection and did not deal with electricity generation or even solar PV systems.
+
+Other related studies from 2015 include a framework named Modana to achieve an integrated process 
+from modeling with SysML/MARTE to analysis with statistical model checking for CPS 
+in terms of non-functional properties such as time and energy~\cite{Cheng2015}. 
+In order to demonstrate Modana's capability, the authors modelled energy-aware buildings 
+as a case study, and discussed the analysis on energy consumption in different scenarios. 
+The focus here is on smart buildings and HVAC (heating, ventilation, and air conditioning) systems. 
+This research, however, did no address the design and verification of solar PV systems. 
  
-In 2017, a researcher suggested the application of formal methods to verify and control the behavior of computational devices interacting over a shared and smart infrastructure~\cite{Abate2017}. The author discussed the aggregation of large populations of thermostatically-controlled loads and of PV panels, and the corresponding problems of energy management in smart buildings, of demand-response on smart grids, and respectively of frequency stabilization and grid robustness. The focus was on controlling the behavior of components, thereby verifying the smart grid as a ``system of systems'' within the context of ``internet of things''. The author used approximate model checking of stochastic and hybrid models.
+In 2017, a researcher suggested the application of formal methods to verify and control 
+the behavior of computational devices interacting over a shared and smart infrastructure~\cite{Abate2017}. 
+The author discussed the aggregation of large populations of thermostatically-controlled loads and of PV panels, 
+and the corresponding problems of energy management in smart buildings, of demand-response on smart grids, 
+and respectively of frequency stabilization and grid robustness. The focus was on controlling the behavior of components, 
+thereby verifying the smart grid as a ``system of systems'' within the context of ``internet of things''. 
+The author, however, used approximate model checking of stochastic and hybrid models.
 
-In 2018, a verification methodology was proposed for the Cyber Physical Energy Systems (CPES) with applications to PV panels and its distributed power point tracking~\cite{Driouich2018}. This approach relied on representing unpredictable behavior of the environment to cover all possible feasible scenarios. The simulation results obtained by JModelica covered the system's complete dynamic behavior; however, it was evident the time consuming issue with almost three days of computer effort to verify the design space of one operation hour of the PV panels behavior. The work did not include the other components of a stand-alone solar PV system.
+In 2018, a verification methodology was proposed for the Cyber Physical Energy Systems (CPES) 
+with applications to PV panels and its distributed power point tracking~\cite{Driouich2018}. 
+This approach relied on representing unpredictable behavior of the environment to cover all possible 
+feasible scenarios. The simulation results obtained by JModelica covered the system's complete dynamic behavior; 
+however, it was evident the time consuming issue with almost three days of computer effort 
+to verify the design space of one operation hour of the PV panels behavior. 
+This related study did not include other components of a stand-alone solar PV system.
 
-Another work from 2018 was the approach to modeling smart grid components using a formal specification. The authors used a state-based formal specification language named Z; they demonstrated the application of Z to four smart grid components~\cite{Akram2018}. The presented formal specification can be considered as a first step towards modeling of smart grid using formal methods. The starting point of this study was that a smart home can be considered as an integrated system consisting of various objects and system, which communicates and interacts with each other. This approach is base on Petri nets and from the premise that modeling of the smart home leads to clear understanding of the overall behavior of the smart grid.
+Another work from 2018 was the approach to model smart grid components using a formal specification. 
+The authors used a state-based formal specification language named Z; 
+they demonstrated the application of Z to four smart grid components~\cite{Akram2018}. 
+The presented formal specification can be considered as a first step towards modeling 
+of smart grid using formal methods. The starting point of this study was that a smart home 
+can be considered as an integrated system consisting of various objects and system, 
+which communicates and interacts with each other. This approach is based 
+on Petri nets and under the assumption that modeling the smart home 
+leads to clear understanding of the overall behavior of the smart grid.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Automated Verification Using Model Checking}
