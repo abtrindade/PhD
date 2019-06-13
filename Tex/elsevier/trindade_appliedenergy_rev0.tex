@@ -115,8 +115,8 @@ specifically grid extension will be the standard in urban areas~\cite{IEAweo2018
 
 In order to simulate or evaluate a PV system, there exist various specialized tools, 
 e.g., RETScreen, HOMER, PVWatts, SAM and Hybrid2~\cite{Pradhan,Swarnkar,NRELDobos,NRELBlair,Mills}; 
-and even general purpose simulation tools, e.g., PSpice \textcolor{red}{add citation}, Saber \textcolor{red}{add citation} 
-or MATLAB/Simulink package~\cite{Gow1999,Benatiallah2017}. However, these tools are based on simulation; 
+and even general purpose simulation tools, e.g., \textcolor{red} {PSpice~\cite{Gow1999},  
+or MATLAB/Simulink package~\cite{Benatiallah2017}}. However, these tools are based on simulation; 
 they have the drawback of an incomplete coverage  since verification of all possible 
 combinations and potential failures of a system is unfeasible~\cite{ClarkeHV18}. 
 
@@ -388,13 +388,13 @@ V_{out}AC = V_{AC}.
 \subsection{PV systems Optimization Criteria}
 In order to select an optimal combination to meet sizing constraints, it is necessary to evaluate power reliability and system cost analysis for the underlying system. An ideal combination for any PV system is made by the best compromise between these two objectives.
 
-During the PV system design, one of the most important aspects to ensure power system security \textcolor{red}{what do you define as ``power system security''? Should it be ``safety''?} is to analyze power supply availability. The reason is because solar energy production is intermittent and, therefore, the energy generated usually will not match with the load demand. A reliable power is a generation system that has sufficient power to feed load demand in a period. 
+During the PV system design, one of the most important aspects to ensure power system \textcolor{red}{reliability is to analyze power supply availability}. The reason is because solar energy production is intermittent and, therefore, the energy generated usually will not match with the load demand. A reliable power is a generation system that has sufficient power to feed load demand in a period. 
 
 There are different methods to express system reliability, the most popular ones are the loss of load probability (LOLP) and the loss of power supply probability (LPSP)~\cite{Alsadi2018}. In both methods, if the probability is zero, then the load will always be fulfilled; otherwise (i.e., probability of one) the load will never be fulfilled.
 
-LOLP is the probability for the case when a load demand exceeds the generation power by the PV system. On one hand, we say that we have a reliable PV system when it is able to generate sufficient power to fulfill the demanded load within a time span. On the other hand, LPSP is defined as the probability of the case when system generates insufficient power to satisfy the load demand. The main approaches to LPSP demand chronological simulation or probabilistic technique. \textcolor{red}{this sentence is unclar... In both, time series data is necessary, and dynamic behavior analysis}. Data is not always available and dynamic analysis is complex, and this is a drawback \textcolor{red}{add citation}.
+LOLP is the probability for the case when a load demand exceeds the generation power by the PV system. On one hand, we say that we have a reliable PV system when it is able to generate sufficient power to fulfill the demanded load within a time span. On the other hand, LPSP is defined as the probability of the case when system generates insufficient power to satisfy the load demand. \textcolor{red}{The main approaches to LPSP demand simulation or probabilistic treatment of time series data to predict dynamic changing on system performance}. However, data is not always available and dynamic analysis is complex, and this is a drawback \textcolor{red}{to LOLP and LPSP~\cite{Alsadi2018}}.
 
-Related to economic analysis, there exist various methods available. The main objective is to determine whether the project has an acceptable investment; the usual way is to perform economic analysis after reliability analysis with the goal of proposing a system with high reliability and lowest cost~\cite{Alsadi2018}. The common methods include: Net Present Cost (NPC) \textcolor{red}{add citation}, the Levelized Cost of Energy (LCOE) \textcolor{red}{add citation}, or the Life Cycle Cost (LCC) \textcolor{red}{add citation}.
+Related to economic analysis, there exist various methods available. The main objective is to determine whether the project has an acceptable investment; the usual way is to perform economic analysis after reliability analysis with the goal of proposing a system with high reliability and lowest cost~\cite{Alsadi2018}. The common methods include: Net Present Cost (NPC) \textcolor{red}{~\cite{Park2004}}, the Levelized Cost of Energy (LCOE) \textcolor{red}{~\cite{Zhou2010}}, or the Life Cycle Cost (LCC) \textcolor{red}{~\cite{Applasamy2011}}.
 
 NPC is the total present value of a time series. The net present worth is found by discounting all cash inflows and outflows, including cost of installation, replacement and maintenance of the PV system, at an interest rate of internal rate of return (IRR)~\cite{Park2004}.
 
@@ -412,21 +412,20 @@ LCC = C_{PV} + C_{bat} + C_{charger} + C_{inv} + C_{installation} + C_{batrep} +
 %%%To select an optimal combination of components from a PV system to meet sizing constraints, 
 %we need to evaluate \textit{power reliability} and perform \textit{system cost} analysis for the recommended system. An ideal combination for any PV system 
 %The optimal sizing of PV systems is made by the best compromise between two objectives: power reliability and system cost~\cite{Alsadi2018}. 
-%Regarding power reliability, this work will rely on the critical period solar energy method~\cite{Pinho} as described in section~\ref{sec:sizing}. 
+%Regarding power reliability, this work will rely on the critical period solar energy method~\cite{Pinho} as described in Section~\ref{sec:sizing}. 
 %the usual is to use loss of load probability (LOLP) or loss of power supply probability (LPSP). Based on the fact that here we are neither considering site characteristics nor the load changes over time, the reliability analysis will be developed only by the critical period method of PV sizing \textcolor{red}{What does it mean? Remember that we have software engineering audience}. 
 %However, considering the system cost analysis, we usually find related studies done with Net Present Cost (NPC), Levelized Cost of Energy (LCOE), or Life Cycle Cost (LCC). Here, based on the fact that the deployment location is not specified, our study uses an adapted LCC analysis, where only the deployment cost is considered about the model, i.e., without the operational and maintenance costs~\cite{Alsadi2018}.
 
 %----------------------------------------------------------------------------------------------
 \subsection{Stand-alone PV System Optimization Technique}
 %----------------------------------------------------------------------------------------------
-
-In order to recommend an optimal configuration for PV systems, the designer has to evaluate the design based on optimization variables. As number of optimization variables increases, the computation effort will increase as well. Hence, to obtain the best PV system design as well as simplified sizing process, prior work introduced three main techniques for system sizing calculation, namely intuitive, numerical, and analytical methods~\cite{Alsadi2018} \textcolor{red}{why [6]?}.
+In order to recommend an optimal configuration for PV systems, the designer has to evaluate the design based on optimization variables. As number of optimization variables increases, the computation effort will increase as well. Hence, to obtain the best PV system design as well as simplified sizing process, prior work introduced three main techniques for system sizing calculation, namely intuitive, numerical, and analytical methods~\cite{Alsadi2018} \textcolor{red}{why [6]? Alessandro: Não entendi o 6 aqui}.
 
 Intuitive method is simple, easy to be implemented, and can be used to give rough suggestion for preliminary design. The sizing rules are based on designer's experience, using lowest performance either in a time period data or by directly using average value (daily, monthly, or annual) of solar irradiance. This method does not consider the battery's state of charge, or even the random nature of solar irradiation and meteorological conditions~\cite{Alsadi2018}.
 
-For numerical method, the design is simulated for each time step within a period. State of charge of batteries is calculated and investigated. It is very accurate, however is complex, demanding more time for calculation \textcolor{red}{add citation}.
+For numerical method, the design is simulated for each time step within a period. State of charge of batteries is calculated and investigated. It is very accurate, however is complex, demanding more time for calculation \textcolor{red}{~\cite{Park2004}}.
 
-Analytical methods is used to obtain a close relation or correlation in a form of equation between capacities and reliabilities. The sizing task becomes much simpler \textcolor{red}{than what?}, however the relation cannot be applied to different sites, because it is specific to one place of deployment of the PV system, thereby demanding adaptation if another site is analyzed.
+Analytical methods is used to obtain a close relation or correlation in a form of equation between capacities and reliabilities. The sizing task becomes much simpler \textcolor{red}{than numerical technique}, however the relation cannot be applied to different sites, because it is specific to one place of deployment of the PV system, thereby demanding adaptation if another site is analyzed.
 
 %------------------------------------------------------
 \section{Synthesizing Optimal Sizing of Stand-alone Solar Photovoltaic Systems}
@@ -490,9 +489,9 @@ The main challenge for the {\sc Synthesize} phase is to find a feasible candidat
 Note that the process described here in completely automated and that a validation is performed by our {\sc Verify} phase to ensure that the approach is sound.
 
 \subsection{Assumptions and Premises}
-Regarding the line 2 of Algorithm~\ref{alg:verification-algorithm}, a list of forty equipment from ten different manufacturers was provided to the code in order to allow the choice of every item of PV sizing. Data sheet from each item was necessary to collect the technical information. Moreover, the price of each item was collected using the internet (in US dollars) \textcolor{red}{add references here?}.
+Regarding the line 2 of Algorithm~\ref{alg:verification-algorithm}, a list of forty equipment from ten different manufacturers was provided to the code in order to allow the choice of every item of PV sizing. Data sheet from each item was necessary to collect the technical information. Moreover, the price of each item \textcolor{red}{was obtained from available quotation of the market, and if the currency was not in US dollars, then it was used the exchange rate of the day to convert it to US dollars) MUDEI O TEXTO POIS A CONSULTA NA WEB P/ OBTER PREÇO DEMANDOU VÁRIOS SITES}.
 
-With respect to power reliability, this work will rely on the critical period solar energy method~\cite{Pinho} as described in section~\ref{sec:sizing} \textcolor{red}{Could you check in the journal guidelines whether we should refer as ``section~\ref{sec:sizing}'' or ``Section~\ref{sec:sizing}''. Then update the entire manuscript with this standard}. The usual is to use loss of load probability (LOLP) or loss of power supply probability (LPSP). However, based on the fact that here we are neither considering site characteristics nor the load changes over time, which demands historical data, the reliability analysis will be developed only by the critical period method of PV sizing.
+With respect to power reliability, this work will rely on the critical period solar energy method~\cite{Pinho} as described in \textcolor{red}{Section~\ref{sec:sizing}}. The usual is to use loss of load probability (LOLP) or loss of power supply probability (LPSP). However, based on the fact that here we are neither considering site characteristics nor the load changes over time, which demands historical data, the reliability analysis will be developed only by the critical period method of PV sizing.
 
 Regarding financial analysis:
 \begin{itemize}
@@ -505,10 +504,10 @@ Regarding financial analysis:
 
 On the subject of PV system optimization technique, we will adopt here the intuitive method since the average value daily of solar irradiance is used at the mathematical model, without considering the battery's state of charge, or even the random nature of solar irradiation and meteorological conditions. Therefore, all the computational effort will be concentrated in our automated synthesis algorithm.
 
-Regarding all case studies, it was defined that the minimum state of charge of batteries is 75\% (DOD maximum of 25\%), the voltage of the system is set in 24 V DC, and the AC voltage from the inverter is 120 V \textcolor{red}{why do we define these parameters? Give a rationale here}.
+Regarding all case studies, it was defined that the minimum state of charge of batteries is 75\% \textcolor{red}{(with DOD maximum of 25\%, what is common to lead-acid batteries), the voltage of the system is set in 24 V DC (the most common as well, but the value can be adjusted to 12 or 48 V at the code), and the AC voltage from the inverter is 127 V (Brazil standard)}.
 
 Related to off-the-shelf simulation tools only HOMER Pro and Hybrid2 perform off-grid system with battery backup analysis. %all the tools perform solar photovoltaic analysis; 
-Additionally, HOMER and RETScreen include economical analysis or even optimization-sensitive analysis. Therefore, in this study, HOMER Pro will be the simulation tool used to compare with our automated synthesis method. Note that that HOMER Pro is available only for Microsoft Windows and the annual standard subscription costs US\$ $504.00$ \textcolor{red}{cite reference}.
+Additionally, HOMER and RETScreen include economical analysis or even optimization-sensitive analysis. Therefore, in this study, HOMER Pro will be the simulation tool used to compare with our automated synthesis method. Note that that HOMER Pro is available only for Microsoft Windows and the annual standard subscription costs US\$ $504.00$ \textcolor{red}{~\cite{HOMER}}.
 
 %---------------------------------------------------------------------------
 \section{Experimental Evaluation}
@@ -519,7 +518,7 @@ Additionally, HOMER and RETScreen include economical analysis or even optimizati
 \subsection{Case studies} 
 %---------------------------------------------------------------------------
 
-We have performed seven stand-alone PV system case studies to evaluate our proposed synthesis approach as described in the first column of Table~\ref{tab1} (Specification) \textcolor{red}{why did you choose these case studies?}. 
+We have performed seven stand-alone PV system case studies to evaluate our proposed synthesis approach as described in the first column of Table~\ref{tab1} (named Specification). \textcolor{red}{These case studies where defined based on usual electrical load found in riverside communities of Amazon State in Brazil~\cite{Agrener2013}}. 
 
 \begin{table}
 \caption{Case studies and results: optimization of stand-alone PV systems.}\label{tab1}
