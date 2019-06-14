@@ -183,41 +183,42 @@ results and discussions. Section~\ref{sec:Conclusion} presents the conclusion an
 
 The conversion of traditional power grid into a smart grid, a fundamental example of a CPS, 
 raises a number of issues that requires novel methods and applications. 
-In 2012, a Chinese smart grid implementation was considered as case study 
+In $2012$, a Chinese smart grid implementation was considered as case study 
 to address the verification problem for performance and energy consumption~\cite{Yukseletall2012}. 
 The authors employed a stochastic model checking approach and presented 
-a modelling and analysis study using PRISM~\cite{KwiatkowskaNP11}. 
+a modelling and analysis study using PRISM, which is
+a probabilistic model checker~\cite{KwiatkowskaNP11}. 
 The focus of this study was on how CPSs integrate information and 
 communication technology functions to the physical elements 
-of a system for monitoring and controlling purposes; here the authors 
+of a system for monitoring and controlling purposes; here, the authors 
 employed automated verification of certain quantitative properties of the system, 
 as probability of	 node failure in the long run, impact of repair service on the failure risk, 
-and expected energy consumption, with no interest in power generation or even solar PV systems.
+and expected energy consumption, without any interest in power generation or even solar PV systems.
 
-In 2015, an approach for applying Monte-Carlo simulation to power system protection schemes 
+In $2015$, an automated approach for applying Monte-Carlo simulation to power system protection schemes 
 presented limitations of incomplete coverage of all possible operating conditions~\cite{Sengupta2015}. 
 The authors proposed an automated simulation-based verification technique to verify correctness 
 of protection settings efficiently using hybrid automata-temporal-logic framework. 
 The initial focus was on relay operations and test-case generation to ensure early detection of design errors. 
 However, this study was limited to power system protection and did not deal with electricity generation or even solar PV systems.
 
-Other related studies from 2015 include a framework named Modana to achieve an integrated process 
-from modeling with SysML/MARTE to analysis with statistical model checking for CPS 
+Other related studies from $2015$ include a framework named Modana to achieve an integrated process 
+from modeling with SysML/MARTE to analysis using statistical model checking for CPS 
 in terms of non-functional properties such as time and energy~\cite{Cheng2015}. 
 In order to demonstrate Modana's capability, the authors modelled energy-aware buildings 
 as a case study, and discussed the analysis on energy consumption in different scenarios. 
 The focus here is on smart buildings and HVAC (heating, ventilation, and air conditioning) systems. 
 This research, however, did no address the design and verification of solar PV systems. 
  
-In 2017, a researcher suggested the application of formal methods to verify and control 
-the behavior of computational devices interacting over a shared and smart infrastructure~\cite{Abate2017}. 
+In $2017$, a researcher suggested the application of formal methods to verify and control 
+the behavior of computational devices, interacting over a shared and smart infrastructure~\cite{Abate2017}. 
 The author discussed the aggregation of large populations of thermostatically-controlled loads and of PV panels, 
 and the corresponding problems of energy management in smart buildings, of demand-response on smart grids, 
 and respectively of frequency stabilization and grid robustness. The focus was on controlling the behavior of components, 
-thereby verifying the smart grid as a ``system of systems'' within the context of ``internet of things''. 
+thereby verifying the given smart grid as a ``system of systems'' within the context of ``internet of things''. 
 The author, however, used approximate model checking of stochastic and hybrid models.
 
-In 2018, a verification methodology was proposed for the Cyber Physical Energy Systems (CPES) 
+In $2018$, a verification methodology was proposed for the Cyber Physical Energy Systems (CPES) 
 with applications to PV panels and its distributed power point tracking~\cite{Driouich2018}. 
 This approach relied on representing unpredictable behavior of the environment to cover all possible 
 feasible scenarios. The simulation results obtained by JModelica covered the system's complete dynamic behavior; 
@@ -225,48 +226,130 @@ however, it was evident the time consuming issue with almost three days of compu
 to verify the design space of one operation hour of the PV panels behavior. 
 This related study did not include other components of a stand-alone solar PV system.
 
-Another work from 2018 was the approach to model smart grid components using a formal specification. 
+Another work from $2018$ was the approach to model smart grid components using a formal specification. 
 The authors used a state-based formal specification language named Z; 
 they demonstrated the application of Z to four smart grid components~\cite{Akram2018}. 
 The presented formal specification can be considered as a first step towards modeling 
-of smart grid using formal methods. The starting point of this study was that a smart home 
+of smart grids using formal methods. The starting point of this study was that a smart home 
 can be considered as an integrated system consisting of various objects and system, 
 which communicates and interacts with each other. This approach is based 
-on Petri nets and under the assumption that modeling the smart home 
+on Petri nets and is under the assumption that modeling the smart home 
 leads to clear understanding of the overall behavior of the smart grid.
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Automated Verification Using Model Checking}
 \label{sec:AutomatedVerification}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-Although simulation and testing explore possible behaviors and scenarios of a given system, they leave open the question of whether unexplored trajectories may contain a flaw. Formal verification conducts an exhaustive exploration of all possible behaviors; when a design is said to be ``correct'' by a formal verification method, it implies that all behaviors have been explored, and questions regarding adequate coverage or missed behavior becomes irrelevant~\cite{Clarke2012}. Formal verification is a systematic approach that applies mathematical reasoning to obtain guarantees about the correctness of a system; one successful method in this domain is model checking~\cite{Clarke2012}. Here we evaluate three state-of-the-art model checkers to formally verifying PV designs w.r.t. user requirements.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Although simulation and testing explore possible behaviors and scenarios of a given system, 
+they leave open the question of whether unexplored trajectories may contain a flaw. 
+Formal verification conducts an exhaustive exploration of all possible behaviors; 
+when a design is said to be ``correct'' by a formal verification method, it implies that all 
+behaviors have been explored, and questions regarding adequate coverage or missed behavior 
+becomes irrelevant~\cite{Clarke2012}. Formal verification is a systematic approach that 
+applies mathematical reasoning to obtain guarantees about the correctness of a system; 
+one successful method in this domain is model checking~\cite{Clarke2012}. 
+Here we evaluate three state-of-the-art model checkers to formally verifying PV designs w.r.t. user requirements.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{CBMC}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-The C Bounded Model Checker (CBMC) falsifies assertions in C programs or proves that they are safe if a completeness threshold is given~\cite{Kroening}. CBMC implements a bit-precise translation of a C program, annotated with assertions and with loops unrolled up to a given depth, into a logical formula. If the formula is satisfiable, then a failing execution that leads to a violated assertion exists~\cite{Kroening}. CBMC's verification flow can be summarized in three stages: (i) Front-end: scans, parses and type-checks C code; it converts control flow elements, such as \textit{if} or \textit{switch} statements, loops and jumps, into equivalent guarded \textit{goto} statements, thus aiming to reduce verification effort; (ii) Middle-end: performs symbolic execution by eagerly unwinding loops up to a fixed bound, which can be specified by the user on a per-loop basis or globally, for all loops and finally; (iv) Back-end: supports SAT and SMT solvers to discharge verification conditions.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+The C Bounded Model Checker (CBMC) falsifies assertions in C programs 
+or proves that they are safe if a completeness threshold is given~\cite{Kroening}. 
+CBMC implements a bit-precise translation of a C program, annotated with assertions 
+and with loops unrolled up to a given depth, into a logical formula. If the formula is satisfiable, 
+then a failing execution that leads to a violated assertion exists~\cite{Kroening}. CBMC's verification 
+flow can be summarized in three stages: (i) Front-end: scans, parses and type-checks C code; 
+it converts control flow elements, such as \textit{if} or \textit{switch} statements, loops and jumps, 
+into equivalent guarded \textit{goto} statements, thus aiming to reduce verification effort; 
+(ii) Middle-end: performs symbolic execution by eagerly unwinding loops up to a fixed bound, 
+which can be specified by the user on a per-loop basis or globally, for all loops and finally; 
+(iv) Back-end: supports SAT and SMT solvers to discharge verification conditions.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{ESBMC}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-ESBMC (or Efficient SMT-based Bounded Model Checker) is a bounded and unbounded mdoel checker for C programs~\cite{esbmc2018}, which supports the verification of LTL properties with bounded traces~\cite{DBLP:journals/sosym/MorseCN015}. ESBMC's verification flow can be summarized in three stages: (i) a front-end that can read and compile C code, where the system formal specification is first handled; (ii) preprocessing steps to deal with code representation, control flow and unwinding of loops, and model simplification, thereby aiming to reduce verification effort; and finally (iii) the SMT solving stage, where all constraints and properties of the system are encoded into SMT and checked for satisfiability. ESBMC exploits the standardized input language of SMT solvers (SMT-LIB\footnote{http://smtlib.cs.uiowa.edu/} logic format) to make use of a resource called \textit{assertion stack}~\cite{Morse2015}. This enables ESBMC, and the respective solver, to learn from previous checks, thus optimizing the search procedure and potentially eliminating a large amount of formula state space to be searched, because it solves and disregards data during the process, incrementally. This technique is called ``incremental SMT''~\cite{DBLP:journals/fac/SchrammelKBMTB17} and allows ESBMC to reduce the memory overhead, mainly when the verified system is complex and the computing platform does not have large amount of memory to deal with the entire design space state.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ESBMC (or Efficient SMT-based Bounded Model Checker) is a bounded and unbounded 
+mdoel checker for C programs~\cite{esbmc2018}, which supports the verification of LTL 
+properties with bounded traces~\cite{DBLP:journals/sosym/MorseCN015}. ESBMC's verification 
+flow can be summarized in three stages: (i) a front-end that can read and compile C code, 
+where the system formal specification is first handled; (ii) preprocessing steps to deal with code representation, 
+control flow and unwinding of loops, and model simplification, thereby aiming to reduce verification effort; 
+and finally (iii) the SMT solving stage, where all constraints and properties of the system are encoded into 
+SMT and checked for satisfiability. ESBMC exploits the standardized input language of SMT solvers 
+(SMT-LIB\footnote{http://smtlib.cs.uiowa.edu/} logic format) to make use of a resource called 
+\textit{assertion stack}~\cite{Morse2015}. This enables ESBMC, and the respective solver, 
+to learn from previous checks, thus optimizing the search procedure and potentially eliminating 
+a large amount of formula state space to be searched, because it solves and disregards data 
+during the process, incrementally. This technique is called ``incremental SMT''~\cite{DBLP:journals/fac/SchrammelKBMTB17} 
+and allows ESBMC to reduce the memory overhead, mainly when the verified system is complex and 
+the computing platform does not have large amount of memory to deal with the entire design space state.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{CPAchecker}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-Automatic program verification requires a choice between precision and efficiency. The more precise a method, the fewer false positives it will produce, but also the more expensive it is, and thus applicable to fewer programs. 
-Historically, this trade-off was reflected in two major approaches to static verification: program analysis and model checking. In order to experiment with the trade-off, and in order to be able to set the dial between the two extreme points, Configurable Program Analysis (CPA) provides a conceptual basis for expressing different verification approaches in the same formal setting. The CPA formalism provides an interface for the definition of program analyses. Consequently, CPAchecker provides an implementation framework that allows the seamless integration of program analyses that are expressed in the CPA framework. The comparison among different approaches in the same experimental setting is intended to be easy and the experimental results are expected to be more meaningful~\citep{Beyer2011}. Related to the architecture, the central data structure is a set of control-flow automata (CFA), which consists of control-flow locations and control-flow edges. The CPA framework provides interfaces to SMT solvers and interpolation procedures~\citep{Beyer2011}. Currently, CPAchecker uses MathSAT as SMT solver; and CSIsat and MathSAT as interpolation procedures~\cite{Beyer2011}. %CPAchecker performs reachability analysis and operates on an object of the abstract data type CPA, i.e., the underlying verification algorithm applies operations from the CPA interface without knowing which concrete CPA it is analyzing. For most configurations, the concrete CPA will be a composite CPA, which implements the combination of different CPAs. \textcolor{red}{It is unclear what a CPA is.}
-%In software verification, it is usual to take a considerable amount of effort to convert a verification idea into actual experimental results and CPAchecker aims to accelerate this process~\cite{Beyer2011}.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Automatic program verification requires a choice between precision and efficiency. 
+The more precise a method, the fewer false positives it will produce, but also the 
+more expensive it is, and thus applicable to fewer programs. 
+Historically, this trade-off was reflected in two major approaches to static verification: 
+program analysis and model checking. In order to experiment with the trade-off, 
+and in order to be able to set the dial between the two extreme points, 
+Configurable Program Analysis (CPA) provides a conceptual basis for expressing 
+different verification approaches in the same formal setting. The CPA formalism 
+provides an interface for the definition of program analyses. Consequently, CPAchecker 
+provides an implementation framework that allows the seamless integration of program 
+analyses that are expressed in the CPA framework. The comparison among different 
+approaches in the same experimental setting is intended to be easy and the experimental 
+results are expected to be more meaningful~\citep{Beyer2011}. Related to the architecture, 
+the central data structure is a set of control-flow automata (CFA), which consists of control-flow 
+locations and control-flow edges. The CPA framework provides interfaces to SMT solvers and 
+interpolation procedures~\citep{Beyer2011}. Currently, CPAchecker uses MathSAT as SMT solver; 
+and CSIsat and MathSAT as interpolation procedures~\cite{Beyer2011}. 
+
 %-----------------------------------------------------------
 \subsection{Program Synthesis}
 \label{sec:ProgramSynthesis}
 %-----------------------------------------------------------
-%
-The basic idea of program synthesis is to automatically construct a program $P$ that satisfies a correctness specification $\sigma$. In particular, program synthesis is automatically performed by engines that use a correctness specification $\sigma$, as starting point, and then incrementally produce a sequence of candidate solutions that partially satisfy $\sigma$~\cite{Abateetal2017}. As a result, a given candidate program $p$ is iteratively refined, in order to match $\sigma$ more closely. CEGIS represents one of the most popular approaches to program synthesis that are currently used in practice for CPS~\cite{Abateetal2017}, whose basic architecture is illustrated in Figure~\ref{Counter-Example-Guided-Inductive-Synthesis} and has close connections to algorithmic debugging using counterexamples and abstraction refinement~\cite{Alur}. 
 
-The correctness specification $\sigma$ provided to our program synthesizer is of the form $\exists \vec{F} .  \forall \vec{x}.  \sigma(\vec{x}, \vec{F})$, where $\vec{F}$ ranges over functions, $\vec{x}$ ranges over ground terms, and $\sigma$ is a quantifier-free (QF) formula typically supported by SMT solvers. The ground terms are interpreted over some finite domain $\mathcal{D}$, where $\mathcal{D}$ can be encoded using the SMT's bit-vectors part. Examples of specification used by our method include house demand, energy, and battery autonomy; we also provide a list of equipment specification and price from different manufacturers and models.
+The basic idea of program synthesis is to automatically construct a program 
+$P$ that satisfies a correctness specification $\sigma$. In particular, program synthesis 
+is automatically performed by engines that use a correctness specification $\sigma$, 
+as starting point, and then incrementally produce a sequence of candidate solutions 
+that partially satisfy $\sigma$~\cite{Abateetal2017}. As a result, a given candidate program 
+$p$ is iteratively refined, in order to match $\sigma$ more closely. CEGIS represents 
+one of the most popular approaches to program synthesis that are currently used in practice for CPS~\cite{Abateetal2017}, 
+whose basic architecture is illustrated in Figure~\ref{Counter-Example-Guided-Inductive-Synthesis} 
+and has close connections to algorithmic debugging using counterexamples and abstraction refinement~\cite{Alur}. 
 
-In Figure~\ref{Counter-Example-Guided-Inductive-Synthesis}, the phases {\sc Synthesize} and {\sc Verify} interact via a finite set of test vectors {\sc inputs} that is incrementally updated. Given the correctness specification $\sigma$, the {\sc Synthesize} procedure tries to find an existential witness $\vec{F}$ satisfying the specification $\sigma(\vec{x}, \vec{F})$, for all $\vec{x}$ in {\sc inputs} (as opposed to all $\vec{x} \in \mathcal{D}$). If {\sc synthesize} succeeds in finding a witness~$\vec{F}$, the latter is a candidate solution (i.e., feasible combination of equipment) to the full synthesis formula, which is passed to {\sc verify} with a lower bound (that is incremented during every iteration), in order to check whether it is a proper solution ({\it i.e.}, $\vec{F}$ satisfies the specification $\sigma(\vec{x}, \vec{F})$ for all $\vec{x}\in\mathcal{D}$). If this is the case, then the algorithm terminates, i.e., we have found a feasible equipment with the lowest cost; otherwise, in the CEGIS traditional method, additional information is provided to the phase {\sc synthesize}, in the form of a new counterexample that is added to the {\sc inputs} set and the loop iterates again; however, in our variant CEGIS method, if the {\sc verify} phase is not successful, then a new candidate is generated by {\sc synthesize} and the lower bound in incremented in order to pursuit the lowest cost.
+The correctness specification $\sigma$ provided to our program synthesizer 
+is of the form $\exists \vec{F} .  \forall \vec{x}.  \sigma(\vec{x}, \vec{F})$, 
+where $\vec{F}$ ranges over functions, $\vec{x}$ ranges over ground terms, 
+and $\sigma$ is a quantifier-free (QF) formula typically supported by SMT solvers. 
+The ground terms are interpreted over some finite domain $\mathcal{D}$, 
+where $\mathcal{D}$ can be encoded using the SMT's bit-vectors part. 
+Examples of specification used by our method include house demand, 
+energy, and battery autonomy; we also provide a list of equipment specification 
+and price from different manufacturers and models.
+
+ \textcolor{red}{this text needs to be updated since we do not use this test vector {\sc inputs} in our algorithm, right?}
+In Figure~\ref{Counter-Example-Guided-Inductive-Synthesis}, the phases {\sc Synthesize} and {\sc Verify} 
+interact via a finite set of test vectors {\sc inputs}, which is incrementally updated. 
+Given the correctness specification $\sigma$, the {\sc Synthesize} procedure 
+tries to find an existential witness $\vec{F}$ satisfying the specification 
+$\sigma(\vec{x}, \vec{F})$, for all $\vec{x}$ in {\sc inputs} (as opposed to all $\vec{x} \in \mathcal{D}$). 
+If {\sc synthesize} succeeds in finding a witness~$\vec{F}$, the latter is a candidate solution 
+(i.e., feasible combination of equipment) to the full synthesis formula, which is passed to {\sc verify} 
+with a lower bound (that is incremented during every iteration), in order to check whether it is a proper solution 
+({\it i.e.}, $\vec{F}$ satisfies the specification $\sigma(\vec{x}, \vec{F})$ for all $\vec{x}\in\mathcal{D}$). 
+If this is the case, then the algorithm terminates, i.e., we have found a feasible equipment 
+with the lowest cost; otherwise, in the CEGIS traditional method, additional information is 
+provided to the phase {\sc synthesize}, in the form of a new counterexample that is added 
+to the {\sc inputs} set and the loop iterates again; however, in our variant CEGIS method, 
+if the {\sc verify} phase is not successful, then a new candidate is generated by {\sc synthesize} 
+and the lower bound in incremented in order to pursuit the lowest cost.
 %
 \begin{figure}[h]
 	\centering
@@ -276,12 +359,17 @@ In Figure~\ref{Counter-Example-Guided-Inductive-Synthesis}, the phases {\sc Synt
 \end{figure}
 %
 
-One may notice that each iteration of the CEGIS loop adds a new input to the finite set $\text{\sc inputs}$, which is then used for synthesis.  Given that the full set of inputs $\mathcal{D}$ is finite because we use bit-vector expressions, this means that the refinement loop can only iterate over a finite number of times; however, {\sc synthesize} may conclude that no candidate solution obeying $\sigma$ for the finite set $\text{\sc inputs}$ exists and our synthesis engine can then conclude that no feasible equipment combination was found. %In a nutshell, at this specific automated formal synthesis of PV systems, we use a variant of CEGIS, where in each iteration we increase the expected cost of PV systems and this controls the {\sc verify} phase and the search by the optimal sizing.  %however, $\mathcal{D}$ can represent a large number of elements for the finite set  and our synthesis engine can then conclude that no feasible equipment combination was found. 
-%In order to avoid exploring all possible values, machine learning techniques can be used in the phase {\sc synthesize}, with the goal of learning from experience (input-output samples), {\it i.e.}, learning from counterexamples provided by a verification oracle~\cite{Alur13}. In addition to that, a pre-processing stage could also figure as another block in the scheme shown in Fig. \ref{Counter-Example-Guided-Inductive-Synthesis}, between {\sc verify} and {\sc synthesize}, which would process counterexamples and provide larger and refined information to the latter, according to specification $\sigma$ and domain $\mathcal{D}$, in order to speed-up convergence to a final candidate.
+ \textcolor{red}{this text needs to be updated since we do not use this test vector {\sc inputs} in our algorithm, right?}
+One may notice that each iteration of the CEGIS loop adds a new input to the finite set 
+$\text{\sc inputs}$, which is then used for synthesis.  Given that the full set of inputs $\mathcal{D}$ 
+is finite because we use bit-vector expressions, this means that the refinement loop can 
+only iterate over a finite number of times; however, {\sc synthesize} may conclude that 
+no candidate solution obeying $\sigma$ for the finite set $\text{\sc inputs}$ 
+exists and our synthesis engine can then conclude that no feasible equipment combination was found.
 
-Program synthesis engines that implement the CEGIS approach~\cite{sketch} can automatically produce solutions for a large variety of specifications; %, due to the combination of automated testing, genetic algorithms, and SMT-based reasoning~\cite{Sharma14}; 
-here we have used software verifiers based on SMT solvers.%Here we used software model checking techniques implemented by different tools: CBMC~\cite{Kroening}, CPAChecker~\cite{Beyer2011}, and ESBMC~\cite{esbmc2018}.
-%
+Program synthesis engines that implement the CEGIS approach~\cite{sketch} can automatically produce 
+solutions for a large variety of specifications; here we have used symbolic software verifiers based on SMT solvers.
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Sizing Stand-alone Solar PV Systems}
 \label{sec:sizing}
