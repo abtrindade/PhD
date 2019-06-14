@@ -374,30 +374,34 @@ solutions for a large variety of specifications; here we have used symbolic soft
 \subsection{Sizing Stand-alone Solar PV Systems}
 \label{sec:sizing}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 A PV system is illustrated in Fig.\ref{fig:blockdiagram}. It identifies the PV generator, batteries, charge controller, inverter, and AC load. 
-The PV generator, which can be a panel or an array, is a semiconductor device that can convert solar energy into DC electricity. %In Fig.\ref{fig:blockdiagram}, there are two variables that depend on the site where the system is deployed and also the weather (i.e., solar irradiance $G$ and temperature $T$). 
-For night hours or rainy days, we hold batteries where power can be stored and used. The use of batteries as a storage form implies the presence of a charge controller~\cite{Hansen}. The PV arrays produce DC and therefore when the PV system contains an AC load, a DC/AC conversion is required. That converter is called inverter; and the AC load dictates the behavior of AC electrical load from the house that will be fed by the system.
+The PV generator, which can be a panel or an array, is a semiconductor device that can convert solar energy into DC electricity.  
+For night hours or rainy days, we hold batteries where power can be stored and used. The use of batteries as a storage 
+form implies the presence of a charge controller~\cite{Hansen}. The PV arrays produce DC and therefore when the PV system 
+contains an AC load, a DC/AC conversion is required. That converter is called inverter; and the AC load dictates the behavior 
+of AC electrical load from the house that will be fed by the system.
+%
 \begin{figure}[h]
 \includegraphics[width=0.7\textwidth]{blockdiagramPVS2_rev}
 \centering
 \caption{Block diagram for a typical stand-alone PV system~\cite{Hansen}.}
 \label{fig:blockdiagram} 
 \end{figure}
-\\
-%
-The sizing check stage will ensure that the system meets the standard project steps related to critical period solar energy method~\cite{Pinho} and adopting MPPT (Maximum Power Point Tracking) charge controller, which is the most common one in practice. 
-%
-Firstly, we need to correct the energy consumption estimated to the load ($E_{consumption}$), which is carried out by Eq.~\eqref{eq:Ecorrected}, where the efficiency of batteries ($\eta_{b}$), controller ($\eta_{c}$), and inverter ($\eta_{i}$) are considered~\cite{Pinho} as follows
 
+The sizing check stage will ensure that the system meets the standard project steps related 
+to critical period solar energy method~\cite{Pinho} and adopting MPPT (Maximum Power Point Tracking) charge controller,
+which is the most common one in practice. Firstly, we need to correct the energy consumption estimated to the load 
+($E_{consumption}$), which is carried out by Eq.~\eqref{eq:Ecorrected}, where the efficiency of batteries ($\eta_{b}$), 
+controller ($\eta_{c}$), and inverter ($\eta_{i}$) are considered~\cite{Pinho} as follows
+%
 \begin{equation}
 \label{eq:Ecorrected}
 E_{corrected} = \dfrac{E_{consumption}}{\eta_{b} \eta_{c} \eta_{i} }.
 \end{equation}
 
-%
 We also need to estimate the energy that can be produced for each panel, called $E_{p}$, in Wh, defined as
 %
-
 \begin{equation}
 \label{eq:Ep}
 E_{p} = Solar\_Irradiance \times Panel\_Area \times \eta_{p} \times 1000,
@@ -405,31 +409,33 @@ E_{p} = Solar\_Irradiance \times Panel\_Area \times \eta_{p} \times 1000,
 
 \noindent where the solar irradiance is expressed in terms of $kWh/m^{2}$ and depends on the site where the PV system will be deployed; 
 the PV panel area is given in $m^{2}$ and corresponds to the size of one PV panel, and $\eta_{p}$ represents the PV panel efficiency.
-%
 The total minimum number of needed solar panels ($N_{TPmin}$) is computed as
-
+%
 \begin{equation}
 \label{eq:NTPmin}
 N_{TPmin} = \dfrac{E_{corrected}}{E_{p}}.
 \end{equation}
 
 Particularly, the total number of panels in series ($N_{PSmin}$) and parallel ($N_{PPmin}$) are respectively given by
-
+%
 \begin{equation}
 \label{eq:NPSmin}
 \dfrac{V_{mppt,min}}{V_{maxPower,TempMax}} \leq N_{PSmin} \leq \dfrac{V_{mppt,max}}{V_{maxPower,TempMin}},
 \end{equation}
-
+%
 \begin{equation}
 \label{eq:NPPmin}
 N_{PPmin} = \dfrac{P_{total}}{Number\,Panels\,Series \times P_{max,ref}},
 \end{equation}
-
-\noindent where $V_{mppt,max}$ is the maximum operation voltage and $V_{mppt,min}$ is the minimum operation voltage of the charge controller; $V_{maxPower,TempMax}$ and $V_{maxPower,TempMin}$ are the maximum power voltage from the PV module considering the maximum and minimum operational temperature, respectively; $P_{total}$ is the total power demanded from the PV system and $P_{max,ref}$ is the power supplied from one PV panel in $Watts$.
-%, $ V_{system} $ is the DC voltage of the bus, normally $12$, $24$ or $48$ V.
 %
+\noindent where $V_{mppt,max}$ is the maximum operation voltage and $V_{mppt,min}$ 
+is the minimum operation voltage of the charge controller; $V_{maxPower,TempMax}$ and 
+$V_{maxPower,TempMin}$ are the maximum power voltage from the PV module considering 
+the maximum and minimum operational temperature, respectively; 
+$P_{total}$ is the total power demanded from the PV system and 
+$P_{max,ref}$ is the power supplied from one PV panel in $Watts$.
 Regarding batteries, we must first define the total capacity of the battery bank, which can be described as
-
+%
 \begin{equation}
 \label{eq:Cbank}
 C_{bank} = \dfrac{E_{corrected} \times autonomy}{V_{system} \times DOD},
@@ -451,83 +457,130 @@ Regarding the charge controller, it must initially meet the voltage requirement 
 V_{c} = V_{system}.
 \end{equation}
 
-The short circuit reference information from the manufacturer's solar panel must be corrected to the cell temperature because the field temperature is higher than the nominal or laboratory temperature, and PV system is temperature dependent, as 
-
+The short circuit reference information from the manufacturer's solar panel must be corrected 
+to the cell temperature because the field temperature is higher than the nominal or laboratory temperature, 
+and PV system is temperature dependent, as 
+%
 \begin{equation}
 \label{eq:iscamb}
 I_{sc,amb} = \dfrac{G}{G_{ref}} \left[ I_{sc,ref} + \mu_{I} \times (T-25) \right]. 
 \end{equation}
 
-The controller must meet the maximum current from the PV array given by Eqs. \eqref{eq:icmin} and \eqref{eq:icicmin} as
-
+The controller must meet the maximum current from the PV array given by Eqs.~\eqref{eq:icmin} and~\eqref{eq:icicmin} as
+%
 \begin{equation}
 \label{eq:icmin}
 I_{c,min} = I_{sc,amb} \times N_{PP},
 \end{equation}
-
+%
 \begin{equation}
 \label{eq:icicmin}
 I_{c} \geq I_{c,min}.
 \end{equation}
 
-The inverter sizing check is performed by means of three equations. Eq.~\eqref{eq:vindc} ensures that the input voltage of the controller meets the system voltage. Eq.~\eqref{eq:voutac} ensures that the output voltage of the controller meets the AC voltage of the load. Finally, Eq.~\eqref{eq:invcheck} ensures that the controller can support the total demand of the load ($Demand$) and the surge power ($P_{surge}$), where $V_{in}DC$ is the nominal input voltage and $V_{out}AC$ is the nominal output voltage of the inverter; $MAX_{AC,ref}$ is the peak power that the inverter can support.
+The inverter sizing check is performed by means of three equations. Eq.~\eqref{eq:vindc} ensures that 
+the input voltage of the controller meets the system voltage. Eq.~\eqref{eq:voutac} ensures that the 
+output voltage of the controller meets the AC voltage of the load. Finally, Eq.~\eqref{eq:invcheck} ensures that 
+the controller can support the total demand of the load ($Demand$) and the surge power ($P_{surge}$), 
+where $V_{in}DC$ is the nominal input voltage and $V_{out}AC$ is the nominal output voltage of the inverter; 
+$MAX_{AC,ref}$ is the peak power that the inverter can support.
 %
 \begin{equation}
 \label{eq:vindc} 
 V_{in}DC = V_{system}.
 \end{equation}
-
+%
 \begin{equation}
 \label{eq:voutac} 
 V_{out}AC = V_{AC}.
 \end{equation}
-
+%
 \begin{equation}
 \label{eq:invcheck} 
 \left[ (Demand \leq P_{AC,ref}) \, and \, (P_{surge} \leq MAX_{AC,ref}) \right].
 \end{equation}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{PV systems Optimization Criteria}
-In order to select an optimal combination to meet sizing constraints, it is necessary to evaluate power reliability and system cost analysis for the underlying system. An ideal combination for any PV system is made by the best compromise between these two objectives.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-During the PV system design, one of the most important aspects to ensure power system \textcolor{red}{reliability is to analyze power supply availability}. The reason is because solar energy production is intermittent and, therefore, the energy generated usually will not match with the load demand. A reliable power is a generation system that has sufficient power to feed load demand in a period. 
+In order to select an optimal combination to meet sizing constraints, 
+it is necessary to evaluate power reliability and system cost analysis for the underlying system. 
+An ideal combination of any PV system is made by the best compromise between these two objectives.
 
-There are different methods to express system reliability, the most popular ones are the loss of load probability (LOLP) and the loss of power supply probability (LPSP)~\cite{Alsadi2018}. In both methods, if the probability is zero, then the load will always be fulfilled; otherwise (i.e., probability of one) the load will never be fulfilled.
+During the PV system design, one of the most important aspects to ensure power system reliability 
+is to analyze power supply availability \textcolor{red}{add citation here}. The reason is because solar 
+energy production is intermittent and, therefore, the energy generated usually will not match 
+with the load demand. A reliable power is a generation system that has sufficient power 
+to feed load demand in a period. 
 
-LOLP is the probability for the case when a load demand exceeds the generation power by the PV system. On one hand, we say that we have a reliable PV system when it is able to generate sufficient power to fulfill the demanded load within a time span. On the other hand, LPSP is defined as the probability of the case when system generates insufficient power to satisfy the load demand. \textcolor{red}{The main approaches to LPSP demand simulation or probabilistic treatment of time series data to predict dynamic changing on system performance}. However, data is not always available and dynamic analysis is complex, and this is a drawback \textcolor{red}{to LOLP and LPSP~\cite{Alsadi2018}}.
+There exist different methods to express system reliability, where the most popular ones 
+are the loss of load probability (LOLP) and the loss of power supply probability (LPSP)~\cite{Alsadi2018}. 
+In both methods, if the probability is zero, then the load will always be fulfilled; otherwise (i.e., probability of one) the load will never be fulfilled.
 
-Related to economic analysis, there exist various methods available. The main objective is to determine whether the project has an acceptable investment; the usual way is to perform economic analysis after reliability analysis with the goal of proposing a system with high reliability and lowest cost~\cite{Alsadi2018}. The common methods include: Net Present Cost (NPC) \textcolor{red}{~\cite{Park2004}}, the Levelized Cost of Energy (LCOE) \textcolor{red}{~\cite{Zhou2010}}, or the Life Cycle Cost (LCC) \textcolor{red}{~\cite{Applasamy2011}}.
+LOLP is the probability for the case when a load demand exceeds the generation power by the PV system. 
+On one hand, we claim that we have a reliable PV system when it is able to generate sufficient power to fulfill
+the demanded load within a time span. On the other hand, LPSP is defined as the probability of the case 
+when system generates insufficient power to satisfy the load demand. The main approaches to LPSP demand 
+simulation or probabilistic treatment of time series data to predict dynamic changing on system performance. 
+However, data is not always available and dynamic analysis is complex; 
+and this is a drawback of LOLP and LPSP~\cite{Alsadi2018}.
 
-NPC is the total present value of a time series. The net present worth is found by discounting all cash inflows and outflows, including cost of installation, replacement and maintenance of the PV system, at an interest rate of internal rate of return (IRR)~\cite{Park2004}.
+Related to economic analysis, there exist various methods available. The main objective is to determine whether 
+the project has an acceptable investment; the usual way is to perform economic analysis after reliability analysis 
+with the goal of proposing a system with high reliability and lowest cost~\cite{Alsadi2018}. The common methods include: 
+Net Present Cost (NPC)~\cite{Park2004}, the Levelized Cost of Energy (LCOE)~\cite{Zhou2010}, 
+or the Life Cycle Cost (LCC)~\cite{Applasamy2011}.
 
-LCOE is defined as the average cost per kWh of useful electrical energy produced by the PV system when a lifetime, investment cost, replacement, operation and maintenance, and capital cost are considered~\cite{Kamel2005}. LCOE method is useful in comparing different generation technologies with different operating characteristics~\cite{Zhou2010}.
+NPC is the total present value of a time series. \textcolor{red}{this sentence is unclear or maybe I'm not familiar with this term... 
+The net present worth is found by discounting all cash inflows and outflows}, 
+including cost of installation, replacement and maintenance of the PV system, 
+at an interest rate of internal rate of return (IRR)~\cite{Park2004}.
 
-LCC is the estimation of sum of installation cost, operating and maintenance of a PV system for a period of time, and expressed in today's value~\cite{Applasamy2011}. Eq.~\ref{eq:LCC} is used to calculate LCC of a PV system,
+LCOE is defined as the average cost per kWh of useful electrical energy produced 
+by the PV system when a lifetime, investment cost, replacement, operation and maintenance, 
+and capital cost are considered~\cite{Kamel2005}. LCOE method is useful in comparing 
+different generation technologies with different operating characteristics~\cite{Zhou2010}.
+
+LCC is the estimation of sum of installation cost, operating and maintenance of a PV system 
+for a period of time, and expressed in today's value~\cite{Applasamy2011}. Eq.~\eqref{eq:LCC} 
+is used to calculate LCC of a PV system,
 %
 \begin{equation}
 \label{eq:LCC}
 LCC = C_{PV} + C_{bat} + C_{charger} + C_{inv} + C_{installation} + C_{batrep} + C_{PWO\&M},
 \end{equation}
-\noindent where $C_{PV}$ is PV array cost, $C_{bat}$ is initial cost of batteries, $C_{charger}$ is cost of charger, $C_{inv}$ is inverter cost, $C_{installation}$ is installation cost, $C_{batrep}$ is battery replacement cost in present value, and $C_{PWO\&M}$ is operation and maintenance costs in present worth.
-
-%
-%%%To select an optimal combination of components from a PV system to meet sizing constraints, 
-%we need to evaluate \textit{power reliability} and perform \textit{system cost} analysis for the recommended system. An ideal combination for any PV system 
-%The optimal sizing of PV systems is made by the best compromise between two objectives: power reliability and system cost~\cite{Alsadi2018}. 
-%Regarding power reliability, this work will rely on the critical period solar energy method~\cite{Pinho} as described in Section~\ref{sec:sizing}. 
-%the usual is to use loss of load probability (LOLP) or loss of power supply probability (LPSP). Based on the fact that here we are neither considering site characteristics nor the load changes over time, the reliability analysis will be developed only by the critical period method of PV sizing \textcolor{red}{What does it mean? Remember that we have software engineering audience}. 
-%However, considering the system cost analysis, we usually find related studies done with Net Present Cost (NPC), Levelized Cost of Energy (LCOE), or Life Cycle Cost (LCC). Here, based on the fact that the deployment location is not specified, our study uses an adapted LCC analysis, where only the deployment cost is considered about the model, i.e., without the operational and maintenance costs~\cite{Alsadi2018}.
+\noindent where $C_{PV}$ is PV array cost, $C_{bat}$ is initial cost of batteries, 
+$C_{charger}$ is cost of charger, $C_{inv}$ is inverter cost, $C_{installation}$ is installation cost, 
+$C_{batrep}$ is battery replacement cost in present value, and $C_{PWO\&M}$ is operation and maintenance costs 
+in present worth.
 
 %----------------------------------------------------------------------------------------------
 \subsection{Stand-alone PV System Optimization Technique}
 %----------------------------------------------------------------------------------------------
-In order to recommend an optimal configuration for PV systems, the designer has to evaluate the design based on optimization variables. As number of optimization variables increases, the computation effort will increase as well. Hence, to obtain the best PV system design as well as simplified sizing process, prior work introduced three main techniques for system sizing calculation, namely intuitive, numerical, and analytical \textcolor{red}{methods~\cite{Zhou2010}}.
 
-Intuitive method is simple, easy to be implemented, and can be used to give rough suggestion for preliminary design. The sizing rules are based on designer's experience, using lowest performance either in a time period data or by directly using average value (daily, monthly, or annual) of solar irradiance. This method does not consider the battery's state of charge, or even the random nature of solar irradiation and meteorological conditions~\cite{Alsadi2018}.
+In order to recommend an optimal configuration for PV systems, 
+the designer has to evaluate the design based on optimization variables. 
+As the number of optimization variables increases, the computational effort 
+will increase as well. Hence, to obtain the best PV system design as well as 
+simplified sizing process, prior work introduced three main techniques 
+for system sizing calculation, namely intuitive, numerical, and analytical methods~\cite{Zhou2010}.
 
-For numerical method, the design is simulated for each time step within a period. State of charge of batteries is calculated and investigated. It is very accurate, however is complex, demanding more time for calculation \textcolor{red}{~\cite{Park2004}}.
+Intuitive method is simple, easy to be implemented, and can be used to give 
+rough suggestion for preliminary design. The sizing rules are based on designer's experience, 
+using lowest performance either in a time period data or by directly using average value 
+(daily, monthly, or annual) of solar irradiance. This method does not consider the battery's 
+state of charge, or even the random nature of solar irradiation and meteorological conditions~\cite{Alsadi2018}.
 
-Analytical methods is used to obtain a close relation or correlation in a form of equation between capacities and reliabilities. The sizing task becomes much simpler \textcolor{red}{than numerical technique}, however the relation cannot be applied to different sites, because it is specific to one place of deployment of the PV system, thereby demanding adaptation if another site is analyzed.
+For numerical method, the design is simulated for each time step within a period. 
+State of charge of batteries is calculated and investigated. It is very accurate, 
+however is complex, demanding more time for calculation~\cite{Park2004}.
+
+Analytical methods is used to obtain a close relation or correlation in a form 
+of equation between capacities and reliabilities. The sizing task becomes much simpler 
+than numerical technique; however, the relation cannot be applied to different sites
+since it is specific to one place of deployment of the PV system, 
+thereby demanding adaptation if another site is analyzed.
 
 %------------------------------------------------------
 \section{Synthesizing Optimal Sizing of Stand-alone Solar Photovoltaic Systems}
@@ -576,40 +629,93 @@ Algorithm~\ref{alg:verification-algorithm} describes our pseudo-code to synthesi
  \end{algorithm}
 %
 
-Our synthesis algorithm will synthesize constant values; it starts with the input of manufacturers data and prices of PV panels, batteries, charge controllers and inverters (Line 2). After that, we define user requirements, i.e., house requirements and design definitions, from Lines 4 and 5. 
+Our synthesis algorithm will synthesize constant values; 
+it starts with the input of manufacturers data and prices of PV panels, batteries, 
+charge controllers and inverters (line $2$). After that, we define user requirements, i.e., 
+house requirements and design definitions, from lines $4$ and $5$. 
 
-The \textit{for}-loop started at Line 6 controls the lowest cost to the PV solution. In particular, it starts with cost $0$ and stops only when the algorithm finds a feasible solution in which the cost breaks the $assertion$ stated in Line 22; if that happens, then our algorithm has found an optimal solution, thereby stating that the {\sc Verify} phase reached a satisfiable condition (\textit{SAT}). The $MaxCost$ value at Line 6 is just a very high value put as a limit to the \textit{for}-loop, that never will be reached because the optimal solution will be found first.
+The \textit{for}-loop started at line $6$ controls the lowest cost to the PV solution. 
+In particular, it starts with cost $0$ and stops only when the algorithm finds a 
+feasible solution in which the cost breaks the $assertion$ stated in line $22$; 
+if that happens, then our algorithm has found an optimal solution, thereby stating 
+that the {\sc Verify} phase reached a satisfiable condition (\textit{SAT}). 
+The $MaxCost$ value at line $6$ is just a very high value put as a limit 
+to the \textit{for}-loop, that never will be reached because the optimal solution will be found first.
 
-Our synthesis algorithm uses non-deterministic variables to choose one specific constant from a given list of PV panels, controllers, batteries and inverters (Lines 7 to 10). That procedure ensures that our synthesis engine checks all combinations of items from each equipment, and combine them to assemble a feasible (candidate) PV solution, which meets the user requirements.
+Our synthesis algorithm uses non-deterministic variables to choose one specific constant 
+from a given list of PV panels, controllers, batteries and inverters (lines $7$ to $10$). 
+That procedure ensures that our synthesis engine checks all combinations of items 
+from each equipment, and combine them to assemble a feasible (candidate) PV solution, 
+which meets the user requirements.
 
-Next, we use Eq.~\eqref{eq:Ecorrected}, Eq.~\eqref{eq:Ep}, Eq.~\eqref{eq:NTPmin}, Eq.~\eqref{eq:NPSmin}, Eq.~\eqref{eq:NPPmin}, Eq.~\eqref{eq:Cbank}, Eq.~\eqref{eq:Nbtotal}, Eq.~\eqref{eq:iscamb}, and Eq.~\eqref{eq:icmin} to calculate the sizing variables (Lines 11 to 17). The directive \textit{assume} (Lines 15, 18 and 19) ensures the compatibility of the chosen items from the list of equipment: the {\sc Verify} phase uses only the item (among all the possible ones) that satisfies the statements of Lines 15, 18 and 19. Therefore, our synthesis algorithm reaches Line 20 with one feasible solution, and the cost of that solution is calculated in $F_{obj}$ (Line 21). 
+Next, we use Eq.~\eqref{eq:Ecorrected}, Eq.~\eqref{eq:Ep}, Eq.~\eqref{eq:NTPmin}, 
+Eq.~\eqref{eq:NPSmin}, Eq.~\eqref{eq:NPPmin}, Eq.~\eqref{eq:Cbank}, 
+Eq.~\eqref{eq:Nbtotal}, Eq.~\eqref{eq:iscamb}, and Eq.~\eqref{eq:icmin} t
+o calculate the sizing variables (lines $11$ to $17$). The directive \textit{assume} (lines $15$, $18$ and $19$) 
+ensures the compatibility of the chosen items from the list of equipment: the {\sc Verify} phase 
+uses only the item (among all the possible ones) that satisfies the statements of Lines $15$, $18$ and $19$. 
+Therefore, our synthesis algorithm reaches line $20$ with one feasible solution, 
+and the cost of that solution is calculated in $F_{obj}$ (line $21$). 
 
-If our algorithm does not find a feasible solution among the item of equipment that were provided to our {\sc Synthesize} phase,  then the result is an unsatisfiable (\textit{UNSAT}), i.e., the program finishes and does not find a solution. It indicates that was not possible to combine the items of each equipment and create a feasible solution. 
+If our algorithm does not find a feasible solution among the item of equipment that 
+were provided to our {\sc Synthesize} phase,  then the result is an unsatisfiable (\textit{UNSAT}), i.e., 
+the program finishes and does not find a solution, which indicates that it 
+was not possible to combine the items of each equipment in order to create a feasible solution. 
 
-The main challenge for the {\sc Synthesize} phase is to find a feasible candidate solution regarding the constraints and user requirements. Related to our {\sc Verify} phase the challenge is to find the lowest acquisition cost from a list of equipment and components that is provided from the {\sc Synthesize} phase. 
+The main challenge for the {\sc Synthesize} phase is to find a feasible candidate 
+solution regarding the constraints and user requirements. Related to our {\sc Verify} 
+phase the challenge is to find the lowest acquisition cost from a list of equipment and 
+components that is provided from the {\sc Synthesize} phase. 
 
-Note that the process described here in completely automated and that a validation is performed by our {\sc Verify} phase to ensure that the approach is sound.
+Note that the process described here in completely automated and that a validation is performed 
+by our {\sc Verify} phase to ensure that the approach is sound.
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Assumptions and Premises}
-Regarding the line 2 of Algorithm~\ref{alg:verification-algorithm}, a list of forty equipment from ten different manufacturers was provided to the code in order to allow the choice of every item of PV sizing. Data sheet from each item was necessary to collect the technical information. Moreover, the price of each item \textcolor{red}{was obtained from available quotation of the market, and if the currency was not in US dollars, then it was used the exchange rate of the day to convert it to US dollars. MUDEI O TEXTO POIS A CONSULTA NA WEB P/ OBTER PREÇO DEMANDOU VÁRIOS SITES}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-With respect to power reliability, this work will rely on the critical period solar energy method~\cite{Pinho} as described in \textcolor{red}{Section~\ref{sec:sizing}}. The usual is to use loss of load probability (LOLP) or loss of power supply probability (LPSP). However, based on the fact that here we are neither considering site characteristics nor the load changes over time, which demands historical data, the reliability analysis will be developed only by the critical period method of PV sizing.
+Regarding the line $2$ of Algorithm~\ref{alg:verification-algorithm}, 
+a list of forty equipment from ten different manufacturers was provided 
+to the synthesis engine in order to allow the choice of every item 
+of PV sizing. Data sheet from each item was necessary to collect 
+technical information. Moreover, the price of each item was obtained 
+from available quotations in the market, and if the currency was not in US dollars, 
+then it was used the exchange rate of the day to convert it to US dollars.
+
+With respect to power reliability, this work will rely on the critical period solar 
+energy method~\cite{Pinho} as described in Section~\ref{sec:sizing}. 
+The usual way is to use loss of load probability (LOLP) or loss of power 
+supply probability (LPSP). However, based on the fact that here we 
+are neither considering site characteristics nor the load changes over time, 
+which demands historical data, the reliability analysis will be developed only 
+by the critical period method of PV sizing.
 
 Regarding financial analysis:
 \begin{itemize}
-	\item LCC lifetime considered: 20 years;
-	\item Installation costs: includes delivery at the isolated community and installation costs itself, 5\% of total cost~\cite{Agrener2013};
-%	\item Electrical protection and complementary electrical item: 7\% of equipment cost [Agrener2013]. Includes circuit breakers, surge protection devices, electrical grounding, DC fuses, main switchboard, string boxes;
-	\item Value of the discount rate or interest rate: 10\%, what is a good rate considering financial investments in developing countries;
-	\item Operation and maintenance annual costs: based on past PV projects in the Amazon region of Brazil, will be adopted the value of US\$ 289.64~\citep{Agrener2013}. This cost includes the battery replacement based on its lifetime (4 years for lead-acid batteries). Therefore will be performed three battery bank replacements during the LCC analysis.
+	\item LCC lifetime considered: $20$ years;
+	\item Installation costs: includes delivery in the isolated community and installation costs itself, $5$\% of total cost~\cite{Agrener2013};
+	\item Value of the discount rate or interest rate: $10$\%, which is a good rate considering financial investments in developing countries;
+	\item Operation and maintenance annual costs: based on past PV projects in the Amazon region of Brazil, will be adopted the value of US\$ 289.64~\citep{Agrener2013}. This cost includes the battery replacement based on its lifetime ($4$ years for lead-acid batteries). Therefore, it will be performed three battery bank replacements during the LCC analysis.
 \end{itemize}
 
-On the subject of PV system optimization technique, we will adopt here the intuitive method since the average value daily of solar irradiance is used at the mathematical model, without considering the battery's state of charge, or even the random nature of solar irradiation and meteorological conditions. Therefore, all the computational effort will be concentrated in our automated synthesis algorithm.
+On the subject of PV system optimization technique, we will adopt here the intuitive method 
+since the average value daily of solar irradiance is used in the mathematical model, 
+without considering the battery's state of charge, or even the random nature 
+of solar irradiation and meteorological conditions. Therefore, all the computational 
+effort will be concentrated in our automated synthesis algorithm.
 
-Regarding all case studies, it was defined that the minimum state of charge of batteries is 75\% \textcolor{red}{(with DOD maximum of 25\%, what is common to lead-acid batteries), the voltage of the system is set in 24 V DC (the most common as well, but the value can be adjusted to 12 or 48 V at the code), and the AC voltage from the inverter is 127 V (Brazil standard)}.
+Regarding all case studies, it was defined that the minimum state of charge of batteries is $75$\% 
+(with DOD maximum of 25\%, which is common to lead-acid batteries), the voltage of the system 
+is set in $24$ V DC (the most common as well, but the value can be adjusted to $12$ or $48$ V at the code), 
+and the AC voltage from the inverter is $127$ V (Brazilian standard).
 
-Related to off-the-shelf simulation tools only HOMER Pro and Hybrid2 perform off-grid system with battery backup analysis. %all the tools perform solar photovoltaic analysis; 
-Additionally, HOMER and RETScreen include economical analysis or even optimization-sensitive analysis. Therefore, in this study, HOMER Pro will be the simulation tool used to compare with our automated synthesis method. Note that that HOMER Pro is available only for Microsoft Windows and the annual standard subscription costs US\$ $504.00$ \textcolor{red}{~\cite{HOMER}}.
+Related to off-the-shelf simulation tools only HOMER Pro and Hybrid2 
+perform off-grid system with battery backup analysis. 
+Additionally, HOMER and RETScreen include economical analysis 
+or even optimization-sensitive analysis. Therefore, in this study, 
+HOMER Pro will be the simulation tool used to compare with our automated synthesis method. 
+Note that that HOMER Pro is available only for Microsoft Windows and 
+its annual standard subscription costs US\$ $504.00$ ~\cite{HOMER}.
 
 %---------------------------------------------------------------------------
 \section{Experimental Evaluation}
