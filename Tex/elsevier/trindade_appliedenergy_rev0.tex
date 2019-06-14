@@ -74,7 +74,7 @@ optimal sizing of stand-alone PV systems using program synthesis. In particular,
 our variant of counterexample guided inductive synthesis (CEGIS) approach has two phases: 
 first we synthesize the sizing of stand-alone PV systems based on power reliability, 
 but that may not achieve the lowest cost; second, the proposed solution is then verified iteratively 
-with a lower bound via symbolic bounded model checking. If the verification step does not fail, 
+with a lower bound via symbolic model checking. If the verification step does not fail, 
 the lower bound is adjusted; and if it fails, a counterexample is provided with the optimal sizing, 
 thereby linking the technical response of the first phase with cost analysis of the second phase. 
 Commercial equipment data from different manufacturers are provided to our synthesis engine 
@@ -97,18 +97,26 @@ automated verification \sep model checking \sep program synthesis \sep electrica
 \section{INTRODUCTION}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-Cyber-Physical Systems  (CPS) are engineered systems, which are built from, and depend upon, 
+Cyber-Physical Systems (CPS) are engineered systems, which are built from, and depend upon, 
 the seamless integration of computational and physical  components~\cite{NSF2015}. 
-During operation, such components must frequently adapt to the executing environment changes 
+During operation, such components must frequently adapt to the operating environment changes 
 faced at run-time (dynamics of the physical processes) and must be able to continue to behave 
-in a controlled and safe way, thus posing novel technical challenges for the software engineering of services and applications for CPS~\cite{Metzger2014}. 
-%Important quality aspects for CPS include scalability, e.g., ensuring that CPS applications can scale to urban-wide deployment environments~\cite{NESSI} \textcolor{red}{only scalability?}.
-Software pervasiveness in CPS places new challenges; in particular, highly dynamic environments, rapidly changing requirements, unpredictable and uncertain operating conditions demand new paradigms for software design~\cite{Filieri2015}.
+in a controlled and safe way, thus posing novel technical challenges for the software engineering 
+of services and applications for CPS~\cite{Metzger2014}. Software pervasiveness in CPS places 
+new challenges; in particular, highly dynamic environments, rapidly changing requirements, 
+unpredictable and uncertain operating conditions demand new paradigms for software design~\cite{Filieri2015}.
 
 While some research efforts do exist to enhance and optimize the software development 
 processes for CPS, further investigation and discussion of better and more effective models 
 are still needed in practice~\cite{Al-Jaroodi2016}. Among the opportunities for enhancements 
-in the software development processes for CPS, there exists the need for developing new techniques and tools to support CPS requirements gathering and analysis with the goal of synthesizing correct-by-construction implementations of CPS. These techniques need to deal with predefined requirements enforced by the nature and inherited constraints of the target CPS. In addition, they should be able to provide verification and validation mechanisms for completeness, correctness, and consistency~\cite{Al-Jaroodi2016}. Uncertainty and variability, at the same time, can be dealt with formal verification~\cite{NESSI}. Energy production, distribution, and optimization are all CPS problems~\cite{UC}. 
+in the software development processes for CPS, there exists the need for developing new techniques 
+and tools to support CPS requirements gathering and analysis with the goal of synthesizing 
+\textit{correct-by-construction} implementations of CPS. These techniques need to deal with 
+predefined requirements enforced by the nature and inherited constraints of the target CPS. 
+In addition, they should be able to provide verification and validation mechanisms for completeness, 
+correctness, and consistency~\cite{Al-Jaroodi2016}. Uncertainty and variability, at the same time, 
+can be dealt with formal verification~\cite{NESSI}. Energy production, distribution, and 
+optimization are all CPS problems~\cite{UC}. 
 
 Lack of access to clean and affordable energy is considered a core 
 dimension of poverty~\cite{Hussein2012}. Progress has been made worldwide; 
@@ -126,28 +134,28 @@ or MATLAB/Simulink package~\cite{Benatiallah2017}}. However, these tools are bas
 they have the drawback of an incomplete coverage  since verification of all possible 
 combinations and potential failures of a system is unfeasible~\cite{ClarkeHV18}. 
 
-Optimization of PV systems is not a recent topic; since the 90's different techniques 
+Optimization of PV systems is not a recent topic; since the $90$'s different techniques 
 using a wide variety of criteria to find ultimate combinations for design parameters, 
-based on intuitive, numerical and analytical methods were developed and evaluated. 
+based on intuitive, numerical and analytical methods were developed and evaluated \textcolor{red}{add citation}. 
 An ideal combination of any PV system is made by the best compromise between 
-two considered objectives, which is power reliability and system cost~\cite{Alsadi2018}.
+two considered objectives, which is power \textit{reliability} and \textit{system cost}~\cite{Alsadi2018}.
  
 However, formal methods based on \textit{symbolic model checking} and its application 
-to synthesize PV systems have not been further explored, which can offer a great potential 
-to obtain a more effective design process to PV systems~\cite{ClarkeHV18}. 
-Here, we use counterexample guided inductive synthesis (CEGIS) for synthesizing 
+to synthesize PV systems have not been further explored in literature, which could offer 
+a great potential to obtain a more effective design process to PV systems~\cite{ClarkeHV18}. 
+Here, we use a variant of counterexample guided inductive synthesis (CEGIS) for synthesizing 
 optimal sizing of stand-alone PV systems using commercial equipment data. 
 Given a correctness specification $\sigma$, our method uses that as starting point 
 and then iteratively produces a sequence of candidate solutions that satisfy $\sigma$, 
-related to power reliability. In particular, on each iteration, we synthesize sizing of 
+related to power reliability. In particular, in each iteration, we synthesize sizing of 
 stand-alone PV systems but that may not achieve the lowest cost. The candidate solution 
 is then verified via symbolic model checking with a lower bound that serves as the minimum 
 cost of reference; if the verification step does not fail, the lower bound is adjusted. 
 If it fails then a counterexample is provided with an optimal sizing that meets 
 power reliability and system cost.
 
-Our work makes two major contributions. \textbf{Firstly}, the use of automated 
-symbolic verification in electrical systems was uncommon in recent 
+Our work makes two major contributions. Firstly, the use of automated 
+symbolic verification methods in electrical systems was uncommon in recent 
 prior studies~\cite{abs-1811-09438}, and specifically their use in synthesizing 
 PV sizing is unprecedented. Here, a list of PV components (i.e., PV panels, 
 charge controllers, inverters, and batteries) can be fed to our proposed synthesis 
@@ -159,9 +167,9 @@ verifiers with the goal of obtaining the best performance in our verification
 back-end for synthesizing optimal PV systems.
 
 \textit{Outline}. Section~\ref{sec:Background} gives the background about related studies, 
-program synthesis, design sizing and validation of PV systems, and the mathematical modeling. 
+program synthesis, sizing design and validation of PV systems, and the mathematical modeling. 
 Section~\ref{sec:Method} presents the automated formal synthesis proposed 
-by this underlying work. Section~\ref{sec:Results} is devoted to the experimentation, 
+in this underlying study. Section~\ref{sec:Results} is devoted to the experimentation, 
 results and discussions. Section~\ref{sec:Conclusion} presents the conclusion and describes future work.
 %
 %-----------------------------------------------------------
