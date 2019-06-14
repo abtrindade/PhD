@@ -86,23 +86,14 @@ Cyber-Physical Systems  (CPS) are engineered systems, which are built from, and 
 the seamless integration of computational and physical  components~\cite{NSF2015}. 
 During operation, such components must frequently adapt to the executing environment changes 
 faced at run-time (dynamics of the physical processes) and must be able to continue to behave 
-in a controlled and safe way, thus posing novel technical challenges for the software engineering 
-of services and applications for CPS~\cite{Metzger2014}. Important quality aspects for CPS include scalability, 
-e.g., ensuring that CPS applications can scale to urban-wide deployment environments~\cite{NESSI} \textcolor{red}{only scalability?}.
-Software pervasiveness in CPS places new challenges; in particular, highly dynamic environments, 
-rapidly changing requirements, unpredictable and uncertain operating conditions demand new paradigms for software design~\cite{Filieri2015}.
+in a controlled and safe way, thus posing novel technical challenges for the software engineering of services and applications for CPS~\cite{Metzger2014}. 
+%Important quality aspects for CPS include scalability, e.g., ensuring that CPS applications can scale to urban-wide deployment environments~\cite{NESSI} \textcolor{red}{only scalability?}.
+Software pervasiveness in CPS places new challenges; in particular, highly dynamic environments, rapidly changing requirements, unpredictable and uncertain operating conditions demand new paradigms for software design~\cite{Filieri2015}.
 
 While some research efforts do exist to enhance and optimize the software development 
 processes for CPS, further investigation and discussion of better and more effective models 
 are still needed in practice~\cite{Al-Jaroodi2016}. Among the opportunities for enhancements 
-in the software development processes for CPS, there exists the need for developing new techniques 
-and tools to support CPS requirements gathering and analysis with the goal of synthesizing 
-correct-by-construction implementations of CPS. These techniques need to deal with 
-predefined requirements enforced by the nature and inherited constraints of the target CPS. 
-In addition, they should be able to provide verification and validation mechanisms 
-for completeness, correctness, and consistency~\cite{Al-Jaroodi2016}. 
-Uncertainty and variability, at the same time, can be dealt with formal verification~\cite{NESSI}. 
-Energy production, distribution, and optimization are all CPS problems~\cite{UC}. 
+in the software development processes for CPS, there exists the need for developing new techniques and tools to support CPS requirements gathering and analysis with the goal of synthesizing correct-by-construction implementations of CPS. These techniques need to deal with predefined requirements enforced by the nature and inherited constraints of the target CPS. In addition, they should be able to provide verification and validation mechanisms for completeness, correctness, and consistency~\cite{Al-Jaroodi2016}. Uncertainty and variability, at the same time, can be dealt with formal verification~\cite{NESSI}. Energy production, distribution, and optimization are all CPS problems~\cite{UC}. 
 
 Lack of access to clean and affordable energy is considered a core 
 dimension of poverty~\cite{Hussein2012}. Progress has been made worldwide; 
@@ -419,7 +410,7 @@ LCC = C_{PV} + C_{bat} + C_{charger} + C_{inv} + C_{installation} + C_{batrep} +
 %----------------------------------------------------------------------------------------------
 \subsection{Stand-alone PV System Optimization Technique}
 %----------------------------------------------------------------------------------------------
-In order to recommend an optimal configuration for PV systems, the designer has to evaluate the design based on optimization variables. As number of optimization variables increases, the computation effort will increase as well. Hence, to obtain the best PV system design as well as simplified sizing process, prior work introduced three main techniques for system sizing calculation, namely intuitive, numerical, and analytical methods~\cite{Alsadi2018} \textcolor{red}{why [6]? Alessandro: Não entendi o 6 aqui}.
+In order to recommend an optimal configuration for PV systems, the designer has to evaluate the design based on optimization variables. As number of optimization variables increases, the computation effort will increase as well. Hence, to obtain the best PV system design as well as simplified sizing process, prior work introduced three main techniques for system sizing calculation, namely intuitive, numerical, and analytical \textcolor{red}{methods~\cite{Zhou2010}}.
 
 Intuitive method is simple, easy to be implemented, and can be used to give rough suggestion for preliminary design. The sizing rules are based on designer's experience, using lowest performance either in a time period data or by directly using average value (daily, monthly, or annual) of solar irradiance. This method does not consider the battery's state of charge, or even the random nature of solar irradiation and meteorological conditions~\cite{Alsadi2018}.
 
@@ -489,7 +480,7 @@ The main challenge for the {\sc Synthesize} phase is to find a feasible candidat
 Note that the process described here in completely automated and that a validation is performed by our {\sc Verify} phase to ensure that the approach is sound.
 
 \subsection{Assumptions and Premises}
-Regarding the line 2 of Algorithm~\ref{alg:verification-algorithm}, a list of forty equipment from ten different manufacturers was provided to the code in order to allow the choice of every item of PV sizing. Data sheet from each item was necessary to collect the technical information. Moreover, the price of each item \textcolor{red}{was obtained from available quotation of the market, and if the currency was not in US dollars, then it was used the exchange rate of the day to convert it to US dollars) MUDEI O TEXTO POIS A CONSULTA NA WEB P/ OBTER PREÇO DEMANDOU VÁRIOS SITES}.
+Regarding the line 2 of Algorithm~\ref{alg:verification-algorithm}, a list of forty equipment from ten different manufacturers was provided to the code in order to allow the choice of every item of PV sizing. Data sheet from each item was necessary to collect the technical information. Moreover, the price of each item \textcolor{red}{was obtained from available quotation of the market, and if the currency was not in US dollars, then it was used the exchange rate of the day to convert it to US dollars. MUDEI O TEXTO POIS A CONSULTA NA WEB P/ OBTER PREÇO DEMANDOU VÁRIOS SITES}
 
 With respect to power reliability, this work will rely on the critical period solar energy method~\cite{Pinho} as described in \textcolor{red}{Section~\ref{sec:sizing}}. The usual is to use loss of load probability (LOLP) or loss of power supply probability (LPSP). However, based on the fact that here we are neither considering site characteristics nor the load changes over time, which demands historical data, the reliability analysis will be developed only by the critical period method of PV sizing.
 
@@ -499,7 +490,7 @@ Regarding financial analysis:
 	\item Installation costs: includes delivery at the isolated community and installation costs itself, 5\% of total cost~\cite{Agrener2013};
 %	\item Electrical protection and complementary electrical item: 7\% of equipment cost [Agrener2013]. Includes circuit breakers, surge protection devices, electrical grounding, DC fuses, main switchboard, string boxes;
 	\item Value of the discount rate or interest rate: 10\%, what is a good rate considering financial investments in developing countries;
-	\item Operation and maintenance annual costs: based on past PV projects in the Amazon region of Brazil, will be adopted the value of US\$ 289.64~\citep{Agrener2013}. This cost includes the battery lifetime (4 years for lead-acid batteries). Therefore will be performed three battery bank replacements during the LCC analysis.
+	\item Operation and maintenance annual costs: based on past PV projects in the Amazon region of Brazil, will be adopted the value of US\$ 289.64~\citep{Agrener2013}. This cost includes the battery replacement based on its lifetime (4 years for lead-acid batteries). Therefore will be performed three battery bank replacements during the LCC analysis.
 \end{itemize}
 
 On the subject of PV system optimization technique, we will adopt here the intuitive method since the average value daily of solar irradiance is used at the mathematical model, without considering the battery's state of charge, or even the random nature of solar irradiation and meteorological conditions. Therefore, all the computational effort will be concentrated in our automated synthesis algorithm.
@@ -518,7 +509,7 @@ Additionally, HOMER and RETScreen include economical analysis or even optimizati
 \subsection{Case studies} 
 %---------------------------------------------------------------------------
 
-We have performed seven stand-alone PV system case studies to evaluate our proposed synthesis approach as described in the first column of Table~\ref{tab1} (named Specification). \textcolor{red}{These case studies where defined based on usual electrical load found in riverside communities of Amazon State in Brazil~\cite{Agrener2013}}. 
+We have performed seven stand-alone PV system case studies to evaluate our proposed synthesis approach as described in the first column of Table~\ref{tab1} (named Specification). \textcolor{red}{These case studies where defined based on usual electrical load found in riverside communities of Amazon State in Brazil~\cite{abs-1811-09438, Agrener2013}}. 
 
 \begin{table}
 \caption{Case studies and results: optimization of stand-alone PV systems.}\label{tab1}
