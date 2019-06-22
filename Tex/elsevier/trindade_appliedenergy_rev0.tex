@@ -67,22 +67,7 @@
 \address[mysecondaryaddress]{University of Manchester, School of Computer Science, Kilburn Building, Manchester M13 9PL}
 
 \begin{abstract}
-There exist various methods and tools to size solar photovoltaic systems; 
-however, the tools are mainly based on simulations, which do not cover all aspects 
-of the design-space. We present a sound and automated approach to obtain 
-optimal sizing of stand-alone PV systems using program synthesis. In particular, 
-our variant of counterexample guided inductive synthesis (CEGIS) approach has two phases: 
-first we synthesize the sizing of stand-alone PV systems based on power reliability, 
-but that may not achieve the lowest cost; second, the proposed solution is then verified iteratively 
-with a lower bound via symbolic model checking. If the verification step does not fail, 
-the lower bound is adjusted; and if it fails, a counterexample is provided with the optimal sizing, 
-thereby linking the technical response of the first phase with cost analysis of the second phase. 
-Commercial equipment data from different manufacturers are provided to our synthesis engine 
-and candidate solutions are derived from financial analysis of the obtained sizing. Our synthesis 
-method is novel and unprecedented to streamline the design of PV systems. Experimental results 
-using seven case studies show that our synthesis method is able to produce within an acceptable 
-run-time the optimal PV system sizing, and a comparative with a specialized simulation tool shows 
-the effectiveness of our approach.
+There exist various methods and tools to size solar photovoltaic systems; however, the tools are mainly based on simulations, which do not cover all aspects of the design-space. We present a sound and automated approach to obtain optimal sizing of stand-alone PV systems using program synthesis. In particular, our variant of counterexample guided inductive synthesis (CEGIS) approach has two phases: first we synthesize the sizing of stand-alone PV systems based on power reliability, but that may not achieve the lowest cost; second, the proposed solution is then verified iteratively with a lower bound via symbolic model checking. If the verification step does not fail, the lower bound is adjusted; and if it fails, a counterexample is provided with the optimal sizing, thereby linking the technical response of the first phase with cost analysis of the second phase. Commercial equipment data from different manufacturers are provided to our synthesis engine and candidate solutions are derived from financial analysis of the obtained sizing. Our synthesis method is novel and unprecedented to streamline the design of PV systems. Experimental results using seven case studies show that our synthesis method is able to produce within an acceptable run-time the optimal PV system sizing, and a comparative with a specialized simulation tool shows the effectiveness of our approach.
 \end{abstract}
 
 \begin{keyword}
@@ -96,49 +81,15 @@ automated verification \sep model checking \sep program synthesis \sep electrica
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{INTRODUCTION}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Cyber-Physical Systems (CPS) are engineered systems, which are built from, and depend upon, the seamless integration of computational and physical  components~\cite{NSF2015}. During operation, such components must frequently adapt to the operating environment changes faced at run-time (dynamics of the physical processes) and must be able to continue to behave in a controlled and safe way, thus posing novel technical challenges for the software engineering of services and applications for CPS~\cite{Metzger2014}. Software pervasiveness in CPS places new challenges; in particular, highly dynamic environments, rapidly changing requirements, unpredictable and uncertain operating conditions demand new paradigms for software design~\cite{Filieri2015}.
 
-Cyber-Physical Systems (CPS) are engineered systems, which are built from, and depend upon, 
-the seamless integration of computational and physical  components~\cite{NSF2015}. 
-During operation, such components must frequently adapt to the operating environment changes 
-faced at run-time (dynamics of the physical processes) and must be able to continue to behave 
-in a controlled and safe way, thus posing novel technical challenges for the software engineering 
-of services and applications for CPS~\cite{Metzger2014}. Software pervasiveness in CPS places 
-new challenges; in particular, highly dynamic environments, rapidly changing requirements, 
-unpredictable and uncertain operating conditions demand new paradigms for software design~\cite{Filieri2015}.
+While some research efforts do exist to enhance and optimize the software development processes for CPS, further investigation and discussion of better and more effective models are still needed in practice~\cite{Al-Jaroodi2016}. Among the opportunities for enhancements in the software development processes for CPS, there exists the need for developing new techniques and tools to support CPS requirements gathering and analysis with the goal of synthesizing \textit{correct-by-construction} implementations of CPS. These techniques need to deal with predefined requirements enforced by the nature and inherited constraints of the target CPS. In addition, they should be able to provide verification and validation mechanisms for completeness, correctness, and consistency~\cite{Al-Jaroodi2016}. Uncertainty and variability, at the same time, can be dealt with formal verification~\cite{NESSI}. Energy production, distribution, and optimization are all CPS problems~\cite{UC}. 
 
-While some research efforts do exist to enhance and optimize the software development 
-processes for CPS, further investigation and discussion of better and more effective models 
-are still needed in practice~\cite{Al-Jaroodi2016}. Among the opportunities for enhancements 
-in the software development processes for CPS, there exists the need for developing new techniques 
-and tools to support CPS requirements gathering and analysis with the goal of synthesizing 
-\textit{correct-by-construction} implementations of CPS. These techniques need to deal with 
-predefined requirements enforced by the nature and inherited constraints of the target CPS. 
-In addition, they should be able to provide verification and validation mechanisms for completeness, 
-correctness, and consistency~\cite{Al-Jaroodi2016}. Uncertainty and variability, at the same time, 
-can be dealt with formal verification~\cite{NESSI}. Energy production, distribution, and 
-optimization are all CPS problems~\cite{UC}. 
+Lack of access to clean and affordable energy is considered a core dimension of poverty~\cite{Hussein2012}. Progress has been made worldwide; in particular, the number of people without electricity access fell below $1$ billion threshold for the first time in 2017~\cite{IEAweo2018}. In order to provide universal electricity for all, decentralized systems led by solar photovoltaic (PV) in off-grid and mini-grid systems will be the lowest-cost solution for three-quarters of the additional connections needed~\cite{Hussein2012}; specifically grid extension will be the standard in urban areas~\cite{IEAweo2018}.
 
-Lack of access to clean and affordable energy is considered a core 
-dimension of poverty~\cite{Hussein2012}. Progress has been made worldwide; 
-in particular, the number of people without electricity access fell below $1$ 
-billion threshold for the first time in 2017~\cite{IEAweo2018}. In order to provide 
-universal electricity for all, decentralized systems led by solar photovoltaic (PV) 
-in off-grid and mini-grid systems will be the lowest-cost solution for three-quarters 
-of the additional connections needed~\cite{Hussein2012}; 
-specifically grid extension will be the standard in urban areas~\cite{IEAweo2018}.
+In order to simulate or evaluate a PV system, there exist various specialized tools, e.g., RETScreen, HOMER, PVWatts, SAM and  Hybrid2~\cite{Pradhan,Swarnkar,NRELDobos,NRELBlair,Mills}; and even general purpose simulation tools, e.g.,  PSpice~\cite{Gow1999}, or MATLAB/Simulink package~\cite{Benatiallah2017}. However, these tools are based on simulation; they have the drawback of an incomplete coverage  since verification of all possible combinations and potential failures of a system is unfeasible~\cite{ClarkeHV18}. 
 
-In order to simulate or evaluate a PV system, there exist various specialized tools, 
-e.g., RETScreen, HOMER, PVWatts, SAM and Hybrid2~\cite{Pradhan,Swarnkar,NRELDobos,NRELBlair,Mills}; 
-and even general purpose simulation tools, e.g.,  PSpice~\cite{Gow1999},  
-or MATLAB/Simulink package~\cite{Benatiallah2017}. However, these tools are based on simulation; 
-they have the drawback of an incomplete coverage  since verification of all possible 
-combinations and potential failures of a system is unfeasible~\cite{ClarkeHV18}. 
-
-Optimization of PV systems is not a recent topic; since the $90$'s different techniques 
-using a wide variety of criteria to find ultimate combinations for design parameters, 
-based on intuitive, numerical and analytical methods were developed and evaluated~\cite{Applasamy2011}. 
-An ideal combination of any PV system is made by the best compromise between 
-two considered objectives, which is power \textit{reliability} and \textit{system cost}~\cite{Alsadi2018}.
+Optimization of PV systems is not a recent topic; since the $90$'s different techniques using a wide variety of criteria to find ultimate combinations for design parameters, based on intuitive, numerical and analytical methods were developed and evaluated~\cite{Applasamy2011}. An ideal combination of any PV system is made by the best compromise between two considered objectives, which is power \textit{reliability} and \textit{system cost}~\cite{Alsadi2018}.
  
 However, formal methods based on \textit{symbolic model checking} and its application 
 to synthesize PV systems have not been further explored in literature, which could offer 
@@ -325,7 +276,7 @@ The basic idea of program synthesis is to automatically construct a program $P$ 
 
 The correctness specification $\sigma$ provided to our program synthesizer is of the form $\exists \vec{F} .  \forall \vec{x}.  \sigma(\vec{x}, \vec{F})$, where $\vec{F}$ ranges over functions, $\vec{x}$ ranges over ground terms, and $\sigma$ is a quantifier-free (QF) formula typically supported by SMT solvers. The ground terms are interpreted over some finite domain $\mathcal{D}$, where $\mathcal{D}$ can be encoded using the SMT's bit-vectors part. Examples of specification used by our method include house demand, energy, and battery autonomy; we also provide a list of equipment specification and price from different manufacturers and models.
 
-\textcolor{red}{In Figure~\ref{Counter-Example-Guided-Inductive-Synthesis}, regarding traditional CEGIS method, the phases {\sc Synthesize} and {\sc Verify} interact via a finite set of test vectors {\sc inputs}, which is incrementally updated. Given the correctness specification $\sigma$, the {\sc Synthesize} procedure tries to find an existential witness $\vec{F}$ satisfying the specification $\sigma(\vec{x}, \vec{F})$, for all $\vec{x}$ in {\sc inputs} (as opposed to all $\vec{x} \in \mathcal{D}$). If {\sc Synthesize} succeeds in finding a witness~$\vec{F}$, the latter is a candidate solution (i.e., feasible combination of equipment) to the full synthesis formula, which is passed to {\sc Verify} in order to check whether it is a proper solution ({\it i.e.}, $\vec{F}$ satisfies the specification $\sigma(\vec{x}, \vec{F})$ for all $\vec{x}\in\mathcal{D}$). If this is the case, then the algorithm terminates, i.e., we have found a feasible equipment with the lowest cost; otherwise, in the CEGIS traditional method, additional information is provided to the phase {\sc Synthesize}, in the form of a new counterexample that is added to the {\sc inputs} set and the loop iterates again.} 
+In Figure~\ref{Counter-Example-Guided-Inductive-Synthesis}, regarding traditional CEGIS method, the phases {\sc Synthesize} and {\sc Verify} interact via a finite set of test vectors {\sc inputs}, which is incrementally updated. Given the correctness specification $\sigma$, the {\sc Synthesize} procedure tries to find an existential witness $\vec{F}$ satisfying the specification $\sigma(\vec{x}, \vec{F})$, for all $\vec{x}$ in {\sc inputs} (as opposed to all $\vec{x} \in \mathcal{D}$). If {\sc Synthesize} succeeds in finding a witness~$\vec{F}$, the latter is a candidate solution (i.e., feasible combination of equipment) to the full synthesis formula, which is passed to {\sc Verify} in order to check whether it is a proper solution ({\it i.e.}, $\vec{F}$ satisfies the specification $\sigma(\vec{x}, \vec{F})$ for all $\vec{x}\in\mathcal{D}$). If this is the case, then the algorithm terminates, i.e., we have found a feasible equipment with the lowest cost; otherwise, in the CEGIS traditional method, additional information is provided to the phase {\sc Synthesize}, in the form of a new counterexample that is added to the {\sc inputs} set and the loop iterates again.
 
 One may notice that each iteration of the traditional CEGIS loop adds a new input to the finite set $\text{\sc inputs}$, which is then used for synthesis.  Given that the full set of inputs $\mathcal{D}$ is finite because we use bit-vector expressions, this means that the refinement loop can only iterate over a finite number of times; however, {\sc Synthesize} may conclude that no candidate solution obeying $\sigma$ for the finite set $\text{\sc inputs}$ exists and our synthesis engine can then conclude that no feasible equipment combination was found.
 
@@ -476,41 +427,26 @@ V_{out}AC = V_{AC}.
 In order to select an optimal combination to meet sizing constraints, 
 it is necessary to evaluate power reliability and system cost analysis for the underlying system. An ideal combination of any PV system is made by the best compromise between these two objectives.
 
-During the PV system design, one of the most important aspects to ensure power system reliability is to analyze power supply availability \textcolor{red}{~\cite{Alsadi2018}}. The reason is because solar energy production is intermittent and, therefore, the energy generated usually will not match with the load demand. A reliable power is a generation system that has sufficient power to feed load demand in a period. 
+During the PV system design, one of the most important aspects to ensure power system reliability is to analyze power supply availability~\cite{Alsadi2018}. The reason is because solar energy production is intermittent and, therefore, the energy generated usually will not match with the load demand. A reliable power is a generation system that has sufficient power to feed load demand in a period. 
 
 There exist different methods to express system reliability, where the most popular ones 
 are the loss of load probability (LOLP) and the loss of power supply probability (LPSP)~\cite{Alsadi2018}. In both methods, if the probability is zero, then the load will always be fulfilled; otherwise (i.e., probability of one) the load will never be fulfilled.
 
 LOLP is the probability for the case when a load demand exceeds the generation power by the PV system. On one hand, we claim that we have a reliable PV system when it is able to generate sufficient power to fulfill the demanded load within a time span. On the other hand, LPSP is defined as the probability of the case when system generates insufficient power to satisfy the load demand. The main approaches to LPSP demand simulation or probabilistic treatment of time series data to predict dynamic changing on system performance. However, data is not always available and dynamic analysis is complex; and this is a drawback of LOLP and LPSP~\cite{Alsadi2018}.
 
-Related to economic analysis, there exist various methods available. The main objective is to determine whether 
-the project has an acceptable investment; the usual way is to perform economic analysis after reliability analysis 
-with the goal of proposing a system with high reliability and lowest cost~\cite{Alsadi2018}. The common methods include: 
-Net Present Cost (NPC)~\cite{Park2004}, the Levelized Cost of Energy (LCOE)~\cite{Zhou2010}, 
-or the Life Cycle Cost (LCC)~\cite{Applasamy2011}.
+Related to economic analysis, there exist various methods available. The main objective is to determine whether the project has an acceptable investment; the usual way is to perform economic analysis after reliability analysis with the goal of proposing a system with high reliability and lowest cost~\cite{Alsadi2018}. The common methods include: Net Present Cost (NPC)~\cite{Park2004}, the Levelized Cost of Energy (LCOE)~\cite{Zhou2010}, or the Life Cycle Cost (LCC)~\cite{Applasamy2011}.
 
-The NPC or life-cycle cost is the present value of all the costs over the project lifetime, 
-minus the present value of all the revenues that it earns over the project lifetime. 
-The net present worth is found by discounting all cash inflows and outflows, 
-including cost of installation, replacement and maintenance of the PV system, 
-at an internal rate of return (IRR)~\cite{Park2004}.  IRR is used to evaluate the attractiveness of a project or investment.
+The NPC is the present value of all the costs over the project lifetime, minus the present value of all the revenues that it earns over the project lifetime. The net present worth is found by discounting all cash inflows and outflows, including cost of installation, replacement and maintenance of the PV system, at an internal rate of return (IRR)~\cite{Park2004}.  IRR is used to evaluate the attractiveness of a project or investment.
 
-LCOE is defined as the average cost per kWh of useful electrical energy produced 
-by the PV system when a lifetime, investment cost, replacement, operation and maintenance, 
-and capital cost are considered~\cite{Kamel2005}. LCOE method is useful in comparing 
-different generation technologies with different operating characteristics~\cite{Zhou2010}.
+LCOE is defined as the average cost per kWh of useful electrical energy produced by the PV system when a lifetime, investment cost, replacement, operation and maintenance, and capital cost are considered~\cite{Kamel2005}. LCOE method is useful in comparing different generation technologies with different operating characteristics~\cite{Zhou2010}.
 
-LCC is the estimation of sum of installation cost, operating and maintenance of a PV system 
-for a period of time, and expressed in today's value~\cite{Applasamy2011}. Eq.~\eqref{eq:LCC} 
-is used to calculate LCC of a PV system,
+LCC is the estimation of sum of installation cost, operating and maintenance of a PV system for a period of time, and expressed in today's value~\cite{Applasamy2011}. Eq.~\eqref{eq:LCC} is used to calculate LCC of a PV system,
 %
 \begin{equation}
 \label{eq:LCC}
 LCC = C_{PV} + C_{bat} + C_{charger} + C_{inv} + C_{installation} + C_{batrep} + C_{PWO\&M},
 \end{equation}
-\noindent where $C_{PV}$ is PV array cost, $C_{bat}$ is initial cost of batteries, 
-$C_{charger}$ is cost of charger, $C_{inv}$ is inverter cost, $C_{installation}$ is installation cost, 
-$C_{batrep}$ is battery replacement cost in present value, and $C_{PWO\&M}$ is operation and maintenance costs 
+\noindent where $C_{PV}$ is PV array cost, $C_{bat}$ is initial cost of batteries, $C_{charger}$ is cost of charger, $C_{inv}$ is inverter cost, $C_{installation}$ is installation cost, $C_{batrep}$ is battery replacement cost in present value, and $C_{PWO\&M}$ is operation and maintenance costs 
 in present worth.
 
 %----------------------------------------------------------------------------------------------
@@ -653,7 +589,7 @@ Regarding financial analysis:
 	\item LCC lifetime considered: $20$ years;
 	\item Installation costs: includes delivery in the isolated community and installation costs itself, $5$\% of total cost~\cite{Agrener2013};
 	\item Value of the discount rate or interest rate: $10$\%, which is a good rate considering financial investments in developing countries;
-	\item Operation and maintenance annual costs: based on past PV projects in the Amazon region of Brazil, will be adopted the value of US\$ 289.64~\citep{Agrener2013}. This cost includes the battery replacement based on its lifetime ($4$ years for lead-acid batteries). Therefore, it will be performed three battery bank replacements during the LCC analysis.
+	\item Operation and maintenance annual costs: based on past PV projects of similar size in the Amazon region of Brazil, will be adopted the value of US\$ 289.64~\citep{Agrener2013}. This cost includes the battery replacement based on its lifetime ($4$ years for lead-acid batteries), plus inverters and controller replacement (every 10 years). Therefore, it will be performed three battery bank and one inverter-controller replacements during the LCC analysis.
 \end{itemize}
 
 On the subject of PV system optimization technique, we will adopt here the intuitive method 
@@ -662,18 +598,18 @@ without considering the battery's state of charge, or even the random nature
 of solar irradiation and meteorological conditions. Therefore, all the computational 
 effort will be concentrated in our automated synthesis algorithm.
 
-Regarding all case studies, it was defined that the minimum state of charge of batteries is $75$\% 
-(with DOD maximum of 25\%, which is common to lead-acid batteries), the voltage of the system 
-is set in $24$ V DC (the most common as well, but the value can be adjusted to $12$ or $48$ V at the code), 
-and the AC voltage from the inverter is $127$ V (Brazilian standard).
+Regarding all case studies, it was defined that the minimum state of charge of batteries is $75$\% (with DOD maximum of 25\%, which is common to lead-acid batteries), the voltage of the system is set in $24$ V DC (the most common as well, but the value can be adjusted to $12$ or $48$ V at the code), and the AC voltage from the inverter is $127$ V (Brazilian standard).
 
-Related to off-the-shelf simulation tools only HOMER Pro and Hybrid2 
-perform off-grid system with battery backup analysis. 
-Additionally, HOMER and RETScreen include economical analysis 
-or even optimization-sensitive analysis. Therefore, in this study, 
-HOMER Pro will be the simulation tool used to compare with our automated synthesis method. 
-Note that that HOMER Pro is available only for Microsoft Windows and 
-its annual standard subscription costs US\$ $504.00$ ~\cite{HOMER}.
+Related to off-the-shelf simulation tools only HOMER Pro and Hybrid2 perform off-grid system with battery backup analysis. Additionally, HOMER and RETScreen include economical analysis or even optimization-sensitive analysis. Therefore, in this study, HOMER Pro will be the simulation tool used to compare with our automated synthesis method.  Related to HOMER Pro:
+
+\begin{itemize}
+	\item HOMER Pro is available only for Microsoft Windows and its annual standard subscription costs US\$ $504.00$~\cite{HOMER};
+	\item HOMER Pro do not have the LCC cost in its reports. However, it has NPC and LCOE. Therefore NPC was used to obtain LCC in order to allow the comparative among tools;
+	\item The optimization analysis of HOMER Pro allows to define a load curve and temperature according of data collected automatically from online databases. However, in order to allow a correct comparative, the curve load and the temperature were defined exactly the same as automated synthesis tools;
+	\item Battery autonomy is not an parameter that the user can set when using HOMER Pro. The tool will always to meet the user requirement, i.e., the load curve during the 365 days of the year;
+	\item HOMER Pro do not have a explicit equipment called charge controller. It uses a controller resource that can perform in two different ways, according of the optimization choice or the user choice: load following or cycle charging~\cite{HOMER}. During the tests it was chosen the load following controller: it produces only enough power to meet the demand~\cite{HOMER};
+	\item The premise adopted when using HOMER Pro it was that the user does not know the optimal solution, and that in order to obtain this solution is necessary to include (at the design phase of the tool) generic PV and batteries modules that HOMER Pro will search for the optimized power of each component. With that in mind, it was included a generic flat plate PV of 1kW and generic lead-acid batteries of 1kW as well (and with capacity of 83.4 Ah according with HOMER Pro modeling). HOMER, during run-time, decides the size in kW of each module, based on feasibility and lower cost.
+\end{itemize}
 
 %---------------------------------------------------------------------------
 \section{Experimental Evaluation}
@@ -684,9 +620,7 @@ its annual standard subscription costs US\$ $504.00$ ~\cite{HOMER}.
 \subsection{Case studies} 
 %---------------------------------------------------------------------------
 
-We have performed seven stand-alone PV system case studies 
-to evaluate our proposed synthesis approach as described in the first column of Table~\ref{tab1} (named Specification). 
-These case studies where defined based on usual electrical load found in riverside communities of Amazon State in Brazil~\cite{abs-1811-09438, Agrener2013}. 
+We have performed seven stand-alone PV system case studies to evaluate our proposed synthesis approach as described in the first column of Table~\ref{tab1} (named Specification). These case studies where defined based on usual electrical load found in riverside communities of Amazon State in Brazil~\cite{abs-1811-09438, Agrener2013}. 
 %
 \begin{table}
 \caption{Case studies and results: optimization of stand-alone PV systems.}\label{tab1}
@@ -694,24 +628,24 @@ These case studies where defined based on usual electrical load found in riversi
 \begin{tabular}{|c|c|c|c|c|}
 \hline
 \hline
-Tools & \makecell{CBMC 5.11 \\(MiniSat 2.2.1)} & \makecell{ESBMC 6.0.0 \\(Boolector 3.0.1)} & \makecell{CPAchecker 1.8\\(MathSAT 5.5.3)} & HOMER Pro \\
+Tools & \makecell{CBMC 5.11 \\(MiniSat 2.2.1)} & \makecell{ESBMC 6.0.0 \\(Boolector 3.0.1)} & \makecell{CPAchecker 1.8\\(MathSAT 5.5.3)} & HOMER Pro 3.13.1\\
 \hline
 \hline
 Specification & Result & Result & Result & Result \\
 \hline
-\makecell{\textbf{Case Study 1}\\Demand:501W\\Peak:501W \\E:3,900Wh/day\\Autonomy:48h} & OM & IF & \makecell{SAT (172.03 min) \\NTP:1$\times$340W (1S)\\NBT:8$\times$105Ah (2S-4P)\\Controller 15A/75V\\Inverter 700W/48V\\LCC: US\$ 7,790.53} & XYZ \\
+\makecell{\textbf{Case Study 1}\\Peak:342W\\Surge:342W \\E:3,900Wh/day\\Autonomy:48h} & OM & IF & \makecell{SAT (172.03 min) \\NTP:1$\times$340W (1S)\\NBT:8$\times$105Ah (2S-4P)\\Controller 15A/75V\\Inverter 700W/48V\\LCC: US\$ 7,790.53} & \makecell{(Time: 0.33 min)\\2.53 kW of PV\\NBT:12$\times$83.4Ah (2S-6P)\\0.351kW inverter\\LCC: US\$ 7,808.04}\\
 \hline
-\makecell{\textbf{Case Study 2}\\Demand:915W\\Peak:980W\\E:4,880Wh/day\\Autonomy:6h} & OM & IF & \makecell {SAT (105.06 min) \\NTP:2$\times$320W (2S)\\NBT:2$\times$80Ah (2S)\\Controller 40A/100V DC\\Inverter 1,200W/24V \\LCC: US\$ 7,133.39} & XYZ \\
+\makecell{\textbf{Case Study 2}\\Peak:814W\\Surge:980W\\E:4,880Wh/day\\Autonomy:48h} & OM & IF & \makecell {SAT (228.7 min) \\NTP:2$\times$330W (2S)\\NBT:10$\times$105Ah (2S-5P)\\Controller 20A/100V DC\\Inverter 1,200W/24V \\LCC: US\$ 8,335.90} & \makecell{(Time: 0.18 min)\\3.71 kW of PV\\NBT:20$\times$83.4Ah (2S-10P)\\0.817kW inverter\\LCC: US\$ 12,861.75} \\
 \hline
-\makecell{\textbf{Case Study 3}\\Demand:915W\\Peak:980W\\E:4,880Wh/day\\Autonomy:12h} & OM & IF & \makecell {SAT (166.13 min) \\NTP:4$\times$150W (4S)\\NBT:4$\times$80Ah (2S-2P)\\Controller 15A/100V DC\\Inverter 1,200W/24V \\LCC: US\$ 7,306.27} & XYZ \\
+\makecell{\textbf{Case Study 3}\\Peak:815W\\Surge:980W\\E:4,880Wh/day\\Autonomy:12h} & OM & IF & \makecell {SAT (166.13 min) \\NTP:4$\times$150W (4S)\\NBT:4$\times$80Ah (2S-2P)\\Controller 15A/100V DC\\Inverter 1,200W/24V \\LCC: US\$ 7,306.27} & Not possible \\
 \hline
-\makecell{\textbf{Case Study 4}\\Demand:253W\\Peak:722W\\E:3,600Wh/day\\Autonomy:48h} & OM & IF & \makecell {SAT (143.71 min) \\NTP:4$\times$150W (4S)\\NBT:10$\times$80Ah (2S-5P)\\Controller 15A/75V\\Inverter 750W/24V \\LCC: US\$ 7,816.31} & XYZ \\
+\makecell{\textbf{Case Study 4}\\Peak:253W\\Surge:722W\\E:3,600Wh/day\\Autonomy:48h} & OM & IF & \makecell {SAT (143.71 min) \\NTP:4$\times$150W (4S)\\NBT:10$\times$80Ah (2S-5P)\\Controller 15A/75V\\Inverter 750W/24V \\LCC: US\$ 7,816.31} & \makecell{(Time: 0.23 min)\\2.42 kW of PV\\NBT:12$\times$83.4Ah (2S-6P)\\0.254kW inverter\\LCC: US\$ 7,677.95}\\
 \hline
-\makecell{\textbf{Case Study 5}\\Demand:263W\\Peak:732W\\E:2,500Wh/day\\Autonomy:48h} & OM & IF & \makecell {SAT (134.93 min) \\NTP:1$\times$340W (1S)\\NBT:6$\times$105Ah (2S-3P)\\Controller 15A/75V\\Inverter 400W/24V \\LCC: US\$ 7,252.14} & XYZ \\
+\makecell{\textbf{Case Study 5}\\Peak:263W\\Surge:732W\\E:2,500Wh/day\\Autonomy:48h} & OM & IF & \makecell {SAT (134.93 min) \\NTP:1$\times$340W (1S)\\NBT:6$\times$105Ah (2S-3P)\\Controller 15A/75V\\Inverter 400W/24V \\LCC: US\$ 7,252.14} & \makecell{(Time: 0.18 min)\\1.59 kW of PV\\NBT:10$\times$83.4Ah (2S-5P)\\0.268kW inverter\\LCC: US\$ 6,175.57} \\
 \hline
-\makecell{\textbf{Case Study 6}\\Demand:322W\\Peak:896W\\E:4,300Wh/day\\Autonomy:48h} & OM & IF & \makecell {SAT (235.75 min) \\NTP:2$\times$200W (2S)\\NBT:10$\times$105Ah (2S-5P)\\Controller 15A/75V\\Inverter 400W/24V \\LCC: US\$ 8,287.23} & XYZ \\
+\makecell{\textbf{Case Study 6}\\Peak:322W\\Surge:896W\\E:4,300Wh/day\\Autonomy:48h} & OM & IF & \makecell {SAT (235.75 min) \\NTP:2$\times$200W (2S)\\NBT:10$\times$105Ah (2S-5P)\\Controller 15A/75V\\Inverter 400W/24V \\LCC: US\$ 8,287.23} & \makecell{(Time: 0.22 min)\\3.15 kW of PV\\NBT:14$\times$83.4Ah (2S-7P)\\0.328kW inverter\\LCC: US\$ 9,112.45} \\
 \hline
-\makecell{\textbf{Case Study 7}\\Demand:1,800W\\Peak:2,900W\\E:14,000Wh/day\\Autonomy:48h} & OM & TO & TO & XYZ \\
+\makecell{\textbf{Case Study 7}\\Peak:1,586W\\Surge:2,900W\\E:14,000Wh/day\\Autonomy:48h} & OM & TO & TO & \makecell{(Time: 0.20 min)\\12.5 kW of PV\\NBT:66$\times$83.4Ah (2S-33P)\\1.60kW inverter\\LCC: US\$ 41,878.11} \\
 \hline
 \hline
 \end{tabular}
