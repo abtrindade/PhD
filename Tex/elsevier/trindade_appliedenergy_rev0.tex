@@ -550,11 +550,11 @@ Related to off-the-shelf simulation tools only HOMER Pro and Hybrid2 perform off
 	\item HOMER Pro is available only for Microsoft Windows and its annual standard subscription costs US\$ $504.00$~\cite{HOMER};
 	\item HOMER Pro do not have the LCC cost in its reports. However, it has NPC and LCOE. Therefore NPC was used to obtain LCC in order to allow the comparative among tools;
 	\item The optimization analysis of HOMER Pro allows to define a load curve and temperature according of data collected automatically from online databases. However, in order to allow a correct comparative, the curve load and the temperature were defined exactly the same as automated synthesis tools;
-	\item Battery autonomy is not an parameter that the user can set when using HOMER Pro. The tool will always to meet the user requirement, i.e., the load curve during the 365 days of the year;
+	\item Battery autonomy is not an parameter that the user can set when using HOMER Pro. The tool will always to meet the user requirement, i.e., the load curve during the $365$ days of the year;
 	\item HOMER Pro do not have a explicit equipment called charge controller. It uses a controller resource that can perform in two different ways, according of the optimization choice or the user choice: load following or cycle charging~\cite{HOMER}. During the tests it was chosen the load following controller: it produces only enough power to meet the demand~\cite{HOMER};
 	\item It was assumed the value of 5\% of capacity shortage that is equivalent to 95\% of availability of the PV system. By definition, availability is the percentage of time at which a power system is capable of meeting the load requirements~\citep{Khatib2014}. For critical loads, 99\% is considered acceptable. While in a ordinary house electrical load, 95\% is considered acceptable;
 	\item It was assumed a string of two batteries in order to match the voltage of the system of $24$ V DC that was used for the automated synthesis tool;
-	\item The premise adopted when using HOMER Pro it was that the user does not know the optimal solution, and that in order to obtain this solution is necessary to include (at the design phase of the tool) generic PV and batteries modules that HOMER Pro will search for the optimized power of each component. With that in mind, it was included a generic flat plate PV of 1 kW and generic lead-acid batteries of 1 kW as well (and with capacity of 83.4 Ah according with HOMER Pro modeling). HOMER, during run-time, decides the size in kW of each module, based on feasibility and lower cost.
+	\item The premise adopted when using HOMER Pro it was that the user does not know the optimal solution, and that in order to obtain this solution is necessary to include (at the design phase of the tool) generic PV and batteries modules that HOMER Pro will search for the optimized power of each component. With that in mind, it was included a generic flat plate PV of $1$ kW and generic lead-acid batteries of $1$ kW as well (and with capacity of $83.4$ Ah according with HOMER Pro modeling). HOMER, during run-time, decides the size in kW of each module, based on feasibility and lower cost.
 \end{itemize}
 
 %---------------------------------------------------------------------------
@@ -615,12 +615,7 @@ Specification & Result & Result & Result & Result \\
 %---------------------------------------------------------------------------
 
 Three start-of-art verification tools, CBMC\footnote{Command-line: \$ cbmc -\phantom{}-unwind 100 filename.c -\phantom{}-trace}, ESBMC\footnote{Command-line: \$ esbmc filename.c -\phantom{}-no-bounds-check -\phantom{}-no-pointer-check -\phantom{}-unwind 100 -\phantom{}-boolector}, %UAutomizer\footnote{Command-line: \$ ./Ultimate -tc config/AutomizerReach.xml -s config/svcomp-Reach-32bit-Automizer\_Default.epf -i filename.c -\phantom{}-traceabstraction.limit.analysis.time 900 -\phantom{}-traceabstraction.stop.after.first.violation.was.found false -\phantom{}-cacsl2boogietranslator.overapproximate.operations.on.floating.types false -\phantom{}- cacsl2boogietranslator.assume.nondeterminstic.values.are.in.range false -\phantom{}-rcfgbuilder.add.additional.assume.for.each.assert true -\phantom{}-rcfgbuilder.simplify.code.blocks true -\phantom{}-rcfgbuilder.size.of.a.code.block LoopFreeBlock}, 
-and CPAchecker\footnote{Command-line: \$ scripts/cpa.sh -heap 64000m -config config/bmc-incremental.properties -spec config/specification/sv-comp-reachability.spc filename.c} were used 
-as our verification engine to compare our approach effectiveness 
-and efficiency. Note that ``incremental'' ESBMC with the SMT solver 
-Z3 was tried\footnote{Command-line: \$ esbmc filename.c -\phantom{}-no-bounds-check -\phantom{}-no-pointer-check -\phantom{}-unwind 100 -\phantom{}-smt-during-symex -\phantom{}-smt-symex-guard -\phantom{}-z3} 
-as an alternative to use less computing memory. 
-The Simulation tool HOMER Pro version $3.13.1$ was used for comparative purpose.
+and CPAchecker\footnote{Command-line: \$ scripts/cpa.sh -heap 64000m -config config/bmc-incremental.properties -spec config/specification/sv-comp-reachability.spc filename.c} were used as our verification engine to compare our approach effectiveness and efficiency. Note that ``incremental'' ESBMC with the SMT solver Z3 was tried\footnote{Command-line: \$ esbmc filename.c -\phantom{}-no-bounds-check -\phantom{}-no-pointer-check -\phantom{}-unwind 100 -\phantom{}-smt-during-symex -\phantom{}-smt-symex-guard -\phantom{}-z3} as an alternative to use less computing memory. The Simulation tool HOMER Pro version $3.13.1$ was used for comparative purpose.
 
 %---------------------------------------------------------------------------
 \subsection{Setup} 
@@ -651,80 +646,37 @@ Our evaluation aims to answer two experimental questions:
 \subsection{Results}  
 %---------------------------------------------------------------------------
 
-CPAchecker was able to synthesize the optimal sizing in 
-six out of seven case studies: the result was produced 
-within the time limit, which varied from $134.71$ to 
-$235.75$ minutes. Only case study $7$ led to a \textit{timeout} 
-result, i.e., it was not solved within $240$ minutes.
-\textcolor{red}{if we allow CPAchecker to run without time limits, what would be the synthesis time for case study 7?}
+CPAchecker was able to synthesize the optimal sizing in six out of seven case studies: the result was produced within the time limit, which varied from $134.71$ to $235.75$ minutes. Only case study $7$ led to a \textit{timeout} result, i.e., it was not solved within $240$ minutes. \textcolor{red}{Removing timeout limitation from CPAchecker, the verifier was able to solve the optimization in minutes}. The violation (SAT result) indicated in Table~\ref{tab1} is the $assert$ of line $22$ from Algorithm~\ref{alg:verification-algorithm}. %The results were tested by manual PV sizing and were sound (\textit{RQ1}). %, linking a feasible technical solution with the lowest cost possible, considering the equipment that were inputted to the code. 
 
-The violation (SAT result) indicated in Table~\ref{tab1} 
-is the $assert$ of line $22$ from Algorithm~\ref{alg:verification-algorithm}. %The results were tested by manual PV sizing and were sound (\textit{RQ1}). %, linking a feasible technical solution with the lowest cost possible, considering the equipment that were inputted to the code. 
+CBMC and ESBMC were unable to produce any conclusive result. Situations of \textit{internal failure}, \textit{timeout}, or \textit{out of memory} occurred; this partially answers the \textit{EQ2}. Note that the internal failure presented by ESBMC was a Z3 solver issue (a bug), and this will demand an updated version of ESBMC. \textcolor{red}{Removing the timeout from ESBMC with Boolector solver, the verifier was able to obtain the automated synthesis in $73.18$ hours for the case $2$ for example}.
 
-CBMC and ESBMC were unable to produce any conclusive result. 
-Situations of \textit{internal failure}, \textit{timeout}, 
-or \textit{out of memory} occurred; this partially answers 
-the \textit{EQ2}. Note tha the internal failure presented 
-by ESBMC was a Z3 solver issue (a bug), and this will demand 
-an updated version of ESBMC.
+Related to HOMER Pro, it was able to evaluate six case studies, and within a time shorter than $30$ seconds, which was much faster than our automated synthesis tool (cf.~\textit{EQ2}). Case study $3$ was not possible to be simulated since HOMER Pro does not have the feature of adjust the battery autonomy, i.e., the tool always tries to feed with electricity the load during $365$ days/year. We have also noted others HOMER Pro drawbacks:
 
-Related to HOMER Pro, it was able to evaluate six case studies, 
-and within a time shorter than $30$ seconds, which was much faster 
-than our automated synthesis tool (cf.~\textit{EQ2}). 
-Case study $3$ was not possible to be simulated since 
-HOMER Pro does not have the feature of adjust the battery autonomy, i.e., 
-the tool always tries to feed with electricity the load during $365$ days/year. 
-We have also noted others HOMER Pro drawbacks:
 \begin{itemize}
-\item There exists no explicit charge controller as a system equipment. 
-HOMER Pro includes automatically a controller just to simulate the 
-charge/discharge of batteries and to meet the load requirement; 
-however, without costs or even with electrical characteristics 
-as maximum current and voltage, which are common during PV sizing;
-\item HOME Pro demands to include some battery specification 
-to initiate the optimization; however, it does not change the 
-electrical specifications during the simulation; and the result 
-are multiples of the original battery type suggested by the user. 
-As example, it was started with a $83.4$ Ah lead-acid battery 
-and during the simulation, HOMER Pro did not try to use 
-other capacities or types;
-\item HOMER Pro does not present the optimal solution 
-in terms of arrays connections of PV panels, just the total 
-in terms of power, i.e., it does not present models and 
-the power of each PV panel, neither the total of panels in series or parallel. 
+\item There exists no explicit charge controller as a system equipment. HOMER Pro includes automatically a controller just to simulate the charge/discharge of batteries and to meet the load requirement; however, without costs or even with electrical characteristics as maximum current and voltage, which are common during PV sizing;
+\item HOME Pro demands to include some battery specification to initiate the optimization; however, it does not change the electrical specifications during the simulation; and the result are multiples of the original battery type suggested by the user. As example, it was started with a $83.4$ Ah lead-acid battery and during the simulation, HOMER Pro did not try to use other capacities or types;
+\item HOMER Pro does not present the optimal solution in terms of arrays connections of PV panels, just the total in terms of power, i.e., it does not present models and the power of each PV panel, neither the total of panels in series or parallel. 
 \end{itemize}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Comparison between Formal Synthsis and HOME Pro}
+\subsection{Comparison between Formal Synthesis and HOME Pro}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-Comparing the results between the formal synthesis 
-with CPAchecker and HOMER Pro, we observed that 
-most results were quite similar, in terms of technical 
-solution and cost, except for case studies $2$ and $7$. 
-In case study $2$, the costs presented by HOMER Pro were 
-$54$\% higher than the automated synthesis tool, probably 
-because the operation and maintenance costs assumed by our 
-automated synthesis tool were underestimated to that specific load. 
+Comparing the results between the formal synthesis with CPAchecker and HOMER Pro, we observed that most results were quite similar, in terms of technical solution and cost (Table~\ref{tab1}). 
 
-In general, the size of the PV panels were bigger 
-in HOMER Pro than with our formal synthesis approach, and that 
-discrepancy is not easy to address without some real systems. 
-Even considering that PVs and inverters were kept at the same cost 
-in both methodologies (simulation and formal synthesis), 
-HOMER Pro have more parameters to be set and a different 
-mathematical model adopted. Just to compare the results with 
-the real-world, the authors had four PV systems deployed and 
-monitored since June $2019$ in a riverside community at the 
-Amazonas State in Brazil, with similar demand presented 
-by case studies $1$, $4$, $5$, and $6$, always with a $3$$\times$$325$ W ($3$S) 
-panels and $4$$\times$$220$ Ah ($2$S-$2$P) lead-acid batteries. 
-Thse solutions are more close to the result presented by 
-our formal synthesis approach than HOMER Pro, and that partially 
-answers \textit{RQ1}.
+Particularly related to LCC, the cost was very close in cases $1$, $4$, $5$ and $6$, with difference varying from 0.23\% to 17.4\%. Even adopting same price per kW to the PV panels, inverters, and batteries, HOMER Pro do not use costs related to charge controllers that were included at CPAchecker modelling. The premise used in CPAchecker to adopt a fixed annual cost for operation and maintenance can produce some impact as well at this discrepancy, however it is not significant.
 
-\textcolor{red}{In general, I don't think we have strong results here. Could you please provide a concrete example of the results provided by both tools and then show that our approach gives a more complete solution of the PV design?}
+However, there was a huge divergence in case study $2$, where the costs presented by HOMER Pro were 54\% higher than the automated synthesis tool, probably because the operation and maintenance costs assumed by our automated synthesis tool were underestimated to that specific load. 
 
+In general, the size of the PV panels and battery bank were bigger in HOMER Pro than with our formal synthesis approach, and that discrepancy is not easy to address without some real systems validation. The mathematical models are different and particular parameters can be tuned as well in each approach, and that can justify the difference that was present in all the cases. As comparative, lets take case $1$: the optimal solution provided by HOMER Pro demands $7$ $\times$ more PV panels that the solution presented by CPAchecker, and do not shows the arrangement of arrays (number of series and parallel PV panels); the battery bank presented by HOMER Pro provides $500.4$ Ah of capacity ($6 \times 83.4$), while CPAchecker presented a optimal solution with $420$ Ah of total capacity ($4 \times 105$). Just to compare the results obtained from the optimization with the real-world, the authors had four PV systems deployed and monitored since June $2019$ in a riverside community at the Amazonas State in Brazil, with similar demand presented by case studies $1$, $4$, $5$, and $6$, always with a $3$ $\times$ $325$ W ($3$S) panels and $4$ $\times$ $220$ Ah ($2$S-$2$P $= 440$ Ah) lead-acid batteries. These solutions are more close to the result presented by our formal synthesis approach than HOMER Pro, showing that our solution is sound \textit{RQ1}.
+
+Related to the inverters, HOMER Pro suggests a value in kW very close to the peak of every case, and it is just a reference value and not a commercial value of inverter. CPAchecker, in other hand, presents inverters that are commercial and can be found off-the-shelf. Therefore is a PRO to the formal synthesis method.
+
+Concerning to charge controllers, as told in previous section, HOMER Pro do not include it as an explicit equipment at its model, only CPAchecker presents a commercial controller and includes it during the cost analysis. Therefore, the formal synthesis method presents more reliable results.
+
+Case $7$ was not solved by CPAchecker within the limit of time established during the experimental phase. And case $3$ was not possible to simulate in HOMER Pro, by its restriction to not allow to set battery autonomy. Resting both without parameters to comparative.
+
+Summarizing, CPAchecker is capable to present a solution that is far detailed and close to the commercial reality than the solution presented by HOMER Pro. Our automated synthesis method can show all the details of every component of a PV system solution, with complete electrical details from data sheet of manufacturers, like the model of the component, nominal current and voltage. By the way, even the name of the manufacturer can be presented (at Table~\ref{tab1} it was removed to avoid some advertising).
 %used with the SMT incremental mode\footnote{Command-line: \$ esbmc filename.c -\phantom{}-no-bounds-check -\phantom{}-no-pointer-check -\phantom{}-unwind 100 -\phantom{}-smt-during-symex -\phantom{}-smt-symex-guard -\phantom{}-z3} enabled with the goal of reducing memory usage; we have also used the SMT solver Z3 version 4.7.1~\cite{DeMoura}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
