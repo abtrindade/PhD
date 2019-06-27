@@ -664,7 +664,7 @@ by ESBMC was a Z3 solver issue (a bug); this will demand
 an updated version of ESBMC to fix this issue. Similarly to CPAchecker, 
 if we remove the timeout from ESBMC with the SMT solver Boolector, 
 then the verifier is able to obtain the automated synthesis 
-in $73.18$ hours for the case study $2$. \textcolor{red}{Similarly, if the timeout of CBMC is removed, the time to obtain the optimal solution to case $2$ with this verifier is of $XX$ hours.}
+in $73.18$ hours for the case study $2$. \textcolor{red}{CBMC, in the other hand, only could present some result if the RAM memory of the system was bigger to avoid the memory out issue.}
 
 Related to HOMER Pro, it was able to evaluate six case studies, 
 and within a time shorter than $30$ seconds, which was much 
@@ -710,7 +710,7 @@ related to charge controllers, which were introduced into the
 CPAchecker modeling. The premise used in CPAchecker to adopt 
 a fixed annual cost for operation and maintenance can produce 
 some impact as well at this discrepancy; however, it is not significant
-since \textcolor{red}{the annual cost considered is too small when compared to the resulting LCC value.}.
+since \textcolor{red}{the annual cost considered is too small when compared to the resulting LCC value.}
 
 However, there exists a huge divergence in case study $2$, 
 where the costs presented by HOMER Pro were $54$\% higher 
