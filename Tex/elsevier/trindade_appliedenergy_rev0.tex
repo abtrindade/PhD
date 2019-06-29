@@ -85,7 +85,7 @@ Cyber-Physical Systems (CPS) are engineered systems, which are built from, and d
 
 While some research efforts do exist to enhance and optimize the software development processes for CPS, further investigation and discussion of better and more effective models are still needed in practice~\cite{Al-Jaroodi2016}. Among the opportunities for enhancements in the software development processes for CPS, there exists the need for developing new techniques and tools to support CPS requirements gathering and analysis with the goal of synthesizing \textit{correct-by-construction} implementations of CPS. These techniques need to deal with predefined requirements enforced by the nature and inherited constraints of the target CPS. In addition, they should be able to provide verification and validation mechanisms for completeness, correctness, and consistency~\cite{Al-Jaroodi2016}. Uncertainty and variability, at the same time, can be dealt with formal verification~\cite{NESSI}. Energy production, distribution, and optimization are all CPS problems~\cite{UC}. 
 
-Lack of access to clean and affordable energy is considered a core dimension of poverty~\cite{Hussein2012}. Progress has been made worldwide; in particular, the number of people without electricity access fell below $1$ billion threshold for the first time in 2017~\cite{IEAweo2018}. In order to provide universal electricity for all, decentralized systems led by solar photovoltaic (PV) in off-grid and mini-grid systems will be the lowest-cost solution for three-quarters of the additional connections needed~\cite{Hussein2012}; specifically grid extension will be the standard in urban areas~\cite{IEAweo2018}.
+Lack of access to clean and affordable energy is considered a core dimension of poverty~\cite{Hussein2012}. Progress has been made worldwide; in particular, the number of people without electricity access fell below $1$ billion threshold for the first time in $2017$~\cite{IEAweo2018}. In order to provide universal electricity for all, decentralized systems led by solar photovoltaic (PV) in off-grid and mini-grid systems will be the lowest-cost solution for three-quarters of the additional connections needed~\cite{Hussein2012}; specifically grid extension will be the standard in urban areas~\cite{IEAweo2018}.
 
 In order to simulate or evaluate a PV system, there exist various specialized tools, e.g., RETScreen, HOMER, PVWatts, SAM and  Hybrid2~\cite{Pradhan,Swarnkar,NRELDobos,NRELBlair,Mills}; and even general purpose simulation tools, e.g.,  PSpice~\cite{Gow1999}, or MATLAB/Simulink package~\cite{Benatiallah2017}. However, these tools are based on simulation; they have the drawback of an incomplete coverage  since verification of all possible combinations and potential failures of a system is unfeasible~\cite{ClarkeHV18}. 
 
@@ -305,7 +305,7 @@ Regarding batteries, we must first define the total capacity of the battery bank
 C_{bank} = \dfrac{E_{corrected} \times autonomy}{V_{system} \times DOD},
 \end{equation}
 
-\noindent where the variable $autonomy$ is a design definition; % and normally has a value ranging from $6$ to $48$h; 
+\noindent where the variable $autonomy$ is a design definition and normally has a value ranging from $6$ to $48$h; 
 $ V_{system} $ is the DC voltage of the bus, and $ DOD $ is the battery deep of discharge (considered of maximum of 25\% here).
 %
 Secondly, the total (minimum) number of batteries is computed as 
@@ -380,7 +380,7 @@ LOLP is the probability for the case when a load demand exceeds the generation p
 
 Related to economic analysis, there exist various methods available. The main objective is to determine whether the project has an acceptable investment; the usual way is to perform economic analysis after reliability analysis with the goal of proposing a system with high reliability and lowest cost~\cite{Alsadi2018}. The common methods include: Net Present Cost (NPC)~\cite{Park2004}, the Levelized Cost of Energy (LCOE)~\cite{Zhou2010}, or the Life Cycle Cost (LCC)~\cite{Applasamy2011}.
 
-The NPC is the present value of all the costs over the project lifetime, minus the present value of all the revenues that it earns over the project lifetime. The net present worth is found by discounting all cash inflows and outflows, including cost of installation, replacement and maintenance of the PV system, at an internal rate of return (IRR)~\cite{Park2004}.  IRR is used to evaluate the attractiveness of a project or investment.
+The NPC is the present value of all the costs over the project lifetime, minus the present value of all the revenues that it earns over the project lifetime. The net present worth is found by discounting all cash inflows and outflows, including cost of installation, replacement and maintenance of the PV system, at an internal rate of return (IRR)~\cite{Park2004}. IRR is used to evaluate the attractiveness of a project or investment.
 
 LCOE is defined as the average cost per kWh of useful electrical energy produced by the PV system when a lifetime, investment cost, replacement, operation and maintenance, and capital cost are considered~\cite{Kamel2005}. LCOE method is useful in comparing different generation technologies with different operating characteristics~\cite{Zhou2010}.
 
@@ -533,7 +533,7 @@ Regarding financial analysis:
 	\item LCC lifetime considered: $20$ years;
 	\item Installation costs: includes delivery in the isolated community and installation costs itself, $5$\% of total cost~\cite{Agrener2013};
 	\item Value of the discount rate or interest rate: $10$\%, which is a good rate considering financial investments in developing countries;
-	\item Operation and maintenance annual costs: based on past PV projects of similar size in the Amazon region of Brazil, will be adopted the value of US\$ 289.64~\citep{Agrener2013}. This cost includes the battery replacement based on its lifetime ($4$ years for lead-acid batteries), plus inverters and controller replacement (every 10 years). Therefore, it will be performed three battery bank and one inverter-controller replacements during the LCC analysis.
+	\item Operation and maintenance annual costs: based on past PV projects of similar size in the Amazon region of Brazil, will be adopted the value of US\$ 289.64~\citep{Agrener2013}. This cost includes the battery replacement based on its lifetime ($4$ years for lead-acid batteries), plus inverters and controller replacement (every $10$ years). Therefore, it will be performed three battery bank and one inverter-controller replacements during the LCC analysis.
 \end{itemize}
 
 On the subject of PV system optimization technique, we will adopt here the intuitive method 
@@ -542,7 +542,7 @@ without considering the battery's state of charge, or even the random nature
 of solar irradiation and meteorological conditions. Therefore, all the computational 
 effort will be concentrated in our automated synthesis algorithm.
 
-Regarding all case studies, it was defined that the minimum state of charge of batteries is $75$\% (with DOD maximum of 25\%, which is common to lead-acid batteries), the voltage of the system is set in $24$ V DC (the most common as well, but the value can be adjusted to $12$ or $48$ V at the code), and the AC voltage from the inverter is $127$ V (Brazilian standard).
+Regarding all case studies, it was defined that the minimum state of charge of batteries is $75$\% (with DOD maximum of $25$\%, which is common to lead-acid batteries), the voltage of the system is set in $24$ V DC (the most common as well, but the value can be adjusted to $12$ or $48$ V at the code), and the AC voltage from the inverter is $127$ V (Brazilian standard).
 
 Related to off-the-shelf simulation tools only HOMER Pro and Hybrid2 perform off-grid system with battery backup analysis. Additionally, HOMER and RETScreen include economical analysis or even optimization-sensitive analysis. Therefore, in this study, HOMER Pro will be the simulation tool used to compare with our automated synthesis method.  Related to HOMER Pro:
 
@@ -652,7 +652,7 @@ the time limit, which varied from $134.71$ to $235.75$ minutes.
 Only case study $7$ led to a \textit{timeout} result, i.e., 
 it was not solved within $240$ minutes. However, if we remove 
 this timeout limitation from CPAchecker, the verifier is 
-able to solve the optimization in \textcolor{red}{$XXXX$} minutes. 
+able to solve the optimization in $44.97$ hours. 
 The violation (SAT result) indicated in Table~\ref{tab1} 
 is the $assert$ of line $22$ from Algorithm~\ref{alg:verification-algorithm}. %The results were tested by manual PV sizing and were sound (\textit{RQ1}). %, linking a feasible technical solution with the lowest cost possible, considering the equipment that were inputted to the code. 
 
@@ -664,7 +664,7 @@ by ESBMC was a Z3 solver issue (a bug); this will demand
 an updated version of ESBMC to fix this issue. Similarly to CPAchecker, 
 if we remove the timeout from ESBMC with the SMT solver Boolector, 
 then the verifier is able to obtain the automated synthesis 
-in $73.18$ hours for the case study $2$. \textcolor{red}{CBMC, in the other hand, only could present some result if the RAM memory of the system was bigger to avoid the memory out issue.}
+in $73.18$ hours for the case study $2$. CBMC, in the other hand, only could present some result if the RAM memory of the system was bigger to avoid the memory out issue.
 
 Related to HOMER Pro, it was able to evaluate six case studies, 
 and within a time shorter than $30$ seconds, which was much 
@@ -710,7 +710,7 @@ related to charge controllers, which were introduced into the
 CPAchecker modeling. The premise used in CPAchecker to adopt 
 a fixed annual cost for operation and maintenance can produce 
 some impact as well at this discrepancy; however, it is not significant
-since \textcolor{red}{the annual cost considered is too small when compared to the resulting LCC value.}
+since this annual cost is too small when compared to the resulting LCC value.
 
 However, there exists a huge divergence in case study $2$, 
 where the costs presented by HOMER Pro were $54$\% higher 
@@ -736,7 +736,7 @@ presented an optimal solution with $420$ Ah of total capacity
 
 Just to compare the results obtained from the optimization 
 with the real-world, the authors had four PV systems deployed 
-and monitored since June $2019$ in a riverside community 
+and monitored since June $2018$ in a riverside community 
 in the Amazonas State in Brazil, with similar demands 
 presented by case studies $1$, $4$, $5$, and $6$, 
 always with a $3$ $\times$ $325$ W ($3$S) panels and 
@@ -755,7 +755,7 @@ off-the-shelf. Therefore is a PRO to the formal synthesis method.
 
 Concerning to charge controllers, as we reported in 
 the previous section, HOMER Pro does not include it 
-as an explicit equipment in its mathmetical model, 
+as an explicit equipment in its mathematical model, 
 only our synthesis tool presents a commercial controller 
 and includes it during the cost analysis. Therefore, 
 the formal synthesis method presents more reliable results than
@@ -787,13 +787,13 @@ to avoid some advertising).
 We have reported a favorable assessment of our formal synthesis method. 
 Nevertheless, we have also identified three threats to the validity 
 of our experimental results, which can be further assessed and 
-constitute future work: (1) improvement of the power reliability 
+constitute future work: ($1$) improvement of the power reliability 
 analysis: to include loss of load probability or loss of power 
 supply probability, which can make the analysis more accurate; 
-(2) the cost analysis is well tailored to the Amazon region of Brazil; 
+($2$) the cost analysis is well tailored to the Amazon region of Brazil; 
 however, a broad analysis from other isolated areas must be 
 performed in order to make the optimization general in terms 
-of applicability; (3) to deploy at the field some PV systems 
+of applicability; ($3$) to deploy at the field some PV systems 
 sized using our synthesized results in order to validate it.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -825,7 +825,7 @@ riverside communities in the Amazonas state (Brazil), and to
 validate some cases with deployed PV systems in isolated communities.
 
 \section*{Acknowledgments}
-The authors would like to thank: (i) Newton Fund [grant number 261881580] for the research mobility support; (ii) FAPEAM - Amazonas State Foundation for Research Support [PROTI-Pesquisa 2018], for the DCTIEX II scholarship (NOV-2018), and for support the research mobility to UK; (iii) FAS - Sustainable Amazonas Foundation for the PhD scholarship (NOV-2017 to MAR-2019); and (iv) University of Sheffield's Research England QR GCRF Institutional Allocation for the HOMER Pro license.
+The authors would like to thank: (i) Newton Fund [grant number $261881580$] for the research mobility support; (ii) FAPEAM - Amazonas State Foundation for Research Support [PROTI-Pesquisa $2018$], for the DCTIEX II scholarship (NOV-$2018$), and for support the research mobility to UK; (iii) FAS - Sustainable Amazonas Foundation for the PhD scholarship (NOV-$2017$ to MAR-$2019$); and (iv) University of Sheffield's Research England QR GCRF Institutional Allocation for the HOMER Pro license.
 
 %
 % argument is your BibTeX string definitions and bibliography database(s)
