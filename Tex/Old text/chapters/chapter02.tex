@@ -3,7 +3,7 @@ chapter02 text here
 
 ////////////////// Begin old stuff
 
-\subsection{Solar Photovoltaic System }
+\section{Solar Photovoltaic System }
 According to \cite{Roy}, a PV system is designed to give the electric supply to a load. This load can be either Alternate Current (AC) type or Direct Current (DC) type. Electric supply can be needed either in daytime or evening time (in particular cases, in both times). The most basic PV system can give supply only in daytime.  For night hours or rainy days, one needed to have batteries, where power can be stored and used \cite{Gules}. 
 
 PV systems are broadly classified into three distinct types, as described by \cite{Mohanty}: 
@@ -18,7 +18,7 @@ Specifically concerning isolated communities, depending on the type of load, cos
  
 There is a resource, called maximum power point tracking (MPPT), which is an electronic control mechanism that maintains the PV operating in a voltage that correspond to the voltage of maximum power, which maximizes the transfer of power and avoiding lost at the PV cells \cite{Pinho}. That resource is found at modern PV systems and is strongly indicated due to its advantages.
 
-\subsubsection{Unregulated standalone PV system with DC load }
+\subsection{Unregulated standalone PV system with DC load }
 Usually this type of system is for low power applications, as defined by \cite{Roy}. The PV system is directly connected to the load without any MPPT controller, as shown at Fig.\ref{fig:unregSPV}. At night hours, the system will not provide any supply because of the absence of the battery. 
  
 \begin{figure}[h]
@@ -28,7 +28,7 @@ Usually this type of system is for low power applications, as defined by \cite{R
 \label{fig:unregSPV}
 \end{figure}
 
-\subsubsection{Regulated standalone PV system with DC load}
+\subsection{Regulated standalone PV system with DC load}
 It is similar to unregulated standalone system with DC load, but the main difference between this and the previous one is that this system requires a MPPT technique, as illustrated by Fig.\ref{fig:regSPV1}. Usually system with MPPT should have battery; otherwise, extra power will be waste.
 
 \begin{figure}[h]
@@ -38,7 +38,7 @@ It is similar to unregulated standalone system with DC load, but the main differ
 \label{fig:regSPV1}
 \end{figure}
 
-\subsubsection{Regulated standalone system with battery and DC load}
+\subsection{Regulated standalone system with battery and DC load}
 Configuration with PV array, battery, MPPT and DC load, as shown in Fig.\ref{fig:regSPV2}. Battery is used to store the extra power of PV system. A charge controller is necessary for this type of system because the useful life of the battery is less than that of the PV module. Extra charging and deep discharging can reduce the battery life \cite{Kim}. 
 
 \begin{figure}[h]
@@ -50,7 +50,7 @@ Configuration with PV array, battery, MPPT and DC load, as shown in Fig.\ref{fig
 
 According to \cite{Pinho}, PV systems that are used to feed loads with low variation on the consumption can be sized to operate without the controller. That is called of self-regulated standalone PV system with battery. However, the voltage from the PV panel must be compatible with the batteries voltage. Normally, the bank of batteries are oversized related to the PV panel and to the load. The drawback is the operation of the batteries, normally overloaded or with excessive discharges (that can damage the batteries).
 
-\subsubsection{Regulated standalone system with battery, AC load}
+\subsection{Regulated standalone system with battery, AC load}
 This system is similar to the previous one, but here AC load draws the power from PV system and, because of the AC load, an inverter (DC to AC converter) is required, as seen in Fig.\ref{fig:regSPV3}. This solution has an increase of cost because has more equipments. However, the AC availability brings the advantage of a higher number of AC appliances to use at the houses or consumer units. That configuration is the focus of the present thesis since it is the most common nowadays all over the world, when off-grid or isolated regions is the target. \textcolor{red} { Alternative??? Specifically for remote rural areas of developing countries or places where the grid extension is not feasible,}
 %stand-alone systems are one the most used solutions, and 
 % depending on the type of load, cost, resources availability, and requirements of the load, 
@@ -753,76 +753,6 @@ V_{out}AC = V_{AC}
 \end{equation}
 
 
-\subsection{Automated Verification }
-It is necessary to keep in mind that validation is the process of determining whether a design meets the needs of the user, whereas verification is the process of determining whether a design meets a set of requirements, specifications, and regulations.  
-
-If the requirements, specifications, and regulations are given in a formal language, then it may be possible to automate verification, resulting in a process known as formal verification. Verification may form part of a validation process, but in general, validation cannot be formalized because it relates a system design to intent.  
-
-Simulation may also be used for validation, but it is more problematic for verification. In order to use simulation for verification, it is necessary to ensure adequate coverage of operating conditions, scenarios, and system inputs. 
-
-Testing can also be used for validation, but for the same reasons, it too is problematic for verification.
- 
-According \cite{Clarke2008}, verification procedure is an intelligent exhaustive search of the state space of the design. In addition, according to \cite{Forejt2011}, formal verification is a systematic approach that applies mathematical reasoning to obtain guarantees about the correctness of a system. One successful method in this domain is model checking.
-  
-Model checking is an automatic verification technique, as defined by \cite{Clarke2008}. Model checking was originally developed reasoned about finite state of concurrent systems, nowadays is mainly used to hardware and software verification, but can be applied to any kind of system. 
-
-The process of model checking can be divided in three components: modeling, specification, and verification method. 
-
-\begin{itemize}
-\item In modeling, a model (normally mathematical) of the system is created; 
-\item In specification, normally a list of properties to be satisfied by the system is stablished, i.e., the requirements, as reliability to performance for example. \item Normally is expressed in temporal logic form ($CTL$); 
-\item The model checking is the verification method itself. 
-\end{itemize}
-
-The model checking algorithm can be described as:  
-
-\begin{itemize}
-\item Given the model $ 'M' $ and a $CTL$ formula $ \phi $ as input;  
-\item Model checking algorithm provides all the states of model $ M $ which satisfies $ \phi $;  
-\item It returns $YES$ if $ \phi $ is $TRUE$, or returns $NO$ if $ \phi $ is $FALSE$.  
-
-\end{itemize}
-Specifically at the $FALSE$ situation, the algorithm returns a counterexample that is useful as diagnostic of the system, in order to discover in which situation the model is violated. \cite{Clarke2008} consider that the most important advantage of the use of model checking.  
- 
-Among the other advantages can be listed: there is no need of proofs (the algorithm is not a deductive procedure), there is no problem with partial specifications of the system, logics can easily express many concurrency properties, is fast (compared to other rigorous methods such as interactive theorem proving). However, there is a main disadvantage of model checking: the state explosion problem. 
-
-The model checking problem can be defined as shown in \cite{Clarke2008}: 
-
-\begin{itemize}
-\item Let $M$ be a Kripke structure (i.e., state transition graph);
-\item $f$ be the specification in temporal logic (a formula);
-\item Find all states $s$ of $M$ such that $M , s \models f$
-\end{itemize}
-
-Fig. \ref{fig:modelcheckstruc} shows the structure of a typical model checking system. A preprocessor extracts a state transition graph from a system (program or circuit).
-
-\begin{figure}[h]
-\includegraphics[width=0.8\textwidth]{modelcheckstruc}
-\centering
-\caption{Model Checker structure (Source: \cite{Clarke2008})}
-\label{fig:modelcheckstruc}
-\end{figure}
-
-Here it is worth to mention that the term "model" is not the meaning taken from the dictionary. The problem is not dealing with an abstraction of the actual system under study. 
-
-The Fig. \ref{fig:systemverif} shows the process to convert a real system to a model in order to be verified by a model checking. 
-
-\begin{figure}[h]
-\includegraphics[width=0.8\textwidth]{systemverif}
-\centering
-\caption{From real system verification to model checking (adapted from \cite{Clarke2008})}
-\label{fig:systemverif}
-\end{figure}
-
-In order to solve the problem of state explosion, many different techniques were developed at the last decades. One of the promising is the Bounded Model Checking (BMC). 
-
-BMC is a method that checks the model up to a given path in the path length. BMC algorithms traverses a finite state machine for a fixed number of steps, , and checks whether violation occurs with this bound. It uses fast SAT solvers, where SAT means satisfiability. SAT problem, as defined by \cite{Clarke2008}, is a problem of determining if there are certain conditions or interpretation that satisfy a given Boolean expression. SAT solvers are used in BMC, such that if there are some Boolean function, the solver would search the model for conditions (value of variables) that would make the formula $TRUE$. If SAT Solver find a substitution for the formula/function then the substitute induces a counterexample.  
-
-CBMC is considering the best-known model verification tool to validate code in ANSI-C and C++, as can be seen in \cite{Kroening}. 
-
-ESBMC is a context-bounded model checker for embedded C/C++ software based on Satisfiability Modulo Theories (SMT) solver, which can use CBMC as front-end.  
-The use of SMT, instead of Boolean Satisfiability SAT from the original BMC, comes as an alternative to overcome limitations of the systems modeling, especially considering that the complexity of these is increasing and the SMT method has high level and richer theories than the SAT to represent the models. 
-
 ///////begin-verification 
 \subsection{Sizing and Simulation of Stand-alone Solar PV systems}
 The sizing and validation of a PV system can be done by hand or with the aid of tools. Here we reference the critical period~\cite{Pinho} as an effective method to stand-alone PV sizing.
@@ -1496,6 +1426,79 @@ The system availability definition depends on how critical the load application 
 \section{Automated Verification Using Model Checking}
 \label{sec:AutomatedVerification}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+/////////////
+%\section{Automated Verification }
+It is necessary to keep in mind that validation is the process of determining whether a design meets the needs of the user, whereas verification is the process of determining whether a design meets a set of requirements, specifications, and regulations.  
+
+If the requirements, specifications, and regulations are given in a formal language, then it may be possible to automate verification, resulting in a process known as formal verification. Verification may form part of a validation process, but in general, validation cannot be formalized because it relates a system design to intent.  
+
+Simulation may also be used for validation, but it is more problematic for verification. In order to use simulation for verification, it is necessary to ensure adequate coverage of operating conditions, scenarios, and system inputs. 
+
+Testing can also be used for validation, but for the same reasons, it too is problematic for verification.
+ 
+According \cite{Clarke2008}, verification procedure is an intelligent exhaustive search of the state space of the design. In addition, according to \cite{Forejt2011}, formal verification is a systematic approach that applies mathematical reasoning to obtain guarantees about the correctness of a system. One successful method in this domain is model checking.
+  
+Model checking is an automatic verification technique, as defined by \cite{Clarke2008}. Model checking was originally developed reasoned about finite state of concurrent systems, nowadays is mainly used to hardware and software verification, but can be applied to any kind of system. 
+
+The process of model checking can be divided in three components: modeling, specification, and verification method. 
+
+\begin{itemize}
+\item In modeling, a model (normally mathematical) of the system is created; 
+\item In specification, normally a list of properties to be satisfied by the system is stablished, i.e., the requirements, as reliability to performance for example. \item Normally is expressed in temporal logic form ($CTL$); 
+\item The model checking is the verification method itself. 
+\end{itemize}
+
+The model checking algorithm can be described as:  
+
+\begin{itemize}
+\item Given the model $ 'M' $ and a $CTL$ formula $ \phi $ as input;  
+\item Model checking algorithm provides all the states of model $ M $ which satisfies $ \phi $;  
+\item It returns $YES$ if $ \phi $ is $TRUE$, or returns $NO$ if $ \phi $ is $FALSE$.  
+
+\end{itemize}
+Specifically at the $FALSE$ situation, the algorithm returns a counterexample that is useful as diagnostic of the system, in order to discover in which situation the model is violated. \cite{Clarke2008} consider that the most important advantage of the use of model checking.  
+ 
+Among the other advantages can be listed: there is no need of proofs (the algorithm is not a deductive procedure), there is no problem with partial specifications of the system, logics can easily express many concurrency properties, is fast (compared to other rigorous methods such as interactive theorem proving). However, there is a main disadvantage of model checking: the state explosion problem. 
+
+The model checking problem can be defined as shown in \cite{Clarke2008}: 
+
+\begin{itemize}
+\item Let $M$ be a Kripke structure (i.e., state transition graph);
+\item $f$ be the specification in temporal logic (a formula);
+\item Find all states $s$ of $M$ such that $M , s \models f$
+\end{itemize}
+
+Fig. \ref{fig:modelcheckstruc} shows the structure of a typical model checking system. A preprocessor extracts a state transition graph from a system (program or circuit).
+
+\begin{figure}[h]
+\includegraphics[width=0.8\textwidth]{modelcheckstruc}
+\centering
+\caption{Model Checker structure (Source: \cite{Clarke2008})}
+\label{fig:modelcheckstruc}
+\end{figure}
+
+Here it is worth to mention that the term "model" is not the meaning taken from the dictionary. The problem is not dealing with an abstraction of the actual system under study. 
+
+The Fig. \ref{fig:systemverif} shows the process to convert a real system to a model in order to be verified by a model checking. 
+
+\begin{figure}[h]
+\includegraphics[width=0.8\textwidth]{systemverif}
+\centering
+\caption{From real system verification to model checking (adapted from \cite{Clarke2008})}
+\label{fig:systemverif}
+\end{figure}
+
+In order to solve the problem of state explosion, many different techniques were developed at the last decades. One of the promising is the Bounded Model Checking (BMC). 
+
+BMC is a method that checks the model up to a given path in the path length. BMC algorithms traverses a finite state machine for a fixed number of steps, , and checks whether violation occurs with this bound. It uses fast SAT solvers, where SAT means satisfiability. SAT problem, as defined by \cite{Clarke2008}, is a problem of determining if there are certain conditions or interpretation that satisfy a given Boolean expression. SAT solvers are used in BMC, such that if there are some Boolean function, the solver would search the model for conditions (value of variables) that would make the formula $TRUE$. If SAT Solver find a substitution for the formula/function then the substitute induces a counterexample.  
+
+CBMC is considering the best-known model verification tool to validate code in ANSI-C and C++, as can be seen in \cite{Kroening}. 
+
+ESBMC is a context-bounded model checker for embedded C/C++ software based on Satisfiability Modulo Theories (SMT) solver, which can use CBMC as front-end.  
+The use of SMT, instead of Boolean Satisfiability SAT from the original BMC, comes as an alternative to overcome limitations of the systems modeling, especially considering that the complexity of these is increasing and the SMT method has high level and richer theories than the SAT to represent the models. 
+
+//////////////////
+
 Although simulation and testing explore possible behaviors and scenarios of a given system, they leave open the question of whether unexplored trajectories may contain a flaw~\cite{ClarkeHV18}. Formal verification conducts an exhaustive exploration of all possible behaviors; when a design is said to be ``correct'' by a formal verification method, it implies that all behaviors have been explored; questions regarding adequate coverage or missed behavior becomes irrelevant~\cite{Clarke2012}. Formal verification is a systematic approach that applies mathematical reasoning to obtain guarantees about the correctness of a system; one successful method in this domain is model checking~\cite{Clarke2012}. Here we evaluate three state-of-the-art model checkers to formally verifying PV designs w.r.t. user requirements.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

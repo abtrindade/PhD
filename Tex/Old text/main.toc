@@ -1,47 +1,62 @@
 \babel@toc {english}{}
 \contentsline {chapter}{\numberline {1}Introduction}{10}{chapter.1}% 
-\contentsline {subsection}{\numberline {1.0.1}Problem's Definition}{13}{subsection.1.0.1}% 
-\contentsline {subsection}{\numberline {1.0.2}Objectives}{14}{subsection.1.0.2}% 
-\contentsline {subsection}{\numberline {1.0.3}Contributions}{15}{subsection.1.0.3}% 
-\contentsline {subsection}{\numberline {1.0.4}Related Work}{15}{subsection.1.0.4}% 
-\contentsline {subsection}{\numberline {1.0.5}Thesis Organization}{17}{subsection.1.0.5}% 
+\contentsline {section}{\numberline {1.1}Problem's Definition}{13}{section.1.1}% 
+\contentsline {section}{\numberline {1.2}Objectives}{14}{section.1.2}% 
+\contentsline {section}{\numberline {1.3}Contributions}{15}{section.1.3}% 
+\contentsline {section}{\numberline {1.4}Related Work}{15}{section.1.4}% 
+\contentsline {section}{\numberline {1.5}Thesis Organization}{17}{section.1.5}% 
 \contentsline {chapter}{\numberline {2}Background}{18}{chapter.2}% 
-\contentsline {subsection}{\numberline {2.0.1}Solar Photovoltaic System }{18}{subsection.2.0.1}% 
-\contentsline {subsubsection}{Unregulated standalone PV system with DC load }{19}{section*.5}% 
-\contentsline {subsubsection}{Regulated standalone PV system with DC load}{19}{section*.6}% 
-\contentsline {subsubsection}{Regulated standalone system with battery and DC load}{20}{section*.7}% 
-\contentsline {subsubsection}{Regulated standalone system with battery, AC load}{21}{section*.8}% 
-\contentsline {subsection}{\numberline {2.0.2}Design and Validation of a Solar photovoltaic system}{21}{subsection.2.0.2}% 
-\contentsline {subsubsection}{PVWatts Calculator}{22}{section*.9}% 
-\contentsline {subsubsection}{SAM}{22}{section*.10}% 
-\contentsline {subsubsection}{HOMER}{23}{section*.11}% 
-\contentsline {subsubsection}{RETScreen}{24}{section*.12}% 
-\contentsline {subsubsection}{Hybrid2}{24}{section*.13}% 
-\contentsline {subsubsection}{Paper Proposal x Reference Tools}{25}{section*.14}% 
-\contentsline {subsection}{\numberline {2.0.3}Component models for stand-alone PV system }{26}{subsection.2.0.3}% 
-\contentsline {subsubsection}{PV generator (cell, module, array) }{26}{section*.15}% 
-\contentsline {subsubsection}{Proposed PV Panel Model}{30}{section*.16}% 
-\contentsline {subsubsection}{The Battery Storage Model }{35}{section*.17}% 
-\contentsline {subsubsection}{Controller Model}{40}{section*.18}% 
-\contentsline {subsubsection}{The inverter model}{44}{section*.19}% 
-\contentsline {subsection}{\numberline {2.0.4}Automated Verification }{45}{subsection.2.0.4}% 
-\contentsline {subsection}{\numberline {2.0.5}Sizing and Simulation of Stand-alone Solar PV systems}{48}{subsection.2.0.5}% 
-\contentsline {subsection}{\numberline {2.0.6}Component models for a stand-alone PV system }{48}{subsection.2.0.6}% 
-\contentsline {subsection}{\numberline {2.0.7}PV System Model}{49}{subsection.2.0.7}% 
-\contentsline {subsection}{\numberline {2.0.8}Availability of Stand-alone PV Systems}{53}{subsection.2.0.8}% 
-\contentsline {section}{\numberline {2.1}Automated Verification Using Model Checking}{53}{section.2.1}% 
-\contentsline {subsection}{\numberline {2.1.1}CBMC}{54}{subsection.2.1.1}% 
-\contentsline {subsection}{\numberline {2.1.2}ESBMC}{54}{subsection.2.1.2}% 
-\contentsline {subsection}{\numberline {2.1.3}CPAchecker}{55}{subsection.2.1.3}% 
-\contentsline {subsection}{\numberline {2.1.4}Automated Verification Using Model Checking}{55}{subsection.2.1.4}% 
-\contentsline {subsubsection}{CBMC}{56}{section*.20}% 
-\contentsline {subsubsection}{ESBMC}{56}{section*.21}% 
-\contentsline {subsubsection}{CPAchecker}{57}{section*.22}% 
-\contentsline {subsection}{\numberline {2.1.5}Program Synthesis}{57}{subsection.2.1.5}% 
-\contentsline {subsection}{\numberline {2.1.6}Sizing Stand-alone Solar PV Systems}{59}{subsection.2.1.6}% 
-\contentsline {subsection}{\numberline {2.1.7}PV systems Optimization Criteria}{62}{subsection.2.1.7}% 
-\contentsline {subsection}{\numberline {2.1.8}Stand-alone PV System Optimization Technique}{63}{subsection.2.1.8}% 
+\contentsline {section}{\numberline {2.1}Solar Photovoltaic System }{18}{section.2.1}% 
+\contentsline {subsection}{\numberline {2.1.1}Unregulated standalone PV system with DC load }{19}{subsection.2.1.1}% 
+\contentsline {subsection}{\numberline {2.1.2}Regulated standalone PV system with DC load}{19}{subsection.2.1.2}% 
+\contentsline {subsection}{\numberline {2.1.3}Regulated standalone system with battery and DC load}{20}{subsection.2.1.3}% 
+\contentsline {subsection}{\numberline {2.1.4}Regulated standalone system with battery, AC load}{21}{subsection.2.1.4}% 
+\contentsline {subsection}{\numberline {2.1.5}Design and Validation of a Solar photovoltaic system}{21}{subsection.2.1.5}% 
+\contentsline {subsubsection}{PVWatts Calculator}{22}{section*.5}% 
+\contentsline {subsubsection}{SAM}{22}{section*.6}% 
+\contentsline {subsubsection}{HOMER}{23}{section*.7}% 
+\contentsline {subsubsection}{RETScreen}{24}{section*.8}% 
+\contentsline {subsubsection}{Hybrid2}{24}{section*.9}% 
+\contentsline {subsubsection}{Paper Proposal x Reference Tools}{25}{section*.10}% 
+\contentsline {subsection}{\numberline {2.1.6}Component models for stand-alone PV system }{26}{subsection.2.1.6}% 
+\contentsline {subsubsection}{PV generator (cell, module, array) }{26}{section*.11}% 
+\contentsline {subsubsection}{Proposed PV Panel Model}{30}{section*.12}% 
+\contentsline {subsubsection}{The Battery Storage Model }{35}{section*.13}% 
+\contentsline {subsubsection}{Controller Model}{40}{section*.14}% 
+\contentsline {subsubsection}{The inverter model}{44}{section*.15}% 
+\contentsline {subsection}{\numberline {2.1.7}Sizing and Simulation of Stand-alone Solar PV systems}{45}{subsection.2.1.7}% 
+\contentsline {subsection}{\numberline {2.1.8}Component models for a stand-alone PV system }{46}{subsection.2.1.8}% 
+\contentsline {subsection}{\numberline {2.1.9}PV System Model}{47}{subsection.2.1.9}% 
+\contentsline {subsection}{\numberline {2.1.10}Availability of Stand-alone PV Systems}{50}{subsection.2.1.10}% 
+\contentsline {section}{\numberline {2.2}Automated Verification Using Model Checking}{51}{section.2.2}% 
+\contentsline {subsection}{\numberline {2.2.1}CBMC}{54}{subsection.2.2.1}% 
+\contentsline {subsection}{\numberline {2.2.2}ESBMC}{54}{subsection.2.2.2}% 
+\contentsline {subsection}{\numberline {2.2.3}CPAchecker}{55}{subsection.2.2.3}% 
+\contentsline {subsection}{\numberline {2.2.4}Automated Verification Using Model Checking}{55}{subsection.2.2.4}% 
+\contentsline {subsubsection}{CBMC}{56}{section*.16}% 
+\contentsline {subsubsection}{ESBMC}{56}{section*.17}% 
+\contentsline {subsubsection}{CPAchecker}{57}{section*.18}% 
+\contentsline {subsection}{\numberline {2.2.5}Program Synthesis}{57}{subsection.2.2.5}% 
+\contentsline {subsection}{\numberline {2.2.6}Sizing Stand-alone Solar PV Systems}{59}{subsection.2.2.6}% 
+\contentsline {subsection}{\numberline {2.2.7}PV systems Optimization Criteria}{62}{subsection.2.2.7}% 
+\contentsline {subsection}{\numberline {2.2.8}Stand-alone PV System Optimization Technique}{63}{subsection.2.2.8}% 
 \contentsline {chapter}{\numberline {3}Methodology}{65}{chapter.3}% 
-\contentsline {chapter}{\numberline {4}Experimental Evaluation}{70}{chapter.4}% 
-\contentsline {chapter}{\numberline {5}Conclusion and Future Work}{71}{chapter.5}% 
-\contentsline {chapter}{\numberline {A}Appendix Title}{73}{appendix.A}% 
+\contentsline {section}{\numberline {3.1}Automated Verification}{65}{section.3.1}% 
+\contentsline {section}{\numberline {3.2}Optimization}{67}{section.3.2}% 
+\contentsline {section}{\numberline {3.3}Assumptions and Premises}{70}{section.3.3}% 
+\contentsline {chapter}{\numberline {4}Experimental Evaluation}{73}{chapter.4}% 
+\contentsline {section}{\numberline {4.1}Automated Verification}{73}{section.4.1}% 
+\contentsline {subsection}{\numberline {4.1.1}Description of the Case Studies}{73}{subsection.4.1.1}% 
+\contentsline {subsection}{\numberline {4.1.2}Objectives and Setup}{73}{subsection.4.1.2}% 
+\contentsline {subsection}{\numberline {4.1.3}Results and Discussion}{74}{subsection.4.1.3}% 
+\contentsline {subsection}{\numberline {4.1.4}Threats to Validity}{76}{subsection.4.1.4}% 
+\contentsline {section}{\numberline {4.2}Optimization}{77}{section.4.2}% 
+\contentsline {subsection}{\numberline {4.2.1}Case studies}{77}{subsection.4.2.1}% 
+\contentsline {subsection}{\numberline {4.2.2}Tools}{77}{subsection.4.2.2}% 
+\contentsline {subsection}{\numberline {4.2.3}Setup}{77}{subsection.4.2.3}% 
+\contentsline {subsection}{\numberline {4.2.4}Objectives}{79}{subsection.4.2.4}% 
+\contentsline {subsection}{\numberline {4.2.5}Results}{79}{subsection.4.2.5}% 
+\contentsline {subsection}{\numberline {4.2.6}Comparison between Formal Synthesis and HOME Pro}{80}{subsection.4.2.6}% 
+\contentsline {subsection}{\numberline {4.2.7}Threats to validity}{81}{subsection.4.2.7}% 
+\contentsline {chapter}{\numberline {5}Conclusion and Future Work}{82}{chapter.5}% 
+\contentsline {chapter}{\numberline {A}Appendix Title}{84}{appendix.A}% 
