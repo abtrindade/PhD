@@ -1,1 +1,199 @@
-chapter03 here amamas asd asd as das das d af dsgf dfg  tre tre t ret ret er ter te rt ert ert er tre t
+The flowchart of the automated verification method is illustrated in Fig.~\ref{fig:flowchartgeneral}. 
+
+\begin{figure}[h]
+\includegraphics[width=0.6\textwidth]{flowchart_verification5.png}
+\centering
+\caption{Flowchart of the proposed automated verification of PV systems.}
+\label{fig:flowchartgeneral}
+\end{figure}
+
+In Step 1, the PV input data %(e.g., load power demand and load energy consumption) 
+and the formulae to check the sizing project, the mathematical model, the limits of the weather non-deterministic variables, are all written as an ANSI-C code~\cite{ANSI2018}. In Step 2, the sizing check of the PV system takes place: it will indicate if there is an error of sizing before to perform the automated verification of the system. This stage ensures that the system meets the standard project steps related to critical period method of sizing~\cite{Pinho}. 
+%
+In Step 3, weather variables (e.g., solar irradiance and ambient temperature) will be systematically explored by our verification engine based on maximum and minimum values from the site, where the PV system will be deployed. 
+%As a consequence, all the formulae of the employed mathematical models will also be updated. 
+In addition, depending on one of the desired properties of the system such as battery autonomy, energy availability, or even system power supply, our verification engine is able to indicate a failure if those properties are not met; in this particular case, it provides a diagnostic counterexample that shows in which conditions the property violation occurred. 
+%; as the  state of charge of the batteries, load demand of power and the load consumption of energy if defined by the code
+% (as reliability, performance, or safety)
+
+%
+%\textcolor{red}{In the following paragraph you should related the output of our verification engine with the description of the BMC SAT or UNSAR given above. For example, what does a failure mean? is it SAT?}
+In a nutshell, the model checker will process the ANSI-C code with constraints %($C$) 
+and properties %($P$) 
+from the PV system, and the tool will automatically verify if the PV system requirements are met. If it returns a failure (i.e., SAT), then the tool provides a counterexample, i.e., a sequence of states that leads to the property violation; this information can be used as a feedback to improve the PV system design. However, if the verification succeeds (i.e., UNSAT), there is no failure up to the bound $k$; therefore, the PV system will present its intended behavior up to the bound $k$.
+%, i.e., our verification engine does not give any guarantee that there is no error in bound $k+1$ unless some induction method is employed~\cite{DBLP:journals/sttt/GadelhaIC17}.
+%
+%
+%---------------------------------------------------------------------
+% \subsection{The case studies and the Algorithm}
+%---------------------------------------------------------------------
+%
+% 
+%and as backup at night 
+%
+%The 700 W system: 3 x 325 W PV panels connected in series, controller of 150 V/35 A with a DC-bus of 24 V, 4 x 220 Ah batteries (2 in series and 2 in parallel arrangement), and inverter of 700 W. 
+%
+%And the 1,200 W PV system: 4 x 325 W connected in series PV panels, with controller of 150 V/35 A  in a DC-bus of 48 V, 4 batteries of 120 Ah connected in series, and a 1,200 W inverter.
+%
+%As demonstrated at this work, the performance of the system is highly dependent of solar irradiance and temperature, that are specific of the deployed local (latitude and longitude). 
+
+Algorithm~\ref{alg:verification-algorithm} describes the equivalent pseudo-code. %Line 1 indicates a function call that performs the size checking of the each component of the PV system. %: using Equations \eqref{eq:NTPmin}, \eqref{eq:NTP}, \eqref{eq:NPSmin}, \eqref{eq:NPS}, \eqref{eq:NPP}, and \eqref{eq:NPPmin} to verify the PV panel; using \eqref{eq:Cbank}, \eqref{eq:Nbtotal}, and \eqref{eq:batcheck} to verify the batteries; using \eqref{eq:vcvsystem}, \eqref{eq:icmin}, and \eqref{eq:icicmin} to verify the charge controller; and using \eqref{eq:vindc}, \eqref{eq:voutac}, and \eqref{eq:invcheck} to verify the inverter. 
+%The verification is carried out by the \textit{assert} macro from the ANSI-C programming language to encode each equation of sizing check. The argument to the \textit{assert} statement must be \textit{true} if the system specification is met; otherwise, the program aborts and prints a counterexample indicating a property violation. If there is no property violation, then the verification algorithm continues and 
+In order to reduce the computational effort of the algorithm,
+% caused by the state explosion inherent of the technique, 
+every 24 h-day was considered as a time-step of 1 hour, and it was split into two parts: (a) one where it is possible to occur PV generation, during daylight, with a duration in hours depending on each site (but dependent on the sun and weather conditions); and (b) one that includes all the remaining day (without any PV generation), when the batteries are demanded to feed the house.
+
+Lines 1 is devoted to information from the location where the PV system will be/were deployed. We use annual average minimum and maximum, related to temperature ($T$) and solar irradiance ($G$), hour by hour, from~\cite{Temperature}, and ~\cite{Irradiance}.
+
+Line 2 represents all the information that comes from the PV sizing and from the equipment manufacturers data: specification and data from PV, batteries, inverter and charge controller. This item includes as information from the house's load curve.
+
+The first automated verification is related to the sizing check (line 3), if an error is found then the algorithm stops. Then two functions, called at lines 4 and 5, are responsible for discover which hour starts the PV generation and when stops. Those functions get this information from the array inputted to the Algorithm with the solar irradiance values.
+
+The batteries are assumed to be charged, i.e., with SOC of 100\% (line 6).
+
+The first for-loop at line 7 controls how many cycles of 24 h will be performed by the Algorithm.  And the for-loop from lines 8 to 11 is responsible to discharge the battery (according the load curve) and verify the state of charge of the battery, hour-by-hour, starting at the first hour of the day after the sun goes down until the next day before the sun goes up (without PV generation). Following, at the next for-loop, from line 12 to 29, is performed the verification where there is solar irradiance and all the PV system works. The Algorithm generates information related to average temperature ($T$) and solar irradiance ($G$), hour-by-hour, using non-deterministic variables from model checker to explore all possible states and the \textit{assume} macro to constrain the non-deterministic values using a given range (lines 15 and 16). 
+%and irradiance varies from 0 W/m$^{2}$ to 852 W/m$^{2}$ (with minimum of 274 W/m$^{2}$ during the daytime, when there is sunlight). 
+%there is PV generation only between 8:00 h and 16:00 h every day, 
+%with zero electric energy generation from 18:00 h to 6:00 h of the next day; and with insignificant generation from 6:00 h to 8:00 h, and from 16:00 h to 18:00 h of the same day. 
+
+After that, the model from PV generator is used in the function call of line 17, to produce the voltage and current considering the states of $G$ and $T$. With respect to every hour considered, the conditional \textit{if-elseif-endif} statements from lines 18, 20, 22, 24 and 26, will imitate the charge controller work, performing the charge or discharge of batteries according to the value of different variables: if there is PV generation, the updated state of charge from batteries, the house's load and the set-up information of the PV system.
+
+At the end of last for-loop, the state of the batteries is verified again (line 27) and the hour is adjusted to the next loop (line 28).
+
+Nevertheless, if the verification engine does not fail, we can conclude that the PV system does not need further corrections up to the given bound $k$.
+%
+%\textcolor{red}{this sentence is unclear... After this process is started the battery autonomy verification, from line 31}. \textcolor{red}{this sentence is unclear... Based on the fact that won't be PV generation after a given time of the day, the algorithm will only discharge the batteries until a new charging process (at the next day) to start.} \textcolor{red}{what do you mean by The formal verification is guaranteed?...  The formal verification is guaranteed by  macro to specific variables of the model, according lines 27 and 35.}
+% and the non-deterministic variables $G$ and $T$ are considered during the formal verification of the system, otherwise, during the other two periods, there is no PV generation and just the power consumption from the backup batteries. 
+%Within this 8h-period, $G$ and $T$ are automated verified with different values every one hour.
+%, and change their value every 1 h according with the algorithm created using the technique.
+ \begin{algorithm}
+ \caption{Model checking algorithm for stand-alone PV}
+ \begin{algorithmic}[1]
+ \begin{scriptsize}
+ \renewcommand{\algorithmicrequire}{\textbf{Input:}}
+ \renewcommand{\algorithmicensure}{\textbf{Output:}}
+  \STATE $declare \, min \, and \, max \, solar \, irradiation[24h], \, and \, temperature[24h]$\\
+  \STATE $declare \, case \, studies \, details: \, sizing \, and \, manufacturers \, data $ \\
+  \STATE $sizing \_ check()$ \\
+  \STATE $startPVgeneration \leftarrow findStartPVgeneration()$ \\
+  \STATE $endPVgeneration \leftarrow findEndPVgeneration()$ \\
+  \STATE $SOC \leftarrow 100\%$ \\
+%  \COMMENT {Starting with the PV generation time}
+% \\ 
+%\textit{LOOP Process}
+ \FOR {$1st \, 24h \, loop$ to $Nth \, 24h \, loop$}
+  \FOR {$endPVgeneration+1$ to $startPVgeneration-1$}
+	  \STATE $dischargeBattery \, in \, 1h()$ \\
+%	  \STATE $autonomyCount \leftarrow autonomyCount+1$ \\
+	  \STATE $assert (SOC \geq SOC \_ min)$ \\
+%	  \STATE $battery \, autonomy \, verification()$ \\
+  \ENDFOR
+  \FOR {$startPVgeneration$ to $endPVgeneration$}
+    \STATE $G \leftarrow nondet \_ uint(\,)$ \COMMENT {$G$ is non-deterministic variable}
+    \STATE $T \leftarrow nondet \_ uint(\,)$ \COMMENT {$T$ is non-deterministic variable}
+    \STATE assume ($Gmin \leq G \leq Gmax$) \COMMENT {restricting $G$ values}
+    \STATE assume ($Tmin \leq T \leq Tmax$) \COMMENT {restricting $T$ values}
+    \STATE $Imax, Vmax \leftarrow PVgenerationMODEL (G,T)$ \\
+    \COMMENT {If-then-else sequence to imitate charge controller work}
+    \IF {($battery \, is \, empty$) AND ($PV \, is \, generating$)}
+      \STATE $chargeBattery \, in \, 1h()$ \COMMENT {PV feed the house}
+    \ELSIF {($battery \, is \, empty$) AND NOT($PV \, is \, generating$)}
+      \STATE FAIL with assert macro \COMMENT {Battery is empty and there is not PV generation}
+    \ELSIF {NOT($battery \, is \, empty$) AND ($PV \, is \, generating$)}
+      \STATE stop battery charge \COMMENT {PV feed the house}
+    \ELSIF {NOT($battery \, is \, empty$) AND NOT($PV \, is \, generating$)}
+      \STATE $dischargeBattery \, in \, 1h()$ \COMMENT {Battery feed the house}
+    \ENDIF
+    \STATE $assert (SOC \geq SOC \_ min)$ \\
+    \STATE $hour \leftarrow hour+1$ \\
+   \ENDFOR
+  \ENDFOR
+ \RETURN $(\,)$ 
+  \end{scriptsize}
+ \end{algorithmic} 
+ \label{alg:verification-algorithm}
+ \end{algorithm}
+ 
+ /////////////
+ Algorithm~\ref{alg:opt-algorithm} describes our pseudo-code to synthesize stand-alone PV systems using symbolic model checking. It was adopted the analytical method of optimization, with LCC economical analysis and power reliability based on the critical period criteria.
+%
+ \begin{algorithm}
+ \caption{Synthesis algorithm}
+ \begin{algorithmic}[1]
+ \renewcommand{\algorithmicrequire}{\textbf{Input:}}
+ \renewcommand{\algorithmicensure}{\textbf{Output:}}
+  \STATE Initialize variables \\
+  \STATE Declare list of PV panels, controllers, batteries, and inverters data and cost \\
+%  \STATE Declare list of controllers data and cost \\
+%  \STATE Declare list of batteries data and cost \\
+%  \STATE Declare list of inverters data and cost \\
+  \STATE Declare the maximum possible cost $MaxCost$  \\
+  \STATE Declare power demand, power peak, energy consumption \\
+  \STATE Declare battery autonomy, deep of discharge, AC voltage \\
+  \FOR {$HintCost=0$ to $MaxCost$}
+ 	\STATE Declare non-deterministic variable to select PV Panel from list \\
+ 	\STATE Declare non-deterministic variable to select Controller from list \\
+ 	\STATE Declare non-deterministic variable to select Battery from list \\
+ 	\STATE Declare non-deterministic variable to select Inverter from list \\ 	
+ 	\STATE Calculate $E_{corrected}, \, E_{p} $ \\
+	\STATE Calculate $N_{TPmin}, \, N_{PSmin}, N_{PPmin} $ \\
+ 	\STATE Calculate $C_{bank}$ \\
+	\STATE Calculate $N_{BS}min, \, N_{BP}min, \, N_{B}total$ \\
+	\STATE Requirement enforced by \textbf{assume}$(V_{c})$ \\
+ 	\STATE Calculate $I_{sc,amb}$ \\
+ 	\STATE Calculate $I_{c,min}$ \\
+ 	\STATE Requirement enforced by \textbf{assume}$(I_{c} \wedge V_{in}DC \wedge V_{out}AC)$ \\
+%	\STATE Requirement enforced by \textbf{assume}$(V_{in}DC \wedge V_{out}AC )$ \\
+%	\STATE Requirement enforced by \textbf{assume}$(V_{out}AC)$ \\
+	\STATE Requirement enforced by \textbf{assume}$(Demand \wedge P_{surge})$ \\
+%	\STATE Requirement enforced by \textbf{assume}$(P_{surge})$ \\
+	\STATE non-deterministic variables hold feasible equipment and cost  \\
+	\STATE $F_{obj} \leftarrow  N_{TP}*Panel_{Cost} \, + \, N_{TB}*Battery_{Cost} \, + Controller_{Cost} \, + \, Inverter_{Cost} \, + \, Installation_{Cost} \, + \, batrep_{Cost} \, + \, PWO\&M_{Cost}$ \\
+	\STATE Violation check with \textbf{assert}$(F_{obj} > HintCost)$ \\
+  \ENDFOR
+ \RETURN $(\,)$ 
+ \end{algorithmic} 
+ \label{alg:opt-algorithm}
+ \end{algorithm}
+%
+
+Our synthesis algorithm will synthesize constant values; 
+it starts with the input of manufacturers data and prices of PV panels, batteries, 
+charge controllers and inverters (line $2$). After that, we define user requirements, i.e., 
+house requirements and design definitions, from lines $4$ and $5$. 
+
+The \textit{for}-loop started at line $6$ controls the lowest cost to the PV solution. 
+In particular, it starts with cost $0$ and stops only when the algorithm finds a 
+feasible solution in which the cost breaks the $assertion$ stated in line $22$; 
+if that happens, then our algorithm has found an optimal solution, thereby stating 
+that the {\sc Verify} phase reached a satisfiable condition (\textit{SAT}). 
+The $MaxCost$ value at line $6$ is just a very high value put as a limit 
+to the \textit{for}-loop, that never will be reached because the optimal solution will be found first.
+
+Our synthesis algorithm uses non-deterministic variables to choose one specific constant 
+from a given list of PV panels, controllers, batteries and inverters (lines $7$ to $10$). 
+That procedure ensures that our synthesis engine checks all combinations of items 
+from each equipment, and combine them to assemble a feasible (candidate) PV solution, 
+which meets the user requirements.
+
+Next, we use Eq.~\eqref{eq:Ecorrected}, Eq.~\eqref{eq:Ep}, Eq.~\eqref{eq:NTPmin}, 
+Eq.~\eqref{eq:NPSmin}, Eq.~\eqref{eq:NPPmin}, Eq.~\eqref{eq:Cbank}, 
+Eq.~\eqref{eq:Nbtotal}, Eq.~\eqref{eq:iscamb}, and Eq.~\eqref{eq:icmin} t
+o calculate the sizing variables (lines $11$ to $17$). The directive \textit{assume} (lines $15$, $18$ and $19$) 
+ensures the compatibility of the chosen items from the list of equipment: the {\sc Verify} phase 
+uses only the item (among all the possible ones) that satisfies the statements of Lines $15$, $18$ and $19$. 
+Therefore, our synthesis algorithm reaches line $20$ with one feasible solution, 
+and the cost of that solution is calculated in $F_{obj}$ (line $21$). 
+
+If our algorithm does not find a feasible solution among the item of equipment that 
+were provided to our {\sc Synthesize} phase,  then the result is an unsatisfiable (\textit{UNSAT}), i.e., 
+the program finishes and does not find a solution, which indicates that it 
+was not possible to combine the items of each equipment in order to create a feasible solution. 
+
+The main challenge for the {\sc Synthesize} phase is to find a feasible candidate 
+solution regarding the constraints and user requirements. Related to our {\sc Verify} 
+phase the challenge is to find the lowest acquisition cost from a list of equipment and 
+components that is provided from the {\sc Synthesize} phase. 
+
+Note that the process described here in completely automated and that a validation is performed 
+by our {\sc Verify} phase to ensure that the approach is sound.

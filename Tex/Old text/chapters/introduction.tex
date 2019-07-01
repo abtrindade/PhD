@@ -1,4 +1,63 @@
-introduction text here kadhew nrjrenasmnfs,mgfs gfsdf gdsf dfsg dsgh bv dzfg df gdf gdf gdf gdf gd fg dfg dfg
+%%automated verification
+Lack of access to clean and affordable energy is considered a core dimension of poverty~\cite{Hussein2012}. There is a close relationship between the lack of energy and the low HDI (Human Development Index)~\cite{Coelho}. Progress has been made worldwide; in particular, the number of people without electricity access fell below 1 billion threshold for the first time in 2017~\cite{IEAweo2018}. %The share of people without access to electricity from Africa is 58\%, while 19\% of the share comes from developing Asia, and 31\% from Latin America~\cite{IEAweo2018}. Numbers from Brazil show the aim to electrify 270 isolated places and 2.7 million of people until 2023~\cite{EPE2018}. 
+%Furthermore, there is a close relationship between the lack of energy and the low HDI (Human Development Index) of those localities~\cite{Coelho}.
+
+In order to provide universal electricity, decentralized systems led by solar photovoltaic (PV) in off-grid and mini-grid systems will be the lowest-cost solution for three-quarters of the additional connections needed; and grid extension will be the standard especially in urban areas~\cite{IEAweo2018}.
+
+%The definition of energy access usually includes both electricity access and access to modern fuels for cooking and heating, in order to replace traditional biomass. 
+%Increased access to energy allows economic growth and poverty alleviation \cite{Karekesi}. 
+%
+%Among the options of renewable sources, there are hydro, wind, and solar photovoltaic (PV). 
+Only a niche market a few years ago, solar PV systems are now becoming a mainstream electricity provider, with an increase of approximately 50\% from 2016 to 2017 in terms of new installations of PV~\cite{EPIA}. %However, this growth is not driven by stand-alone systems.
+
+In order to simulate or evaluate a PV system there are a myriad of specialized tools available in the market, such as RETScreen, HOMER, PVWatts, SAM, and Hybrid2 \cite{Pradhan,Swarnkar,NRELDobos,NRELBlair,Mills}; and even general purpose simulation tools such as PSpice, and MATLAB/Simulink package \cite{Gow1999,Benatiallah2017}.
+%
+%However, to the best of our knowledge, this work can be the first work to perform automated verification of a stand-alone solar PV project solution.  
+%
+%According to \cite{SEIA} and \cite{Chauhan}, solar is the most abundant source of renewable energy on earth. In SPV system, solar radiations are captured from the sun and turned into electricity using SPV cells made of silicon and other materials. SPV...
+%
+%In order to address different aspects of a SPV project, there is a myriad of public domain and commercial software available. According to \cite{Brooks}, the capabilities of these tools range from simple solar resource and energy production estimative, to site survey and system design tools, to complex financial analysis software (with optimization). Some tools also provide support to rebate programs applications and tax incentives (specific to each country or region), while other programs and worksheets focus on the technical aspects of system sizing and design.  
+%
+%Manufactures and integrators have yet their proprietary software to perform various system sizing, with the drawback of include just their own products among the possibilities of choice, what restrict the solution. 
+%
+%PV systems can be classified into grid-connected and stand-alone systems. At this proposal, only off-grid or stand-alone systems will be considered. The utilization of solar energy in off-grid mode has the potential to meet the energy need for remote rural areas of developing countries.  
+However, those tools are based on running experiments in simulation models. Simulation has the advantage of being cheap (if compared to test in real systems) %and can be employed before the system design is concluded 
+but it has the drawback of an incomplete coverage since the verification of all possible combinations and potential failures of a system is unfeasible~\cite{ClarkeHV18}.
+
+Formal methods based on model checking offer a great potential to obtain a more effective and faster verification in the design process~\cite{ClarkeHV18}.  
+%with behavior that is, in principle, well determined. 
+Any kind of system can be specified as computer programs using mathematical logic, which constitutes the intended (correct) behavior; then, one can try to give a formal proof or otherwise establish that the program meets its specification. %User or project requirements can be added during the creation of the formal model to be verified. %, as defined by \cite{Trindade}. 
+%
+%This area of research is referred as formal methods. % as defined in \cite{Clarkeetal}.
+% Their aim is to establish system correctness with mathematical rigor. 
+%In the recent decades, research in formal methods has led to the development of very promising verification techniques.
+% that facilitate the early detection of bugs in order to ensure the correctness of the system. 
+%
+%Model-based verification techniques are based on models that describe the possible system behavior in a mathematically precise and unambiguous manner. 
+%Thus, such problems as incompleteness, ambiguities, and inconsistencies, which normally are discovered only in later stages of the design, can be detected in advance, as described by \cite{Trindade}. 
+%Model checking algorithms can then verify the system model by systematically exploring all its states to check whether the requirements are met by the given system.
+%
+%Formal methods, alternatively, provide facilities for the modeling of each component of any complex system~\cite{Hall1990}. 
+%
+
+
+//automated synthesis
+Cyber-Physical Systems (CPS) are engineered systems, which are built from, and depend upon, the seamless integration of computational and physical  components~\cite{NSF2015}. During operation, such components must frequently adapt to the operating environment changes faced at run-time (dynamics of the physical processes) and must be able to continue to behave in a controlled and safe way, thus posing novel technical challenges for the software engineering of services and applications for CPS~\cite{Metzger2014}. Software pervasiveness in CPS places new challenges; in particular, highly dynamic environments, rapidly changing requirements, unpredictable and uncertain operating conditions demand new paradigms for software design~\cite{Filieri2015}.
+
+While some research efforts do exist to enhance and optimize the software development processes for CPS, further investigation and discussion of better and more effective models are still needed in practice~\cite{Al-Jaroodi2016}. Among the opportunities for enhancements in the software development processes for CPS, there exists the need for developing new techniques and tools to support CPS requirements gathering and analysis with the goal of synthesizing \textit{correct-by-construction} implementations of CPS. These techniques need to deal with predefined requirements enforced by the nature and inherited constraints of the target CPS. In addition, they should be able to provide verification and validation mechanisms for completeness, correctness, and consistency~\cite{Al-Jaroodi2016}. Uncertainty and variability, at the same time, can be dealt with formal verification~\cite{NESSI}. Energy production, distribution, and optimization are all CPS problems~\cite{UC}. 
+
+Lack of access to clean and affordable energy is considered a core dimension of poverty~\cite{Hussein2012}. Progress has been made worldwide; in particular, the number of people without electricity access fell below $1$ billion threshold for the first time in $2017$~\cite{IEAweo2018}. In order to provide universal electricity for all, decentralized systems led by solar photovoltaic (PV) in off-grid and mini-grid systems will be the lowest-cost solution for three-quarters of the additional connections needed~\cite{Hussein2012}; specifically grid extension will be the standard in urban areas~\cite{IEAweo2018}.
+
+In order to simulate or evaluate a PV system, there exist various specialized tools, e.g., RETScreen, HOMER, PVWatts, SAM and  Hybrid2~\cite{Pradhan,Swarnkar,NRELDobos,NRELBlair,Mills}; and even general purpose simulation tools, e.g.,  PSpice~\cite{Gow1999}, or MATLAB/Simulink package~\cite{Benatiallah2017}. However, these tools are based on simulation; they have the drawback of an incomplete coverage  since verification of all possible combinations and potential failures of a system is unfeasible~\cite{ClarkeHV18}. 
+
+Optimization of PV systems is not a recent topic; since the $90$'s different techniques using a wide variety of criteria to find ultimate combinations for design parameters, based on intuitive, numerical and analytical methods were developed and evaluated~\cite{Applasamy2011}. An ideal combination of any PV system is made by the best compromise between two considered objectives, which is power \textit{reliability} and \textit{system cost}~\cite{Alsadi2018}.
+ 
+However, formal methods based on \textit{symbolic model checking} and its application 
+to synthesize PV systems have not been further explored in literature, which could offer 
+a great potential to obtain a more effective design process to PV systems~\cite{ClarkeHV18}. 
+
+
+//old material
 
 Among the options of renewable sources, there are hydro, wind, and solar photovoltaic (PV). Only a niche market a few years ago, PV are now becoming a mainstream electricity provider, changing the way the world is powered. Based in data from \cite{EPIA}, there was an increase of approximately 30\% from 2013 to 2014 in terms of new installations of PV. The use of the power generation technology with renewable energy source is developing rapidly due to the industrial development \cite{Yatimi}. The renewable energy leads to an advance all over the world by protecting the environment: it is clean (low greenhouse gases emissions), operating silently, long lifetime, low maintenance, absence of fuel cost and inexhaustible \cite{Noroozian}. Renewable energy, and particularly the power generation from solar energy using photovoltaic (PV) panels, has emerged as an alternative to fossil or nuclear fuel generation. The increase in a number of PV systems installed all over the world brings the need for proper modeling and simulation tools for researcher and practitioners involved in their application. 
 
@@ -23,12 +82,70 @@ In the recent decades, research in formal methods has led to the development of 
 Model-based verification techniques are based on models that describe the possible system behavior in a mathematically precise and unambiguous manner. Thus, such problems as incompleteness, ambiguities, and inconsistencies, which normally are discovered only in later stages of the design, can be detected in advance, as described by \cite{Trindade}. Algorithms can verify the system model through systematically explore all their states.
 
 \subsection{Objectives}
-Objectives here
+In this study, a mathematical model of each component of a stand-alone PV system, as panel solar, charge controller, batteries, inverter, and electrical load is used. %The behavior of each system component can be analyzed and observed with the support of those formal models, as a joint operation of the components, which in this case represents the operation of the solar PV system itself. 
+The project requirements, as battery autonomy and power demand, besides weather conditions, as solar irradiance and ambient temperature, are inputted to the proposed tool and automatically verified during the formal process. The model checking tool reports in which conditions a system does not meet the user requirements. A key benefit to this approach is that it helps in the detection of flaws in the design phase of system development, thereby considerably improving system reliability~\cite{Akram2018}. 
+%Those programs are viewed as mathematical objects, and the use of 
+%Bringing this technique to solar PV systems, i
+%Instead of finding a bug or a software inconsistence, t
+%Here it will be verified a stand-alone PV system, with all their components modeled mathematically,   
+%Among the non-deterministic variables considerated, is it worth to mention environmental issues (like solar irradiance, and temperature), and the variation of the electrical load (power consumption) or the battery' state of charge, as shown in Fig.\ref{fig:flowchartgeneral}.
+The implementation of the proposed tool is carried out by means of an algorithm in language C, that is executed by three state-of-the-art model checkers to formally verifying PV designs, in order to evaluate performance and correctness: the C Bounded Model Checker (CBMC)~\cite{Kroening}, the Efficient SMT-based Bounded Model Checker (ESBMC)~\cite{esbmc2018}, and the Configurable Program Analysis Checker (CPAchecker).
+%three the efficient SMT-based bounded model checker (ESBMC)~\cite{esbmc2018}. %, which allows one to incrementally verify a PV system as an imperative program using a fragment of decidable first-order theories~\cite{DBLP:books/daglib/0019162}.
+
+///////////
+Here, we use a variant of counterexample guided inductive synthesis (CEGIS) for synthesizing 
+optimal sizing of stand-alone PV systems using commercial equipment data. 
+Given a correctness specification $\sigma$, our method uses that as starting point 
+and then iteratively produces a sequence of candidate solutions that satisfy $\sigma$, 
+related to power reliability. In particular, in each iteration, we synthesize sizing of 
+stand-alone PV systems but that may not achieve the lowest cost. The candidate solution 
+is then verified via symbolic model checking with a lower bound that serves as the minimum 
+cost of reference; if the verification step does not fail, the lower bound is adjusted. 
+If it fails then a counterexample is provided with an optimal sizing that meets 
+power reliability and system cost.
+
 
 \subsection{Contributions}
-Contributions text subsection here
+This paper makes two main contributions. % Firstly, we describe a modular modeling of each component of a PV system by means of mathematical models that can be encoded into fragments of first-order theories supported by software model checkers. Secondly
+Firstly, we propose an algorithm written in language C that implements the automated verification method which formally checks the sizing and the operation of a given stand-alone PV system. Secondly, we evaluate the verification method by comparing three state-of-the-art model checkers in five real case studies. %Thirdly, experimental results show that this proposed approach can find subtle design errors in stand-alone PV systems, which are not easily detected by other approach based on simulation. 
+
+%\textcolor{red}{This introduction is missing the description of the vision, approach and results. In particular, try to match each paragraph to: problem, vision, approach, results and contributions.} 
+%
+%The framework provided at this paper outlines the requirements, the process and the mathematical modeling to perform automated formal verification of a stand-alone PV system, using the satisfiability modulo theories (SMT)-based verification method.
+
+/////////////////
+Our work makes two major contributions. Firstly, the use of automated 
+symbolic verification methods in electrical systems was uncommon in recent 
+prior studies~\cite{abs-1811-09438}, and specifically their use in synthesizing 
+PV sizing is unprecedented. Here, a list of PV components (i.e., PV panels, 
+charge controllers, inverters, and batteries) can be fed to our proposed synthesis 
+method together with user requirements and environment constraints, 
+and our synthesis algorithm based on symbolic model checking 
+can find the optimal solution in technical and economical terms. 
+\textbf{Secondly}, we evaluate different state-of-art symbolic software 
+verifiers with the goal of obtaining the best performance in our verification 
+back-end for synthesizing optimal PV systems.
  
 \subsection{Related Work}
 
+The conversion of traditional power grid into a smart grid, a fundamental example of a CPS, 
+raises a number of issues that requires novel methods and applications. In $2012$, a Chinese smart grid implementation was considered as case study to address the verification problem for performance and energy consumption~\cite{Yukseletall2012}. The authors employed a stochastic model checking approach and presented a modelling and analysis study using PRISM, which is a probabilistic model checker~\cite{KwiatkowskaNP11}. The focus of this study was on how CPSs integrate information and communication technology functions to the physical elements of a system for monitoring and controlling purposes; here, the authors employed automated verification of certain quantitative properties of the system, as probability of	 node failure in the long run, impact of repair service on the failure risk, and expected energy consumption, without any interest in power generation or even solar PV systems.
+
+In $2015$, an automated approach for applying Monte-Carlo simulation to power system protection schemes presented limitations of incomplete coverage of all possible operating conditions~\cite{Sengupta2015}. The authors proposed an automated simulation-based verification technique to verify correctness of protection settings efficiently using hybrid automata-temporal-logic framework. The initial focus was on relay operations and test-case generation to ensure early detection of design errors. However, this study was limited to power system protection and did not deal with electricity generation or even solar PV systems.
+
+Other related studies from $2015$ include a framework named Modana to achieve an integrated process from modeling with SysML/MARTE to analysis using statistical model checking for CPS in terms of non-functional properties such as time and energy~\cite{Cheng2015}. In order to demonstrate Modana's capability, the authors modelled energy-aware buildings as a case study, and discussed the analysis on energy consumption in different scenarios. The focus here is on smart buildings and HVAC (heating, ventilation, and air conditioning) systems. This research, however, did no address the design and verification of solar PV systems. 
+ 
+In $2017$, a researcher suggested the application of formal methods to verify and control the behavior of computational devices, interacting over a shared and smart infrastructure~\cite{Abate2017}. The author discussed the aggregation of large populations of thermostatically-controlled loads and of PV panels, and the corresponding problems of energy management in smart buildings, of demand-response on smart grids, and respectively of frequency stabilization and grid robustness. The focus was on controlling the behavior of components, thereby verifying the given smart grid as a "system of systems" within the context of "internet of things". The author, however, used approximate model checking of stochastic and hybrid models.
+
+In $2018$, a verification methodology was proposed for the Cyber Physical Energy Systems (CPES) with applications to PV panels and its distributed power point tracking~\cite{Driouich2018}. This approach relied on representing unpredictable behavior of the environment to cover all possible feasible scenarios. The simulation results obtained by JModelica covered the system's complete dynamic behavior; however, it was evident the time consuming issue with almost three days of computer effort to verify the design space of one operation hour of the PV panels behavior. This related study did not include other components of a stand-alone solar PV system.
+
+Another work from $2018$ was the approach to model smart grid components using a formal specification. The authors used a state-based formal specification language named Z; they demonstrated the application of Z to four smart grid components~\cite{Akram2018}. The presented formal specification can be considered as a first step towards modeling of smart grids using formal methods. The starting point of this study was that a smart home can be considered as an integrated system consisting of various objects and system, which communicates and interacts with each other. This approach is based on Petri nets and is under the assumption that modeling the smart home leads to clear understanding of the overall behavior of the smart grid.
+
 \subsection{Thesis Organization}
-Text here
+Section~\ref{sec:SolarPhotovoltaicSystem} gives the background about solar PV systems, design and validation of PV systems, and the mathematical modeling. Section~\ref{sec:AutomatedVerification} presents the automated verification technique. The methodology is presented in section~\ref{sec:Methodology}. Section~\ref{sec:results} is devoted to the results. Section~\ref{sec:Conclusions} presents the conclusion and describes future work.
+
+Section~\ref{sec:Background} gives the background about related studies, 
+program synthesis, sizing design and validation of PV systems, and the mathematical modeling. 
+Section~\ref{sec:Method} presents the automated formal synthesis proposed 
+in this underlying study. Section~\ref{sec:Results} is devoted to the experimentation, 
+results and discussions. Section~\ref{sec:Conclusion} presents the conclusion and describes future work.
