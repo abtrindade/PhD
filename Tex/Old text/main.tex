@@ -1,27 +1,54 @@
 \documentclass[12pt,twoside]{report}
-\usepackage[utf8]{inputenc}
+%\documentclass[12pt,a4paper]{ltxdoc}
+%\documentclass[12pt,a4paper]{article}
+\usepackage{lmodern}			% Usa a fonte Latin Modern			
+\usepackage[T1]{fontenc}		% seleção de códigos de fonte.
+\usepackage[utf8]{inputenc}		% determina a codificação utilizada (conversão automática dos acentos)
+\usepackage{hyperref}  			% controla a formação do índice
+\usepackage{parskip}			% espaçamento entre os parágrafos
+\usepackage{microtype} 			% para melhorias de justificação
+\usepackage{morefloats}			% permite mais floats
+\usepackage{setspace}
+%\singlespacing
+\onehalfspacing
+%\doublespacing
+%\setstretch{1.1}
+
+%\documentclass[10pt,a4paper]{article}
+%\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
 \usepackage{graphicx}
+%Alessandro input: makecell package to permite line break inside tables
+\usepackage{makecell}
+\usepackage[alf]{abntex2cite}	% citacoes
+
+%\documentclass[12pt,twoside]{report}
+%\usepackage[utf8]{inputenc}
+%\usepackage{graphicx}
 \graphicspath{ {images/} }
-\usepackage{caption}
-\usepackage{subcaption}
+%\usepackage{caption}
+%\usepackage{subcaption}
 \usepackage[a4paper,width=150mm,top=25mm,bottom=25mm,bindingoffset=6mm]{geometry}
 \usepackage{fancyhdr}
 \pagestyle{fancy}
 \fancyhead{}
-\fancyhead[RO,LE]{Thesis Title}
+\fancyhead[RO,LE]{Automated Verification Applied to Stand-alone Solar Photovoltaic Systems}
 \fancyfoot{}
 \fancyfoot[LE,RO]{\thepage}
 \fancyfoot[LO,CE]{Chapter \thechapter}
-\fancyfoot[CO,RE]{Author Name}
+\fancyfoot[CO,RE]{Alessandro Trindade}
 \renewcommand{\headrulewidth}{0.4pt}
 \renewcommand{\footrulewidth}{0.4pt}
 
 %\usepackage[style=authoryear,sorting=none]{biblatex}
 %\addbibresource{references.bib}
 
-\title{Thesis Title}
+\title{Automated Verification Applied to Stand-alone Solar Photovoltaic Systems: Optimal Sizing and Project Validation}
 \author{Alessandro Trindade}
-\date{Day Month Year}
+\date{31 July 2019}
 
 \begin{document}
 
@@ -29,12 +56,12 @@
 
 \input{abstract}
 
-\chapter*{Dedication}
-To mum and dad
-
-\chapter*{Declaration}
-I declare that..
-
+%\chapter*{Dedication}
+%To mum and dad
+%
+%\chapter*{Declaration}
+%I declare that..
+%
 \chapter*{Acknowledgements}
 I want to thank...
 
@@ -47,16 +74,16 @@ I want to thank...
 \chapter{Introduction}
 \input{chapters/introduction}
 
-\chapter{Chapter Two Title}
+\chapter{Background}
 \input{chapters/chapter02}
 
-\chapter{Chapter Three Title}
+\chapter{Methodology}
 \input{chapters/chapter03}
 
-\chapter{Chapter Four Title}
+\chapter{Experimental Evaluation}
 \input{chapters/chapter04}
 
-\chapter{Conclusion}
+\chapter{Conclusion and Future Work}
 \input{chapters/conclusion}
 
 \appendix
