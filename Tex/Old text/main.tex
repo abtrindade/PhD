@@ -36,12 +36,7 @@
 \usepackage[a4paper,width=150mm,top=25mm,bottom=25mm,bindingoffset=6mm]{geometry}
 \usepackage{fancyhdr}
 \pagestyle{fancy}
-\fancyhead{}
-\fancyhead[RO,LE]{Automated Verification Applied to Stand-alone Solar Photovoltaic Systems}
-\fancyfoot{}
-\fancyfoot[LE,RO]{\thepage}
-\fancyfoot[LO,CE]{Chapter \thechapter}
-\fancyfoot[CO,RE]{Alessandro Trindade}
+%
 \renewcommand{\headrulewidth}{0.4pt}
 \renewcommand{\footrulewidth}{0.4pt}
 
@@ -56,7 +51,20 @@
 
 \input{titlepage}
 
+\input{2ndcover}
+\thispagestyle{empty}
+\pagenumbering{gobble}
+
+\input{fichacatalog}
+%\thispagestyle{empty}
+\newpage 
+
 \input{abstract}
+\pagestyle{empty}
+%\thispagestyle{empty}
+
+\input{resumo}
+%\thispagestyle{empty}
 
 %\chapter*{Dedication}
 %To mum and dad
@@ -65,7 +73,11 @@
 %I declare that..
 %
 \chapter*{Acknowledgements}
-I want to thank...
+It is not possible to get here without the help of several people. I hope I have not forgotten any and do no wrong.
+
+I would like to thank God (for the gift of life); Solange and Louise (without the patience and support of my family I could not be here); my parents and grandparents; Lucas (for having believed in me and for the patience); the Electricity Department at UFAM (for the support); Professors Feitosa and Barreto from IComp (support and advice); secretary people from IComp (for the support); the financial support from FAPEAM, British Council/Newton Fund and Fundação Amazonas Sustentável; and Coventry University team (Elena, Kojo, and for the opportunity to use field deployed photovoltaic solar systems).
+
+\pagestyle{empty}
 
 \tableofcontents
 
@@ -74,7 +86,18 @@ I want to thank...
 \listoftables
 
 \chapter{Introduction}
+\pagenumbering{arabic}
+\pagestyle{fancy}
+\fancyhead{}
+\fancyhead[RO,LE]{Automated Verification Applied to Stand-alone Solar Photovoltaic Systems}
+\fancyfoot{}
+\fancyfoot[LE,RO]{\thepage}
+\fancyfoot[CO,CE]{Chapter \thechapter}
+\fancyfoot[LO,RE]{A. B. Trindade}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
 \input{chapters/introduction}
+
 
 \chapter{Background}
 \input{chapters/chapter02}
@@ -82,17 +105,21 @@ I want to thank...
 \chapter{Methodology}
 \input{chapters/chapter03}
 
-\chapter{Experimental Evaluation}
+\chapter{Results}
 \input{chapters/chapter04}
 
 \chapter{Conclusion and Future Work}
+\fancyfoot[CO,CE]{Conclusion and Future Work}
 \input{chapters/conclusion}
 
 \appendix
 \chapter{Appendix Title}
+\fancyfoot[CO,CE]{Appendix}
 \input{chapters/appendix}
 
+\fancyfoot[CO,CE]{Bibliography}
 %\printbibliography
 \bibliography{trindadeThesis}{}
+
 
 \end{document}

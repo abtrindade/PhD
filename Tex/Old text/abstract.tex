@@ -1,22 +1,29 @@
 \thispagestyle{plain}
 \begin{center}
-    \Large
-    \textbf{Automated Verification Applied to Stand-alone Solar Photovoltaic Systems}
-    
-    \vspace{0.4cm}
-    \large
-    Optimal Sizing and Project Validation
-    
-    \vspace{0.4cm}
-    \textbf{Alessandro Trindade}
-    
+%    \Large
+%    \textbf{Automated Verification Applied to Stand-alone Solar Photovoltaic Systems}
+%    
+%    \vspace{0.4cm}
+%    \large
+%    Optimal Sizing and Project Validation
+%    
+%    \vspace{0.4cm}
+%    \textbf{Alessandro Trindade}
+%    
     \vspace{0.9cm}
     \textbf{Abstract}
 \end{center}
 verif:
 With declining costs and increasing performance, the deployment of renewable energy systems is growing faster. In 2017, for the first time, the number of people without access to electricity dipped below 1 billion, but trends on energy access likewise fall short of global goals. Particular attention is given to stand-alone solar photovoltaic systems in rural areas or where grid extension is unfeasible. Tools to evaluate electrification projects are available, but they are based on simulations that do not cover all aspects of the design space. Automated verification using model checking has proven to be an effective technique to validate any kind of system. This paper marks the first application of software model checking to formally verify the design of a stand-alone solar photovoltaic system including solar panel, charge controller, battery, inverter, and electric load. Case studies, from real photovoltaic systems deployed in five different sites, ranging from 700 W to 1,200 W, were used to evaluate this proposed approach and to compare that with specialized simulation tools. Different verification tools were evaluated as well, in order to compare performance and soundness. Data from practical applications show the effectiveness of our approach, where specific conditions that lead to failures in a photovoltaic solar system are only detailed by the automated verification method.
 
+
+
+
+
 synthesis:
 There exist various methods and tools to size solar photovoltaic systems; however, the tools are mainly based on simulations, which do not cover all aspects of the design-space. We present a sound and automated approach to obtain optimal sizing of stand-alone PV systems using program synthesis. In particular, our variant of counterexample guided inductive synthesis (CEGIS) approach has two phases: first we synthesize the sizing of stand-alone PV systems based on power reliability, but that may not achieve the lowest cost; second, the proposed solution is then verified iteratively with a lower bound via symbolic model checking. If the verification step does not fail, the lower bound is adjusted; and if it fails, a counterexample is provided with the optimal sizing, thereby linking the technical response of the first phase with cost analysis of the second phase. Commercial equipment data from different manufacturers are provided to our synthesis engine and candidate solutions are derived from financial analysis of the obtained sizing. Our synthesis method is novel and unprecedented to streamline the design of PV systems. Experimental results using seven case studies show that our synthesis method is able to produce within an acceptable run-time the optimal PV system sizing, and a comparative with a specialized simulation tool and real PV systems shows the effectiveness of our approach.
+
+
+
 
 \textit{Keywords}: Formal verification; automated verification; model checking; program synthesis; electrical systems; solar photovoltaic systems
