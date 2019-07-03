@@ -73,9 +73,9 @@
 %I declare that..
 %
 \chapter*{Acknowledgements}
-It is not possible to get here without the help of several people. I hope I have not forgotten any and do no wrong.
+(It is not possible to get here without the help of several people. I hope I have not forgotten any and do no wrong).
 
-I would like to thank God (for the gift of life); Solange and Louise (without the patience and support of my family I could not be here); my parents and grandparents; Lucas (for having believed in me and for the patience); the Electricity Department at UFAM (for the support); Professors Feitosa and Barreto from IComp (support and advice); secretary people from IComp (for the support); the financial support from FAPEAM, British Council/Newton Fund and Fundação Amazonas Sustentável; and Coventry University team (Elena, Kojo, and for the opportunity to use field deployed photovoltaic solar systems).
+I would like to thank God (for the gift of life); Solange and Louise (without the patience and support of my family I could not be here); my parents and grandparents; Lucas (for having believed in me and for the patience); the Electricity Department at UFAM (for the support); Professors Feitosa, Marco Cristo and Barreto from IComp (support and advice); IT support team from IComp (Virtual Machine maintenance); secretary people from IComp (for the administrative support); the financial support from FAPEAM, British Council/Newton Fund and Fundação Amazonas Sustentável; Davide Poggio from University of Sheffield for the HOMER Pro license (Research England QR GCRF Institutional Allocation); and Coventry University team (Elena, Kojo, and Ross for the opportunity to use field deployed photovoltaic solar systems).
 
 \pagestyle{empty}
 
@@ -84,6 +84,8 @@ I would like to thank God (for the gift of life); Solange and Louise (without th
 \listoffigures
 
 \listoftables
+\newpage 
+\input{abbreviations}
 
 \chapter{Introduction}
 \pagenumbering{arabic}
@@ -105,20 +107,24 @@ I would like to thank God (for the gift of life); Solange and Louise (without th
 \chapter{Methodology}
 \input{chapters/chapter03}
 
-\chapter{Results}
+\chapter{Automated Formal Verification of Stand-Alone Solar PV Systems}
 \input{chapters/chapter04}
 
-\chapter{Conclusion and Future Work}
-\fancyfoot[CO,CE]{Conclusion and Future Work}
+\chapter{Automated Formal Synthesis Optimization Method for Sizing of Stand-Alone Solar PV Systems}
+\input{chapters/chapter05}
+
+\chapter{Conclusions}
+\fancyfoot[CO,CE]{Conclusions}
 \input{chapters/conclusion}
 
 \appendix
-\chapter{Appendix Title}
+\chapter{List of Publications}
 \fancyfoot[CO,CE]{Appendix}
 \input{chapters/appendix}
 
-\fancyfoot[CO,CE]{Bibliography}
+\fancyfoot[CO,CE]{References}
 %\printbibliography
+\renewcommand\bibname{References}
 \bibliography{trindadeThesis}{}
 
 

@@ -1,6 +1,7 @@
+\section{Main Contributions}
+
 We have described and evaluated an automated verification method to check whether a given PV system meets its specification using software model checking techniques. We have considered five case studies from real PV systems deployed in five different sites, ranging from $700$ W to $1,200$ W; and three state-of-art verification engines were considered (ESBMC, CBMC, and CPAchecker). Although the verification method proposed takes longer than simulation methods, it is able to present details that lead to failures in a PV system that is not a feature presented in commercial simulation tool. In particular, the proposed method was successful in finding sizing errors and indicating in details. Related to the verification engines comparative, the ESBMC with the Z3 solver executed in the incremental configuration presented the better performance (around four times faster than CBMC), used less RAM memory (less than 2GB when compared to 9.2GB of CBMC and 19.2GB of CPAchecker), and all the results were sound because the PV owners and the monitoring system validated the possible flaws that the system could be presenting in the field.
 %New tests must be performed, in an improved setup (i.e., better computing performance) with the goal of obtaining verification results in shorter times than the ones obtained in this study. 
-As future work, we will also consider other types of renewable energy and even hybrid ones to allow our method to verify typical rural electrification.
 
 ///////////////////////
 
@@ -22,7 +23,16 @@ to find the optimal solution than HOMER Pro; however, the presented
 solution was more complete and detailed, which is very useful 
 to a user to get a list of equipment and go to shopping.
 
-As future work, the authors plan to improve the power reliability analysis, 
+
+\section{Future Work Directions}
+create a research group in automated verification applied to electrical systems
+improve mathematical models
+
+Automated verification: As future work, we will also consider other types of renewable energy and even hybrid ones to allow our method to verify typical rural electrification.
+
+Synthesis: As future work, the authors plan to improve the power reliability analysis, 
 to address the restriction to only allow automated synthesis of 
 riverside communities in the Amazonas state (Brazil), and to 
 validate some cases with deployed PV systems in isolated communities.
+
+\section{Concluding Remarks}
