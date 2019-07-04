@@ -2,12 +2,15 @@ In this chapter some concepts related to the intersection of the two areas of th
 
 First, the concept of formal verification is introduced as background to understanding how a methodology that performs (mainly) bug detection can be used to validate a design sizing or to obtain an optimal solution of PV systems.
 
-And secondly, how a solar PV system can be modelled in order to be verified/optimized by the formal verification methodology.
+And secondly, how a solar PV system can be modelled in order to be validated or optimized by the formal verification methodology.
 
 \section{Formal Methods, Formal Design and Formal Verification}
+
 Formal methods are system design techniques that use rigorously specified mathematical models to validate systems, most notably (and known for) software and hardware systems~\cite{Collins98}. In contrast to other design systems, formal methods use mathematical proof as a complement to system testing in order to ensure correct behavior. With increasing scale and complexity, and safety becomes a more important issue, the formal approach to system design offers another level of insurance.
 
 Formal methods differ from other design systems through the use of formal verification schemes, the basic principles of the system must be proven correct before they are accepted~\cite{Bowen93}. Traditional system design has used extensive testing to verify behavior, but testing is capable of only finite conclusions. Dijkstra and others have demonstrated that tests can only show the situations where a system won't fail, but cannot say anything about the behavior of the system outside of the testing scenarios~\cite{Bentley99}. In contrast, once a theorem is proven true it remains true.
+
+Prior the 80's, mainly deductive verification was used as formal method, with the use of axioms and proving rules to demonstrate the correctness of the system. The original focus was to verify critical systems based on the premise that 'if system is important, must spend the enough time to verify it'~\cite{Lowry1998}. Worth to mention that back in time, formal methods were initially performed by hand.
 
 It is very important to note that formal verification does not avoid the need for testing~\cite{Bowen95}. Formal verification cannot fix bad assumptions in the design, but it can help identify errors in reasoning which would otherwise be left unverified. In several cases, engineers have reported finding flaws in systems once they reviewed their designs formally~\cite{Kling95}.
 
@@ -15,7 +18,7 @@ A formal design can be summarized as a three step process, as described below~\c
 
 \begin{itemize}
 \item Formal Specification: During the formal specification phase, the engineer rigorously defines a system using a modelling language. Modeling languages are fixed grammars which allow users to model complex structures out of predefined types (are rigorously defined). This process of formal specification is similar to the process of converting a word problem into algebraic notation and help engineers to clearly define their problems, goals and solutions. Several engineers who have used formal specifications say that the clarity that this stage produces is a benefit in itself~\cite{Kling95}.
-\item Verification: As stated above, formal methods differ from other specification systems by their heavy emphasis on provability and correctness. By building a system using a formal specification, the designer is actually developing a set of theorems about his system. By proving these theorems correct, the formal verification ensures that the modelled system has an intended behavior. Verification is a difficult process, largely because even the simplest system has several dozen theorems, each of which has to be proven. Given the demands of complexity and Moore's law, almost all formal systems use an automated theorem proving tool of some form. That is the origin of 'automated verification' definition. These tools can prove simple theorems, verify the semantics of theorems, and provide assistance for verifying more complicated proofs and with feedback about the trace of the error (in order to correct the system and the specification of it).
+\item Verification: As stated above, formal methods differ from other specification systems by their heavy emphasis on provability and correctness. By building a system using a formal specification, the designer is actually developing a set of theorems about his system. By proving these theorems correct, the formal verification ensures that the modelled system has an intended behavior. Verification is a difficult process, largely because even the simplest system has several dozen theorems, each of which has to be proven. Given the demands of complexity and Moore's law, almost all formal systems use an automated theorem proving tool of some form~\cite{Collins98}. That is the origin of 'automated verification' definition. These tools can prove simple theorems, verify the semantics of theorems, and provide assistance for verifying more complicated proofs and with feedback about the trace of the error (in order to correct the system and the specification of it).
 \item Implementation: Once the model has been specified and verified, it is implemented by converting the specification into code.
 
 \end{itemize}
@@ -63,7 +66,7 @@ A formal design can be summarized as a three step process, as described below~\c
 \section{Project Validation, Automated Verification and Synthesis Using Model Checking}
 \label{sec:AutomatedVerification}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-/////////////
+
 %\section{Automated Verification }
 It is necessary to keep in mind that validation is the process of determining whether a design meets the needs of the user, whereas verification is the process of determining whether a design meets a set of requirements, specifications, and regulations.  
 
@@ -112,7 +115,7 @@ Fig. \ref{fig:modelcheckstruc} shows the structure of a typical model checking s
 \begin{figure}[h]
 \includegraphics[width=0.8\textwidth]{modelcheckstruc}
 \centering
-\caption{Model Checker structure (Source: \cite{Clarke2008})}
+\caption{Model Checker structure. Source: \cite{Clarke2008}.}
 \label{fig:modelcheckstruc}
 \end{figure}
 
@@ -123,104 +126,72 @@ The Fig. \ref{fig:systemverif} shows the process to convert a real system to a m
 \begin{figure}[h]
 \includegraphics[width=0.8\textwidth]{systemverif}
 \centering
-\caption{From real system verification to model checking (adapted from \cite{Clarke2008})}
+\caption{From real system verification to model checking. Source: adapted from \cite{Clarke2008}.}
 \label{fig:systemverif}
 \end{figure}
 
 In order to solve the problem of state explosion, many different techniques were developed at the last decades. One of the promising is the Bounded Model Checking (BMC). 
 
-BMC is a method that checks the model up to a given path in the path length. BMC algorithms traverses a finite state machine for a fixed number of steps, , and checks whether violation occurs with this bound. It uses fast SAT solvers, where SAT means satisfiability. SAT problem, as defined by \cite{Clarke2008}, is a problem of determining if there are certain conditions or interpretation that satisfy a given Boolean expression. SAT solvers are used in BMC, such that if there are some Boolean function, the solver would search the model for conditions (value of variables) that would make the formula $TRUE$. If SAT Solver find a substitution for the formula/function then the substitute induces a counterexample.  
+BMC is a method that checks the model up to a given path in the path length. BMC algorithms traverses a finite state machine for a fixed number of steps, , and checks whether violation occurs with this bound. It uses fast SAT solvers, where SAT means satisfiability. 
 
-CBMC is considering the best-known model verification tool to validate code in ANSI-C and C++, as can be seen in \cite{Kroening}. 
+SAT problem, as defined by \cite{Clarke2008}, is a problem of determining if there are certain conditions or interpretation that satisfy a given Boolean expression. SAT solvers are used in BMC, such that if there are some Boolean function, the solver would search the model for conditions (value of variables) that would make the formula $TRUE$. If SAT Solver find a substitution for the formula/function then the substitute induces a counterexample.  
 
-ESBMC is a context-bounded model checker for embedded C/C++ software based on Satisfiability Modulo Theories (SMT) solver, which can use CBMC as front-end.  
+%%CBMC is considering the best-known model verification tool to validate code in ANSI-C and C++, as can be seen in \cite{Kroening}. 
+%
+%ESBMC is a context-bounded model checker for embedded C/C++ software based on Satisfiability Modulo Theories (SMT) solver, which can use CBMC as front-end.  
 The use of SMT, instead of Boolean Satisfiability SAT from the original BMC, comes as an alternative to overcome limitations of the systems modeling, especially considering that the complexity of these is increasing and the SMT method has high level and richer theories than the SAT to represent the models. 
 
-//////////////////
+%Although simulation and testing explore possible behaviors and scenarios of a given system, they leave open the question of whether unexplored trajectories may contain a flaw~\cite{ClarkeHV18}. Formal verification conducts an exhaustive exploration of all possible behaviors; when a design is said to be ``correct'' by a formal verification method, it implies that all behaviors have been explored; questions regarding adequate coverage or missed behavior becomes irrelevant~\cite{Clarke2012}. Formal verification is a systematic approach that applies mathematical reasoning to obtain guarantees about the correctness of a system; one successful method in this domain is model checking~\cite{Clarke2012}. 
 
-Although simulation and testing explore possible behaviors and scenarios of a given system, they leave open the question of whether unexplored trajectories may contain a flaw~\cite{ClarkeHV18}. Formal verification conducts an exhaustive exploration of all possible behaviors; when a design is said to be ``correct'' by a formal verification method, it implies that all behaviors have been explored; questions regarding adequate coverage or missed behavior becomes irrelevant~\cite{Clarke2012}. Formal verification is a systematic approach that applies mathematical reasoning to obtain guarantees about the correctness of a system; one successful method in this domain is model checking~\cite{Clarke2012}. 
-
-Here we evaluate three state-of-the-art model checkers to formally verifying and synthesize PV designs w.r.t. user requirements.
+At this work will be evaluated three state-of-the-art model checkers to formally verifying and synthesize PV designs w.r.t. user requirements.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{CBMC}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-The C Bounded Model Checker (CBMC) falsifies assertions in C programs or proves that they are safe if a completeness threshold is given~\cite{Kroening}. CBMC implements a bit-precise translation of a C program, annotated with assertions and with loops unrolled up to a given depth, into a logical formula. If the formula is satisfiable, then a failing execution that leads to a violated assertion exists~\cite{Kroening}. CBMC's verification flow can be summarized in three stages: (i) Front-end: scans, parses and type-checks C code; it converts control flow elements, such as \textit{if} or \textit{switch} statements, loops and jumps, into equivalent guarded \textit{goto} statements, thus aiming to reduce verification effort; (ii) Middle-end: performs symbolic execution by eagerly unwinding loops up to a fixed bound, which can be specified by the user on a per-loop basis or globally, for all loops and finally; (iv) Back-end: supports SAT and SMT solvers to discharge verification conditions.
+
+The C Bounded Model Checker (CBMC) falsifies assertions in C programs or proves that they are safe if a completeness threshold is given~\cite{Kroening}. CBMC implements a bit-precise translation of a C program, annotated with assertions and with loops unrolled up to a given depth, into a logical formula. If the formula is satisfiable, then a failing execution that leads to a violated assertion exists~\cite{Kroening}. 
+
+CBMC's verification flow can be summarized in three stages: 
+
+\begin{itemize}
+\item Front-end: scans, parses and type-checks C code; it converts control flow elements, such as \textit{if} or \textit{switch} statements, loops and jumps, into equivalent guarded \textit{goto} statements, thus aiming to reduce verification effort; 
+\item Middle-end: performs symbolic execution by eagerly unwinding loops up to a fixed bound, which can be specified by the user on a per-loop basis or globally, for all loops and finally; 
+\item Back-end: supports SAT and SMT solvers to discharge verification conditions.
+\end{itemize}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{ESBMC}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-The Efficient SMT-based Bounded Model Checker (ESBMC) is a bounded and unbounded model checker for C programs~\cite{esbmc2018}, which supports the verification of LTL properties with bounded traces~\cite{DBLP:journals/sosym/MorseCN015}. ESBMC's verification flow can be summarized in three stages: (i) a front-end that can read and compile C code, where the system formal specification is first handled; (ii) preprocessing steps to deal with code representation, control flow and unwinding of loops, and model simplification, thereby aiming to reduce verification effort; and finally (iii) the SMT solving stage, where all constraints and properties of the system are encoded into SMT and checked for satisfiability. ESBMC exploits the standardized input language of SMT solvers (SMT-LIB\footnote{http://smtlib.cs.uiowa.edu/} logic format) to make use of a resource called \textit{assertion stack}~\cite{Morse2015}. This enables ESBMC, and the respective solver, to learn from previous checks, thus optimizing the search procedure and potentially eliminating a large amount of formula state space to be searched, because it solves and disregards data during the process, incrementally. This technique is called ``incremental SMT''~\cite{DBLP:journals/fac/SchrammelKBMTB17} and allows ESBMC to reduce the memory overhead, mainly when the verified system is complex and the computing platform does not have large amount of memory to deal with the entire design space state.
-%
+
+The Efficient SMT-based Bounded Model Checker (ESBMC) is a bounded and unbounded model checker for C programs~\cite{esbmc2018}, which supports the verification of LTL properties with bounded traces~\cite{DBLP:journals/sosym/MorseCN015}. 
+
+ESBMC's verification flow can be summarized in three stages: 
+
+\begin{itemize}
+\item A front-end that can read and compile C code, where the system formal specification is first handled; 
+\item Preprocessing steps to deal with code representation, control flow and unwinding of loops, and model simplification, thereby aiming to reduce verification effort; and finally 
+\item The SMT solving stage, where all constraints and properties of the system are encoded into SMT and checked for satisfiability.
+\end{itemize}
+ 
+ESBMC exploits the standardized input language of SMT solvers (SMT-LIB\footnote{http://smtlib.cs.uiowa.edu/} logic format) to make use of a resource called \textit{assertion stack}~\cite{Morse2015}. This enables ESBMC, and the respective solver, to learn from previous checks, thus optimizing the search procedure and potentially eliminating a large amount of formula state space to be searched, because it solves and disregards data during the process, incrementally. This technique is called ``incremental SMT''~\cite{DBLP:journals/fac/SchrammelKBMTB17} and allows ESBMC to reduce the memory overhead, mainly when the verified system is complex and the computing platform does not have large amount of memory to deal with the entire design space state.
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{CPAchecker}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-Automatic program verification requires a choice between precision and efficiency. %The more precise a method, the fewer false positives it will produce, but also the more expensive it is, and thus applicable to fewer programs. 
-Historically, this trade-off was reflected in two major approaches to static verification: program analysis and model checking. In order to experiment with the trade-off, and in order to be able to set the dial between the two extreme points, Configurable Program Analysis (CPA) provides a conceptual basis for expressing different verification approaches in the same formal setting. The CPA formalism provides an interface for the definition of program analyses. Consequently, CPAchecker provides an implementation framework that allows the seamless integration of program analyses that are expressed in the CPA framework. The comparison among different approaches in the same experimental setting is intended to be easy and the experimental results are expected to be more meaningful~\cite{Beyer2011}. Related to the architecture, the central data structure is a set of control-flow automata (CFA), which consists of control-flow locations and control-flow edges. The CPA framework provides interfaces to SMT solvers and interpolation procedures~\cite{Beyer2011}. %Currently, CPAchecker uses MathSAT as SMT solver; and CSIsat and MathSAT as interpolation procedures~\cite{Beyer2011}. %CPAchecker performs reachability analysis and operates on an object of the abstract data type CPA, i.e., the underlying verification algorithm applies operations from the CPA interface without knowing which concrete CPA it is analyzing. For most configurations, the concrete CPA will be a composite CPA, which implements the combination of different CPAs. \textcolor{red}{It is unclear what a CPA is.}
+
+Automatic program verification requires a choice between precision and efficiency. The more precise a method, the fewer false positives it will produce, but also the more expensive it is, and thus applicable to fewer programs. 
+
+Historically, this trade-off was reflected in two major approaches to static verification: program analysis and model checking. In order to experiment with the trade-off, and in order to be able to set the dial between the two extreme points, Configurable Program Analysis (CPA) provides a conceptual basis for expressing different verification approaches in the same formal setting. 
+
+The CPA formalism provides an interface for the definition of program analyses. Consequently, CPAchecker provides an implementation framework that allows the seamless integration of program analyses that are expressed in the CPA framework. The comparison among different approaches in the same experimental setting is intended to be easy and the experimental results are expected to be more meaningful~\cite{Beyer2011}. Related to the architecture, the central data structure is a set of control-flow automata (CFA), which consists of control-flow locations and control-flow edges. 
+
+The CPA framework provides interfaces to SMT solvers and interpolation procedures~\cite{Beyer2011}. Currently, CPAchecker uses MathSAT as SMT solver; and CSIsat and MathSAT as interpolation procedures~\cite{Beyer2011}. %CPAchecker performs reachability analysis and operates on an object of the abstract data type CPA, i.e., the underlying verification algorithm applies operations from the CPA interface without knowing which concrete CPA it is analyzing. For most configurations, the concrete CPA will be a composite CPA, which implements the combination of different CPAs. \textcolor{red}{It is unclear what a CPA is.}
 %In software verification, it is usual to take a considerable amount of effort to convert a verification idea into actual experimental results and CPAchecker aims to accelerate this process~\cite{Beyer2011}.
 
 //////Begin optimization
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Automated Verification Using Model Checking}
-\label{sec:AutomatedVerification}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-Although simulation and testing explore possible behaviors and scenarios of a given system, 
-they leave open the question of whether unexplored trajectories may contain a flaw. 
-Formal verification conducts an exhaustive exploration of all possible behaviors; 
-when a design is said to be ``correct'' by a formal verification method, it implies that all 
-behaviors have been explored, and questions regarding adequate coverage or missed behavior 
-becomes irrelevant~\cite{Clarke2012}. Formal verification is a systematic approach that 
-applies mathematical reasoning to obtain guarantees about the correctness of a system; 
-one successful method in this domain is model checking~\cite{Clarke2012}. 
-Here we evaluate three state-of-the-art model checkers to formally verifying PV designs w.r.t. user requirements.
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsubsection{CBMC}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-The C Bounded Model Checker (CBMC) falsifies assertions in C programs 
-or proves that they are safe if a completeness threshold is given~\cite{Kroening}. 
-CBMC implements a bit-precise translation of a C program, annotated with assertions 
-and with loops unrolled up to a given depth, into a logical formula. If the formula is satisfiable, 
-then a failing execution that leads to a violated assertion exists~\cite{Kroening}. CBMC's verification 
-flow can be summarized in three stages: (i) Front-end: scans, parses and type-checks C code; 
-it converts control flow elements, such as \textit{if} or \textit{switch} statements, loops and jumps, 
-into equivalent guarded \textit{goto} statements, thus aiming to reduce verification effort; 
-(ii) Middle-end: performs symbolic execution by eagerly unwinding loops up to a fixed bound, 
-which can be specified by the user on a per-loop basis or globally, for all loops and finally; 
-(iv) Back-end: supports SAT and SMT solvers to discharge verification conditions.
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsubsection{ESBMC}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-ESBMC (or Efficient SMT-based Bounded Model Checker) is a bounded and unbounded model checker for C programs~\cite{esbmc2018}, which supports the verification of LTL properties with bounded traces~\cite{DBLP:journals/sosym/MorseCN015}. ESBMC's verification flow can be summarized in three stages: (i) a front-end that can read and compile C code, where the system formal specification is first handled; (ii) preprocessing steps to deal with code representation, control flow and unwinding of loops, and model simplification, thereby aiming to reduce verification effort; and finally (iii) the SMT solving stage, where all constraints and properties of the system are encoded into SMT and checked for satisfiability. ESBMC exploits the standardized input language of SMT solvers (SMT-LIB\footnote{http://smtlib.cs.uiowa.edu/} logic format) to make use of a resource called \textit{assertion stack}~\cite{Morse2015}. This enables ESBMC, and the respective solver, to learn from previous checks, thus optimizing the search procedure and potentially eliminating a large amount of formula state space to be searched, because it solves and disregards data during the process, incrementally. This technique is called "incremental SMT"~\cite{DBLP:journals/fac/SchrammelKBMTB17} and allows ESBMC to reduce the memory overhead, mainly when the verified system is complex and the computing platform does not have large amount of memory to deal with the entire design space state.
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsubsection{CPAchecker}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-Automatic program verification requires a choice between precision and efficiency. 
-The more precise a method, the fewer false positives it will produce, but also the 
-more expensive it is, and thus applicable to fewer programs. 
-Historically, this trade-off was reflected in two major approaches to static verification: 
-program analysis and model checking. In order to experiment with the trade-off, 
-and in order to be able to set the dial between the two extreme points, 
-Configurable Program Analysis (CPA) provides a conceptual basis for expressing 
-different verification approaches in the same formal setting. The CPA formalism 
-provides an interface for the definition of program analyses. Consequently, CPAchecker 
-provides an implementation framework that allows the seamless integration of program 
-analyses that are expressed in the CPA framework. The comparison among different 
-approaches in the same experimental setting is intended to be easy and the experimental 
-results are expected to be more meaningful~\cite{Beyer2011}. Related to the architecture, 
-the central data structure is a set of control-flow automata (CFA), which consists of control-flow 
-locations and control-flow edges. The CPA framework provides interfaces to SMT solvers and 
-interpolation procedures~\cite{Beyer2011}. Currently, CPAchecker uses MathSAT as SMT solver; 
-and CSIsat and MathSAT as interpolation procedures~\cite{Beyer2011}. 
-
 %-----------------------------------------------------------
-\subsection{Program Synthesis}
+\subsection{CEGIS and Program Synthesis}
 \label{sec:ProgramSynthesis}
 %-----------------------------------------------------------
 
@@ -238,16 +209,6 @@ The correctness specification $\sigma$ provided to our program synthesizer is of
 In Figure~\ref{Counter-Example-Guided-Inductive-Synthesis}, regarding traditional CEGIS method, the phases {\sc Synthesize} and {\sc Verify} interact via a finite set of test vectors {\sc inputs}, which is incrementally updated. Given the correctness specification $\sigma$, the {\sc Synthesize} procedure tries to find an existential witness $\vec{F}$ satisfying the specification $\sigma(\vec{x}, \vec{F})$, for all $\vec{x}$ in {\sc inputs} (as opposed to all $\vec{x} \in \mathcal{D}$). If {\sc Synthesize} succeeds in finding a witness~$\vec{F}$, the latter is a candidate solution (i.e., feasible combination of equipment) to the full synthesis formula, which is passed to {\sc Verify} in order to check whether it is a proper solution ({\it i.e.}, $\vec{F}$ satisfies the specification $\sigma(\vec{x}, \vec{F})$ for all $\vec{x}\in\mathcal{D}$). If this is the case, then the algorithm terminates, i.e., we have found a feasible equipment with the lowest cost; otherwise, in the CEGIS traditional method, additional information is provided to the phase {\sc Synthesize}, in the form of a new counterexample that is added to the {\sc inputs} set and the loop iterates again.
 
 One may notice that each iteration of the traditional CEGIS loop adds a new input to the finite set $\text{\sc inputs}$, which is then used for synthesis.  Given that the full set of inputs $\mathcal{D}$ is finite because we use bit-vector expressions, this means that the refinement loop can only iterate over a finite number of times; however, {\sc Synthesize} may conclude that no candidate solution obeying $\sigma$ for the finite set $\text{\sc inputs}$ exists and our synthesis engine can then conclude that no feasible equipment combination was found.
-
-However, in our variant CEGIS method proposed here, there are four particular differences related to the traditional CEGIS: 
-(1) there exists no test vector and every candidate is generated during the run-time in the {\sc Synthesize} phase and sent to the {\sc Verify} phase; 
-(2) if the {\sc Verify} phase is unsuccessful, then a new candidate is generated by {\sc Synthesize} and 
-(3) the lower bound of the {\sc Verify} phase is incremented to search for the lowest cost; 
-(4) as a result, there exists no refinement from the {\sc Verify} phase back to the {\sc Synthesize} phase, i.e., 
-a new counterexample is not added to the {\sc input} set since a failure during the {\sc Verify} phase will only discard 
-a given candidate that could be feasible in the next iteration with a new lower bound.
-
-Program synthesis engines that implement the CEGIS approach~\cite{sketch} can automatically produce solutions for a large variety of specifications; here we have used symbolic software verifiers based on SMT solvers.
 
 \section{Solar Photovoltaic System }
 According to \cite{Roy}, a PV system is designed to give the electric supply to a load. This load can be either Alternate Current (AC) type or Direct Current (DC) type. Electric supply can be needed either in daytime or evening time (in particular cases, in both times). The most basic PV system can give supply only in daytime.  For night hours or rainy days, one needed to have batteries, where power can be stored and used \cite{Gules}. 
@@ -270,7 +231,7 @@ Usually this type of system is for low power applications, as defined by \cite{R
 \begin{figure}[h]
 \includegraphics[width=0.6\textwidth]{unregulatedSPV.png}
 \centering
-\caption{Unregulated standalone SPV system with DC load (Source: \cite{Roy})}
+\caption{Unregulated standalone SPV system with DC load. Source: \cite{Roy}.}
 \label{fig:unregSPV}
 \end{figure}
 
@@ -280,7 +241,7 @@ It is similar to unregulated standalone system with DC load, but the main differ
 \begin{figure}[h]
 \includegraphics[width=0.8\textwidth]{regulatedSPV1.png}
 \centering
-\caption{Regulated standalone SPV system with DC load (Source: \cite{Roy})}
+\caption{Regulated standalone SPV system with DC load. Source: \cite{Roy}.}
 \label{fig:regSPV1}
 \end{figure}
 
@@ -290,7 +251,7 @@ Configuration with PV array, battery, MPPT and DC load, as shown in Fig.\ref{fig
 \begin{figure}[h]
 \includegraphics[width=0.8\textwidth]{regulatedSPV2.png}
 \centering
-\caption{Regulated standalone SPV system with battery DC load (Source: \cite{Roy})}
+\caption{Regulated standalone SPV system with battery DC load. Source: \cite{Roy}.}
 \label{fig:regSPV2}
 \end{figure}
 
@@ -307,7 +268,7 @@ the most suitable configuration is the regulated stand-alone system with battery
 \begin{figure}[h]
 \includegraphics[width=0.8\textwidth]{regulatedSPV3.png}
 \centering
-\caption{Regulated standalone system with battery, AC load (Source: \cite{Roy})}
+\caption{Regulated standalone system with battery, AC load. Source: \cite{Roy}.}
 \label{fig:regSPV3}
 \end{figure}
 
@@ -393,7 +354,7 @@ The main purpose of this section is to describe the models for the elements of a
 \begin{figure}[h]
 \includegraphics[width=0.95\textwidth]{blockdiagramPVS}
 \centering
-\caption{Block diagram for the stand-alone PV system (Source: \cite{Hansen})}
+\caption{Block diagram for the stand-alone PV system. Source: \cite{Hansen}.}
 \label{fig:blockdiagram}
 \end{figure}
 
@@ -409,7 +370,7 @@ To increase their utility, a number of individual PV cells are interconnected to
 \begin{figure}[h]
 \includegraphics[width=0.95\textwidth]{celmodarray}
 \centering
-\caption{PV cell, module and array (Source: \cite{SamlexSolar})}
+\caption{PV cell, module and array. Source: \cite{SamlexSolar}.}
 \label{fig:celmodarray}
 \end{figure}
 
@@ -424,7 +385,7 @@ The performance of photovoltaic systems (solar cell/panels), that is, the output
 \begin{figure}[h]
 \includegraphics[width=0.95\textwidth]{equivckt}
 \centering
-\caption{Four different equivalent circuit models: (a) 1-diode; (b) 1-diode/1-resistor; (c) 1-diode/2-resistor; (d) 2-diode/2-resistor (Source: \cite{Cubas})}
+\caption{Four different equivalent circuit models: (a) 1-diode; (b) 1-diode/1-resistor; (c) 1-diode/2-resistor; (d) 2-diode/2-resistor. Source: \cite{Cubas}.}
 \label{fig:equivckt}
 \end{figure}
  
@@ -505,7 +466,7 @@ A single-diode without series and shunt resistances is considered. Equation 1 is
 \begin{figure}[h]
 \includegraphics[width=0.90\textwidth]{ivcurve}
 \centering
-\caption{$ I-V $ characteristic curve of an ideal PV cell (Source: \cite{Saloux})}
+\caption{$ I-V $ characteristic curve of an ideal PV cell. Source: \cite{Saloux}.}
 \label{fig:ivcurve}
 \end{figure}
 
@@ -694,7 +655,7 @@ In general, the battery models view the battery as a voltage source $ E $ in ser
 \begin{figure}[h]
 \includegraphics[width=0.7\textwidth]{batteryckt}
 \centering
-\caption{Schematic diagram of the battery. Source: \cite{Hansen}}
+\caption{Schematic diagram of the battery. Source: \cite{Hansen}.}
 \label{fig:batteryckt}
 \end{figure}
 
@@ -847,7 +808,7 @@ According \cite{Hansen}, to protect the battery against an excessive charge, the
 \begin{figure}[h]
 \includegraphics[width=0.7\textwidth]{controllerover}
 \centering
-\caption{Operating principle of an overcharge protector (Source: \cite{Hansen})}
+\caption{Operating principle of an overcharge protector. Source: \cite{Hansen}.}
 \label{fig:controllerover}
 \end{figure}
 
@@ -856,7 +817,7 @@ To protect the battery against excessive discharge, the load is disconnected whe
 \begin{figure}[h]
 \includegraphics[width=0.7\textwidth]{controllerdisc}
 \centering
-\caption{Operating principle of a discharge protector (Source: \cite{Hansen})}
+\caption{Operating principle of a discharge protector. Source: \cite{Hansen}.}
 \label{fig:controllerdisc}
 \end{figure}
 
@@ -869,7 +830,7 @@ The steps in the modeling of the controller process are summarized in Table \ref
 \renewcommand{\arraystretch}{1.3}
 % if using array.sty, it might be a good idea to tweak the value of
 % \extrarowheight as needed to properly center the text within the cells
-\caption{Summary of the controller process (Source: \cite{Hansen})}
+\caption{Summary of the controller process. Source: \cite{Hansen}.}
 \label{table:controller}
 \centering
 %% Some packages, such as MDW tools, offer better commands for making tables
