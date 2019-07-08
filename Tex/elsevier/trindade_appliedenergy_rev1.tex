@@ -91,7 +91,7 @@ In order to simulate or evaluate a PV system, there exist various specialized to
 
 Optimization of PV systems is not a recent topic; since the $90$'s different techniques using a wide variety of criteria to find ultimate combinations for design parameters, based on intuitive, numerical and analytical methods were developed and evaluated~\cite{Applasamy2011}. An ideal combination of any PV system is made by the best compromise between two considered objectives, which is power \textit{reliability} and \textit{system cost}~\cite{Alsadi2018}.
  
-\textcolor{red}{At the present work, the focus is not a novelty in the criteria or the optimization objectives. Our aim and novelty is to show a most effective approach on the pursuit of the optimal solution, using formal methods.}
+\textcolor{red}{In this study, our focus is not on a novel criteria or optimization objectives. Instead, our novelty relies on an effective approach on the pursuit of the optimal solution using formal methods, which outperforms existing state-of-the-art simulation tools.}
 
 Formal methods based on \textit{symbolic model checking} and its application 
 to synthesize PV systems have not been further explored in literature, which could offer 
@@ -107,7 +107,11 @@ cost of reference; if the verification step does not fail, the lower bound is ad
 If it fails then a counterexample is provided with an optimal sizing that meets 
 power reliability and system cost.
 
-Our work makes two major contributions. \textbf{Firstly}, the use of automated 
+%------------------------------------------------------
+\subsection{Contributions}
+%------------------------------------------------------
+
+Our work makes three major contributions. \textbf{First}, the use of automated 
 symbolic verification methods in electrical systems was uncommon in recent 
 prior studies~\cite{abs-1811-09438}, and specifically their use in synthesizing 
 optimal PV sizing is unprecedented. Here, a list of PV components (i.e., PV panels, 
@@ -115,11 +119,14 @@ charge controllers, inverters, and batteries) can be fed to our proposed synthes
 method together with user requirements and environment constraints, 
 and our synthesis algorithm based on symbolic model checking 
 can find the optimal solution in technical and economical terms. 
-\textbf{Secondly}, we evaluate different state-of-art symbolic software 
+\textbf{Second}, we evaluate different state-of-art symbolic software 
 verifiers with the goal of obtaining the best performance in our verification 
 back-end for synthesizing optimal PV systems, \textcolor{red}{being the first work that performs this type of comparative.}
+\textcolor{red}{\textbf{Third}, our experimental results show that our synthesis method is an effective and efficient approach 
+on the pursuit of the optimal solution of PV system design using formal methods, which outperforms 
+existing state-of-the-art simulation tools.}
 
-\textit{Outline}. Section~\ref{sec:Background} gives the background about related studies, 
+\noindent \textit{Outline}. Section~\ref{sec:Background} gives the background about related studies, 
 program synthesis, sizing design and validation of PV systems, and the mathematical modeling. 
 Section~\ref{sec:Method} presents the automated formal synthesis proposed 
 in this underlying study. Section~\ref{sec:Results} is devoted to the experimentation, 
