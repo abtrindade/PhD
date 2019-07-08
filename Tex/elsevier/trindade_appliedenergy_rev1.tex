@@ -67,7 +67,7 @@
 \address[mysecondaryaddress]{University of Manchester, School of Computer Science, Kilburn Building, Manchester M13 9PL}
 
 \begin{abstract}
-There exist various methods and tools to size solar photovoltaic systems; however, these existing tools are mainly based on simulations, which do not cover all aspects of the design-space during the search for the optimal solution. \textcolor{red}{Here, we present a novel sound and automated approach to obtain optimal sizing of stand-alone PV systems using program synthesis, with a particular focus on computer optimization methods instead of criteria or objectives, which were investigated in prior studies over the last two decades}. In particular, our variant of counterexample guided inductive synthesis (CEGIS) approach has two phases: first we synthesize the sizing of stand-alone PV systems based on power reliability, but that may not achieve the lowest cost; second, the proposed solution is then verified iteratively with a lower bound \textcolor{red}{cost} via symbolic model checking. If the verification step does not fail, the lower bound is adjusted; and if it fails, a counterexample is provided with the optimal sizing, thereby linking the technical response of the first phase with cost analysis of the second phase. Commercial equipment data from different manufacturers are provided to our synthesis engine and candidate solutions are derived from financial analysis of the obtained sizing. Our synthesis method is novel and unprecedented to streamline the design of PV systems. Experimental results using seven case studies show that our synthesis method is able to produce within an acceptable run-time the optimal PV system sizing. \textcolor{red}{We also present a comparative with a specialized simulation tool over real PV systems to show the effectiveness of our approach, which is able to provide more accurate results of optimal sizing of stand-alone PV systems than that existing simulation tool}.
+There exist various methods and tools to size solar photovoltaic systems; however, these existing tools are mainly based on simulations, which do not cover all aspects of the design-space during the search for the optimal solution. Here, we present a novel sound and automated approach to obtain optimal sizing of stand-alone PV systems using program synthesis, with a particular focus on computer optimization methods instead of criteria or objectives, which were investigated in prior studies over the last two decades. In particular, our variant of counterexample guided inductive synthesis (CEGIS) approach has two phases: first we synthesize the sizing of stand-alone PV systems based on power reliability, but that may not achieve the lowest cost; second, the proposed solution is then verified iteratively with a lower bound cost via symbolic model checking. If the verification step does not fail, the lower bound is adjusted; and if it fails, a counterexample is provided with the optimal sizing, thereby linking the technical response of the first phase with cost analysis of the second phase. Commercial equipment data from different manufacturers are provided to our synthesis engine and candidate solutions are derived from financial analysis of the obtained sizing. Our synthesis method is novel and unprecedented to streamline the design of PV systems. Experimental results using seven case studies show that our synthesis method is able to produce within an acceptable run-time the optimal PV system sizing. We also present a comparative with a specialized simulation tool over real PV systems to show the effectiveness of our approach, which is able to provide more accurate results of optimal sizing of stand-alone PV systems than that existing simulation tool.
 \end{abstract}
 
 \begin{keyword}
@@ -91,7 +91,7 @@ In order to simulate or evaluate a PV system, there exist various specialized to
 
 Optimization of PV systems is not a recent topic; since the $90$'s different techniques using a wide variety of criteria to find ultimate combinations for design parameters, based on intuitive, numerical and analytical methods were developed and evaluated~\cite{Applasamy2011}. An ideal combination of any PV system is made by the best compromise between two considered objectives, which is power \textit{reliability} and \textit{system cost}~\cite{Alsadi2018}.
  
-\textcolor{red}{Note that in this study, our focus is not on a novel criteria or even optimization objectives. Instead, our novelty relies on an effective approach on the pursuit of the optimal solution of PV systems using formal methods, which outperforms existing state-of-the-art simulation tools.}
+Note that in this study, our focus is not on a novel criteria or even optimization objectives. Instead, our novelty relies on an effective approach on the pursuit of the optimal solution of PV systems using formal methods, which outperforms existing state-of-the-art simulation tools.
 
 Formal methods based on \textit{symbolic model checking} and its application 
 to synthesize PV systems have not been further explored in literature, which could offer 
@@ -121,13 +121,13 @@ and our synthesis algorithm based on symbolic model checking
 can find the optimal solution in technical and economical terms. 
 \textbf{Second}, we evaluate different state-of-art symbolic software 
 verifiers with the goal of obtaining the best performance in our verification 
-back-end for synthesizing optimal PV systems, \textcolor{red}{being the first work that performs this type of comparative.}
-\textcolor{red}{\textbf{Third}, our experimental results show that our synthesis method is an effective and efficient approach 
+back-end for synthesizing optimal PV systems, being the first work that performs this type of comparative.
+\textbf{Third}, our experimental results show that our synthesis method is an effective and efficient approach 
 on the pursuit of the optimal solution of PV systems using formal methods, which outperforms 
-existing state-of-the-art simulation tools. As a result, our study marks the first application of a sound
+existing state-of-the-art simulation tool. As a result, our study marks the first application of a sound
 and automated formal synthesis approach able to provide accurate results of optimal sizing of stand-alone PV systems.
 Thus, we considerably advance the state-of-the-art in applied energy over the last two decades 
-with the goal of optimally designing PV systems.}
+with the goal of optimally designing PV systems.
 
 \noindent \textit{Outline}. Section~\ref{sec:Background} gives the background about related studies, 
 program synthesis, sizing design and validation of PV systems, and the mathematical modeling. 
@@ -144,7 +144,7 @@ results and discussions. Section~\ref{sec:Conclusion} presents the conclusion an
 \subsection{State-of-art in Automated Verification of Electrical Systems}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\textcolor{red} {Here we discuss only the use of formal methods on electrical systems in general since currently there exists no use of it or even program synthesis to obtain the optimization of PV sizing.}
+Here we discuss only the use of formal methods on electrical systems in general since currently there exists no use of it or even program synthesis to obtain the optimization of PV sizing.
 
 The conversion of traditional power grid into a smart grid, a fundamental example of a CPS, 
 raises a number of issues that requires novel methods and applications. In $2012$, a Chinese smart grid implementation was considered as case study to address the verification problem for performance and energy consumption~\cite{Yukseletall2012}. The authors employed a stochastic model checking approach and presented a modelling and analysis study using PRISM, which is a probabilistic model checker~\cite{KwiatkowskaNP11}. The focus of this study was on how CPSs integrate information and communication technology functions to the physical elements of a system for monitoring and controlling purposes; here, the authors employed automated verification of certain quantitative properties of the system, as probability of	 node failure in the long run, impact of repair service on the failure risk, and expected energy consumption, without any interest in power generation or even solar PV systems.
@@ -817,7 +817,7 @@ sized using our synthesized results in order to validate it.
 
 We have described and evaluated an automated synthesis method 
 to obtain the optimal size of PV system using software model 
-checking techniques. \textcolor{red}{The focus was on the method to obtain the optimal solution, based on formal methods that can cover the design-space better than simulation tools}. We have considered seven case studies 
+checking techniques. The focus was on the method to obtain the optimal solution, based on formal methods that can cover the design-space better than simulation tools. We have considered seven case studies 
 from PV systems in two different sites of the Amazonas State 
 in Brazil, ranging from $253$\,W to $1,586$\,W peak; and 
 three state-of-art verification engines were considered 
