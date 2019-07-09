@@ -21,7 +21,7 @@ The PV cell in a solar PV system, as defined in \cite{Rawat}, is a semiconductor
 %
 %The increase in a number of PV systems installed all over the world brings the need for proper modeling and simulation tools for researcher and practitioners involved in their application.
 
-The increase in a number of PV systems installed all over the world brings the need for proper modeling and simulation tools for researcher and practitioners involved in their application. 
+The increase in a number of PV systems installed all over the world brings the need for proper modeling of those equipment and simulation tools for researcher and practitioners involved in their application. 
 
 Moreover, the optimum sizing of these devices is important for reliable operation. Therefore, these systems need to be designed properly according to the site, land area available, load requirement, load pattern, environmental conditions and economics in order to utilize available resources efficiently and economically \cite{Rawat}.
 
@@ -66,8 +66,8 @@ Related to \textbf{automated verification}, in this study, a mathematical model 
 The implementation of the proposed tool is carried out by means of an algorithm in language C, that is executed by three state-of-the-art model checkers to formally verifying PV designs, in order to evaluate performance and correctness: the C Bounded Model Checker (CBMC)~\cite{Kroening}, the Efficient SMT-based Bounded Model Checker (ESBMC)~\cite{esbmc2018}, and the Configurable Program Analysis Checker (CPAchecker).
 %three the efficient SMT-based bounded model checker (ESBMC)~\cite{esbmc2018}. %, which allows one to incrementally verify a PV system as an imperative program using a fragment of decidable first-order theories~\cite{DBLP:books/daglib/0019162}.
 
-Related to \textbf{automated synthesis} method and the optimal sizing of stand-alone PV systems, this Thesis presents the development of a variant of counterexample guided inductive synthesis (CEGIS) that uses commercial equipment data to deliver commercial list of items. 
-Given a correctness specification $\sigma$, our method uses that as starting point 
+Related to \textbf{automated synthesis} method and the optimal sizing of stand-alone PV systems, this Thesis presents the development of a variant of counterexample guided inductive synthesis (CEGIS) that uses commercial equipment data, user requirements and weather conditions as input. 
+Given a correctness specification $\sigma$, the proposed method uses that as starting point 
 and then iteratively produces a sequence of candidate solutions that satisfy $\sigma$, 
 related to power reliability. In particular, in each iteration, we synthesize sizing of 
 stand-alone PV systems but that may not achieve the lowest cost. The candidate solution 
@@ -86,9 +86,9 @@ Associated to \textbf{automated verification}, this Thesis makes three main cont
 %The framework provided at this paper outlines the requirements, the process and the mathematical modeling to perform automated formal verification of a stand-alone PV system, using the satisfiability modulo theories (SMT)-based verification method.
 
 And linked to \textbf{automated synthesis}, this work makes three major contributions. 
-\textbf{First}, the use of automated symbolic verification methods in electrical systems was uncommon in recent prior studies~\cite{abs-1811-09438}, and specifically their use in synthesizing optimal PV sizing is unprecedented. Here, a list of PV components (i.e., PV panels, charge controllers, inverters, and batteries) can be fed to the proposed synthesis method together with user requirements and environment constraints, and our synthesis algorithm based on symbolic model checking can find the optimal solution in technical and economical terms. 
-\textbf{Second}, we evaluate different state-of-art symbolic software verifiers with the goal of obtaining the best performance in our verification back-end for synthesizing optimal PV systems, being the first work that performs this type of comparative. 
-\textbf{Third}, the experimental results show that our synthesis method is an effective and efficient approach on the pursuit of the optimal solution of PV systems using formal methods, which outperforms existing state-of-the-art simulation tool. As a result, this Thesis marks the first application of a sound and automated formal synthesis approach able to provide accurate results of optimal sizing of stand-alone PV systems. Thus, there is considerably advance the state-of-the-art in applied energy over the last two decades with the goal of optimally designing PV systems.
+\textbf{First}, the use of automated symbolic verification methods in electrical systems was uncommon in recent prior studies~\cite{abs-1811-09438}, and specifically their use in synthesizing optimal PV sizing is unprecedented. Here, a list of PV components (i.e., PV panels, charge controllers, inverters, and batteries) can be fed to the proposed synthesis method together with user requirements and environment constraints, and the proposed synthesis algorithm based on symbolic model checking can find the optimal solution in technical and economical terms. 
+\textbf{Second}, we evaluate different state-of-art symbolic software verifiers with the goal of obtaining the best performance in the verification back-end for synthesizing optimal PV systems, being the first work that performs this type of comparative. 
+\textbf{Third}, the experimental results show that the proposed synthesis method is an effective and efficient approach on the pursuit of the optimal solution of PV systems using formal methods, which outperforms existing state-of-the-art simulation tool. As a result, this Thesis marks the first application of a sound and automated formal synthesis approach able to provide accurate results of optimal sizing of stand-alone PV systems. Thus, there is considerably advance the state-of-the-art in applied energy over the last two decades with the goal of optimally designing PV systems.
  
 \section{Related Work}
 
