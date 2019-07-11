@@ -1,0 +1,426 @@
+\documentclass[11pt]{article}
+
+\usepackage[normalem]{ulem}
+\usepackage[english]{babel}
+\usepackage[latin1]{inputenc}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{epstopdf}
+\usepackage{url}
+%\usepackage{mathtools}
+\usepackage{enumerate}
+\usepackage[nodayofweek]{datetime}
+\usepackage[caption=false]{subfig}
+%\mathtoolsset{showonlyrefs}
+\usepackage[linesnumbered,lined,ruled,boxed]{algorithm2e}
+\SetKw{KwBy}{by}
+\usepackage{xcolor}
+%\input{rgbcolors}
+%\usepackage{color}
+\usepackage{natbib}
+% \usepackage[style=authoryear-comp,dashed=false]{biblatex}
+% \bibliography{piecewise_lyapunov}
+\newtheorem{myassumption}{Assumption}
+\newcommand{\mstitle}{Automated Formal Verification of Stand-alone Solar Photovoltaic Systems}
+\newcommand{\refnumber}{SE-D-19-01248}
+\newenvironment{resposta}{~~~\begin{quote}\color{blue}\textbf{Response:}}{\end{quote}}
+\newcommand{\comment}[1]{}
+%\definecolor{DarkGreen}{rgb}{0.2, 0.4, 0.2}
+\usepackage{amsmath}
+\usepackage{listings}
+\lstset{language=C,basicstyle=\small\ttfamily}
+\usepackage{tikz}
+\usetikzlibrary{positioning, automata, shapes.arrows, calc, shapes, arrows, calc,patterns,decorations.pathmorphing,decorations.markings}
+
+\newcommand{\param}[2]{\ensuremath{\langle{#1},{#2}\rangle}\xspace}
+\textwidth 15cm
+\setlength{\textheight}{1.1\textheight}
+\newcommand\hi{\hspace*{\parindent}}
+\newcommand\vi{\vspace{\baselineskip}}
+\newcommand\lac{{\mbox{{\Huge\bf L}\hspace{-0.65em}
+\raisebox{-1.2ex}{\Huge\bf A}\hspace{-1.1em}
+\raisebox{-0.6ex}{\Huge\bf C~}}}}
+\newcommand{\fwlfunction}[1]{\mathcal{FWL}[#1]}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{Manuscript Reference Number: \refnumber}
+\rhead{Page \thepage\ of \pageref{LastPage}}
+\lfoot{}
+\rfoot{}
+
+%\pagestyle{headings}
+\pagenumbering{roman}
+\begin{document}
+\setcounter{page}{1}
+\thispagestyle{empty}
+
+
+\hoffset -1.5cm \voffset .5cm
+
+
+\sf
+
+\vspace*{-2.5cm} \hspace*{-0.1cm} {\small
+{\mbox{\begin{minipage}{2cm}
+\centerline{\includegraphics[width=1.5cm]{ufam_logo.png}}
+\end{minipage}}} \hspace*{0.1cm}
+\begin{minipage}{11.0cm}{\large \textbf{Federal University of Amazonas}}\\
+{\sc Faculty of Technology}\\
+{\sc Department of Electricity}
+\end{minipage}
+} \vspace*{0mm}
+
+\hspace*{-.7cm} {\rule[-1ex]{15cm}{0.03cm}}
+
+\begin{flushright}
+\begin{minipage}{7.0cm}\small
+{\bf Please Reply to:}\\
+Assistant Professor Alessandro Trindade\\
+Universidade Federal do Amazonas\\
+Departamento de Eletricidade\\
+Av. Gal. Rodrigo Otávio, 3000, Japiim, Campus Universitário\\
+ZIP 69077-000, Manaus - AM, Brazil\\
+{\em alessandrotrindade@ufam.edu.br}
+\end{minipage}
+\end{flushright}
+ 
+\vi
+\hspace*{\fill}{\small Manaus, \today.}
+\vi
+
+
+
+\begin{flushleft}
+    Mario A Medina, PhD, PE\\
+    Associate Editor\\
+	Solar Energy
+    \end{flushleft}
+\vi
+
+\begin{flushleft}
+\textbf{REF.:} \refnumber
+    \end{flushleft}
+\vi \vi
+ 
+\indent Dear Associate Editor,
+\vi 
+
+We thank you for asking us to comply with your Reviewers' reports. 
+We are submitting a revised version of our manuscript entitled ``{\em \mstitle},'' by Alessandro Trindade, and Lucas Cordeiro. This revised version carefully addresses each comment provided by the reviewers, as suggested in your original decision letter. 
+In particular, our reply letter describes all modifications we made to our manuscript and the respective responses to the comments raised by the reviewers.  
+
+
+%\vi
+
+%Thank you very much in advance.
+
+\vi\vi
+
+\indent
+Sincerely,\\
+
+
+
+\begin{quote}
+\begin{quote}
+\begin{flushright}
+
+
+\vi
+\vi
+
+Alessandro B. Trindade~~~~~~~
+\end{flushright}
+\end{quote}
+\end{quote}
+
+\hoffset -1.5cm \voffset .5cm
+
+
+% =============================================
+\newpage
+\subsection*{Authors'  Response to the Review Comments on manuscript ``{\mstitle}'' -- Manuscript Reference Number: \refnumber}
+
+\vi
+
+The authors would like to thank the anonymous reviewers for their valuable and constructive comments and suggestions, which helped us significantly improve the quality of our manuscript. 
+
+According to the associate editor and reviewers' comments, our manuscript has been carefully revised and all detailed changes are highlighted in red color, along with the original text. The revision included the Abstract, Introduction, and Results sections.
+
+Our responses  to all comments (in blue color) are given in the sequel, with clear indications about how and where they were addressed along our manuscript.
+
+We hope those modifications in our manuscript and also our responses are sufficient to make our work suitable for publication in {\bf Solar Energy}.
+
+
+
+\newpage
+\subsection*{Reviewer \#2 comments followed by the authors' answers:}
+
+\begin{quote}
+
+In the manuscript, the authors report about the first application of software model checking to formally verify the design of a stand-alone solar photovoltaic system including solar panel, charge controller, battery, inverter, and electric load. They show, case studies, from real photovoltaic systems deployed in five different places, ranging from 700 W to 1,200 W, were used to evaluate this proposed approach and to compare that with specialized simulation tools. Also, the authors reported the evaluated different verification tools, in order to compare performance and soundness. Data from practical applications show the effectiveness of their approach, where specific conditions that lead to failures in a photovoltaic solar system are only detailed by the automated verification method.
+
+I have specifics questions and suggestions in order to improvement the manuscript.
+
+1.-To clarify the figure 2, i recommend write "current" inside the figure, don't put just I.
+
+\begin{resposta} 
+
+\end{resposta}
+
+2.-This software model checking has performance in comparison the other commercials software,how is this performance?, Could you give the areas where your software performs better than commercial software?   
+
+\begin{resposta} 
+
+\end{resposta}
+
+3.-In text reference at figure 1 the authors do not describe all symbols drawn into image, for instances, what is means G, T. I suspect that in section 4 they define which are the variables (Irradiation and temperature). I suggest you define those symbols in the text that that figure describes.
+
+\begin{resposta} 
+
+\end{resposta}
+
+4.- Are the verification results carried out affected by the different characteristics of the computers?
+
+\begin{resposta} 
+
+\end{resposta}
+
+\end{quote}
+\newpage
+
+
+\subsection*{Reviewer \#4 comments followed by the authors' answers:} 
+
+\begin{quote}
+
+The topic itself is interest for the PV application. However some section including abstract and result must be rewritten to be enhanced, here are the comments: 
+
+-       The manuscript illustrated the main drawback from other existed work that they are based on simulation and the proposed approach is claimed to do evaluation based real PV system as illustrated in the abstract, however the evolution is based on simulation model, mathematical, and information from website data such as Weather base and Energy Plus. The author should present real data measurement for more accurate results then compared and the main difference should be clarified.
+
+\begin{resposta} 
+
+\end{resposta}
+
+-       Section 5 "Experimental Evolution" It can be changed to Verification result, otherwise the author should clarify the real measurements of the system.
+
+\begin{resposta} 
+
+\end{resposta}
+
+-       Can the author present the main waveform of the PV system in the steady state operation and under failure or any environmental change? waveforms such as: Input power, VMPP, IMPP, AC load  
+
+\begin{resposta} 
+
+\end{resposta}
+\end{quote}
+
+\newpage
+
+------------------------------Lucas:
+\subsection*{Reviewer \#1 comments followed by the authors' answers:}
+
+\begin{quote}
+The paper is a survey on verification and synthesis of embedded and cyber-physical systems. More in detail, the authors consider symbolic model checking (mostly bounded-model checking) and synthesis, and other techniques are also mentioned.
+
+Unfortunately, I don't think that the current version meets the standards for publication. 
+
+\begin{resposta} 
+We thank this reviewer for the valuable and honest comments about our manuscript. In this revised version, we have carefully addressed each of the reviewers' comments, with the goal of making our manuscript suitable for publication in {\bf IET Cyber-Physical Systems: Theory \& Applications}. In this respect, we have significantly extended our manuscript, in order to describe various model checkers that are not only state-of-the-art, but also contributed to the development of the embedded \& cyber-physical systems (ECPS) field ({\it cf.} Sections 3, 4.5, 7.1 and 7.2). Give that this is a broad research area, we might have forgotten to cite some other relevant work; however, given the current knowledge in system verification, we believe we have covered the most relevant and significant related studies. We have also covered a variety of studies strictly related to verification and synthesis of CPS and hybrid systems ({\it cf.} Section 3) and introduced an illustrative example of a real-world three-tanks system modeled by hybrid-automata ({\it cf.} Section 2, by using computation three logic and linear-time temporal logic), while pointed out the main current challenges to formally verify and synthesize control software for ECPSs ({\it cf.} Sections 6 and 7). In Section 9, we highlighted the main limitations of our survey, in terms of systematic literature review.
+\end{resposta}
+
+The two main weaknesses are:
+
+
+(1) The paper is not specific: a number of sections in the paper and a number of references are not related to ECPS, but only to software verification or to verification in general. For instance, the authors mention Hybrid Systems (HS) and techniques for HS in section 2, but HS are not mentioned after this point. 
+
+\begin{resposta}
+Indeed, our goal was to tackle literature related to symbolic model checking and program synthesis, while pointing out promising approaches related to ECPSs. As a consequence, we first addressed classical and state-of-the-art techniques, in order to give a broad view, and then restricted to studies specifically related to ECPSs or with potential to be applied to them. Nonetheless, such a strategy may have given the impression that our manuscript's central subject was not ECPS, which we tried to mitigate with the current revised version and its new text, such as current Section 3, as it stands now, and the hybrid-system (HS) example in Section 2. Generally, ECPSs are systems that present both continuous and discrete dynamics, as HSs, and, due to this reason, the main approach to formally verify and synthesize controllers for ECPSs is modeling them through HSs. Section 2 is dedicated to establish a suitable modeling approach for application of formal verification and synthesis techniques: the chosen adequate models are hybrid automata (HA). Thus, it was important to discuss the literature related to representation of hybrid system in this section, in order to achieve the concept notion of hybrid automata and their use for ECPS modeling. In the remaining sections, there is no need for particularly tackling HSs, given that the manuscript is focused on discussing verification and synthesis methodologies for ECPSs, which are usually represented by HA. The goal of the discussion regarding HSs was clarified along the revised Section 2. Furthermore, an example of HA for an ECPS, known as Sim3Tanks, was presented for discussion along the remaining manuscript, in order to illustrate the application of symbolic verification and synthesis.
+\end{resposta}
+
+(2) The paper is not structured: for instance, section 3 is a generic introduction to software verification, and a discussion about specific techniques for ECPS verification is only present in section 6. In general, It is not clear how the authors chose their references.
+\begin{resposta} 
+Indeed, our intention was to provide a broad review regarding symbolic verification and its application to synthesis, while highlighting specific techniques applied to ECPSs, which may have led to this comment. One may notice that we did not mean to focus on a specific set of references, but instead unveil ECPS development and then propose and devise future paths for system design and verification, which are safe and secure by construction ({\it cf.} Section 7). In order to provide more structure and focus on ECPS verification, we have added the second before last paragraph of the introduction and also modified the last one of it, a new Section 3 was added, in order to provide focus on cyber-physical systems, and, finally, the former Section 3 was modified and now constitutes Section 4, which now acts as a discussion text towards the authors' vision for ECPS verification. Additionally, we have substantially expanded the description of symbolic verification tools throughout our manuscript, in order to emphasize their strengthens and weaknesses, when verifying ECPSs, and also their potential to fulfill current technical gaps. Section 6, which is now section 7 and already contained discussion regarding ECPS verification, as mentioned by the reviewer, was also further extended, with more technical information.  
+\end{resposta}
+
+(3) More in detail, for 1): section 3 should have a different title, as it is not specific to ECPS. This section should probably be replaced by a section containing specific approaches for ECPS verification. Section 4 should contain more technical details about the approaches presented. Section 5 and section 6 are phrased like a research agenda for ECPS, rather than as a survey (even if some paragraphs under future trends are effectively surveying state of the art).
+\begin{resposta} 
+	As mentioned in previous responses, we added a new section 3, which now presents material strictly related to ECPS verification, while also tackling aggregate effects, which deserve special attention. That was done as a response to the reviewer's comment, in order to be compliant with its first part. In addition, former section 3 is now section 4, presents a new title, and also includes more material, while bearing the authors' vision regarding future trends in ECPs verification. Former Section 4 is now section 5 and contains more technical material regarding DSVerifier, DSSynth, and Scratch, which indeed improved its efficacy in conveying the proposed material. Former Sections 5 and 6, which are now 6 and 7, respectively, intended to both highlight current challenges, while proposing feasible solutions, and present research towards them, which belong to the state of the art group. Anyway, they are important, since they reveal trends and propose approaches based on real research. In order to expand Section 6, complete its content, and avoid impression of a mere research agenda, while preserving its structure (both trends and state of the art), we have added material related to initial and promising research regarding both ECPS verification and synthesis, which provides more survey structure and is now mixed with insightful research directions. Section 7, in turn, aims to present research problems, where we have also improved literature review, in order to show their relevance.
+\end{resposta}
+
+(4) For 2): the authors should specify how they have selected their references. This could be done by adopting a systematic approach, or by defining a taxonomy, or by some other structured approach (e.g., using a running ECPS example).
+\begin{resposta} 
+	As our article's title suggests, we intended to provide a survey on symbolic verification and its application to ECPS. As a consequence, we addressed a large part of the current existing literature on that matter. Even so, we tried to narrow to ECPS verification, aggregate effects, ECPS synthesis, and open research problems on those areas, while focusing on symbolic model checking; in particular, bounded model checking, \textit{k}-induction, interpolants, symbolic execution, and abstraction. Anyway, we have adopted automated search through popular digital libraries, whose relevant results were filtered according to peer-reviewed conferences and journals in that target area. In addition, we included a few studies outside this group, whose content was highly correlated with our results. Our methodology for reference selection has also employed a broader scheme, which included the strategy mentioned above, as a constructive block, and is described as follows. Firstly, we began with HSs, explained their link with ECPSs, and them expanded by tackling ECPS verification with aggregate effects. Then, we took the cue created by existing approaches, in order to provide a link with symbolic model checking. Later, we moved to ECPS synthesis and merged both regarding challenges and trends. A more detailed description of our literature review can be found in the recently added Section 9.
+\end{resposta}
+
+(5) Currently, the paper mentions some techniques, but ignore other approaches. As a concrete example: the authors focus mainly on bounded model checking techniques and tools, but only one tool is described in some detail (ESBMC) in section 6, while others are only mentioned (e.g., CBMC) and this choice is not motivated. Similarly, other software verification techniques (e.g., those based on separation logic) are not considered nor compared for the verification of C code. 
+\begin{resposta} 
+	As previously explained, bounded model checking (BMC) and its companion techniques ({\it e.g.}, $k$-induction) are envisioned as a promising approach towards ECPS synthesis and verification, as long as merged with system and behavior models, which may have led to this condition. In order to mitigate that, we have focused on symbolic verification methods, and in particular BMC, in some specific parts of the text, and then further described eight additional software verifiers: CPAchecker (Section 6.1), Lazy-CSeq (Section 6.2), Astree (Sections 3.7 and 6.4), Polyspace (Sections 3.7 and 6.4), Frama-C (Sections 3.7 and 6.4), Infer (Section 6.1), SMV (Section 3), NuSMV (Section 3), KLEE (section 4.6). Each verifier is described as follows: 
+	
+	\textbf{CPAchecker}. Beyer, Dangl, and Wendler described a software verification-framework called CPAchecker, which automatically generates invariants through a combination of data-flow-based invariant generator and dynamic precision adjustment, with the goal of injecting (inductive) invariants into the \textit{k}-induction algorithm. Even though the combination between \textit{k}-induction and continuously-refined invariants significantly enhances verification results, there is still room for improvements, particularly for learning from counterexamples, in order to improve bug finding capabilities.
+	
+	\textbf{Lazy-Cseq}. Lazy-CSeq is a code-to-code transformation tool based on Lazy Sequentialization techniques, initially introduced by La Torre {\it et al.} for non-deterministically sequentializing concurrent C programs, which re-uses existing BMC tools as backends, in order to find code violations. Its main idea is to pre-process a concurrent program and convert it into a non-deterministic sequential one, with the goal of simplifying verification tasks.
+	
+	\textbf{Astree, Polyspace, and Frama-C}. Astr\'ee, PolySpace, and Frama-C are the most successful implementations of the abstract interpretation technique; in particular, Astr\'ee and PolySpace have been successfully used to prove absence of run-time errors, in real-world flight control software. Although those software verifiers scale relatively well for large code bases, their main drawback is that they usually provide false alarms, due to over-approximation of possible program executions.
+	                                        	
+	\textbf{Separation logic and Infer}. Another interesting direction for future research consists in investigating the application of separation logic, in order to reason about ECPS. The key idea of separation logic is to perform a local reasoning based on specifications and proofs of a given program component, by considering only the portion of memory used by that same component, and not the entire program global state; thus, this allows modular reasoning among different program components, with the goal of scaling formal verification to larger software systems. Infer represents one of the most successful implementations of that approach; it is an open-source static code analysis tool used for verifying the Facebook code base, was employed on many mobile apps ({\it e.g.}, WhatsApp), and was adopted by many companies ({\it e.g.}, Mozilla and Spotify).
+	                         
+	
+	\textbf{SMV and NuSMV}. SMV and NuSMV are two representative symbolic verifiers based on binary decision diagrams (BDDs); actually, the latter is a re-implementation and extension of SMV, which also supports BMC using SAT solvers. In NuSMV, system properties can be expressed in a wide range of temporal properties, such as CTL, as done for system Sim3Tanks in Section 2, real-time CTL, LTL, and property specification language (PSL).
+	
+	\textbf{KLEE}. Path-based symbolic execution tools, as KLEE, employ several optimizations to prune the number of paths being explored, thereby caching previous queries and checking whether branch path constraints are satisfiable, before exploring them. One notable advantage of symbolic executors, over BMC tools, is that the former can be used for coverage test generation.
+\end{resposta}
+
+
+(6) Additional comments (mostly typos/rephrasing):
+\begin{itemize}
+	\item p.1 "mainly when his contact with patients..." $\rightarrow$ rephrase as it is not clear.
+	\begin{resposta} 
+	We have replaced ``mainly when his contact with patients...'' by ``mainly when their contact with patients...'', in which the personal (possessive) pronoun ``their'' refers to ``human specialists''.
+        \end{resposta}
+	\item p.2 "Correctness is asserted wrt [...] safety or reachability": what about liveness properties?
+	\begin{resposta}
+	We have rewritten the first paragraph of Section ``modeling Cyber-Physical Systems for Verification and Control Synthesis Purpose'' to state about safety and liveness properties as follows: Correctness is asserted with respect to a given specification, which may be related to safety or liveness. A safety specification is related to a set of undesirable (reachable) states that must be avoided or simply ensures that ``something bad never happens'', while a liveness one refers to a desired (reachable) state that must eventually be achieved or simply ensures that ``something good will eventually happen''. In both cases, a model is needed for an ECPS, in order to compute that no error state is reachable or that a desirable state is eventually reached.  Therefore, an algorithmic (decision) procedure ({\it cf.} Definition 2) can be devised from this model, in to decide about its correctness and reliability; this decision procedure output is simply ``yes'', if a specification holds, or, otherwise, ``no''.
+	\end{resposta}
+	\item p.3 Rephrase "to decide if a number of steps $\forall$..."
+	\begin{resposta}
+	We have rephrased this sentence as follows: ``Given a class of ECPSs $\Omega$ and a set $\Phi$ of desired properties, a class of verification problems $\gamma$ is called decidable if an algorithmic procedure can decide whether there exists a finite number of steps $\mathcal{O} \in \Omega$ that satisfies every property $\mathcal{L}\in \Phi$''.
+	\end{resposta}
+	\item p.4 I don't understand how (2) encodes a loop, shouldn't you have an additional predicate loop($s_k$,$s_l$) with $k \geq l$ ?
+	\begin{resposta}
+	The property $\phi$ is already encoded within a loop. When passing from $\psi_{k} = I\left(s_{0}\right) \wedge \bigwedge^{k-1}_{i=0} R\left(s_{i},s_{i+1}\right) \wedge \neg \phi_{k}$ to $\psi_{k} = I\left(s_{0}\right) \wedge \bigwedge^{k-1}_{i=0} R\left(s_{i},s_{i+1}\right) \wedge \left(\bigvee^{k}_{i=0} \neg \phi_{i}\right)$, both equations unroll the transition system $R$, but the latter means that property $\phi$ is checked at every loop iteration, {\it i.e.}, at every system unrolling up to the iteration bound (depth) $k$. As a consequence, there is no need for adding that predicate  loop($s_k$,$s_l$). We have completely revised Section 4.1 ``Bounded Model Checking (BMC)'', in order to make our BMC formulation clearer for readers.
+	\end{resposta}
+	\item p.5 "x tends to infinity after 128 executions" $\rightarrow$ please explain
+	\begin{resposta}
+	We have rewritten it as ``If we consider the IEEE floating-point standard (IEEE 754), then invariant $x>0$ initially holds; however, after $128$ loop iterations (lines 4-6 of Figure 4), $x$ tends to infinity, thereby leading to values outside the range of representable \texttt{float} numbers''.
+	\end{resposta}
+	\item p.6 "and If no such inductive..." $\rightarrow$ if lowercase
+         \begin{resposta} 
+	Implemented as suggested.
+        \end{resposta}
+	\item p.6 (same paragraph as above) "the instance  $x>1 (a=1, b=0)$..." $\rightarrow$ are a and b defined?
+	\begin{resposta}
+	There was a typo in this particular sentence. The variables ``a'' and ``b'' are not used in the example provided in Figure 6. We have fixed it in the revised version of our manuscript. 
+	\end{resposta}
+	\item p.6, second column: "there is no satisfying assignment to A /\ B*" $\rightarrow$ what is B*?
+	\begin{resposta}
+	We have fixed this typo. The footnote indicated by ``*'' should be after ``.'' and not after ``B''.
+	\end{resposta}
+	\item p.6 "another viable, elegant, and more viable..." $\rightarrow$ viable repeated
+         \begin{resposta} 
+	 We have replaced ``another viable, elegant, and more viable...'' by ``Another viable and more elegant strategy...''
+        \end{resposta}
+	\item p.7 "An possible approach" $\rightarrow$ A possible approach
+	\begin{resposta} 
+	Implemented as suggested.
+        \end{resposta}
+	\item p.8/9 section 5 contains mainly challenges for verification, synthesis is only mentioned in the last paragraph
+	\begin{resposta} 
+	We have added three additional challenges related to synthesis, as follows:
+	
+        \begin{enumerate}
+	  \item  \textcolor{blue}{Parametrize search-space exploration;}
+	  \item  \textcolor{blue}{Improve learning processes via counterexamples;}
+	  \item  \textcolor{blue}{Use of incremental SAT/SMT solving process.}
+       \end{enumerate}
+
+        These additional synthesis challenges are described in further details, at the end of Section 6, as follows:
+        
+The first aspect is related to word lengths and representations of variables in an employed (embedded) hardware, where an ECPS is built upon. Here, floating-point representations can provide better approximation of real numbers, when compared with fixed-point ones with the same number of bits, which typically varies from $16$ to $64$ bits, in popular hardware architectures used for ECPSs. Multiple-precision floating-point arithmetic can further represent real numbers, whose precision digits are bounded by the available memory of a system, and practical software packages do exist to implement that type of arithmetic ({\it e.g.}, MPFR\footnote{https://www.mpfr.org/} and MPFI\footnote{https://directory.fsf.org/wiki/MPFI}). Nonetheless, using floating-point arithmetic in software synthesizers usually leads to higher verification time and memory consumption, as previously observed by Duggirala and Viswanathan [1]. In order to synthesize a given ECPS, typical synthesizers need to parameterize search-space exploration via multiple choices of word-length and variable representations, in order to produce a candidate solution that considers time and memory limits.
+
+The second aspect deals with the way software synthesizers can learn from counterexamples produced during a verification phase, in order to quickly propose a candidate solution that meets a given specification. Here, critical aspects for any CEGIS approach, such as counterexample selection, are still poorly understood by the research community, thereby resulting in completely ad-hoc designs. Further investigation of those aspects would allow software synthesizers to come up with efficient synthesis approaches, for instance, through the use of an additional processing step before counterexample input, so that reliable implementations of communication and control software in ECPSs could be learned, in order to quickly achieve a correct-by-construction design. Machine learning techniques, such as reinforcement learning and decision tree learning, could be used, in order to achieve that goal and then speed up synthesis processes.
+
+Lastly, the third aspect is related to the ability of SAT/SMT solvers to incrementally solve propositional or fragment of first-order logic formulae. In particular, incremental SAT solving allows software synthesizers to deal with sufficiently large logical formulae, incrementally, by learning from previous checks, {\it i.e.}, check VCs in iteration $k + 1$ based on the work done for iteration $k$, thus optimizing search procedures and potentially eliminating a large amount of formula state-space to be tackled. Some prior studies~[2,3] show that incremental learning can cut run-times by one order of magnitude, in comparison with standard non-incremental approaches over a large set of industrial embedded benchmarks (mainly from the automotive industry); however, we have not seen much effort, in the research community, regarding use of incremental SAT/SMT solving to efficiently synthesize control software for ECPS, through incremental learning (from previous checks).
+
+        
+
+[1] Duggirala, P.S., Viswanathan, M. Analyzing real time linear control systems using software verification. In: IEEE Real-Time Systems Symposium, 2015. pp. 216--226.
+
+[2] Schrammel, P., Kroening, D., Brain, M., Martins, R., Teige, T., Bienmüller, T.: Incremental bounded model checking for embedded software, Formal Aspects of Computing, 2017, 29, (5), pp. 911--931
+
+[3] E\'en, N., S\"orensson, N.: An extensible sat-solver. In: 6th International Conference on Theory and Applications of Satisfiability Testing. vol. 2919 of LNCS, 2003. pp. 502--518
+
+        \end{resposta}
+        
+	\item p.9 Section 6, RP2, RP4 RP5 are not specific to ECPS (for instance section 6.2 on page 10 is not mentioning ECPS by generic Linux distributions).
+	\begin{resposta} 
+	We have rewritten RP2, in order to make its relation stronger to ECPSs, as follows: ``exploitation of SMT techniques to leverage (bounded) model checking of multi-threaded software, in order to mitigate the state-explosion problem due to thread interleaving, when verifying ECPS implementations that require multi-core processors with scalable shared memory''. We have also added additional statements to Section 7.2, in order to emphasize the importance of multi-threaded software verification, in the context of ECPS implementations.
+	
+	Regarding RP4, we have rewritten the first paragraph of Section 7.4, by describing three additional (real-world) examples of ECPS [1,2,3] that have been tackled in literature, with the goal of incorporating knowledge about system purpose and associated features into symbolic verification methods.
+	
+	Regarding RP5, we have also rewritten the first paragraph of Section 7.5, in order to emphasize the relation of this RP with ECPSs, as follows: ``Although existing symbolic verification tools were extended to support Java, C/C++, and some variants, new application interfaces and programming languages are often developed, which require suitable software verification tools for specific frameworks and embedded platforms, in order to building ECPSs. Indeed, it would be interesting if a new programming language model could be loaded, which, along with symbolic verification core algorithms, were able to check different programs and frameworks.''. We have also introduced new content to the second paragraph of Section 7.5, in order to illustrate some real cases being addressed by this RP, as follows: ``In this respect, Clang even provides a static analyzer (called CSA), which is an open-source project built on top of Clang that can perform context-sensitive inter-procedural analysis for programs written in the languages supported by Clang. It is designed to be fast, so that it can provide results for common mistakes ({\it e.g.}, division by zero or null pointer dereferencing), even in complex programs.''. 
+	
+	[1] Peter Schrammel, Daniel Kroening, Martin Brain, Ruben Martins, Tino Teige, Tom Bienmüller: Incremental bounded model checking for embedded software. Formal Asp. Comput. 29(5): 911--931 (2017)
+
+	[2] Lennon Chaves, Iury Bessa, Hussama Ismail, Adriano Bruno dos Santos Frutuoso, Lucas C. Cordeiro, Eddie Batista de Lima Filho: DSVerifier-Aided Verification Applied to Attitude Control Software in Unmanned Aerial Vehicles. IEEE Trans. Reliability 67(4): 1420--1441 (2018)
+	
+	[3] Jeremy Morse, Lucas C. Cordeiro, Denis A. Nicole, Bernd Fischer: Model checking LTL properties over ANSI-C programs with bounded traces. Software and System Modeling 14(1): 65-81 (2015)
+	\end{resposta}
+	\item Several references need to be fixed, e.g. [3] has an unbalanced open bracket near (, 2008, but many others have similar problems.
+\end{itemize}
+
+\begin{resposta} 
+	We thank the comment provided by this reviewer. We have carefully revised our reference list and fixed the mentioned problem and many others.
+\end{resposta}
+
+\end{quote}
+
+\newpage
+
+\subsection*{Reviewer \#2 comments followed by the authors' answers:}
+
+\begin{quote}
+Embedded \& cyber-physical systems (ECPSs) develop rapidly and are applied in wider fields. With the increasing complexity of the systems and higher requirements of reliability on them, new challenges arose for verification and synthesis of ECPSs. This paper is a survey that reviews the related work and discusses recent advances on symbolic model checking techniques and their applications to control synthesis. Additionally, challenges, problems, and recent advances to ensure correctness and timeliness regarding ECPSs are discussed. Reliability issues, in the development of ECPSs, are then considered, as a prominent verification and synthesis application for achieving correct-by-construction systems.
+
+In the first part of the article, the authors introduce the significance and challenges of ECPS, and then conclude the technologies of verification and synthesis in detail. In the latter part of the article, the authors introduce the verification and synthesis challenges for ECPSs and define seven major research problems in detail. Finally, the authors put forward the new application of software verification and synthesis, where not only code correctness will be addressed, but also full system reliability.
+
+It can be seen that great efforts have been made in this paper. It summarizes the application and challenges of ECPSs and the development of verification and synthesis technologies comprehensively. The definition and technologies are presented friendly to understand. The research questions proposed by authors are reasonable. Interesting conclusions have been drawn on new applications of verification and synthesis for Asps. From the point of writing, the author arranges the content appropriately. 
+
+	\begin{resposta} 
+		We thank the kind comment provided by this reviewer. Indeed, it summarizes what was intended to be done with this manuscript. In addition, we should highlight that, initially, our main focus was on symbolic verification techniques based on SAT and SMT solvers, which we believe is a promising approach for ECPS verification and synthesis, given they are constantly presenting size and complexity increase. In the revised version of our manuscript, we have also covered other verification techniques and tools, as suggested by the other reviewers. As examples, we have revised Section 4.5, named as ``Abstraction'', with the goal of covering abstract interpretation, which is a useful static analysis approach to formally verify large code bases. We have also introduced a completely new section 4.6, named as``Path-based symbolic execution'', in order to address another important verification techniques successfully employed for coverage test generation. Finally, we have also introduced, in Section 7.1, separation logic, which has been successfully employed to verify the Facebook's code base and many mobile apps ({\it e.g.}, WhatsApp), in addition to being adopted by many companies ({\it e.g.}, Mozilla and Spotify).		
+		We hope that our revised version now fairly covers the most significant and recent related studies in the field of ECPS synthesis and verification.
+	\end{resposta}
+	
+However, some minor issues still need to be improved:
+	
+	
+	(7) The method of survey and the scope the bibliography should be explained. 
+	
+	\begin{resposta} 
+	We have written a new section called ``Limitations of this Survey'', in order to describe the method we have employed to search for publications via digital libraries, along with its limitations. 	
+	\end{resposta}
+	
+	(8) I suggest that the limitation of this work should be discussed in Section 8.
+	\begin{resposta} 
+	The main limitations that we can identify for our work are related to the systematic review process. In particular, we have systematically carried out a literature review about symbolic verification and synthesis techniques for ECPSs, while also outlined our vision for future research; however, one of the major problems with systematic literature review is to find all relevant studies related to a given research area. In Section 9, we describe each limitation of our systematic review, related to the \textit{searching}, \textit{screening}, and \textit{synthesis} phases. Here, we have also described ways to alleviate those limitations and to remove any bias introduced into each stage of this systematic review process.
+	\end{resposta}
+	
+	(9) There are a few typos and grammar errors in this paper.
+	\begin{resposta} 
+		We have carefully revised our manuscript; all typos and grammar errors, which we have identified during this first round of reviews, haven been fixed.
+	\end{resposta}
+		
+\end{quote}
+
+
+\newpage
+
+\subsection*{Reviewer \#3 comments followed by the authors' answers:}
+
+\begin{quote}
+	(10) This is a survey paper that discusses symbolic verification approaches to verify and synthesize embedded and cyber-physical systems (ECPS). The paper is very well-written and it covers important papers and advancements in this field. ECPS is a very important area and by its own nature, it is extremely challenging to verify these systems - in particular to develop verification techniques that are both, precise and scalable. I liked the way, the relevant research work is organized and presented. Moreover, it also describes the challenges along with the current state of open problems. This should be helpful not only to researchers who are new to this field but also to more experienced researchers since the paper can form a concise source of information and the state-of-the-art for this vast and growing field. 
+	
+	The only concern I have about the paper is regarding the reference formats. Not only that some details are missing from several references but also that formats are inconsistent which should be unacceptable particularly for a survey paper (and even otherwise). These issues should be fixed if the paper is accepted.
+	
+	\begin{resposta} 
+		We thank the comment provided by this reviewer. We have carefully revised and standardize all the entries. 
+	\end{resposta}
+		
+\end{quote}
+
+\label{LastPage}
+
+% \printbibliography
+
+\end{document} 
