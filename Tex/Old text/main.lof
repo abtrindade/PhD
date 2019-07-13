@@ -12,13 +12,12 @@
 \contentsline {figure}{\numberline {2.9}{\ignorespaces PV cell, module and array. Source: \cite {SamlexSolar}.}}{26}{figure.2.9}% 
 \contentsline {figure}{\numberline {2.10}{\ignorespaces Four different equivalent circuit models: (a) 1-diode; (b) 1-diode/1-resistor; (c) 1-diode/2-resistor; (d) 2-diode/2-resistor. Source: \cite {Cubas}.}}{27}{figure.2.10}% 
 \contentsline {figure}{\numberline {2.11}{\ignorespaces $ I-V $ characteristic curve of an ideal PV cell. Source: \cite {Saloux}.}}{30}{figure.2.11}% 
-\contentsline {figure}{\numberline {2.12}{\ignorespaces Schematic diagram of the battery. Source: \cite {Hansen}.}}{35}{figure.2.12}% 
-\contentsline {figure}{\numberline {2.13}{\ignorespaces Operating principle of an overcharge protector. Source: \cite {Hansen}.}}{40}{figure.2.13}% 
-\contentsline {figure}{\numberline {2.14}{\ignorespaces Operating principle of a discharge protector. Source: \cite {Hansen}.}}{41}{figure.2.14}% 
-\contentsline {figure}{\numberline {2.15}{\ignorespaces 1-diode equivalent PV cell/panel circuit model (adapted from~\cite {Cubas}).}}{44}{figure.2.15}% 
+\contentsline {figure}{\numberline {2.12}{\ignorespaces Schematic diagram of the battery. Source: \cite {Hansen}.}}{34}{figure.2.12}% 
+\contentsline {figure}{\numberline {2.13}{\ignorespaces Operating principle of an overcharge protector. Source: \cite {Hansen}.}}{39}{figure.2.13}% 
+\contentsline {figure}{\numberline {2.14}{\ignorespaces Operating principle of a discharge protector. Source: \cite {Hansen}.}}{39}{figure.2.14}% 
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {3.1}{\ignorespaces Flowchart of the proposed automated verification of PV systems.}}{53}{figure.3.1}% 
-\contentsline {figure}{\numberline {3.2}{\ignorespaces CEGIS applied to PV system sizing.}}{57}{figure.3.2}% 
+\contentsline {figure}{\numberline {3.1}{\ignorespaces Flowchart of the proposed automated verification of PV systems.}}{48}{figure.3.1}% 
+\contentsline {figure}{\numberline {3.2}{\ignorespaces CEGIS applied to PV system sizing.}}{52}{figure.3.2}% 
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }

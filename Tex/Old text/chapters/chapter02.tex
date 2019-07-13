@@ -345,6 +345,8 @@ Sensitive analysis &  &  & X & X & \\
 Considering that the focus of this research is on off-grid solutions and supported tools, only HOMER remain for comparative. All tools need some parameters inherently from manufacturer's catalog, so the project starts with manufacturers and integrators tool to define the basic items of the project: panels, inverters, controllers, and batteries. After that, the potential solution is analyzed in another tool to validate or even optimize the solution. Therefore, that is the challenge of this work, i.e., to prove that is possible to use automated verification to validate an off-grid PV solution.
 
 \subsection{Component models for stand-alone PV systems}
+\label{model}
+
 The main purpose of this section is to describe the models for the elements of a standalone PV system: PV generator, battery, controller, inverter, and load. The modeling of the PV system is based on modular blocks, as illustrated in Fig.\ref{fig:blockdiagram}, from \cite{Hansen}. The modular structure facilitates the modeling of the other system structures and replacing of elements as, for instance, a DC load instead of an AC load. 
 
 \begin{figure}[h]
@@ -406,7 +408,7 @@ Where:
 	\end{itemize}
 \item $V_{T}$ is the thermal voltage ($ V_{T}=k_{B}T/q $);
 	\begin{itemize}
-	\item $ k_{B} $ is the Boltzmann constant ($ 1.3806503\times10^{-23}J $); 
+	\item $ k_{B} $ is the Boltzmann constant ($ 1.3806503\times10^{-23}J/K $); 
 	\item $ T $ the temperature of the p-n junction (or cell temperature) expressed in Kelvin; 
 	\item $ q $ is absolute value of the electron's charge ($ -1.60217646\times10^{-19}C $).	
 	\end{itemize}	 
@@ -455,9 +457,9 @@ Therefore, a wide variety of models exists for estimation of power output of PV 
 
 
 \subsubsection{Proposed PV Panel Model}
-With the proposed model, an explicit set of equations is derivate from the ideal PV model given by Equation \ref{eq:1d1rmodel}.
+With the proposed model, an explicit set of equations is derivate from the ideal PV model given by Equation~\ref{eq:1diodemodel}.
 
-A single-diode without series and shunt resistances is considered. Equation 1 is used to write down expressions for currents and voltages at each key point shown in Fig. \ref{fig:ivcurve}.
+A single-diode without series and shunt resistances is considered. Equation~\ref{eq:1diodemodel} is used to write down expressions for currents and voltages at each key point shown in Fig. \ref{fig:ivcurve}.
 
 \begin{figure}[h]
 \includegraphics[width=0.90\textwidth]{ivcurve}
@@ -511,7 +513,7 @@ It is evident that Equation \ref{eq:Vmderiv} requires an expression of the deriv
 \dfrac{dI}{dV}\vert_{V_{m}} \cong -\dfrac{0-I_{sc}}{V_{oc}-0}=\dfrac{I_{sc}}{V_{oc}}
 \end{equation}
 
-Replacing the Equation \ref{eq:dIdV_Vm} into Equations \ref{eq:Vmderiv} and \ref{eq:Im}, the voltage and the current at the maximum power point and consequently the maximum output power, are expressed by Equations \ref{eq:Vmfinal}, \ref{eq:Imfinal}, and \ref{eq:Pm} ($ P_{m}=V_{m}I_{m} $). These equations are used to calculate the key cell parameters at the maximum power point as function cell temperature and parameters from the manufacturer's data-sheet.
+Replacing the Equation \ref{eq:dIdV_Vm} into Equations \ref{eq:Vmderiv} and \ref{eq:Im}, the voltage and the current at the maximum power point and consequently the maximum output power, are expressed by Equations \ref{eq:Vmfinal}, \ref{eq:Imfinal}, and \ref{eq:Pm} ($ P_{m}=V_{m}I_{m} $). These equations are used to calculate the key cell parameters at the maximum power point (MPPT) as function cell temperature and parameters from the manufacturer's data-sheet.
 
 \begin{equation}
 \label{eq:Vmfinal}
@@ -567,7 +569,7 @@ a = \dfrac{q(V_{m,ref}-V_{oc,ref})}{Nk_{B}T} \dfrac{1}{ln \left( 1 - \dfrac{I_{m
 
 Where $ V_{mref} $, $ V_{oc,ref} $, $ I_{m,ref} $, and $ I_{sc,ref} $ are key cell values obtained under both actual cell temperature and solar irradiance conditions, usually provided by manufacturers.
 
-The model is now completely determined; it requires the actual cell temperature (or the air temperature), the actual solar irradiance and common data provided by manufacturers.
+The model is now completely determined, i.e., with all the variables defined. This model requires the actual cell temperature (or the air temperature), the actual solar irradiance and common data provided by manufacturers.
 
 If the PV cells are in parallel, then there is a parallel array. Therefore, there will be a change at the $ I_{ph} $ and $ I_{0} $and the resulting current is given by Equation \ref{eq:Iarray}, as demonstrated in \cite{Saloux}.
 
@@ -587,51 +589,7 @@ V_{array} = (N_{cells in series})(V_{one panel})
 
 Where $ V_{one panel} $ is the voltage from Equation \ref{eq:Vmfinal}.
 
-Besides the model verification, there is the prior stage of project sizing check, which is simple, based on manufacturer's data and information from the sizing and the site. 
-
-First is necessary to correct the energy consumption that was estimated to the load ($E_{consumption}$). That is done by Equation \ref{eq:Ecorrected}, according \cite{Pinho}. Where the efficiency of batteries ($\eta_{b}$), controller ($\eta_{c}$), and the inverter ($\eta_{i}$) are considered.
-
-\begin{equation}
-\label{eq:Ecorrected}
-E_{corrected} = \dfrac{E_{consumption}}{ \eta_{b} \eta_{c} \eta_{i} }
-\end{equation}
-
-The total minimum number of solar panels necessary($ N_{TPmin} $) is calculated by Equation \ref{eq:NTPmin}, and the check is done with the Equation \ref{eq:NTP}, where the sized number of panels ($ N_{TP} $) must be greater than the result from Equation \ref{eq:NTPmin}.
-
-\begin{equation}
-\label{eq:NTPmin}
-N_{TPmin} = \dfrac{E_{corrected}}{E_{p}}
-\end{equation}
-
-\begin{equation}
-\label{eq:NTP}
-N_{TP} \geq N_{TPmin}
-\end{equation}
-
-Particularly, the total number of panels is series ($ N_{PSmin} $) and parallel ($ N_{PPmin} $) are given by the Equations \ref{eq:NPSmin} and \ref{eq:NPPmin}, respectively. With the check did by Equations \ref{eq:NPS} and \ref{eq:NPP}. $ V_{system} $ is the DC voltage of the bus, and is a design decision (normally 12, 24 or 48 V).
-
-\begin{equation}
-\label{eq:NPSmin}
-N_{PSmin} = \dfrac{V_{system}}{V_{m,ref}}
-\end{equation}
-
-\begin{equation}
-\label{eq:NPPmin}
-N_{PPmin} = \dfrac{N_{TPmin}}{N_{PSmin}}
-\end{equation}
-
-\begin{equation}
-\label{eq:NPS}
-N_{PS} \geq N_{PSmin}
-\end{equation}
-
-\begin{equation}
-\label{eq:NPP}
-N_{PP} \geq N_{PPmin}
-\end{equation}
-
-
-\subsubsection{The Battery Storage Model }
+\subsubsection{Battery Storage Model }
 Because of the fluctuating nature of the output delivered by the PV arrays, batteries are necessary in a PV system. Thus, during the hours of sunshine, the PV system feeds directly the load and the excess electrical energy is stored in the battery. During the night, or during a period with low solar irradiation, energy is supplied to the load from the battery \cite{Mellit}.
   
 Several models have been presented in the literature. However, regardless of the model, normally the following parameters are required: 
@@ -766,32 +724,12 @@ SOC_{charge} = SOC_{previous} + \dfrac{100*Pm*Num_{h}}{V_{system}*capacity*N_{BP
 SOC_{discharge} = SOC_{previous} - \dfrac{100*I_{drained}*Num_{h}}{capacity}
 \end{equation}
 
-
-Besides the model verification, there is also the prior stage of project sizing check, as did to the solar panel. First is necessary to define the total capacity of the battery bank, as shown by Equation \ref{eq:Cbank}.
-
-\begin{equation}
-\label{eq:Cbank}
-C_{bank} = \dfrac{E_{corrected} \times autonomy}{V_{system} \times DOD}
-\end{equation}
-
-The variable $ autonomy $ is a design definition and normally has a value ranging from 6 to 48h. The other variables were discussed previously.
-
-Following, is done the total (minimum) number of batteries, as show by Equation \ref{eq:Nbtotal}. Moreover, the Equation \ref{eq:batcheck} perform the final sizing check, considering the number of batteries in series ($ N_{BS} $) and the number of batteries in parallel ($ N_{BP} $) that were established to the project.
-
-\begin{equation}
-\label{eq:Nbtotal}
-N_{B}total = N_{BS}min \times N_{BP}min = \dfrac{V_{system}}{V_{bat}} \times \dfrac{C_{bank}}{C_{20}}
-\end{equation}
-
-\begin{equation}
-\label{eq:batcheck}
-\left( N_{BS} \times  N_{BP} \right) \geq N_{B}total
-\end{equation}
-
 \subsubsection{Controller Model}
 Depending on the literature, the controller can receive different names: controller \cite{Hansen}, charge controller \cite{Mahanta} and \cite{Chauhan}, regulator \cite{Mellit}, DC-DC converter with MPPT and switch \cite{Dhanowa}, \cite{Yatimi}, \cite{Abdulateef}, \cite{Roy}. However, in this study, in order to simplify, the term used is controller. 
 
 The controller is a set of items (DC-DC converter, a MPPT and switches) and can be defined as the responsible to manage the energy flow to PV system, batteries and loads by collecting information on the battery voltage and knowing the maximum and minimum values acceptable for the battery voltage. According to \cite{Pinho}, controllers aim to protect the battery (or batteries) against the excessive charge and discharge, improving its lifetime. 
+
+Controllers with MPPT mechanism are the mostly used nowadays,  and it maintains the PV operating at the stage of maximum power.
 
 As defined by \cite{Hansen} and \cite{Mellit}, all power systems must include a control strategy, which describes the interactions between its components. The use of battery as a storage form implies thus the presence of a charge controller. 
 
@@ -855,7 +793,7 @@ As shown in \cite{Abdulateef}, the DC-DC converter is used to increase the effic
 
 \begin{equation}
 \label{eq:poutcont}
-P_{in = P_{out}}
+P_{in} = P_{out}
 \end{equation}
 
 Assuming that the efficiency of the controller ($ \eta_{c} $) is a manufacturer's data, from Equation \ref{eq:poutcont} is possible to reach Equation \ref{eq:potcont}.
@@ -865,7 +803,9 @@ Assuming that the efficiency of the controller ($ \eta_{c} $) is a manufacturer'
 V_{in} I_{in} \eta_{c} = V_{out} I_{out}
 \end{equation}
 
-Where $ V_{in} $ is the voltage across the PV array, $ I_{in} $ is the current output of PV array, $ V_{out}=V_{b}=V_{system} $ is the  DC bus voltage, and $-I_{out}$ is the output current from the converter, when all the other values are known.
+Where $ V_{in} $ is the voltage across the PV array, $ I_{in} $ is the current output of PV array, $ V_{out}$ is the  DC bus voltage, and $I_{out}$ is the output current from the converter, when all the other values are known.
+
+Worth to mention that $ V_{out}$, depending on the PV panel generation and on the batteries charge, it can be the voltage that charges the battery $V_{b}$ (which is bigger than the nominal voltage of the batteries), the voltage that is feed by the batteries (the same $V_{b}$ but with levels that can be lower than it, or even the voltage that comes from the PV panels and depends on the MPPT system employed by the controller.
 
 The output voltage is related to the input voltage as a function of duty cycle of the switch (\cite{Abdulateef}). 
  
@@ -886,44 +826,6 @@ Various types of MPPT schemes are proposed by researchers, namely open circuit, 
  
 As the MPPT definition and the equations to get the maximum power from the PV panels was described at the end of the PV panel modeling, the important here is to notice that the Equation \ref{eq:voutvin} defines the relationship between the input signal, the efficiency of the controller and the output power.
  
-One more time, some steps must be done to check the sizing project of the controller, prior the verification phase. Initially the controller must meet the voltage requirement of the PV system, as shown by Equation \ref{eq:vcvsystem}. 
-
-\begin{equation}
-\label{eq:vcvsystem}
-V_{c} = V_{system}
-\end{equation}
-
-Following, the short circuit reference information from the manufacturer's solar panel must be corrected to the cell temperature, as shown by Equation \ref{eq:iscamb}.
-
-\begin{equation}
-\label{eq:iscamb}
-I_{sc,amb} = I_{sc,ref} \times \left[ 1 + \eta_{I} \times (T-25) \right] 
-\end{equation}
-
-The controller must meet the maximum current from the PV array (Equations \ref{eq:icmin} and \ref{eq:icicmin}).
-
-\begin{equation}
-\label{eq:icmin}
-I_{c,min} = I_{sc,amb} \times N_{PP}
-\end{equation}
-
-\begin{equation}
-\label{eq:icicmin}
-I_{c} \geq I_{c,min}
-\end{equation}
-
-The number of controllers required for the off-grid PV system, as defined by \cite{Yatimi}, is calculated using Equation \ref{eq:numberofcmin}. In addition, the final sizing check is did by Equation \ref{eq:numberofc}, who validate the number of controllers adopted.
-
-\begin{equation}
-\label{eq:numberofcmin}
-number_{controllers} = \dfrac{Total \, max \, power \, of \, PV}{Controller \, max \, power} =  \dfrac{P_{m,ref} \times N_{TP}}{V_{system} \times I_{controller,max}}
-\end{equation}
-
-\begin{equation}
-\label{eq:numberofc}
-N_{controller} \geq number_{controllers}
-\end{equation}
-
 \subsubsection{The inverter model}
 As shown by \cite{Mellit}, the PV arrays produce DC and therefore when the PV system contains an AC load, a DC/AC conversion is required. An inverter is a converter, where the power flows from DC to AC side, i.e., having a DC voltage as input; it produces AC voltage, as output. The role of the inverter is to keep the voltage constant on the AC side, i.e., at the rated voltage (127 V or 220 V, for example), and to convert the input power $ P_{in} $ into the output power $ P_{out} $ with the best possible efficiency \cite{Hansen}.
 
@@ -938,592 +840,28 @@ Where $ I_{DC} $ is the current required by the inverter from the DC source in o
 
 Therefore, with this equation it is possible to simulate the output power of the inverter, based on information from the inverter's data-sheet and from the DC module or the PV panel that feed the inverter (which are obtained by this study model). 
 
-The sizing project check of the inverter is done through three Equations. Equation \ref{eq:vindc} ensure that the input voltage of the controller meet the voltage of the system. Equation \ref{eq:voutac} ensures that the output voltage of the controller meet the AC voltage of the load. Moreover, Equation \ref{eq:invcheck} ensures that the controller can support the total demand of the load and the surge power.
 
-\begin{equation}
-\label{eq:vindc} 
-V_{in}DC = V_{system}
-\end{equation}
-
-\begin{equation}
-\label{eq:voutac} 
-V_{out}AC = V_{AC}
-\end{equation}
-
-\begin{equation}
-\label{eq:invcheck} 
-\left[ (Demand \leq P_{AC,ref}) \, and \, (P_{surge} \leq MAX_{AC,ref}) \right] 
-\end{equation}
-
-
-
-%-------------------------------------------------------------------
-\subsection{PV System Model}
-\label{sec:PVsystemmodel}
-%-------------------------------------------------------------------
-%A photovoltaic PV generator is the whole assembly of solar cells, connections, protective parts, and supports. 
-%In the present modeling, the focus is only on cell/module/array.
-%
-%%%%%%The basic element of a PV system is a PV cell, also called a solar cell. A solar cell is a semiconductor device that can convert solar energy into DC electricity. 
-%The semiconductor materials (usually silicon), which are specially treated to form an electric field, positive on one side (backside) and negative on the other (towards the sun). When solar energy (photons) hits the solar cell, electrons are knocked loose from the atoms in the semiconductor material, creating electron-hole pairs \cite{Lorenzo}. If electrical conductors are attached to the positive and negative sides, forming an electrical circuit, the electrons are captured in the form of electric current $ I_{ph} $ (photocurrent).
-%%%%%To increase their utility, a number of individual PV cells are interconnected together in a %sealed, weatherproof 
-%%%%%package called panel or module. 
-%For instance, a 12 V Panel will have 36 cells connected in series and a 24 V Panel will have 72 PV cells connected in series. In addition, to achieve the desired voltage and current, modules are wired in series and parallel into what is called a PV Array, as shown in Fig.\ref{fig:celmodarray}. The flexibility of the modular PV system allows designers to create PV systems that can meet a wide variety of electrical demands. 
-%
-%\begin{figure}[h]
-%\includegraphics[width=0.4\textwidth]{celmodarray}
-%\centering
-%\caption{PV cell, module and array (Source: \cite{SamlexSolar})}
-%\label{fig:celmodarray}
-%\end{figure}
-%
-%%%%%The PV modules are generally rated under standard test conditions (STC), and the parameters required for the input of the PV modules are relying on meteorological conditions.
-%the meteorological conditions of the area to be serviced by PV solution. %However, the climatic conditions are unpredictable due to the random nature of their occurrence \cite{Jakhrani}.
-%, which leads to the following specification by the manufacturers:  solar radiation of 1000 W/m$^{2}$, cell temperature of 25$^{o}$C, and solar spectrum of 1.5. The parameters required for the input of the PV modules are relying on the meteorological conditions of the area to be serviced by photovoltaic solution. However, the climatic conditions are unpredictable due to the random nature of their occurrence \cite{Jakhrani}.
-%
-%These uncertainties lead to either over- or underestimation of energy yield from PV modules. An overestimation up to 40\% was reported as compared to the rated power output of PV modules \cite{Durisch}. The growing demand of photovoltaics technologies led to research in the various aspects of its components from cell technology to the modeling, size optimization, and system performance \cite{Yatimi}, \cite{Saloux}, \cite{Mellit}. 
-%
-%Modeling PV modules is one of the major components responsible for proper functioning of PV systems. However, the estimation of models is affected by various intrinsic and extrinsic factors, which ultimately influence the behavior of current and voltage. Therefore, perfect modeling is essential to estimate the performance of PV modules in different environmental conditions \cite{Jakhrani}.
-% 
-%Modeling provides the ways to understand the current, voltage, and power relationships of PV systems.
-Mathematical models are required in order to allow the formal specification of the PV system. At this section we will summarize the models adopted at the paper.
-
-\textbf{PV modules}: a wide variety of models exists. % for estimation of its power output  (and $I-V$ or $P-V$ curves). 
-However, the present work will rely on the simplified model of 1-diode, illustrated in Fig. \ref{fig:equivckt}. This model has a small error rate, between 0.03\% and 4.68\% from selected PV panels tested~\cite{Saloux}.
-
-%The performance of PV systems %, %that is, the output current/voltage curve ($I-V$ curve), 
-%is usually studied using an equivalent circuit model~\cite{Yatimi}, which consists of a current source with one or two diodes connected in parallel, and up to two resistors, one connected in parallel and the other one in series, to take into account energy losses in this model~\cite{Cubas}. 
-%Based on these electronic components, four basic configurations are normally used when studying photovoltaic systems, as shown by Fig. \ref{fig:equivckt}. 
-\begin{figure}[h]
-\includegraphics[width=0.40\textwidth]{equivckt1D}
-\centering
-\caption{1-diode equivalent PV cell/panel circuit model (adapted from~\cite{Cubas}).}
-%\caption{Four different equivalent circuit models: (a) 1-diode; (b) 1-diode/1-resistor; (c) 1-diode/2-resistor; (d) 2-diode/2-resistor (Source: \cite{Cubas})}
-\label{fig:equivckt}
-\end{figure}
-
-The Eq. \eqref{eq:1diodemodel} relates the output current, $I$, to the output voltage, $V$. %This model has a small error rate, between 0.03\% and 4.68\% from selected PV panels tested~\cite{Saloux}. %In addition, this mathematical modeling has the advantage of being an explicit model, which does not use iterative numerical calculation, which is time-consuming to computing~\cite{Cubas}.
-\begin{equation}
-\label{eq:1diodemodel}
-I = I_{ph}-I_{D1}=I_{ph}-I_{0}\left[ exp \left( \dfrac{V}{NaV_{T}} \right)  \right], 
-\end{equation}
-
-\noindent where $I_{ph}$ is the photocurrent delivered by the constant current source; $I_{0}$ is the reverse saturation current corresponding to the diode; $N$ is the number of series-connected cells; %($N=1$ in a single cell configuration); 
-$a$ is the ideality or quality factor ($a=1$ for ideal diodes and between $1$ and $2$ for real diodes); $V_{T}$ is the thermal voltage ($ V_{T}=k_{B}T/q $); $ k_{B} $ is the Boltzmann constant ($ 1.3806503\times10^{-23}\:J/K $); $T$ the temperature of cell in Kelvin; $q$ is absolute value of the electron's charge ($ -1.60217646\times10^{-19}\:C $).
-
-%\begin{itemize}
-%\item $I_{ph}$ is the photocurrent delivered by the constant current source; 
-%\item $ I_{0} $ is the reverse saturation current corresponding to the diode; 
-%\item $ N $ is the number of series-connected cells in the photovoltaic system to be analyzed; $ N=1 $ in a single cell configuration.
-%	\begin{itemize}
-%	\item $ N=1 $ in a single cell configuration. 	
-%	\end{itemize}	  
-%\item $ a $ is the ideality factor (or quality factor) that takes into account the deviation of the diodes from the Shockley diffusion theory; $a=1$ for ideal diodes and between $ 1 $ and $ 2 $ for real diodes.
-%	\begin{itemize}
-%	\item $a=1$ for ideal diodes and between $ 1 $ and $ 2 $ for real diodes. 	
-%	\end{itemize}
-%\item $V_{T}$ is the thermal voltage ($ V_{T}=k_{B}T/q $);
-%	\begin{itemize}
-%	\item $ k_{B} $ is the Boltzmann constant ($ 1.3806503\times10^{-23}J $); 
-%	\item $ T $ the temperature of the p-n junction (or cell temperature) expressed in Kelvin; 
-%	\item $ q $ is absolute value of the electron's charge ($ -1.60217646\times10^{-19}C $).	
-%	\end{itemize}	 
-%\end{itemize}
-%
-%This model has only three unknown parameters ($ I_{ph}$, $I_{0}$, and $a $), and it assumes that the series resistance is $ zero $ and shunt resistance is $ infinite $ and, thus, both of these parameters are ignored.
-%
-%The 1-diode/1-resistor model, is described by Equation \ref{eq:1d1rmodel}. 
-%
-%\begin{equation}
-%\label{eq:1d1rmodel}
-%I =I_{ph}-I_{0}\left[ exp \left( \dfrac{V+IR_{s}}{NaV_{T}} \right) -1 \right] 
-%\end{equation}
-%
-%Where $R_{s}$ is the series resistor.
-%
-%At this model, there are four unknown parameters ($ I_{ph}$, $I_{0}$, $ R_{s} $, and $ a $), and it assumes shunt resistance as $ infinite $.
-%
-%The 1-diode/2-resistor model, is described by Equation \ref{eq:1d2rmodel}. 
-%
-%\begin{equation}
-%\label{eq:1d2rmodel}
-%I =I_{ph}-I_{0}\left[ exp \left( \dfrac{V+IR_{s}}{NaV_{T}} \right) -1 \right] - \dfrac{V+IR_{s}}{R_{sh}}
-%\end{equation}
-%
-%Where $R_{sh}$ is the shunt resistor.
-%
-%At this model, there are five unknown parameters ($ I_{ph}$, $I_{0}$, $ R_{s} $, $ R_{sh} $, and $ a $).
-%
-%And the 2-diode/2-resistor model, is described by Equation \ref{eq:2d2rmodel}. 
-%
-%\begin{multline}
-%\label{eq:2d2rmodel}
-%I =I_{ph}-I_{01}\left[ exp \left( \dfrac{V+IR_{s}}{Na_{1}V_{T}} \right) -1 \right] - \\ %I_{02}\left[ exp \left( \dfrac{V+IR_{s}}{Na_{2}V_{T}} \right) -1 \right] - \dfrac{V+IR_{s}}{R_{sh}}
-%\end{multline}
-%
-%This model has six unknown parameters with two exponential terms. 
-%Briefly, both single and double diode models require the knowledge of all unknown parameters, which is usually not provided by manufacturers. Nevertheless, the current-voltage equation is a transcendental expression \cite{Jakhrani}.  
-%
-%However, regardless of the adopted model, the parameters of the equations must be estimated to adapt the corresponding model to the real behavior of the solar cell/panel. 
-%
-%For that reason, researchers gradually focused on searching out the approximate methods for the calculation of unknown parameters and walked through three different paths. The analytical methods give exact solutions by means of algebraic equations, as done by \cite{Cubas} and \cite{Brano}. However, due to implicit nature and nonlinearity of PV cell or module characteristics, it is hard to find out the analytical solution of all unknown parameters, as described by \cite{Hasan}. Thus, numerical methods such as Newton-Raphson method or Levenberg-Marquardt algorithm were preferred, as described by \cite{Mellit}. This happens because numerical methods give approximate solution of the nonlinear problems without searching for exact solutions. However, numerical methods are time consuming and need long term time series data, which is not available in developing countries. \cite{Jakhrani} did a mixed methodology using analytical and numerical steps together.  \cite{Shenawy} create a method to discover the unknown parameters of the PV panels through experimentation (essays). And \cite{Tian} did a mix of analytical and experimental methodology to get the unknown parameters, but samples of the PV modules are necessary to perform some essays, when we use experimental technique. 
-%Therefore, a wide variety of models exists for estimation of power output of PV modules (and $I-V$ or $P-V$ curves). However, the present work will rely on t
-%The simplified model of 1-diode has demonstrated that it has a small error rate, between 0.03\% and 4.68\% from selected PV panels tested~\cite{Saloux}. In addition, this mathematical modeling has the advantage of being an explicit model, which does not use iterative numerical calculation, which is time-consuming to computing~\cite{Cubas}. 
- %
-%\subsection{PV Panel Model}
-%With the proposed model, an explicit set of equations is derivate from the ideal PV model given by Equation \ref{eq:1diodemodel}.
-%
-%A single-diode without series and shunt resistances is considered. 
-%%%%%%%Eq.~\eqref{eq:1diodemodel} is used to express currents and voltages at each key point of the characteristic curve from a PV cell \cite{Villalva}.
-% shown in Fig. \ref{fig:ivcurve}.
-%
-%\begin{figure}[h]
-%\includegraphics[width=0.4\textwidth]{ivcurve}
-%\centering
-%\caption{$ I-V $ characteristic curve of an ideal PV cell (Source: \cite{Saloux})}
-%\label{fig:ivcurve}
-%\end{figure}
-%
-%Hence, the short-circuit current, the open-circuit voltage, the maximum power voltage and current are written as defined by \cite{Saloux} and shown from Equations \ref{eq:Isc} to \ref{eq:Im}.
-%\begin{equation}
-%\label{eq:Isc}
-%I_{sc}=I_{ph}\vert_{V=0}
-%\end{equation}
-%
-%\begin{equation}
-%\label{eq:Voc}
-%V_{oc}=\dfrac{aNk_{B}T}{q}ln\left( 1+\dfrac{I_{sc}}{I_{0}} \right) 
-%\end{equation}
-%
-%\begin{equation}
-%\label{eq:exp}
-%exp\left( \dfrac{qV_{oc}}{aNk_{B}T} \right) = \left(1+\dfrac{qV_{m}}{aNk_{B}T} \right) exp \left( \dfrac{qV_{m}}{aNk_{B}T} \right) 
-%\end{equation}
-%
-%\begin{equation}
-%\label{eq:Im}
-%I_{m} =I_{ph}-I_{0}\left[ exp \left( \dfrac{qV_{m}}{aNk_{B}T} \right) -1 \right] 
-%\end{equation}
-%
-%Equation \ref{eq:exp} is not explicit with the PV key parameters, therefore need to be rewritten in a different way. 
-%
-%A PV cell has a hybrid behavior, i.e., a current-source at the short-circuit point and voltage-source at the open-circuit point \cite{Saloux}. 
-%These two regions are characterized by two asymptotes of the $ I-V $ curve in Fig. \ref{fig:ivcurve}, where the transition is a compromise between both behaviors. It is interesting to observe that the maximum power point corresponds to a trade-off condition, where the current is still high enough before it starts decreasing with increasing the output voltage (Fig. \ref{fig:ivcurve}).
-%
-%Based on this, the tangent of the I-V curve can be used to evaluate the transition between current- to voltage-source controlled regions; this operation yields Equation \ref{eq:didv}.
-%
-%\begin{equation}
-%\label{eq:didv}
-%\dfrac{dI}{dV}=-\dfrac{qI_{0}}{aNk_{B}T}exp \left( \dfrac{qV}{aNk_{B}T}  \right) 
-%\end{equation}
-%
-%The derivative of Equation \ref{eq:didv} is used to calculate the output voltage that corresponds to the maximum power operation condition of the cell. Therefore, the Equation \ref{eq:Vmderiv} is generated.
-%
-%\begin{equation}
-%\label{eq:Vmderiv}
-%V_{m}=\dfrac{aNk_{B}T}{q} ln \left( -\dfrac{qNk_{B}T}{qI_{0}} \left( \dfrac{dI}{dV}  \right)_{V_{m}}   \right) 
-%\end{equation}
-%
-%It is evident that Equation \ref{eq:Vmderiv} requires an expression of the derivative of the current with voltage evaluated at the maximum power point. The fact that the maximum power corresponds to an extreme, the variation of the maximum output power with voltage is relatively small, i.e., a change on $ V_{m} $ has a relatively small effect on the maximum power of the cell \cite{Saloux}. Consequently, considering the asymptotic behavior of the $I-V$ curve at short- and open-circuit conditions, the derivative required by Equation \ref{eq:Vmderiv} can be calculated as shown in Equation \ref{eq:dIdV_Vm}.
-%
-%\begin{equation}
-%\label{eq:dIdV_Vm}
-%\dfrac{dI}{dV}\vert_{V_{m}} \cong -\dfrac{0-I_{sc}}{V_{oc}-0}=\dfrac{I_{sc}}{V_{oc}}
-%\end{equation}
-%
-%Replacing the Equation \ref{eq:dIdV_Vm} into Equations \ref{eq:Vmderiv} and \ref{eq:Im}, 
-%
-The voltage and the current at the maximum power point tracking (MPPT), can be described by Eq. \eqref{eq:Vmfinal}, and Eq. \eqref{eq:Imfinal}~\cite{Saloux}: %, and Eq. \eqref{eq:Pm} as follows~\cite{Saloux}: %These equations are used to calculate the key cell parameters at the maximum power point as function cell temperature and parameters from the manufacturer's data-sheet.
-\begin{equation}
-\label{eq:Vmfinal}
-V_{m}=\dfrac{aNk_{B}T}{q} ln \left( \dfrac{aNk_{B}T}{qI_{0}} \dfrac{I_{sc}}{V_{oc}}  \right). 
-\end{equation}
-
-\begin{equation}
-\label{eq:Imfinal}
-I_{m} = I_{ph} + I_{0} - \dfrac{aNk_{B}T}{q} \left( \dfrac{I_{sc}}{V_{oc}} \right).  
-\end{equation}
-
-%\begin{equation}
-%\label{eq:Pm}
-%P_{m} = V_{m} I_{m}.
-%\end{equation}
-%
-%\begin{multline}
-%\label{eq:Pm}
-%P_{m} = V_{m} I_{m} = \left[ \dfrac{aNk_{B}T}{q} ln \left( \dfrac{aNk_{B}T}{qI_{0}} \dfrac{I_{sc}}{V_{oc}}  \right) \right] \times \\ \left[ I_{ph} + I_{0} - \dfrac{aNk_{B}T}{q} \left( \dfrac{I_{sc}}{V_{oc}} \right)  \right] 
-%\end{multline}
-%
-However, the photo-current delivered by the constant current source ($I_{ph}$) or even the reverse saturation current ($ I_{0} $) are not given by PV manufacturers. Therefore, Eq. ~\eqref{eq:Iph} is used to calculate the photo-current as function of irradiance and temperature~\cite{Villalva}:
-\begin{equation}
-\label{eq:Iph}
-I_{ph}=\dfrac{G}{G_{ref}} \left[ I_{ph,ref} + \mu_{I} \left( T-T_{ref} \right)    \right], 
-\end{equation}
-
-\noindent where the reference state (STC) of the cell is given by the solar irradiance $ G_{ref}=1000\:W/m^{2} $ and the temperature $ T_{ref}=298.15 K (=25^{o}\:C) $; $ \mu_{I} $ is the short-circuit current temperature coefficient ($A/K$); %and corresponds to the photocurrent obtained from a given PV cell working at reference conditions.
-$ I_{ph,ref} $ can be approximated to the reference short-circuit current ($ I_{sc,ref} $)\cite{Villalva}.
-% that is provided by PV manufacturers ($ I_{sc,ref} $).
-%\cite{Jakhrani} that is provided by PV manufacturers ($ I_{sc,ref} $).
-%%
-The cell temperature ($ T $) in degree Celsius is described by Eq. \ref{eq:Tcell}~\cite{Ross}:
-\begin{equation}
-\label{eq:Tcell}
-T = T_{air} + \dfrac{NOCT-20}{800}G,
-\end{equation}
-
-\noindent where $ T_{air} $ is the ambient temperature, $NOCT$ is the nominal operating cell temperature (in $^{o}$C), and $G$ is the solar irradiance ($ W/m^{2} $) of the place where the PV system is deployed.
-
-Furthermore, Eq. ~\eqref{eq:I0} permits the saturation current ($ I_{0} $) to be expressed as a function of the cell temperature as~\cite{Villalva} 
-%In this study, this relation is explicitly written based on cell open-circuit conditions using the short-circuit current temperature coefficient as well as the open-circuit voltage temperature coefficient (Equation \ref{eq:I0}).
-
-\begin{equation}
-\label{eq:I0}
-I_{0} = \dfrac{I_{sc,ref} + \mu_{I}(T - T_{ref})}{exp \left[ \dfrac{q(V_{oc,ref} + \mu_{V} (T - T_{ref}))}{aNk_{B}T}    \right] -1},
-\end{equation}
-
-\noindent where $ V_{oc,ref} $ is the reference open-circuit voltage and $ \mu_{V} $ is an open-circuit voltage temperature coefficient ($ V/K $).
-
-%The ideality (or quality) factor of the diode $ a $, which is usually considered as a constant \cite{Villalva}, is determined in the reference state. 
-Using the maximum power point current, cf. Eq.~\eqref{eq:Imfinal}, and the saturation current in the reference temperature given by Eq.~\eqref{eq:I0}, the diode ideality factor~\cite{Saloux} is determined by Eq.~\eqref{eq:a}:
-\begin{equation}
-\label{eq:a}
-a = \dfrac{q(V_{m,ref}-V_{oc,ref})}{Nk_{B}T} \dfrac{1}{ln \left( 1 - \dfrac{I_{m,ref}}{I_{sc,ref}}  \right) },
-\end{equation}
-
-\noindent where $V_{mref}$, $V_{oc,ref}$, $I_{m,ref}$, and $I_{sc,ref}$ are key cell values obtained under both actual cell temperature and solar irradiance conditions. %, usually provided by manufacturers; t
-
-%The PV generator model is now completely determined; it requires the actual cell temperature (or the air temperature), the actual solar irradiance and common data provided by manufacturers in data-sheets or manuals.
-%
-%If the PV cells are in parallel, then there is a parallel array. Therefore, there will be a change at the $ I_{ph} $ and $ I_{0} $and the resulting current is given by Equation \ref{eq:Iarray}, as demonstrated in \cite{Saloux}.
-%
-%\begin{equation}
-%\label{eq:Iarray}
-%I_{array} = (N_{cells in parallel})(I_{one cell})
-%\end{equation}
-%
-%Where $ I_{one cell} $ is the current from Equation \ref{eq:Imfinal}.
-%
-%In addition, if the panels are in series, the current do not change but the total voltage is the sum of the each panel's voltage.
-%
-%\begin{equation}
-%\label{eq:Varray}
-%V_{array} = (N_{cells in series})(V_{one panel})
-%\end{equation}
-%
-%Where $ V_{one panel} $ is the voltage from Equation \ref{eq:Vmfinal}.
-%------------------------------------------------------------
-%Because of the fluctuating nature of the output delivered by the PV arrays, batteries are nece\sqrt{•}ry in a PV system. Thus, during the hours of sunshine, the PV system feeds directly the load and the excess electrical energy is stored in the battery. During the night, or during a period with low solar irradiation, energy is supplied to the load from the battery \cite{Mellit}.
-  
-Related to the \textbf{batteries}, various models have been described in the literature and the most common ones are based on lead-acid batteries~\cite{Copetti,Pinho};
-%, and \cite{Manwell93, Manwell94}. 
-%However, regardless of the model, normally the following parameters are required: 
-%
-%\begin{itemize}
-%\item Nominal capacity ($ q_{max} $), is the number of Ampere-hours ($ Ah $) that can maximally be extracted from the battery
-%, under predetermined discharge conditions.
-%\item State of charge ($ SOC $), is the ratio between the present capacity and the nominal capacity, i.e., $ SOC = q/q_{max} $. 
-%Obviously $ 0<SOC<1 $. 
-%If $ SOC=1 $, then the battery is totally charged; and if $ SOC=0 $, the battery is fully discharged
-%\item Charge (or discharge) regime.This parameter reflects the relationship between the nominal capacity of a battery and the current at which it is charged (or discharged). 
-%It is expressed in hours: for instance, discharge regime is 30h for a battery of 150 Ah that is discharged at 5A.
-%\item Efficiency ($\eta_{b}$), is the ratio of the charge extracted during discharge divided by the amount of the charge needed to restore the initial state of charging or discharging current. 
-%\item Lifetime, is the number of charge/discharge cycles the battery can sustain before losing 20\% of its nominal capacity.
-%\end{itemize}
-%
-%The merit of a stand-alone PV system is evaluated in terms of the reliability of the electricity supply to the load and in terms of the long-term efficiency of the components. The battery efficiency was described in this section, and the liability is quantified by the concept of loss of load probability (LLP). LLP is defined as the ratio between the Ampere-hour deficit and the Ampere-hour demand, both with respect to the load, over a long period of time \cite{Copetti}. 
-%
-%In general, the battery models view the battery as a voltage source $ E $ in series with an internal resistance $ R_{0} $, as shown in Fig. \ref{fig:batteryckt}. 
-%
-%\begin{figure}[h]
-%\includegraphics[width=0.4\textwidth]{batteryckt}
-%\centering
-%\caption{Schematic diagram of the battery (Source: \cite{Hansen})}
-%\label{fig:batteryckt}
-%\end{figure}
-%
-%The terminal voltage of the battery can be expressed in terms of its open circuit voltage and the voltage across the internal resistance of the battery \cite{Sukamongkol}, as shown by Equation 31.  
-%
-%Where $ V_{b} $ is the battery terminal voltage, $ E_{oc} $ is the battery circuit voltage, $ I_{b} $ is the battery current, and $ R_{b} $ is the internal resistance of the battery.
-%
-%The battery model, which describes the relationship between the voltage, current and the state of charge, can be found in \cite{Copetti}, \cite{Manwell93}, and \cite{Manwell94}.  
-%
-%The Kinetic Battery Model (KiBaM) of Manwell and McGowen \cite{Manwell93} was developed at the University of Massachusetts to predict the performance of the battery, based on manufacturer's data. However, it uses some data extracted from tested batteries in laboratory. Therefore is not suitable to this study. 
-%
-that kind of battery has relative low cost and wide availability~\cite{Copetti}. 
-%
-Here, the model adopted uses only manufacturer's data without empirical tests~\cite{Copetti}. % and allows finding relations among voltage, current, state of charge and temperature. 
-%
-The discharge voltage is described by Eq. \eqref{eq:bat_Vd}.
-%The first term represents the voltage variation with the state of charge ($ SOC $), i.e., the electrolyte concentration, and the second is the variation due to internal resistance variation.
-%
-\begin{multline}
-\label{eq:bat_Vd}
-V_{d} = \left[ 2.085-0.12(1-SOC) \right] - \dfrac{I}{C_{10}} \left( \dfrac{4}{1+I^{1.3}} + \dfrac{0.27}{SOC^{1.5}}+0.02 \right) (1-0.007 \Delta T),
-\end{multline}
-
-\noindent where $C_{10}$ means 10 h of rated capacity (manufacturer's data-sheet), $\Delta T$ is temperature variation ($\Delta T=T-T_{ref} $%, $ T_{ref}=25^{o}C $
-), $ SOC $ or state of charge indicates how much electric charge is stored in the cell at a given time. %Mathematically, it is the ratio between the present capacity and the nominal capacity% (in $ Ah $, provided by manufacturer)
-%If $SOC=1$, then the battery is totally charged; and if $ SOC=0 $, then the battery is fully discharged.  %, defined by Equation \ref{eq:SOCbat}.
-%\begin{equation}
-%\label{eq:SOCbat}
-%SOC = \left( 1 - \dfrac{Q}{C} \right) 
-%\end{equation}
-%
-%Where $ Q $ is the charge delivered at the time of interest ($ Q=It $), and C is the battery capacity.
-%
-%The ratio between $ Q $ and $ C $ represents t
-The depth of discharge ($DOD$) or the fraction of discharge, is $DOC=1-SOC$.
-
-%The efficiency of the battery discharge is assumed to be 100\%, according \cite{Copetti}; however, the total amount of useful charge available during discharge is limited by the current rate and temperature given by Equation \ref{eq:CC10}. This equation, called of capacity, is normalized with respect to discharge current corresponding to $ C_{10} $ rated capacity ($ I_{10} $).
-%
-%\begin{equation}
-%\label{eq:CC10}
-%\dfrac{C}{C_{10}} = \dfrac{1.67}{1+0.67 \left( \dfrac{I}{I_{10}} \right)^{0.9} }(1+0.005 %\Delta T)
-%\end{equation}
-%
-%Note that when the discharge current tends to zero at 25$^{o}$C, the maximum capacity that can be removed is about 67\% over the capacity.
-For the charging process, the parameters are described by Eq.~\eqref{eq:Vcbat} as
-%
-\begin{multline}
-\label{eq:Vcbat}
-V_{c} = [2+0.16SOC]+ \dfrac{I}{C_{10}} \left( \dfrac{6}{1+I^{0.86}} + \dfrac{0.48}{(1-SOC)^{1.2}} + 0.036  \right) (1-0.025 \Delta T).
-\end{multline}
-%
-%Note that SOC can be calculated easily at any point during the discharge period, thereby considering the current drained from batteries during a certain time period. %; however, during recharge it is much more difficult \cite{Copetti}.
-%Generally, the efficient region is where $ SOC $ is below $ 0.7 $ and $ V_{c} $ is less than $2.3 V$ per cell. The efficiency drops to zero at full charge and the function that represents the charge efficiency ($ \eta_{c} $) variation with state of charge and current rate is given in Equation \ref{eq:efficcharge}.
-%\begin{equation}
-%\label{eq:efficcharge}
-%\eta_{c} = 1 - exp \left[ \dfrac{20.73}{\dfrac{I}{I_{10}}+0.55} (SOC-1) \right] 
-%\end{equation}
-%
-%\cite{Copetti} show that, 
-%During overcharge, gassing occur and tests demonstrated that the final charge voltage ($ V_{ec} $) increases with the current intensity and with the decreasing of the temperature (\ref{eq:Vec}). It was created a function for the gassing voltage as well, as shown in (\ref{eq:Vg}). In addition, the overcharge phenomenon can be represented by (\ref{eq:Voverc}).
-%\begin{equation}
-%\label{eq:Vec}
-%V_{ec} = \left[ 2.45 + 2.011 ln \left( 1+\dfrac{I}{C_{10}} \right)  \right] (1-0.002 \Delta T)
-%\end{equation}
-%
-%\begin{equation}
-%\label{eq:Vg}
-%V_{g} = \left[ 2.24 + 1.97 ln \left( 1+\dfrac{I}{C_{10}} \right)  \right] (1-0.002 \Delta T)
-%\end{equation}
-%
-%\begin{multline}
-%\label{eq:Voverc}
-%V_{c} = V_{g} + (V_{ec} - V_{g}) \\ \left[ 1- exp \left( \dfrac{Ah_{restored}-0.95C}{I\tau}  \right)    \right] 
-%\end{multline}
-%
-%Where $ Ah_{restored} $ represents the Ampere-hour stored in the battery with regard to the battery capacity ($ C $) during this hour.
-%
-%The function assumes that 95\% of the capacity was already restored at the start of overcharge.
-%
-%The time constant of the phenomenon ($ \tau $) is reversely proportional to the charge intensity and can be written by (\ref{eq:tau}).
-%\begin{equation}
-%\label{eq:tau}
-%\tau = \dfrac{17.3}{1+852 \left( \dfrac{I}{C_{10}} \right) ^{1.67} }
-%\end{equation}
-%
-%Therefore, to model the voltage ($ V_{c} $) evolution of the battery, (\ref{eq:Vcbat}) can be used up the start of gassing ($ V_{c} \leq V_{g} $). And during overcharging ($ V_{c} > V_{g} $), (\ref{eq:Voverc}) can be used until a constant final voltage ($ V_{ec} $) is reached.
-%
-%The storage capacity of the battery can be calculated using Equation \ref{eq:stor}, as defined in \cite{Wenham}.
-%
-%\begin{equation}
-%\label{eq:stor}
-%Storage capacity = \dfrac{N_{C}E_{load}}{DOD \eta _{b}}
-%\end{equation}
-%
-%Where $ DOD $ is the maximum possible depth of battery discharge, $ E_{load} $ is the average energy consumed by the load, $ N_{C} $ is the largest number of continuous cloudy days of the area, and $ \eta_{b} $ is the efficiency of the battery.
-%
-%As an example of this formula application, as shown by \cite{Abdulateef}, considering that a stand-alone PV system is intended to supply $1.5 kW/48 V$ for 24 hours ($=36 kWh$); The largest number of continuous cloudy days in the selected site is about 1 day; For a maximum depth of discharge for the battery $DOD$ of $0.8$ and battery efficiency $80\%$.
-%
-%Then the storage capacity using Equation \ref{eq:stor} becomes $56.3 kWh$. Since the selected DC bus voltage is $48 V$, then the required Ampere-hours of the battery is $1173 Ah$ ($56.3 kWh/48$). If a single battery of 12 V and 350 Ah is considered, then four batteries are connected in series ($4 \times 350 Ah = 1400 Ah$).
-%
-%At this research, it was considered a simplified model for charging (Equation \ref{eq:charge}) and discharging (Equation \ref{eq:discharge}) of the batteries, even considering that the process is not linear and depends on the temperature. The equations are used to update the $SOC$ of the batteries, and have the number of hours ($ Num_{h} $) as a variable. There is a factor (1.15) which is present at the charging equation, and is necessary to express that during the charging process is usual to reach 115\% of the battery capacity
-%
-%\begin{multline}
-%\label{eq:charge}
-%SOC_{charge} = SOC_{previous} + \\ \dfrac{100*Pm*Num_{h}}{V_{system}*capacity*N_{BP}*1.15}
-%\end{multline}
-%
-%\begin{multline}
-%\label{eq:discharge}
-%SOC_{discharge} = SOC_{previous} - \\ \dfrac{100*I_{drained}*Num_{h}}{capacity}
-%\end{multline}
-%
-%
-%---------------------------------------------------------
-%---------------------------------------------------------
-%Depending on the literature, the controller can receive different names: controller \cite{Hansen}, charge controller \cite{Mahanta} and \cite{Chauhan}, regulator \cite{Mellit}, DC-DC converter with MPPT and switch \cite{Dhanowa}, \cite{Yatimi}, \cite{Abdulateef}, \cite{Roy}. However, in this study, in order to simplify, the term used is controller. 
-
-The \textbf{charge controller} or controller is the responsible to manage the energy flow to PV system, batteries and loads by collecting information on the battery voltage and knowing the maximum and minimum values acceptable for the battery voltage. Controllers with MPPT mechanism are the mostly used nowadays,  and it maintains the PV operating at the stage of maximum power. %Controllers aim to protect the battery (or batteries) against the excessive charge and discharge \cite{Pinho}, improving its lifetime. 
-%
-%The resource MPPT, called of maximum power point tracking, is an electronic control mechanism that maintains the PV operating in a voltage that correspond to the voltage of maximum power.
-%
-%
-%As defined by \cite{Hansen} and \cite{Mellit}, all power systems must include a control strategy, which describes the interactions between its components. The use of battery as a storage form implies thus the presence of a charge controller. 
-%
-%%%%%%%%%%In general, there are two main operating modes for the controller~\cite{Rawat}: normal operating condition, when the battery voltage fluctuates between maximum and minimum voltages; and overcharge or over-discharge conditions, which occur when the battery voltage reaches some critical values. 
-%
-%The controller allows the management of energy between the load and the battery \cite{Mellit}. 
-%The input signals for regulator model are the battery current ($ I_{br} $), PV generator's voltage ($ V_{PV} $), PV generator's current ($ I_{PV} $), and battery voltage ($ V_{b} $). The outputs are battery ($ I_{rb} $) current and used current ($ I_{u} $). 
-
-The steps in the modeling of the controller process are summarized in Table~\ref{table:controller}. To protect the battery against an excessive charge, the PV arrays are disconnected from the system, when the terminal voltage increases above a certain threshold $V_{max \_ off}$ and when the current required by the load is less than the current delivered by the PV arrays~\cite{Hansen}. PV arrays are connected again when the terminal voltage decreases below a certain value $ V_{max \_ on} $. 
-%This can be done by using a switch with a hysteresis cycle, as illustrated in Fig. \ref{fig:controllerover}. 
-%
-%\begin{figure}[h]
-%\includegraphics[width=0.4\textwidth]{controllerover}
-%\centering
-%\caption{Operating principle of an overcharge protector (Source: \cite{Hansen})}
-%\label{fig:controllerover}
-%\end{figure}
-%
-In order to protect the battery against excessive discharge, the load is disconnected when the terminal voltage falls below a certain threshold $V_{min \_ off}$ and when the current required by the load is larger than the current delivered by the PV arrays~\cite{Hansen}. The load is reconnected to the system, when the terminal voltage is above a certain value $V_{min \_ on}$.
-%, using a switch with a hysteresis cycle, as shown in Fig. \ref{fig:controllerdisc}. 
-%
-%\begin{figure}[h]
-%\includegraphics[width=0.4\textwidth]{controllerdisc}
-%\centering
-%\caption{Operating principle of a discharge protector (Source: \cite{Hansen})}
-%\label{fig:controllerdisc}
-%\end{figure}
-%
-%According to \cite{Lorenzo}, the switches may either be electromechanical (relay, contactors, etc.) or solid state (bipolar transistors, MOSFET's, etc.). 
-%
-\begin{table}[!t]
-%% increase table row spacing, adjust to taste
-\renewcommand{\arraystretch}{1.3}
-% if using array.sty, it might be a good idea to tweak the value of
-% \extrarowheight as needed to properly center the text within the cells
-\caption{Summary of the controller process (adapted from~\cite{Hansen})}
-\label{table:controller}
-\centering
-%% Some packages, such as MDW tools, offer better commands for making tables
-%% than the plain LaTeX2e tabular which is used here.
-\begin{tabular}{c | c | c }
-\hline
-\hline
-Step  & Constraint & Command\\
-\hline
-\hline
-(1) & \makecell{If $V > V_{max \_ off}$ \\and $I_{load} < I_{pv}$} & \makecell{Disconnect PV array \\from the system}\\
-\hline
-(2) & \makecell{If command (1) is \\done and $V < V_{max \_ on}$} & \makecell{Reconnect PV array \\to the system}\\
-\hline
-(3) & \makecell{If $V < V_{min \_ off}$ and \\ $I_{load} > I_{pv}$} & \makecell{Disconnect the load \\from the system}\\
-\hline
-(4) & \makecell{If command (3) is \\ done and $V > V_{min \_ on}$} & \makecell{Reconnect the load \\to the system}\\
-\hline
-\hline
-\end{tabular}
-\end{table}
-
-%Regarding the DC-DC converter, the most basic idea is that the power is converted while altering the current and voltage. 
-%
-%As shown in \cite{Abdulateef}, the DC-DC converter is used to increase the efficiency of the PV system by matching the voltage generated by PV array to the voltage required by the load. 
-The output power ($ P_{out} $) of controller is given by Eq. \eqref{eq:poutcont}.
-\begin{equation}
-\label{eq:poutcont}
-P_{in} \eta_{c} = P_{out}.
-\end{equation}
-
-Assuming that the efficiency of the controller ($ \eta_{c} $) is a manufacturer's data, from Eq. \eqref{eq:poutcont} we compute Eq. \eqref{eq:potcont}.
-\begin{equation}
-\label{eq:potcont}
-V_{in} I_{in} \eta_{c} = V_{out} I_{out},
-\end{equation}
-
-\noindent where $ V_{in} $ is the voltage across the PV array, $ I_{in} $ is the output current of PV array, $ V_{out} $ is the  DC bus voltage, and $ I_{out} $ is the output current from the converter.
-
-%The output voltage is related to the input voltage as a function of duty cycle of the switch (\cite{Abdulateef}). 
-% 
-%A DC-DC converter can either be step-up (Boost), step-down (Buck), or both increase and decrease (Buck-Boost) the voltage, as defined by \cite{Mahanta}. In addition, there is the Cuk converter, which is a Buck-Boost converter with an inverting topology \cite{Catherine}. 
-%
-%For the Cuk converter, the relationship is expressed by \ref{eq:voutvin} as show in \cite{Abdulateef}.
-%
-%\begin{equation}
-%\label{eq:voutvin}
-%\dfrac{V_{out}}{V_{in}} = \dfrac{D}{D-1}
-%\end{equation}
-%
-%Where $D$ is the duty cycle or ratio of the circuit converter, i.e., it is defined as the ratio of the on time of the switch to the total switching period.
-% 
-%The DC/DC converter should always operate in the MPPT to maximize the PV array efficiency and consequently increase the efficiency of the PV system, as defined in \cite{Yatimi}.
-%  
-%Various types of MPPT schemes are proposed by researchers, namely open circuit, short circuit, perturb and observe (P\& O)/hill climbing, incremental conductance, and so forth, as shown by \cite{Haque}.
-% 
-%As the MPPT definition and the equations to get the maximum power from the PV panels was described at the end of the PV panel modeling, the important here is to notice that the Equation \ref{eq:voutvin} defines the relationship between the input signal, the efficiency of the controller and the output power.
- 
-%The number of controllers required for the stand-alone PV system, as defined by \cite{Yatimi}, is calculated using Equation \ref{eq:numberofcmin}. In addition, the final sizing check is did by Equation \ref{eq:numberofc}, who validate the number of controllers adopted.
-%\begin{multline}
-%\label{eq:numberofcmin}
-%number_{controllers} = \dfrac{Total \, max \, power \, of \, PV}{Controller \, max \, power} = \\ \dfrac{P_{m,ref} \times N_{TP}}{V_{system} \times I_{controller,max}}
-%\end{multline}
-%
-%\begin{equation}
-%\label{eq:numberofc}
-%N_{controller} \geq number_{controllers}
-%\end{equation}
-%
-%\subsection{Joint work: charge controller and batteries}
-%When batteries are charged, they go through three main different states - bulk, absorption and float, with impact to the inverter and to power supplied to the house.
-%, and it is necessary to understand those three states in order to comprehend the joint work of the controller with the battery. With impact to the inverter and to power supplied to the house. 
-%
-%All the explanation at this section is related to $SOC$ and to the voltage at the DC-bus (controller output, which will be bigger than $V_{system}$) where the batteries are connected, all ruled by the charge controller. Moreover, it is important to mention that smart chargers, the most usual nowadays, will detect voltage and resistance from the battery prior to charging.
-%
-%Bulk - is the first stage of charging. Bulk begins when the sun comes out.
-%, or other source of electrical generation is turned on. 
-%This stage occurs when the batteries are at a lower $SOC$, generally anything not smaller than $75\%$ to $80\%$ (defined during system sizing). This stage is typically where the highest voltage and current the charger is rated for will actually be used. The bulk stage basically allows the PV panel to put as much current into the batteries as possible. For a typical 12 V battery, the charging voltage going into a battery will reach 14.16 V to 14.40 V at this stage, and there is no risk of overcharging in this stage because the battery hasn't even reached full yet.
-%
-%Absorption - once the batteries reach the programmed absorb voltage, usually somewhere between 14.16 and 14.40 V, the batteries will go into the absorption stage. Typically, when a battery reaches this stage its $SOC$ is around $85-95\%$. During this stage, the batteries are kept at the programmed voltage, and the current going into the batteries reduces as the batteries become more full. The absorption stage ends after the programmed time is reached or the number of Ampere going into the battery falls below a preset number. The lower current going into the battery safely brings up the charge on the battery without overheating it. 
-%Usually, this stage takes more time than the bulk stage.
-%
-%Float - upon the completion of the absorption stage, the charge controller will  drop down the voltage and maintain at a steady 13.20 V to 13.38 V (manufacturer's defined value), which is the maximum voltage that a 12 V battery can hold, and begin the float stage. The float stage brings the battery all the way through and maintains $SOC$ at $100\%$. The current will also decrease to a point where it's considered just a pulse. It's essentially the float stage where there is charge going into the battery at all times, but only at a safe rate to ensure a full state of charge and nothing more. 
-%Most smart chargers do not turn off at this point, however it is completely safe to leave a battery in float mode for months to even years at a time.
-%
-%Battery charging technology relies on smart micro-controlled devices. Therefore it is extremely important that the program settings for the charge controller or inverter/charger are correct, and the list includes the bulk and absorption values. 
-%This will help preserve and extend the battery life. There are always default settings to the equipment, set by software, however those settings are not $100\%$ correct because there are difference among models of equipment and among manufacturer's. The ideal is to read the data-sheet from the manufacturers and perform a manual adjust.
-%
-%There are the possibility to combine batteries in a bank, with parallel and series connections, all depending the sizing of the project:
-%
-%\begin{itemize}
-%\item Batteries connected in parallel are seen by the controller as one large battery of the combined Ah capacity of all the batteries. For example, two 12 V and 220 Ah batteries in parallel are seen as one 12 V and 440 Ah battery;
-%\item In the other hand, although the batteries connected in series are also seen as a single battery, the result is different: two 12 V and 220 Ah batteries in series are seen as one 24 V and 220 Ah battery;
-%\item In addition, a mixed bank arrangement can be useful: a bank with two 12 V and 220 Ah batteries in series connected in parallel with a similar arrange will produce an equivalent battery of 24 V and 440 Ah.
-%\end{itemize}
-%-----------------------------------------------
-%-----------------------------------------------
-%As shown by \cite{Mellit}, the PV arrays produce DC and therefore when the PV system contains an AC load, a DC/AC conversion is required. 
-%An inverter is a converter, where the power flows from DC to AC side, i.e., having a DC voltage as input; it produces AC voltage, as output. 
-The role of the \textbf{inverter} is to keep the voltage constant on the AC side, %, i.e., at the rated voltage, % (127 V or 220 V, for example), 
-and to convert the input power $ P_{in} $ into the output power $ P_{out} $ with the best possible efficiency $ \eta_{i} $ as described by \eqref{eq:efficinv} \cite{Hansen}:
-%
-%The inverter is characterized by a power dependent efficiency $ \eta_{i} $ as shown by (\ref{eq:efficinv}) \cite{Hansen}.
-\begin{equation}
-\label{eq:efficinv}
-\eta_{i} = \dfrac{P_{out}}{P_{in}} = \dfrac{V_{AC} I_{AC} cos\varphi}{V_{DC}I_{DC}},
-\end{equation}
-
-\noindent where $ I_{DC} $ is the current required by the inverter from the DC source to be able to keep the rated voltage on the AC side, $ V_{DC} $ is the input voltage to the inverter delivered by the DC source (PV panel or battery),  $ V_{AC}  $ and $ I_{AC} $ are the output voltage and current, respectively, and $ cos \varphi $ can be obtained from the inverter's manual.
-
-%Therefore, with this equation it is possible to simulate the output power of the inverter, based on information from the inverter's data-sheet and from the DC module or the PV panel that feed the inverter (which are obtained by this study model). 
-%
 %
 %--------------------------------------------------
 \subsection{Availability of Stand-alone PV Systems}
 \label{sec:availability}
 %--------------------------------------------------
-%Each stand-alone PV system, like any other power systems, has a specific level of availability. This reliability level impacts various issues, as system performance, production, feasibility, and investment. 
+
+Each stand-alone PV system, like any other power systems, has a specific level of availability. This reliability level impacts various issues, as system performance, production, feasibility, and investment. 
+
 The availability of a stand-alone PV system can be defined as the percentage of time at which a power system is capable of meeting the load requirements~\cite{Khatib2014}. The number of hours that the system is available, divided by 8,760 h, gives the annual system availability.
-The system availability definition depends on how critical the load application is. For critical loads, 99\% is considered acceptable. While in a ordinary house electrical load, 95\% is considered acceptable. %As an example, a system with 95\% availability is expected to meet the load requirement of 8,322 h during an average year for the entire useful life of the system. An annual availability of 99\% means that the system can operate the load for 8,672 h of the 8,760 h.
-%
-%With that in mind, it is important to mention that even if a formal verification or a simulation shows that a PV system fails, it doesn't mean that the sizing is wrong. It is important to evaluate how critical the load application is and the horizon of evaluation. However this analysis can be useful, for example, to improve the sized battery autonomy.
-%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+The system availability definition depends on how critical the load application is. For critical loads, 99\% is considered acceptable. While in a ordinary house electrical load, 95\% is considered acceptable. 
+
+As an example, a system with 95\% availability is expected to meet the load requirement of 8,322 h during an average year for the entire useful life of the system. An annual availability of 99\% means that the system can operate the load for 8,672 h of the 8,760 h.
+
+With that in mind, it is important to mention that even if a formal verification or a simulation shows that a PV system fails, it doesn't mean that the sizing is wrong. It is important to evaluate how critical the load application is and the horizon of evaluation. However this analysis can be useful, for example, to improve the sized battery autonomy.
 
 
-////sizing check
+\subsection{Sizing Stand-alone Solar Photovoltaic Systems}
 
-The sizing check stage will ensure that the system meets the standard project steps related 
+The mathematical model presented at section~\ref{model} is important for the project validation, however if it is included an approach to perform the sizing of stand-alone PV systems, than the proposed tools at this Thesis can perform the system validation (the intended behavior), and moreover to obtain the optimal project sizing.
+
+The sizing check stage can ensure that the system meets the standard project steps related 
 to critical period solar energy method~\cite{Pinho} and adopting MPPT (Maximum Power Point Tracking) charge controller,
 which is the most common one in practice. Firstly, we need to correct the energy consumption estimated to the load 
 ($E_{consumption}$), which is carried out by Eq.~\eqref{eq:Ecorrected}, where the efficiency of batteries ($\eta_{b}$), 
@@ -1578,11 +916,18 @@ C_{bank} = \dfrac{E_{corrected} \times autonomy}{V_{system} \times DOD},
 \noindent where the variable $autonomy$ is a design definition and normally has a value ranging from $6$ to $48$h; 
 $ V_{system} $ is the DC voltage of the bus, and $ DOD $ is the battery deep of discharge (considered of maximum of 25\% here).
 %
-Secondly, the total (minimum) number of batteries is computed as 
+Secondly, the total number of batteries is computed as 
 
 \begin{equation}
 \label{eq:Nbtotal}
 N_{B}total = N_{BS}min \times N_{BP}min = \dfrac{V_{system}}{V_{bat}} \times \dfrac{C_{bank}}{1 \,Battery \, Capacity}.
+\end{equation}
+
+Moreover, the Equation \ref{eq:batcheck} perform the final sizing check, considering the number of batteries in series ($ N_{BS} $) and the number of batteries in parallel ($ N_{BP} $) adopted by the project.
+
+\begin{equation}
+\label{eq:batcheck}
+\left( N_{BS} \times  N_{BP} \right) \geq N_{B}total
 \end{equation}
 
 Regarding the charge controller, it must initially meet the voltage requirement of the PV system, as described by Eq.~\eqref{eq:vcvsystem} to the charge controller voltage: 
@@ -1612,6 +957,18 @@ I_{c,min} = I_{sc,amb} \times N_{PP},
 I_{c} \geq I_{c,min}.
 \end{equation}
 
+The number of controllers required for the off-grid PV system, as defined by \cite{Yatimi}, is calculated using Equation \ref{eq:numberofcmin}. In addition, the final sizing check is did by Equation \ref{eq:numberofc}, who validate the number of controllers adopted.
+
+\begin{equation}
+\label{eq:numberofcmin}
+number_{controllers} = \dfrac{Total \, max \, power \, of \, PV}{Controller \, max \, power} =  \dfrac{P_{m,ref} \times N_{TP}}{V_{system} \times I_{controller,max}}
+\end{equation}
+
+\begin{equation}
+\label{eq:numberofc}
+N_{controller} \geq number_{controllers}
+\end{equation}
+
 The inverter sizing check is performed by means of three equations. Eq.~\eqref{eq:vindc} ensures that 
 the input voltage of the controller meets the system voltage. Eq.~\eqref{eq:voutac} ensures that the 
 output voltage of the controller meets the AC voltage of the load. Finally, Eq.~\eqref{eq:invcheck} ensures that 
@@ -1634,8 +991,10 @@ V_{out}AC = V_{AC}.
 \left[ (Demand \leq P_{AC,ref}) \, and \, (P_{surge} \leq MAX_{AC,ref}) \right].
 \end{equation}
 
+\textcolor{red}{Number of inverters???? XXXXXXXXXXX}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{PV systems Optimization Criteria}
+\subsection{PV Systems Optimization Criteria}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 In order to select an optimal combination to meet sizing constraints, 

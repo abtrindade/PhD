@@ -28,39 +28,39 @@
 \contentsline {subsection}{\numberline {2.3.6}Component models for stand-alone PV systems}{24}{subsection.2.3.6}% 
 \contentsline {subsubsection}{PV generator (cell, module, array) }{24}{section*.11}% 
 \contentsline {subsubsection}{Proposed PV Panel Model}{29}{section*.12}% 
-\contentsline {subsubsection}{The Battery Storage Model }{34}{section*.13}% 
-\contentsline {subsubsection}{Controller Model}{39}{section*.14}% 
-\contentsline {subsubsection}{The inverter model}{43}{section*.15}% 
-\contentsline {subsection}{\numberline {2.3.7}PV System Model}{44}{subsection.2.3.7}% 
-\contentsline {subsection}{\numberline {2.3.8}Availability of Stand-alone PV Systems}{48}{subsection.2.3.8}% 
-\contentsline {subsection}{\numberline {2.3.9}PV systems Optimization Criteria}{50}{subsection.2.3.9}% 
-\contentsline {subsection}{\numberline {2.3.10}Stand-alone PV System Optimization Technique}{51}{subsection.2.3.10}% 
-\contentsline {section}{\numberline {2.4}Summary}{52}{section.2.4}% 
-\contentsline {chapter}{\numberline {3}Methodology}{53}{chapter.3}% 
-\contentsline {section}{\numberline {3.1}Intro}{53}{section.3.1}% 
-\contentsline {section}{\numberline {3.2}Automated Verification}{53}{section.3.2}% 
-\contentsline {section}{\numberline {3.3}Optimization}{55}{section.3.3}% 
-\contentsline {subsection}{\numberline {3.3.1}Variant CEGIS}{55}{subsection.3.3.1}% 
-\contentsline {section}{\numberline {3.4}Assumptions and Premises}{59}{section.3.4}% 
-\contentsline {section}{\numberline {3.5}Conclusion}{61}{section.3.5}% 
-\contentsline {chapter}{\numberline {4}Automated Formal Verification of Stand-Alone Solar PV Systems}{62}{chapter.4}% 
-\contentsline {section}{\numberline {4.1}Intro to Automated Verification Experimental Evaluation}{62}{section.4.1}% 
-\contentsline {section}{\numberline {4.2}Description of the Case Studies}{62}{section.4.2}% 
-\contentsline {section}{\numberline {4.3}Objectives and Setup}{62}{section.4.3}% 
-\contentsline {section}{\numberline {4.4}Results and Discussion}{63}{section.4.4}% 
-\contentsline {section}{\numberline {4.5}Threats to Validity}{65}{section.4.5}% 
-\contentsline {section}{\numberline {4.6}Conclusion}{66}{section.4.6}% 
-\contentsline {chapter}{\numberline {5}Automated Formal Synthesis Optimization Method for Sizing of Stand-Alone Solar PV Systems}{67}{chapter.5}% 
-\contentsline {section}{\numberline {5.1}Intro to Automated Formal Synthesis Optimization}{67}{section.5.1}% 
-\contentsline {section}{\numberline {5.2}Optimization Case studies}{67}{section.5.2}% 
-\contentsline {section}{\numberline {5.3}Tools}{69}{section.5.3}% 
-\contentsline {section}{\numberline {5.4}Setup}{69}{section.5.4}% 
-\contentsline {section}{\numberline {5.5}Objectives}{69}{section.5.5}% 
-\contentsline {section}{\numberline {5.6}Comparison between Formal Synthesis and HOME Pro}{70}{section.5.6}% 
-\contentsline {section}{\numberline {5.7}Threats to validity}{72}{section.5.7}% 
-\contentsline {section}{\numberline {5.8}Conclusion}{72}{section.5.8}% 
-\contentsline {chapter}{\numberline {6}Conclusions}{73}{chapter.6}% 
-\contentsline {section}{\numberline {6.1}Main Contributions}{73}{section.6.1}% 
-\contentsline {section}{\numberline {6.2}Future Work Directions}{74}{section.6.2}% 
-\contentsline {section}{\numberline {6.3}Concluding Remarks}{74}{section.6.3}% 
-\contentsline {chapter}{\numberline {A}List of Publications}{75}{appendix.A}% 
+\contentsline {subsubsection}{Battery Storage Model }{33}{section*.13}% 
+\contentsline {subsubsection}{Controller Model}{38}{section*.14}% 
+\contentsline {subsubsection}{The inverter model}{41}{section*.15}% 
+\contentsline {subsection}{\numberline {2.3.7}Availability of Stand-alone PV Systems}{42}{subsection.2.3.7}% 
+\contentsline {subsection}{\numberline {2.3.8}Sizing Stand-alone Solar Photovoltaic Systems}{42}{subsection.2.3.8}% 
+\contentsline {subsection}{\numberline {2.3.9}PV Systems Optimization Criteria}{45}{subsection.2.3.9}% 
+\contentsline {subsection}{\numberline {2.3.10}Stand-alone PV System Optimization Technique}{46}{subsection.2.3.10}% 
+\contentsline {section}{\numberline {2.4}Summary}{47}{section.2.4}% 
+\contentsline {chapter}{\numberline {3}Methodology}{48}{chapter.3}% 
+\contentsline {section}{\numberline {3.1}Intro}{48}{section.3.1}% 
+\contentsline {section}{\numberline {3.2}Automated Verification}{48}{section.3.2}% 
+\contentsline {section}{\numberline {3.3}Optimization}{50}{section.3.3}% 
+\contentsline {subsection}{\numberline {3.3.1}Variant CEGIS}{50}{subsection.3.3.1}% 
+\contentsline {section}{\numberline {3.4}Assumptions and Premises}{54}{section.3.4}% 
+\contentsline {section}{\numberline {3.5}Conclusion}{56}{section.3.5}% 
+\contentsline {chapter}{\numberline {4}Automated Formal Verification of Stand-Alone Solar PV Systems}{57}{chapter.4}% 
+\contentsline {section}{\numberline {4.1}Intro to Automated Verification Experimental Evaluation}{57}{section.4.1}% 
+\contentsline {section}{\numberline {4.2}Description of the Case Studies}{57}{section.4.2}% 
+\contentsline {section}{\numberline {4.3}Objectives and Setup}{57}{section.4.3}% 
+\contentsline {section}{\numberline {4.4}Results and Discussion}{58}{section.4.4}% 
+\contentsline {section}{\numberline {4.5}Threats to Validity}{60}{section.4.5}% 
+\contentsline {section}{\numberline {4.6}Conclusion}{61}{section.4.6}% 
+\contentsline {chapter}{\numberline {5}Automated Formal Synthesis Optimization Method for Sizing of Stand-Alone Solar PV Systems}{62}{chapter.5}% 
+\contentsline {section}{\numberline {5.1}Intro to Automated Formal Synthesis Optimization}{62}{section.5.1}% 
+\contentsline {section}{\numberline {5.2}Optimization Case studies}{62}{section.5.2}% 
+\contentsline {section}{\numberline {5.3}Tools}{64}{section.5.3}% 
+\contentsline {section}{\numberline {5.4}Setup}{64}{section.5.4}% 
+\contentsline {section}{\numberline {5.5}Objectives}{64}{section.5.5}% 
+\contentsline {section}{\numberline {5.6}Comparison between Formal Synthesis and HOME Pro}{65}{section.5.6}% 
+\contentsline {section}{\numberline {5.7}Threats to validity}{67}{section.5.7}% 
+\contentsline {section}{\numberline {5.8}Conclusion}{67}{section.5.8}% 
+\contentsline {chapter}{\numberline {6}Conclusions}{68}{chapter.6}% 
+\contentsline {section}{\numberline {6.1}Main Contributions}{68}{section.6.1}% 
+\contentsline {section}{\numberline {6.2}Future Work Directions}{69}{section.6.2}% 
+\contentsline {section}{\numberline {6.3}Concluding Remarks}{69}{section.6.3}% 
+\contentsline {chapter}{\numberline {A}List of Publications}{70}{appendix.A}% 
