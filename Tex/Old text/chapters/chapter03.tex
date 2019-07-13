@@ -124,7 +124,21 @@ Nevertheless, if the verification engine does not fail, we can conclude that the
  
  
 \subsection{Variant CEGIS} 
-Related to the CEGIS presented in chapter Background, it was created a variant CEGIS method at this work. There are four particular differences related to the traditional CEGIS: 
+
+In Figure~\ref{CEGISalt}, it is pictured a variant of CEGIS. This variant was created during this Thesis.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.75\columnwidth]{fig2_rev.jpg}
+	\caption{CEGIS applied to PV system sizing.}
+	\label{CEGISalt}
+\end{figure}
+
+Examples of specification used by our method include house demand, energy, and battery autonomy; we also provide a list of equipment specification and price from different manufacturers and models.
+
+-----------
+
+There are four particular differences related to the traditional CEGIS described in Figure XX: 
 
 \begin{itemize}
 \item There exists no test vector and every candidate is generated during the run-time in the {\sc Synthesize} phase and sent to the {\sc Verify} phase; 

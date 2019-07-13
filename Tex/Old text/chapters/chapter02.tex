@@ -6,11 +6,11 @@ And secondly, how a solar PV system can be modelled in order to be validated or 
 
 \section{Formal Methods, Formal Design and Formal Verification}
 
-Formal methods are system design techniques that use rigorously specified mathematical models to validate systems, most notably (and known for) software and hardware systems~\cite{Collins98}. In contrast to other design systems, formal methods use mathematical proof as a complement to system testing in order to ensure correct behavior. With increasing scale and complexity, and safety becomes a more important issue, the formal approach to system design offers another level of insurance.
+Formal methods are system design techniques that use rigorously specified mathematical models to validate systems, most notably (and known for) software and hardware systems~\cite{Collins98}. In contrast to other design systems, formal methods use mathematical proof as a complement to system testing in order to ensure correct behavior. With increasing scale and complexity, and safety becomes a more important issue, the formal approach to system design offers better level of insurance.
 
 Formal methods differ from other design systems through the use of formal verification schemes, the basic principles of the system must be proven correct before they are accepted~\cite{Bowen93}. Traditional system design has used extensive testing to verify behavior, but testing is capable of only finite conclusions. Dijkstra and others have demonstrated that tests can only show the situations where a system won't fail, but cannot say anything about the behavior of the system outside of the testing scenarios~\cite{Bentley99}. In contrast, once a theorem is proven true it remains true.
 
-Prior the 80's, mainly deductive verification was used as formal method, with the use of axioms and proving rules to demonstrate the correctness of the system. The original focus was to verify critical systems based on the premise that 'if system is important, must spend the enough time to verify it'~\cite{Lowry1998}. Worth to mention that back in time, formal methods were initially performed by hand.
+Prior the 80's, mainly deductive verification was used as formal method, with the use of axioms and proving rules to demonstrate the correctness of the system. The original focus was to verify critical systems based on the premise that 'if system is important, must spend the enough time to verify it'~\cite{Lowry1998}. Back in time, formal methods were initially performed by hand.
 
 Worth to mention that formal verification does not avoid the need for testing~\cite{Bowen95}. Formal verification can not fix bad assumptions in the design, but it can help identify errors in reasoning which would otherwise be left unverified. In several cases, engineers have reported finding flaws in systems once they reviewed their designs formally~\cite{Kling95}.
 
@@ -67,11 +67,9 @@ A formal design can be summarized as a three step process, as described below~\c
 %\section{Automated Verification }
 It is necessary to keep in mind that validation is the process of determining whether a design meets the needs of the user, whereas verification is the process of determining whether a design meets a set of requirements, specifications, and regulations.  
 
-If the requirements, specifications, and regulations are given in a formal language, then it may be possible to automate verification, resulting in a process known as formal verification. Verification may form part of a validation process, but in general, validation cannot be formalized because it relates a system design to intent.  
+If the requirements, specifications, and regulations are given in a formal language, then it may be possible to automate verification.  
 
-Simulation may also be used for validation, but it is more problematic for verification. In order to use simulation for verification, it is necessary to ensure adequate coverage of operating conditions, scenarios, and system inputs. 
-
-Testing can also be used for validation, but for the same reasons, it too is problematic for verification.
+Simulation may also be used for validation, but it is more problematic for verification. In order to use simulation for verification, it is necessary to ensure adequate coverage of operating conditions, scenarios, and system inputs. Testing can also be used for validation, but for the same reasons, it too is problematic for verification.
  
 According \cite{Clarke2008}, verification procedure is an intelligent exhaustive search of the state space of the design. In addition, according to \cite{Forejt2011}, formal verification is a systematic approach that applies mathematical reasoning to obtain guarantees about the correctness of a system. One successful method in this domain is model checking.
 
@@ -186,26 +184,27 @@ The CPA formalism provides an interface for the definition of program analyses. 
 The CPA framework provides interfaces to SMT solvers and interpolation procedures~\cite{Beyer2011}. Currently, CPAchecker uses MathSAT as SMT solver; and CSIsat and MathSAT as interpolation procedures~\cite{Beyer2011}. %CPAchecker performs reachability analysis and operates on an object of the abstract data type CPA, i.e., the underlying verification algorithm applies operations from the CPA interface without knowing which concrete CPA it is analyzing. For most configurations, the concrete CPA will be a composite CPA, which implements the combination of different CPAs. \textcolor{red}{It is unclear what a CPA is.}
 %In software verification, it is usual to take a considerable amount of effort to convert a verification idea into actual experimental results and CPAchecker aims to accelerate this process~\cite{Beyer2011}.
 
-//////Begin optimization
 %-----------------------------------------------------------
 \subsection{CEGIS and Program Synthesis}
 \label{sec:ProgramSynthesis}
 %-----------------------------------------------------------
 
-The basic idea of program synthesis is to automatically construct a program $P$ that satisfies a correctness specification $\sigma$. In particular, program synthesis is automatically performed by engines that use a correctness specification $\sigma$, as starting point, and then incrementally produce a sequence of candidate solutions that partially satisfy $\sigma$~\cite{Abateetal2017}. As a result, a given candidate program $p$ is iteratively refined, in order to match $\sigma$ more closely. CEGIS represents one of the most popular approaches to program synthesis that are currently used in practice for CPS~\cite{Abateetal2017}, whose basic architecture is illustrated in Figure~\ref{Counter-Example-Guided-Inductive-Synthesis} and has close connections to algorithmic debugging using counterexamples and abstraction refinement~\cite{Alur}. 
+The basic idea of program synthesis is to automatically construct a program $P$ that satisfies a correctness specification $\sigma$. In particular, program synthesis is automatically performed by engines that use a correctness specification $\sigma$, as starting point, and then incrementally produce a sequence of candidate solutions that partially satisfy $\sigma$~\cite{Abateetal2017}. As a result, a given candidate program $p$ is iteratively refined, in order to match $\sigma$ more closely. 
+
+CEGIS represents one of the most popular approaches to program synthesis that are currently used in practice for CPS~\cite{Abateetal2017}, whose basic architecture is illustrated in Figure~\ref{Counter-Example-Guided-Inductive-Synthesis} and has close connections to algorithmic debugging using counterexamples and abstraction refinement~\cite{Alur}. 
 
 \begin{figure}[h]
 	\centering
-	\includegraphics[width=0.75\columnwidth]{fig2_rev.jpg}
-	\caption{CEGIS applied to PV system sizing.}
+	\includegraphics[width=0.75\columnwidth]{fig2_orig}
+	\caption{Counterexample Guided Inductive Synthesis (CEGIS).}
 	\label{Counter-Example-Guided-Inductive-Synthesis}
 \end{figure}
 
-The correctness specification $\sigma$ provided to our program synthesizer is of the form $\exists \vec{F} .  \forall \vec{x}.  \sigma(\vec{x}, \vec{F})$, where $\vec{F}$ ranges over functions, $\vec{x}$ ranges over ground terms, and $\sigma$ is a quantifier-free (QF) formula typically supported by SMT solvers. The ground terms are interpreted over some finite domain $\mathcal{D}$, where $\mathcal{D}$ can be encoded using the SMT's bit-vectors part. Examples of specification used by our method include house demand, energy, and battery autonomy; we also provide a list of equipment specification and price from different manufacturers and models.
+The correctness specification $\sigma$ provided to our program synthesizer is of the form $\exists \vec{F} .  \forall \vec{x}.  \sigma(\vec{x}, \vec{F})$, where $\vec{F}$ ranges over functions, $\vec{x}$ ranges over ground terms, and $\sigma$ is a quantifier-free (QF) formula typically supported by SMT solvers. The ground terms are interpreted over some finite domain $\mathcal{D}$, where $\mathcal{D}$ can be encoded using the SMT's bit-vectors part. 
 
-In Figure~\ref{Counter-Example-Guided-Inductive-Synthesis}, regarding traditional CEGIS method, the phases {\sc Synthesize} and {\sc Verify} interact via a finite set of test vectors {\sc inputs}, which is incrementally updated. Given the correctness specification $\sigma$, the {\sc Synthesize} procedure tries to find an existential witness $\vec{F}$ satisfying the specification $\sigma(\vec{x}, \vec{F})$, for all $\vec{x}$ in {\sc inputs} (as opposed to all $\vec{x} \in \mathcal{D}$). If {\sc Synthesize} succeeds in finding a witness~$\vec{F}$, the latter is a candidate solution (i.e., feasible combination of equipment) to the full synthesis formula, which is passed to {\sc Verify} in order to check whether it is a proper solution ({\it i.e.}, $\vec{F}$ satisfies the specification $\sigma(\vec{x}, \vec{F})$ for all $\vec{x}\in\mathcal{D}$). If this is the case, then the algorithm terminates, i.e., we have found a feasible equipment with the lowest cost; otherwise, in the CEGIS traditional method, additional information is provided to the phase {\sc Synthesize}, in the form of a new counterexample that is added to the {\sc inputs} set and the loop iterates again.
+In Figure~\ref{Counter-Example-Guided-Inductive-Synthesis}, regarding CEGIS method, the phases {\sc Synthesize} and {\sc Verify} interact via a finite set of test vectors {\sc inputs}, which is incrementally updated. Given the correctness specification $\sigma$, the {\sc Synthesize} procedure tries to find an existential witness $\vec{F}$ satisfying the specification $\sigma(\vec{x}, \vec{F})$, for all $\vec{x}$ in {\sc inputs} (as opposed to all $\vec{x} \in \mathcal{D}$). If {\sc Synthesize} succeeds in finding a witness~$\vec{F}$, the latter is a candidate solution (i.e., feasible combination of equipment) to the full synthesis formula, which is passed to {\sc Verify} in order to check whether it is a proper solution ({\it i.e.}, $\vec{F}$ satisfies the specification $\sigma(\vec{x}, \vec{F})$ for all $\vec{x}\in\mathcal{D}$). If this is the case, then the algorithm terminates, i.e., we have found a feasible solution; otherwise, in the CEGIS method, additional information is provided to the phase {\sc Synthesize}, in the form of a new counterexample that is added to the {\sc inputs} set and the loop iterates again.
 
-One may notice that each iteration of the traditional CEGIS loop adds a new input to the finite set $\text{\sc inputs}$, which is then used for synthesis.  Given that the full set of inputs $\mathcal{D}$ is finite because we use bit-vector expressions, this means that the refinement loop can only iterate over a finite number of times; however, {\sc Synthesize} may conclude that no candidate solution obeying $\sigma$ for the finite set $\text{\sc inputs}$ exists and our synthesis engine can then conclude that no feasible equipment combination was found.
+One may notice that each iteration of the CEGIS loop adds a new input to the finite set $\text{\sc inputs}$, which is then used for synthesis.  Given that the full set of inputs $\mathcal{D}$ is finite because we use bit-vector expressions, this means that the refinement loop can only iterate over a finite number of times; however, {\sc Synthesize} may conclude that no candidate solution obeying $\sigma$ for the finite set $\text{\sc inputs}$ exists and our synthesis engine can then conclude that no feasible solution was found.
 
 \section{Solar Photovoltaic System }
 According to \cite{Roy}, a PV system is designed to give the electric supply to a load. This load can be either Alternate Current (AC) type or Direct Current (DC) type. Electric supply can be needed either in daytime or evening time (in particular cases, in both times). The most basic PV system can give supply only in daytime.  For night hours or rainy days, one needed to have batteries, where power can be stored and used \cite{Gules}. 
@@ -333,7 +332,7 @@ Support & X & X & X & X &  \\
 Off-grid systems &   &   & X & X & X\\
 Hybrid systems &  &  & X & X & X\\
 Photovoltaics & X & X & X & X & X\\
-Batteries &  &  & X & X & X\\
+Batteries &  &  & X &  & X\\
 Main technical (T) or economical (E) & T & T & E & E & T \\
 Optimization &  &  & X & X &  \\
 Sensitive analysis &  &  & X & X & \\
@@ -342,10 +341,10 @@ Sensitive analysis &  &  & X & X & \\
 \end{tabular}
 \end{table}
 
-\subsubsection{Paper Proposal x Reference Tools}
-Considering that the focus of this research is on off-grid solutions and supported tools, only HOMER and RETScreen remain for comparative. All tools need some parameters inherently from manufacturer's catalog, so the project starts with manufacturers and integrators tool to define the basic items of the project: panels, inverters, controllers, and batteries. After that, the potential solution is analyzed in another tool to validate or even optimize the solution. Therefore, that is the challenge of this work, i.e., to prove that is possible to use automated verification to validate an off-grid PV solution.
+\subsubsection{Thesis Proposal x Reference Tools}
+Considering that the focus of this research is on off-grid solutions and supported tools, only HOMER remain for comparative. All tools need some parameters inherently from manufacturer's catalog, so the project starts with manufacturers and integrators tool to define the basic items of the project: panels, inverters, controllers, and batteries. After that, the potential solution is analyzed in another tool to validate or even optimize the solution. Therefore, that is the challenge of this work, i.e., to prove that is possible to use automated verification to validate an off-grid PV solution.
 
-\subsection{Component models for stand-alone PV system }
+\subsection{Component models for stand-alone PV systems}
 The main purpose of this section is to describe the models for the elements of a standalone PV system: PV generator, battery, controller, inverter, and load. The modeling of the PV system is based on modular blocks, as illustrated in Fig.\ref{fig:blockdiagram}, from \cite{Hansen}. The modular structure facilitates the modeling of the other system structures and replacing of elements as, for instance, a DC load instead of an AC load. 
 
 \begin{figure}[h]
@@ -957,114 +956,7 @@ V_{out}AC = V_{AC}
 \end{equation}
 
 
-///////begin-verification 
-\subsection{Sizing and Simulation of Stand-alone Solar PV systems}
-The sizing and validation of a PV system can be done by hand or with the aid of tools. Here we reference the critical period~\cite{Pinho} as an effective method to stand-alone PV sizing.
-%
-%In order to address different aspects of the PV system design, there are various software tools available in the literature~\cite{Rajanna,Rawat}.
-%public domain and commercial software available for the PV market. 
-%According to \cite{Brooks}, t
-%%%%%%%%%%The capabilities of tools available in the literature range from simple solar resource and energy production estimation, %to site survey and system design tools,
-% to complex financial analysis and project optimization. 
-%Some tools also provide support to rebate programs applications and tax incentives (specific to each country or region), while other programs and worksheets focus on the technical aspects of system sizing and design.
-%
-%Manufacturers and integrators have yet their proprietary software to perform inverter string sizing and various system sizing and design tools, with the drawback to just include their own products among the possibilities of choice. 
 
-The most popular softwares are summarized at Table~\ref{table:softwares}: PVWatts, SAM, HOMER, RETScreen, and Hybrid2~\cite{Pradhan,Swarnkar,NRELDobos,NRELBlair,Mills}.
-%\subsection{PVWatts Calculator}
-%According to \cite{Freeman} and \cite{NRELDobos}, it is a web application developed by the National Renewable Energy Laboratory (NREL), which estimates the electricity production of a grid-connected roof- or ground-mounted photovoltaic system based on a few inputs. According to \cite{NRELDobos}, to use the calculator, it is necessary to provide information about the system's location, basic design parameters, and system economics. PVWatts calculates estimated values for the system's annual and monthly electricity production, and for the electricity monetary value. This tool is suitable for very preliminary studies of a potential location for a photovoltaic system that uses crystalline silicon or thin film photovoltaic modules. The production estimates that PVWatts computation do not account for many factors that are important in the design of a photovoltaic system, therefore it is necessary support of an energy expert. The calculator estimates the monthly and annual electricity production of a photovoltaic system using an hour-by-hour simulation over a period of one year. To represent the system's physical characteristics, PVWatts requires values for six inputs: System DC size; Module type; Array type; System losses; Array tilt angle; Array azimuth angle.
-%
-%\subsection{SAM}
-%SAM or System Advisor Model is a software from the U.S. Department of Energy and National Renewable Energy Laboratory. According to \cite{NRELBlair} and \cite{Cameron2008}, SAM is intended to help users to determine whether the model meets their project constraints/specifications, and (also) to provide information for readers who do not plan to use the model, but want to learn about its capabilities. SAM is a performance and financial model designed to facilitate decision making for people involved in the renewable energy industry: Project managers and engineers; Financial and policy analysts; Technology developers; and Researchers. SAM makes performance predictions and cost of energy estimates for grid-connected power projects based on installation and operating costs and system design parameters that you specify as inputs to the model. Projects can be either on the customer side of the utility meter, where they buy and sell electricity at retail rates, or on the utility side of the meter, where they sell electricity at a price negotiated through a power purchase agreement. SAM is an electric power generation model and assumes that the renewable energy system delivers power either to an electric grid, or to a grid-connected building or facility to meet electric load. It does not model thermal energy systems that meet a thermal process load. As mentioned in \cite{NRELBlair}, SAM does not model isolated or off-grid power systems, and does not model systems with electricity storage batteries.
-%
-%\subsection{HOMER}
-%As defined in \cite{HOMER}, actually is a set of two tools: HOMER Legacy and HOMER Pro. HOMER is an acronym for Hybrid Optimization Model for Multiple Energy Resources. HOMER Legacy is the original HOMER software version created at the National Renewable Energy Laboratory (NREL). HOMER Legacy is a free computer model that simplifies the task of evaluating design options for both off-grid and grid-connected power systems for remote, stand-alone, and distributed generation applications. HOMER's optimization and sensitivity analysis algorithms allow the user to evaluate the economic and technical feasibility of a large number of technology options. Since 2016 HOMER Legacy can be found at HOMER web site, but only available for students and nonprofit organizations, as defined in \cite{HOMER}, and has not support available. At the short-time only the commercial version will remain.
-%
-%The commercial version (paid), called HOMER Pro, as defined in \cite{Swarnkar}, is a tool for optimizing micro-grid design in all sectors, from village power and island utilities to grid-connected campuses and military bases. HOMER Pro put together three tools in one product: optimization, simulation, and sensitivity analysis. HOMER Pro provides the detailed rigor of chronological simulation and optimization in a model that is intended to be easy to use. It is adaptable to a wide variety of projects. For a village or community-scale power system, HOMER can model both the technical and economic factors involved in the project. For larger systems, HOMER can provide an overview that compares the cost and feasibility of different configurations. Chronological simulation is essential for modeling variable resources, such as solar and wind power and for combined heat and power applications, where the thermal load is variable. HOMER's sensitivity analysis helps determine the potential impact of uncertain factors such as fuel prices or wind speed on a given system. 
-%
-%\subsection{RETScreen}
-%As mentioned in \cite{Pradhan}, RETScreen is a decision-support tool designed to help decision makers and energy professionals to evaluate the financial viability of renewable energy, energy efficiency, and/or co-generation projects.
-%
-%RETScreen models various types of renewable energy technologies (RETs), allowing for comparisons between technology options. The software can be used to evaluate benefits from both clean energy production from power generation projects and savings through energy efficiency projects, accounting for project costs, greenhouse gas emission reductions, and financial risk. The software is freely distributed (but with restrictions to save work or print), and had three different versions:
-%
-%\begin{itemize}
-%\item RETScreen 4 (discontinued, requires Microsoft Excel to run); 
-%\item RETScreen Software Suit, which includes the RETScreen 4 and a Windows-based graphical software that allows project owners to verify the ongoing energy performance of their facilities (discontinued in 2013);
-%\item And the actual (2016) RETScreen Expert, which allows users to evaluate energy investments over an entire project life-cycle (including benchmarking, feasibility, and performance analysis) in a fully integrated way, and within one software platform. However, this version works is only Windows-based. This version has a complete paid version, in an annual subscription way.
-%\end{itemize}
-%
-%As described by \cite{Pradhan}, RETScreen performs a five-step standard analysis: setting and site conditions; energy model; cost analysis; emission analysis, financial analysis, sensitivity, and risk analysis. It is developed and maintained by the Government of Canada, through the CanmetENERGY Varennes Research Centre of Natural Resources; in collaboration with: NASA; Renewable Energy and Energy Efficiency Partnership (REEEP); United Nations Environment Programme (UNEP), and the Global Environment Facility (GEF). RETScreen is available in 36 languages; it is a multi-awarded tool, and includes equipment databases for components manufactured and available worldwide.
-%
-%\subsection{Hybrid2}
-%The Hybrid2 software package, as described in \cite{Mills}, is a user-friendly tool to perform detailed long-term performance and economic analysis on a wide variety of hybrid power systems. Hybrid2 is a probabilistic/time series computer model, using time series data for loads, wind speed, solar insolation, and temperature; and the power system is designed or selected by the user, in order to predict the performance of the hybrid power system. Variations in wind speed and in load within each time step are factored into the performance predictions. The code does not consider short-term system fluctuations caused by system dynamics or component transients. This program is not supported anymore and according to \cite{UMASS}, probably after the user performs the free download of the tool, it will not work on Windows platforms later than Windows XP, what is a limitation.
-%
-%Table~\ref{table:softwares} summarizes the off-the-shelf tools employed here, where 
-As highlights, only HOMER and Hybrid2 perform off-grid system with battery backup analysis. %all the tools perform solar photovoltaic analysis; 
-Additionally, HOMER and RETScreen include economical analysis or even optimization-sensitive analysis. However, commercial version of those tools, called RETScreen Expert and HOMER Pro, are available only for Microsoft Windows and the annual subscription typically range from US\$504.00 to US\$657.00.
-%
-\begin{table}[!t]
-%% increase table row spacing, adjust to taste
-\renewcommand{\arraystretch}{1.3}
-% if using array.sty, it might be a good idea to tweak the value of
-% \extrarowheight as needed to properly center the text within the cells
-\caption{Comparative coverage of reference simulation software}
-\label{table:softwares}
-\centering
-%% Some packages, such as MDW tools, offer better commands for making tables
-%% than the plain LaTeX2e tabular which is used here.
-\begin{tabular}{c | c | c | c | c | c}
-\hline
-\hline
-Characteristic  & \rotatebox{90}{PVWatts} & \rotatebox{90}{SAM} & \rotatebox{90}{HOMER} & \rotatebox{90}{RETScreen} & \rotatebox{90}{Hybrid2}\\
-\hline
-\hline
-Support & X & X & X & X &  \\
-\hline
-Off-grid systems &   &   & X & X & X\\
-\hline
-Hybrid systems &  &  & X & X & X\\
-\hline
-Photovoltaics & X & X & X & X & X\\
-\hline
-Batteries &  &  & X &  & X\\
-\hline
-\makecell{Main technical (T) \\ or economical(E)} & T & T & E & E & T \\
-\hline
-Optimization &  &  & X & X &  \\
-\hline
-Sensitive analysis &  &  & X & X & \\
-\hline
-\hline
-\end{tabular}
-\end{table}
-%
-%-------------------------------------------------------------------
-%\subsection{Paper Proposal x Reference Tools}
-%-------------------------------------------------------------------
-%
-In this study, HOMER was chosen to comparative with our proposed verification approach (Section~\ref{sec:results_indeed}).%All tools need some parameters inherently from manufacturer's catalog.
-%, so the project starts with manufacturers and integrators tool to define the basic items of the project: panels, inverters, controllers, and batteries. 
-%After that, the potential solution is analyzed in another tool to simulate or even optimize the proposed solution. Therefore, that is 
-%Thus, the main challenge here is to demonstrate the application of software model checking to formally verify a stand-alone PV solution, thus proving that this approach is more effective and complete than other state-of-the-art tool such as HOMER Pro. The comparative evaluation between HOMER Pro and our approach is presented in Section~\ref{sec:results_indeed}.
-%
-%-------------------------------------------------------------------
-\subsection{Component models for a stand-alone PV system }
-%-------------------------------------------------------------------
-%The main purpose of this section is to describe the models for the elements of a stand-alone PV system: PV generator, battery, controller, inverter, and load. 
-%The mathematical modeling of the PV system is based on modular blocks, as illustrated in Fig.\ref{fig:blockdiagram}. It identifies the PV generator, batteries, charge controller, inverter, and AC load. 
-A stand-alone PV system is illustrated in Fig.\ref{fig:blockdiagram}. The PV generator is a semiconductor device that can convert solar energy into DC electricity. %In Fig.\ref{fig:blockdiagram}, there are two variables that depend on the site where the system is deployed and the weather (i.e., solar irradiance $G$ and temperature $T$). 
-For night hours or rainy days, power stored in batteries can be used and it implies the presence of a charge controller~\cite{Hansen}. The PV arrays produce DC and therefore when the PV system contains an AC load, a DC/AC conversion is required (inverter). The AC load dictates the behavior of AC electrical load from the house that will be fed by the system.
-%
-%The modular structure facilitates the modeling of the other system structures and replacement of elements, such as a DC load instead of an AC load. 
-%
-\begin{figure}[h]
-\includegraphics[width=0.80\textwidth]{blockdiagramPVS2}
-\centering
-\caption{Block diagram for a typical stand-alone PV system (adapted from~\cite{Hansen}).}
-\label{fig:blockdiagram}
-\end{figure}
-%
-%In the literature, there are several mathematical models available for each component of PV systems. At the next section, the mathematical model for each component is presented. 
 %-------------------------------------------------------------------
 \subsection{PV System Model}
 \label{sec:PVsystemmodel}
@@ -1629,24 +1521,7 @@ The system availability definition depends on how critical the load application 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Sizing Stand-alone Solar PV Systems}
-\label{sec:sizing}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-A PV system is illustrated in Fig.\ref{fig:blockdiagram}. It identifies the PV generator, batteries, charge controller, inverter, and AC load. 
-The PV generator, which can be a panel or an array, is a semiconductor device that can convert solar energy into DC electricity.  
-For night hours or rainy days, we hold batteries where power can be stored and used. The use of batteries as a storage 
-form implies the presence of a charge controller~\cite{Hansen}. The PV arrays produce DC and therefore when the PV system 
-contains an AC load, a DC/AC conversion is required. That converter is called inverter; and the AC load dictates the behavior 
-of AC electrical load from the house that will be fed by the system.
-%
-\begin{figure}[h]
-\includegraphics[width=0.7\textwidth]{blockdiagramPVS2_rev}
-\centering
-\caption{Block diagram for a typical stand-alone PV system~\cite{Hansen}.}
-\label{fig:blockdiagram} 
-\end{figure}
+////sizing check
 
 The sizing check stage will ensure that the system meets the standard project steps related 
 to critical period solar energy method~\cite{Pinho} and adopting MPPT (Maximum Power Point Tracking) charge controller,
