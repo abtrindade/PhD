@@ -167,7 +167,7 @@ In the manuscript, the authors report about the first application of software mo
 
 I have specifics questions and suggestions in order to improvement the manuscript.
 
-1.-To clarify the figure 2, i recommend write "current" inside the figure, don't put just I.
+(1) To clarify the figure 2, i recommend write "current" inside the figure, don't put just I.
 
 \begin{resposta} 
 We thank the reviewer fot this insightful comment. Indeed, it summarizes what was intended to be studied in this manuscript. Additionally, we emphasize that the main focus of our study relies on the validation process of solar PV systems instead of the mathematical modelling, which was already investigated by prior studies over the last two decades; this particular information was carefully included in the revised abstract, introduction and conclusion sections since we concluded that it was unclear in the previous version of our manuscript. Regarding Figure 2, we fixed it as indicated by the reviewer. Moreover, we applied the same procedure to voltage V, in order to keep consistency throughout our manuscript.
@@ -175,7 +175,7 @@ We thank the reviewer fot this insightful comment. Indeed, it summarizes what wa
 
 \end{resposta}
 
-2.-This software model checking has performance in comparison the other commercials software,how is this performance?, Could you give the areas where your software performs better than commercial software?   
+(2) This software model checking has performance in comparison the other commercials software,how is this performance?, Could you give the areas where your software performs better than commercial software?   
 
 \begin{resposta} 
 Note that our options about specialized off-the-shelf tools to design stand-alone solar PV systems are very limited in literature, which motivated us to perform further studies in this area. In particular, as described in Section 2.1, only Hybrid2 and HOMER Pro perform off-grid with battery analysis of PV systems. Hybrid2 is not supported anymore, thereby being in disuse. We have updated this information in our manuscript. Therefore, in this particular research field (stand-alone solar PV systems), only HOMER Pro could be used for comparative purposes. However, in our experiments we could some general simulation tools with the same mathematical model adopted by the automated verification tool. However, this would represent an unfair comparison since we would need to tweak the simulation tools to prepare them for comparison purposes. We have described this limitation in Section 5.4 (``Threats to Validity'') in order to state that additional comparisons could be carried out with general simulation tools if they employ similar mathematical models as the ones described here.
@@ -190,13 +190,13 @@ However, the authors demonstrated in $2016$ [1] that model checking can present 
 
 \end{resposta}
 
-3.-In text reference at figure 1 the authors do not describe all symbols drawn into image, for instances, what is means G, T. I suspect that in section 4 they define which are the variables (Irradiation and temperature). I suggest you define those symbols in the text that that figure describes.
+(3) In text reference at figure 1 the authors do not describe all symbols drawn into image, for instances, what is means G, T. I suspect that in section 4 they define which are the variables (Irradiation and temperature). I suggest you define those symbols in the text that that figure describes.
 
 \begin{resposta} 
 Indeed, we have missed this particular information in the paragraph that describes the mentioned figure. We thank you so much for this observation. We have revised our manuscript to describe every employed symbol. The revised version of these paragraphs \textcolor{red}{in Section X} are now described as: ``A stand-alone PV system is illustrated in Fig.1. The PV generator is a semiconductor device that can convert solar energy into DC electricity, with high dependence of two weather variables from the site where the system is deployed: solar irradiance $G$ and temperature $T$. For night hours or rainy days, power stored in batteries can be used and it implies the presence of a charge controller. The PV arrays produce DC and therefore when the PV system contains an AC load, a DC/AC conversion is required (inverter). The AC load dictates the behavior of AC electrical load from the house that will be fed by the system. At this pictured modular structure, every element produces/consumes current $I$ and voltage $V$ as illustrated by their physical magnitudes, where $pv$ means photovoltaic, $bat$ is battery, $dc$ is direct and $ac$ is alternating signals.''.
 \end{resposta}
 
-4.- Are the verification results carried out affected by the different characteristics of the computers?
+(4) Are the verification results carried out affected by the different characteristics of the computers?
 
 \begin{resposta} 
 Indeed, we did not inform the impact of changing the computer setup or related issues. We thank the reviewer for this observation. We have revised our manuscript to include the following paragraph: ``Note that the results presented here depend on the computer's processor and memory, the version of each software verifier (i.e., CBMC, ESBMC, CPAchecker), the parameters passed by the command-line, and the algorithm to be solved \textcolor{red}{what do you mean by the algorithm to be solved?}. Additionally, any change from HOMER Pro to another simulation tool can also influence the measured time to obtain results.".
@@ -210,25 +210,25 @@ Indeed, we did not inform the impact of changing the computer setup or related i
 
 \begin{quote}
 
-The topic itself is interest for the PV application. However some section including abstract and result must be rewritten to be enhanced, here are the comments: 
+(5) The topic itself is interest for the PV application. However some section including abstract and result must be rewritten to be enhanced, here are the comments: 
 
 -       The manuscript illustrated the main drawback from other existed work that they are based on simulation and the proposed approach is claimed to do evaluation based real PV system as illustrated in the abstract, however the evolution is based on simulation model, mathematical, and information from website data such as Weather base and Energy Plus. The author should present real data measurement for more accurate results then compared and the main difference should be clarified.
 
 \begin{resposta} 
-We appreciate the comments and we realized that our text was not clear. As told for the Reviewer \#2, we should highlight that our main focus was at the validation process of the solar PV system, instead of the mathematical modelling that was investigated in prior studies over the last two decades. Moreover, we compare the results of using automated verification with simulation tool; real PV systems were just to check the validation results presented by the two tools. Because the automated verification and simulation tools are intended to be used during the project, before the buying or deployment of equipment. This information was carefully included at the revised Abstract, Introduction and at the Conclusion sections, because we concluded that was not clear in the previous version of the paper.
+We appreciate these comments; we actually realized that our manuscript was unclear. We should highlight that our main research focus is on the validation process of the stand-alone solar PV system instead of the mathematical modelling, which was already investigated in prior studies over the last two decades. Moreover, we compare the results of using automated verification with simulation; real PV systems were employed just to validate the results presented by both approaches (model checking and simulation). Note that the automated verification and simulation tools are intended to be used during the design of the PV system, i.e., before actually buying or deploying the equipment. This information was carefully included in the revised abstract, introduction and conclusion sections since we concluded that it was unclear in the previous version of our manuscript.
 
-The authors have real load curve, and information collected from monitoring system of four (in five) PV systems/cases, however based on the fact that the automated verification is mathematical and not visual (curves/plots), seems that is not a adequate way of comparative.
+The authors hold real load curve and information collected from monitoring system of four (in five) PV systems/cases \textcolor{red}{could you please identify them here? which one does not have such a information?}; however, based on the fact that the automated verification is mathematical and not visual (curves/plots), it seems that our comparison is not an adequate way \textcolor{red}{why not? explain the reason here}.
 
-The information from temperature and solar irradiance from every site, used to the simulation and formal verification tools, come from historical data collected from real stations that are available in Weather Base and Energy Plus web sites. Considering that the idea of the work is to show the effectiveness of the proposal just after the design phase, before deployment, seems that is plausible that procedure. Worth to mention that the sites from four case studies (the ones in a riverside indigenous community) do not have weather station available to collect data and the information must be approximated to Manaus data (the closet site with historic data).
+The information from temperature and solar irradiance from every site, used by the simulation and formal verification tools, come from historical data collected from real stations, which are available in Weather Base and Energy Plus web sites \textcolor{red}{shall we provide the website here?}. Considering that the idea of our study is to show the effectiveness of the proposed verification method just after the design phase (i.e., before deployment), we believe that it is a plausible procedure \textcolor{red}{to....}. Note that the sites from four case studies (i.e., the ones in a riverside indigenous community) do not have weather station available to collect data and the information must be approximated to Manaus data (the closest site with historical data) \textcolor{red}{what are the consequences? shall we state this limitation in the threats to validity section?}.
 \end{resposta}
 
--       Section 5 "Experimental Evolution" It can be changed to Verification result, otherwise the author should clarify the real measurements of the system.
+(6)      Section 5 "Experimental Evolution" It can be changed to Verification result, otherwise the author should clarify the real measurements of the system.
 
 \begin{resposta} 
 We thank the reviewer for this comment. We did as suggested and changed the section title to "Verification and Simulation Results", because the results were related to verification and simulation tools only. The data collected from dwellers with real PV systems were used just to confirm flaws and complains about the equipment deployed at the field. The idea was not to present wave forms because how automated verification works it is different of simulation or testing.
 \end{resposta}
 
--       Can the author present the main waveform of the PV system in the steady state operation and under failure or any environmental change? waveforms such as: Input power, VMPP, IMPP, AC load  
+(7)       Can the author present the main waveform of the PV system in the steady state operation and under failure or any environmental change? waveforms such as: Input power, VMPP, IMPP, AC load  
 
 \begin{resposta} 
 As explained at the first question, here the authors failed in explain better the study. We appreciate one more time the comment and the opportunity to correct this issue. 
