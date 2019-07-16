@@ -18,37 +18,48 @@
 \BOOKMARK [2][-]{subsection.2.3.3}{Regulated standalone system with battery and DC load}{section.2.3}% 18
 \BOOKMARK [2][-]{subsection.2.3.4}{Regulated standalone system with battery, AC load}{section.2.3}% 19
 \BOOKMARK [2][-]{subsection.2.3.5}{Design and Validation of a Solar photovoltaic system}{section.2.3}% 20
-\BOOKMARK [2][-]{subsection.2.3.6}{Component models for stand-alone PV systems}{section.2.3}% 21
-\BOOKMARK [2][-]{subsection.2.3.7}{Availability of Stand-alone PV Systems}{section.2.3}% 22
-\BOOKMARK [2][-]{subsection.2.3.8}{Sizing Stand-alone Solar Photovoltaic Systems}{section.2.3}% 23
-\BOOKMARK [2][-]{subsection.2.3.9}{PV Systems Optimization Criteria}{section.2.3}% 24
-\BOOKMARK [2][-]{subsection.2.3.10}{Stand-alone PV System Optimization Technique}{section.2.3}% 25
-\BOOKMARK [1][-]{section.2.4}{Summary}{chapter.2}% 26
-\BOOKMARK [0][-]{chapter.3}{Methodology}{}% 27
-\BOOKMARK [1][-]{section.3.1}{Intro}{chapter.3}% 28
-\BOOKMARK [1][-]{section.3.2}{Automated Verification}{chapter.3}% 29
-\BOOKMARK [1][-]{section.3.3}{Optimization}{chapter.3}% 30
-\BOOKMARK [2][-]{subsection.3.3.1}{Variant CEGIS}{section.3.3}% 31
-\BOOKMARK [1][-]{section.3.4}{Assumptions and Premises}{chapter.3}% 32
-\BOOKMARK [1][-]{section.3.5}{Conclusion}{chapter.3}% 33
-\BOOKMARK [0][-]{chapter.4}{Automated Formal Verification of Stand-Alone Solar PV Systems}{}% 34
-\BOOKMARK [1][-]{section.4.1}{Intro to Automated Verification Experimental Evaluation}{chapter.4}% 35
-\BOOKMARK [1][-]{section.4.2}{Description of the Case Studies}{chapter.4}% 36
-\BOOKMARK [1][-]{section.4.3}{Objectives and Setup}{chapter.4}% 37
-\BOOKMARK [1][-]{section.4.4}{Results and Discussion}{chapter.4}% 38
-\BOOKMARK [1][-]{section.4.5}{Threats to Validity}{chapter.4}% 39
-\BOOKMARK [1][-]{section.4.6}{Conclusion}{chapter.4}% 40
-\BOOKMARK [0][-]{chapter.5}{Automated Formal Synthesis Optimization Method for Sizing of Stand-Alone Solar PV Systems}{}% 41
-\BOOKMARK [1][-]{section.5.1}{Intro to Automated Formal Synthesis Optimization}{chapter.5}% 42
-\BOOKMARK [1][-]{section.5.2}{Optimization Case studies}{chapter.5}% 43
-\BOOKMARK [1][-]{section.5.3}{Tools}{chapter.5}% 44
-\BOOKMARK [1][-]{section.5.4}{Setup}{chapter.5}% 45
-\BOOKMARK [1][-]{section.5.5}{Objectives}{chapter.5}% 46
-\BOOKMARK [1][-]{section.5.6}{Comparison between Formal Synthesis and HOME Pro}{chapter.5}% 47
-\BOOKMARK [1][-]{section.5.7}{Threats to validity}{chapter.5}% 48
-\BOOKMARK [1][-]{section.5.8}{Conclusion}{chapter.5}% 49
-\BOOKMARK [0][-]{chapter.6}{Conclusions}{}% 50
-\BOOKMARK [1][-]{section.6.1}{Main Contributions}{chapter.6}% 51
-\BOOKMARK [1][-]{section.6.2}{Future Work Directions}{chapter.6}% 52
-\BOOKMARK [1][-]{section.6.3}{Concluding Remarks}{chapter.6}% 53
-\BOOKMARK [0][-]{appendix.A}{List of Publications}{}% 54
+\BOOKMARK [3][-]{subsubsection.2.3.5.1}{PVWatts Calculator}{subsection.2.3.5}% 21
+\BOOKMARK [3][-]{subsubsection.2.3.5.2}{SAM}{subsection.2.3.5}% 22
+\BOOKMARK [3][-]{subsubsection.2.3.5.3}{HOMER}{subsection.2.3.5}% 23
+\BOOKMARK [3][-]{subsubsection.2.3.5.4}{RETScreen}{subsection.2.3.5}% 24
+\BOOKMARK [3][-]{subsubsection.2.3.5.5}{Hybrid2}{subsection.2.3.5}% 25
+\BOOKMARK [3][-]{subsubsection.2.3.5.6}{Thesis Proposal x Reference Tools}{subsection.2.3.5}% 26
+\BOOKMARK [2][-]{subsection.2.3.6}{Component models for stand-alone PV systems}{section.2.3}% 27
+\BOOKMARK [3][-]{subsubsection.2.3.6.1}{PV generator \(cell, module, array\) }{subsection.2.3.6}% 28
+\BOOKMARK [3][-]{subsubsection.2.3.6.2}{Proposed PV Panel Model}{subsection.2.3.6}% 29
+\BOOKMARK [3][-]{subsubsection.2.3.6.3}{Battery Storage Model }{subsection.2.3.6}% 30
+\BOOKMARK [3][-]{subsubsection.2.3.6.4}{Controller Model}{subsection.2.3.6}% 31
+\BOOKMARK [3][-]{subsubsection.2.3.6.5}{The inverter model}{subsection.2.3.6}% 32
+\BOOKMARK [2][-]{subsection.2.3.7}{Availability of Stand-alone PV Systems}{section.2.3}% 33
+\BOOKMARK [2][-]{subsection.2.3.8}{Sizing Stand-alone Solar Photovoltaic Systems}{section.2.3}% 34
+\BOOKMARK [2][-]{subsection.2.3.9}{PV Systems Optimization Criteria}{section.2.3}% 35
+\BOOKMARK [2][-]{subsection.2.3.10}{Stand-alone PV System Optimization Technique}{section.2.3}% 36
+\BOOKMARK [1][-]{section.2.4}{Summary}{chapter.2}% 37
+\BOOKMARK [0][-]{chapter.3}{Methodology}{}% 38
+\BOOKMARK [1][-]{section.3.1}{Intro}{chapter.3}% 39
+\BOOKMARK [1][-]{section.3.2}{Automated Verification}{chapter.3}% 40
+\BOOKMARK [1][-]{section.3.3}{Optimization}{chapter.3}% 41
+\BOOKMARK [2][-]{subsection.3.3.1}{Variant CEGIS}{section.3.3}% 42
+\BOOKMARK [1][-]{section.3.4}{Assumptions and Premises}{chapter.3}% 43
+\BOOKMARK [1][-]{section.3.5}{Conclusion}{chapter.3}% 44
+\BOOKMARK [0][-]{chapter.4}{Automated Formal Verification of Stand-Alone Solar PV Systems}{}% 45
+\BOOKMARK [1][-]{section.4.1}{Intro to Automated Verification Experimental Evaluation}{chapter.4}% 46
+\BOOKMARK [1][-]{section.4.2}{Description of the Case Studies}{chapter.4}% 47
+\BOOKMARK [1][-]{section.4.3}{Objectives and Setup}{chapter.4}% 48
+\BOOKMARK [1][-]{section.4.4}{Results and Discussion}{chapter.4}% 49
+\BOOKMARK [1][-]{section.4.5}{Threats to Validity}{chapter.4}% 50
+\BOOKMARK [1][-]{section.4.6}{Conclusion}{chapter.4}% 51
+\BOOKMARK [0][-]{chapter.5}{Automated Formal Synthesis Optimization Method for Sizing of Stand-Alone Solar PV Systems}{}% 52
+\BOOKMARK [1][-]{section.5.1}{Intro to Automated Formal Synthesis Optimization}{chapter.5}% 53
+\BOOKMARK [1][-]{section.5.2}{Optimization Case studies}{chapter.5}% 54
+\BOOKMARK [1][-]{section.5.3}{Tools}{chapter.5}% 55
+\BOOKMARK [1][-]{section.5.4}{Setup}{chapter.5}% 56
+\BOOKMARK [1][-]{section.5.5}{Objectives}{chapter.5}% 57
+\BOOKMARK [1][-]{section.5.6}{Comparison between Formal Synthesis and HOME Pro}{chapter.5}% 58
+\BOOKMARK [1][-]{section.5.7}{Threats to validity}{chapter.5}% 59
+\BOOKMARK [1][-]{section.5.8}{Conclusion}{chapter.5}% 60
+\BOOKMARK [0][-]{chapter.6}{Conclusions}{}% 61
+\BOOKMARK [1][-]{section.6.1}{Main Contributions}{chapter.6}% 62
+\BOOKMARK [1][-]{section.6.2}{Future Work Directions}{chapter.6}% 63
+\BOOKMARK [1][-]{section.6.3}{Concluding Remarks}{chapter.6}% 64
+\BOOKMARK [0][-]{appendix.A}{List of Publications}{}% 65

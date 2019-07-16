@@ -724,6 +724,9 @@ SOC_{charge} = SOC_{previous} + \dfrac{100*Pm*Num_{h}}{V_{system}*capacity*N_{BP
 SOC_{discharge} = SOC_{previous} - \dfrac{100*I_{drained}*Num_{h}}{capacity}
 \end{equation}
 
+Worth to mention that, specifically to PV systems used in Brazil, there is a Normative Resolution issued by the Brazil National Electric Energy Agency (Aneel) that establishes the minimum of 48 hours of battery autonomy to stand-alone solar PV systems (RN 493/2012), among others definitions related to this matter.
+
+
 \subsubsection{Controller Model}
 Depending on the literature, the controller can receive different names: controller \cite{Hansen}, charge controller \cite{Mahanta} and \cite{Chauhan}, regulator \cite{Mellit}, DC-DC converter with MPPT and switch \cite{Dhanowa}, \cite{Yatimi}, \cite{Abdulateef}, \cite{Roy}. However, in this study, in order to simplify, the term used is controller. 
 
@@ -838,10 +841,8 @@ The inverter is characterized by a power dependent efficiency $ \eta_{i} $ given
 
 Where $ I_{DC} $ is the current required by the inverter from the DC source in order to be able to keep the rated voltage on the AC side, $ V_{DC} $ is the input voltage to the inverter delivered by the DC source (PV panel or battery),  $ V_{AC}  $ and $ I_{AC} $ are the output voltage and current, respectively, and $ cos \varphi $ can be found from the inverter's data-sheet.
 
-Therefore, with this equation it is possible to simulate the output power of the inverter, based on information from the inverter's data-sheet and from the DC module or the PV panel that feed the inverter (which are obtained by this study model). 
+Therefore, with this equation it is possible to simulate the output power of the inverter, based on information from the inverter's data-sheet and from the DC module or the PV panel that feed the inverter (which are obtained by this study model).
 
-
-%
 %--------------------------------------------------
 \subsection{Availability of Stand-alone PV Systems}
 \label{sec:availability}
@@ -991,7 +992,10 @@ V_{out}AC = V_{AC}.
 \left[ (Demand \leq P_{AC,ref}) \, and \, (P_{surge} \leq MAX_{AC,ref}) \right].
 \end{equation}
 
-\textcolor{red}{Number of inverters???? XXXXXXXXXXX}
+Some models of inverters allow parallel operation of more than one unit, besides the integration in order to create bi-phase and three-phase circuits. It is advised the use of pure sine wave inverter, especially for cases where are used electronic loads sensitive to harmonic distortion waves.
+
+Moreover, it is important to verify the compatibility between charge controller and inverter, because there are some models that do not accept to work with brands of different manufacturers.
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{PV Systems Optimization Criteria}
@@ -1050,3 +1054,16 @@ since it is specific to one place of deployment of the PV system,
 thereby demanding adaptation if another site is analyzed.
 
 \section{Summary}
+
+At this Section, all the background and theoretical base needed to understand the concepts, techniques, tools, and criteria used during the following Sections were presented.
+
+A historical explanation about the origin of the formal methods until to reach modern model checkers was presented. It was highlighted the importance of computers evolution in order to allow the automation of formal verification. If we were stuck in time, probably the formal verification was being made by hand until nowadays.
+
+Is was pointed out the importance of mathematical rigor to the models and representation of systems, and that automated verification can be applied to any kind of systems (from simple ones to the complex ones)
+
+State-of-art automated verification tools were described with relation to their characteristics and techniques. Simulation tools were described as well and the reason why HOMER Pro was the one chosen to the comparative.
+
+It was explained how to validate a system, comparing test, simulation and automated verification techniques. It was possible to demonstrate that only automated verification can prove the absence of system flaws.
+
+The method of critical period solar energy method was presented as the chosen one for sizing solar PV systems. Following, the criteria and techniques for optimal sizing of PV systems were highlighted as well.
+
