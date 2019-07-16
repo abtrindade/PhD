@@ -908,7 +908,7 @@ Historically, this trade-off was reflected in two major approaches to static ver
 %\label{fig:statetransition}
 %\end{figure}
 %
-\textcolor{red}{It is worth mentioning that the steps described here are carried out shortly after the design of the solar photovoltaic system, as soon as the equipment and equipment specifications are defined; before buying and deploying them, as a way to ensure that the project will not fail.}
+\textcolor{red}{Note that the steps described here are carried out shortly after the design of the solar PV system, as soon as the equipment and its specifications are defined, i.e., before buying and deploying them, as a safe approach to ensure that the project will succeed.}
 
 %
 The flowchart of the automated verification method is illustrated in Fig.~\ref{fig:flowchartgeneral}. 
@@ -960,12 +960,15 @@ Lines 1 is devoted to information from the location where the PV system will be/
 
 Line 2 represents all the information that comes from the PV sizing and from the equipment manufacturers data: specification and data from PV, batteries, inverter and charge controller. This item includes as well information from the house's load curve.
 
-\textcolor{red}{At this work, we estimated load curves based on survey and visiting performed in June of 2017, and the the estimated load curve was converted as vectors with 24 positions, one to each house of the day (in Watts): 
-House 1: [118, 118, 118, 46, 46, 46, 95, 95, 170, 170, 296, 242, 242, 95, 95, 95, 95, 95, 342, 288, 288, 288, 288, 118]; 
-House 2: [136, 136, 136, 136, 136, 136, 67, 67, 184, 184, 184, 184, 184, 67, 67, 67, 67, 67, 253, 253, 253, 253, 253, 136]; 
-House 3: [113, 113, 113, 113, 113, 113, 67, 67, 217, 97, 97, 97, 97, 97, 97, 97, 97, 97, 263, 113, 113, 113, 113, 113]; 
-House 4: [207, 207, 207, 135, 135, 135, 66, 66, 161, 161, 233, 253, 248, 66, 66, 66, 66, 66, 302, 317, 322, 302, 302, 207]; 
-House 5: [45, 16, 16, 16, 16, 16, 0, 0, 0, 72, 72, 222, 150, 150, 0, 0, 72, 72, 814, 814, 814, 742, 742, 16].}
+\textcolor{red}{In our study, we estimated load curves based on survey and visiting performed in June of 2017, and the the estimated load curve was converted as vectors with 24 positions, one to each house of the day (in Watts):}
+%
+\begin{itemize} 
+\item \textcolor{red}{House 1: [118, 118, 118, 46, 46, 46, 95, 95, 170, 170, 296, 242, 242, 95, 95, 95, 95, 95, 342, 288, 288, 288, 288, 118];} 
+\item \textcolor{red}{House 2: [136, 136, 136, 136, 136, 136, 67, 67, 184, 184, 184, 184, 184, 67, 67, 67, 67, 67, 253, 253, 253, 253, 253, 136];} 
+\item \textcolor{red}{House 3: [113, 113, 113, 113, 113, 113, 67, 67, 217, 97, 97, 97, 97, 97, 97, 97, 97, 97, 263, 113, 113, 113, 113, 113];}
+\item \textcolor{red}{House 4: [207, 207, 207, 135, 135, 135, 66, 66, 161, 161, 233, 253, 248, 66, 66, 66, 66, 66, 302, 317, 322, 302, 302, 207];} 
+\item \textcolor{red}{House 5: [45, 16, 16, 16, 16, 16, 0, 0, 0, 72, 72, 222, 150, 150, 0, 0, 72, 72, 814, 814, 814, 742, 742, 16].}
+\end{itemize}
 
 The first automated verification is related to the sizing check (line 3), if an error is found then the algorithm stops. Then two functions, called at lines 4 and 5, are responsible for discover which hour starts the PV generation and when stops. Those functions get this information from the array inputted to the Algorithm with the solar irradiance values.
 
