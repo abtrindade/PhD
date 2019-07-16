@@ -1154,7 +1154,7 @@ Nevertheless, if the verification engine does not fail, we can conclude that the
 %------------------------------------------
 %
 %We have performed five case studies to evaluate our proposed verification method: (a) four PV systems (three in series 325W PV panels, four 220 Ah batteries in a configuration with two series and two parallel with 48h autonomy, 700 W inverter with peak power of 1,600W, charge controller with MPPT with 35A/150V of capacity) deployed in four different houses in an indigenous community (GPS coordinates 2$^{o}$44'50.0"S 60$^{o}$25'47.8"W) situated nearby Manaus (Brazil), with each house having a different power demand (house 1 = 253 W, house 2 = 263 W, house 3 = 283 W, and house 4 = 501 W); and (b) one case concerning a system deployed as an individual system in Manaus (GPS coordinates 3$^{o}$4'20.208"S 60$^{o}$0'30.168"W), supporting 915 W of the house's load (house 5 with four 325W PV panels in a configuration two series and two parallel, four 120Ah batteries in series and autonomy of just 6 h, 1,200 W inverter with surge of 1,600 W, charge controller with MPPT of 150V/35A). 
-We have performed five case studies to evaluate the proposed approach as described in Table~\ref{tab2}. \textcolor{red}{Power peak, power surge and energy consumption were estimated based on visiting and survey applied in each house (before the electrification).} %Furthermore, three start-of-art verification tools, as described in Section~\ref{sec:AutomatedVerification} (ESBMC, CBMC, and CPAchecker), and HOMER Pro simulation tool were used to compare the approach effectiveness and efficiency.
+We have performed five case studies to evaluate the proposed approach as described in Table~\ref{tab2}. \textcolor{red}{Power peak, power surge, and energy consumption were estimated based on visiting and survey applied to each house (before the electrification).} %Furthermore, three start-of-art verification tools, as described in Section~\ref{sec:AutomatedVerification} (ESBMC, CBMC, and CPAchecker), and HOMER Pro simulation tool were used to compare the approach effectiveness and efficiency.
 
 \begin{table}
 \caption{Case studies: stand-alone solar PV systems.}\label{tab2}
@@ -1214,7 +1214,7 @@ Verification engine CPAchecker 1.8 was used \footnote{Command-line: \$ scripts/c
 % enabled with the goal of reducing memory usage; 
  %The experiments were performed without a predefined timeout.
 
-\textcolor{red}{Note that the results presented here depend on the computer's processor and memory, the version of each software verifier (i.e., CBMC, ESBMC, CPAchecker), the parameters passed by the command-line, and the coded problem (software created by authors) to be solved. Additionally, any change from HOMER Pro to another simulation tool can also influence the measured time to obtain results.}
+\textcolor{red}{Note that the results presented here depend on the computer's processor and memory, the version of each software verifier (i.e., CBMC, ESBMC, CPAchecker), the parameters passed by the command-line, and the implemented model (software created by authors) to be solved. Additionally, any change from HOMER Pro to another simulation tool can also influence the measured time to obtain results.}
 
 %------------------------------------------
 \subsection{Results and Discussion}
@@ -1324,10 +1324,10 @@ The adoption of more complex models, or even an evaluation in a PV laboratory to
 \textit{Case studies:} Our case studies are performed only in one municipality. A more complete evaluation can be performed with more case studies.
 
 \textcolor{red}{
-\textit{Simulation Tool:} Only HOMER Pro was used. The inclusion of other specialized simulation tool or even a general simulation tool that uses the same mathematical model adopted by the automated verification can change the comparative.}
+\textit{Simulation Tool:} Only HOMER Pro was used. The inclusion of other specialized simulation tool or even a general simulation tool that uses the same mathematical model adopted by the automated verification could change the comparative.}
 
 \textcolor{red}{
-\textit{Temperature and Solar Irradiance Data}: Information related to temperature and solar irradiance of each case study, independently of using simulation or formal verification, come from data bases available online. However, considering that riverside communities do not have weather stations, the data used at this work come from the closest municipality (Manaus in all case studies), where stations collect regularly those data. Therefore, the most accurate should be the use of weather stations in each location to obtain the data.}
+\textit{Temperature and Solar Irradiance Data}: Information related to temperature and solar irradiance of each case study, independently of using simulation or formal verification, come from databases available online \textcolor{green}{cite them here?}. However, considering that riverside communities do not have weather stations, the data used in our study come from the closest municipality (Manaus in all case studies), where stations collect regularly those data. Therefore, the most accurate should be the use of weather stations in each location to obtain the data.}
 
 %-------------------------------------
 \section{Conclusions and Future Work}
