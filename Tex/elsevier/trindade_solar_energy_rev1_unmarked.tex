@@ -1,8 +1,8 @@
 \documentclass[review]{elsarticle}
 
 \usepackage{lineno,hyperref}
-\modulolinenumbers[1]
-\linenumbers
+%\modulolinenumbers[1]
+%\linenumbers
 
 %\journal{Renewable \& Sustainable Energy Reviews}
 
@@ -71,7 +71,7 @@
 \address[mysecondaryaddress]{University of Manchester, School of Computer Science, Kilburn Building, Manchester M13 9PL}
 
 \begin{abstract}
-\textcolor{red}{With declining costs and increasing performance, the deployment of renewable energy systems is growing faster. In $2017$, for the first time, the number of people without access to electricity dropped down below $1$ billion, but trends on energy access likewise fall short of global goals. Particular attention is given to stand-alone solar photovoltaic systems in rural areas or where grid extension is unfeasible. Tools to evaluate electrification projects are available, but they are based on simulations that do not cover all aspects of the design-space. Automated verification using model checking has proven to be an effective technique to validate complex (state transition) systems. This paper marks the first application of software model checking to formally verify the design of a stand-alone solar photovoltaic system, including solar panel, charge controller, battery, inverter, and electric load. Our main focus is on the project validation to be carried out just after the system sizing, i.e., prior to buying equipment and deployment, as a safe approach to ensure the intended behavior. Five case studies were used to evaluate this proposed approach and to compare that with specialized simulation tool. Different verification tools were evaluated to compare performance and soundness among automated verifiers. The experimental results reported by our automated verification method and by the simulation tool were compared with data collected from dwellers of the deployed cases, thereby showing the effectiveness of our approach, where specific conditions that lead to failures in a solar photovoltaic system are only detailed by the automated verification method.}
+With declining costs and increasing performance, the deployment of renewable energy systems is growing faster. In $2017$, for the first time, the number of people without access to electricity dropped down below $1$ billion, but trends on energy access likewise fall short of global goals. Particular attention is given to stand-alone solar photovoltaic systems in rural areas or where grid extension is unfeasible. Tools to evaluate electrification projects are available, but they are based on simulations that do not cover all aspects of the design-space. Automated verification using model checking has proven to be an effective technique to validate complex (state transition) systems. This paper marks the first application of software model checking to formally verify the design of a stand-alone solar photovoltaic system, including solar panel, charge controller, battery, inverter, and electric load. Our main focus is on the project validation to be carried out just after the system sizing, i.e., prior to buying equipment and deployment, as a safe approach to ensure the intended behavior. Five case studies were used to evaluate this proposed approach and to compare that with specialized simulation tool. Different verification tools were evaluated to compare performance and soundness among automated verifiers. The experimental results reported by our automated verification method and by the simulation tool were compared with data collected from dwellers of the deployed cases, thereby showing the effectiveness of our approach, where specific conditions that lead to failures in a solar photovoltaic system are only detailed by the automated verification method.
 %With declining costs and increasing performance, the deployment of renewable energy systems is growing faster. In $2017$, for the first time, the number of people without access to electricity dropped down below $1$ billion, but trends on energy access likewise fall short of global goals. Particular attention is given to stand-alone solar photovoltaic (PV) systems in rural areas or where grid extension is unfeasible. Tools to evaluate electrification projects are available, but they are based on simulations that do not cover all aspects of the design-space. Automated verification using model checking has proven to be an effective technique to validate complex (state transition) systems. This paper marks the first application of software model checking to formally verify the design of a stand-alone solar photovoltaic system, including solar panel, charge controller, battery, inverter, and electric load. Our main focus is on the solar PV project validation to be carried out just after the system sizing, i.e., prior to buying equipment and deploying it in the field, as a safe approach to ensure the intended behavior. Case studies, ranging from $253$ W to $814$ W, were used to evaluate this proposed approach and to compare that with specialized simulation tool. Different verification tools were evaluated to compare performance and soundness among automated verifiers. The experimental results reported by our automated verification method and by the simulation tool were compared with data collected from dwellers of the deployed cases, thereby showing the effectiveness of our approach, where specific conditions that lead to failures in a solar PV system are only detailed by the automated verification method.}
 \end{abstract}
 
@@ -134,9 +134,9 @@ The project requirements, as battery autonomy and power demand, besides weather 
 The implementation of the proposed tool is carried out by means of an algorithm in language C, that is executed by three state-of-the-art model checkers to formally verifying PV designs, in order to evaluate performance and correctness: the C Bounded Model Checker (CBMC)~\citep{Kroening}, the Efficient SMT-based Bounded Model Checker (ESBMC)~\citep{esbmc2018}, and the Configurable Program Analysis Checker (CPAchecker).
 %three the efficient SMT-based bounded model checker (ESBMC)~\cite{esbmc2018}. %, which allows one to incrementally verify a PV system as an imperative program using a fragment of decidable first-order theories~\cite{DBLP:books/daglib/0019162}.
 
-\textcolor{red}{Note that in this study, our focus is not on a novel mathematical modelling of PV systems. Instead, our novelty relies on an effective approach to perform validation of PV systems using software model checking, in a process that is intended to be done just after the system sizing, prior to buying equipment and deploying it in the field, as a safe approach to ensure the intended behavior.}
+Note that in this study, our focus is not on a novel mathematical modelling of PV systems. Instead, our novelty relies on an effective approach to perform validation of PV systems using software model checking, in a process that is intended to be done just after the system sizing, prior to buying equipment and deploying it in the field, as a safe approach to ensure the intended behavior.
 
-\textcolor{red}{Here we compare model checking with simulation tools. However how they work is completely different. On one hand, simulation depends on the choice of input variables (and their values) in order to obtain the output. On the other hand, model checking performs an exhaustive search with the goal of proving or violating a given property. In the latter case, if the property is violated (an unexpected behavior of the system), then the model checker presents the input that causes such a violation. Therefore, we can prove the absence of system flaws using model checking.}
+Here we compare model checking with simulation tools. However how they work is completely different. On one hand, simulation depends on the choice of input variables (and their values) in order to obtain the output. On the other hand, model checking performs an exhaustive search with the goal of proving or violating a given property. In the latter case, if the property is violated (an unexpected behavior of the system), then the model checker presents the input that causes such a violation. Therefore, we can prove the absence of system flaws using model checking.
 
 In prior studies, the evaluation of PV systems w.r.t. user requirements were performed by simulation tools using MATLAB/Simulink~\citep{Benatiallah2017, Natsheh2012}, or HOMER Pro \citep{Lamnadi2017}, where some mathematical model was adopted and the tool simulated the PV behavior over the time. Related to formal methods, in 2015, an approach for applying Monte-Carlo simulation to power system protection schemes presented limitations of incomplete coverage of all possible operating conditions~\citep{Sengupta2015}. The authors proposed an automated simulation-based verification technique to verify correctness of protection settings using hybrid automata-temporal-logic framework. In 2017, a researcher suggested the application of formal methods to verify and control the behavior of computational devices interacting over a shared-smart infrastructure~\citep{Abate2017}. The author discussed the aggregation of large populations of thermostatically-controlled loads and of PV panels, and the corresponding problems of energy management in smart buildings and smart grids. The author used approximate model checking of stochastic and hybrid models. In 2018, a verification methodology was proposed with applications to PV panels and its distributed power point tracking~\citep{Driouich2018}. This approach relied on representing unpredictable behavior of the environment to cover all possible feasible scenarios. The simulation results obtained by JModelica had evident time consuming issue with almost three days of computer effort to verify the design space of one operation hour of the PV panels behavior. Another work from 2018 was the approach to modeling smart grid components using a formal specification. The authors used a state-based formal specification language named Z; they demonstrated the application to four smart grid components~\citep{Akram2018}. This approach is based on Petri nets.
 %%%%%%%%%%%%%
@@ -244,7 +244,7 @@ The most popular softwares are summarized at Table~\ref{table:softwares}: PVWatt
 %The Hybrid2 software package, as described in \cite{Mills}, is a user-friendly tool to perform detailed long-term performance and economic analysis on a wide variety of hybrid power systems. Hybrid2 is a probabilistic/time series computer model, using time series data for loads, wind speed, solar insolation, and temperature; and the power system is designed or selected by the user, in order to predict the performance of the hybrid power system. Variations in wind speed and in load within each time step are factored into the performance predictions. The code does not consider short-term system fluctuations caused by system dynamics or component transients. This program is not supported anymore and according to \cite{UMASS}, probably after the user performs the free download of the tool, it will not work on Windows platforms later than Windows XP, what is a limitation.
 %
 %Table~\ref{table:softwares} summarizes the off-the-shelf tools employed here, where 
-As highlights, only HOMER and Hybrid2 perform off-grid system with battery backup analysis. \textcolor{red}{Hybrid2 is not supported anymore, being in disuse since that not work on Windows platforms later than Windows XP~\citep{UMASS, Pinho}.} %all the tools perform solar photovoltaic analysis; 
+As highlights, only HOMER and Hybrid2 perform off-grid system with battery backup analysis.  Hybrid2 is not supported anymore, being in disuse since that not work on Windows platforms later than Windows XP~\citep{UMASS, Pinho}. %all the tools perform solar photovoltaic analysis; 
 Additionally, HOMER and RETScreen include economical analysis or even optimization-sensitive analysis. However, commercial version of those tools, called RETScreen Expert and HOMER Pro, are available only for Microsoft Windows and the annual subscription typically range from US\$504.00 to US\$657.00.
 %
 \begin{table}[!t]
@@ -297,15 +297,15 @@ In this study, HOMER was chosen to comparative with our proposed verification ap
 %-------------------------------------------------------------------
 %The main purpose of this section is to describe the models for the elements of a stand-alone PV system: PV generator, battery, controller, inverter, and load. 
 %The mathematical modeling of the PV system is based on modular blocks, as illustrated in Fig.\ref{fig:blockdiagram}. It identifies the PV generator, batteries, charge controller, inverter, and AC load. 
-A stand-alone PV system is illustrated in Fig.\ref{fig:blockdiagram}. The PV generator is a semiconductor device that can convert solar energy into DC electricity\textcolor{red}{, with high dependence on two weather variables from the site, where the system is deployed: solar irradiance $G$ and temperature $T$}. 
-For night hours or rainy days, power stored in batteries can be used and it implies the presence of a charge controller~\citep{Hansen}. The PV arrays produce DC and therefore when the PV system contains an AC load, a DC/AC conversion is required (inverter). The AC load dictates the behavior of AC electrical load from the house that will be fed by the system. \textcolor{red}{In this pictured modular structure, every element produces/consumes current $I$ and voltage $V$, as illustrated by their physical magnitudes, where $pv$ means photovoltaic, $bat$ is battery, $dc$ is direct, and $ac$ is alternating signals.}
+A stand-alone PV system is illustrated in Fig.\ref{fig:blockdiagram}. The PV generator is a semiconductor device that can convert solar energy into DC electricity, with high dependence on two weather variables from the site, where the system is deployed: solar irradiance $G$ and temperature $T$. 
+For night hours or rainy days, power stored in batteries can be used and it implies the presence of a charge controller~\citep{Hansen}. The PV arrays produce DC and therefore when the PV system contains an AC load, a DC/AC conversion is required (inverter). The AC load dictates the behavior of AC electrical load from the house that will be fed by the system. In this pictured modular structure, every element produces/consumes current $I$ and voltage $V$, as illustrated by their physical magnitudes, where $pv$ means photovoltaic, $bat$ is battery, $dc$ is direct, and $ac$ is alternating signals.
 %
 %The modular structure facilitates the modeling of the other system structures and replacement of elements, such as a DC load instead of an AC load. 
 %
 \begin{figure}[h]
 \includegraphics[width=0.80\textwidth]{blockdiagramPVS2}
 \centering
-\caption{\textcolor{red}{Block diagram for a typical stand-alone PV system, adapted from~\citep{Hansen}}.}
+\caption{Block diagram for a typical stand-alone PV system, adapted from~\citep{Hansen}.}
 \label{fig:blockdiagram}
 \end{figure}
 %
@@ -350,7 +350,7 @@ However, the present work will rely on the simplified model of 1-diode, illustra
 \begin{figure}[h]
 \includegraphics[width=0.40\textwidth]{equivckt1D}
 \centering
-\caption{\textcolor{red}{1-diode equivalent PV cell/panel circuit model, adapted from~\citep{Cubas}.}}
+\caption{1-diode equivalent PV cell/panel circuit model, adapted from~\citep{Cubas}.}
 %\caption{Four different equivalent circuit models: (a) 1-diode; (b) 1-diode/1-resistor; (c) 1-diode/2-resistor; (d) 2-diode/2-resistor (Source: \cite{Cubas})}
 \label{fig:equivckt}
 \end{figure}
@@ -909,7 +909,7 @@ Historically, this trade-off was reflected in two major approaches to static ver
 %\label{fig:statetransition}
 %\end{figure}
 %
-\textcolor{red}{Note that the steps described here are carried out shortly after the design of the solar PV system, as soon as the equipment and its specifications are defined, i.e., before buying and deploying them, as a safe approach to ensure that the project will succeed.}
+Note that the steps described here are carried out shortly after the design of the solar PV system, as soon as the equipment and its specifications are defined, i.e., before buying and deploying them, as a safe approach to ensure that the project will succeed.
 
 %
 The flowchart of the automated verification method is illustrated in Fig.~\ref{fig:flowchartgeneral}. 
@@ -921,7 +921,7 @@ The flowchart of the automated verification method is illustrated in Fig.~\ref{f
 \label{fig:flowchartgeneral}
 \end{figure}
 
-In Step 1, the PV input data \textcolor{red}{(e.g., load power demand and load energy consumption)} 
+In Step 1, the PV input data (e.g., load power demand and load energy consumption) 
 and the formulae to check the sizing project, the mathematical model, the limits of the weather non-deterministic variables, are all written as an ANSI-C code~\citep{ANSI2018}. In Step 2, the sizing check of the PV system takes place: it will indicate if there is an error of sizing before to perform the automated verification of the system. This stage ensures that the system meets the standard project steps related to critical period method of sizing~\citep{Pinho}. 
 %
 In Step 3, weather variables (e.g., solar irradiance and ambient temperature) will be systematically explored by our verification engine based on maximum and minimum values from the site, where the PV system will be deployed. 
@@ -961,14 +961,14 @@ Lines 1 is devoted to information from the location where the PV system will be/
 
 Line 2 represents all the information that comes from the PV sizing and from the equipment manufacturers data: specification and data from PV, batteries, inverter and charge controller. This item includes as well information from the house's load curve.
 
-\textcolor{red}{In our study, we estimated load curves based on survey and visiting performed in June of 2017, and the the estimated load curve was converted as vectors with 24 positions, one to each house of the day (in Watts):}
+In our study, we estimated load curves based on survey and visiting performed in June of 2017, and the the estimated load curve was converted as vectors with 24 positions, one to each house of the day (in Watts):
 %
 \begin{itemize} 
-\item \textcolor{red}{House 1: [118, 118, 118, 46, 46, 46, 95, 95, 170, 170, 296, 242, 242, 95, 95, 95, 95, 95, 342, 288, 288, 288, 288, 118];} 
-\item \textcolor{red}{House 2: [136, 136, 136, 136, 136, 136, 67, 67, 184, 184, 184, 184, 184, 67, 67, 67, 67, 67, 253, 253, 253, 253, 253, 136];} 
-\item \textcolor{red}{House 3: [113, 113, 113, 113, 113, 113, 67, 67, 217, 97, 97, 97, 97, 97, 97, 97, 97, 97, 263, 113, 113, 113, 113, 113];}
-\item \textcolor{red}{House 4: [207, 207, 207, 135, 135, 135, 66, 66, 161, 161, 233, 253, 248, 66, 66, 66, 66, 66, 302, 317, 322, 302, 302, 207];} 
-\item \textcolor{red}{House 5: [45, 16, 16, 16, 16, 16, 0, 0, 0, 72, 72, 222, 150, 150, 0, 0, 72, 72, 814, 814, 814, 742, 742, 16].}
+\item House 1: [118, 118, 118, 46, 46, 46, 95, 95, 170, 170, 296, 242, 242, 95, 95, 95, 95, 95, 342, 288, 288, 288, 288, 118];
+\item House 2: [136, 136, 136, 136, 136, 136, 67, 67, 184, 184, 184, 184, 184, 67, 67, 67, 67, 67, 253, 253, 253, 253, 253, 136]; 
+\item House 3: [113, 113, 113, 113, 113, 113, 67, 67, 217, 97, 97, 97, 97, 97, 97, 97, 97, 97, 263, 113, 113, 113, 113, 113];
+\item House 4: [207, 207, 207, 135, 135, 135, 66, 66, 161, 161, 233, 253, 248, 66, 66, 66, 66, 66, 302, 317, 322, 302, 302, 207]; 
+\item House 5: [45, 16, 16, 16, 16, 16, 0, 0, 0, 72, 72, 222, 150, 150, 0, 0, 72, 72, 814, 814, 814, 742, 742, 16].
 \end{itemize}
 
 The first automated verification is related to the sizing check (line 3), if an error is found then the algorithm stops. Then two functions, called at lines 4 and 5, are responsible for discover which hour starts the PV generation and when stops. Those functions get this information from the array inputted to the Algorithm with the solar irradiance values.
@@ -1142,7 +1142,7 @@ Nevertheless, if the verification engine does not fail, we can conclude that the
 % \fnbelowfloat command of the stfloats package.
 %
 %----------------------------------------------
-\section{\textcolor{red}{Verification and Simulation Results}} 
+\section{Verification and Simulation Results} 
 \label{sec:results}
 %----------------------------------------------
 %
@@ -1155,7 +1155,7 @@ Nevertheless, if the verification engine does not fail, we can conclude that the
 %------------------------------------------
 %
 %We have performed five case studies to evaluate our proposed verification method: (a) four PV systems (three in series 325W PV panels, four 220 Ah batteries in a configuration with two series and two parallel with 48h autonomy, 700 W inverter with peak power of 1,600W, charge controller with MPPT with 35A/150V of capacity) deployed in four different houses in an indigenous community (GPS coordinates 2$^{o}$44'50.0"S 60$^{o}$25'47.8"W) situated nearby Manaus (Brazil), with each house having a different power demand (house 1 = 253 W, house 2 = 263 W, house 3 = 283 W, and house 4 = 501 W); and (b) one case concerning a system deployed as an individual system in Manaus (GPS coordinates 3$^{o}$4'20.208"S 60$^{o}$0'30.168"W), supporting 915 W of the house's load (house 5 with four 325W PV panels in a configuration two series and two parallel, four 120Ah batteries in series and autonomy of just 6 h, 1,200 W inverter with surge of 1,600 W, charge controller with MPPT of 150V/35A). 
-We have performed five case studies to evaluate the proposed approach as described in Table~\ref{tab2}. \textcolor{red}{Power peak, power surge, and energy consumption were estimated based on visiting and survey applied to each house in June 2017 (before the electrification).} %Furthermore, three start-of-art verification tools, as described in Section~\ref{sec:AutomatedVerification} (ESBMC, CBMC, and CPAchecker), and HOMER Pro simulation tool were used to compare the approach effectiveness and efficiency.
+We have performed five case studies to evaluate the proposed approach as described in Table~\ref{tab2}. Power peak, power surge, and energy consumption were estimated based on visiting and survey applied to each house in June 2017 (before the electrification). %Furthermore, three start-of-art verification tools, as described in Section~\ref{sec:AutomatedVerification} (ESBMC, CBMC, and CPAchecker), and HOMER Pro simulation tool were used to compare the approach effectiveness and efficiency.
 
 \begin{table}
 \caption{Case studies: stand-alone solar PV systems.}\label{tab2}
@@ -1174,11 +1174,11 @@ Charge Controller & \multicolumn{5}{|c|}{With MPPT of 150 V/35 A}\\
 \hline
 Inverter & \multicolumn{4}{|c|}{700 W, surge: 1,600 W} & 1,200 W, surge: 1,600 W\\
 \hline
-\textcolor{red}{Power peak (W)}& 342  & 253  & 263 & 322 & 814 \\
+Power peak (W)& 342  & 253  & 263 & 322 & 814 \\
 \hline
-\textcolor{red}{Power surge (W)}& 342 & 722 & 732 & 896 & 980\\
+Power surge (W)& 342 & 722 & 732 & 896 & 980\\
 \hline
-\makecell{\textcolor{red}{Consumption}\\ \textcolor{red}{(kWh/day)}}& \textcolor{red}{3.9} & \textcolor{red}{3.6} & \textcolor{red}{2.5} & \textcolor{red}{4.3} & \textcolor{red}{4.88} \\
+\makecell{Consumption\\(kWh/day)}& 3.9 & 3.6 & 2.5 & 4.3 & 4.88 \\
 \hline
 GPS Coordinates & \multicolumn{4}{|c|}{\makecell{2$^{o}$44'50.0"S 60$^{o}$25'47.8"W\\}} & \makecell{3$^{o}$4'20.208"S \\60$^{o}$0'30.168"W}\\
 \hline
@@ -1186,14 +1186,14 @@ Details & \multicolumn{4}{|c|}{\makecell{Riverside indigenous community\\Rural A
 \hline
 \hline
 \end{tabular}
-\textcolor{red}{Legend: (S): Series; (P): Parallel.}
+Legend: (S): Series; (P): Parallel.
 \end{scriptsize}
 \end{table}
 %------------------------------------------
 \subsection{Objectives and Setup}
 \label{sec:setup}
 %------------------------------------------
-\textcolor{red}{We aim} to answer two research questions:
+We aim to answer two research questions:
 %
 \begin{enumerate}
 \item[RQ1] \textbf{(soundness)} Does our automated verification approach provide correct results?
@@ -1215,7 +1215,7 @@ Verification engine CPAchecker 1.8 was used \footnote{Command-line: \$ scripts/c
 % enabled with the goal of reducing memory usage; 
  %The experiments were performed without a predefined timeout.
 
-\textcolor{red}{Note that the results presented here depend on the computer's processor and memory, the version of each software verifier (i.e., CBMC, ESBMC, CPAchecker), the parameters passed by the command-line, and the implemented model (software created by authors) to be solved. Additionally, any change from HOMER Pro to another simulation tool can also influence the measured time to obtain results.}
+Note that the results presented here depend on the computer's processor and memory, the version of each software verifier (i.e., CBMC, ESBMC, CPAchecker), the parameters passed by the command-line, and the implemented model (software created by authors) to be solved. Additionally, any change from HOMER Pro to another simulation tool can also influence the measured time to obtain results.
 
 %------------------------------------------
 \subsection{Results and Discussion}
@@ -1315,7 +1315,7 @@ There were no divergence of results for the houses 1, 2, 3 and 4 w.r.t. our prop
 \subsection{Threats to Validity}
 %---------------------------------------------------
 We have reported a favorable assessment of the proposed method. % over a diverse set of real-world benchmarks. 
-Nevertheless, we have also identified \textcolor{red}{five} threats to the validity of our results that can further be assessed.
+Nevertheless, we have also identified five threats to the validity of our results that can further be assessed.
 
 \textit{Model precision:} each component of the PV system is mathematically modeled. %, and the precision of the proposed method depends on the precision of that particular model. 
 The adoption of more complex models, or even an evaluation in a PV laboratory to validate the model could add more reliability to the results.
@@ -1324,21 +1324,19 @@ The adoption of more complex models, or even an evaluation in a PV laboratory to
 
 \textit{Case studies:} Our case studies are performed only in one municipality. A more complete evaluation can be performed with more case studies.
 
-\textcolor{red}{
-\textit{Simulation Tool:} Only HOMER Pro was used. The inclusion of other specialized simulation tool or even a general simulation tool that uses the same mathematical model adopted by the automated verification could change the comparative.}
+\textit{Simulation Tool:} Only HOMER Pro was used. The inclusion of other specialized simulation tool or even a general simulation tool that uses the same mathematical model adopted by the automated verification could change the comparative.
 
-\textcolor{red}{
-\textit{Temperature and Solar Irradiance Data}: Information related to temperature and solar irradiance of each case study, independently of using simulation or formal verification, come from databases available online~\citep{Temperature, Irradiance}. However, considering that riverside communities do not have weather stations, the data used in our study come from the closest municipality (Manaus in all case studies), where stations collect regularly those data. Therefore, the most accurate should be the use of weather stations in each location.}
+\textit{Temperature and Solar Irradiance Data}: Information related to temperature and solar irradiance of each case study, independently of using simulation or formal verification, come from databases available online~\citep{Temperature, Irradiance}. However, considering that riverside communities do not have weather stations, the data used in our study come from the closest municipality (Manaus in all case studies), where stations collect regularly those data. Therefore, the most accurate should be the use of weather stations in each location.
 
 %-------------------------------------
 \section{Conclusions and Future Work}
 \label{sec:Conclusions}
 %-------------------------------------
 We have described and evaluated an automated verification method to check whether a given PV system meets its specification using software model checking techniques. 
-\textcolor{red}{Our main focus was on the method to validate PV system projects, based on software model checking, which can cover the design-space better than simulation tools. 
-We have considered five case studies, ranging from \textcolor{red}{$253$ W to $814$ W}; three state-of-art verification engines were considered (ESBMC, CBMC, and CPAchecker); and one specialized simulation tool (HOMER Pro). The experimental results from automated verification and simulation tools were compared with information collected from dwelles of the sites, where the real PV systems were deployed.} Although the verification method proposed takes longer than simulation methods, it is able to present details that lead to failures in a PV system that is not a feature presented in commercial simulation tool. In particular, the proposed method was successful in finding sizing errors and indicating in details. Related to the verification engines comparative, the ESBMC with the Z3 solver executed in the incremental configuration presented the better performance (around four times faster than CBMC), used less RAM memory (less than 2 GB when compared to 9.2 GB of CBMC and 19.2 GB of CPAchecker), and all the results were sound because the PV owners and the monitoring system validated the possible flaws that the system could be presenting in the field.
+Our main focus was on the method to validate PV system projects, based on software model checking, which can cover the design-space better than simulation tools. 
+We have considered five case studies, ranging from $253$ W to $814$ W; three state-of-art verification engines were considered (ESBMC, CBMC, and CPAchecker); and one specialized simulation tool (HOMER Pro). The experimental results from automated verification and simulation tools were compared with information collected from dwelles of the sites, where the real PV systems were deployed. Although the verification method proposed takes longer than simulation methods, it is able to present details that lead to failures in a PV system that is not a feature presented in commercial simulation tool. In particular, the proposed method was successful in finding sizing errors and indicating in details. Related to the verification engines comparative, the ESBMC with the Z3 solver executed in the incremental configuration presented the better performance (around four times faster than CBMC), used less RAM memory (less than 2 GB when compared to 9.2 GB of CBMC and 19.2 GB of CPAchecker), and all the results were sound because the PV owners and the monitoring system validated the possible flaws that the system could be presenting in the field.
 %New tests must be performed, in an improved setup (i.e., better computing performance) with the goal of obtaining verification results in shorter times than the ones obtained in this study. 
-As future work, we will \textcolor{red} {expand the number of case studies (preferentially in different countries), develop the code of a general purpose simulation tool to include in the comparative, and also consider} other types of renewable energy and even hybrid ones to allow our method to verify typical rural electrification.
+As future work, we will expand the number of case studies (preferentially in different countries), develop the code of a general purpose simulation tool to include in the comparative, and also consider other types of renewable energy and even hybrid ones to allow our method to verify typical rural electrification.
 %the proposed method will be extended to start from a list of commercial equipment, where each equipment is verified and the final solution, which satisfies the project specification, is found, thus leading to an optimum sizing of PV systems. 
 %We will also consider other types of renewable energy and even hybrid ones to allow our method to design and verify typical rural electrification.
 %
