@@ -1,8 +1,10 @@
-\section{Intro}
+%\section{Introduction}
+%
+In this Chapter, the adopted methodologies to perform formal verification and optimal sizing of stand-alone solar PV systems using formal methods, more specifically model checking, will be detailed. Besides that, all the assumptions and premises adopted are presented as well with direct impact in the results and conclusions of this work. 
 
-Introduction text here
+It is important to emphasize that the whole explanation about the theoretical basis of the two subjects discussed here are present in the previous chapter. In addition, the author suggests that previous reading be done to facilitate understanding.
 
-\section{Automated Verification}
+\section{Automated Verification of Solar PV Systems}
 The flowchart of the automated verification method is illustrated in Fig.~\ref{fig:flowchartgeneral}. 
 
 \begin{figure}[h]
@@ -12,10 +14,12 @@ The flowchart of the automated verification method is illustrated in Fig.~\ref{f
 \label{fig:flowchartgeneral}
 \end{figure}
 
-In Step 1, the PV input data %(e.g., load power demand and load energy consumption) 
-and the formulae to check the sizing project, the mathematical model, the limits of the weather non-deterministic variables, are all written as an ANSI-C code~\cite{ANSI2018}. In Step 2, the sizing check of the PV system takes place: it will indicate if there is an error of sizing before to perform the automated verification of the system. This stage ensures that the system meets the standard project steps related to critical period method of sizing~\cite{Pinho}. 
-%
-In Step 3, weather variables (e.g., solar irradiance and ambient temperature) will be systematically explored by our verification engine based on maximum and minimum values from the site, where the PV system will be deployed. 
+In \textbf{Step 1}, the PV input data %(e.g., load power demand and load energy consumption) 
+and the formulae to check the sizing project, the mathematical model, the limits of the weather non-deterministic variables, are all written as an ANSI-C code~\cite{ANSI2018}. In 
+
+\textbf{Step 2}, the sizing check of the PV system takes place: it will indicate if there is an error of sizing before to perform the automated verification of the system. This stage ensures that the system meets the standard project steps related to critical period method of sizing~\cite{Pinho}. 
+
+In \textbf{Step 3}, weather variables (e.g., solar irradiance and ambient temperature) will be systematically explored by our verification engine based on maximum and minimum values from the site, where the PV system will be deployed. 
 %As a consequence, all the formulae of the employed mathematical models will also be updated. 
 In addition, depending on one of the desired properties of the system such as battery autonomy, energy availability, or even system power supply, our verification engine is able to indicate a failure if those properties are not met; in this particular case, it provides a diagnostic counterexample that shows in which conditions the property violation occurred. 
 %; as the  state of charge of the batteries, load demand of power and the load consumption of energy if defined by the code
@@ -23,9 +27,7 @@ In addition, depending on one of the desired properties of the system such as ba
 
 %
 %\textcolor{red}{In the following paragraph you should related the output of our verification engine with the description of the BMC SAT or UNSAR given above. For example, what does a failure mean? is it SAT?}
-In a nutshell, the model checker will process the ANSI-C code with constraints %($C$) 
-and properties %($P$) 
-from the PV system, and the tool will automatically verify if the PV system requirements are met. If it returns a failure (i.e., SAT), then the tool provides a counterexample, i.e., a sequence of states that leads to the property violation; this information can be used as a feedback to improve the PV system design. However, if the verification succeeds (i.e., UNSAT), there is no failure up to the bound $k$; therefore, the PV system will present its intended behavior up to the bound $k$.
+In a nutshell, the model checker will process the ANSI-C code with constraints ($C$) and properties ($P$) from the PV system, and the tool will automatically verify if the PV system requirements are met. If it returns a failure (i.e., SAT), then the tool provides a counterexample, i.e., a sequence of states that leads to the property violation; this information can be used as a feedback to improve the PV system design. However, if the verification succeeds (i.e., UNSAT), there is no failure up to the bound $k$; therefore, the PV system will present its intended behavior up to the bound $k$.
 %, i.e., our verification engine does not give any guarantee that there is no error in bound $k+1$ unless some induction method is employed~\cite{DBLP:journals/sttt/GadelhaIC17}.
 %
 %
@@ -49,6 +51,8 @@ In order to reduce the computational effort of the algorithm,
 every 24 h-day was considered as a time-step of 1 hour, and it was split into two parts: (a) one where it is possible to occur PV generation, during daylight, with a duration in hours depending on each site (but dependent on the sun and weather conditions); and (b) one that includes all the remaining day (without any PV generation), when the batteries are demanded to feed the house.
 
 Lines 1 is devoted to information from the location where the PV system will be/were deployed. We use annual average minimum and maximum, related to temperature ($T$) and solar irradiance ($G$), hour by hour, from~\cite{Temperature}, and ~\cite{Irradiance}.
+
+Premise 1:
 
 Line 2 represents all the information that comes from the PV sizing and from the equipment manufacturers data: specification and data from PV, batteries, inverter and charge controller. This item includes as information from the house's load curve.
 
@@ -119,13 +123,13 @@ Nevertheless, if the verification engine does not fail, we can conclude that the
  \label{alg:verification-algorithm}
  \end{algorithm}
  
- /////////////
- \section{Optimization}
- 
- 
-\subsection{Variant CEGIS} 
 
-In Figure~\ref{CEGISalt}, it is pictured a variant of CEGIS. This variant was created during this Thesis.
+ \section{Optimal Sizing of Solar PV Systems}
+ 
+ 
+\subsection{Variant of CEGIS} 
+
+In Figure~\ref{CEGISalt}, it is pictured a variant of CEGIS previously presented in Section \textcolor{red}{XXX}. This variant was created during this Thesis.
 
 \begin{figure}[h]
 	\centering
@@ -233,8 +237,13 @@ components that is provided from the {\sc Synthesize} phase.
 Note that the process described here in completely automated and that a validation is performed 
 by our {\sc Verify} phase to ensure that the approach is sound.
 
-\section{Assumptions and Premises}
+\subsection{Optimization Assumptions and Premises}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+A premise is a stated reason or evidence that supports the conclusion. 
+An assumption is an unstated premise that supports the conclusion. 
+Both premise and assumption are unquestionable facts but the assumption, unlike the premise, is not explicitly stated and needs to be deciphered.
+
 
 Regarding the line $2$ of Algorithm~\ref{alg:verification-algorithm}, 
 a list of forty equipment from ten different manufacturers was provided 

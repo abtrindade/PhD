@@ -37,12 +37,11 @@
 \contentsline {subsection}{\numberline {2.3.10}Stand-alone PV System Optimization Technique}{47}{subsection.2.3.10}% 
 \contentsline {section}{\numberline {2.4}Summary}{47}{section.2.4}% 
 \contentsline {chapter}{\numberline {3}Methodology}{49}{chapter.3}% 
-\contentsline {section}{\numberline {3.1}Intro}{49}{section.3.1}% 
-\contentsline {section}{\numberline {3.2}Automated Verification}{49}{section.3.2}% 
-\contentsline {section}{\numberline {3.3}Optimization}{51}{section.3.3}% 
-\contentsline {subsection}{\numberline {3.3.1}Variant CEGIS}{51}{subsection.3.3.1}% 
-\contentsline {section}{\numberline {3.4}Assumptions and Premises}{55}{section.3.4}% 
-\contentsline {section}{\numberline {3.5}Conclusion}{57}{section.3.5}% 
+\contentsline {section}{\numberline {3.1}Automated Verification of Solar PV Systems}{49}{section.3.1}% 
+\contentsline {section}{\numberline {3.2}Optimal Sizing of Solar PV Systems}{51}{section.3.2}% 
+\contentsline {subsection}{\numberline {3.2.1}Variant of CEGIS}{51}{subsection.3.2.1}% 
+\contentsline {subsection}{\numberline {3.2.2}Optimization Assumptions and Premises}{55}{subsection.3.2.2}% 
+\contentsline {section}{\numberline {3.3}Conclusion}{57}{section.3.3}% 
 \contentsline {chapter}{\numberline {4}Automated Formal Verification of Stand-Alone Solar PV Systems}{58}{chapter.4}% 
 \contentsline {section}{\numberline {4.1}Intro to Automated Verification Experimental Evaluation}{58}{section.4.1}% 
 \contentsline {section}{\numberline {4.2}Description of the Case Studies}{58}{section.4.2}% 
