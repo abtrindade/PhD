@@ -119,7 +119,7 @@ Here it is worth to mention that the term "model" is not the meaning taken from 
 The Fig. \ref{fig:systemverif} shows the process to convert a real system to a model in order to be verified by a model checking. 
 
 \begin{figure}[h]
-\includegraphics[width=0.8\textwidth]{systemverif}
+\includegraphics[width=0.8\textwidth]{systemverif3}
 \centering
 \caption{From real system verification to model checking. Source: adapted from \cite{Clarke2008}.}
 \label{fig:systemverif}
@@ -254,12 +254,12 @@ Configuration with PV array, battery, MPPT and DC load, as shown in Fig.\ref{fig
 According to \cite{Pinho}, PV systems that are used to feed loads with low variation on the consumption can be sized to operate without the controller. That is called of self-regulated standalone PV system with battery. However, the voltage from the PV panel must be compatible with the batteries voltage. Normally, the bank of batteries are oversized related to the PV panel and to the load. The drawback is the operation of the batteries, normally overloaded or with excessive discharges (that can damage the batteries).
 
 \subsection{Regulated standalone system with battery, AC load}
-This system is similar to the previous one, but here AC load draws the power from PV system and, because of the AC load, an inverter (DC to AC converter) is required, as seen in Fig.\ref{fig:regSPV3}. This solution has an increase of cost because has more equipments. However, the AC availability brings the advantage of a higher number of AC appliances to use at the houses or consumer units. That configuration is the focus of the present thesis since it is the most common nowadays all over the world, when off-grid or isolated regions is the target. \textcolor{red} { Alternative??? Specifically for remote rural areas of developing countries or places where the grid extension is not feasible,}
+This system is similar to the previous one, but here AC load draws the power from PV system and, because of the AC load, an inverter (DC to AC converter) is required, as seen in Fig.\ref{fig:regSPV3}. This solution has an increase of cost because has more equipments. However, the AC availability brings the advantage of a higher number of AC appliances to use at the houses or consumer units. That configuration is the focus of the present Thesis since it is the most common nowadays specifically for remote rural areas of developing countries or places where the grid extension is not feasible.
 %stand-alone systems are one the most used solutions, and 
 % depending on the type of load, cost, resources availability, and requirements of the load, 
 %stand-alone systems 
 %can be split into several categories. However, 
-the most suitable configuration is the regulated stand-alone system with battery and AC load.
+%the most suitable configuration is the regulated stand-alone system with battery and AC load.
 
 \begin{figure}[h]
 \includegraphics[width=0.8\textwidth]{regulatedSPV3.png}
@@ -462,7 +462,7 @@ With the proposed model, an explicit set of equations is derivate from the ideal
 A single-diode without series and shunt resistances is considered. Equation~\ref{eq:1diodemodel} is used to write down expressions for currents and voltages at each key point shown in Fig. \ref{fig:ivcurve}.
 
 \begin{figure}[h]
-\includegraphics[width=0.90\textwidth]{ivcurve}
+\includegraphics[width=0.7\textwidth]{ivcurve}
 \centering
 \caption{$ I-V $ characteristic curve of an ideal PV cell. Source: \cite{Saloux}.}
 \label{fig:ivcurve}
@@ -607,7 +607,7 @@ The merit of a stand-alone PV system is evaluated in terms of the reliability of
 In general, the battery models view the battery as a voltage source $ E $ in series with an internal resistance $ R_{0} $, as shown in Fig. \ref{fig:batteryckt}. 
 
 \begin{figure}[h]
-\includegraphics[width=0.7\textwidth]{batteryckt}
+\includegraphics[width=0.5\textwidth]{batteryckt}
 \centering
 \caption{Schematic diagram of the battery. Source: \cite{Hansen}.}
 \label{fig:batteryckt}
@@ -767,7 +767,7 @@ The steps in the modeling of the controller process are summarized in Table \ref
 \renewcommand{\arraystretch}{1.3}
 % if using array.sty, it might be a good idea to tweak the value of
 % \extrarowheight as needed to properly center the text within the cells
-\caption{Summary of the controller process. Source: \cite{Hansen}.}
+\caption{Summary of the controller process. Source: adapted from~\cite{Hansen}}
 \label{table:controller}
 \centering
 %% Some packages, such as MDW tools, offer better commands for making tables
@@ -778,13 +778,13 @@ The steps in the modeling of the controller process are summarized in Table \ref
 Step  & Constraint & Command\\
 \hline
 \hline
-(1) & \makecell{If $V > V_{max \textunderscore off}$ and $I_{load} < I_{pv}$} & \makecell{Disconnect PV array from the system}\\
+(1) & \makecell{If $V > V_{max \_ off}$ \\and $I_{load} < I_{pv}$} & \makecell{Disconnect PV array \\from the system}\\
 \hline
-(2) & \makecell{If command (1) is done and $V < V_{max \textunderscore on}$} & \makecell{Reconnect PV array to the system}\\
+(2) & \makecell{If command (1) is \\done and $V < V_{max \_ on}$} & \makecell{Reconnect PV array \\to the system}\\
 \hline
-(3) & \makecell{If $V < V_{min \textunderscore off}$ and $I_{load} > I_{pv}$} & \makecell{Disconnect the load from the system}\\
+(3) & \makecell{If $V < V_{min \_ off}$ and \\ $I_{load} > I_{pv}$} & \makecell{Disconnect the load \\from the system}\\
 \hline
-(4) & \makecell{If command (3) is done and $V > V_{min \textunderscore on}$} & \makecell{Reconnect the load to the system}\\
+(4) & \makecell{If command (3) is \\ done and $V > V_{min \_ on}$} & \makecell{Reconnect the load \\to the system}\\
 \hline
 \hline
 \end{tabular}
