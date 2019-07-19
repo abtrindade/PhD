@@ -38,28 +38,28 @@
 \contentsline {section}{\numberline {2.4}Summary}{47}{section.2.4}% 
 \contentsline {chapter}{\numberline {3}Methodology}{49}{chapter.3}% 
 \contentsline {section}{\numberline {3.1}Automated Verification of Solar PV Systems}{49}{section.3.1}% 
-\contentsline {section}{\numberline {3.2}Optimal Sizing of Solar PV Systems}{52}{section.3.2}% 
-\contentsline {subsection}{\numberline {3.2.1}Variant of CEGIS}{52}{subsection.3.2.1}% 
-\contentsline {subsection}{\numberline {3.2.2}Optimization Assumptions and Premises}{55}{subsection.3.2.2}% 
-\contentsline {section}{\numberline {3.3}Conclusion}{58}{section.3.3}% 
-\contentsline {chapter}{\numberline {4}Automated Formal Verification of Stand-Alone Solar PV Systems}{59}{chapter.4}% 
-\contentsline {section}{\numberline {4.1}Intro to Automated Verification Experimental Evaluation}{59}{section.4.1}% 
-\contentsline {section}{\numberline {4.2}Description of the Case Studies}{59}{section.4.2}% 
-\contentsline {section}{\numberline {4.3}Objectives and Setup}{59}{section.4.3}% 
-\contentsline {section}{\numberline {4.4}Results and Discussion}{60}{section.4.4}% 
-\contentsline {section}{\numberline {4.5}Threats to Validity}{62}{section.4.5}% 
-\contentsline {section}{\numberline {4.6}Conclusion}{63}{section.4.6}% 
-\contentsline {chapter}{\numberline {5}Automated Formal Synthesis Optimization Method for Sizing of Stand-Alone Solar PV Systems}{64}{chapter.5}% 
-\contentsline {section}{\numberline {5.1}Intro to Automated Formal Synthesis Optimization}{64}{section.5.1}% 
-\contentsline {section}{\numberline {5.2}Optimization Case studies}{64}{section.5.2}% 
-\contentsline {section}{\numberline {5.3}Tools}{66}{section.5.3}% 
-\contentsline {section}{\numberline {5.4}Setup}{66}{section.5.4}% 
-\contentsline {section}{\numberline {5.5}Objectives}{66}{section.5.5}% 
-\contentsline {section}{\numberline {5.6}Comparison between Formal Synthesis and HOME Pro}{67}{section.5.6}% 
-\contentsline {section}{\numberline {5.7}Threats to validity}{69}{section.5.7}% 
-\contentsline {section}{\numberline {5.8}Conclusion}{69}{section.5.8}% 
-\contentsline {chapter}{\numberline {6}Conclusions}{70}{chapter.6}% 
-\contentsline {section}{\numberline {6.1}Main Contributions}{70}{section.6.1}% 
-\contentsline {section}{\numberline {6.2}Future Work Directions}{71}{section.6.2}% 
-\contentsline {section}{\numberline {6.3}Concluding Remarks}{71}{section.6.3}% 
-\contentsline {chapter}{\numberline {A}List of Publications}{72}{appendix.A}% 
+\contentsline {section}{\numberline {3.2}Optimal Sizing of Solar PV Systems}{53}{section.3.2}% 
+\contentsline {subsection}{\numberline {3.2.1}Variant of CEGIS}{54}{subsection.3.2.1}% 
+\contentsline {subsection}{\numberline {3.2.2}Optimization Assumptions and Premises}{57}{subsection.3.2.2}% 
+\contentsline {section}{\numberline {3.3}Conclusion}{59}{section.3.3}% 
+\contentsline {chapter}{\numberline {4}Automated Formal Verification of Stand-Alone Solar PV Systems}{60}{chapter.4}% 
+\contentsline {section}{\numberline {4.1}Intro to Automated Verification Experimental Evaluation}{60}{section.4.1}% 
+\contentsline {section}{\numberline {4.2}Description of the Case Studies}{60}{section.4.2}% 
+\contentsline {section}{\numberline {4.3}Objectives and Setup}{60}{section.4.3}% 
+\contentsline {section}{\numberline {4.4}Results and Discussion}{61}{section.4.4}% 
+\contentsline {section}{\numberline {4.5}Threats to Validity}{63}{section.4.5}% 
+\contentsline {section}{\numberline {4.6}Conclusion}{64}{section.4.6}% 
+\contentsline {chapter}{\numberline {5}Automated Formal Synthesis Optimization Method for Sizing of Stand-Alone Solar PV Systems}{65}{chapter.5}% 
+\contentsline {section}{\numberline {5.1}Intro to Automated Formal Synthesis Optimization}{65}{section.5.1}% 
+\contentsline {section}{\numberline {5.2}Optimization Case studies}{65}{section.5.2}% 
+\contentsline {section}{\numberline {5.3}Tools}{67}{section.5.3}% 
+\contentsline {section}{\numberline {5.4}Setup}{67}{section.5.4}% 
+\contentsline {section}{\numberline {5.5}Objectives}{67}{section.5.5}% 
+\contentsline {section}{\numberline {5.6}Comparison between Formal Synthesis and HOME Pro}{68}{section.5.6}% 
+\contentsline {section}{\numberline {5.7}Threats to validity}{70}{section.5.7}% 
+\contentsline {section}{\numberline {5.8}Conclusion}{70}{section.5.8}% 
+\contentsline {chapter}{\numberline {6}Conclusions}{71}{chapter.6}% 
+\contentsline {section}{\numberline {6.1}Main Contributions}{71}{section.6.1}% 
+\contentsline {section}{\numberline {6.2}Future Work Directions}{72}{section.6.2}% 
+\contentsline {section}{\numberline {6.3}Concluding Remarks}{72}{section.6.3}% 
+\contentsline {chapter}{\numberline {A}List of Publications}{73}{appendix.A}% 
