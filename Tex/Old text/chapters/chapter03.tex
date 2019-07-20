@@ -1,23 +1,31 @@
 %\section{Introduction}
 %
-In this Chapter, the adopted methodologies to perform formal verification and optimal sizing of stand-alone solar PV systems using formal methods, more specifically model checking, will be detailed. Besides that, all the assumptions and premises adopted are presented as well with direct impact in the results and conclusions of this work. 
+In this Chapter, the adopted methodologies to perform formal verification and optimal sizing of stand-alone solar PV systems using formal methods, more specifically model checking, will be detailed. Diagrams, flowcharts, and algorithms support and explain the solutions.
+
+Besides that, all the assumptions and premises adopted are presented. Both support the results/conclusions, with direct impact on it. Usually, a premise is an unquestionable fact, however assumptions can be questionable. Unlike the premise, assumptions are not explicitly stated and need to be deciphered. With that in mind, a detailed explanation of assumptions is performed for all over this Chapter.
 
 It is important to emphasize that the whole explanation about the theoretical basis of the two subjects discussed here are present in the previous chapter. In addition, the author suggests that previous reading be done to facilitate understanding.
 
 \section{Automated Verification of Solar PV Systems}
 
-Fig.~\ref{fig:validation} illustrates how a stand-alone solar PV project can be validated, passing through the traditional techniques, as manual, simulation, testing, and including the proposed automatic verification that is detailed in this Section. Note that, in one hand, the input information is the same for all the techniques, with the difference that in automated validation it is possible to define the bound $k$ to restrict the space-design search. However, in the other hand, the outputs are not equal, as the design-space coverage and the information presented as result.
+Fig.~\ref{fig:validation} illustrates how a stand-alone solar PV project can be validated, passing through the traditional techniques, as manual, simulation, testing, and including the proposed automatic verification that is detailed in this Section. 
+
+Note that, in one hand, the input information is the same for all the techniques, with the difference that in automated validation it is possible to define the bound $k$ to restrict the space-design search. Among the inputs it is possible to list: location weather data (temperature, solar irradiance, and solar insolation); system sizing information regarding specifications and configuration of PV panels, charge controller, inverter, batteries, DC bus  voltage; and requirements (battery autonomy, electric load demand, electric peak power demand, energy consumption, load curve, and AC voltage).
+
+However, in the other hand, the outputs are not equal, as the design-space coverage and the information presented as result. Regarding the design-space, it was shown in  chapter \nameref{chap:background} that the most complete coverage is performed by automated verification, event using the bound $k$ to restrict the search, because is not necessary to unbound completely the system in order to found a design flaw. Moreover, testing and simulation depends on the test vector used as input to evaluate the system.
+
+About the results presented by the methods, a project validation done 'by hand' is just a piece of paper produced; simulation software produce fail, success information and can additionally to present the optimized design if the evaluated has some flaw, with graphics and reports; testing (using laboratory or field) is done using measurement equipment and/or data from monitoring systems. Automated verification, proposed at this Thesis, presents fail, success information as well, however the output is not graphical (as will be shown in the  \autoref{chap:automatedverification}), summarized by reports with details about the variables and states of the project that causes a project flaw (in the case where is detected a design fail).
 
 \begin{figure}[h]
-\includegraphics[width=1.0\textwidth]{PVprojectvalidation}
+\includegraphics[width=1.0\textwidth]{PVprojectvalidation2}
 \centering
 \caption{Comparative of project validation methods}
 \label{fig:validation}
 \end{figure}
 
-Starting at his point, it will be showed how is done the automated verification. 
+Starting at his point, it will be showed how is done the proposed automated verification of stand-alone solar PV systems. 
 
-The process begins with the conversion of the real PV system into a model. The Fig. \ref{fig:systemverif4} shows the process to convert a real solar PV system to a model in order to be verified by a model checking. 
+The process begins with the conversion of the real PV system into a model. The Fig. \ref{fig:systemverif4} shows how a real solar PV system is equivalent and converted to a model in order to be verified by a model checking. 
 
 This illustration is a adaption from the general process of real system conversion depicted in Fig.~\ref{fig:systemverif}, detailing the inputs, outputs, and requirements of a real solar PV system. 
 
@@ -98,7 +106,9 @@ Line 2 represents all the information that comes from the PV sizing and from the
 
 \textbf{Assumption:} Load curve from every house must be estimated or measured. Moreover, the time step is of 1 hour, and it is not considered seasonality, i.e., the load curve is the same for the entire year.
 
-The first automated verification is related to the sizing check (line 3), if an error is found then the algorithm stops. Then two functions, called at lines 4 and 5, are responsible for discover which hour starts the PV generation and when stops. Those functions get this information from the array inputted to the Algorithm with the solar irradiance values.
+The first automated verification is related to the sizing check (line 3), if an error is found then the algorithm stops. In order to perform the sizing check, the algorithm uses Equations \eqref{eq:NTPmin}, \eqref{eq:NPSmin}, and \eqref{eq:NPPmin} to verify the PV panel; using \eqref{eq:Nbtotal}, and \eqref{eq:batcheck} to verify the batteries; using \eqref{eq:vcvsystem}, \eqref{eq:icmin}, and \eqref{eq:icicmin} to verify the charge controller; and using \eqref{eq:vindc}, \eqref{eq:voutac}, and \eqref{eq:invcheck} to verify the inverter.
+
+Then, if there is not a sizing design flaw, two functions, called at lines 4 and 5, are responsible for discover which hour starts the PV generation and when stops. Those functions get this information from the array inputted to the Algorithm with the solar irradiance values.
 
 The batteries are assumed to be charged, i.e., with SOC of 100\% (line 6).
 
@@ -166,7 +176,9 @@ Nevertheless, if the verification engine does not fail, we can conclude that the
  \end{algorithmic} 
  \label{alg:verification-algorithm}
  \end{algorithm}
- 
+
+%\subsubsection{Assumptions and Premises} 
+%
 
 \section{Optimal Sizing of Solar PV Systems}
 
@@ -175,7 +187,7 @@ Fig.~\ref{fig:optimization} illustrates how to obtain the optimal sizing of a st
 One more time, as depicted in automated verification process, the input information is the same for all the methods, with the difference that in automated validation it is possible to define the bound $k$ to restrict the design-space search. And the outputs are not equal, as the design-space coverage and the, mainly, the final resulting.
 
 \begin{figure}[h]
-\includegraphics[width=1.0\textwidth]{optimalsizingprocess}
+\includegraphics[width=1.0\textwidth]{optimalsizingprocess2}
 \centering
 \caption{Comparative of optimal sizing methods}
 \label{fig:optimization}
@@ -269,12 +281,11 @@ which meets the user requirements.
 
 Next, we use Eq.~\eqref{eq:Ecorrected}, Eq.~\eqref{eq:Ep}, Eq.~\eqref{eq:NTPmin}, 
 Eq.~\eqref{eq:NPSmin}, Eq.~\eqref{eq:NPPmin}, Eq.~\eqref{eq:Cbank}, 
-Eq.~\eqref{eq:Nbtotal}, Eq.~\eqref{eq:iscamb}, and Eq.~\eqref{eq:icmin} t
-o calculate the sizing variables (lines $11$ to $17$). The directive \textit{assume} (lines $15$, $18$ and $19$) 
+Eq.~\eqref{eq:Nbtotal}, Eq.~\eqref{eq:iscamb}, and Eq.~\eqref{eq:icmin} to calculate the sizing variables (lines $11$ to $17$). The directive \textit{assume} (lines $15$, $18$ and $19$) 
 ensures the compatibility of the chosen items from the list of equipment: the {\sc Verify} phase 
-uses only the item (among all the possible ones) that satisfies the statements of Lines $15$, $18$ and $19$. 
+uses only the item (among all the possible ones) that satisfies the statements of Lines $15$, $18$ and $19$. Line $15$ is specific to the charge controller voltage check. Line $18$ checks the inverter check $I_{c}$, charge controller DC input voltage $V_{in}DC$, and charge controller AC output voltage $V_{in}DC$ check. Line $19$ ensures the power demand and the surge power of inverter.
 Therefore, our synthesis algorithm reaches line $20$ with one feasible solution, 
-and the cost of that solution is calculated in $F_{obj}$ (line $21$). 
+and the cost of that solution is calculated in $F_{obj}$ (line $21$). This cost is the equivalent of ~\ref{eq:LCC} described in Section ~\ref{sec:optcriteria}.
 
 If our algorithm does not find a feasible solution among the item of equipment that 
 were provided to our {\sc Synthesize} phase,  then the result is an unsatisfiable (\textit{UNSAT}), i.e., 
@@ -286,17 +297,14 @@ solution regarding the constraints and user requirements. Related to our {\sc Ve
 phase the challenge is to find the lowest acquisition cost from a list of equipment and 
 components that is provided from the {\sc Synthesize} phase. 
 
-Note that the process described here in completely automated and that a validation is performed 
+Note that the process described here is completely automated and that a validation is performed 
 by our {\sc Verify} phase to ensure that the approach is sound.
 
 \subsection{Optimization Assumptions and Premises}
 \label{sec:OptAssumptions}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-A premise is a stated reason or evidence that supports the conclusion. 
-An assumption is an unstated premise that supports the conclusion. 
-Both premise and assumption are unquestionable facts but the assumption, unlike the premise, is not explicitly stated and needs to be deciphered.
-
+Here some premise are presented and some adopted assumptions are explained for the optimal sizing method, regarding the automated synthesis and simulation software.
 
 Regarding the line $2$ of Algorithm~\ref{alg:verification-algorithm}, 
 a list of forty equipment from ten different manufacturers was provided 
@@ -333,7 +341,6 @@ Regarding all case studies, it was defined that the minimum state of charge of b
 Related to off-the-shelf simulation tools only HOMER Pro and Hybrid2 perform off-grid system with battery backup analysis. Additionally, HOMER and RETScreen include economical analysis or even optimization-sensitive analysis. Therefore, in this study, HOMER Pro will be the simulation tool used to compare with our automated synthesis method.  Related to HOMER Pro:
 
 \begin{itemize}
-	\item HOMER Pro is available only for Microsoft Windows and its annual standard subscription costs US\$ $504.00$~\cite{HOMER};
 	\item HOMER Pro do not have the LCC cost in its reports. However, it has NPC and LCOE. Therefore NPC was used to obtain LCC in order to allow the comparative among tools;
 	\item The optimization analysis of HOMER Pro allows to define a load curve and temperature according of data collected automatically from online databases. However, in order to allow a correct comparative, the curve load and the temperature were defined exactly the same as automated synthesis tools;
 	\item Battery autonomy is not an parameter that the user can set when using HOMER Pro. The tool will always to meet the user requirement, i.e., the load curve during the $365$ days of the year;
@@ -344,3 +351,8 @@ Related to off-the-shelf simulation tools only HOMER Pro and Hybrid2 perform off
 \end{itemize}
 
 \section{Conclusion}
+
+This Chapter showed in details how the automated verification method and the automated synthesis method, two state-of-art tools used in computer science, were adapted in order to be used in stand-alone solar PV systems to validate their behavior or the obtain the optimal project sizing. Moreover, is was possible to picture how the proposed methods are compared with the traditional ones used for the same purpose.
+
+Detailed diagrams, flowcharts and algorithms with pseudo-code were presented with the aim to support the proposed work and to facilitate the understanding. And even more so, the assumptions adopted for the automated verification and simulation software were listed, because those assumptions have impact at the results there will be presented at the next two Chapters.
+
