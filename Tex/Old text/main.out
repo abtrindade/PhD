@@ -40,23 +40,29 @@
 \BOOKMARK [1][-]{section.3.2}{Optimal Sizing of Solar PV Systems}{chapter.3}% 40
 \BOOKMARK [2][-]{subsection.3.2.1}{Variant of CEGIS}{section.3.2}% 41
 \BOOKMARK [2][-]{subsection.3.2.2}{Optimization Assumptions and Premises}{section.3.2}% 42
-\BOOKMARK [1][-]{section.3.3}{Conclusion}{chapter.3}% 43
-\BOOKMARK [0][-]{chapter.4}{Automated Formal Verification of Stand-Alone Solar PV Systems}{}% 44
-\BOOKMARK [1][-]{section.4.1}{Description of the Case Studies}{chapter.4}% 45
-\BOOKMARK [1][-]{section.4.2}{Objectives and Setup}{chapter.4}% 46
-\BOOKMARK [1][-]{section.4.3}{Results and Discussion}{chapter.4}% 47
-\BOOKMARK [1][-]{section.4.4}{Threats to Validity}{chapter.4}% 48
-\BOOKMARK [1][-]{section.4.5}{Conclusion}{chapter.4}% 49
-\BOOKMARK [0][-]{chapter.5}{Automated Formal Synthesis Optimization Method for Sizing of Stand-Alone Solar PV Systems}{}% 50
-\BOOKMARK [1][-]{section.5.1}{Optimization Case studies}{chapter.5}% 51
-\BOOKMARK [1][-]{section.5.2}{Tools}{chapter.5}% 52
-\BOOKMARK [1][-]{section.5.3}{Setup}{chapter.5}% 53
-\BOOKMARK [1][-]{section.5.4}{Objectives}{chapter.5}% 54
-\BOOKMARK [1][-]{section.5.5}{Comparison between Formal Synthesis and HOME Pro}{chapter.5}% 55
-\BOOKMARK [1][-]{section.5.6}{Threats to validity}{chapter.5}% 56
-\BOOKMARK [1][-]{section.5.7}{Conclusion}{chapter.5}% 57
-\BOOKMARK [0][-]{chapter.6}{Conclusions}{}% 58
-\BOOKMARK [1][-]{section.6.1}{Main Contributions}{chapter.6}% 59
-\BOOKMARK [1][-]{section.6.2}{Future Work Directions}{chapter.6}% 60
-\BOOKMARK [1][-]{section.6.3}{Concluding Remarks}{chapter.6}% 61
-\BOOKMARK [0][-]{appendix.A}{List of Publications}{}% 62
+\BOOKMARK [1][-]{section.3.3}{General Assumptions}{chapter.3}% 43
+\BOOKMARK [1][-]{section.3.4}{Conclusion}{chapter.3}% 44
+\BOOKMARK [0][-]{chapter.4}{Automated Formal Verification of Stand-Alone Solar PV Systems}{}% 45
+\BOOKMARK [1][-]{section.4.1}{Description of the Case Studies}{chapter.4}% 46
+\BOOKMARK [1][-]{section.4.2}{Objectives and Setup}{chapter.4}% 47
+\BOOKMARK [1][-]{section.4.3}{Verifiers Environment}{chapter.4}% 48
+\BOOKMARK [2][-]{subsubsection.4.3.0.1}{CBMC}{section.4.3}% 49
+\BOOKMARK [3][-]{subsubsection.4.3.0.2}{ESBMC}{subsubsection.4.3.0.1}% 50
+\BOOKMARK [3][-]{subsubsection.4.3.0.3}{CPAchecker}{subsubsection.4.3.0.1}% 51
+\BOOKMARK [1][-]{section.4.4}{HOMER Pro Environment}{chapter.4}% 52
+\BOOKMARK [1][-]{section.4.5}{Results and Discussion}{chapter.4}% 53
+\BOOKMARK [1][-]{section.4.6}{Threats to Validity}{chapter.4}% 54
+\BOOKMARK [1][-]{section.4.7}{Conclusion}{chapter.4}% 55
+\BOOKMARK [0][-]{chapter.5}{Automated Formal Synthesis Optimization Method for Sizing of Stand-Alone Solar PV Systems}{}% 56
+\BOOKMARK [1][-]{section.5.1}{Optimization Case studies}{chapter.5}% 57
+\BOOKMARK [1][-]{section.5.2}{Objectives and Setup}{chapter.5}% 58
+\BOOKMARK [1][-]{section.5.3}{Verifiers and HOMER Pro Environments}{chapter.5}% 59
+\BOOKMARK [1][-]{section.5.4}{Results}{chapter.5}% 60
+\BOOKMARK [1][-]{section.5.5}{Comparison between Formal Synthesis and HOME Pro}{chapter.5}% 61
+\BOOKMARK [1][-]{section.5.6}{Threats to validity}{chapter.5}% 62
+\BOOKMARK [1][-]{section.5.7}{Conclusion}{chapter.5}% 63
+\BOOKMARK [0][-]{chapter.6}{Conclusions}{}% 64
+\BOOKMARK [1][-]{section.6.1}{Main Contributions}{chapter.6}% 65
+\BOOKMARK [1][-]{section.6.2}{Future Work Directions}{chapter.6}% 66
+\BOOKMARK [1][-]{section.6.3}{Concluding Remarks}{chapter.6}% 67
+\BOOKMARK [0][-]{appendix.A}{List of Publications}{}% 68

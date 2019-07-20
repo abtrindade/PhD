@@ -14,7 +14,7 @@ our proposed synthesis approach, as described in the first column of
 Table~\ref{tab1} (named Specification). These case studies were defined 
 based on usual electrical load found in riverside communities of the 
 Amazon State in Brazil~\cite{abs-1811-09438, Agrener2013}. 
-%
+
 \begin{table}
 \caption{Case studies and results: optimization of stand-alone PV systems.}\label{tab1}
 \begin{scriptsize}
@@ -48,25 +48,7 @@ Specification & Result & Result & Result & Result \\
 
 
 %---------------------------------------------------------------------------
-\section{Tools} 
-%---------------------------------------------------------------------------
-
-Three start-of-art verification tools, CBMC\footnote{Command-line: \$ cbmc -\phantom{}-unwind 100 filename.c -\phantom{}-trace}, ESBMC\footnote{Command-line: \$ esbmc filename.c -\phantom{}-no-bounds-check -\phantom{}-no-pointer-check -\phantom{}-unwind 100 -\phantom{}-boolector}, %UAutomizer\footnote{Command-line: \$ ./Ultimate -tc config/AutomizerReach.xml -s config/svcomp-Reach-32bit-Automizer\_Default.epf -i filename.c -\phantom{}-traceabstraction.limit.analysis.time 900 -\phantom{}-traceabstraction.stop.after.first.violation.was.found false -\phantom{}-cacsl2boogietranslator.overapproximate.operations.on.floating.types false -\phantom{}- cacsl2boogietranslator.assume.nondeterminstic.values.are.in.range false -\phantom{}-rcfgbuilder.add.additional.assume.for.each.assert true -\phantom{}-rcfgbuilder.simplify.code.blocks true -\phantom{}-rcfgbuilder.size.of.a.code.block LoopFreeBlock}, 
-and CPAchecker\footnote{Command-line: \$ scripts/cpa.sh -heap 64000m -config config/bmc-incremental.properties -spec config/specification/sv-comp-reachability.spc filename.c} were used as our verification engine to compare our approach effectiveness and efficiency. Note that ``incremental'' ESBMC with the SMT solver Z3 was tried\footnote{Command-line: \$ esbmc filename.c -\phantom{}-no-bounds-check -\phantom{}-no-pointer-check -\phantom{}-unwind 100 -\phantom{}-smt-during-symex -\phantom{}-smt-symex-guard -\phantom{}-z3} as an alternative to use less computing memory. The Simulation tool HOMER Pro version $3.13.1$ was used for comparative purpose.
-
-%---------------------------------------------------------------------------
-\section{Setup} 
-%---------------------------------------------------------------------------
-
-All experiments regarding the verification tools were conducted 
-on an otherwise idle Intel Xeon CPU E5-4617 ($8$-cores) with 
-$2.90$ GHz and $64$ GB of RAM, running Ubuntu $16.04$ LTS $64$-bits. 
-Related to HOMER Pro, we have used an Intel Core i5-$4210$ ($4$-cores), 
-with $1.7$ GHz and $4$ GB of RAM, running Windows 10. 
-Our experiments were performed with a predefined timeout of $240$ minutes.
-
-%---------------------------------------------------------------------------
-\section{Objectives} 
+\section{Objectives and Setup} 
 %---------------------------------------------------------------------------
 
 Our evaluation aims to answer two experimental questions: 
@@ -79,9 +61,24 @@ Our evaluation aims to answer two experimental questions:
 
 \end{enumerate}
 
+All experiments regarding the verification tools were conducted 
+on an otherwise idle Intel Xeon CPU E5-4617 ($8$-cores) with 
+$2.90$ GHz and $64$ GB of RAM, running Ubuntu $16.04$ LTS $64$-bits. 
+Related to HOMER Pro, we have used an Intel Core i5-$4210$ ($4$-cores), 
+with $1.7$ GHz and $4$ GB of RAM, running Windows 10. 
+Our experiments were performed with a predefined timeout of $240$ minutes.
+
+Three start-of-art verification tools, CBMC\footnote{Command-line: \$ cbmc -\phantom{}-unwind 100 filename.c -\phantom{}-trace}, ESBMC\footnote{Command-line: \$ esbmc filename.c -\phantom{}-no-bounds-check -\phantom{}-no-pointer-check -\phantom{}-unwind 100 -\phantom{}-boolector}, %UAutomizer\footnote{Command-line: \$ ./Ultimate -tc config/AutomizerReach.xml -s config/svcomp-Reach-32bit-Automizer\_Default.epf -i filename.c -\phantom{}-traceabstraction.limit.analysis.time 900 -\phantom{}-traceabstraction.stop.after.first.violation.was.found false -\phantom{}-cacsl2boogietranslator.overapproximate.operations.on.floating.types false -\phantom{}- cacsl2boogietranslator.assume.nondeterminstic.values.are.in.range false -\phantom{}-rcfgbuilder.add.additional.assume.for.each.assert true -\phantom{}-rcfgbuilder.simplify.code.blocks true -\phantom{}-rcfgbuilder.size.of.a.code.block LoopFreeBlock}, 
+and CPAchecker\footnote{Command-line: \$ scripts/cpa.sh -heap 64000m -config config/bmc-incremental.properties -spec config/specification/sv-comp-reachability.spc filename.c} were used as our verification engine to compare our approach effectiveness and efficiency. Note that ``incremental'' ESBMC with the SMT solver Z3 was tried\footnote{Command-line: \$ esbmc filename.c -\phantom{}-no-bounds-check -\phantom{}-no-pointer-check -\phantom{}-unwind 100 -\phantom{}-smt-during-symex -\phantom{}-smt-symex-guard -\phantom{}-z3} as an alternative to use less computing memory. The Simulation tool HOMER Pro version $3.13.1$ was used for comparative purpose.
+
+
+\section{Verifiers and HOMER Pro Environments}
+
+The environment and captured screens are the same as presented in Section~\ref{sec:verifenviron} for the verifiers and in Section~\ref{sec:homerenviron} for the HOMER Pro tools.
+
+
 %---------------------------------------------------------------------------
-\
-section{Results}  
+\section{Results}  
 %---------------------------------------------------------------------------
 
 CPAchecker was able to synthesize the optimal sizing in six 

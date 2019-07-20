@@ -50,8 +50,6 @@ Moreover, the proposed flowchart of the automated verification method is illustr
 In \textbf{Step 1}, the PV input data %(e.g., load power demand and load energy consumption) 
 and the formulae to check the sizing project, the mathematical model, the limits of the weather non-deterministic variables, are all written as an ANSI-C code~\cite{ANSI2018}. 
 
-\textbf{Assumption:} All the PV system model, user requirements, assumptions, and technical information from the PV system equipment is written as an ANSI-C code.
-
 In \textbf{Step 2}, the sizing check of the PV system takes place: it will indicate if there is an error of sizing before to perform the automated verification of the system. This stage ensures that the system meets the standard project steps related to critical period method of sizing~\cite{Pinho}. 
 
 \textbf{Assumption:} before the automated verification, who performs the verification of the intended system behavior, is performed the sizing checking of the system. Moreover, if there is some error, the process stops, showing where is the sizing error.
@@ -67,8 +65,6 @@ In addition, depending on one of the desired properties of the system such as ba
 %
 %\textcolor{red}{In the following paragraph you should related the output of our verification engine with the description of the BMC SAT or UNSAR given above. For example, what does a failure mean? is it SAT?}
 In a nutshell, the model checker will process the ANSI-C code with constraints ($C$) and properties ($P$) from the PV system, and the tool will automatically verify if the PV system requirements are met. If it returns a failure (i.e., SAT), then the tool provides a counterexample, i.e., a sequence of states that leads to the property violation; this information can be used as a feedback to improve the PV system design. However, if the verification succeeds (i.e., UNSAT), there is no failure up to the bound $k$; therefore, the PV system will present its intended behavior up to the bound $k$.
-
-\textbf{Assumption:} Use of bound $k$ to restrict the design-space and improve performance.
 
 %, i.e., our verification engine does not give any guarantee that there is no error in bound $k+1$ unless some induction method is employed~\cite{DBLP:journals/sttt/GadelhaIC17}.
 %
@@ -217,7 +213,6 @@ There are four particular differences related to the traditional CEGIS described
 
 Program synthesis engines that implement the CEGIS approach~\cite{sketch} can automatically produce solutions for a large variety of specifications; here we have used symbolic software verifiers based on SMT solvers.
 
-
 Algorithm~\ref{alg:opt-algorithm} describes our pseudo-code to synthesize stand-alone PV systems using symbolic model checking. It was adopted the analytical method of optimization, with LCC economical analysis and power reliability based on the critical period criteria.
 %
  \begin{algorithm}
@@ -306,7 +301,7 @@ by our {\sc Verify} phase to ensure that the approach is sound.
 
 Here some premise are presented and some adopted assumptions are explained for the optimal sizing method, regarding the automated synthesis and simulation software.
 
-Regarding the line $2$ of Algorithm~\ref{alg:verification-algorithm}, 
+Regarding the line $2$ of Algorithm~\ref{alg:opt-algorithm}, 
 a list of forty equipment from ten different manufacturers was provided 
 to the synthesis engine in order to allow the choice of every item 
 of PV sizing. Data sheet from each item was necessary to collect 
@@ -336,9 +331,9 @@ without considering the battery's state of charge, or even the random nature
 of solar irradiation and meteorological conditions. Therefore, all the computational 
 effort will be concentrated in our automated synthesis algorithm.
 
-Regarding all case studies, it was defined that the minimum state of charge of batteries is $75$\% (with DOD maximum of $25$\%, which is common to lead-acid batteries), the voltage of the system is set in $24$ V DC (the most common as well, but the value can be adjusted to $12$ or $48$ V at the code), and the AC voltage from the inverter is $127$ V (Brazilian standard).
+Regarding batteries, the voltage of the system (DC bus) is set in $24$ V DC (but the value can be adjusted to $12$ or $48$ V at the code).
 
-Related to off-the-shelf simulation tools only HOMER Pro and Hybrid2 perform off-grid system with battery backup analysis. Additionally, HOMER and RETScreen include economical analysis or even optimization-sensitive analysis. Therefore, in this study, HOMER Pro will be the simulation tool used to compare with our automated synthesis method.  Related to HOMER Pro:
+Related to HOMER Pro:
 
 \begin{itemize}
 	\item HOMER Pro do not have the LCC cost in its reports. However, it has NPC and LCOE. Therefore NPC was used to obtain LCC in order to allow the comparative among tools;
@@ -349,6 +344,33 @@ Related to off-the-shelf simulation tools only HOMER Pro and Hybrid2 perform off
 	\item It was assumed a string of two batteries in order to match the voltage of the system of $24$ V DC that was used for the automated synthesis tool;
 	\item The premise adopted when using HOMER Pro it was that the user does not know the optimal solution, and that in order to obtain this solution is necessary to include (at the design phase of the tool) generic PV and batteries modules that HOMER Pro will search for the optimized power of each component. With that in mind, it was included a generic flat plate PV of $1$ kW and generic lead-acid batteries of $1$ kW as well (and with capacity of $83.4$ Ah according with HOMER Pro modeling). HOMER, during run-time, decides the size in kW of each module, based on feasibility and lower cost.
 \end{itemize}
+
+\section{General Assumptions}
+
+Here is listed the assumptions adopted for both methods developed on this Thesis.
+
+Regarding the code in ANSI-C created to perform both methods, automated verification and automated synthesis, it was written in order to be the same independently of the verifier used. This means that: 
+
+\begin{itemize}
+\item There is not the use of '\# include' preprocessor directive, so common in the C language, which allows the use of language C libraries, including the mathematical one;
+\item Because of absence of '\# include' directive, it was necessary to create specific mathematical functions at the proposed code in order to calculate the exponential 'exp(x)' or $e^{x}$, and natural logarithm 'log(x)' functions, used for the solar PV model;
+\item There is not the presence of '\# define' preprocessor directive. Therefore were used global variables to replace it;
+\item The macro 'assert (expression);' must be replaced by 'if (!expression) \{ \_ \_ VERIFIER\_ error();\}'
+\item The macro 'assume (expression);' must be replaced by '\_ \_ VERIFIER\_ assume(expression)';
+\item It is not possible to use the \# if, \# else, \# elif, \# endif or \# ifdef, \# ifndef commands.
+\end{itemize}
+
+Regarding the automated verification and automated synthesis methods:
+
+\begin{itemize}
+\item It was used a value of bound $k$ to restrict the design-space and improve performance. The chose of value was empirical, after some tests with the code;
+\item All the PV system model, user requirements, assumptions, and technical information from the PV system equipment are written as an ANSI-C code.
+\end{itemize}
+
+Related to off-the-shelf simulation tools only HOMER Pro and Hybrid2 perform off-grid system with battery backup analysis. Additionally, HOMER and RETScreen include economical analysis or even optimization-sensitive analysis, however RETScreen do not have stand-alone solar PV system analysis capacity. Therefore, in this study, HOMER Pro will be the only simulation tool used to compare with our automated synthesis method.  
+
+Regarding all case studies, it was defined that the minimum state of charge of batteries is $75$\%, i.e., with DOD maximum of $25$\%, which is common to lead-acid batteries (adopted as standard here), and the AC voltage from the inverter is $127$ V (Brazilian standard).
+
 
 \section{Conclusion}
 

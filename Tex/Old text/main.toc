@@ -41,23 +41,29 @@
 \contentsline {section}{\numberline {3.2}Optimal Sizing of Solar PV Systems}{54}{section.3.2}% 
 \contentsline {subsection}{\numberline {3.2.1}Variant of CEGIS}{54}{subsection.3.2.1}% 
 \contentsline {subsection}{\numberline {3.2.2}Optimization Assumptions and Premises}{59}{subsection.3.2.2}% 
-\contentsline {section}{\numberline {3.3}Conclusion}{61}{section.3.3}% 
-\contentsline {chapter}{\numberline {4}Automated Formal Verification of Stand-Alone Solar PV Systems}{62}{chapter.4}% 
-\contentsline {section}{\numberline {4.1}Description of the Case Studies}{62}{section.4.1}% 
-\contentsline {section}{\numberline {4.2}Objectives and Setup}{62}{section.4.2}% 
-\contentsline {section}{\numberline {4.3}Results and Discussion}{63}{section.4.3}% 
-\contentsline {section}{\numberline {4.4}Threats to Validity}{65}{section.4.4}% 
-\contentsline {section}{\numberline {4.5}Conclusion}{66}{section.4.5}% 
-\contentsline {chapter}{\numberline {5}Automated Formal Synthesis Optimization Method for Sizing of Stand-Alone Solar PV Systems}{67}{chapter.5}% 
-\contentsline {section}{\numberline {5.1}Optimization Case studies}{67}{section.5.1}% 
-\contentsline {section}{\numberline {5.2}Tools}{67}{section.5.2}% 
-\contentsline {section}{\numberline {5.3}Setup}{69}{section.5.3}% 
-\contentsline {section}{\numberline {5.4}Objectives}{69}{section.5.4}% 
-\contentsline {section}{\numberline {5.5}Comparison between Formal Synthesis and HOME Pro}{70}{section.5.5}% 
-\contentsline {section}{\numberline {5.6}Threats to validity}{72}{section.5.6}% 
-\contentsline {section}{\numberline {5.7}Conclusion}{72}{section.5.7}% 
-\contentsline {chapter}{\numberline {6}Conclusions}{73}{chapter.6}% 
-\contentsline {section}{\numberline {6.1}Main Contributions}{73}{section.6.1}% 
-\contentsline {section}{\numberline {6.2}Future Work Directions}{74}{section.6.2}% 
-\contentsline {section}{\numberline {6.3}Concluding Remarks}{74}{section.6.3}% 
-\contentsline {chapter}{\numberline {A}List of Publications}{75}{appendix.A}% 
+\contentsline {section}{\numberline {3.3}General Assumptions}{60}{section.3.3}% 
+\contentsline {section}{\numberline {3.4}Conclusion}{62}{section.3.4}% 
+\contentsline {chapter}{\numberline {4}Automated Formal Verification of Stand-Alone Solar PV Systems}{63}{chapter.4}% 
+\contentsline {section}{\numberline {4.1}Description of the Case Studies}{63}{section.4.1}% 
+\contentsline {section}{\numberline {4.2}Objectives and Setup}{63}{section.4.2}% 
+\contentsline {section}{\numberline {4.3}Verifiers Environment}{64}{section.4.3}% 
+\contentsline {subsubsection}{\numberline {4.3.0.1}CBMC}{64}{subsubsection.4.3.0.1}% 
+\contentsline {subsubsection}{\numberline {4.3.0.2}ESBMC}{64}{subsubsection.4.3.0.2}% 
+\contentsline {subsubsection}{\numberline {4.3.0.3}CPAchecker}{64}{subsubsection.4.3.0.3}% 
+\contentsline {section}{\numberline {4.4}HOMER Pro Environment}{64}{section.4.4}% 
+\contentsline {section}{\numberline {4.5}Results and Discussion}{64}{section.4.5}% 
+\contentsline {section}{\numberline {4.6}Threats to Validity}{67}{section.4.6}% 
+\contentsline {section}{\numberline {4.7}Conclusion}{67}{section.4.7}% 
+\contentsline {chapter}{\numberline {5}Automated Formal Synthesis Optimization Method for Sizing of Stand-Alone Solar PV Systems}{68}{chapter.5}% 
+\contentsline {section}{\numberline {5.1}Optimization Case studies}{68}{section.5.1}% 
+\contentsline {section}{\numberline {5.2}Objectives and Setup}{68}{section.5.2}% 
+\contentsline {section}{\numberline {5.3}Verifiers and HOMER Pro Environments}{70}{section.5.3}% 
+\contentsline {section}{\numberline {5.4}Results}{70}{section.5.4}% 
+\contentsline {section}{\numberline {5.5}Comparison between Formal Synthesis and HOME Pro}{71}{section.5.5}% 
+\contentsline {section}{\numberline {5.6}Threats to validity}{73}{section.5.6}% 
+\contentsline {section}{\numberline {5.7}Conclusion}{73}{section.5.7}% 
+\contentsline {chapter}{\numberline {6}Conclusions}{74}{chapter.6}% 
+\contentsline {section}{\numberline {6.1}Main Contributions}{74}{section.6.1}% 
+\contentsline {section}{\numberline {6.2}Future Work Directions}{75}{section.6.2}% 
+\contentsline {section}{\numberline {6.3}Concluding Remarks}{75}{section.6.3}% 
+\contentsline {chapter}{\numberline {A}List of Publications}{76}{appendix.A}% 
