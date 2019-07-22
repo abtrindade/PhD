@@ -1,13 +1,11 @@
-This Chapter is devoted to the results of using automated verification to validate the intended behavior of stand-alone solar PV systems. Moreover, there is the comparative with a specialized simulation tool, and even the use of different verifiers who perform the automated verification in order to evaluate performance.
+This Chapter is devoted to the results of using automated verification to validate the intended behavior of stand-alone solar PV systems. Moreover, there is the comparative with a specialized simulation tool, and even the use of different verifiers who perform the automated verification in order to evaluate performance. Tables, commented reports, and graphical outputs are presented to aid the understanding.
 
 \section{Description of the Case Studies}
 %------------------------------------------
 %
 %We have performed five case studies to evaluate our proposed verification method: (a) four PV systems (three in series 325W PV panels, four 220 Ah batteries in a configuration with two series and two parallel with 48h autonomy, 700 W inverter with peak power of 1,600W, charge controller with MPPT with 35A/150V of capacity) deployed in four different houses in an indigenous community (GPS coordinates 2$^{o}$44'50.0"S 60$^{o}$25'47.8"W) situated nearby Manaus (Brazil), with each house having a different power demand (house 1 = 253 W, house 2 = 263 W, house 3 = 283 W, and house 4 = 501 W); and (b) one case concerning a system deployed as an individual system in Manaus (GPS coordinates 3$^{o}$4'20.208"S 60$^{o}$0'30.168"W), supporting 915 W of the house's load (house 5 with four 325W PV panels in a configuration two series and two parallel, four 120Ah batteries in series and autonomy of just 6 h, 1,200 W inverter with surge of 1,600 W, charge controller with MPPT of 150V/35A). 
 We have performed five case studies to evaluate the proposed approach as described in Table~\ref{tab2}. %Furthermore, three start-of-art verification tools, as described in Section~\ref{sec:AutomatedVerification} (ESBMC, CBMC, and CPAchecker), and HOMER Pro simulation tool were used to compare the approach effectiveness and efficiency.
-These case studies were defined 
-based on usual electrical load found in riverside communities of the 
-Amazon State in Brazil~\cite{abs-1811-09438, Agrener2013}.
+These case studies were defined based on usual electrical load found in riverside communities of the Amazon State in Brazil~\cite{abs-1811-09438, Agrener2013}.
 
 \begin{table}
 \caption{Case studies: stand-alone solar PV systems.}\label{tab2}
@@ -18,15 +16,21 @@ Amazon State in Brazil~\cite{abs-1811-09438, Agrener2013}.
 Item & House 1 & House 2 & House 3 & House 4 & House 5\\
 \hline
 \hline
-PV Panels &  \multicolumn{4}{|c|}{3x 325 W: in series} & 4x 325 W: 2x series, 2x parallel \\
+PV Panels &  \multicolumn{4}{|c|}{3$\times$325 W: (3S)} & 4$\times$325 W: (2S-2P) \\
 \hline
-Batteries & \multicolumn{4}{|c|}{\makecell{4x220 Ah: 2x series, 2x parallel\\ autonomy: 48 h}} & \makecell{4x 120 Ah batteries in series\\ autonomy: 6 h}\\
+Batteries & \multicolumn{4}{|c|}{\makecell{4$\times$220 Ah: (2S-2P)\\ autonomy: 48 h}} & \makecell{4$\times$120 Ah: (4S)\\ autonomy: 6 h}\\
 \hline
 Charge Controller & \multicolumn{5}{|c|}{With MPPT of 150 V/35 A}\\
 \hline
-Inverter & \multicolumn{4}{|c|}{700 W, peak of 1,600 W} & 1,200 W, peak of 1,600 W\\
+Inverter & \multicolumn{4}{|c|}{700 W, surge: 1,600 W} & 1,200 W, surge: 1,600 W\\
 \hline
-Power demand & 253 W & 263 W & 283 W & 501 W & 915 W\\
+Power peak (W)& 342  & 253  & 263 & 322 & 814 \\
+\hline
+Power surge (W)& 342 & 722 & 732 & 896 & 980\\
+\hline
+Load curve (W) & \multicolumn{5}{|l|}{\makecell{House 1: 118-118-118-46-46-46-95-95-170-170-296-242-242-95-95-95-95-95-342-288-288-288-288-118\\House 2: 136-136-136-136-136-136-67-67-184-184-184-184-184-67-67-67-67-67-253-253-253-253-253-136\\House 3: 113-113-113-113-113-113-67-67-217-97-97-97-97-97-97-97-97-97-263-113-113-113-113-113\\House 4: 207-207-207-135-135-135-66-66-161-161-233-253-248-66-66-66-66-66-302-317-322-302-302-207\\House 5: 45-16-16-16-16-16-0-0-0-72-72-222-150-150-0-0-72-72-814-814-814-742-742-16}}\\
+\hline
+\makecell{Consumption\\ (kWh/day)}& 3.9 & 3.6 & 2.5 & 4.3 & 4.88\\
 \hline
 GPS Coordinates & \multicolumn{4}{|c|}{\makecell{2$^{o}$44'50.0"S 60$^{o}$25'47.8"W\\}} & \makecell{3$^{o}$4'20.208"S \\60$^{o}$0'30.168"W}\\
 \hline
@@ -34,6 +38,7 @@ Details & \multicolumn{4}{|c|}{\makecell{Riverside indigenous community\\Rural A
 \hline
 \hline
 \end{tabular}
+Legend: (S): Series; (P): Parallel.
 \end{scriptsize}
 \end{table}
 
@@ -63,27 +68,16 @@ Verification engine CPAchecker 1.8 was used \footnote{Command-line: \$ scripts/c
 % enabled with the goal of reducing memory usage; 
  %The experiments were performed without a predefined timeout.
 
-\section{Verifiers Environment}
-\label{sec:verifenviron}
-
-Screens and comments about the verifiers.
-
-\subsubsection{CBMC}
-
-\subsubsection{ESBMC}
-
-\subsubsection{CPAchecker}
-
-\section{HOMER Pro Environment}
-\label{sec:homerenviron}
-
-Screens and comments about the simulation tool.
+%\section{Verifiers Environment}
+%\label{sec:verifenviron}
 
 %------------------------------------------
 \section{Results and Discussion}
 \label{sec:results_indeed}
 %------------------------------------------
-%
+
+This Section presents the results, with commented outputs produced by every tool, mainly related to the reports (CBMC and ESBMC) and some graphical resources (CPAchecker and ESBMC).
+
 %\textcolor{red}{We should answer the two% research questions here... please take a look at https://ssvlab.github.io/lucasccordeiro/papers/cav2017.pdf to check how you can answer.}
 %\begin{enumerate}
 %\item[RQ1] \textbf{(soundness)} Does our approach provide correct results?
@@ -123,22 +117,81 @@ House 5 &  \makecell{Out of memory \\(UNKNOWN)} & \makecell{$\leq$ 1 sec \\(SAT 
 
 The description of our experimental results can be broken down into three parts, one for each verification engine: ESBMC, CBMC, and CPAchecker. 
 
-Related to ESBMC, we have tried two possibilities: one with Boolector and another one with Z3. The incremental option, which uses less memory, can be performed with Z3 only since ESBMC does not support the incremental mode with Boolector yet. Using ESBMC with Boolector led to an out of memory situation in all the case studies. This result was obtained in less than six minutes of execution, i.e., the 64 GB of RAM were consumed by the verification engine and the processes were killed, thus leading to an UNKNOWN result returned by ESBMC as shown in the first column of Table~\ref{cases}. However, running the same version of ESBMC but using incremental solving with Z3, the experimentation returned SAT or UNSAT to all the case studies. Related to the cases that use a 700 W PV system, ESBMC could not reach an error in all the four houses and the execution time took from 04 m 27 s to 05 m 08 s. However the 1,200 W PV system (house 5) failed (SAT) in line 337 of the code, thereby indicating that the system is \textit{incorrectly} sized; in particular, the counterexample provided by the verification engine indicated that the nominal current from the charge controller is less than the minimum current demanded by the PV system, therefore the equipment chosen is not suitable to meet the design requirements.
-This verification took less than 1 s to be performed, as indicated in the last line of Table~\ref{cases}, and it is faster than the previous analysis because ESBMC stops during the sizing check, which is in line 3 of Algorithm~\ref{alg:verification-algorithm}, and does not perform the rest of verification code. 
 
-Concerning the CBMC tool, similar results were obtained, but with some slower time. The experimentation returned SAT or UNSAT to all the case studies. Related to the 700 W PV systems, the tool could not reach an error in all the four houses and the execution time took from 18 m 36 s to 19 m 02 s. However the 1,200 W PV system (house 5) failed (SAT) in line 337 of the code; with the same counterexample presented by ESBMC. This verification took less than 1 s to be performed as well. 
+
+\subsection{ESBMC}
+Related to ESBMC, we have tried two possibilities: one with Boolector and another one with Z3. The incremental option, which uses less memory, can be performed with Z3 only since ESBMC does not support the incremental mode with Boolector yet. 
+
+Using ESBMC with Boolector led to an out of memory situation in all the case studies. This result was obtained in less than six minutes of execution, i.e., the 64 GB of RAM were consumed by the verification engine and the processes were killed, thus leading to an UNKNOWN result returned by ESBMC as shown in the first column of Table~\ref{cases}. 
+
+However, running the same version of ESBMC but using incremental solving with Z3, the experimentation returned SAT or UNSAT to all the case studies. 
+
+Related to the cases that use a 700 W PV system (house 1, house 2, house 3, and house 4), ESBMC could not reach an error in all the four houses and the execution time took from 04 m 27 s to 05 m 08 s. Fig.~\ref{fig:esbmcverifhouse1} shows the output report of the tool, with the absence of fail at the end of analysis.
+
+\begin{figure}[h]
+\includegraphics[width=0.8\textwidth]{esbmcverifh1.png}
+\centering
+\caption{Report generated by ESBMC (with Z3 solver) after validation of House 1.}
+\label{fig:esbmcverifhouse1}
+\end{figure}
+
+However the 1,200 W PV system (house 5) failed (SAT) in line 337 of the code, thereby indicating that the system is \textit{incorrectly} sized; in particular, the counterexample provided by the verification engine indicated that the nominal current from the charge controller is less than the minimum current demanded by the PV system, therefore the equipment chosen is not suitable to meet the design requirements. Fig.~\ref{fig:esbmcverifhouse5} shows the report issued by the tool, with red highlights for the result, showing the incompatibility of the sized charge controller and the minimum necessary. This verification took less than 1 s to be performed, as indicated in the last line of Table~\ref{cases}, and it is faster than the previous analysis because ESBMC stops during the sizing check, which is in line 3 of Algorithm~\ref{alg:verification-algorithm}, and does not perform the rest of verification code.
+
+\begin{figure}[h]
+\includegraphics[width=0.8\textwidth]{esbmcverifh5.png}
+\centering
+\caption{Report generated by ESBMC (with Z3 solver) after validation of House 5.}
+\label{fig:esbmcverifhouse5}
+\end{figure}
+
+%At the terminal, the command used to perform the verification is:
+%\$ esbmc filename.c -\phantom{}-no-bounds-check -\phantom{}-no-pointer-check -\phantom{}-no-div-by-zero-check -\phantom{}-unwind 300 -\phantom{}-smt-during-symex -\phantom{}-smt-symex-guard --z3
+%
+%Where:
+%
+%\begin{itemize}
+%\item The first three parameters, after the filename, are related to options that are usual to find bug in software, %for example, like bound check to arrays, pointer check, and division by zero, 
+%but unnecessary to check at this kind of problem (if not removed, there is lost of performance during the automated verification);
+%\item The parameter $unmind$ tells to ESBMC the limit to unroll the loops. This number was optimized (empirically) in order to reduce the running time and avoid to unwind unnecessarily the loops;
+%\item The two parameters with $symex$ tell to ESBMC to perform an incremental SMT solving. There are other options, but this parameter is necessary because the complexity of the algorithms. The incremental SMT solving uses few RAM memory, compared with other SMT solving. 
+%During empirical tests of the algorithms, the incremental solving was the only one who do not demanded 100\% the RAM memory. The use of swap-memory, i.e., the use of hard disk, reduces the performance and must be avoided;
+%\item And the last parameter says to the tool that the Z3 SMT solver will be used.
+%\end{itemize}
+%
+
+
+\subsection{CBMC}
+
+Concerning the CBMC tool, similar results were obtained, but with some slower time than ESBMC. The experimentation returned SAT or UNSAT to all the case studies. Related to the 700 W PV systems (house 1, house 2, house 3, and house 4), the tool could not reach an error in all the four houses and the execution time took from 18 m 36 s to 19 m 02 s. 
+
+Fig. \ref{fig:cbmcverifhouse1} shows part of report produced by CBMC when validating the house 1. The file produced by CBMC is 160 lines long and 12.4 kB of size. The author highlighted the result, which shows that was not found design flaws within the bound $k$ of 100.
+
+\begin{figure}[h]
+\includegraphics[width=0.8\textwidth]{cbmcverifh1.png}
+\centering
+\caption{Report generated by CBMC after validation of House 1.}
+\label{fig:cbmcverifhouse1}
+\end{figure}
+
+However the 1,200 W PV system (house 5) failed (SAT) in line 337 of the code; with the same counterexample presented by ESBMC. This verification took less than 1 s to be performed as well. Fig.~\ref{fig:cbmcverifhouse5} shows the (edited) report produced, with the highlights about the flaw found: the minimum controller current needed to the PV systems is not compatible with the chosen controller of the sized system.
+
+\begin{figure}[h]
+\includegraphics[width=0.7\textwidth]{cbmcverifh5.png}
+\centering
+\caption{Report generated by CBMC after validation of House 5.}
+\label{fig:cbmcverifhouse5}
+\end{figure}
+
+
+\subsection{CPAchecker}
 
 Finally, the CPAchecker tool presented some different results. Even using two different configuration possibilities, as described in Section~\ref{sec:setup}, the verification engine presented an UNKNOWN result for all the 700 W systems. This is because the \textit{time out} limit was reached, i.e., after 4 hours of execution the tool was unable to decide if the verification was SAT or UNSAT. However, when verifying the 1,200 W PV system, the tool presented a SAT message equal to the other engines. 
 
-In order to validate the possible flaw from house 5, we have surveyed the owner of the 1,200 W system. We identified that, in fact, the system does not meet the battery autonomy when all loads are turned on, and this was double checked with the monitoring system from the charge controller, which showed that the maximum power or surge power were not exceeded, thus affirming RQ1; this behavior is expected since the system was purchased as an off-the-shelf solution and not as a customized design for the electrical charges of the house. The same process of validation was done to the houses 1, 2, 3 and 4, which use the 700 W PV systems: from July of 2018 to March 2019, a monthly visiting was performed to apply surveys to the dwellers and to collect data from a local monitoring system: not every month were reported some energy interruption of the PV systems. However, even when one interruption is reported in a month, this represents around 3.33\% of interruption for the entire period ($1/30$), which indicates 96.97\% of availability of the PV system %($96.67\% = 100\%-3.33\%$) 
-and it is in accordance to what was described in Section~\ref{sec:availability}, because the type of electrical load of the houses is not critical; this situation is considered an energy interruption, but is not considered a system flaw, further affirming RQ1.
-%\begin{figure}[h]
-%\includegraphics[width=0.65\textwidth]{loadcurve.png}
-%\centering
-%\caption{Five weeks monitored load curve from House 1.}
-%\label{fig:loadcurve}
-%\end{figure}
 
+\subsection{HOMER Pro Environment}
+\label{sec:homerenviron}
+
+Screens and comments about the simulation tool.
 The same five case studies were evaluated by HOMER Pro (RQ2). The simulation results showed that the project restrictions were met by four 700 W PV systems (house 1, 2, 3 and 4), without any indication of sizing error or even performance related issues. The case study that was unsuccessful during simulation was the 1,200 W (house 5); however, without any indication about the failures of this PV system (RQ2). All the simulations took less than 5 seconds (each) to be performed by HOMER Pro. %Fig. \ref{fig:homerscreen} shows one of the screens presented by HOMER Pro software, specifically to house 1.
 %
 %\begin{figure}[h]
@@ -157,20 +210,19 @@ There were no divergence of results for the houses 1, 2, 3 and 4 w.r.t. our prop
 %
 %However, related to the results of the automated verification: (a) the 1,200 W PV system (house 5) failed during the sizing check. The number of panels was \textit{incorrect}; in particular, the counterexample provided by our verification method indicated 3 panels in parallel and the sized project has 2 in series and 2 in parallel. That verification took 63.3 hours to be performed. Surveying the owner of the 1,200 W system it was identified that, in fact, the system mostly of the time do not met the battery autonomy (mainly when all the loads are turned on). That behavior is expected because the system was purchased as an off-the-shelf solution and not as a specific design for the electrical charges of the house; (b) Related to the four 700 W PV systems, just one verification finished its analysis (house 1) considering the time-out of 432 h of computing. The sizing check was successful during automated verification, but there was found flaw related with the battery autonomy, when SOC reached levels below of 75\%. The automated verification identified the flaw right after the first night-discharge cycle, before the solar system start to recharge the batteries. The proposed tool took 409.3 hours to find this error at house 1. This possible flaw was confirmed with the dweller that uses the system: at least once or twice a mouth is usual the system to turn off, normally during raining days or with more clouds in the sky, and after the sun rises the system returns to normal operation. Related to houses 2, 3 and 4, it was considered that the automated verification had a time-out condition, with no conclusive results.
 
-%At the terminal, the command used to perform the verification is:
-%\$ esbmc filename.c -\phantom{}-no-bounds-check -\phantom{}-no-pointer-check -\phantom{}-no-div-by-zero-check -\phantom{}-unwind 300 -\phantom{}-smt-during-symex -\phantom{}-smt-symex-guard --z3
-%
-%Where:
-%
-%\begin{itemize}
-%\item The first three parameters, after the filename, are related to options that are usual to find bug in software, %for example, like bound check to arrays, pointer check, and division by zero, 
-%but unnecessary to check at this kind of problem (if not removed, there is lost of performance during the automated verification);
-%\item The parameter $unmind$ tells to ESBMC the limit to unroll the loops. This number was optimized (empirically) in order to reduce the running time and avoid to unwind unnecessarily the loops;
-%\item The two parameters with $symex$ tell to ESBMC to perform an incremental SMT solving. There are other options, but this parameter is necessary because the complexity of the algorithms. The incremental SMT solving uses few RAM memory, compared with other SMT solving. 
-%During empirical tests of the algorithms, the incremental solving was the only one who do not demanded 100\% the RAM memory. The use of swap-memory, i.e., the use of hard disk, reduces the performance and must be avoided;
-%\item And the last parameter says to the tool that the Z3 SMT solver will be used.
-%\end{itemize}
-%
+\subsection{Comparing Automated Verification and Simulation Results with Real PV Systems}
+
+In order to validate the possible flaw from house 5, we have surveyed the owner of the 1,200 W system. We identified that, in fact, the system does not meet the battery autonomy when all loads are turned on, and this was double checked with the monitoring system from the charge controller, which showed that the maximum power or surge power were not exceeded, thus affirming RQ1; this behavior is expected since the system was purchased as an off-the-shelf solution and not as a customized design for the electrical charges of the house. The same process of validation was done to the houses 1, 2, 3 and 4, which use the 700 W PV systems: from July of 2018 to March 2019, a monthly visiting was performed to apply surveys to the dwellers and to collect data from a local monitoring system: not every month were reported some energy interruption of the PV systems. However, even when one interruption is reported in a month, this represents around 3.33\% of interruption for the entire period ($1/30$), which indicates 96.97\% of availability of the PV system %($96.67\% = 100\%-3.33\%$) 
+and it is in accordance to what was described in Section~\ref{sec:availability}, because the type of electrical load of the houses is not critical; this situation is considered an energy interruption, but is not considered a system flaw, further affirming RQ1.
+%\begin{figure}[h]
+%\includegraphics[width=0.65\textwidth]{loadcurve.png}
+%\centering
+%\caption{Five weeks monitored load curve from House 1.}
+%\label{fig:loadcurve}
+%\end{figure}
+
+
+
 %\subsection{Experimental results}
 %\label{sec:results}
 %---------------------------------------------------
