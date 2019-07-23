@@ -1,41 +1,34 @@
+At this final chapter, the conclusions about the research done during the Doctoral process are presented. Moreover, a list of future contributions, which probably will foster the creation of a research group that applies model checking to electrical systems (not only renewable source) closes the work.
+
 \section{Main Contributions}
 
-We have described and evaluated an automated verification method to check whether a given PV system meets its specification using software model checking techniques. We have considered five case studies from real PV systems deployed in five different sites, ranging from $700$ W to $1,200$ W; and three state-of-art verification engines were considered (ESBMC, CBMC, and CPAchecker). Although the verification method proposed takes longer than simulation methods, it is able to present details that lead to failures in a PV system that is not a feature presented in commercial simulation tool. In particular, the proposed method was successful in finding sizing errors and indicating in details. Related to the verification engines comparative, the ESBMC with the Z3 solver executed in the incremental configuration presented the better performance (around four times faster than CBMC), used less RAM memory (less than 2GB when compared to 9.2GB of CBMC and 19.2GB of CPAchecker), and all the results were sound because the PV owners and the monitoring system validated the possible flaws that the system could be presenting in the field.
+This Thesis contributions can be split in two, each one concerning the tools created with the use of model checking to solar PV systems.
+
+It was described and evaluated an automated verification method to check whether a given PV system meets its specification using software model checking techniques. It was considered five case studies from real PV systems deployed in five different sites, ranging from $700$ W to $1,200$ W; and three state-of-art verification engines were considered (ESBMC, CBMC, and CPAchecker). Although the verification method proposed takes longer than simulation methods, it is able to present details that lead to failures in a PV system that is not a feature presented in commercial simulation tool. In particular, the proposed method was successful in finding sizing errors and indicating in details. Related to the verification engines comparative, the ESBMC with the Z3 solver executed in the incremental configuration presented the better performance (around four times faster than CBMC), used less RAM memory (less than 2GB when compared to 9.2GB of CBMC and 19.2GB of CPAchecker), and all the results were sound because the PV owners and the monitoring system validated the possible flaws that the system could be presenting in the field.
 %New tests must be performed, in an improved setup (i.e., better computing performance) with the goal of obtaining verification results in shorter times than the ones obtained in this study. 
 
-///////////////////////
-
-We have described and evaluated an automated synthesis method 
-to obtain the optimal size of PV system using software model 
-checking techniques. We have considered seven case studies 
-from PV systems in two different sites of the Amazonas State 
-in Brazil, ranging from $253$\,W to $1,586$\,W peak; and 
-three state-of-art verification engines were considered 
-(ESBMC, CBMC, and CPAchecker), in addition to a specialized 
-off-the-shelf simulation tool (HOMER Pro) in order to compare the results.
-
-Our automated synthesis tool presented detailed optimal solution 
-to six case studies adopted in this paper, with specifications, 
-models, and the arrangement in terms of series-parallel connections, 
-thereby covering the charge controller, which was not presented by HOMER Pro. 
-In a nutshell, our automated synthesis tool took more time 
-to find the optimal solution than HOMER Pro; however, the presented 
-solution was more complete and detailed, which is very useful 
-to a user to get a list of equipment and go to shopping.
+It was described and evaluated as well, an automated synthesis method to obtain the optimal size of PV system using software model checking techniques. It was considered seven case studies from PV systems in two different sites of the Amazonas State in Brazil, ranging from $253$\,W to $1,586$\,W peak; and three state-of-art verification engines were considered (ESBMC, CBMC, and CPAchecker), in addition to a specialized off-the-shelf simulation tool (HOMER Pro) in order to compare the results. The automated synthesis tool presented detailed optimal solution to six case studies adopted in this paper, with specifications, models, and the arrangement in terms of series-parallel connections, thereby covering the charge controller, which was not presented by HOMER Pro. In a nutshell, our automated synthesis tool took more time to find the optimal solution than HOMER Pro; however, the presented solution was more complete and detailed, which is very useful to a user to get a list of equipment and go to shopping.
 
 
 \section{Future Work Directions}
-create a research group in automated verification applied to electrical systems
-improve mathematical models
 
-Automated verification: As future work, we will also consider other types of renewable energy and even hybrid ones to allow our method to verify typical rural electrification.
+As the focus here was stand-alone solar PV systems, one future work will be also consider other types of renewable energy and even hybrid ones to allow the method to verify and to obtain the optimal sizing of typical rural electrification systems.
 
-Synthesis: As future work, the authors plan to improve the power reliability analysis, 
-to address the restriction to only allow automated synthesis of 
-riverside communities in the Amazonas state (Brazil), and to 
-validate some cases with deployed PV systems in isolated communities.
+Related to automated sizing, the author plan to improve the power reliability analysis, 
+to address the restriction to only allow automated synthesis of riverside communities in the Amazonas state (Brazil), and to validate some cases with deployed PV systems in isolated communities.
+
+It is planned to develop the code of a general purpose simulation tool, using the same mathematical model employed for the model checking methods of this work, to include it in the comparative in order to cover all the possibilities to validate or optimize solar PV systems.
+
+One future long term direction is to foster the creation of a research group in automated verification and synthesis applied to electrical systems improve mathematical models; and a international network of researchers in model checking applied to electrical systems.
+
 
 \section{Concluding Remarks}
 
-Price: HOMER Pro is available only for Microsoft Windows and its annual standard subscription costs US\$ $504.00$~\cite{HOMER}; CPAchecker, ESBMC and CBMC are XXX
+The automated verification and automates synthesis methods demonstrate the effectiveness and the potential of use in stand-alone solar PV systems. Some issues must be addressed in order to improve the tools, as performance and the human-computer interaction, however the work has potential and it is promising.
+
+About license and the use of tools that the author employed at this work, must be noticed that HOMER Pro is available only for Microsoft Windows and its annual standard subscription costs US\$ $504.00$~\cite{HOMER}; the verifiers, as CPAchecker, ESBMC and CBMC, and their solvers, they are  based on open source software license and usually allows the users to freely use, modify, and distribute licensed product. Permission is granted, free of charge, to use this software for evaluation and research purposes (and that is a advantage when compared to commercial tools); therefore, some of the licenses do not allow the software to be used in a commercial context.
+
+Based on the fact that the tools detailed here have not similarity in past work in the world, can be concluded that it was produced original research that expands the boundaries of knowledge, putting cutting-edge computer science methodologies to solve typical electrical engineering problems and to improve the design of systems.
+
+
 
