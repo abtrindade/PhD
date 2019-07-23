@@ -53,17 +53,18 @@
 \contentsline {subsection}{\numberline {4.3.4}HOMER Pro Environment}{68}{subsection.4.3.4}% 
 \contentsline {subsection}{\numberline {4.3.5}Comparing Automated Verification and Simulation Results with Real PV Systems}{70}{subsection.4.3.5}% 
 \contentsline {section}{\numberline {4.4}Threats to Validity}{71}{section.4.4}% 
-\contentsline {section}{\numberline {4.5}Conclusion}{71}{section.4.5}% 
-\contentsline {chapter}{\numberline {5}Automated Formal Synthesis Optimization Method for Sizing of Stand-Alone Solar PV Systems}{73}{chapter.5}% 
-\contentsline {section}{\numberline {5.1}Optimization Case studies}{73}{section.5.1}% 
-\contentsline {section}{\numberline {5.2}Objectives and Setup}{74}{section.5.2}% 
-\contentsline {section}{\numberline {5.3}Verifiers and HOMER Pro Environments}{75}{section.5.3}% 
-\contentsline {section}{\numberline {5.4}Results}{75}{section.5.4}% 
-\contentsline {section}{\numberline {5.5}Comparison between Formal Synthesis and HOME Pro}{77}{section.5.5}% 
-\contentsline {section}{\numberline {5.6}Threats to validity}{78}{section.5.6}% 
-\contentsline {section}{\numberline {5.7}Conclusion}{78}{section.5.7}% 
-\contentsline {chapter}{\numberline {6}Conclusions}{79}{chapter.6}% 
-\contentsline {section}{\numberline {6.1}Main Contributions}{79}{section.6.1}% 
-\contentsline {section}{\numberline {6.2}Future Work Directions}{80}{section.6.2}% 
-\contentsline {section}{\numberline {6.3}Concluding Remarks}{80}{section.6.3}% 
-\contentsline {chapter}{\numberline {A}List of Publications}{82}{appendix.A}% 
+\contentsline {section}{\numberline {4.5}Conclusion}{72}{section.4.5}% 
+\contentsline {chapter}{\numberline {5}Automated Formal Synthesis Optimization Method for Sizing of Stand-Alone Solar PV Systems}{74}{chapter.5}% 
+\contentsline {section}{\numberline {5.1}Optimization Case studies}{74}{section.5.1}% 
+\contentsline {section}{\numberline {5.2}Objectives and Setup}{75}{section.5.2}% 
+\contentsline {section}{\numberline {5.3}Results}{76}{section.5.3}% 
+\contentsline {section}{\numberline {5.4}Comparison between Formal Synthesis and HOMER Pro}{79}{section.5.4}% 
+\contentsline {section}{\numberline {5.5}Threats to validity}{80}{section.5.5}% 
+\contentsline {section}{\numberline {5.6}Conclusion}{81}{section.5.6}% 
+\contentsline {chapter}{\numberline {6}Conclusions}{82}{chapter.6}% 
+\contentsline {section}{\numberline {6.1}Main Contributions}{82}{section.6.1}% 
+\contentsline {section}{\numberline {6.2}Future Work Directions}{83}{section.6.2}% 
+\contentsline {section}{\numberline {6.3}Concluding Remarks}{83}{section.6.3}% 
+\contentsline {chapter}{\numberline {A}List of Publications}{85}{appendix.A}% 
+\contentsline {section}{\numberline {A.1}Journals}{85}{section.A.1}% 
+\contentsline {section}{\numberline {A.2}Congress}{85}{section.A.2}% 
