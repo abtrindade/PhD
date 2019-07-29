@@ -4,7 +4,9 @@ First, the concept of formal verification is introduced as background to underst
 
 And secondly, how a solar PV system can be modelled in order to be validated or optimized by the formal verification methodology.
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Formal Methods, Formal Design and Formal Verification}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 Formal methods are system design techniques that use rigorously specified mathematical models to validate systems, most notably (and known for) software and hardware systems~\cite{Collins98}. In contrast to other design systems, formal methods use mathematical proof as a complement to system testing in order to ensure correct behavior. With increasing scale and complexity, and safety becomes a more important issue, the formal approach to system design offers better level of insurance.
 
@@ -60,6 +62,7 @@ A formal design can be summarized as a three step process, as described below~\c
 %
 %The lightweight approach is a traditional engineering compromise, and there is a tradeoff. As formal methods become more common, engineers will have to learn type theory, modern algebra and proof techniques. Ultimately, engineers will have to think more like mathematicians.
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Project Validation, Automated Verification and Synthesis Using Model Checking}
 \label{sec:AutomatedVerification}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -159,7 +162,7 @@ CBMC's verification flow can be summarized in three stages:
 \subsection{ESBMC}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-The Efficient SMT-based Bounded Model Checker (ESBMC) is a bounded and unbounded model checker for C programs~\cite{esbmc2018}, which supports the verification of LTL properties with bounded traces~\cite{DBLP:journals/sosym/MorseCN015}. 
+The Efficient SMT-based Bounded Model Checker (ESBMC) is a bounded and unbounded model checker for C~\cite{esbmc2018}, C++~\cite{RamalhoFSMC013}, Qt~\cite{MonteiroGCF17}, and CUDA~\cite{PereiraASMMFC17} programs, which supports the verification of LTL properties with bounded traces~\cite{DBLP:journals/sosym/MorseCN015}. 
 
 ESBMC's verification flow can be summarized in three stages: 
 
@@ -241,7 +244,10 @@ It is similar to unregulated standalone system with DC load, but the main differ
 \label{fig:regSPV1}
 \end{figure}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Regulated standalone system with battery and DC load}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 Configuration with PV array, battery, MPPT and DC load, as shown in Fig.\ref{fig:regSPV2}. Battery is used to store the extra power of PV system. A charge controller is necessary for this type of system because the useful life of the battery is less than that of the PV module. Extra charging and deep discharging can reduce the battery life \cite{Kim}. 
 
 \begin{figure}[h]
@@ -253,7 +259,10 @@ Configuration with PV array, battery, MPPT and DC load, as shown in Fig.\ref{fig
 
 According to \cite{Pinho}, PV systems that are used to feed loads with low variation on the consumption can be sized to operate without the controller. That is called of self-regulated standalone PV system with battery. However, the voltage from the PV panel must be compatible with the batteries voltage. Normally, the bank of batteries are oversized related to the PV panel and to the load. The drawback is the operation of the batteries, normally overloaded or with excessive discharges (that can damage the batteries).
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Regulated standalone system with battery, AC load}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 This system is similar to the previous one, but here AC load draws the power from PV system and, because of the AC load, an inverter (DC to AC converter) is required, as seen in Fig.\ref{fig:regSPV3}. This solution has an increase of cost because has more equipments. However, the AC availability brings the advantage of a higher number of AC appliances to use at the houses or consumer units. That configuration is the focus of the present Thesis since it is the most common nowadays specifically for remote rural areas of developing countries or places where the grid extension is not feasible.
 %stand-alone systems are one the most used solutions, and 
 % depending on the type of load, cost, resources availability, and requirements of the load, 
@@ -268,7 +277,10 @@ This system is similar to the previous one, but here AC load draws the power fro
 \label{fig:regSPV3}
 \end{figure}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Design and Validation of a Solar photovoltaic system}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 The design and validation of a SPV system can be done by hand or with the aid of a software tool. 
 
 In order to address different aspects of project system and systems design, there is a myriad of public domain and commercial software available for the SPV market. According to \cite{Brooks}, the capabilities of these tools range from simple solar resource and energy production estimative, to site survey and system design tools, to complex financial analysis software (with optimization). Some tools also provide support to rebate programs applications and tax incentives (specific to each country or region), while other programs and worksheets focus on the technical aspects of system sizing and design.
@@ -284,18 +296,30 @@ In this study, the most popular tools are presented:
 \item Hybrid2
 \end{itemize}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{PVWatts Calculator}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 According to \cite{Freeman} and \cite{NRELDobos}, it is a web application developed by the National Renewable Energy Laboratory (NREL), which estimates the electricity production of a grid-connected roof- or ground-mounted photovoltaic system based on a few inputs. According to \cite{NRELDobos}, to use the calculator, it is necessary to provide information about the system's location, basic design parameters, and system economics. PVWatts calculates estimated values for the system's annual and monthly electricity production, and for the electricity monetary value. This tool is suitable for very preliminary studies of a potential location for a photovoltaic system that uses crystalline silicon or thin film photovoltaic modules. The production estimates that PVWatts computation do not account for many factors that are important in the design of a photovoltaic system, therefore it is necessary support of an energy expert. The calculator estimates the monthly and annual electricity production of a photovoltaic system using an hour-by-hour simulation over a period of one year. To represent the system's physical characteristics, PVWatts requires values for six inputs: System DC size; Module type; Array type; System losses; Array tilt angle; Array azimuth angle.
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{SAM}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 SAM or System Advisor Model is a software from the U.S. Department of Energy and National Renewable Energy Laboratory. According to \cite{NRELBlair} and \cite{Cameron2008}, SAM is intended to help users to determine whether the model meets their project constraints/specifications, and (also) to provide information for readers who do not plan to use the model, but want to learn about its capabilities. SAM is a performance and financial model designed to facilitate decision making for people involved in the renewable energy industry: Project managers and engineers; Financial and policy analysts; Technology developers; and Researchers. SAM makes performance predictions and cost of energy estimates for grid-connected power projects based on installation and operating costs and system design parameters that you specify as inputs to the model. Projects can be either on the customer side of the utility meter, where they buy and sell electricity at retail rates, or on the utility side of the meter, where they sell electricity at a price negotiated through a power purchase agreement. SAM is an electric power generation model and assumes that the renewable energy system delivers power either to an electric grid, or to a grid-connected building or facility to meet electric load. It does not model thermal energy systems that meet a thermal process load. As mentioned in \cite{NRELBlair}, SAM does not model isolated or off-grid power systems, and does not model systems with electricity storage batteries.
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{HOMER}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 As defined in \cite{HOMER}, actually is a set of two tools: HOMER Legacy and HOMER Pro. HOMER is an acronym for Hybrid Optimization Model for Multiple Energy Resources. HOMER Legacy is the original HOMER software version created at the National Renewable Energy Laboratory (NREL). HOMER Legacy is a free computer model that simplifies the task of evaluating design options for both off-grid and grid-connected power systems for remote, stand-alone, and distributed generation applications. HOMER's optimization and sensitivity analysis algorithms allow the user to evaluate the economic and technical feasibility of a large number of technology options. Since 2016 Homer Legacy can be found at HOMER web site, but only available for students and nonprofit organizations, as defined in \cite{HOMER}, and has not support available. At the short-time only the commercial version will remain.
  
 The commercial version (paid), called HOMER Pro, as defined in \cite{Swarnkar}, is a tool for optimizing micro-grid design in all sectors, from village power and island utilities to grid-connected campuses and military bases. HOMER Pro put together three tools in one product: optimization, simulation, and sensitivity analysis. HOMER Pro provides the detailed rigor of chronological simulation and optimization in a model that is intended to be easy to use. It is adaptable to a wide variety of projects. For a village or community-scale power system, HOMER can model both the technical and economic factors involved in the project. For larger systems, HOMER can provide an overview that compares the cost and feasibility of different configurations. Chronological simulation is essential for modeling variable resources, such as solar and wind power and for combined heat and power applications, where the thermal load is variable. HOMER's sensitivity analysis helps determine the potential impact of uncertain factors such as fuel prices or wind speed on a given system. 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{RETScreen}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 As mentioned in \cite{Pradhan}, RETScreen is a decision-support tool designed to help decision makers and energy professionals to evaluate the financial viability of renewable energy, energy efficiency, and/or co-generation projects.
 
 RETScreen models various types of renewable energy technologies (RETs), allowing for comparisons between technology options. The software can be used to evaluate benefits from both clean energy production from power generation projects and savings through energy efficiency projects, accounting for project costs, greenhouse gas emission reductions, and financial risk. The software is freely distributed (but with restrictions to save work or print), and had three different versions:
@@ -308,7 +332,10 @@ RETScreen models various types of renewable energy technologies (RETs), allowing
 
 As described by \cite{Pradhan}, RETScreen performs a five-step standard analysis: setting and site conditions; energy model; cost analysis; emission analysis, financial analysis, sensitivity, and risk analysis. It is developed and maintained by the Government of Canada, through the CanmetENERGY Varennes Research Centre of Natural Resources; in collaboration with: NASA; Renewable Energy and Energy Efficiency Partnership (REEEP); United Nations Environment Programme (UNEP), and the Global Environment Facility (GEF). RETScreen is available in 36 languages; it is a multi-awarded tool, and includes equipment databases for components manufactured and available worldwide.
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Hybrid2}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 The Hybrid2 software package, as described in \cite{Mills}, is a user-friendly tool to perform detailed long-term performance and economic analysis on a wide variety of hybrid power systems. Hybrid2 is a probabilistic/time series computer model, using time series data for loads, wind speed, solar insolation, and temperature; and the power system is designed or selected by the user, in order to predict the performance of the hybrid power system. Variations in wind speed and in load within each time step are factored into the performance predictions. The code does not consider short-term system fluctuations caused by system dynamics or component transients. This program is not supported anymore and according to \cite{UMASS}, probably after the user performs the free download of the tool, it will not work on Windows platforms later than Windows XP, what is a limitation.
 
 Table \ref{table:softwares} summarizes the tools described in this paper.  Where just Hybrid2 do not have technical support; only HOMER, RETScreen and Hybrid2 perform off-grid system or battery backup analysis; all the tools perform solar photovoltaic analysis; and that only HOMER and RETScreen are complete, including economical analysis or even optimization-sensitive analysis. However, only paid version of those softwares have all the features, and they run only at Windows-based operational systems.
@@ -341,11 +368,16 @@ Sensitive analysis &  &  & X & X & \\
 \end{tabular}
 \end{table}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Thesis Proposal x Reference Tools}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 Considering that the focus of this research is on off-grid solutions and supported tools, only HOMER remain for comparative. All tools need some parameters inherently from manufacturer's catalog, so the project starts with manufacturers and integrators tool to define the basic items of the project: panels, inverters, controllers, and batteries. After that, the potential solution is analyzed in another tool to validate or even optimize the solution. Therefore, that is the challenge of this work, i.e., to prove that is possible to use automated verification to validate an off-grid PV solution.
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Component models for stand-alone PV systems}
 \label{model}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 The main purpose of this section is to describe the models for the elements of a standalone PV system: PV generator, battery, controller, inverter, and load. The modeling of the PV system is based on modular blocks, as illustrated in Fig.\ref{fig:blockdiagram}, from \cite{Hansen}. The modular structure facilitates the modeling of the other system structures and replacing of elements as, for instance, a DC load instead of an AC load. 
 
@@ -358,7 +390,10 @@ The main purpose of this section is to describe the models for the elements of a
 
 In the literature, there are several mathematical models available for each component of stand-alone PV systems. In this section, the mathematical model for each component of PV system is presented. 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{PV generator (cell, module, array) }
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 A photovoltaic PV generator is the whole assembly of solar cells, connections, protective parts, and supports. In the present modeling, the focus is only on cell/module/array.
  
 The basic element of a PV System is the PV cell, also called a Solar Cell. A PV / Solar Cell is a semiconductor device that can convert solar energy into DC electricity. The semiconductor materials (usually silicon), which are specially treated to form an electric field, positive on one side (backside) and negative on the other (towards the sun). When solar energy (photons) hits the solar cell, electrons are knocked loose from the atoms in the semiconductor material, creating electron-hole pairs \cite{Lorenzo}. If electrical conductors are attached to the positive and negative sides, forming an electrical circuit, the electrons are captured in the form of electric current $ I_{ph} $ (photocurrent).
@@ -455,8 +490,10 @@ For that reason, researchers gradually focused on searching out the approximate 
 
 Therefore, a wide variety of models exists for estimation of power output of PV modules (and $I-V$ or $P-V$ curves). However, the present work will rely on the simplified model of 1-diode, that was shown by \cite{Saloux} that has a small error rate, between 0.03\% and 4.68\% from selected PV panels tested. In addition, this mathematical modeling has the advantage of being an explicit model, which does not use iterative numerical calculation. 
 
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Proposed PV Panel Model}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 With the proposed model, an explicit set of equations is derivate from the ideal PV model given by Equation~\ref{eq:1diodemodel}.
 
 A single-diode without series and shunt resistances is considered. Equation~\ref{eq:1diodemodel} is used to write down expressions for currents and voltages at each key point shown in Fig. \ref{fig:ivcurve}.
@@ -549,7 +586,7 @@ The cell temperature ($ T $) can be obtained from \cite{Ross} and is shown in Eq
 T = T_{air} + \dfrac{NOCT-20}{800}G
 \end{equation}
 
-Where $ T_{air} $ is the ambient temperature, $NOCT$ is the nominal operating cell temperature (in $^{o}$C) that is found at the PV manufacturer's data-sheet, and $G$ is the solar irradiance ($ W/m^{2} $) of the place where the PV system is deployed.
+\noindent where $ T_{air} $ is the ambient temperature, $NOCT$ is the nominal operating cell temperature (in $^{o}$C) that is found at the PV manufacturer's data-sheet, and $G$ is the solar irradiance ($ W/m^{2} $) of the place where the PV system is deployed.
 
 Furthermore, \cite{Villalva} have proposed a relationship, which allows the saturation current ($ I_{0} $) to be expressed as a function of the cell temperature. In this study, this relation is explicitly written based on cell open-circuit conditions using the short-circuit current temperature coefficient as well as the open-circuit voltage temperature coefficient (Equation \ref{eq:I0}).
 
@@ -558,7 +595,7 @@ Furthermore, \cite{Villalva} have proposed a relationship, which allows the satu
 I_{0} = \dfrac{I_{sc,ref} + \mu_{I}(T - T_{ref})}{exp \left[ \dfrac{q(V_{oc,ref} + \mu_{V} (T - T_{ref}))}{aNk_{B}T}    \right] -1}
 \end{equation}
 
-Where $ V_{oc,ref} $ is the reference open-circuit voltage, and $ \mu_{V} $ is an open-circuit voltage temperature coefficient ($ V/K $).
+\noindent where $ V_{oc,ref} $ is the reference open-circuit voltage, and $ \mu_{V} $ is an open-circuit voltage temperature coefficient ($ V/K $).
 
 The ideality (or quality) factor of the diode $ a $, which is usually considered as a constant \cite{Villalva}, is determined in the reference state. Using the maximum power point current equation (Equation \ref{eq:Pm}) and the saturation current in the reference temperature given by Equation \ref{eq:I0}, the diode quality coefficient is determined by Equation \ref{eq:a}.
 
@@ -567,7 +604,7 @@ The ideality (or quality) factor of the diode $ a $, which is usually considered
 a = \dfrac{q(V_{m,ref}-V_{oc,ref})}{Nk_{B}T} \dfrac{1}{ln \left( 1 - \dfrac{I_{m,ref}}{I_{sc,ref}}  \right) }
 \end{equation}
 
-Where $ V_{mref} $, $ V_{oc,ref} $, $ I_{m,ref} $, and $ I_{sc,ref} $ are key cell values obtained under both actual cell temperature and solar irradiance conditions, usually provided by manufacturers.
+\noindent where $ V_{mref} $, $ V_{oc,ref} $, $ I_{m,ref} $, and $ I_{sc,ref} $ are key cell values obtained under both actual cell temperature and solar irradiance conditions, usually provided by manufacturers.
 
 The model is now completely determined, i.e., with all the variables defined. This model requires the actual cell temperature (or the air temperature), the actual solar irradiance and common data provided by manufacturers.
 
@@ -578,7 +615,7 @@ If the PV cells are in parallel, then there is a parallel array. Therefore, ther
 I_{array} = (N_{cells in parallel})(I_{one cell})
 \end{equation}
 
-Where $ I_{one cell} $ is the current from Equation \ref{eq:Imfinal}.
+\noindent where $ I_{one cell} $ is the current from Equation \ref{eq:Imfinal}.
 
 In addition, if the panels are in series, the current do not change but the total voltage is the sum of the each panel's voltage.
 
@@ -587,9 +624,12 @@ In addition, if the panels are in series, the current do not change but the tota
 V_{array} = (N_{cells in series})(V_{one panel})
 \end{equation}
 
-Where $ V_{one panel} $ is the voltage from Equation \ref{eq:Vmfinal}.
+\noindent where $ V_{one panel} $ is the voltage from Equation \ref{eq:Vmfinal}.
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Battery Storage Model }
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 Because of the fluctuating nature of the output delivered by the PV arrays, batteries are necessary in a PV system. Thus, during the hours of sunshine, the PV system feeds directly the load and the excess electrical energy is stored in the battery. During the night, or during a period with low solar irradiation, energy is supplied to the load from the battery \cite{Mellit}.
   
 Several models have been presented in the literature. However, regardless of the model, normally the following parameters are required: 
@@ -726,9 +766,11 @@ SOC_{discharge} = SOC_{previous} - \dfrac{100*I_{drained}*Num_{h}}{capacity}
 
 Worth to mention that, specifically to PV systems used in Brazil, there is a Normative Resolution issued by the Brazil National Electric Energy Agency (Aneel) that establishes the minimum of 48 hours of battery autonomy to stand-alone solar PV systems (RN 493/2012), among others definitions related to this matter.
 
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Controller Model}
 \label{sec:controller}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 Depending on the literature, the controller can receive different names: controller \cite{Hansen}, charge controller \cite{Mahanta} and \cite{Chauhan}, regulator \cite{Mellit}, DC-DC converter with MPPT and switch \cite{Dhanowa}, \cite{Yatimi}, \cite{Abdulateef}, \cite{Roy}. However, in this study, in order to simplify, the term used is controller. 
 
 The controller is a set of items (DC-DC converter, a MPPT and switches) and can be defined as the responsible to manage the energy flow to PV system, batteries and loads by collecting information on the battery voltage and knowing the maximum and minimum values acceptable for the battery voltage. According to \cite{Pinho}, controllers aim to protect the battery (or batteries) against the excessive charge and discharge, improving its lifetime. 
@@ -858,8 +900,9 @@ As an example, a system with 95\% availability is expected to meet the load requ
 
 With that in mind, it is important to mention that even if a formal verification or a simulation shows that a PV system fails, it doesn't mean that the sizing is wrong. It is important to evaluate how critical the load application is and the horizon of evaluation. However this analysis can be useful, for example, to improve the sized battery autonomy.
 
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Sizing Stand-alone Solar Photovoltaic Systems}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 The mathematical model presented at section~\ref{model} is important for the project validation, however if it is included an approach to perform the sizing of stand-alone PV systems, than the proposed tools at this Thesis can perform the system validation (the intended behavior), and moreover to obtain the optimal project sizing.
 
@@ -1055,7 +1098,9 @@ than numerical technique; however, the relation cannot be applied to different s
 since it is specific to one place of deployment of the PV system, 
 thereby demanding adaptation if another site is analyzed.
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Summary}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 At this Section, all the background and theoretical base needed to understand the concepts, techniques, tools, and criteria used during the following Sections were presented.
 
