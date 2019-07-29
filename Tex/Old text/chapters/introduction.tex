@@ -84,20 +84,27 @@ power reliability and system cost. Note that in this study, the focus is not on 
 
 
 %----------------------------------------------
+\section{Outline of the Solution}
+%----------------------------------------------
+
+\textcolor{red}{you should briefly describe here the outline of your solution. As example, take a look at \url{https://ssvlab.github.io/lucasccordeiro/papers/phd\_thesis\_cordeiro.pdf.}}
+
+
+%----------------------------------------------
 \section{Contributions}
 %----------------------------------------------
 
 Associated to \textbf{automated verification}, this Thesis makes three main contributions. % Firstly, we describe a modular modeling of each component of a PV system by means of mathematical models that can be encoded into fragments of first-order theories supported by software model checkers. Secondly
-\textbf{Firstly}, it is proposed an algorithm written in language C that implements the automated verification method which formally checks the sizing and the operation of a given stand-alone PV system. 
+\textbf{Firstly}, we propose an algorithm written in the C programming language, which implements the automated verification method to formally check the sizing and the operation of a given stand-alone PV system. 
 \textbf{Secondly}, we evaluate the verification method by comparing three state-of-the-art model checkers in five real case studies. 
-\textbf{Thirdly}, experimental results show that this proposed approach can find subtle design errors in stand-alone PV systems, which are not easily detected by other approach based on simulation. 
+\textbf{Thirdly}, experimental results show that this proposed approach can find subtle design errors in stand-alone PV systems, which are not easily detected by other approaches based on simulation. 
 %
 %The framework provided at this paper outlines the requirements, the process and the mathematical modeling to perform automated formal verification of a stand-alone PV system, using the satisfiability modulo theories (SMT)-based verification method.
 
 And linked to \textbf{automated synthesis}, this work makes three major contributions. 
-\textbf{First}, the use of automated symbolic verification methods in electrical systems was uncommon in recent prior studies~\cite{abs-1811-09438}, and specifically their use in synthesizing optimal PV sizing is unprecedented. Here, a list of PV components (i.e., PV panels, charge controllers, inverters, and batteries) can be fed to the proposed synthesis method together with user requirements and environment constraints, and the proposed synthesis algorithm based on symbolic model checking can find the optimal solution in technical and economical terms. 
-\textbf{Second}, we evaluate different state-of-art symbolic software verifiers with the goal of obtaining the best performance in the verification back-end for synthesizing optimal PV systems, being the first work that performs this type of comparative. 
-\textbf{Third}, the experimental results show that the proposed synthesis method is an effective and efficient approach on the pursuit of the optimal solution of PV systems using formal methods, which outperforms existing state-of-the-art simulation tool. As a result, this Thesis marks the first application of a sound and automated formal synthesis approach able to provide accurate results of optimal sizing of stand-alone PV systems. Thus, there is considerably advance the state-of-the-art in applied energy over the last two decades with the goal of optimally designing PV systems.
+\textbf{First}, the use of automated symbolic verification methods in electrical systems was uncommon in recent prior studies~\cite{abs-1811-09438}, and specifically their use in synthesizing optimal PV sizing is unprecedented. Here, a list of PV components (i.e., PV panels, charge controllers, inverters, and batteries) can be fed to the proposed synthesis method together with the user requirements and environment constraints, and the proposed synthesis algorithm based on symbolic model checking can find the optimal solution in technical and economical terms. 
+\textbf{Second}, we evaluate different state-of-art symbolic software verifiers with the goal of obtaining the best performance in the verification back-end for synthesizing optimal PV systems, thereby being the first work that performs this type of evaluation. 
+\textbf{Third}, the experimental results show that the proposed synthesis method is an effective and efficient approach on the pursuit of the optimal solution of PV systems using formal methods, which outperforms existing state-of-the-art simulation tool. As a result, this Thesis marks the first application of a sound and automated formal synthesis approach able to provide accurate results of optimal sizing of stand-alone PV systems. Thus, this research considerably advances the state-of-the-art in applied energy over the last two decades with the goal of optimally designing PV systems.
  
 %---------------------------------------------- 
 \section{Related Work}
@@ -112,16 +119,18 @@ In $2015$, an automated approach for applying Monte-Carlo simulation to power sy
 
 Other related studies from $2015$ include a framework named Modana to achieve an integrated process from modeling with SysML/MARTE to analysis using statistical model checking for CPS in terms of non-functional properties such as time and energy~\cite{Cheng2015}. In order to demonstrate Modana's capability, the authors modelled energy-aware buildings as a case study, and discussed the analysis on energy consumption in different scenarios. The focus here is on smart buildings and HVAC (heating, ventilation, and air conditioning) systems. This research, however, did no address the design and verification of solar PV systems. 
  
-In $2017$, a researcher suggested the application of formal methods to verify and control the behavior of computational devices, interacting over a shared and smart infrastructure~\cite{Abate2017}. The author discussed the aggregation of large populations of thermostatically-controlled loads and of PV panels, and the corresponding problems of energy management in smart buildings, of demand-response on smart grids, and respectively of frequency stabilization and grid robustness. The focus was on controlling the behavior of components, thereby verifying the given smart grid as a "system of systems" within the context of "internet of things". The author, however, used approximate model checking of stochastic and hybrid models.
+In $2017$, a researcher suggested the application of formal methods to verify and control the behavior of computational devices, interacting over a shared and smart infrastructure~\cite{Abate2017}. The author discussed the aggregation of large populations of thermostatically-controlled loads and of PV panels, and the corresponding problems of energy management in smart buildings, of demand-response on smart grids, and respectively of frequency stabilization and grid robustness. The focus was on controlling the behavior of components, thereby verifying the given smart grid as a ``system of systems'' within the context of "internet of things". The author, however, used approximate model checking of stochastic and hybrid models.
 
 In $2018$, a verification methodology was proposed for the Cyber Physical Energy Systems (CPES) with applications to PV panels and its distributed power point tracking~\cite{Driouich2018}. This approach relied on representing unpredictable behavior of the environment to cover all possible feasible scenarios. The simulation results obtained by JModelica covered the system's complete dynamic behavior; however, it was evident the time consuming issue with almost three days of computer effort to verify the design space of one operation hour of the PV panels behavior. This related study did not include other components of a stand-alone solar PV system.
 
 Another work from $2018$ was the approach to model smart grid components using a formal specification. The authors used a state-based formal specification language named Z; they demonstrated the application of Z to four smart grid components~\cite{Akram2018}. The presented formal specification can be considered as a first step towards modeling of smart grids using formal methods. The starting point of this study was that a smart home can be considered as an integrated system consisting of various objects and system, which communicates and interacts with each other. This approach is based on Petri nets and is under the assumption that modeling the smart home leads to clear understanding of the overall behavior of the smart grid.
+
+\textcolor{red}{you should add some paragraphs here to describe the difference of your work to other available in the literature.}
 
 %----------------------------------------------
 \section{Thesis Organization}
 %----------------------------------------------
 
 % ~\nameref or \autoref{
-Chapter \nameref{chap:background} gives the theoretical basis on formal methods, formal verification, automated verification, solar PV systems, design and validation of PV systems, program synthesis, and the mathematical modeling. Chapter~\nameref{chap:methodology} presents the automated verification  and the automated synthesis techniques. The results related to the experimental use of automated verification are in \autoref{chap:automatedverification}. While \autoref{chap:automatedsynthesis} is devoted to the experimentation, 
+Chapter \nameref{chap:background} gives the theoretical basis on formal methods, formal verification, automated verification, solar PV systems, design and validation of PV systems, program synthesis, and the mathematical modeling. Chapter~\nameref{chap:methodology} presents the automated verification  and the automated synthesis techniques. The results related to the experimental use of automated verification are in \autoref{chap:automatedverification}, while \autoref{chap:automatedsynthesis} is devoted to the experimentation, 
 results and discussions of the automated synthesis technique. Chapter \nameref{chap:conclusions} presents the main contributions, future work directions and concluding remarks.
