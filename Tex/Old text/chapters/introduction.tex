@@ -25,16 +25,18 @@ The increase in a number of PV systems installed all over the world brings the n
 
 Moreover, the optimum sizing of these devices is important for reliable operation. Therefore, these systems need to be designed properly according to the site, land area available, load requirement, load pattern, environmental conditions and economics in order to utilize available resources efficiently and economically \cite{Rawat}.
 
+%-------------------------------------------------
 \section{Problem's Definition}
+%-------------------------------------------------
 
 In order to address different aspects of a solar PV project, there is a myriad of public domain and commercial software available, such as RETScreen, HOMER, PVWatts, SAM, and Hybrid2 \cite{Pradhan,Swarnkar,NRELDobos,NRELBlair,Mills}; and even general purpose simulation tools such as PSpice, and MATLAB/Simulink package \cite{Gow1999,Benatiallah2017}. According to \cite{Brooks}, the capabilities of these tools range from simple solar resource and energy production estimation, to site survey and system design tools, to complex financial analysis software (with optimization). Some tools also provide support to rebate programs applications and tax incentives (specific to each country or region), while other programs and worksheets focus on the technical aspects of system sizing and design.  
 %
-Manufactures and integrators have yet their proprietary software to perform various system sizing, with the drawback of include just their own products among the possibilities of choice, what restrict the solution. 
+Manufactures and integrators have yet their proprietary software to perform various system sizing \textcolor{red}{add citation}, with the drawback of include just their own products among the possibilities of choice, what restrict the solution. 
 %
 %PV systems can be classified into grid-connected and stand-alone systems. At this proposal, only off-grid or stand-alone systems will be considered. The utilization of solar energy in off-grid mode has the potential to meet the energy need for remote rural areas of developing countries.  
-However, those tools are based on running experiments in simulation models. Simulation has the advantage of being cheap (if compared to test in real systems) and can be employed before the system design is concluded, but it has the drawback of an incomplete coverage since the verification of all possible combinations and potential failures of a system is unfeasible~\cite{ClarkeHV18}.
+However, those tools are based on running experiments in simulation models \textcolor{red}{which tools?}. Simulation has the advantage of being cheap (if compared to test in real systems) and can be employed before the system design is concluded, but it has the drawback of an incomplete coverage since the verification of all possible combinations and potential failures of a system is unfeasible~\cite{ClarkeHV18}.
 
-Formal methods based on model checking offer a great potential to obtain a more effective and faster verification in the design process~\cite{ClarkeHV18}, with behavior that is, in principle, well determined. 
+Formal methods based on model checking offer a great potential to obtain a more effective and faster verification in the design process~\cite{ClarkeHV18}, including for example CPS~\cite{Abateetal2017,AbateBCCDKK17,Bessa,ChavesBCKF17}, with behavior that is, in principle, well determined. 
 Any kind of system can be specified as computer programs using mathematical logic, which constitutes the intended (correct) behavior; then, one can try to give a formal proof or otherwise establish that the program meets its specification. User or project requirements can be added during the creation of the formal model to be verified~\cite{Trindade}. 
 %
 This area of research is referred as formal methods~\cite{Clarkeetal}. Their aim is to establish system correctness with mathematical rigor. 
