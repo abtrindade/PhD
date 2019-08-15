@@ -1,0 +1,191 @@
+\documentclass[11pt]{article}
+
+\usepackage[normalem]{ulem}
+\usepackage[english]{babel}
+\usepackage[latin1]{inputenc}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{epstopdf}
+\usepackage{url}
+%\usepackage{mathtools}
+\usepackage{enumerate}
+\usepackage[nodayofweek]{datetime}
+\usepackage[caption=false]{subfig}
+%\mathtoolsset{showonlyrefs}
+\usepackage[linesnumbered,lined,ruled,boxed]{algorithm2e}
+\SetKw{KwBy}{by}
+\usepackage{xcolor}
+%\input{rgbcolors}
+%\usepackage{color}
+\usepackage{natbib}
+% \usepackage[style=authoryear-comp,dashed=false]{biblatex}
+% \bibliography{piecewise_lyapunov}
+\newtheorem{myassumption}{Assumption}
+\newcommand{\mstitle}{Automated Formal Verification of Stand-alone Solar Photovoltaic Systems}
+\newcommand{\refnumber}{SE-D-19-01248R1}
+\newenvironment{resposta}{~~~\begin{quote}\color{blue}\textbf{Response:}}{\end{quote}}
+\newcommand{\comment}[1]{}
+%\definecolor{DarkGreen}{rgb}{0.2, 0.4, 0.2}
+\usepackage{amsmath}
+\usepackage{listings}
+\lstset{language=C,basicstyle=\small\ttfamily}
+\usepackage{tikz}
+\usetikzlibrary{positioning, automata, shapes.arrows, calc, shapes, arrows, calc,patterns,decorations.pathmorphing,decorations.markings}
+
+\newcommand{\param}[2]{\ensuremath{\langle{#1},{#2}\rangle}\xspace}
+\textwidth 15cm
+\setlength{\textheight}{1.1\textheight}
+\newcommand\hi{\hspace*{\parindent}}
+\newcommand\vi{\vspace{\baselineskip}}
+\newcommand\lac{{\mbox{{\Huge\bf L}\hspace{-0.65em}
+\raisebox{-1.2ex}{\Huge\bf A}\hspace{-1.1em}
+\raisebox{-0.6ex}{\Huge\bf C~}}}}
+\newcommand{\fwlfunction}[1]{\mathcal{FWL}[#1]}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{Manuscript Reference Number: \refnumber}
+\rhead{Page \thepage\ of \pageref{LastPage}}
+\lfoot{}
+\rfoot{}
+
+%\pagestyle{headings}
+\pagenumbering{roman}
+\begin{document}
+\setcounter{page}{1}
+\thispagestyle{empty}
+
+
+\hoffset -1.5cm \voffset .5cm
+
+
+\sf
+
+\vspace*{-2.5cm} \hspace*{-0.1cm} {\small
+{\mbox{\begin{minipage}{2cm}
+\centerline{\includegraphics[width=1.5cm]{ufam_logo.png}}
+\end{minipage}}} \hspace*{0.1cm}
+\begin{minipage}{11.0cm}{\large \textbf{Federal University of Amazonas}}\\
+{\sc Faculty of Technology}\\
+{\sc Department of Electricity}
+\end{minipage}
+} \vspace*{0mm}
+
+\hspace*{-.7cm} {\rule[-1ex]{15cm}{0.03cm}}
+
+\begin{flushright}
+\begin{minipage}{7.0cm}\small
+{\bf Please Reply to:}\\
+Assistant Professor Alessandro Trindade\\
+Universidade Federal do Amazonas\\
+Departamento de Eletricidade\\
+Av. Gal. Rodrigo Otávio, 3000, Japiim, Campus Universitário\\
+ZIP 69077-000, Manaus - AM, Brazil\\
+{\em alessandrotrindade@ufam.edu.br}
+\end{minipage}
+\end{flushright}
+ 
+\vi
+\hspace*{\fill}{\small Manaus, \today.}
+\vi
+
+
+
+\begin{flushleft}
+    Mario A. Medina, PhD, PE\\
+    Associate Editor\\
+	Solar Energy
+    \end{flushleft}
+\vi
+
+\begin{flushleft}
+\textbf{REF.:} \refnumber
+    \end{flushleft}
+\vi \vi
+ 
+\indent Dear Mario,
+\vi 
+
+We thank you for asking us to comply with your reviewers' reports. 
+We are submitting a revised version of our manuscript entitled 
+``{\em \mstitle}'' by Alessandro Trindade and Lucas Cordeiro. 
+This revised version carefully addresses each comment provided 
+by the reviewers, as suggested in your original decision letter. 
+In particular, our reply letter describes all modifications we made 
+to our manuscript and the respective responses to the comments 
+raised by the reviewers.  
+
+%\vi
+
+%Thank you very much in advance.
+
+\vi\vi
+
+\indent
+Sincerely,\\
+
+
+
+\begin{quote}
+\begin{quote}
+\begin{flushright}
+
+
+\vi
+\vi
+
+Alessandro B. Trindade~~~~~~~
+\end{flushright}
+\end{quote}
+\end{quote}
+
+\hoffset -1.5cm \voffset .5cm
+
+
+% =============================================
+\newpage
+\subsection*{Authors'  Response to the Review Comments on manuscript ``{\mstitle}'' -- Manuscript Reference Number: \refnumber}
+
+\vi
+
+The authors would like to thank the anonymous reviewers for their valuable and constructive comments and suggestions, which helped us significantly improve the quality of our manuscript. 
+
+According to the associate editor and reviewers' comments, our manuscript has been carefully revised and all detailed changes are highlighted in red color, along with the original text. 
+
+Our responses  to all comments (in blue color) are given in the sequel, with clear indications about how and where they were addressed along our manuscript.
+
+We hope those modifications in our manuscript and also our responses are sufficient to make our work suitable for publication in {\bf Solar Energy}.
+
+
+
+\newpage
+\subsection*{Reviewers' comments:}
+
+\begin{quote}
+Mandatory Editorial Changes: your highlights are incomplete sentences.
+
+Please follow the Guide for Authors to construct the Highlights.
+Your Highlights do not comply with the requirements stated in the Guide for Authors.  Failure to comply with this requirement will result in the rejection of your paper. 
+
+1.     Highlights must be complete sentences with a maximum of 85 characters, not words, including spaces, per highlight.
+A complete sentence is a sentence that conveys and idea, contains a subject and a verb predicate, projects a full thought, and is able to stand alone.
+Please visit www.elsevier.com/authors/journal-authors/highlights for more details and to see examples of highlights.
+
+To understand the concept of a complete sentences, please visit: 
+
+http://faculty.washington.edu/ezent/imsc.htm
+\end{quote}
+
+
+\begin{resposta} 
+We thank the reviewer for this insightful comment and suggestion. Indeed, we had to rewrite the highlights doc fileit summarizes what was intended to be studied in this manuscript. Additionally, we have emphasized that the main focus of our study relies on the validation process of solar PV systems instead of the mathematical modeling, which was already investigated in prior studies over the last two decades; this particular information was carefully included in the revised abstract, introduction, and conclusion sections since it was unclear in the previous version of our manuscript. Regarding Figure 2, we fixed it as recommended by the reviewer. Moreover, we applied the same procedure to voltage $V$, in order to keep consistency throughout our manuscript.
+
+
+\end{resposta}
+
+
+
+\label{LastPage}
+
+% \printbibliography
+\end{document} 

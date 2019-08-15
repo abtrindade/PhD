@@ -1,0 +1,43 @@
+Os destaques são três a cinco (três a quatro para artigos da Cell Press) pontos orientados para resultados que fornecem aos leitores uma visão geral rápida das principais descobertas do seu artigo. Pense neles como um trecho rápido dos resultados - curtos e doces. Cada destaque deve ter 85 caracteres ou menos, incluindo espaços, e os destaques juntos devem transmitir claramente apenas os resultados do estudo.
+
+Verification can be effective to validate stand-alone solar photovoltaic systems
+Automated verification method can detect design errors better than simulation
+ESBMC can produce better performance and soundness among automated verifiers
+
+
+
+- Propose a novel verification method to detect design errors of photovoltaic systems
+- Verify formally the sizing and the operation of a given photovoltaic system
+- Detect design erros that are not identified by other approaches
+- Develop an automated reasoning tool that implements the proposed verification method
+- Evaluate three state-of-the-art automated reasoning tools in five real case studies
+
+
+Propose a novel verification method to detect design errors of photovoltaic systems
+Verifying formally the sizing and the operation of a given photovoltaic system
+Develop an automated reasoning tool that implements the proposed verification method
+Detection of design erros are not identified by other approaches
+Evaluate three state-of-the-art automated reasoning tools in five real case studies
+
+Statistical fault detection in photovoltaic systems---------------------
+A new approach to fault detection in photovoltaic systems is developed.
+Fault detection is based on the residuals obtained from a one-diode model.
+EWMA test is used to monitor the performance of photovoltaic systems.
+The proposed method has been experimentally validated in a grid connected PV system.
+This scheme successfully monitors the DC side of PV systems and detects partial shading.
+
+
+Experimental studies of active solar still integrated with two hybrid PVT collectors--------------
+Experiment on active PVT-FPC solar still has been carried out.
+Modeling, validation, productivity and performance analysis have been done.
+Coefficient of determination, % uncertainty, r and e has been calculated.
+Productivity is more than 100% which suggests the feasibility of system.
+Production cost of water and cost of electricity gain have been calculated.
+
+
+Artificial bee colony based algorithm for maximum power point tracking (MPPT) for PV systems operating under partial shaded conditions
+An artificial bee colony based MPPT under partially shaded conditions is proposed.
+Photovoltaic systems are considered.
+A co-simulation methodology combining Simulink and Pspice has been adopted.
+Excellent efficiency and tracking performance compared to the PSO-based MPPT.
+The effectiveness of the proposed method has been confirmed experimentally.
