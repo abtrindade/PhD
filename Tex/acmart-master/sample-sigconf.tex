@@ -22,31 +22,31 @@
 %% in the same archive or directory.)
 %%
 %% The first command in your LaTeX source must be the \documentclass command.
-\documentclass[sigconf]{acmart}
+\documentclass[sigconf,review]{acmart}
 
 %%
 %% \BibTeX command to typeset BibTeX logo in the docs
-\AtBeginDocument{%
-  \providecommand\BibTeX{{%
-    \normalfont B\kern-0.5em{\scshape i\kern-0.25em b}\kern-0.8em\TeX}}}
+%\AtBeginDocument{%
+%  \providecommand\BibTeX{{%
+%    \normalfont B\kern-0.5em{\scshape i\kern-0.25em b}\kern-0.8em\TeX}}}
 
 %% Rights management information.  This information is sent to you
 %% when you complete the rights form.  These commands have SAMPLE
 %% values in them; it is your responsibility as an author to replace
 %% the commands and values with those provided to you when you
 %% complete the rights form.
-\setcopyright{acmcopyright}
-\copyrightyear{2018}
-\acmYear{2018}
-\acmDOI{10.1145/1122445.1122456}
+%\setcopyright{acmcopyright}
+%\copyrightyear{2018}
+%\acmYear{2018}
+%\acmDOI{10.1145/1122445.1122456}
 
 %% These commands are for a PROCEEDINGS abstract or paper.
-\acmConference[Woodstock '18]{Woodstock '18: ACM Symposium on Neural
-  Gaze Detection}{June 03--05, 2018}{Woodstock, NY}
-\acmBooktitle{Woodstock '18: ACM Symposium on Neural Gaze Detection,
-  June 03--05, 2018, Woodstock, NY}
-\acmPrice{15.00}
-\acmISBN{978-1-4503-9999-9/18/06}
+%\acmConference[Woodstock '18]{Woodstock '18: ACM Symposium on Neural
+%  Gaze Detection}{June 03--05, 2018}{Woodstock, NY}
+%\acmBooktitle{Woodstock '18: ACM Symposium on Neural Gaze Detection,
+%  June 03--05, 2018, Woodstock, NY}
+%\acmPrice{15.00}
+%\acmISBN{978-1-4503-9999-9/18/06}
 
 
 %%
@@ -75,7 +75,7 @@
 %%
 %% The "title" command has an optional parameter,
 %% allowing the author to define a "short title" to be used in page headers.
-\title{The Name of the Title is Hope}
+\title{Test}
 
 %%
 %% The "author" command and its associated commands are used to define
@@ -98,15 +98,7 @@
   \postcode{43017-6221}
 }
 
-\author{Lars Th{\o}rv{\"a}ld}
-\affiliation{%
-  \institution{The Th{\o}rv{\"a}ld Group}
-  \streetaddress{1 Th{\o}rv{\"a}ld Circle}
-  \city{Hekla}
-  \country{Iceland}}
-\email{larst@affiliation.org}
-
-\author{Valerie B\'eranger}
+\author{Valerie Beranger}
 \affiliation{%
   \institution{Inria Paris-Rocquencourt}
   \city{Rocquencourt}
@@ -208,13 +200,13 @@
 %% A "teaser" image appears between the author and affiliation
 %% information and the body of the document, and typically spans the
 %% page.
-\begin{teaserfigure}
-  \includegraphics[width=\textwidth]{sampleteaser}
-  \caption{Seattle Mariners at Spring Training, 2010.}
-  \Description{Enjoying the baseball game from the third-base
-  seats. Ichiro Suzuki preparing to bat.}
-  \label{fig:teaser}
-\end{teaserfigure}
+%\begin{teaserfigure}
+%  \includegraphics[width=\textwidth]{sampleteaser}
+%  \caption{Seattle Mariners at Spring Training, 2010.}
+%  \Description{Enjoying the baseball game from the third-base
+%  seats. Ichiro Suzuki preparing to bat.}
+%  \label{fig:teaser}
+%\end{teaserfigure}
 
 %%
 %% This command processes the author and affiliation and title
@@ -536,14 +528,14 @@ The ``\verb|figure|'' environment should be used for figures. One or
 more images can be placed within a figure. If your figure contains
 third-party material, you must clearly identify it as such, as shown
 in the example below.
-\begin{figure}[h]
-  \centering
-  \includegraphics[width=\linewidth]{sample-franklin}
-  \caption{1907 Franklin Model D roadster. Photograph by Harris \&
-    Ewing, Inc. [Public domain], via Wikimedia
-    Commons. (\url{https://goo.gl/VLCRBB}).}
-  \Description{The 1907 Franklin Model D roadster.}
-\end{figure}
+%\begin{figure}[h]
+%  \centering
+%  \includegraphics[width=\linewidth]{sample-franklin}
+%  \caption{1907 Franklin Model D roadster. Photograph by Harris \&
+%    Ewing, Inc. [Public domain], via Wikimedia
+%    Commons. (\url{https://goo.gl/VLCRBB}).}
+%  \Description{The 1907 Franklin Model D roadster.}
+%\end{figure}
 
 Your figures should contain a caption which describes the figure to
 the reader. Figure captions go below the figure. Your figures should
@@ -569,7 +561,7 @@ figure in your article, place the command immediately before the
 
 \section{Citations and Bibliographies}
 
-The use of \BibTeX\ for the preparation and formatting of one's
+The use of BibTeX for the preparation and formatting of one's
 references is strongly recommended. Authors' names should be complete
 --- use full first names (``Donald E. Knuth'') not initials
 (``D. E. Knuth'') --- and the salient identifying features of a
@@ -583,7 +575,7 @@ commands, placed just before the \verb|\end{document}| command:
   \bibliography{bibfile}
 \end{verbatim}
 where ``\verb|bibfile|'' is the name, without the ``\verb|.bib|''
-suffix, of the \BibTeX\ file.
+suffix, of the BibTeX file.
 
 Citations and references are numbered by default. A small number of
 ACM publications have citations and references formatted in the
