@@ -43,8 +43,7 @@
 %\acmDOI{10.1145/1122445.1122456}
 
 %% These commands are for a PROCEEDINGS abstract or paper.
-%\acmConference[Woodstock '18]{Woodstock '18: ACM Symposium on Neural
-%  Gaze Detection}{June 03--05, 2018}{Woodstock, NY}
+\acmConference[ICSE 2020]{Seoul: 42nd International Conference on Software Engineering}{May 23--29, 2020}{Seoul, South Korea}
 %\acmBooktitle{Woodstock '18: ACM Symposium on Neural Gaze Detection,
 %  June 03--05, 2018, Woodstock, NY}
 %\acmPrice{15.00}
@@ -99,7 +98,7 @@
 \author{Lucas Cordeiro}
 \email{lucas.cordeiro@manchester.ac.uk}
 \affiliation{%
-  \institution{The University of Oxford}
+  \institution{The University of Manchester}
   \city{Manchester}
   \country{UK}
 }
@@ -117,7 +116,7 @@
 %% The abstract is a short summary of the work to be presented in the
 %% article.
 \begin{abstract}
-Currently, there exist various state-of-the-art tools to design solar photovoltaic (PV) systems, but they are mainly based on simulations, which do not cover all aspects of the design-space. We present a sound and automated approach to synthesize optimal sizing of stand-alone PV systems using program synthesis. In particular, our variant of counterexample guided inductive synthesis (CEGIS) approach has two phases: first we synthesize sizing of stand-alone PV systems but that may not achieve the lowest cost. The optimal solution is then verified via symbolic model checking; if the verification step fails, a counterexample is provided to the synthesis engine and the process iterates until an optimal sizing is obtained. Commercial equipment data is provided to our synthesis engine and candidate solutions are derived from financial analysis of the obtained sizing. Our synthesis method is novel and unprecedented to streamline the design of PV systems. Experimental results show that our synthesis method is able to synthesize within an acceptable run-time the optimal PV system sizing of two different intricate case studies.
+Currently, there exist various state-of-the-art tools to design solar photovoltaic (PV) systems, but they are mainly based on simulations, which do not cover all aspects of the design-space. We present a sound and automated approach to synthesize optimal sizing of stand-alone PV systems using program synthesis. In particular, our variant of counterexample guided inductive synthesis (CEGIS) approach has two phases: first we synthesize sizing of stand-alone PV systems but that may not achieve the lowest cost. The optimal solution is then verified via symbolic model checking; if the verification step fails, a bound is increased and the process iterates until an optimal sizing is obtained. Commercial equipment data is provided to our synthesis engine and candidate solutions are derived from financial analysis of the obtained sizing. Our synthesis method is novel and unprecedented to streamline the design of PV systems. Experimental results show that our synthesis method is able to synthesize within an acceptable run-time the optimal PV system sizing of two different intricate case studies.
 \end{abstract}
 
 %%
@@ -172,6 +171,7 @@ Currently, there exist various state-of-the-art tools to design solar photovolta
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{INTRODUCTION}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 Cyber-Physical Systems  (CPS) are engineered systems, which are built from, and depend upon, 
 the seamless integration of computational  and  physical  components~\cite{NSF2015}. 
 During operation, such components must frequently adapt to the executing environment changes 
@@ -194,149 +194,162 @@ However, formal methods based on \textit{symbolic model checking} and its applic
 
 Our work makes two major contributions. Firstly, the use of automated symbolic verification in electrical systems was uncommon in recent prior studies~\cite{abs-1811-09438}, and specifically their use in synthesizing PV sizing is unprecedented. Here, a list of PV components %(i.e., PV panels, charge controllers, inverters, and batteries) 
 can be fed to our proposed synthesis method together with user requirements and environment constraints, and our synthesis algorithm based on symbolic model checking can find the optimal solution in technical and economical terms. Secondly, we evaluate different state-of-art symbolic software verifiers with the goal of obtaining the best performance in our verification back-end for synthesizing optimal PV systems.
-%
+
 %-----------------------------------------------------------
 \section{BACKGROUND}
 \label{sec:AutomatedVerification}
 %-----------------------------------------------------------
-%
+
 %-----------------------------------------------------------
 \subsection{Program Synthesis}
 \label{sec:ProgramSynthesis}
 %-----------------------------------------------------------
-%
+
 The basic idea of program synthesis is to automatically construct a program $P$ that satisfies a correctness specification $\sigma$. In particular, program synthesis is automatically performed by engines that use a correctness specification $\sigma$, as starting point, and then incrementally produce a sequence of candidate solutions that partially satisfy $\sigma$~\cite{Abateetal2017}. As a result, a given candidate program $p$ is iteratively refined, in order to match $\sigma$ more closely. CEGIS represents one of the most popular approaches to program synthesis that are currently used in practice for CPS~\cite{Abateetal2017}, whose basic architecture is illustrated in Figure~\ref{Counter-Example-Guided-Inductive-Synthesis} and has close connections to algorithmic debugging using counterexamples and abstraction refinement~\cite{Alur13}. 
 
 The correctness specification $\sigma$ provided to our program synthesizer is of the form $\exists \vec{F} .  \forall \vec{x}.  \sigma(\vec{x}, \vec{F})$, where $\vec{F}$ ranges over functions, $\vec{x}$ ranges over ground terms, and $\sigma$ is a quantifier-free (QF) formula typically supported by SMT solvers. The ground terms are interpreted over some finite domain $\mathcal{D}$, where $\mathcal{D}$ can be encoded using the SMT's bit-vectors part. Examples of specification used by our method include house demand, energy, and battery autonomy; we also provide a list of equipment specification and price from different manufacturers and models.
 
 In Figure~\ref{Counter-Example-Guided-Inductive-Synthesis}, the phases {\sc Synthesize} and {\sc Verify} interact via a finite set of test vectors {\sc inputs} that is incrementally updated. Given the correctness specification $\sigma$, the {\sc Synthesize} procedure tries to find an existential witness $\vec{F}$ satisfying the specification $\sigma(\vec{x}, \vec{F})$, for all $\vec{x}$ in {\sc inputs} (as opposed to all $\vec{x} \in \mathcal{D}$). If {\sc synthesize} succeeds in finding a witness~$\vec{F}$, the latter is a candidate solution (i.e., feasible combination of equipment) to the full synthesis formula, which is passed to {\sc verify}, in order to check whether it is a proper solution ({\it i.e.}, $\vec{F}$ satisfies the specification $\sigma(\vec{x}, \vec{F})$ for all $\vec{x}\in\mathcal{D}$). If this is the case, then the algorithm terminates, i.e., we have found a feasible equipment with the lowest cost; otherwise, additional information is provided to the phase {\sc synthesize}, in the form of a new counterexample that is added to the {\sc inputs} set and the loop iterates again. 
-%
+
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=0.85\columnwidth]{fig2_rev.jpg}
 	\caption{CEGIS applied to PV system sizing.}
 	\label{Counter-Example-Guided-Inductive-Synthesis}
 \end{figure}
-%
+
 One may notice that each iteration of the CEGIS loop adds a new input to the finite set $\text{\sc inputs}$, which is then used for synthesis.  Given that the full set of inputs $\mathcal{D}$ is finite because we use bit-vector expressions, this means that the refinement loop can only iterate over a finite number of times; however, {\sc synthesize} may conclude that no candidate solution obeying $\sigma$ for the finite set $\text{\sc inputs}$ exists and our synthesis engine can then conclude that no feasible equipment combination was found. At this specific automated formal synthesis of PV systems, we use a variant of CEGIS, where in each iteration we increase the expected cost of PV systems and this controls the {\sc verify} phase and the search by the optimal sizing.  %however, $\mathcal{D}$ can represent a large number of elements for the finite set  and our synthesis engine can then conclude that no feasible equipment combination was found. 
 %In order to avoid exploring all possible values, machine learning techniques can be used in the phase {\sc synthesize}, with the goal of learning from experience (input-output samples), {\it i.e.}, learning from counterexamples provided by a verification oracle~\cite{Alur13}. In addition to that, a pre-processing stage could also figure as another block in the scheme shown in Fig. \ref{Counter-Example-Guided-Inductive-Synthesis}, between {\sc verify} and {\sc synthesize}, which would process counterexamples and provide larger and refined information to the latter, according to specification $\sigma$ and domain $\mathcal{D}$, in order to speed-up convergence to a final candidate.
 Program synthesis engines that implement the CEGIS approach~\cite{sketch} can automatically produce solutions for a large variety of specifications; %, due to the combination of automated testing, genetic algorithms, and SMT-based reasoning~\cite{Sharma14}; 
 here we have used software verifiers based on SMT solvers.%Here we used software model checking techniques implemented by different tools: CBMC~\cite{Kroening}, CPAChecker~\cite{Beyer2011}, and ESBMC~\cite{esbmc2018}.
-%
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Sizing Stand-alone Solar PV Systems}
 \label{sec:sizing}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 A PV system is illustrated in Fig.\ref{fig:blockdiagram}. %It identifies the PV generator, batteries, charge controller, inverter, and AC load. 
 The PV generator, which can be a panel or an array, is a semiconductor device that can convert solar energy into DC electricity. %In Fig.\ref{fig:blockdiagram}, there are two variables that depend on the site where the system is deployed and also the weather (i.e., solar irradiance $G$ and temperature $T$). 
 For night hours or rainy days, we hold batteries where power can be stored and used. The use of batteries as a storage form implies the presence of a charge controller~\cite{Hansen}. The PV arrays produce DC and therefore when the PV system contains an AC load, a DC/AC conversion is required. That converter is called inverter; and the AC load dictates the behavior of AC electrical load from the house that will be fed by the system.
+
 \begin{figure}[h]
 \includegraphics[width=0.4\textwidth]{blockdiagramPVS2_rev}
 \centering
 \caption{Block diagram for a typical stand-alone PV system~\cite{Hansen}.}
 \label{fig:blockdiagram} 
 \end{figure}
-\\
+
 %
 The sizing check stage will ensure that the system meets the standard project steps related to critical period solar energy method~\cite{Pinho} and adopting MPPT (Maximum Power Point Tracking) charge controller, which is the most common one in practice. 
-%
+
 Firstly, we need to correct the energy consumption estimated to the load ($E_{consumption}$), which is carried out by Eq.~\eqref{eq:Ecorrected}, where the efficiency of batteries ($\eta_{b}$), controller ($\eta_{c}$), and inverter ($\eta_{i}$) are considered~\cite{Pinho} as follows
+
 \begin{equation}
 \label{eq:Ecorrected}
-\scriptstyle E_{corrected} = \dfrac{\scriptstyle E_{consumption}}{ \scriptstyle \eta_{b} \eta_{c} \eta_{i} }.
+E_{corrected} = \dfrac{E_{consumption}}{\eta_{b} \eta_{c} \eta_{i} }.
 \end{equation}
-%
+
 We also need to estimate the energy that can be produced for each panel, called $E_{p}$, in Wh, defined as
-%
+
 \begin{equation}
 \label{eq:Ep}
-\scriptstyle E_{p} = \scriptstyle Solar\_Irradiance \times Panel\_Area \times \eta_{p} \times 1000,
+E_{p} = Solar\_Irradiance \times Panel\_Area \times \eta_{p} \times 1000,
 \end{equation}
-%
+
 \noindent where the solar irradiance is expressed in terms of $kWh/m^{2}$ and depends on the site where the PV system will be deployed; 
 the PV panel area is given in $m^{2}$ and corresponds to the size of one PV panel, and $\eta_{p}$ represents the PV panel efficiency.
-%
+
 The total minimum number of needed solar panels ($N_{TPmin}$) is computed as
-%
+
 \begin{equation}
 \label{eq:NTPmin}
-\scriptstyle N_{TPmin} = \dfrac{\scriptstyle E_{corrected}}{\scriptstyle E_{p}}.
+N_{TPmin} = \dfrac{E_{corrected}}{E_{p}}.
 \end{equation}
 %
 Particularly, the total number of panels in series ($N_{PSmin}$) and parallel ($N_{PPmin}$) are respectively given by
-%
+
 \begin{equation}
 \label{eq:NPSmin}
-\dfrac{\scriptstyle V_{mppt,min}}{\scriptstyle V_{maxPower,TempMax}} \scriptstyle \leq \scriptstyle N_{PSmin} \leq \dfrac{\scriptstyle V_{mppt,max}}{\scriptstyle V_{maxPower,TempMin}},
+\dfrac{V_{mppt,min}}{V_{maxPower,TempMax}} \leq N_{PSmin} \leq \dfrac{V_{mppt,max}}{V_{maxPower,TempMin}},
 \end{equation}
-%
+
 \begin{equation}
 \label{eq:NPPmin}
-\scriptstyle N_{PPmin} = \dfrac{\scriptstyle P_{total}}{\scriptstyle Number\,Panels\,Series \scriptstyle \times \scriptstyle P_{max,ref}},
+N_{PPmin} = \dfrac{P_{total}}{Number\,Panels\,Series \times P_{max,ref}},
 \end{equation}
-%
+
 \noindent where $V_{mppt,max}$ is the maximum operation voltage and $V_{mppt,min}$ is the minimum operation voltage of the charge controller; $V_{maxPower,TempMax}$ and $V_{maxPower,TempMin}$ are the maximum power voltage from the PV module considering the maximum and minimum operational temperature, respectively; $P_{total}$ is the total power demanded from the PV system and $P_{max,ref}$ is the power supplied from one PV panel in $Watts$.
 %, $ V_{system} $ is the DC voltage of the bus, normally $12$, $24$ or $48$ V.
-%
+
 Regarding batteries, we must first define the total capacity of the battery bank, which can be described as
+
 \begin{equation}
 \label{eq:Cbank}
-\scriptstyle C_{bank} \scriptstyle = \dfrac{\scriptstyle E_{corrected} \scriptstyle \times \scriptstyle autonomy}{\scriptstyle V_{system} \scriptstyle \times \scriptstyle DOD},
+C_{bank} = \dfrac{E_{corrected} \times autonomy}{V_{system} \times DOD},
 \end{equation}
-%
+
 \noindent where the variable $autonomy$ is a design definition; % and normally has a value ranging from $6$ to $48$h; 
 $ V_{system} $ is the DC voltage of the bus, and $ DOD $ is the battery deep of discharge (considered of maximum of 25\% here).
-%
+
 Secondly, the total (minimum) number of batteries is computed as 
+
 \begin{equation}
 \label{eq:Nbtotal}
-\scriptstyle N_{B}total = \scriptstyle N_{BS}min \scriptstyle \times \scriptstyle N_{BP}min = \dfrac{\scriptstyle V_{system}}{\scriptstyle V_{bat}} \scriptstyle \times \dfrac{\scriptstyle C_{bank}}{\scriptstyle 1 \,Battery \, Capacity}.
+N_{B}total = N_{BS}min \times N_{BP}min.
 \end{equation}
-%
+
+\begin{equation}
+\label{eq:Nbtotal2}
+N_{B}total = \dfrac{V_{system}}{V_{bat}} \times \dfrac{C_{bank}}{1 \,Battery \, Capacity}.
+\end{equation}
+
 Regarding the charge controller, it must initially meet the voltage requirement of the PV system, as described by Eq.~\eqref{eq:vcvsystem} to the charge controller voltage: 
+
 \begin{equation}
 \label{eq:vcvsystem}
-\scriptstyle V_{c} = \scriptstyle V_{system}.
+V_{c} = V_{system}.
 \end{equation}
-%
+
 The short circuit reference information from the manufacturer's solar panel must be corrected to the cell temperature because the field temperature is higher than the nominal or laboratory temperature, and PV system is temperature dependent, as 
-%
+
 \begin{equation}
 \label{eq:iscamb}
-\scriptstyle I_{sc,amb} = \dfrac{\scriptstyle G}{\scriptstyle G_{ref}} \left[ \scriptstyle I_{sc,ref} + \scriptstyle \mu_{I} \scriptstyle \times \scriptstyle (T-25) \right]. 
+I_{sc,amb} = \dfrac{G}{G_{ref}} \left[ I_{sc,ref} + \mu_{I} \times (T-25) \right]. 
 \end{equation}
-%
+
 The controller must meet the maximum current from the PV array given by Eqs. \eqref{eq:icmin} and \eqref{eq:icicmin} as
+
 \begin{equation}
 \label{eq:icmin}
-\scriptstyle I_{c,min} = \scriptstyle I_{sc,amb} \times \scriptstyle N_{PP},
+I_{c,min} = I_{sc,amb} \times N_{PP},
 \end{equation}
-%
+
 \begin{equation}
 \label{eq:icicmin}
-\scriptstyle I_{c} \geq \scriptstyle I_{c,min}.
+I_{c} \geq I_{c,min}.
 \end{equation}
-%
+
 The inverter sizing check is performed by means of three equations. Eq.~\eqref{eq:vindc} ensures that the input voltage of the controller meets the system voltage. Eq.~\eqref{eq:voutac} ensures that the output voltage of the controller meets the AC voltage of the load. Finally, Eq.~\eqref{eq:invcheck} ensures that the controller can support the total demand of the load ($Demand$) and the surge power ($P_{surge}$), where $V_{in}DC$ is the nominal input voltage and $V_{out}AC$ is the nominal output voltage of the inverter; $MAX_{AC,ref}$ is the peak power that the inverter can support.
-%
+
 \begin{equation}
 \label{eq:vindc} 
-\scriptstyle V_{in}DC = \scriptstyle V_{system}.
+V_{in}DC = V_{system}.
 \end{equation}
-%
+
 \begin{equation}
 \label{eq:voutac} 
-\scriptstyle V_{out}AC = \scriptstyle V_{AC}.
+V_{out}AC = V_{AC}.
 \end{equation}
-%
+
 \begin{equation}
 \label{eq:invcheck} 
-\left[ (\scriptstyle Demand \leq \scriptstyle P_{AC,ref}) \, \scriptstyle and \, \scriptstyle (P_{surge} \leq MAX_{AC,ref}) \right].
+\left[ (Demand \leq P_{AC,ref}) \, and \, (P_{surge} \leq MAX_{AC,ref}) \right].
 \end{equation}
+
 % -------------------------------------------------------
 \subsection{Optimal Sizing of PV Systems}
 % -------------------------------------------------------
-%
+
 %%%To select an optimal combination of components from a PV system to meet sizing constraints, 
 %we need to evaluate \textit{power reliability} and perform \textit{system cost} analysis for the recommended system. An ideal combination for any PV system 
 The optimal sizing of PV systems is made by the best compromise between two objectives: power reliability and system cost~\cite{Alsadi2018}. 
@@ -344,16 +357,18 @@ Regarding power reliability, this work will rely on the critical period solar en
 %the usual is to use loss of load probability (LOLP) or loss of power supply probability (LPSP). Based on the fact that here we are neither considering site characteristics nor the load changes over time, the reliability analysis will be developed only by the critical period method of PV sizing \textcolor{red}{What does it mean? Remember that we have software engineering audience}. 
 %However, considering the system cost analysis, we usually find related studies done with Net Present Cost (NPC), Levelized Cost of Energy (LCOE), or Life Cycle Cost (LCC). Here, based on the fact that the deployment location is not specified, our study uses an adapted LCC analysis, where only the deployment cost is considered about the model, i.e., without the operational and maintenance costs~\cite{Alsadi2018}.
 Considering the system cost analysis, based on the fact that the deployment location is not specified, our study uses an adapted Life Cycle Cost (LCC) analysis, where only the acquisition cost is considered about the model, i.e., without the operational and maintenance costs~\cite{Alsadi2018}.
+
 %------------------------------------------------------
 \section{Synthesizing Optimal Sizing of Stand-alone Solar Photovoltaic Systems}
 %Applying Automated Verification to Optimal Sizing of Stand-alone Solar PV Systems}
 %------------------------------------------------------
+
 Algorithm~\ref{alg:verification-algorithm} describes our pseudo-code to synthesize stand-alone PV systems using symbolic model checking. 
-%
+
  \begin{algorithm}
  \caption{Synthesis algorithm}
  \begin{algorithmic}[1]
- \begin{scriptsize}
+% \begin{scriptsize}
  \renewcommand{\algorithmicrequire}{\textbf{Input:}}
  \renewcommand{\algorithmicensure}{\textbf{Output:}}
   \STATE Initialize variables \\
@@ -386,11 +401,10 @@ Algorithm~\ref{alg:verification-algorithm} describes our pseudo-code to synthesi
 	\STATE Violation check with \textbf{assert}$(F_{obj} > HintCost)$ \\
   \ENDFOR
  \RETURN $(\,)$ 
-  \end{scriptsize}
+%  \end{scriptsize}
  \end{algorithmic} 
  \label{alg:verification-algorithm}
  \end{algorithm}
-%
 
 Our synthesis algorithm will synthesize constant values; it starts with the input of manufacturers data and prices of PV panels, batteries, charge controllers and inverters (Line 2). After that, we define user requirements, i.e., house requirements and design definitions, from Lines 4 and 5. 
 
@@ -405,9 +419,11 @@ If our algorithm does not find a feasible solution among the item of equipment t
 The main challenge for the {\sc Synthesize} phase is to find a feasible candidate solution regarding the constraints and user requirements. Related to our {\sc Verify} phase the challenge is to find the lowest acquisition cost from a list of equipment and components that is provided from the {\sc Synthesize} phase. 
 
 Note that the process described here in completely automated and that a validation is performed by our {\sc Verify} phase to ensure that the approach is sound.
+
 %---------------------------------------------------------------------------
 \section{Results and Discussion}
 %---------------------------------------------------------------------------
+
 \textbf{Case studies.} We have performed two stand-alone PV system case studies to evaluate our proposed synthesis approach as described in the first line of Table~\ref{tab1}. Our synthesis algorithm was fed with data and costs of twenty-two equipment items from nine different manufacturers of PV systems. Furthermore, three start-of-art verification tools, CBMC,\footnote{Command-line: \$ cbmc -\phantom{}-unwind 100 filename.c -\phantom{}-trace} ESBMC,\footnote{Command-line: \$ esbmc filename.c -\phantom{}-no-bounds-check -\phantom{}-no-pointer-check -\phantom{}-unwind 100 -\phantom{}-boolector} %UAutomizer\footnote{Command-line: \$ ./Ultimate -tc config/AutomizerReach.xml -s config/svcomp-Reach-32bit-Automizer\_Default.epf -i filename.c -\phantom{}-traceabstraction.limit.analysis.time 900 -\phantom{}-traceabstraction.stop.after.first.violation.was.found false -\phantom{}-cacsl2boogietranslator.overapproximate.operations.on.floating.types false -\phantom{}- cacsl2boogietranslator.assume.nondeterminstic.values.are.in.range false -\phantom{}-rcfgbuilder.add.additional.assume.for.each.assert true -\phantom{}-rcfgbuilder.simplify.code.blocks true -\phantom{}-rcfgbuilder.size.of.a.code.block LoopFreeBlock}, 
 and CPAchecker,\footnote{Command-line: \$ scripts/cpa.sh -heap 64000m -config config/bmc-incremental.properties -spec config/specification/sv-comp-reachability.spc filename.c} were used as our verification engine to compare our approach effectiveness and efficiency. 
 
@@ -421,7 +437,8 @@ The violation of line 209 indicated in Table~\ref{tab1} is the $assert$ of line 
 CBMC and ESBMC produced \textit{UNKNOWN} result (\textit{timeout} or \textit{out of memory}); this partially answers the \textit{RQ2}.
 %
 %used with the SMT incremental mode\footnote{Command-line: \$ esbmc filename.c -\phantom{}-no-bounds-check -\phantom{}-no-pointer-check -\phantom{}-unwind 100 -\phantom{}-smt-during-symex -\phantom{}-smt-symex-guard -\phantom{}-z3} enabled with the goal of reducing memory usage; we have also used the SMT solver Z3 version 4.7.1~\cite{DeMoura}.
-\begin{table}
+
+\begin{table*}
 \caption{Case studies and Results: optimization of PV systems.}\label{tab1}
 %\begin{scriptsize}
 \begin{tabular}{|c|c|c|}
@@ -443,307 +460,10 @@ Tools & \textbf{Result} & \textbf{Result}\\
 \hline
 \end{tabular}
 %\end{scriptsize}
-\end{table}
+\end{table*}
 %
 
 \textbf{Threats to validity.}  We have reported a favorable assessment of the proposed method. Nevertheless, we have also identified four threats to the validity of our results that can be further assessed and constitute future work: (1) improvement of the power reliability analysis: to include loss of load probability or loss of power supply probability, which can make the analysis more accurate; (2) improvement of the system cost analysis: using Net Present Cost (NPC), or Levelized Cost of Energy (LCOE) criteria, in order to promote the acceptability of investment, or to include operational and maintenance costs to the adopted Life Cycle Cost (LCC) analysis performed at this paper; (3) to increase the equipment and manufacturers data base: this will increase the complexity of the optimization but the result will also allow improved sizing; and (4) to compare the results of our approach with an off-the-shelf PV sizing/optimization software: this will validate the results obtained and it allows a simulation-verification comparative.
-
-
-
-\section{Authors and Affiliations}
-
-Each author must be defined separately for accurate metadata
-identification. Multiple authors may share one affiliation. Authors'
-names should not be abbreviated; use full first names wherever
-possible. Include authors' e-mail addresses whenever possible.
-
-Grouping authors' names or e-mail addresses, or providing an ``e-mail
-alias,'' as shown below, is not acceptable:
-\begin{verbatim}
-  \author{Brooke Aster, David Mehldau}
-  \email{dave,judy,steve@university.edu}
-  \email{firstname.lastname@phillips.org}
-\end{verbatim}
-
-The \verb|authornote| and \verb|authornotemark| commands allow a note
-to apply to multiple authors --- for example, if the first two authors
-of an article contributed equally to the work.
-
-If your author list is lengthy, you must define a shortened version of
-the list of authors to be used in the page headers, to prevent
-overlapping text. The following command should be placed just after
-the last \verb|\author{}| definition:
-\begin{verbatim}
-  \renewcommand{\shortauthors}{McCartney, et al.}
-\end{verbatim}
-Omitting this command will force the use of a concatenated list of all
-of the authors' names, which may result in overlapping text in the
-page headers.
-
-The article template's documentation, available at
-\url{https://www.acm.org/publications/proceedings-template}, has a
-complete explanation of these commands and tips for their effective
-use.
-
-\section{Rights Information}
-
-Authors of any work published by ACM will need to complete a rights
-form. Depending on the kind of work, and the rights management choice
-made by the author, this may be copyright transfer, permission,
-license, or an OA (open access) agreement.
-
-Regardless of the rights management choice, the author will receive a
-copy of the completed rights form once it has been submitted. This
-form contains \LaTeX\ commands that must be copied into the source
-document. When the document source is compiled, these commands and
-their parameters add formatted text to several areas of the final
-document:
-\begin{itemize}
-\item the ``ACM Reference Format'' text on the first page.
-\item the ``rights management'' text on the first page.
-\item the conference information in the page header(s).
-\end{itemize}
-
-Rights information is unique to the work; if you are preparing several
-works for an event, make sure to use the correct set of commands with
-each of the works.
-
-\section{CCS Concepts and User-Defined Keywords}
-
-Two elements of the ``acmart'' document class provide powerful
-taxonomic tools for you to help readers find your work in an online
-search.
-
-The ACM Computing Classification System ---
-\url{https://www.acm.org/publications/class-2012} --- is a set of
-classifiers and concepts that describe the computing
-discipline. Authors can select entries from this classification
-system, via \url{https://dl.acm.org/ccs/ccs.cfm}, and generate the
-commands to be included in the \LaTeX\ source.
-
-User-defined keywords are a comma-separated list of words and phrases
-of the authors' choosing, providing a more flexible way of describing
-the research being presented.
-
-CCS concepts and user-defined keywords are required for all short- and
-full-length articles, and optional for two-page abstracts.
-
-\section{Sectioning Commands}
-
-Your work should use standard \LaTeX\ sectioning commands:
-\verb|section|, \verb|subsection|, \verb|subsubsection|, and
-\verb|paragraph|. They should be numbered; do not remove the numbering
-from the commands.
-
-Simulating a sectioning command by setting the first word or words of
-a paragraph in boldface or italicized text is {\bfseries not allowed.}
-
-\section{Tables}
-
-The ``\verb|acmart|'' document class includes the ``\verb|booktabs|''
-package --- \url{https://ctan.org/pkg/booktabs} --- for preparing
-high-quality tables.
-
-Table captions are placed {\itshape above} the table.
-
-Because tables cannot be split across pages, the best placement for
-them is typically the top of the page nearest their initial cite.  To
-ensure this proper ``floating'' placement of tables, use the
-environment \textbf{table} to enclose the table's contents and the
-table caption.  The contents of the table itself must go in the
-\textbf{tabular} environment, to be aligned properly in rows and
-columns, with the desired horizontal and vertical rules.  Again,
-detailed instructions on \textbf{tabular} material are found in the
-\textit{\LaTeX\ User's Guide}.
-
-Immediately following this sentence is the point at which
-Table~\ref{tab:freq} is included in the input file; compare the
-placement of the table here with the table in the printed output of
-this document.
-
-\begin{table}
-  \caption{Frequency of Special Characters}
-  \label{tab:freq}
-  \begin{tabular}{ccl}
-    \toprule
-    Non-English or Math&Frequency&Comments\\
-    \midrule
-    \O & 1 in 1,000& For Swedish names\\
-    $\pi$ & 1 in 5& Common in math\\
-    \$ & 4 in 5 & Used in business\\
-    $\Psi^2_1$ & 1 in 40,000& Unexplained usage\\
-  \bottomrule
-\end{tabular}
-\end{table}
-
-To set a wider table, which takes up the whole width of the page's
-live area, use the environment \textbf{table*} to enclose the table's
-contents and the table caption.  As with a single-column table, this
-wide table will ``float'' to a location deemed more
-desirable. Immediately following this sentence is the point at which
-Table~\ref{tab:commands} is included in the input file; again, it is
-instructive to compare the placement of the table here with the table
-in the printed output of this document.
-
-\begin{table*}
-  \caption{Some Typical Commands}
-  \label{tab:commands}
-  \begin{tabular}{ccl}
-    \toprule
-    Command &A Number & Comments\\
-    \midrule
-    \texttt{{\char'134}author} & 100& Author \\
-    \texttt{{\char'134}table}& 300 & For tables\\
-    \texttt{{\char'134}table*}& 400& For wider tables\\
-    \bottomrule
-  \end{tabular}
-\end{table*}
-
-\section{Math Equations}
-You may want to display math equations in three distinct styles:
-inline, numbered or non-numbered display.  Each of the three are
-discussed in the next sections.
-
-\subsection{Inline (In-text) Equations}
-A formula that appears in the running text is called an inline or
-in-text formula.  It is produced by the \textbf{math} environment,
-which can be invoked with the usual
-\texttt{{\char'134}begin\,\ldots{\char'134}end} construction or with
-the short form \texttt{\$\,\ldots\$}. You can use any of the symbols
-and structures, from $\alpha$ to $\omega$, available in
-\LaTeX~\cite{Lamport:LaTeX}; this section will simply show a few
-examples of in-text equations in context. Notice how this equation:
-\begin{math}
-  \lim_{n\rightarrow \infty}x=0
-\end{math},
-set here in in-line math style, looks slightly different when
-set in display style.  (See next section).
-
-\subsection{Display Equations}
-A numbered display equation---one set off by vertical space from the
-text and centered horizontally---is produced by the \textbf{equation}
-environment. An unnumbered display equation is produced by the
-\textbf{displaymath} environment.
-
-Again, in either environment, you can use any of the symbols and
-structures available in \LaTeX\@; this section will just give a couple
-of examples of display equations in context.  First, consider the
-equation, shown as an inline equation above:
-\begin{equation}
-  \lim_{n\rightarrow \infty}x=0
-\end{equation}
-Notice how it is formatted somewhat differently in
-the \textbf{displaymath}
-environment.  Now, we'll enter an unnumbered equation:
-\begin{displaymath}
-  \sum_{i=0}^{\infty} x + 1
-\end{displaymath}
-and follow it with another numbered equation:
-\begin{equation}
-  \sum_{i=0}^{\infty}x_i=\int_{0}^{\pi+2} f
-\end{equation}
-just to demonstrate \LaTeX's able handling of numbering.
-
-\section{Figures}
-
-The ``\verb|figure|'' environment should be used for figures. One or
-more images can be placed within a figure. If your figure contains
-third-party material, you must clearly identify it as such, as shown
-in the example below.
-%\begin{figure}[h]
-%  \centering
-%  \includegraphics[width=\linewidth]{sample-franklin}
-%  \caption{1907 Franklin Model D roadster. Photograph by Harris \&
-%    Ewing, Inc. [Public domain], via Wikimedia
-%    Commons. (\url{https://goo.gl/VLCRBB}).}
-%  \Description{The 1907 Franklin Model D roadster.}
-%\end{figure}
-
-Your figures should contain a caption which describes the figure to
-the reader. Figure captions go below the figure. Your figures should
-{\bfseries also} include a description suitable for screen readers, to
-assist the visually-challenged to better understand your work.
-
-Figure captions are placed {\itshape below} the figure.
-
-
-
-\section{Citations and Bibliographies}
-
-The use of BibTeX for the preparation and formatting of one's
-references is strongly recommended. Authors' names should be complete
---- use full first names (``Donald E. Knuth'') not initials
-(``D. E. Knuth'') --- and the salient identifying features of a
-reference should be included: title, year, volume, number, pages,
-article DOI, etc.
-
-The bibliography is included in your source document with these two
-commands, placed just before the \verb|\end{document}| command:
-\begin{verbatim}
-  \bibliographystyle{ACM-Reference-Format}
-  \bibliography{bibfile}
-\end{verbatim}
-where ``\verb|bibfile|'' is the name, without the ``\verb|.bib|''
-suffix, of the BibTeX file.
-
-Citations and references are numbered by default. A small number of
-ACM publications have citations and references formatted in the
-``author year'' style; for these exceptions, please include this
-command in the {\bfseries preamble} (before
-``\verb|\begin{document}|'') of your \LaTeX\ source:
-\begin{verbatim}
-  \citestyle{acmauthoryear}
-\end{verbatim}
-
-  Some examples.  A paginated journal article \cite{Abril07}, an
-  enumerated journal article \cite{Cohen07}, a reference to an entire
-  issue \cite{JCohen96}, a monograph (whole book) \cite{Kosiur01}, a
-  monograph/whole book in a series (see 2a in spec. document)
-  \cite{Harel79}, a divisible-book such as an anthology or compilation
-  \cite{Editor00} followed by the same example, however we only output
-  the series if the volume number is given \cite{Editor00a} (so
-  Editor00a's series should NOT be present since it has no vol. no.),
-  a chapter in a divisible book \cite{Spector90}, a chapter in a
-  divisible book in a series \cite{Douglass98}, a multi-volume work as
-  book \cite{Knuth97}, an article in a proceedings (of a conference,
-  symposium, workshop for example) (paginated proceedings article)
-  \cite{Andler79}, a proceedings article with all possible elements
-  \cite{Smith10}, an example of an enumerated proceedings article
-  \cite{VanGundy07}, an informally published work \cite{Harel78}, a
-  doctoral dissertation \cite{Clarkson85}, a master's thesis:
-  \cite{anisi03}, an online document / world wide web resource
-  \cite{Thornburg01, Ablamowicz07, Poker06}, a video game (Case 1)
-  \cite{Obama08} and (Case 2) \cite{Novak03} and \cite{Lee05} and
-  (Case 3) a patent \cite{JoeScientist001}, work accepted for
-  publication \cite{rous08}, 'YYYYb'-test for prolific author
-  \cite{SaeediMEJ10} and \cite{SaeediJETC10}. Other cites might
-  contain 'duplicate' DOI and URLs (some SIAM articles)
-  \cite{Kirschmer:2010:AEI:1958016.1958018}. Boris / Barbara Beeton:
-  multi-volume works as books \cite{MR781536} and \cite{MR781537}. A
-  couple of citations with DOIs:
-  \cite{2004:ITE:1009386.1010128,Kirschmer:2010:AEI:1958016.1958018}. Online
-  citations: \cite{TUGInstmem, Thornburg01, CTANacmart}. Artifacts:
-  \cite{R} and \cite{UMassCitations}.
-
-\section{Acknowledgments}
-
-Identification of funding sources and other support, and thanks to
-individuals and groups that assisted in the research and the
-preparation of the work should be included in an acknowledgment
-section, which is placed just before the reference section in your
-document.
-
-This section has a special environment:
-\begin{verbatim}
-  \begin{acks}
-  ...
-  \end{acks}
-\end{verbatim}
-so that the information contained therein can be more easily collected
-during the article metadata extraction phase, and to ensure
-consistency in the spelling of the section heading.
-
-Authors should not prepare this section as a numbered or unnumbered {\verb|\section|}; please use the ``{\verb|acks|}'' environment.
 
 %%
 %% The acknowledgments section is defined using the "acks" environment
@@ -751,7 +471,7 @@ Authors should not prepare this section as a numbered or unnumbered {\verb|\sect
 %% identification of the section in the article metadata, and the
 %% consistent spelling of the heading.
 \begin{acks}
-To Robert, for the bagels and explaining CMYK and color spaces.
+The authors would like to thank: (i) Newton Fund [grant number $261881580$] for the research mobility support; (ii) FAPEAM - Amazonas State Foundation for Research Support [PROTI-Pesquisa $2018$], for the DCTIEX II scholarship (NOV-$2018$), and for support the research mobility to UK; and (iii) FAS - Sustainable Amazonas Foundation for the PhD scholarship (NOV-$2017$ to MAR-$2019$).
 \end{acks}
 
 %%
