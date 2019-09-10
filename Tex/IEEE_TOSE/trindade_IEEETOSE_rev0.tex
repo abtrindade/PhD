@@ -362,7 +362,8 @@
 % not capitalized unless they are the first or last word of the title.
 % Linebreaks \\ can be used within to get better formatting as desired.
 % Do not put math or special symbols in the title.
-\title{An automated formal synthesis optimization method for sizing of stand-alone solar photovoltaic systems: case studies and comparative}
+%\title{An automated formal synthesis optimization method for sizing of stand-alone solar photovoltaic systems: case studies and comparative}
+\title{Optimal Sizing of Stand-alone Solar Photovoltaic Systems Through Automated Formal Synthesis Method}
 %
 %
 % author names and IEEE memberships
@@ -433,17 +434,13 @@
 % As a general rule, do not put math, special symbols or citations
 % in the abstract or keywords.
 \begin{abstract}
-There exist various methods and tools to size solar photovoltaic systems; however, these existing tools are mainly based on simulations, which do not cover all aspects of the design-space during the search for the optimal solution. Here, we present a novel sound and automated approach to obtain optimal sizing of stand-alone PV systems using program synthesis, with a particular focus on computer optimization methods instead of criteria or objectives, which were investigated in prior studies over the last two decades. In particular, our variant of counterexample guided inductive synthesis (CEGIS) approach has two phases: first we synthesize the sizing of stand-alone PV systems based on power reliability, but that may not achieve the lowest cost; second, the proposed solution is then verified iteratively with a lower bound cost via symbolic model checking. If the verification step does not fail, the lower bound is adjusted; and if it fails, a counterexample is provided with the optimal sizing, thereby linking the technical response of the first phase with cost analysis of the second phase. Commercial equipment data from different manufacturers are provided to our synthesis engine and candidate solutions are derived from financial analysis of the obtained sizing. Our synthesis method is novel and unprecedented to streamline the design of PV systems. Experimental results using seven case studies show that our synthesis method is able to produce within an acceptable run-time the optimal PV system sizing. We also present a comparative with a specialized simulation tool over real PV systems to show the effectiveness of our approach, which is able to provide more accurate results of optimal sizing of stand-alone PV systems than that existing simulation tool.
+There exist various methods and tools to size solar photovoltaic systems; however, the existing tools are mainly based on simulations, which do not cover all aspects of the design-space during the search for the optimal solution. Here, we present a novel sound and automated approach to obtain optimal sizing of stand-alone photovoltaic systems using program synthesis, with a particular focus on computer optimization methods instead of criteria or objectives, which were investigated in prior studies over the last decades. In particular, our variant of counterexample guided inductive synthesis (CEGIS) approach has two phases: first we synthesize the sizing of stand-alone photovoltaic systems based on power reliability, but that may not achieve the lowest cost; second, the proposed solution is then verified iteratively with a lower bound cost via symbolic model checking. If the verification step does not fail, the lower bound is adjusted; and if it fails, a counterexample is provided with the optimal sizing, thereby linking the technical response of the first phase with cost analysis of the second phase. Commercial equipment data from different manufacturers are provided to our synthesis engine and candidate solutions are derived from financial analysis. Experimental results using seven case studies show that our synthesis method is able to produce within an acceptable run-time the optimal system sizing. We also present a comparative with a specialized simulation tool over real photovoltaic systems to show the effectiveness of our approach, which is able to provide more detailed and accurate solution than the existing simulation tool.
 \end{abstract}
 
 % Note that keywords are not normally used for peerreview papers.
 \begin{IEEEkeywords}
 Automated verification, model checking, program synthesis, electrical systems, solar photovoltaic systems.
 \end{IEEEkeywords}
-
-
-
-
 
 
 % For peer review papers, you can put extra information on the cover
