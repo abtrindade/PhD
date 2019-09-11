@@ -479,176 +479,51 @@ Automated verification, model checking, program synthesis, electrical systems, s
 
 \IEEEPARstart{L}{ack} of access to clean and affordable energy is considered a core dimension of poverty~\cite{Hussein2012}. Progress has been made worldwide; in particular, the number of people without electricity access fell below $1$ billion threshold for the first time in $2017$~\cite{IEAweo2018}. In order to provide universal electricity for all, decentralized systems led by solar photovoltaic (PV) in off-grid and mini-grid systems will be the lowest-cost solution for three-quarters of the additional connections needed~\cite{Hussein2012}; specifically grid extension will be the standard in urban areas~\cite{IEAweo2018}.
 
-In order to simulate or evaluate a PV system, there exist various specialized tools, e.g., RETScreen, HOMER, PVWatts, SAM and  Hybrid2~\cite{Pradhan,Swarnkar,NRELDobos,NRELBlair,Mills}; and even general purpose simulation tools, e.g.,  PSpice~\cite{Gow1999}, or MATLAB/Simulink package~\cite{Benatiallah2017}. However, these tools are based on simulation; they have the drawback of an incomplete coverage  since verification of all possible combinations and potential failures of a system is unfeasible~\cite{ClarkeHV18}. 
+In order to simulate or evaluate a PV system, there exist various specialized tools, e.g., RETScreen, HOMER, PVWatts, SAM and Hybrid2~\cite{Pradhan,Swarnkar,NRELDobos,NRELBlair,Mills}; and even general purpose simulation tools, e.g.,  PSpice~\cite{Gow1999}, or MATLAB/Simulink package~\cite{Benatiallah2017}. However, these tools are based on simulation; they have the drawback of an incomplete coverage  since verification of all possible combinations and potential failures of a system is unfeasible~\cite{ClarkeHV18}. 
 
 Optimization of PV systems is not a recent topic; since the $90$'s different techniques using a wide variety of criteria to find ultimate combinations for design parameters, based on intuitive, numerical and analytical methods were developed and evaluated~\cite{Applasamy2011}. An ideal combination of any PV system is made by the best compromise between two considered objectives, which is power \textit{reliability} and \textit{system cost}~\cite{Alsadi2018}.
+
+Formal methods could offer a great potential to obtain a more effective design process to PV systems~\cite{ClarkeHV18}. Related to past studies where formal methods are applied to the energy area, in $2012$, a Chinese smart grid implementation was considered as case study to address the verification problem for performance and energy consumption~\cite{Yukseletall2012}. In $2015$, automated simulation-based verification technique was applied to verify correctness of power system protection settings ~\cite{Sengupta2015}. In $2017$, a researcher suggested the application of formal methods to verify and control the behavior of computational devices, interacting over a smart grid  infrastructure~\cite{Abate2017}. Finally, in $2018$, a verification methodology was applied to PV panels (not a complete PV system) and its distributed power point tracking~\cite{Driouich2018}. However, past studies did not deal with electricity generation or even solar PV systems optimization. Formal methods based on \textit{symbolic model checking} and its application to synthesize PV systems have not been further explored in literature.
  
-Note that in this study, our focus is not on a novel criteria or even optimization objectives. Instead, our novelty relies on an effective approach on the pursuit of the optimal solution of PV systems using formal methods, which outperforms existing state-of-the-art simulation tools.
+Here, we have developed a variant of counterexample guided inductive synthesis (CEGIS) for synthesizing optimal sizing of stand-alone PV systems using commercial equipment data. Given a correctness specification $\sigma$, our method uses that as starting point and then iteratively produces a sequence of candidate solutions that satisfy $\sigma$, related to power reliability. In particular, in each iteration, we synthesize sizing of stand-alone PV systems but that may not achieve the lowest cost. The candidate solution is then verified via symbolic model checking with a lower bound that serves as the minimum cost of reference; if the verification step does not fail, the lower bound is adjusted. If it fails then a counterexample is provided with an optimal sizing that meets power reliability and system cost. Note that in this study, our focus is not on a novel criteria or even optimization objectives. Instead, our novelty relies on an effective approach on the pursuit of the optimal solution of PV systems using formal methods. %, which outperforms existing state-of-the-art simulation tool.
 
-Formal methods based on \textit{symbolic model checking} and its application 
-to synthesize PV systems have not been further explored in literature, which could offer 
-a great potential to obtain a more effective design process to PV systems~\cite{ClarkeHV18}. 
-Here, we use a variant of counterexample guided inductive synthesis (CEGIS) for synthesizing 
-optimal sizing of stand-alone PV systems using commercial equipment data. 
-Given a correctness specification $\sigma$, our method uses that as starting point 
-and then iteratively produces a sequence of candidate solutions that satisfy $\sigma$, 
-related to power reliability. In particular, in each iteration, we synthesize sizing of 
-stand-alone PV systems but that may not achieve the lowest cost. The candidate solution 
-is then verified via symbolic model checking with a lower bound that serves as the minimum 
-cost of reference; if the verification step does not fail, the lower bound is adjusted. 
-If it fails then a counterexample is provided with an optimal sizing that meets 
-power reliability and system cost.
+%Our work makes two major contributions. \textbf{First}, the use of automated symbolic verification methods in electrical systems was rare in recent prior studies~\cite{abs-1811-09438}, and specifically their use in synthesizing optimal PV sizing is unprecedented. Here, a list of PV components (i.e., PV panels, charge controllers, inverters, and batteries) can be fed to our proposed synthesis method together with user requirements and environment constraints, and our synthesis algorithm based on symbolic model checking can find the optimal solution in technical and economical terms. \textbf{Second}, %our experimental results show that our synthesis method is an effective and efficient approach on the pursuit of the optimal solution of PV systems using formal methods, which outperforms existing state-of-the-art simulation tool. As a result, 
+\textit{Contribution}. Our study marks the first application of a sound and automated formal synthesis approach able to provide accurate results of optimal sizing of stand-alone PV systems, which outperforms existing state-of-the-art simulation tool used in a comparative with seven case studies. Thus, we considerably advance the state-of-the-art in applied energy over the last two decades with the goal of optimally designing PV systems.
 
-%------------------------------------------------------
-\subsection{Contributions}
-%------------------------------------------------------
-
-Our work makes three major contributions. \textbf{First}, the use of automated 
-symbolic verification methods in electrical systems was uncommon in recent 
-prior studies~\cite{abs-1811-09438}, and specifically their use in synthesizing 
-optimal PV sizing is unprecedented. Here, a list of PV components (i.e., PV panels, 
-charge controllers, inverters, and batteries) can be fed to our proposed synthesis 
-method together with user requirements and environment constraints, 
-and our synthesis algorithm based on symbolic model checking 
-can find the optimal solution in technical and economical terms. 
-\textbf{Second}, we evaluate different state-of-art symbolic software 
-verifiers with the goal of obtaining the best performance in our verification 
-back-end for synthesizing optimal PV systems, being the first work that performs this type of comparative.
-\textbf{Third}, our experimental results show that our synthesis method is an effective and efficient approach 
-on the pursuit of the optimal solution of PV systems using formal methods, which outperforms 
-existing state-of-the-art simulation tool. As a result, our study marks the first application of a sound
-and automated formal synthesis approach able to provide accurate results of optimal sizing of stand-alone PV systems.
-Thus, we considerably advance the state-of-the-art in applied energy over the last two decades 
-with the goal of optimally designing PV systems.
-
-\noindent \textit{Outline}. Section~\ref{sec:Background} gives the background about related studies, 
-program synthesis, sizing design and validation of PV systems, and the mathematical modeling. 
-Section~\ref{sec:Method} presents the automated formal synthesis proposed 
-in this underlying study. Section~\ref{sec:Results} is devoted to the experimentation, 
-results and discussions. Section~\ref{sec:Conclusion} presents the conclusion and describes future work.
+\textit{Outline}. Section~\ref{sec:Background} gives the background about program synthesis, design sizing and validation of PV systems, and the mathematical modeling. Section~\ref{sec:Method} presents the automated formal synthesis proposed in this underlying study. Section~\ref{sec:Results} is devoted to the experimentation, results and discussions. Section~\ref{sec:Conclusion} presents the conclusion and describes future work.
 
 \section{Background}
 \label{sec:Background}
 %-----------------------------------------------------------
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{State-of-art in Automated Verification of Electrical Systems}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-Here we discuss only the use of formal methods on electrical systems in general since currently there exists no use of it or even program synthesis to obtain the optimization of PV sizing.
-
-The conversion of traditional power grid into a smart grid, a fundamental example of a CPS, 
-raises a number of issues that requires novel methods and applications. In $2012$, a Chinese smart grid implementation was considered as case study to address the verification problem for performance and energy consumption~\cite{Yukseletall2012}. The authors employed a stochastic model checking approach and presented a modelling and analysis study using PRISM, which is a probabilistic model checker~\cite{KwiatkowskaNP11}. The focus of this study was on how CPSs integrate information and communication technology functions to the physical elements of a system for monitoring and controlling purposes; here, the authors employed automated verification of certain quantitative properties of the system, as probability of	 node failure in the long run, impact of repair service on the failure risk, and expected energy consumption, without any interest in power generation or even solar PV systems.
-
-In $2015$, an automated approach for applying Monte-Carlo simulation to power system protection schemes presented limitations of incomplete coverage of all possible operating conditions~\cite{Sengupta2015}. The authors proposed an automated simulation-based verification technique to verify correctness of protection settings efficiently using hybrid automata-temporal-logic framework. The initial focus was on relay operations and test-case generation to ensure early detection of design errors. However, this study was limited to power system protection and did not deal with electricity generation or even solar PV systems.
-
-Other related studies from $2015$ include a framework named Modana to achieve an integrated process from modeling with SysML/MARTE to analysis using statistical model checking for CPS in terms of non-functional properties such as time and energy~\cite{Cheng2015}. In order to demonstrate Modana's capability, the authors modelled energy-aware buildings as a case study, and discussed the analysis on energy consumption in different scenarios. The focus here is on smart buildings and HVAC (heating, ventilation, and air conditioning) systems. This research, however, did no address the design and verification of solar PV systems. 
- 
-In $2017$, a researcher suggested the application of formal methods to verify and control the behavior of computational devices, interacting over a shared and smart infrastructure~\cite{Abate2017}. The author discussed the aggregation of large populations of thermostatically-controlled loads and of PV panels, and the corresponding problems of energy management in smart buildings, of demand-response on smart grids, and respectively of frequency stabilization and grid robustness. The focus was on controlling the behavior of components, thereby verifying the given smart grid as a "system of systems" within the context of "internet of things". The author, however, used approximate model checking of stochastic and hybrid models.
-
-In $2018$, a verification methodology was proposed for the Cyber Physical Energy Systems (CPES) with applications to PV panels and its distributed power point tracking~\cite{Driouich2018}. This approach relied on representing unpredictable behavior of the environment to cover all possible feasible scenarios. The simulation results obtained by JModelica covered the system's complete dynamic behavior; however, it was evident the time consuming issue with almost three days of computer effort to verify the design-space of one operation hour of the PV panels behavior. This related study did not include other components of a stand-alone solar PV system.
-
-Another work from $2018$ was the approach to model smart grid components using a formal specification. The authors used a state-based formal specification language named Z; they demonstrated the application of Z to four smart grid components~\cite{Akram2018}. The presented formal specification can be considered as a first step towards modeling of smart grids using formal methods. The starting point of this study was that a smart home can be considered as an integrated system consisting of various objects and system, which communicates and interacts with each other. This approach is based on Petri nets and is under the assumption that modeling the smart home leads to clear understanding of the overall behavior of the smart grid.
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Automated Verification Using Model Checking}
-\label{sec:AutomatedVerification}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-Although simulation and testing explore possible behaviors and scenarios of a given system, 
-they leave open the question of whether unexplored trajectories may contain a flaw. 
-Formal verification conducts an exhaustive exploration of all possible behaviors; 
-when a design is said to be ``correct'' by a formal verification method, it implies that all 
-behaviors have been explored, and questions regarding adequate coverage or missed behavior 
-becomes irrelevant~\cite{Clarke2012}. Formal verification is a systematic approach that 
-applies mathematical reasoning to obtain guarantees about the correctness of a system; 
-one successful method in this domain is model checking~\cite{Clarke2012}. 
-Here we use one state-of-the-art model checker to formally verifying PV designs w.r.t. user requirements. XXXXXXXXmention that received Golden Medal SV-CompXXXX
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsubsection{CPAchecker}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-Automatic program verification requires a choice between precision and efficiency. 
-The more precise a method, the fewer false positives it will produce, but also the 
-more expensive it is, and thus applicable to fewer programs. 
-Historically, this trade-off was reflected in two major approaches to static verification: 
-program analysis and model checking. In order to experiment with the trade-off, 
-and in order to be able to set the dial between the two extreme points, 
-Configurable Program Analysis (CPA) provides a conceptual basis for expressing 
-different verification approaches in the same formal setting. The CPA formalism 
-provides an interface for the definition of program analyses. Consequently, CPAchecker 
-provides an implementation framework that allows the seamless integration of program 
-analyses that are expressed in the CPA framework. The comparison among different 
-approaches in the same experimental setting is intended to be easy and the experimental 
-results are expected to be more meaningful~\cite{Beyer2011}. Related to the architecture, 
-the central data structure is a set of control-flow automata (CFA), which consists of control-flow 
-locations and control-flow edges. The CPA framework provides interfaces to SMT solvers and 
-interpolation procedures~\cite{Beyer2011}. Currently, CPAchecker uses MathSAT as SMT solver; 
-and CSIsat and MathSAT as interpolation procedures~\cite{Beyer2011}. 
-
-%-----------------------------------------------------------
-\subsection{Program Synthesis}
-\label{sec:ProgramSynthesis}
-%-----------------------------------------------------------
-
-The basic idea of program synthesis is to automatically construct a program $P$ that satisfies a correctness specification $\sigma$. In particular, program synthesis is automatically performed by engines that use a correctness specification $\sigma$, as starting point, and then incrementally produce a sequence of candidate solutions that partially satisfy $\sigma$~\cite{Abateetal2017}. As a result, a given candidate program $p$ is iteratively refined, in order to match $\sigma$ more closely. CEGIS represents one of the most popular approaches to program synthesis that are currently used in practice for CPS~\cite{Abateetal2017}, whose basic architecture is illustrated in Figure~\ref{Counter-Example-Guided-Inductive-Synthesis} and has close connections to algorithmic debugging using counterexamples and abstraction refinement~\cite{Alur}. 
-
-\begin{figure}[h]
-	\centering
-	\includegraphics[width=0.75\columnwidth]{fig2_rev2.jpg}
-	\caption{CEGIS applied to PV system sizing.}
-	\label{Counter-Example-Guided-Inductive-Synthesis}
-\end{figure}
-
-The correctness specification $\sigma$ provided to our program synthesizer is of the form $\exists \vec{F} .  \forall \vec{x}.  \sigma(\vec{x}, \vec{F})$, where $\vec{F}$ ranges over functions, $\vec{x}$ ranges over ground terms, and $\sigma$ is a quantifier-free (QF) formula typically supported by SMT solvers. The ground terms are interpreted over some finite domain $\mathcal{D}$, where $\mathcal{D}$ can be encoded using the SMT's bit-vectors part. Examples of specification used by our method include house demand, energy, and battery autonomy; we also provide a list of equipment specification and price from different manufacturers and models.
-
-In Figure~\ref{Counter-Example-Guided-Inductive-Synthesis}, regarding traditional CEGIS method, the phases {\sc Synthesize} and {\sc Verify} interact via a finite set of test vectors {\sc inputs}, which is incrementally updated. Given the correctness specification $\sigma$, the {\sc Synthesize} procedure tries to find an existential witness $\vec{F}$ satisfying the specification $\sigma(\vec{x}, \vec{F})$, for all $\vec{x}$ in {\sc inputs} (as opposed to all $\vec{x} \in \mathcal{D}$). If {\sc Synthesize} succeeds in finding a witness~$\vec{F}$, the latter is a candidate solution (i.e., feasible combination of equipment) to the full synthesis formula, which is passed to {\sc Verify} in order to check whether it is a proper solution ({\it i.e.}, $\vec{F}$ satisfies the specification $\sigma(\vec{x}, \vec{F})$ for all $\vec{x}\in\mathcal{D}$). If this is the case, then the algorithm terminates, i.e., we have found a feasible equipment with the lowest cost; otherwise, in the CEGIS traditional method, additional information is provided to the phase {\sc Synthesize}, in the form of a new counterexample that is added to the {\sc inputs} set and the loop iterates again.
-
-One may notice that each iteration of the traditional CEGIS loop adds a new input to the finite set $\text{\sc inputs}$, which is then used for synthesis.  Given that the full set of inputs $\mathcal{D}$ is finite because we use bit-vector expressions, this means that the refinement loop can only iterate over a finite number of times; however, {\sc Synthesize} may conclude that no candidate solution obeying $\sigma$ for the finite set $\text{\sc inputs}$ exists and our synthesis engine can then conclude that no feasible equipment combination was found.
-
-However, in our variant CEGIS method proposed here, there are four particular differences related to the traditional CEGIS: 
-(1) there exists no test vector and every candidate is generated during the run-time in the {\sc Synthesize} phase and sent to the {\sc Verify} phase; 
-(2) if the {\sc Verify} phase is unsuccessful, then a new candidate is generated by {\sc Synthesize} and 
-(3) the lower bound of the {\sc Verify} phase is incremented to search for the lowest cost; 
-(4) as a result, there exists no refinement from the {\sc Verify} phase back to the {\sc Synthesize} phase, i.e., 
-a new counterexample is not added to the {\sc input} set since a failure during the {\sc Verify} phase will only discard 
-a given candidate that could be feasible in the next iteration with a new lower bound.
-
-Program synthesis engines that implement the CEGIS approach~\cite{sketch} can automatically produce solutions for a large variety of specifications; here we have used symbolic software verifiers based on SMT solvers.
+Here we explain how to size a stand-alone solar PV system with their respective mathematical model, and what type of criteria or technique is possible to apply for the optimal sizing of PV systems. Furthermore, we present the theory about program synthesis,
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Sizing Stand-alone Solar PV Systems}
 \label{sec:sizing}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-A PV system is illustrated in Fig.\ref{fig:blockdiagram}. It identifies the PV generator, batteries, charge controller, inverter, and AC load. 
-The PV generator, which can be a panel or an array, is a semiconductor device that can convert solar energy into DC electricity.  
-For night hours or rainy days, we hold batteries where power can be stored and used. The use of batteries as a storage 
-form implies the presence of a charge controller~\cite{Hansen}. The PV arrays produce DC and therefore when the PV system 
-contains an AC load, a DC/AC conversion is required. That converter is called inverter; and the AC load dictates the behavior 
-of AC electrical load from the house that will be fed by the system.
-%
+A PV system is illustrated in Fig.\ref{fig:blockdiagram}. It identifies the PV generator, batteries, charge controller, inverter, and AC load. The PV generator, which can be a panel or an array, is a semiconductor device that can convert solar energy into DC electricity. 
+For night hours or rainy days, we hold batteries where power can be stored and used. The use of batteries as a storage form implies the presence of a charge controller~\cite{Hansen}. The PV arrays produce DC and therefore when the PV system contains an AC load, a DC/AC conversion is required. That converter is called inverter; and the AC load dictates the behavior of AC electrical load from the house that will be fed by the system.
+
 \begin{figure}[h]
-\includegraphics[width=0.7\textwidth]{blockdiagramPVS2_rev}
+\includegraphics[width=0.4\textwidth]{blockdiagramPVS2_rev}
 \centering
 \caption{Block diagram for a typical stand-alone PV system~\cite{Hansen}.}
 \label{fig:blockdiagram} 
 \end{figure}
 
 The sizing check stage will ensure that the system meets the standard project steps related 
-to critical period solar energy method~\cite{Pinho} and adopting MPPT (Maximum Power Point Tracking) charge controller,
-which is the most common one in practice. Firstly, we need to correct the energy consumption estimated to the load 
-($E_{consumption}$), which is carried out by Eq.~\eqref{eq:Ecorrected}, where the efficiency of batteries ($\eta_{b}$), 
-controller ($\eta_{c}$), and inverter ($\eta_{i}$) are considered~\cite{Pinho} as follows
-%
+to critical period solar energy method~\cite{Pinho} and adopting MPPT (Maximum Power Point Tracking) charge controller, which is the most common one in practice, among other sizing techniques and possibilities. 
+
+Firstly, we need to correct the energy consumption estimated to the load ($E_{consumption}$), which is carried out by Eq.~\eqref{eq:Ecorrected}, where the efficiency of batteries ($\eta_{b}$), controller ($\eta_{c}$), and inverter ($\eta_{i}$) are considered~\cite{Pinho} as follows
+
 \begin{equation}
 \label{eq:Ecorrected}
 E_{corrected} = \dfrac{E_{consumption}}{\eta_{b} \eta_{c} \eta_{i} }.
 \end{equation}
 
 We also need to estimate the energy that can be produced for each panel, called $E_{p}$, in Wh, defined as
-%
+
 \begin{equation}
 \label{eq:Ep}
 E_{p} = Solar\_Irradiance \times Panel\_Area \times \eta_{p} \times 1000,
@@ -657,24 +532,24 @@ E_{p} = Solar\_Irradiance \times Panel\_Area \times \eta_{p} \times 1000,
 \noindent where the solar irradiance is expressed in terms of $kWh/m^{2}$ and depends on the site where the PV system will be deployed; 
 the PV panel area is given in $m^{2}$ and corresponds to the size of one PV panel, and $\eta_{p}$ represents the PV panel efficiency.
 The total minimum number of needed solar panels ($N_{TPmin}$) is computed as
-%
+
 \begin{equation}
 \label{eq:NTPmin}
 N_{TPmin} = \dfrac{E_{corrected}}{E_{p}}.
 \end{equation}
 
 Particularly, the total number of panels in series ($N_{PSmin}$) and parallel ($N_{PPmin}$) are respectively given by
-%
+
 \begin{equation}
 \label{eq:NPSmin}
 \dfrac{V_{mppt,min}}{V_{maxPower,TempMax}} \leq N_{PSmin} \leq \dfrac{V_{mppt,max}}{V_{maxPower,TempMin}},
 \end{equation}
-%
+
 \begin{equation}
 \label{eq:NPPmin}
 N_{PPmin} = \dfrac{P_{total}}{Number\,Panels\,Series \times P_{max,ref}},
 \end{equation}
-%
+
 \noindent where $V_{mppt,max}$ is the maximum operation voltage and $V_{mppt,min}$ 
 is the minimum operation voltage of the charge controller; $V_{maxPower,TempMax}$ and 
 $V_{maxPower,TempMin}$ are the maximum power voltage from the PV module considering 
@@ -682,7 +557,7 @@ the maximum and minimum operational temperature, respectively;
 $P_{total}$ is the total power demanded from the PV system and 
 $P_{max,ref}$ is the power supplied from one PV panel in $Watts$.
 Regarding batteries, we must first define the total capacity of the battery bank, which can be described as
-%
+
 \begin{equation}
 \label{eq:Cbank}
 C_{bank} = \dfrac{E_{corrected} \times autonomy}{V_{system} \times DOD},
@@ -690,15 +565,21 @@ C_{bank} = \dfrac{E_{corrected} \times autonomy}{V_{system} \times DOD},
 
 \noindent where the variable $autonomy$ is a design definition and normally has a value ranging from $6$ to $48$h; 
 $ V_{system} $ is the DC voltage of the bus, and $ DOD $ is the battery deep of discharge (considered of maximum of 25\% here).
-%
+
 Secondly, the total (minimum) number of batteries is computed as 
 
 \begin{equation}
 \label{eq:Nbtotal}
-N_{B}total = N_{BS}min \times N_{BP}min = \dfrac{V_{system}}{V_{bat}} \times \dfrac{C_{bank}}{1 \,Battery \, Capacity}.
+N_{B}total = N_{BS}min \times N_{BP}min
+\end{equation}
+
+\begin{equation}
+\label{eq:Nbtotal2}
+N_{B}total = \dfrac{V_{system}}{V_{bat}} \times \dfrac{C_{bank}}{1 \,Battery \, Capacity}.
 \end{equation}
 
 Regarding the charge controller, it must initially meet the voltage requirement of the PV system, as described by Eq.~\eqref{eq:vcvsystem} to the charge controller voltage: 
+
 \begin{equation}
 \label{eq:vcvsystem}
 V_{c} = V_{system}.
@@ -707,19 +588,19 @@ V_{c} = V_{system}.
 The short circuit reference information from the manufacturer's solar panel must be corrected 
 to the cell temperature because the field temperature is higher than the nominal or laboratory temperature, 
 and PV system is temperature dependent, as 
-%
+
 \begin{equation}
 \label{eq:iscamb}
 I_{sc,amb} = \dfrac{G}{G_{ref}} \left[ I_{sc,ref} + \mu_{I} \times (T-25) \right]. 
 \end{equation}
 
 The controller must meet the maximum current from the PV array given by Eqs.~\eqref{eq:icmin} and~\eqref{eq:icicmin} as
-%
+
 \begin{equation}
 \label{eq:icmin}
 I_{c,min} = I_{sc,amb} \times N_{PP},
 \end{equation}
-%
+
 \begin{equation}
 \label{eq:icicmin}
 I_{c} \geq I_{c,min}.
@@ -731,17 +612,17 @@ output voltage of the controller meets the AC voltage of the load. Finally, Eq.~
 the controller can support the total demand of the load ($Demand$) and the surge power ($P_{surge}$), 
 where $V_{in}DC$ is the nominal input voltage and $V_{out}AC$ is the nominal output voltage of the inverter; 
 $MAX_{AC,ref}$ is the peak power that the inverter can support.
-%
+
 \begin{equation}
 \label{eq:vindc} 
 V_{in}DC = V_{system}.
 \end{equation}
-%
+
 \begin{equation}
 \label{eq:voutac} 
 V_{out}AC = V_{AC}.
 \end{equation}
-%
+
 \begin{equation}
 \label{eq:invcheck} 
 \left[ (Demand \leq P_{AC,ref}) \, and \, (P_{surge} \leq MAX_{AC,ref}) \right].
@@ -768,11 +649,15 @@ The NPC is the present value of all the costs over the project lifetime, minus t
 LCOE is defined as the average cost per kWh of useful electrical energy produced by the PV system when a lifetime, investment cost, replacement, operation and maintenance, and capital cost are considered~\cite{Kamel2005}. LCOE method is useful in comparing different generation technologies with different operating characteristics~\cite{Zhou2010}.
 
 LCC is the estimation of sum of installation cost, operating and maintenance of a PV system for a period of time, and expressed in today's value~\cite{Applasamy2011}. Eq.~\eqref{eq:LCC} is used to calculate LCC of a PV system,
-%
+
 \begin{equation}
 \label{eq:LCC}
-LCC = C_{PV} + C_{bat} + C_{charger} + C_{inv} + C_{installation} + C_{batrep} + C_{PWO\&M},
+\begin{aligned}
+LCC = & C_{PV} + C_{bat} + C_{charger} + C_{inv} + \\
+      & C_{installation} + C_{batrep} + C_{PWO\&M},
+\end{aligned}
 \end{equation}
+
 \noindent where $C_{PV}$ is PV array cost, $C_{bat}$ is initial cost of batteries, $C_{charger}$ is cost of charger, $C_{inv}$ is inverter cost, $C_{installation}$ is installation cost, $C_{batrep}$ is battery replacement cost in present value, and $C_{PWO\&M}$ is operation and maintenance costs 
 in present worth.
 
@@ -802,6 +687,75 @@ of equation between capacities and reliabilities. The sizing task becomes much s
 than numerical technique; however, the relation cannot be applied to different sites
 since it is specific to one place of deployment of the PV system, 
 thereby demanding adaptation if another site is analyzed.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Automated Verification Using Model Checking}
+\label{sec:AutomatedVerification}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Although simulation and testing explore possible behaviors and scenarios of a given system, 
+they leave open the question of whether unexplored trajectories may contain a flaw. 
+Formal verification conducts an exhaustive exploration of all possible behaviors; 
+when a design is said to be ``correct'' by a formal verification method, it implies that all 
+behaviors have been explored, and questions regarding adequate coverage or missed behavior 
+becomes irrelevant~\cite{Clarke2012}. Formal verification is a systematic approach that 
+applies mathematical reasoning to obtain guarantees about the correctness of a system; 
+one successful method in this domain is model checking~\cite{Clarke2012}. 
+Here we use one state-of-the-art model checker, who was awarded with the Golden Medal at the annual competition in software verification~\cite{LMU2019}, to formally verifying PV designs w.r.t. user requirements.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection{CPAchecker}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Automatic program verification requires a choice between precision and efficiency. 
+The more precise a method, the fewer false positives it will produce, but also the 
+more expensive it is, and thus applicable to fewer programs. 
+Historically, this trade-off was reflected in two major approaches to static verification: 
+program analysis and model checking. In order to experiment with the trade-off, 
+and in order to be able to set the dial between the two extreme points, 
+Configurable Program Analysis (CPA) provides a conceptual basis for expressing 
+different verification approaches in the same formal setting. The CPA formalism 
+provides an interface for the definition of program analyses. Consequently, CPAchecker 
+provides an implementation framework that allows the seamless integration of program 
+analyses that are expressed in the CPA framework. The comparison among different 
+approaches in the same experimental setting is intended to be easy and the experimental 
+results are expected to be more meaningful~\cite{Beyer2011}. Related to the architecture, 
+the central data structure is a set of control-flow automata (CFA), which consists of control-flow 
+locations and control-flow edges. The CPA framework provides interfaces to SMT solvers and 
+interpolation procedures~\cite{Beyer2011}. Currently, CPAchecker uses MathSAT as SMT solver; 
+and CSIsat and MathSAT as interpolation procedures~\cite{Beyer2011}. 
+
+%-----------------------------------------------------------
+\subsection{Program Synthesis Technique}
+\label{sec:ProgramSynthesis}
+%-----------------------------------------------------------
+
+Program synthesis addresses an age-old problem in computer science: can a computer program itself?~\cite{Bornholt2019}. Before the computer can automatically generate a program, it is necessary to give it a specification of what the program should do. The specification needs to describe the program’s desired behavior (in enough detail) in order to ensure that the program does what it is intended.
+
+Therefore, the basic idea of program synthesis is to automatically construct a program $P$ that satisfies a correctness specification $\sigma$. In particular, program synthesis is automatically performed by engines that use a correctness specification $\sigma$, as starting point, and then incrementally produce a sequence of candidate solutions that partially satisfy $\sigma$~\cite{Abateetal2017}. As a result, a given candidate program $p$ is iteratively refined, in order to match $\sigma$ more closely. CEGIS represents one of the most popular approaches to program synthesis that are currently used in practice for cyber-physical problems~\cite{Abateetal2017}, as energy production, distribution, and optimization, and  whose basic architecture is illustrated in Figure~\ref{Counter-Example-Guided-Inductive-Synthesis} and has close connections to algorithmic debugging using counterexamples and abstraction refinement~\cite{Alur}. 
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.75\columnwidth]{fig2_rev2.jpg}
+	\caption{CEGIS applied to PV system sizing.}
+	\label{Counter-Example-Guided-Inductive-Synthesis}
+\end{figure}
+
+The correctness specification $\sigma$ provided to our program synthesizer is of the form $\exists \vec{F} .  \forall \vec{x}.  \sigma(\vec{x}, \vec{F})$, where $\vec{F}$ ranges over functions, $\vec{x}$ ranges over ground terms, and $\sigma$ is a quantifier-free (QF) formula typically supported by SMT solvers. The ground terms are interpreted over some finite domain $\mathcal{D}$, where $\mathcal{D}$ can be encoded using the SMT's bit-vectors part. Examples of specification used by our method include house demand, energy, and battery autonomy; we also provide a list of equipment specification and price from different manufacturers and models.
+
+In Figure~\ref{Counter-Example-Guided-Inductive-Synthesis}, regarding traditional CEGIS method, the phases {\sc Synthesize} and {\sc Verify} interact via a finite set of test vectors {\sc inputs}, which is incrementally updated. Given the correctness specification $\sigma$, the {\sc Synthesize} procedure tries to find an existential witness $\vec{F}$ satisfying the specification $\sigma(\vec{x}, \vec{F})$, for all $\vec{x}$ in {\sc inputs} (as opposed to all $\vec{x} \in \mathcal{D}$). If {\sc Synthesize} succeeds in finding a witness~$\vec{F}$, the latter is a candidate solution (i.e., feasible combination of equipment) to the full synthesis formula, which is passed to {\sc Verify} in order to check whether it is a proper solution ({\it i.e.}, $\vec{F}$ satisfies the specification $\sigma(\vec{x}, \vec{F})$ for all $\vec{x}\in\mathcal{D}$). If this is the case, then the algorithm terminates, i.e., we have found a feasible equipment with the lowest cost; otherwise, in the CEGIS traditional method, additional information is provided to the phase {\sc Synthesize}, in the form of a new counterexample that is added to the {\sc inputs} set and the loop iterates again.
+
+One may notice that each iteration of the traditional CEGIS loop adds a new input to the finite set $\text{\sc inputs}$, which is then used for synthesis.  Given that the full set of inputs $\mathcal{D}$ is finite because we use bit-vector expressions, this means that the refinement loop can only iterate over a finite number of times; however, {\sc Synthesize} may conclude that no candidate solution obeying $\sigma$ for the finite set $\text{\sc inputs}$ exists and our synthesis engine can then conclude that no feasible equipment combination was found.
+
+However, in our variant CEGIS method proposed here, there are four particular differences related to the traditional CEGIS: 
+(1) there exists no test vector and every candidate is generated during the run-time in the {\sc Synthesize} phase and sent to the {\sc Verify} phase; 
+(2) if the {\sc Verify} phase is unsuccessful, then a new candidate is generated by {\sc Synthesize} and 
+(3) the lower bound of the {\sc Verify} phase is incremented to search for the lowest cost; 
+(4) as a result, there exists no refinement from the {\sc Verify} phase back to the {\sc Synthesize} phase, i.e., 
+a new counterexample is not added to the {\sc input} set since a failure during the {\sc Verify} phase will only discard 
+a given candidate that could be feasible in the next iteration with a new lower bound.
+
+Program synthesis engines that implement the CEGIS approach~\cite{sketch} can automatically produce solutions for a large variety of specifications; here we have used symbolic software verifiers based on SMT solvers.
 
 %------------------------------------------------------
 \section{Synthesizing optimal sizing of stand-alone solar PV systems}
