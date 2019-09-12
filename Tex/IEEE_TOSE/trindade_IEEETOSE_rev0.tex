@@ -56,10 +56,6 @@
 % manually specify the path to it like:
 % \documentclass[journal]{../sty/IEEEtran}
 
-
-
-
-
 % Some very useful LaTeX packages include:
 % (uncomment the ones you want to load)
 
@@ -82,11 +78,6 @@
 % When switching from latex to pdflatex and vice-versa, the compiler may
 % have to be run twice to clear warning/error messages.
 
-
-
-
-
-
 % *** CITATION PACKAGES ***
 %
 %\usepackage{cite}
@@ -104,10 +95,6 @@
 % The latest version can be obtained at:
 % http://www.ctan.org/pkg/cite
 % The documentation is contained in the cite.sty file itself.
-
-
-
-
 
 
 % *** GRAPHICS RELATED PACKAGES ***
@@ -150,10 +137,6 @@
 % You can find documentation about the pdfTeX application at:
 % http://www.tug.org/applications/pdftex
 
-
-
-
-
 % *** MATH PACKAGES ***
 %
 %\usepackage{amsmath}
@@ -167,9 +150,6 @@
 % does. amsmath.sty is already installed on most LaTeX systems. The latest
 % version and documentation can be obtained at:
 % http://www.ctan.org/pkg/amsmath
-
-
-
 
 
 % *** SPECIALIZED LIST PACKAGES ***
@@ -492,18 +472,20 @@ Here, we have developed a variant of counterexample guided inductive synthesis (
 
 \textit{Outline}. Section~\ref{sec:Background} gives the background about program synthesis, design sizing and validation of PV systems, and the mathematical modeling. Section~\ref{sec:Method} presents the automated formal synthesis proposed in this underlying study. Section~\ref{sec:Results} is devoted to the experimentation, results and discussions. Section~\ref{sec:Conclusion} presents the conclusion and describes future work.
 
-\section{Background}
+\section{Sizing and Optimization of PV Systems}
 \label{sec:Background}
 %-----------------------------------------------------------
-Here we explain how to size a stand-alone solar PV system with their respective mathematical model, and what type of criteria or technique is possible to apply for the optimal sizing of PV systems. Furthermore, we present the theory about program synthesis,
+
+Here we explain the adopted method to size stand-alone solar PV systems, and what type of criteria and technique is possible to apply for the optimal sizing. 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Sizing Stand-alone Solar PV Systems}
 \label{sec:sizing}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-A PV system is illustrated in Fig.\ref{fig:blockdiagram}. It identifies the PV generator, batteries, charge controller, inverter, and AC load. The PV generator, which can be a panel or an array, is a semiconductor device that can convert solar energy into DC electricity. 
-For night hours or rainy days, we hold batteries where power can be stored and used. The use of batteries as a storage form implies the presence of a charge controller~\cite{Hansen}. The PV arrays produce DC and therefore when the PV system contains an AC load, a DC/AC conversion is required. That converter is called inverter; and the AC load dictates the behavior of AC electrical load from the house that will be fed by the system.
+A PV system block diagram is illustrated in Fig.\ref{fig:blockdiagram}. %It identifies the PV generator, batteries, charge controller, inverter, and AC load. 
+The PV generator, which can be a panel or an array, is a semiconductor device that can convert solar energy into DC electricity. 
+For night hours or rainy days, we hold batteries where power can be stored and used. The use of batteries as a storage form implies the presence of a charge controller~\cite{Hansen}. The PV arrays produce DC and therefore when the PV system contains an AC load, a DC/AC conversion (inverter) is required. The AC load dictates the behavior of AC electrical load from the house. % that will be fed by the PV system.
 
 \begin{figure}[h]
 \includegraphics[width=0.4\textwidth]{blockdiagramPVS2_rev}
@@ -512,10 +494,8 @@ For night hours or rainy days, we hold batteries where power can be stored and u
 \label{fig:blockdiagram} 
 \end{figure}
 
-The sizing check stage will ensure that the system meets the standard project steps related 
-to critical period solar energy method~\cite{Pinho} and adopting MPPT (Maximum Power Point Tracking) charge controller, which is the most common one in practice, among other sizing techniques and possibilities. 
-
-Firstly, we need to correct the energy consumption estimated to the load ($E_{consumption}$), which is carried out by Eq.~\eqref{eq:Ecorrected}, where the efficiency of batteries ($\eta_{b}$), controller ($\eta_{c}$), and inverter ($\eta_{i}$) are considered~\cite{Pinho} as follows
+%The sizing check stage will ensure that the system meets the standard project steps related  to critical period solar energy method~\cite{Pinho} and adopting MPPT (Maximum Power Point Tracking) charge controller, which is the most common one in practice, among other sizing techniques and possibilities. 
+Among the techniques that can be used for the sizing of PV systems, it was adopted here the critical period solar energy method~\cite{Pinho}, with the use of MPPT (Maximum Power Point Tracking) charge controller (which is the most common nowadays). Firstly, we need to correct the energy consumption estimated to the load ($E_{consumption}$), which is carried out by Eq.~\eqref{eq:Ecorrected}, where the efficiency of batteries ($\eta_{b}$), controller ($\eta_{c}$), and inverter ($\eta_{i}$) are considered~\cite{Pinho} as follows
 
 \begin{equation}
 \label{eq:Ecorrected}
@@ -629,11 +609,10 @@ V_{out}AC = V_{AC}.
 \end{equation}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{PV systems Optimization Criteria}
+\subsection{PV Systems Optimization Criteria}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-In order to select an optimal combination to meet sizing constraints, 
-it is necessary to evaluate power reliability and system cost analysis for the underlying system. An ideal combination of any PV system is made by the best compromise between these two objectives.
+In order to select an optimal combination to meet sizing constraints, it is necessary to evaluate power reliability and system cost analysis for the underlying system. An ideal combination of any PV system is made by the best compromise between these two objectives.
 
 During the PV system design, one of the most important aspects to ensure power system reliability is to analyze power supply availability~\cite{Alsadi2018}. The reason is because solar energy production is intermittent and, therefore, the energy generated usually will not match with the load demand. A reliable power is a generation system that has sufficient power to feed load demand in a period. 
 
@@ -662,7 +641,7 @@ LCC = & C_{PV} + C_{bat} + C_{charger} + C_{inv} + \\
 in present worth.
 
 %----------------------------------------------------------------------------------------------
-\subsection{Stand-alone PV System Optimization Technique}
+\subsection{PV Systems Optimization Techniques}
 %----------------------------------------------------------------------------------------------
 
 In order to recommend an optimal configuration for PV systems, 
@@ -688,7 +667,13 @@ than numerical technique; however, the relation cannot be applied to different s
 since it is specific to one place of deployment of the PV system, 
 thereby demanding adaptation if another site is analyzed.
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%------------------------------------------------------
+\section{Automated Formal Synthesis Method}
+\label{sec:Method}
+%------------------------------------------------------
+
+In this section we present the theory and the methodology created to obtain the optimal sizing of stand-alone solar PV systems through program synthesis.
+
 \subsection{Automated Verification Using Model Checking}
 \label{sec:AutomatedVerification}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -757,13 +742,8 @@ a given candidate that could be feasible in the next iteration with a new lower 
 
 Program synthesis engines that implement the CEGIS approach~\cite{sketch} can automatically produce solutions for a large variety of specifications; here we have used symbolic software verifiers based on SMT solvers.
 
-%------------------------------------------------------
-\section{Synthesizing optimal sizing of stand-alone solar PV systems}
-\label{sec:Method}
-%------------------------------------------------------
-
 Algorithm~\ref{alg:verification-algorithm} describes our pseudo-code to synthesize stand-alone PV systems using symbolic model checking. It was adopted the analytical method of optimization, with LCC economical analysis and power reliability based on the critical period criteria.
-%
+
  \begin{algorithm}
  \caption{Synthesis algorithm}
  \begin{algorithmic}[1]
@@ -895,25 +875,17 @@ Related to off-the-shelf simulation tools only HOMER Pro and Hybrid2 perform off
 \end{itemize}
 
 %---------------------------------------------------------------------------
-\section{Experimental evaluation}
+\section{Case Studies and Analysis}
 \label{sec:Results}
 %---------------------------------------------------------------------------
 
-This section presents the case studies used to evaluate our proposed approach. 
-We also compare our approach with a simulation tool, named HOME Pro. 
-The version and command-line of each verifier adopted, 
-the computing setup, the objectives of the experimental phase, 
-and the results itself are also described.
+This section presents the case studies used to evaluate our proposed approach. We also compare our approach with a specialized simulation tool (HOME Pro). The computing setup, the objectives of the experimental phase, and the results itself are also described.
 
 %---------------------------------------------------------------------------
 \subsection{Case studies} 
 %---------------------------------------------------------------------------
 
-We have performed seven stand-alone PV system case studies to evaluate 
-our proposed synthesis approach, as described in the first column of 
-Table~\ref{tab1} (named Specification). These case studies were defined 
-based on usual electrical load found in riverside communities of the 
-Amazon State in Brazil~\cite{abs-1811-09438, Agrener2013}. 
+We have performed seven case studies to evaluate our proposed synthesis approach, as described in the first column of Table~\ref{tab1} (named Specification). These case studies were defined based on real houses visited by the team of a Newton Fund project in riverside communities around the Low Black River in Amazonas - Brazil. For all cases, a estimated load curve (kWh) was defined based on the electronics consumers found of each house.
 
 \begin{table}[!t]
 \caption{Case studies and results: optimization of stand-alone PV systems.}\label{tab1}
@@ -946,16 +918,11 @@ Specification & Result & Result \\
 \end{scriptsize}
 \end{table}
 
-
-%---------------------------------------------------------------------------
-\subsection{Comparative Tools} 
-%---------------------------------------------------------------------------
-
-The start-of-art verification tool, CPAchecker\footnote{Command-line: \$ scripts/cpa.sh -heap 64000m -config config/bmc-incremental.properties -spec config/specification/sv-comp-reachability.spc filename.c} were used as our verification engine to compare our approach effectiveness and efficiency. The Simulation tool HOMER Pro version $3.13.1$ was used for comparative purpose.
-
 %---------------------------------------------------------------------------
 \subsection{Setup} 
 %---------------------------------------------------------------------------
+
+The start-of-art verification tool, CPAchecker\footnote{Command-line: \$ scripts/cpa.sh -heap 64000m -config config/bmc-incremental.properties -spec config/specification/sv-comp-reachability.spc filename.c} was used as our verification engine to compare our approach effectiveness and efficiency. The Simulation tool HOMER Pro version $3.13.1$ was used for comparative purpose.
 
 All experiments regarding the verification tools were conducted 
 on an otherwise idle Intel Xeon CPU E5-4617 ($8$-cores) with 
@@ -974,7 +941,7 @@ Our evaluation aims to answer two experimental questions:
 
 \item[EQ1] \textbf{(soundness)} does our automated synthesis approach provide correct results?
 
-\item[EQ2] \textbf{(performance)} how do the software verifiers compare to each other?
+\item[EQ2] \textbf{(performance)} how does our formal synthesis tools compares to a specialized simulation tool?
 
 \end{enumerate}
 
@@ -1019,10 +986,6 @@ in terms of connections of arrays of PV panels, just the
 total in terms of power, i.e., it does not present neither models 
 and the power of each PV panel nor the total of panels in series or parallel. 
 \end{itemize}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Comparison between Formal Synthesis and HOME Pro}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 Comparing the results between the formal synthesis with CPAchecker 
 and HOMER Pro, we observed that most results are quite similar, 
@@ -1122,7 +1085,7 @@ of applicability; ($3$) to deploy at the field some PV systems
 sized using our synthesized results in order to validate it.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Conclusion}
+\section{Conclusion and Future Work}
 \label{sec:Conclusion}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
