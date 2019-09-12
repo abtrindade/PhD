@@ -470,22 +470,14 @@ Here, we have developed a variant of counterexample guided inductive synthesis (
 %Our work makes two major contributions. \textbf{First}, the use of automated symbolic verification methods in electrical systems was rare in recent prior studies~\cite{abs-1811-09438}, and specifically their use in synthesizing optimal PV sizing is unprecedented. Here, a list of PV components (i.e., PV panels, charge controllers, inverters, and batteries) can be fed to our proposed synthesis method together with user requirements and environment constraints, and our synthesis algorithm based on symbolic model checking can find the optimal solution in technical and economical terms. \textbf{Second}, %our experimental results show that our synthesis method is an effective and efficient approach on the pursuit of the optimal solution of PV systems using formal methods, which outperforms existing state-of-the-art simulation tool. As a result, 
 \textit{Contribution}. Our study marks the first application of a sound and automated formal synthesis approach able to provide accurate results of optimal sizing of stand-alone PV systems, which outperforms existing state-of-the-art simulation tool used in a comparative with seven case studies. Thus, we considerably advance the state-of-the-art in applied energy over the last two decades with the goal of optimally designing PV systems.
 
-\textit{Outline}. Section~\ref{sec:Background} gives the background about program synthesis, design sizing and validation of PV systems, and the mathematical modeling. Section~\ref{sec:Method} presents the automated formal synthesis proposed in this underlying study. Section~\ref{sec:Results} is devoted to the experimentation, results and discussions. Section~\ref{sec:Conclusion} presents the conclusion and describes future work.
+\textit{Outline}. Section~\ref{sec:Background} gives the background about sizing and optimization of PV systems. Section~\ref{sec:Method} presents the automated formal synthesis proposed in this underlying study. Section~\ref{sec:Results} is devoted to the experimentation, results and analysis. Section~\ref{sec:Conclusion} presents the conclusion and describes future work.
 
 \section{Sizing and Optimization of PV Systems}
 \label{sec:Background}
 %-----------------------------------------------------------
 
-Here we explain the adopted method to size stand-alone solar PV systems, and what type of criteria and technique is possible to apply for the optimal sizing. 
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Sizing Stand-alone Solar PV Systems}
-\label{sec:sizing}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-A PV system block diagram is illustrated in Fig.\ref{fig:blockdiagram}. %It identifies the PV generator, batteries, charge controller, inverter, and AC load. 
-The PV generator, which can be a panel or an array, is a semiconductor device that can convert solar energy into DC electricity. 
-For night hours or rainy days, we hold batteries where power can be stored and used. The use of batteries as a storage form implies the presence of a charge controller~\cite{Hansen}. The PV arrays produce DC and therefore when the PV system contains an AC load, a DC/AC conversion (inverter) is required. The AC load dictates the behavior of AC electrical load from the house. % that will be fed by the PV system.
+A stand-alone PV system block diagram is illustrated in Fig.\ref{fig:blockdiagram}. %It identifies the PV generator, batteries, charge controller, inverter, and AC load. 
+The PV generator, which can be a panel or an array, is a semiconductor device that can convert solar energy into DC electricity. For night hours or rainy days, we hold batteries where power can be stored and used. The use of batteries as a storage form implies the presence of a charge controller~\cite{Hansen}. The PV arrays produce DC and therefore when the PV system contains an AC load, a DC/AC conversion (inverter) is required. The AC load dictates the behavior of AC electrical load from the house. % that will be fed by the PV system.
 
 \begin{figure}[h]
 \includegraphics[width=0.4\textwidth]{blockdiagramPVS2_rev}
@@ -494,8 +486,14 @@ For night hours or rainy days, we hold batteries where power can be stored and u
 \label{fig:blockdiagram} 
 \end{figure}
 
-%The sizing check stage will ensure that the system meets the standard project steps related  to critical period solar energy method~\cite{Pinho} and adopting MPPT (Maximum Power Point Tracking) charge controller, which is the most common one in practice, among other sizing techniques and possibilities. 
-Among the techniques that can be used for the sizing of PV systems, it was adopted here the critical period solar energy method~\cite{Pinho}, with the use of MPPT (Maximum Power Point Tracking) charge controller (which is the most common nowadays). Firstly, we need to correct the energy consumption estimated to the load ($E_{consumption}$), which is carried out by Eq.~\eqref{eq:Ecorrected}, where the efficiency of batteries ($\eta_{b}$), controller ($\eta_{c}$), and inverter ($\eta_{i}$) are considered~\cite{Pinho} as follows
+In this section we explain the adopted method to size stand-alone solar PV systems, and what criteria and technique is possible to apply for the optimal sizing. 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Sizing Stand-alone Solar PV Systems}
+\label{sec:sizing}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+At this work, was adopted the critical period solar energy method~\cite{Pinho}, and MPPT (Maximum Power Point Tracking) charge controller (which is the most common nowadays). Firstly, we need to correct the energy consumption estimated to the load ($E_{consumption}$), which is carried out by Eq.~\eqref{eq:Ecorrected}, where the efficiency of batteries ($\eta_{b}$), controller ($\eta_{c}$), and inverter ($\eta_{i}$) are considered~\cite{Pinho} as follows
 
 \begin{equation}
 \label{eq:Ecorrected}
@@ -609,10 +607,10 @@ V_{out}AC = V_{AC}.
 \end{equation}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{PV Systems Optimization Criteria}
+\subsection{PV Systems Optimization: Criteria and Techniques}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-In order to select an optimal combination to meet sizing constraints, it is necessary to evaluate power reliability and system cost analysis for the underlying system. An ideal combination of any PV system is made by the best compromise between these two objectives.
+In order to select an optimal PV system to meet sizing constraints, it is necessary to evaluate power reliability and system cost analysis for the underlying system. An ideal combination of any PV system is made by the best compromise between these two objectives or \textbf{criteria}.
 
 During the PV system design, one of the most important aspects to ensure power system reliability is to analyze power supply availability~\cite{Alsadi2018}. The reason is because solar energy production is intermittent and, therefore, the energy generated usually will not match with the load demand. A reliable power is a generation system that has sufficient power to feed load demand in a period. 
 
@@ -640,15 +638,11 @@ LCC = & C_{PV} + C_{bat} + C_{charger} + C_{inv} + \\
 \noindent where $C_{PV}$ is PV array cost, $C_{bat}$ is initial cost of batteries, $C_{charger}$ is cost of charger, $C_{inv}$ is inverter cost, $C_{installation}$ is installation cost, $C_{batrep}$ is battery replacement cost in present value, and $C_{PWO\&M}$ is operation and maintenance costs 
 in present worth.
 
-%----------------------------------------------------------------------------------------------
-\subsection{PV Systems Optimization Techniques}
-%----------------------------------------------------------------------------------------------
-
-In order to recommend an optimal configuration for PV systems, 
+Parallel to criteria, in order to recommend an optimal configuration for PV systems, 
 the designer has to evaluate the design based on optimization variables. 
 As the number of optimization variables increases, the computational effort 
 will increase as well. Hence, to obtain the best PV system design as well as 
-simplified sizing process, prior work introduced three main techniques 
+simplified sizing process, prior work introduced three main \textbf{techniques} 
 for system sizing calculation, namely intuitive, numerical, and analytical methods~\cite{Zhou2010}.
 
 Intuitive method is simple, easy to be implemented, and can be used to give 
@@ -686,11 +680,8 @@ behaviors have been explored, and questions regarding adequate coverage or misse
 becomes irrelevant~\cite{Clarke2012}. Formal verification is a systematic approach that 
 applies mathematical reasoning to obtain guarantees about the correctness of a system; 
 one successful method in this domain is model checking~\cite{Clarke2012}. 
-Here we use one state-of-the-art model checker, who was awarded with the Golden Medal at the annual competition in software verification~\cite{LMU2019}, to formally verifying PV designs w.r.t. user requirements.
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsubsection{CPAchecker}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+In order to perform the automated formal synthesis, we will use a state-of-the-art model checker, who was awarded with the Golden Medal at the annual competition in software verification~\cite{LMU2019}, the \textbf{CPAchecker}.
 
 Automatic program verification requires a choice between precision and efficiency. 
 The more precise a method, the fewer false positives it will produce, but also the 
@@ -700,9 +691,7 @@ program analysis and model checking. In order to experiment with the trade-off,
 and in order to be able to set the dial between the two extreme points, 
 Configurable Program Analysis (CPA) provides a conceptual basis for expressing 
 different verification approaches in the same formal setting. The CPA formalism 
-provides an interface for the definition of program analyses. Consequently, CPAchecker 
-provides an implementation framework that allows the seamless integration of program 
-analyses that are expressed in the CPA framework. The comparison among different 
+provides an interface for the definition of program analyses. Consequently, CPAchecker provides an implementation framework that allows the seamless integration of program analyses that are expressed in the CPA framework. The comparison among different 
 approaches in the same experimental setting is intended to be easy and the experimental 
 results are expected to be more meaningful~\cite{Beyer2011}. Related to the architecture, 
 the central data structure is a set of control-flow automata (CFA), which consists of control-flow 
