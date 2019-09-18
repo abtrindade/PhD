@@ -477,7 +477,7 @@ Here, we have developed a variant of counterexample guided inductive synthesis (
 %-----------------------------------------------------------
 
 A stand-alone PV system block diagram is illustrated in Fig.\ref{fig:blockdiagram}. %It identifies the PV generator, batteries, charge controller, inverter, and AC load. 
-The PV generator, which can be a panel or an array, is a semiconductor device that can convert solar energy into DC electricity. For night hours or rainy days, we hold batteries where power can be stored and used. The use of batteries as a storage form implies the presence of a charge controller~\cite{Hansen}. The PV arrays produce DC and therefore when the PV system contains an AC load, a DC/AC conversion (inverter) is required. The AC load dictates the behavior of AC electrical load from the house. % that will be fed by the PV system.
+The PV generator (a panel or an array) is a semiconductor device that can convert solar energy into DC electricity. For night hours or rainy days, we hold batteries where power can be stored and used. The use of batteries as a storage form implies the presence of a charge controller~\cite{Hansen}. The PV arrays produce DC and therefore when the PV system contains an AC load, a DC/AC conversion (inverter) is required. The AC load dictates the behavior of AC electrical load from the house. % that will be fed by the PV system.
 
 \begin{figure}[h]
 \includegraphics[width=0.4\textwidth]{blockdiagramPVS2_rev}
@@ -564,8 +564,7 @@ V_{c} = V_{system}.
 \end{equation}
 
 The short circuit reference information from the manufacturer's solar panel must be corrected 
-to the cell temperature because the field temperature is higher than the nominal or laboratory temperature, 
-and PV system is temperature dependent, as 
+to the cell temperature because the field temperature is higher than the nominal or laboratory temperature, and PV system is temperature dependent, as 
 
 \begin{equation}
 \label{eq:iscamb}
@@ -612,20 +611,9 @@ V_{out}AC = V_{AC}.
 
 In order to select an optimal PV system to meet sizing constraints, it is necessary to evaluate power reliability and system cost analysis for the underlying system. An ideal combination of any PV system is made by the best compromise between these two objectives or \textbf{criteria}.
 
-During the PV system design, one of the most important aspects to ensure power system reliability is to analyze power supply availability~\cite{Alsadi2018}. The reason is because solar energy production is intermittent and, therefore, the energy generated usually will not match with the load demand. A reliable power is a generation system that has sufficient power to feed load demand in a period. 
+During the PV system design, one of the most important aspects to ensure power system reliability is to analyze power supply availability~\cite{Alsadi2018}. The reason is because solar energy production is intermittent and, therefore, the energy generated usually will not match with the load demand. A reliable power is a generation system that has sufficient power to feed load demand in a period. There exist different methods to express system reliability, where the most popular ones are the loss of load probability (LOLP) and the loss of power supply probability (LPSP)~\cite{Alsadi2018}. In both methods, if the probability is zero, then the load will always be fulfilled; otherwise (i.e., probability of one) the load will never be fulfilled. LOLP is the probability for the case when a load demand exceeds the generation power by the PV system. On one hand, we claim that we have a reliable PV system when it is able to generate sufficient power to fulfill the demanded load within a time span. On the other hand, LPSP is defined as the probability of the case when system generates insufficient power to satisfy the load demand. The main approaches to LPSP demand simulation or probabilistic treatment of time series data to predict dynamic changing on system performance. However, data is not always available and dynamic analysis is complex; and this is a drawback of LOLP and LPSP~\cite{Alsadi2018}.
 
-There exist different methods to express system reliability, where the most popular ones 
-are the loss of load probability (LOLP) and the loss of power supply probability (LPSP)~\cite{Alsadi2018}. In both methods, if the probability is zero, then the load will always be fulfilled; otherwise (i.e., probability of one) the load will never be fulfilled.
-
-LOLP is the probability for the case when a load demand exceeds the generation power by the PV system. On one hand, we claim that we have a reliable PV system when it is able to generate sufficient power to fulfill the demanded load within a time span. On the other hand, LPSP is defined as the probability of the case when system generates insufficient power to satisfy the load demand. The main approaches to LPSP demand simulation or probabilistic treatment of time series data to predict dynamic changing on system performance. However, data is not always available and dynamic analysis is complex; and this is a drawback of LOLP and LPSP~\cite{Alsadi2018}.
-
-Related to economic analysis, there exist various methods available. The main objective is to determine whether the project has an acceptable investment; the usual way is to perform economic analysis after reliability analysis with the goal of proposing a system with high reliability and lowest cost~\cite{Alsadi2018}. The common methods include: Net Present Cost (NPC)~\cite{Park2004}, the Levelized Cost of Energy (LCOE)~\cite{Zhou2010}, or the Life Cycle Cost (LCC)~\cite{Applasamy2011}.
-
-The NPC is the present value of all the costs over the project lifetime, minus the present value of all the revenues that it earns over the project lifetime. The net present worth is found by discounting all cash inflows and outflows, including cost of installation, replacement and maintenance of the PV system, at an internal rate of return (IRR)~\cite{Park2004}. IRR is used to evaluate the attractiveness of a project or investment.
-
-LCOE is defined as the average cost per kWh of useful electrical energy produced by the PV system when a lifetime, investment cost, replacement, operation and maintenance, and capital cost are considered~\cite{Kamel2005}. LCOE method is useful in comparing different generation technologies with different operating characteristics~\cite{Zhou2010}.
-
-LCC is the estimation of sum of installation cost, operating and maintenance of a PV system for a period of time, and expressed in today's value~\cite{Applasamy2011}. Eq.~\eqref{eq:LCC} is used to calculate LCC of a PV system,
+Related to economic analysis, there exist various methods available. The main objective is to determine whether the project has an acceptable investment; the usual way is to perform economic analysis after reliability analysis with the goal of proposing a system with high reliability and lowest cost~\cite{Alsadi2018}. The common methods include: Net Present Cost (NPC)~\cite{Park2004}, the Levelized Cost of Energy (LCOE)~\cite{Zhou2010}, or the Life Cycle Cost (LCC)~\cite{Applasamy2011}. The NPC is the present value of all the costs over the project lifetime, minus the present value of all the revenues that it earns over the project lifetime. The net present worth is found by discounting all cash inflows and outflows, including cost of installation, replacement and maintenance of the PV system, at an internal rate of return (IRR)~\cite{Park2004}. IRR is used to evaluate the attractiveness of a project or investment. LCOE is defined as the average cost per kWh of useful electrical energy produced by the PV system when a lifetime, investment cost, replacement, operation and maintenance, and capital cost are considered~\cite{Kamel2005}. LCOE method is useful in comparing different generation technologies with different operating characteristics~\cite{Zhou2010}. LCC is the estimation of sum of installation cost, operating and maintenance of a PV system for a period of time, and expressed in today's value~\cite{Applasamy2011}. Eq.~\eqref{eq:LCC} is used to calculate LCC of a PV system,
 
 \begin{equation}
 \label{eq:LCC}
@@ -643,22 +631,7 @@ the designer has to evaluate the design based on optimization variables.
 As the number of optimization variables increases, the computational effort 
 will increase as well. Hence, to obtain the best PV system design as well as 
 simplified sizing process, prior work introduced three main \textbf{techniques} 
-for system sizing calculation, namely intuitive, numerical, and analytical methods~\cite{Zhou2010}.
-
-Intuitive method is simple, easy to be implemented, and can be used to give 
-rough suggestion for preliminary design. The sizing rules are based on designer's experience, 
-using lowest performance either in a time period data or by directly using average value 
-(daily, monthly, or annual) of solar irradiance. This method does not consider the battery's 
-state of charge, or even the random nature of solar irradiation and meteorological conditions~\cite{Alsadi2018}.
-
-For numerical method, the design is simulated for each time step within a period. 
-State of charge of batteries is calculated and investigated. It is very accurate, 
-however is complex, demanding more time for calculation~\cite{Park2004}.
-
-Analytical methods is used to obtain a close relation or correlation in a form 
-of equation between capacities and reliabilities. The sizing task becomes much simpler 
-than numerical technique; however, the relation cannot be applied to different sites
-since it is specific to one place of deployment of the PV system, 
+for system sizing calculation, namely intuitive, numerical, and analytical methods~\cite{Zhou2010}. Intuitive method is simple, easy to be implemented, and can be used to give rough suggestion for preliminary design. The sizing rules are based on designer's experience, using lowest performance either in a time period data or by directly using average value (daily, monthly, or annual) of solar irradiance. This method does not consider the battery's state of charge, or even the random nature of solar irradiation and meteorological conditions~\cite{Alsadi2018}. For numerical method, the design is simulated for each time step within a period. State of charge of batteries is calculated and investigated. It is very accurate, however is complex, demanding more time for calculation~\cite{Park2004}. Analytical methods is used to obtain a close relation or correlation in a form of equation between capacities and reliabilities. The sizing task becomes much simpler than numerical technique; however, the relation cannot be applied to different sites since it is specific to one place of deployment of the PV system, 
 thereby demanding adaptation if another site is analyzed.
 
 %------------------------------------------------------
@@ -691,22 +664,16 @@ program analysis and model checking. In order to experiment with the trade-off,
 and in order to be able to set the dial between the two extreme points, 
 Configurable Program Analysis (CPA) provides a conceptual basis for expressing 
 different verification approaches in the same formal setting. The CPA formalism 
-provides an interface for the definition of program analyses. Consequently, CPAchecker provides an implementation framework that allows the seamless integration of program analyses that are expressed in the CPA framework. The comparison among different 
-approaches in the same experimental setting is intended to be easy and the experimental 
-results are expected to be more meaningful~\cite{Beyer2011}. Related to the architecture, 
-the central data structure is a set of control-flow automata (CFA), which consists of control-flow 
-locations and control-flow edges. The CPA framework provides interfaces to SMT solvers and 
-interpolation procedures~\cite{Beyer2011}. Currently, CPAchecker uses MathSAT as SMT solver; 
-and CSIsat and MathSAT as interpolation procedures~\cite{Beyer2011}. 
+provides an interface for the definition of program analyses. Consequently, CPAchecker provides an implementation framework that allows the seamless integration of program analyses that are expressed in the CPA framework. Related to the architecture, the central data structure is a set of control-flow automata (CFA), which consists of control-flow locations and control-flow edges. The CPA framework provides interfaces to SMT (Satisfiability Modulo Theories) solvers and interpolation procedures~\cite{Beyer2011}. Currently, CPAchecker uses MathSAT as SMT solver~\cite{Beyer2011}. 
 
 %-----------------------------------------------------------
 \subsection{Program Synthesis Technique}
 \label{sec:ProgramSynthesis}
 %-----------------------------------------------------------
 
-Program synthesis addresses an age-old problem in computer science: can a computer program itself?~\cite{Bornholt2019}. Before the computer can automatically generate a program, it is necessary to give it a specification of what the program should do. The specification needs to describe the program’s desired behavior (in enough detail) in order to ensure that the program does what it is intended.
+Program synthesis addresses an age-old problem in computer science: can a computer program itself?~\cite{Bornholt2019}. Before the computer can automatically generate a program, it is necessary to give it a specification of what the program should do. The specification needs to describe the program’s desired behavior in order to ensure that the program does what it is intended.
 
-Therefore, the basic idea of program synthesis is to automatically construct a program $P$ that satisfies a correctness specification $\sigma$. In particular, program synthesis is automatically performed by engines that use a correctness specification $\sigma$, as starting point, and then incrementally produce a sequence of candidate solutions that partially satisfy $\sigma$~\cite{Abateetal2017}. As a result, a given candidate program $p$ is iteratively refined, in order to match $\sigma$ more closely. CEGIS represents one of the most popular approaches to program synthesis that are currently used in practice for cyber-physical problems~\cite{Abateetal2017}, as energy production, distribution, and optimization, and  whose basic architecture is illustrated in Figure~\ref{Counter-Example-Guided-Inductive-Synthesis} and has close connections to algorithmic debugging using counterexamples and abstraction refinement~\cite{Alur}. 
+Therefore, the basic idea of program synthesis is to automatically construct a program $P$ that satisfies a correctness specification $\sigma$. In particular, program synthesis is automatically performed by engines that use a correctness specification $\sigma$, as starting point, and then incrementally produce a sequence of candidate solutions that partially satisfy $\sigma$~\cite{Abateetal2017}. As a result, a given candidate program $p$ is iteratively refined, in order to match $\sigma$ more closely. CEGIS represents one of the most popular approaches to program synthesis that are currently used in practice for cyber-physical problems~\cite{Abateetal2017}, as energy production, distribution, and optimization, and  whose basic architecture is illustrated in Figure~\ref{Counter-Example-Guided-Inductive-Synthesis} and has close connections to algorithmic debugging using counterexamples and abstraction refinement~\cite{Alur} from model checking. 
 
 \begin{figure}[h]
 	\centering
@@ -820,7 +787,7 @@ by our {\sc Verify} phase to ensure that the approach is sound.
 
 Regarding the line $2$ of Algorithm~\ref{alg:verification-algorithm}, 
 a list of forty equipment from ten different manufacturers was provided 
-to the synthesis engine in order to allow the choice of every item 
+to our synthesis engine in order to allow the choice of every item 
 of PV sizing. Data sheet from each item was necessary to collect 
 technical information. Moreover, the price of each item was obtained 
 from available quotations in the market, and if the currency was not in US dollars, 
@@ -839,7 +806,7 @@ Regarding financial analysis:
 	\item LCC lifetime considered: $20$ years;
 	\item Installation costs: includes delivery in the isolated community and installation costs itself, $5$\% of total cost~\cite{Agrener2013};
 	\item Value of the discount rate or interest rate: $10$\%, which is a good rate considering financial investments in developing countries;
-	\item Operation and maintenance annual costs: based on past PV projects of similar size in the Amazon region of Brazil, will be adopted the value of US\$ 289.64~\cite{Agrener2013}. This cost includes the battery replacement based on its lifetime ($4$ years for lead-acid batteries), plus inverters and controller replacement (every $10$ years). Therefore, it will be performed three battery bank and one inverter-controller replacements during the LCC analysis.
+	\item Operation and maintenance annual costs: based on PV projects of similar size in the Amazon region of Brazil, will be adopted the value of US\$ 289.64~\cite{Agrener2013}. This cost includes the battery replacement based on its lifetime ($4$ years for lead-acid batteries), plus inverters and controller replacement (every $10$ years). Therefore, it will be performed three battery bank and one inverter-controller replacements during the LCC analysis.
 \end{itemize}
 
 On the subject of PV system optimization technique, we will adopt here the intuitive method 
@@ -854,9 +821,8 @@ Related to off-the-shelf simulation tools only HOMER Pro and Hybrid2 perform off
 
 \begin{itemize}
 	\item HOMER Pro is available only for Microsoft Windows and its annual standard subscription costs US\$ $504.00$~\cite{HOMER};
-	\item HOMER Pro do not have the LCC cost in its reports. However, it has NPC and LCOE. Therefore NPC was used to obtain LCC in order to allow the comparative among tools;
-	\item The optimization analysis of HOMER Pro allows to define a load curve and temperature according of data collected automatically from online databases. However, in order to allow a correct comparative, the curve load and the temperature were defined exactly the same as automated synthesis tools;
-	\item Battery autonomy is not an parameter that the user can set when using HOMER Pro. The tool will always to meet the user requirement, i.e., the load curve during the $365$ days of the year;
+	\item HOMER Pro do not have the LCC cost in its reports. It has NPC and LCOE. Therefore NPC was used to obtain LCC in order to allow the comparative;
+	\item The optimization analysis of HOMER Pro allows to define a load curve and temperature according of data collected from online databases. However, in order to allow a correct comparative, the curve load and the temperature were defined exactly the same as automated synthesis tools;
 	\item HOMER Pro do not have a explicit equipment called charge controller. It uses a controller resource that can perform in two different ways, according of the optimization choice or the user choice: load following or cycle charging~\cite{HOMER}. During the tests it was chosen the load following controller: it produces only enough power to meet the demand~\cite{HOMER};
 	\item It was assumed the value of 5\% of capacity shortage that is equivalent to 95\% of availability of the PV system. By definition, availability is the percentage of time at which a power system is capable of meeting the load requirements~\cite{Khatib2014}. For critical loads, 99\% is considered acceptable. While in a ordinary house electrical load, 95\% is considered acceptable;
 	\item It was assumed a string of two batteries in order to match the voltage of the system of $24$ V DC that was used for the automated synthesis tool;
@@ -868,7 +834,7 @@ Related to off-the-shelf simulation tools only HOMER Pro and Hybrid2 perform off
 \label{sec:Results}
 %---------------------------------------------------------------------------
 
-This section presents the case studies used to evaluate our proposed approach. We also compare our approach with a specialized simulation tool (HOME Pro). The computing setup, the objectives of the experimental phase, and the results itself are also described.
+This section presents the case studies used to evaluate our proposed approach. We also compare our approach with a specialized simulation tool (HOME Pro). The computing setup, the objectives of the experimental phase, and the results are also described.
 
 %---------------------------------------------------------------------------
 \subsection{Case studies} 
@@ -903,7 +869,7 @@ Specification & Result & Result \\
 \hline
 \hline
 \end{tabular}
-\\Legend: OM = out of memory; TO = timeout; IF = internal failure, E = energy.
+\\Caption: OM = out of memory; TO = timeout; IF = internal failure, E = energy.
 \end{scriptsize}
 \end{table}
 
@@ -947,40 +913,12 @@ this timeout limitation from CPAchecker, the verifier is
 able to solve the optimization in $44.97$ hours. 
 The violation (SAT result) indicated in Table~\ref{tab1} 
 is the $assert$ of line $22$ from Algorithm~\ref{alg:verification-algorithm}. %The results were tested by manual PV sizing and were sound (\textit{RQ1}). %, linking a feasible technical solution with the lowest cost possible, considering the equipment that were inputted to the code. 
+As interesting feature of the automated synthesis, every optimal sizing is presented as a detailed list of equipment with brand (in Table~\ref{tab1} it was removed 
+to avoid some advertising) and model taken from the list inputted to the algorithm, moreover the number of series and parallel solar panels and batteries are presented.
 
-Related to HOMER Pro, it was able to evaluate six case studies, 
-and within a time shorter than $30$ seconds, which was much 
-faster than our automated synthesis tool (cf.~\textit{EQ2}). 
-Case study $3$ was not possible to be simulated since HOMER Pro 
-does not have the feature of adjusting the battery autonomy, i.e., 
-the tool always tries to feed with electricity the given load 
-during $365$ days/year. We have also noted other HOMER Pro drawbacks:
+Related to HOMER Pro, it was able to evaluate six case studies, and within a time shorter than $30$ seconds, which was much faster than our automated synthesis tool  (cf.~\textit{EQ2}). Case study $3$ was not possible to be simulated since HOMER Pro does not have the feature of adjusting the battery autonomy (the tool will always to meet the user requirement, i.e., the load curve during the $365$ days of the year). Other HOMER Pro drawbacks, when compared to our automated synthesis method: (a) There exists no explicit charge controller as a system equipment. HOMER includes automatically a controller just to simulate the charge/discharge of batteries and to meet the load requirement; however, without costs or even with electrical characteristics as maximum current and voltage, which are common during PV sizing; (b) HOMER demands to include some battery specification to initiate the optimization; however, it does not change the electrical specifications during the simulation; the presented results are multiples of the original battery type suggested by the user. As example, it was started with a $83.4$ Ah lead-acid battery and during the simulation, HOMER Pro did not try to use other capacities or types; (c) HOMER does not present the optimal solution in terms of connections of arrays of PV panels, just the total in terms of power, i.e., it does not present neither models and the power of each PV panel nor the total of panels in series or parallel; (d) Battery autonomy is not an parameter that the user can set when using HOMER. 
 
-\begin{itemize}
-\item There exists no explicit charge controller 
-as a system equipment. HOMER Pro includes automatically 
-a controller just to simulate the charge/discharge 
-of batteries and to meet the load requirement; however, 
-without costs or even with electrical characteristics 
-as maximum current and voltage, which are common during PV sizing;
-\item HOME Pro demands to include some battery specification 
-to initiate the optimization; however, it does not change 
-the electrical specifications during the simulation; 
-the presented results are multiples of the original 
-battery type suggested by the user. As example, it was 
-started with a $83.4$ Ah lead-acid battery and during 
-the simulation, HOMER Pro did not try to use other capacities or types;
-\item HOMER Pro does not present the optimal solution 
-in terms of connections of arrays of PV panels, just the 
-total in terms of power, i.e., it does not present neither models 
-and the power of each PV panel nor the total of panels in series or parallel. 
-\end{itemize}
-
-Comparing the results between the formal synthesis with CPAchecker 
-and HOMER Pro, we observed that most results are quite similar, 
-in terms of technical solution and cost (cf. Table~\ref{tab1}). 
-
-Particularly related to LCC, the cost was very close in cases 
+Comparing the results between the formal synthesis with CPAchecker and HOMER Pro  (cf.~\textit{EQ2}), we observed that most results are quite similar, in terms of technical solution and cost (cf. Table~\ref{tab1}). Particularly related to LCC, the cost was very close in cases 
 $1$, $4$, $5$ and $6$, with difference varying from $0.23$\% to $17.4$\%. 
 Even adopting the same price per kW to the PV panels, 
 inverters, and batteries, HOMER Pro does not use costs 
@@ -990,11 +928,7 @@ a fixed annual cost for operation and maintenance can produce
 some impact as well at this discrepancy; however, it is not significant
 since this annual cost is too small when compared to the resulting LCC value.
 
-However, there exists a huge divergence in case study $2$, 
-where the costs presented by HOMER Pro were $54$\% higher 
-than our automated synthesis tool, probably because the 
-operation and maintenance costs assumed by our automated 
-synthesis tool were underestimated to that specific load. 
+However, there exists a huge divergence in case study $2$, where the costs presented by HOMER Pro were $54$\% higher than our automated synthesis tool, probably because the operation and maintenance costs assumed by our automated synthesis tool were underestimated to that specific load. 
 
 In general, the size of the PV panels and battery bank were 
 bigger in HOMER Pro than with our formal synthesis approach, 
@@ -1015,7 +949,7 @@ presented an optimal solution with $420$ Ah of total capacity
 Just to compare the results obtained from the optimization 
 with the real-world, the authors had four PV systems deployed 
 and monitored since June $2018$ in a riverside community 
-in the Amazonas State in Brazil, with similar demands 
+in the Amazonas State in Brazil (coordinates 2$^{o}$44'50.0"S 60$^{o}$25'47.8"W), with similar power demands 
 presented by case studies $1$, $4$, $5$, and $6$, 
 always with a $3$ $\times$ $325$ W ($3$S) panels and 
 $4$ $\times$ $220$ Ah ($2$S-$2$P $= 440$ Ah) 
@@ -1045,18 +979,6 @@ phase. Case study $3$ was not possible to simulate in HOMER Pro,
 because its restriction does not allow one to set the battery autonomy, 
 thus resting both without parameters to comparative.
 
-Summarizing, our synthesis tool is capable to present a 
-solution, which is far detailed and close to the commercial 
-reality than the solution presented by HOMER Pro. 
-In particular, our automated synthesis method 
-can provide all the details of every component of 
-a PV system solution, with complete electrical details 
-from data sheet of manufacturers, including 
-the model of the component, nominal current and voltage. 
-In this respect, even the name of the manufacturer 
-can be presented (in Table~\ref{tab1} it was removed 
-to avoid some advertising).
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Threats to validity}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1078,28 +1000,11 @@ sized using our synthesized results in order to validate it.
 \label{sec:Conclusion}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-We have described and evaluated an automated synthesis method 
-to obtain the optimal size of PV system using software model 
-checking techniques. The focus was on the method to obtain the optimal solution, based on formal methods that can cover the design-space better than simulation tools. We have considered seven case studies 
-from PV systems in two different sites of the Amazonas State 
-in Brazil, ranging from $253$\,W to $1,586$\,W peak; one 
-state-of-art verification engine was considered 
-(CPAchecker), in addition to a specialized 
-off-the-shelf simulation tool (HOMER Pro) in order to compare the results.
+We have described and evaluated an automated synthesis method to obtain the optimal size of PV system using software model checking techniques. The focus was on the method to obtain the optimal solution, based on formal methods that can cover the design-space better than simulation tools. We have considered seven case studies from PV systems in two different sites of the Amazonas State in Brazil, ranging from $253$\,W to $1,586$\,W peak; one state-of-art verification engine was considered (CPAchecker), in addition to a specialized off-the-shelf simulation tool (HOMER Pro) in order to compare the results.
 
-Our automated synthesis tool presented detailed optimal solution 
-to six case studies adopted in this paper, with specifications, 
-models, and the arrangement in terms of series-parallel connections, 
-thereby covering the charge controller, which was not presented by HOMER Pro. 
-In a nutshell, our automated synthesis tool took more time 
-to find the optimal solution than HOMER Pro; however, the presented 
-solution was more complete and detailed, which is very useful 
-to a user to get a list of equipment and go to shopping.
+Summarizing, our synthesis tool is capable to present a solution, which is far detailed and close to the commercial reality than the solution presented by HOMER Pro. In particular, our automated synthesis method can provide all the details of every component of a PV system solution, with complete electrical details from data sheet of manufacturers, including the model of the component, nominal current and voltage. In this respect, even the name of the manufacturer can be presented. Covering the charge controller, which was not presented by HOMER Pro. In a nutshell, our automated synthesis tool took more time to find the optimal solution than HOMER Pro; however, the presented solution was more complete and detailed, which is very useful to a user to get a list of equipment and go to shopping.
 
-As future work, the authors plan to improve the power reliability analysis, 
-to address the restriction to only allow automated synthesis of 
-riverside communities in the Amazonas state (Brazil), and to 
-validate some cases with deployed PV systems in isolated communities.
+As future work, the authors plan to improve the power reliability analysis, to address the restriction to only allow automated synthesis of riverside communities in the Amazonas state (Brazil), and to validate some cases with the deployment of real PV systems in isolated communities.
 
 % An example of a floating figure using the graphicx package.
 % Note that \label must occur AFTER (or within) \caption.
@@ -1214,7 +1119,7 @@ validate some cases with deployed PV systems in isolated communities.
 % use section* for acknowledgment
 \section*{Acknowledgment}
 
-The authors would like to thank: (i) Newton Fund [grant number $261881580$] for the research mobility support; (ii) FAPEAM - Amazonas State Foundation for Research Support [PROTI-Pesquisa $2018$], for the DCTIEX II scholarship (NOV-$2018$), and for support the research mobility to UK; (iii) FAS - Sustainable Amazonas Foundation for the PhD scholarship (NOV-$2017$ to MAR-$2019$); and (iv) University of Sheffield's Research England QR GCRF Institutional Allocation for the HOMER Pro license.
+The authors would like to thank: (i) Newton Fund [grant $261881580$] for the mobility support; (ii) FAPEAM - Amazonas Foundation for Research [PROTI-Pesquisa $2018$], for the mobility support to UK (NOV-$2018$); (iii) FAS - Sustainable Amazonas Foundation for the PhD scholarship (NOV-$2017$ to MAR-$2019$); and (iv) University of Sheffield's QR GCRF Institutional Allocation for the HOMER Pro license.
 
 % Can use something like this to put references on a page
 % by themselves when using endfloat and the captionsoff option.
