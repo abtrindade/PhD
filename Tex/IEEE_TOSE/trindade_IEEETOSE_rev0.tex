@@ -641,6 +641,16 @@ thereby demanding adaptation if another site is analyzed.
 
 In this section we present the theory and the methodology created to obtain the optimal sizing of stand-alone solar PV systems through program synthesis.
 
+Fig.~\ref{fig:optimization} illustrates how to obtain the optimal sizing of a stand-alone solar PV system, passing through the traditional techniques (manual, and simulation), and including the proposed automatic synthesis that is detailed in this Section. The input information is the same for all the methods, with the difference that in automated validation it is possible to define the bound $k$ to restrict the design-space search. And the outputs are not equal, as the design-space coverage and the, mainly, the final resulting.
+
+\begin{figure}[h]
+\includegraphics[width=0.5\textwidth]{optimalsizingprocess2}
+\centering
+\caption{Comparative of optimal sizing methods}
+\label{fig:optimization}
+\end{figure}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Automated Verification Using Model Checking}
 \label{sec:AutomatedVerification}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -664,8 +674,20 @@ program analysis and model checking. In order to experiment with the trade-off,
 and in order to be able to set the dial between the two extreme points, 
 Configurable Program Analysis (CPA) provides a conceptual basis for expressing 
 different verification approaches in the same formal setting. The CPA formalism 
-provides an interface for the definition of program analyses. Consequently, CPAchecker provides an implementation framework that allows the seamless integration of program analyses that are expressed in the CPA framework. Related to the architecture, the central data structure is a set of control-flow automata (CFA), which consists of control-flow locations and control-flow edges. The CPA framework provides interfaces to SMT (Satisfiability Modulo Theories) solvers and interpolation procedures~\cite{Beyer2011}. Currently, CPAchecker uses MathSAT as SMT solver~\cite{Beyer2011}. 
+provides an interface for the definition of program analyses. Consequently, CPAchecker provides an implementation framework that allows the seamless integration of program analyses that are expressed in the CPA framework. Related to the architecture, the central data structure is a set of control-flow automata (CFA), which consists of control-flow locations and control-flow edges. 
 
+However, there is a main disadvantage of model checking: the state explosion problem~\cite{Clarke2012}. In order to solve this issue, many different techniques were developed at the last decades. One of the promising is the Bounded Model Checking (BMC). BMC algorithms traverses a finite state machine for a fixed number of steps, $k$, and checks whether violation occurs with this bound. 
+
+The CPA framework provides interfaces to SMT (Satisfiability Modulo Theories) solvers and interpolation procedures~\cite{Beyer2011}. Currently, CPAchecker uses MathSAT as SMT solver~\cite{Beyer2011}. The use of SMT by CPAchecker, instead of Boolean Satisfiability SAT from the original BMC, comes as an alternative to overcome limitations of the systems modeling, especially considering that the complexity of these is increasing and the SMT method has high level and richer theories than the SAT to represent the models.
+
+%CPAchecker algorithms can traverse a finite state machine for a fixed number of steps, $k$, and checks whether violation occurs with this bound; therefore is not necessary to search for 
+%
+%BMC techniques are only able to falsify properties up to the given depth k;
+%
+%Verification of safety properties: can we find a bad state in k steps?
+%
+%Model checking tools face a combinatorial blow up of the state-space, commonly known as the state explosion problem, that must be addressed to solve most real-world problems. There are several approaches to combat this problem.
+%
 %-----------------------------------------------------------
 \subsection{Program Synthesis Technique}
 \label{sec:ProgramSynthesis}
