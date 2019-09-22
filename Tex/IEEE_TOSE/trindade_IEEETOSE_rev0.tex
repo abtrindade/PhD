@@ -472,13 +472,13 @@ Here, we have developed a variant of counterexample guided inductive synthesis (
 
 \textit{Outline}. Section~\ref{sec:Background} gives the background about sizing and optimization of PV systems. Section~\ref{sec:Method} presents the automated formal synthesis proposed in this underlying study. Section~\ref{sec:Results} is devoted to the experimental evaluation, while Section~\ref{sec:Conclusion} presents the conclusions and describes future work.
 
+%-----------------------------------------------------------
 \section{Sizing and Optimization of PV Systems}
 \label{sec:Background}
 %-----------------------------------------------------------
 
-A stand-alone PV system block diagram is illustrated in Fig.\ref{fig:blockdiagram}. %It identifies the PV generator, batteries, charge controller, inverter, and AC load. 
-The PV generator (a panel or an array) is a semiconductor device that can convert solar energy into DC electricity. For night hours or rainy days, we hold batteries where power can be stored and used. The use of batteries as a storage form implies the presence of a charge controller~\cite{Hansen}. The PV arrays produce DC and therefore when the PV system contains an AC load, a DC/AC conversion (inverter) is required. The AC load dictates the behavior of AC electrical load from the house. % that will be fed by the PV system.
-
+Fig.\ref{fig:blockdiagram} illustrates a stand-alone PV system block diagram. The PV generator (a panel or an array) is a semiconductor device that can convert solar energy into DC electricity. For night hours or rainy days, we hold batteries where power can be stored and used. The use of batteries as a storage form implies the presence of a charge controller~\cite{Hansen}. The PV arrays produce DC, and therefore when the PV system contains an AC load, a DC/AC conversion (inverter) is required. The AC load dictates the behavior of the AC electrical load from the house.
+%
 \begin{figure}[h]
 \includegraphics[width=0.4\textwidth]{blockdiagramPVS2_rev}
 \centering
@@ -486,37 +486,37 @@ The PV generator (a panel or an array) is a semiconductor device that can conver
 \label{fig:blockdiagram} 
 \end{figure}
 
-In this section we explain the adopted method to size stand-alone solar PV systems, and what criteria and technique is possible to apply for the optimal sizing. 
+In this section, we explain the adopted method to size stand-alone solar PV systems, and what criteria and technique are possible to apply for the optimal sizing. 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Sizing Stand-alone Solar PV Systems}
 \label{sec:sizing}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-At this work, was adopted the critical period solar energy method~\cite{Pinho}, and MPPT (Maximum Power Point Tracking) charge controller (which is the most common nowadays). Firstly, we need to correct the energy consumption estimated to the load ($E_{consumption}$), which is carried out by Eq.~\eqref{eq:Ecorrected}, where the efficiency of batteries ($\eta_{b}$), controller ($\eta_{c}$), and inverter ($\eta_{i}$) are considered~\cite{Pinho} as follows
+We adopted a critical period solar energy method~\cite{Pinho}; in particular, maximum power point tracking (MPPT) charge controller, which is the most common nowadays. First, we need to correct the energy consumption estimated to the load ($E_{consumption}$), which is carried out by Eq.~\eqref{eq:Ecorrected}, where the efficiency of batteries ($\eta_{b}$), controller ($\eta_{c}$), and inverter ($\eta_{i}$) are considered~\cite{Pinho} as follows
 
 \begin{equation}
 \label{eq:Ecorrected}
 E_{corrected} = \dfrac{E_{consumption}}{\eta_{b} \eta_{c} \eta_{i} }.
 \end{equation}
 
-We also need to estimate the energy that can be produced for each panel, called $E_{p}$, in Wh, defined as
+We also need to estimate the energy that each panel produces, called $E_{p}$, in Wh, defined as
 
 \begin{equation}
 \label{eq:Ep}
 E_{p} = Solar\_Irradiance \times Panel\_Area \times \eta_{p} \times 1000,
 \end{equation}
 
-\noindent where the solar irradiance is expressed in terms of $kWh/m^{2}$ and depends on the site where the PV system will be deployed; 
+\noindent where the solar irradiance is expressed in terms of $kWh/m^{2}$ and depends on the site where we deploy the PV system; 
 the PV panel area is given in $m^{2}$ and corresponds to the size of one PV panel, and $\eta_{p}$ represents the PV panel efficiency.
-The total minimum number of needed solar panels ($N_{TPmin}$) is computed as
+We compute the total minimum number of needed solar panels ($N_{TPmin}$) as
 
 \begin{equation}
 \label{eq:NTPmin}
 N_{TPmin} = \dfrac{E_{corrected}}{E_{p}}.
 \end{equation}
 
-Particularly, the total number of panels in series ($N_{PSmin}$) and parallel ($N_{PPmin}$) are respectively given by
+Notably, we give the total number of panels in series ($N_{PSmin}$) and parallel ($N_{PPmin}$) by
 
 \begin{equation}
 \label{eq:NPSmin}
@@ -534,18 +534,18 @@ $V_{maxPower,TempMin}$ are the maximum power voltage from the PV module consider
 the maximum and minimum operational temperature, respectively; 
 $P_{total}$ is the total power demanded from the PV system and 
 $P_{max,ref}$ is the power supplied from one PV panel in $Watts$.
-Regarding batteries, we must first define the total capacity of the battery bank, which can be described as
-
+Regarding batteries, we must first define the total capacity of the battery bank as
+%
 \begin{equation}
 \label{eq:Cbank}
 C_{bank} = \dfrac{E_{corrected} \times autonomy}{V_{system} \times DOD},
 \end{equation}
 
-\noindent where the variable $autonomy$ is a design definition and normally has a value ranging from $6$ to $48$h; 
-$ V_{system} $ is the DC voltage of the bus, and $ DOD $ is the battery deep of discharge (considered of maximum of 25\% here).
-
-Secondly, the total (minimum) number of batteries is computed as 
-
+\noindent where the variable $autonomy$ is a design definition and typically has a value ranging from $6$ to $48$h; $ V_{system} $ 
+is the DC voltage of the bus, and $ DOD $ is the battery deep of discharge (considered of maximum of 25\% here).
+%
+Second, we compute the total (minimum) number of batteries as 
+%
 \begin{equation}
 \label{eq:Nbtotal}
 N_{B}total = N_{BS}min \times N_{BP}min
@@ -583,7 +583,7 @@ I_{c,min} = I_{sc,amb} \times N_{PP},
 I_{c} \geq I_{c,min}.
 \end{equation}
 
-The inverter sizing check is performed by means of three equations. Eq.~\eqref{eq:vindc} ensures that 
+The inverter sizing check is performed using three equations. Eq.~\eqref{eq:vindc} ensures that 
 the input voltage of the controller meets the system voltage. Eq.~\eqref{eq:voutac} ensures that the 
 output voltage of the controller meets the AC voltage of the load. Finally, Eq.~\eqref{eq:invcheck} ensures that 
 the controller can support the total demand of the load ($Demand$) and the surge power ($P_{surge}$), 
@@ -609,12 +609,12 @@ V_{out}AC = V_{AC}.
 \subsection{PV Systems Optimization: Criteria and Techniques}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-In order to select an optimal PV system to meet sizing constraints, it is necessary to evaluate power reliability and system cost analysis for the underlying system. An ideal combination of any PV system is made by the best compromise between these two objectives or \textbf{criteria}.
+We need to evaluate \textit{power reliability} and \textit{system cost analysis} for the underlying system to select an optimal PV system to meet sizing constraints. An ideal combination of any PV system consists of the best compromise between these two objectives or criteria.
 
-During the PV system design, one of the most important aspects to ensure power system reliability is to analyze power supply availability~\cite{Alsadi2018}. The reason is because solar energy production is intermittent and, therefore, the energy generated usually will not match with the load demand. A reliable power is a generation system that has sufficient power to feed load demand in a period. There exist different methods to express system reliability, where the most popular ones are the loss of load probability (LOLP) and the loss of power supply probability (LPSP)~\cite{Alsadi2018}. In both methods, if the probability is zero, then the load will always be fulfilled; otherwise (i.e., probability of one) the load will never be fulfilled. LOLP is the probability for the case when a load demand exceeds the generation power by the PV system. On one hand, we claim that we have a reliable PV system when it is able to generate sufficient power to fulfill the demanded load within a time span. On the other hand, LPSP is defined as the probability of the case when system generates insufficient power to satisfy the load demand. The main approaches to LPSP demand simulation or probabilistic treatment of time series data to predict dynamic changing on system performance. However, data is not always available and dynamic analysis is complex; and this is a drawback of LOLP and LPSP~\cite{Alsadi2018}.
+During the PV system design, one of the most important aspects to ensure power system reliability is to analyze power supply availability~\cite{Alsadi2018}. The reason is that solar energy production is intermittent and, therefore, the energy generated usually does not match with the load demand. A reliable power is a generation system that has sufficient power to feed load demand in a period. There exist different methods to express system reliability, where the most popular ones are the loss of load probability (LOLP) and the loss of power supply probability (LPSP)~\cite{Alsadi2018}. In both methods, if the probability is zero, then the load is always fulfilled; otherwise (i.e., probability of one) the load is never fulfilled. LOLP is the probability for the case when a load demand exceeds the generation power by the PV system. On the one hand,  we have a reliable PV system when it can generate sufficient power to fulfill the demanded load within a period. On the other hand, LPSP is defined as the probability of the case when the system generates insufficient power to satisfy the load demand. The main approaches to LPSP demand simulation or probabilistic treatment of time series data to predict dynamic changing on system performance. However, data is not always available and dynamic analysis is complex; and this is a drawback of LOLP and LPSP~\cite{Alsadi2018}.
 
-Related to economic analysis, there exist various methods available. The main objective is to determine whether the project has an acceptable investment; the usual way is to perform economic analysis after reliability analysis with the goal of proposing a system with high reliability and lowest cost~\cite{Alsadi2018}. The common methods include: Net Present Cost (NPC)~\cite{Park2004}, the Levelized Cost of Energy (LCOE)~\cite{Zhou2010}, or the Life Cycle Cost (LCC)~\cite{Applasamy2011}. The NPC is the present value of all the costs over the project lifetime, minus the present value of all the revenues that it earns over the project lifetime. The net present worth is found by discounting all cash inflows and outflows, including cost of installation, replacement and maintenance of the PV system, at an internal rate of return (IRR)~\cite{Park2004}. IRR is used to evaluate the attractiveness of a project or investment. LCOE is defined as the average cost per kWh of useful electrical energy produced by the PV system when a lifetime, investment cost, replacement, operation and maintenance, and capital cost are considered~\cite{Kamel2005}. LCOE method is useful in comparing different generation technologies with different operating characteristics~\cite{Zhou2010}. LCC is the estimation of sum of installation cost, operating and maintenance of a PV system for a period of time, and expressed in today's value~\cite{Applasamy2011}. Eq.~\eqref{eq:LCC} is used to calculate LCC of a PV system,
-
+There exist various methods available related to economic analysis. The main objective is to determine whether the project has an acceptable investment; the usual way is to perform economic analysis after reliability analysis to propose a system with high reliability and lowest cost~\cite{Alsadi2018}. The conventional methods include: Net Present Cost (NPC)~\cite{Park2004}, the Levelized Cost of Energy (LCOE)~\cite{Zhou2010}, or the Life Cycle Cost (LCC)~\cite{Applasamy2011}. The NPC is the present value of all the costs over the project lifetime, minus the present value of all the revenues that it earns over the project lifetime. We find the present net worth by discounting all cash inflows and outflows, including the cost of installation, replacement, and maintenance of the PV system, at an internal rate of return (IRR)~\cite{Park2004}. IRR is used to evaluate the attractiveness of a project or investment. We define LCOE as the average cost per kWh of useful electrical energy produced by the PV system when a lifetime, investment cost, replacement, operation and maintenance, and capital cost are considered~\cite{Kamel2005}. LCOE method is useful in comparing different generation technologies with different operating characteristics~\cite{Zhou2010}. LCC is the estimation of the sum of installation cost, operating and maintenance of a PV system for some time, and expressed in today's value~\cite{Applasamy2011}. Eq.~\eqref{eq:LCC} is used to calculate LCC of a PV system,
+%
 \begin{equation}
 \label{eq:LCC}
 \begin{aligned}
@@ -626,13 +626,7 @@ LCC = & C_{PV} + C_{bat} + C_{charger} + C_{inv} + \\
 \noindent where $C_{PV}$ is PV array cost, $C_{bat}$ is initial cost of batteries, $C_{charger}$ is cost of charger, $C_{inv}$ is inverter cost, $C_{installation}$ is installation cost, $C_{batrep}$ is battery replacement cost in present value, and $C_{PWO\&M}$ is operation and maintenance costs 
 in present worth.
 
-Parallel to criteria, in order to recommend an optimal configuration for PV systems, 
-the designer has to evaluate the design based on optimization variables. 
-As the number of optimization variables increases, the computational effort 
-will increase as well. Hence, to obtain the best PV system design as well as 
-simplified sizing process, prior work introduced three main \textbf{techniques} 
-for system sizing calculation, namely intuitive, numerical, and analytical methods~\cite{Zhou2010}. Intuitive method is simple, easy to be implemented, and can be used to give rough suggestion for preliminary design. The sizing rules are based on designer's experience, using lowest performance either in a time period data or by directly using average value (daily, monthly, or annual) of solar irradiance. This method does not consider the battery's state of charge, or even the random nature of solar irradiation and meteorological conditions~\cite{Alsadi2018}. For numerical method, the design is simulated for each time step within a period. State of charge of batteries is calculated and investigated. It is very accurate, however is complex, demanding more time for calculation~\cite{Park2004}. Analytical methods is used to obtain a close relation or correlation in a form of equation between capacities and reliabilities. The sizing task becomes much simpler than numerical technique; however, the relation cannot be applied to different sites since it is specific to one place of deployment of the PV system, 
-thereby demanding adaptation if another site is analyzed.
+Parallel to criteria, the designer has to evaluate the design based on optimization variables to recommend an optimal configuration for PV systems. As the number of optimization variables increases, the computational effort increases as well. Hence, to obtain the best PV system design as well as a simplified sizing process, prior work introduced three primary techniques for system sizing calculation, namely intuitive, numerical, and analytical methods~\cite{Zhou2010}. The intuitive method is simple, easy to be implemented, and can be used to give rough suggestions for preliminary design. The sizing rules rely on the designer's experience, using the lowest performance either in a time data or by directly using average value (daily, monthly, or annual) of solar irradiance. This method does not consider the battery's state of charge, or even the random nature of solar irradiation and meteorological conditions~\cite{Alsadi2018}. For the numerical method, the design simulates for each time step within a period to calculate and investigate the state of charge of batteries. The numerical method is very accurate; however, it is complex, demanding more time for calculation~\cite{Park2004}. Analytical methods are used to obtain a close relation or correlation in the form of an equation between capacities and reliabilities. The sizing task becomes much more straightforward than numerical technique; however, the relation cannot be applied to different sites since it is specific to one place of deployment of the PV system, thereby demanding adaptation if another site is analyzed.
 
 %------------------------------------------------------
 \section{Automated Formal Synthesis Method}
