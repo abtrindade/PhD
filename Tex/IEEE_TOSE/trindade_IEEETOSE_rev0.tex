@@ -889,17 +889,17 @@ CPAchecker was able to synthesize the optimal sizing in six out of seven case st
 
 Related to HOMER Pro, it was able to evaluate six case studies, and within a time shorter than $30$ seconds, which was much faster than our automated synthesis tool (cf.~\textit{EQ2}). We were unable to simulate case study $3$ since HOMER Pro does not have the feature of adjusting the battery autonomy (the tool always meets the user requirement, i.e., the load curve during the $365$ days of the year). Other HOMER Pro drawbacks, when compared to our automated synthesis method: (a) There exists no explicit charge controller as a system equipment. HOMER includes a controller automatically just to simulate the charge/discharge of batteries and to meet the load requirement; however, without costs or even with electrical characteristics as maximum current and voltage, which are common during PV sizing; (b) HOMER demands to include some battery specification to initiate the optimization; however, it does not change the electrical specifications during the simulation; the presented results are multiples of the original battery type suggested by the user. As example, it was started with a $83.4$ Ah lead-acid battery, and during the simulation, HOMER Pro did not try to use other capacities or types; (c) HOMER does not present the optimal solution in terms of connections of arrays of PV panels, just the total in terms of power, i.e., it does present neither models and the power of each PV panel nor the total of panels in series or parallel; (d) Battery autonomy is not a parameter that the user can set when using HOMER. 
 
-Comparing the results between the formal synthesis with CPAchecker and HOMER Pro  (cf.~\textit{EQ2}), we observed that most results are quite similar, in terms of technical solution and cost (cf. Table~\ref{tab1}). Particularly related to LCC, the cost was very close in cases 
-$1$, $4$, $5$ and $6$, with difference varying from $0.23$\% to $17.4$\%. 
+Comparing the results between the formal synthesis with CPAchecker and HOMER Pro (cf.~\textit{EQ2}), 
+we observed that most results are quite similar, in terms of technical solution and cost (cf. Table~\ref{tab1}). 
+Mainly related to LCC, the cost was very close in cases $1$, $4$, $5$ and $6$, with difference varying from $0.23$\% to $17.4$\%. 
 Even adopting the same price per kW to the PV panels, 
 inverters, and batteries, HOMER Pro does not use costs 
-related to charge controllers, which were introduced into the 
+related to charge controllers, which we introduced into the 
 CPAchecker modeling. The premise used in CPAchecker to adopt 
 a fixed annual cost for operation and maintenance can produce 
 some impact as well at this discrepancy; however, it is not significant
 since this annual cost is too small when compared to the resulting LCC value.
-
-However, there exists a huge divergence in case study $2$, where the costs presented by HOMER Pro were $54$\% higher than our automated synthesis tool, probably because the operation and maintenance costs assumed by our automated synthesis tool were underestimated to that specific load. 
+However, there exists a considerable divergence in case study $2$, where the costs presented by HOMER Pro were $54$\% higher than our automated synthesis tool, probably because we underestimated the operation and maintenance costs assumed by our automated synthesis tool to that specific load. 
 
 In general, the size of the PV panels and battery bank were 
 bigger in HOMER Pro than with our formal synthesis approach, 
