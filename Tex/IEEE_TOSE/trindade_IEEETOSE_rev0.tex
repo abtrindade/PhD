@@ -815,13 +815,13 @@ Related to off-the-shelf simulation tools only HOMER Pro perform off-grid system
 \label{sec:Results}
 %---------------------------------------------------------------------------
 
-This section presents the case studies used to evaluate our proposed approach. We also compare our approach with a specialized simulation tool (HOME Pro). The computing setup, the objectives of the experimental phase, and the results are also described.
+This section describes our case studies, experimental setup,  objectives, and results to evaluate our proposed synthesis approach. We also compare our approach with a specialized simulation tool (HOME Pro).
 
 %---------------------------------------------------------------------------
 \subsection{Case studies} 
 %---------------------------------------------------------------------------
 
-We have performed seven case studies to evaluate our proposed synthesis approach, as described in the first column of Table~\ref{tab1} (named Specification). These case studies were defined based on real houses visited by the team of a Newton Fund project in riverside communities around the Low Black River in Amazonas - Brazil. For all cases, a estimated load curve (kWh) was defined based on the electronics consumers found of each house.
+We have performed seven case studies to evaluate our proposed synthesis approach, as described in the first column of Table~\ref{tab1} (\textit{Specification}). These case studies were defined based on real houses visited by the team of a Newton Fund project in riverside communities around the Low Black River in Amazonas - Brazil \textcolor{red}{add citation, e.g., project website? can you also briefly explain this project? we should also mention it in the beginning of our article}. For all cases, an estimated load curve (kWh) was defined based on the electronics consumers found of each house.
 
 \begin{table}[!t]
 \caption{Case studies and results: optimization of PV systems.}\label{tab1}
@@ -858,12 +858,12 @@ Specification & Result & Result \\
 \subsection{Setup} 
 %---------------------------------------------------------------------------
 
-The start-of-art verification tool, CPAchecker\footnote{Command-line: \$ scripts/cpa.sh -heap 64000m -config config/bmc-incremental.properties -spec config/specification/sv-comp-reachability.spc filename.c} was used as our verification engine to compare our approach effectiveness and efficiency. The Simulation tool HOMER Pro version $3.13.1$ was used for comparative purpose.
+The start-of-art verification tool CPAchecker\footnote{Command-line: \$ scripts/cpa.sh -heap 64000m -config config/bmc-incremental.properties -spec config/specification/sv-comp-reachability.spc filename.c} was used as our verification engine to compare our approach effectiveness and efficiency. The Simulation tool HOMER Pro version $3.13.1$ was used for comparative purpose.
 
 All experiments regarding the verification tools were conducted 
 on an otherwise idle Intel Xeon CPU E5-4617 ($8$-cores) with 
 $2.90$ GHz and $64$ GB of RAM, running Ubuntu $16.04$ LTS $64$-bits. 
-Related to HOMER Pro, we have used an Intel Core i5-$4210$ ($4$-cores), 
+For HOMER Pro, we have used an Intel Core i5-$4210$ ($4$-cores), 
 with $1.7$ GHz and $4$ GB of RAM, running Windows 10. 
 Our experiments were performed with a predefined timeout of $240$ minutes.
 
@@ -877,7 +877,7 @@ Our evaluation aims to answer two experimental questions:
 
 \item[EQ1] \textbf{(soundness)} does our automated synthesis approach provide correct results?
 
-\item[EQ2] \textbf{(performance)} how does our formal synthesis tools compares to a specialized simulation tool?
+\item[EQ2] \textbf{(performance)} how does our formal synthesis tool compare to a specialized simulation tool?
 
 \end{enumerate}
 
@@ -901,21 +901,7 @@ some impact as well at this discrepancy; however, it is not significant
 since this annual cost is too small when compared to the resulting LCC value.
 However, there exists a considerable divergence in case study $2$, where the costs presented by HOMER Pro were $54$\% higher than our automated synthesis tool, probably because we underestimated the operation and maintenance costs assumed by our automated synthesis tool to that specific load. 
 
-In general, the size of the PV panels and battery bank were 
-bigger in HOMER Pro than with our formal synthesis approach, 
-and that discrepancy is not easy to address without some real 
-systems validation. The mathematical models are different and 
-particular parameters can be tuned as well in each approach, 
-and that can justify the difference, which was presented in all 
-the case studies. As comparative, let's consider case study $1$: 
-the optimal solution provided by HOMER Pro demands $7$ $\times$ 
-more PV panels than the solution presented by our synthesis tool, 
-and HOME Pro does not show the arrangement of arrays 
-(i.e., the number of series and parallel PV panels); 
-the battery bank presented by HOMER Pro provides $500.4$ Ah 
-of capacity ($6 \times 83.4$), while our synthesis tool 
-presented an optimal solution with $420$ Ah of total capacity 
-($4 \times 105$). 
+In general, the size of the PV panels and battery bank were larger in HOMER Pro than with our formal synthesis approach,  and that discrepancy is not easy to address without some real systems validation \textcolor{red}{why is it not easy?}. The mathematical models are different, and particular parameters can be tuned as well in each approach, and that can justify the difference presented in all the case studies. As comparative, consider case study $1$: the optimal solution provided by HOMER Pro demands $7$ $\times$ more PV panels than the solution presented by our synthesis tool, and HOME Pro does not show the arrangement of arrays (i.e., the number of series and parallel PV panels); the battery bank presented by HOMER Pro provides $500.4$ Ah of capacity ($6 \times 83.4$), while our synthesis tool presented an optimal solution with $420$ Ah of total capacity ($4 \times 105$). 
 
 Just to compare the results obtained from the optimization 
 with the real-world, the authors had four PV systems deployed 
