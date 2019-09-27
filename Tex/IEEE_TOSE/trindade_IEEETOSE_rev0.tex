@@ -461,13 +461,13 @@ Automated verification, model checking, program synthesis, electrical systems, s
 \IEEEPARstart{L}{ack} of access to clean and affordable energy is considered a core dimension of poverty~\cite{Hussein2012}. Progress has been made worldwide; in particular, the number of people without electricity access fell below $1$ billion threshold for the first time in $2017$~\cite{IEAweo2018}. Decentralized systems led by solar photovoltaic (PV) in off-grid and mini-grid systems are the lowest-cost solution for three-quarters of the additional connections needed to provide universal electricity~\cite{Hussein2012}; specifically, grid extension are the standard in urban areas~\cite{IEAweo2018}.
 
 To simulate or evaluate a PV system, there exist various specialized tools, e.g., RETScreen, HOMER, PVWatts, SAM and Hybrid2~\cite{Pradhan,Swarnkar,NRELDobos,NRELBlair,Mills}; and even general-purpose simulation tools, e.g., PSpice~\cite{Gow1999}, or MATLAB/Simulink package~\cite{Benatiallah2017}. However, these tools rely on simulation; they have the drawback of an incomplete coverage since verification of all possible combinations and potential failures of a system is unfeasible~\cite{ClarkeHV18}. 
-
-Optimization of PV systems is not a recent topic; since the $90$'s different techniques using a wide variety of criteria to find ultimate combinations for design parameters, based on intuitive, numerical, and analytical methods were developed and evaluated~\cite{Applasamy2011}. An ideal combination of any PV system consists of the best compromise between two considered objectives, which is power \textit{reliability} and \textit{system cost}~\cite{Alsadi2018}.
+%
+Optimization of PV systems is not a recent topic; since the $90$'s different techniques using a wide variety of criteria to find ultimate combinations for design parameters, based on intuitive, numerical, and analytical methods were developed and evaluated~\cite{Applasamy2011}. An ideal combination of any PV system consists of the best compromise between two objectives, which is power \textit{reliability} and \textit{system cost}~\cite{Alsadi2018}.
 
 Formal methods could offer great potential to obtain a more effective design process for PV systems~\cite{ClarkeHV18}. In $2012$, a Chinese smart grid implementation considered a case study to address the verification problem for performance and energy consumption~\cite{Yukseletall2012}. In $2015$, an automated simulation-based verification technique was applied to verify the correctness of power system protection settings~\cite{Sengupta2015}. In $2017$, a researcher suggested the application of formal methods to verify and control the behavior of computational devices, interacting over a smart grid infrastructure~\cite{Abate2017}. Finally, in $2018$, a verification methodology was applied to PV panels (not a complete PV system) and its distributed power point tracking~\cite{Driouich2018}. However, prior studies did not deal with electricity generation or even solar PV systems optimization. Formal methods based on \textit{symbolic model checking} and its application to synthesize PV systems are still unexplored in literature.
  
 Here, we have developed a variant of counterexample guided inductive synthesis (CEGIS) for synthesizing optimal sizing of stand-alone PV systems using commercial equipment data. Given a correctness specification $\sigma$, our method uses that as a starting point and then iteratively produces a sequence of candidate solutions that satisfy $\sigma$, related to power reliability. In particular, in each iteration, we synthesize the sizing of stand-alone PV systems, but that may not achieve the lowest cost. The candidate solution is then verified via symbolic model checking with a lower bound that serves as the minimum cost of reference; if the verification step does not fail, the lower bound is adjusted. If it fails, then a counterexample is provided with an optimal sizing that meets both power reliability and system cost. Note that in this study, our focus is not on new criteria or even optimization objectives. Instead, our novelty relies on an effective approach to the pursuit of the optimal solution of PV systems using formal methods. 
-
+%
 %Our work makes two major contributions. \textbf{First}, the use of automated symbolic verification methods in electrical systems was rare in recent prior studies~\cite{abs-1811-09438}, and specifically their use in synthesizing optimal PV sizing is unprecedented. Here, a list of PV components (i.e., PV panels, charge controllers, inverters, and batteries) can be fed to our proposed synthesis method together with user requirements and environment constraints, and our synthesis algorithm based on symbolic model checking can find the optimal solution in technical and economical terms. \textbf{Second}, %our experimental results show that our synthesis method is an effective and efficient approach on the pursuit of the optimal solution of PV systems using formal methods, which outperforms existing state-of-the-art simulation tool. As a result, 
 In summary, this paper makes the following original contributions.
 
@@ -487,7 +487,7 @@ In summary, this paper makes the following original contributions.
 \label{sec:Background}
 %-----------------------------------------------------------
 
-Fig.\ref{fig:blockdiagram} illustrates a stand-alone PV system block diagram. The PV generator (a panel or an array) is a semiconductor device that can convert solar energy into DC electricity. For night hours or rainy days, we hold batteries where power can be stored and used. The use of batteries as a storage form implies the presence of a charge controller~\cite{Hansen}. The PV arrays produce DC, and therefore when the PV system contains an AC load, a DC/AC conversion (inverter) is required. The AC load dictates the behavior of the AC electrical load from the house.
+Fig.\ref{fig:blockdiagram} illustrates a stand-alone PV system block diagram. The PV generator (a panel or an array) is a semiconductor device that can convert solar energy into DC electricity. For night hours or rainy days, we hold batteries where power can be stored and used. The use of batteries as a storage form implies the presence of a charge controller~\cite{Hansen}. The PV arrays produce DC, and therefore when the PV system contains an AC load, a DC/AC conversion (inverter) is required. The AC load dictates the AC electrical load behavior from the house.
 %
 \begin{figure}[h]
 \includegraphics[width=0.4\textwidth]{blockdiagramPVS2_rev}
@@ -673,7 +673,7 @@ To perform the automated formal synthesis, we use a state-of-the-art model check
 
 Program synthesis addresses an age-old problem in computer science: can a computer program itself?~\cite{Bornholt2019}. Before the computer can automatically generate a program, it is necessary to give it a specification of what the program should do. The specification needs to describe the program's desired behavior to ensure that the program does what it intends.
 
-The basic idea of program synthesis is to automatically construct a program $P$ that satisfies a correctness specification $\sigma$. In particular, program synthesis is automatically performed by engines that use a correctness specification $\sigma$, as starting point, and then incrementally produce a sequence of candidate solutions that partially satisfy $\sigma$~\cite{Abateetal2017}. As a result, a given candidate program $p$ is iteratively refined, to match $\sigma$ more closely. CEGIS represents one of the most popular approaches to program synthesis currently used in practice for cyber-physical problems~\cite{Abateetal2017}, as energy production, distribution, and optimization. Figure~\ref{Counter-Example-Guided-Inductive-Synthesis} illustrates the underlying architecture. Note that CEGIS has close connections to algorithmic debugging using counterexamples and abstraction refinement~\cite{Alur} from model checking.
+The basic idea of program synthesis is to automatically construct a program $P$ that satisfies a correctness specification $\sigma$. In particular, program synthesis is automatically performed by engines that use a correctness specification $\sigma$, as starting point, and then incrementally produce a sequence of candidate solutions that partially satisfy $\sigma$~\cite{Abateetal2017}. As a result, a given candidate program $p$ is iteratively refined, to match $\sigma$ more closely. CEGIS represents one of the most popular approaches to program synthesis currently used in practice for cyber-physical problems~\cite{Abateetal2017}, as energy production, distribution, and optimization. Figure~\ref{Counter-Example-Guided-Inductive-Synthesis} illustrates the underlying architecture. Note that CEGIS has close connections to algorithmic debugging using counterexamples and abstraction refinement~\cite{Alur}. %from model checking.
 %
 \begin{figure}[h]
 	\centering
@@ -688,7 +688,7 @@ In Figure~\ref{Counter-Example-Guided-Inductive-Synthesis}, regarding traditiona
 
 One may notice that each iteration of the traditional CEGIS loop adds a new input to the finite set $\text{\sc inputs}$, which is then used for synthesis. Given that the full set of inputs $\mathcal{D}$ is finite because we use bit-vector expressions, this means that the refinement loop can only iterate over a finite number of times; however, {\sc Synthesize} may conclude that no candidate solution obeying $\sigma$ for the finite set $\text{\sc inputs}$ exists, and our synthesis engine can then conclude that no feasible equipment combination was found.
 
-However, in our variant CEGIS method proposed here, there exist four distinct differences related to the traditional CEGIS: 
+In our variant CEGIS method, there exist four distinct differences related to the traditional CEGIS: 
 (1) there exists no test vector and every candidate is generated during the run-time in the {\sc Synthesize} phase and sent to the {\sc Verify} phase; 
 (2) if the {\sc Verify} phase is unsuccessful, then a new candidate is generated by {\sc Synthesize} and 
 (3) the lower bound of the {\sc Verify} phase is incremented to search for the lowest cost; 
@@ -763,11 +763,10 @@ Regarding the line $2$ of Algorithm~\ref{alg:verification-algorithm}, a list of 
 With respect to power reliability, this work will rely on the critical period solar 
 energy method~\cite{Pinho} as described in Section~\ref{sec:sizing}. 
 The usual way is to use loss of load probability (LOLP) or loss of power 
-supply probability (LPSP). However, based on the fact that here we 
-are neither considering site characteristics nor the load changes over time, 
+supply probability (LPSP). However, we are neither considering site characteristics nor the load changes over time, 
 which demands historical data, the reliability analysis will be developed only 
 by the critical period method of PV sizing.
-
+%
 Regarding financial analysis:
 \begin{itemize}
 	\item LCC lifetime considered: $20$ years;
