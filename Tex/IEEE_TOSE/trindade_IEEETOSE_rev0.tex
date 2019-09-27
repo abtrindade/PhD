@@ -343,7 +343,7 @@
 % Linebreaks \\ can be used within to get better formatting as desired.
 % Do not put math or special symbols in the title.
 %\title{An automated formal synthesis optimization method for sizing of stand-alone solar photovoltaic systems: case studies and comparative}
-\title{Optimal Sizing of Stand-alone Solar PV Systems Through Automated Formal Synthesis Method}
+\title{Optimal Sizing of Stand-alone Solar PV Systems via Automated Formal Synthesis}
 %
 %
 % author names and IEEE memberships
@@ -472,8 +472,8 @@ In summary, this paper makes the following original contributions.
 
 \begin{itemize}
 \item Our study marks the first application of a sound and automated formal synthesis approach, which can provide accurate results of optimal sizing of stand-alone PV systems. 
-\item \textcolor{red}{We propose a variant CEGIS method with striking differences of how the {\sc Synthesize} and {\sc Verify} phases work together, with the abolition of the feasible solution candidate vector and the use of an incremental iterative loop until the optimal cost solution of the system is reached.}
-\item Experimental results show that our proposed formal synthesis approach qualitatively outperforms an existing state-of-the-art simulation tool used in a comparative with seven case studies. \textcolor{red}{Our solution is far detailed and close to the commercial reality (real PV systems) than the solution presented by simulation}.
+\item We propose a variant CEGIS method with striking differences of how the {\sc Synthesize} and {\sc Verify} phases work together, with the abolition of the feasible solution candidate vector and the use of an incremental, iterative loop until we reach the optimal cost solution of the system.
+\item Experimental results show that our proposed formal synthesis approach qualitatively outperforms an existing state-of-the-art simulation tool used in a comparative with seven case studies. Our solution is far detailed and closer to the commercial reality (real PV systems) than the solution presented by simulation.
 \end{itemize}
 
 %\textit{Contribution}. Our study marks the first application of a sound and automated formal synthesis approach that can provide accurate results of optimal sizing of stand-alone PV systems, which outperforms an existing state-of-the-art simulation tool used in a comparative with seven case studies. In particular, the methodological research with automated synthesis produces more detailed and complete optimization when compared with the simulation tool, besides the fact that the sizing is closer to real PV systems deployed at isolated communities in the Amazon area of Brazil. Considering other studies carried out in the last two decades, we considerably advance the state-of-the-art in applied energy to optimally design PV systems.
@@ -739,7 +739,7 @@ Algorithm~\ref{alg:verification-algorithm} describes our pseudo-code to synthesi
 %
 Our synthesis algorithm will synthesize constant values. It starts with the input of manufacturers' data and prices of PV panels, batteries, charge controllers, and inverters (line $2$). After that, we define user requirements, i.e., house requirements and design definitions, from lines $4$ and $5$. 
 
-\textcolor{red}{The \textit{for}-loop on line 6 ensures the search for the lowest cost to the PV solution. The $MaxCost$ value is a very high value put as a limit to the loop, which never will be reached because the optimal solution will be found first. The formal guarantee of this statement is based on the fact that the cost is verified just after a feasible technical candidate if found on {\sc Synthesize} phase}. 
+The \textit{for}-loop on line 6 ensures the search for the lowest cost to the PV solution. The $MaxCost$ value is a very high value put as a limit to the loop, which never will be reached because the optimal solution will be found first. The formal guarantee of this statement is based on the fact that the cost is verified just after a feasible technical candidate if found on {\sc Synthesize} phase. 
 In particular, the loop starts with cost $0$ and stops only when the algorithm finds a feasible solution in which the cost breaks the $assertion$ stated in line $22$; if that happens, then our algorithm has found an optimal solution, thereby stating that the {\sc Verify} phase reached a satisfiable condition (\textit{SAT}).
 
 Our synthesis algorithm uses non-deterministic variables to choose one specific constant from a given list of PV panels, controllers, batteries, and inverters (lines $7$ to $10$). That procedure ensures that our synthesis engine checks all combinations of items from each equipment, and combine them to assemble a feasible (candidate) PV solution, which meets the user requirements.
@@ -797,7 +797,7 @@ This section describes our case studies, experimental setup,  objectives, and re
 \subsection{Case studies} 
 %---------------------------------------------------------------------------
 
-We have performed seven case studies to evaluate our proposed synthesis approach, as described in the first column of Table~\ref{tab1} (\textit{Specification}). These case studies were defined based on real houses visited by the team of a Newton Fund project in riverside communities around the Low Black River in Amazonas - Brazil. \textcolor{red}{This project, finished in March'2019, visited and surveyed 14 riverside isolated communities, aiming to evaluate the energetic habits of the dwellers\footnote{http://star-energy.coventry.ac.uk/}}. For all cases, an estimated load curve (kWh) was defined based on the electronics consumers found of each house.
+We have performed seven case studies to evaluate our proposed synthesis approach, as described in the first column of Table~\ref{tab1} (\textit{Specification}). These case studies were defined based on real houses visited by the team of a Newton Fund project in riverside communities around the Low Black River in Amazonas - Brazil. This project finished in March 2019, where we visited and surveyed 14 riverside isolated communities, aiming to evaluate the energetic habits of the dwellers.\footnote{http://star-energy.coventry.ac.uk/} For all cases, an estimated load curve (kWh) was defined based on the electronics consumers found of each house.
 
 \begin{table}[!t]
 \caption{Case studies and results: optimization of PV systems.}\label{tab1}
@@ -1099,7 +1099,7 @@ received his BSc and MSc in Electrical Engineering from the Federal University o
 % if you will not have a photo at all:
 \begin{IEEEbiography}
     [{\includegraphics[width=1in,height=1.25in,clip,keepaspectratio]{lucas3por4}}]{Lucas Cordeiro}
-received his Ph.D. degree in Computer Science in 2011 from the University of Southampton, UK. Currently, he is a Senior Lecturer in the School of Computer Science at the University of Manchester, and leads the Systems and Software Verification laboratory. He is also a collaborator in the Postgraduate Program in Electrical Engineering and Informatics at the Federal University of Amazonas (UFAM), Brazil. Prior to joining the University of Manchester, he worked as a researcher at Oxford University / Diffblue and as an adjunct professor at UFAM; he also worked for 4 years as software engineer at industry. His work focuses on software model checking, automated testing, program synthesis, and embedded \& cyber-physical systems.
+received his Ph.D. degree in Computer Science in 2011 from the University of Southampton, UK. Currently, he is a Senior Lecturer in the School of Computer Science at the University of Manchester, and leads the Systems and Software Verification laboratory. He is also a collaborator in the Postgraduate Program in Electrical Engineering and Informatics at the Federal University of Amazonas (UFAM), Brazil. Before joining the University of Manchester, he worked as a researcher at Oxford University / Diffblue and as an adjunct professor at UFAM; he also worked for four years as a software engineer in industry. His work focuses on software model checking, automated testing, program synthesis, and embedded \& cyber-physical systems.
 \end{IEEEbiography}
 % You can push biographies down or up by placing
 % a \vfill before or after them. The appropriate
