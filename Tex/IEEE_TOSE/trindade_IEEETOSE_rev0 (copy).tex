@@ -359,7 +359,6 @@
 \author{Alessandro~Trindade and Lucas~Cordeiro% <-this % stops a space
 \thanks{A. Trindade is with the Department of Electricity, Federal University of Amazonas, Manaus, Brazil, e-mail: alessandrotrindade@ufam.edu.br.}% <-this % stops a space
 \thanks{L. Cordeiro is with School of Computer Science, The University of Manchester, UK, e-mail: lucas.cordeiro@manchester.ac.uk.}% <-this % stops a space
-\thanks{The work of A. Trindade was supported in part by Newton Fund under Grant $261881580$, and in part by FAPEAM- Amazonas Foundation for Research under Grant PROTI-Pesquisa $2018$.}
 \thanks{Manuscript received September XY, 2019; revised XXXXX 11, 2019.}}
 
 % note the % following the last \IEEEmembership and also \thanks - 
@@ -379,6 +378,8 @@
 % you are supposed to have spaces between the names. For what it is worth,
 % this is a minor point as most people would not even notice if the said evil
 % space somehow managed to creep in.
+
+
 
 % The paper headers
 \markboth{IEEE Transactions on Sustainable Energy,~Vol.~XX, No.~YY, September~2019}%
@@ -459,18 +460,22 @@ Automated verification, model checking, program synthesis, electrical systems, s
 
 \IEEEPARstart{L}{ack} of access to clean and affordable energy is considered a core dimension of poverty~\cite{Hussein2012}. Progress has been made worldwide; in particular, the number of people without electricity access fell below $1$ billion threshold for the first time in $2017$~\cite{IEAweo2018}. Decentralized systems led by solar photovoltaic (PV) in off-grid and mini-grid systems are the lowest-cost solution for three-quarters of the additional connections needed to provide universal electricity~\cite{Hussein2012}; specifically, grid extension are the standard in urban areas~\cite{IEAweo2018}.
 
-%To simulate or evaluate a PV system, there exist various specialized tools, e.g., RETScreen, HOMER, PVWatts, SAM and Hybrid2~\cite{Pradhan,Swarnkar,NRELDobos,NRELBlair,Mills}; and even general-purpose simulation tools, e.g., PSpice~\cite{Gow1999}, or MATLAB/Simulink package~\cite{Benatiallah2017}. However, these tools rely on simulation; they have the drawback of an incomplete coverage since verification of all possible combinations and potential failures of a system is unfeasible~\cite{ClarkeHV18}. 
+To simulate or evaluate a PV system, there exist various specialized tools, e.g., RETScreen, HOMER, PVWatts, SAM and Hybrid2~\cite{Pradhan,Swarnkar,NRELDobos,NRELBlair,Mills}; and even general-purpose simulation tools, e.g., PSpice~\cite{Gow1999}, or MATLAB/Simulink package~\cite{Benatiallah2017}. However, these tools rely on simulation; they have the drawback of an incomplete coverage since verification of all possible combinations and potential failures of a system is unfeasible~\cite{ClarkeHV18}. 
 %
-To simulate or evaluate a PV system, there exist various specialized tools, e.g., RETScreen, and HOMER~\cite{Pradhan,Swarnkar}; and even general-purpose simulation tools, as  MATLAB~\cite{Benatiallah2017}. However, these tools rely on simulation, with the drawback of an incomplete coverage since verification of all possible combinations and potential failures of a system is unfeasible~\cite{ClarkeHV18}. 
-
 Optimization of PV systems is not a recent topic; since the $90$'s different techniques using a wide variety of criteria to find ultimate combinations for design parameters, based on intuitive, numerical, and analytical methods were developed and evaluated~\cite{Applasamy2011}. An ideal combination of any PV system consists of the best compromise between two objectives, which is power \textit{reliability} and \textit{system cost}~\cite{Alsadi2018}.
 
-Formal methods could offer great potential to obtain a more effective design process for PV systems~\cite{ClarkeHV18}. In $2012$, a Chinese smart grid implementation considered a case study to address the verification problem for performance and energy consumption~\cite{Yukseletall2012}. In $2015$, an automated simulation-based verification technique was applied to verify the correctness of power system protection settings~\cite{Sengupta2015}. In $2017$, a researcher suggested the application of formal methods to verify and control the behavior of computational devices in a smart grid ~\cite{Abate2017}. Finally, in $2018$, a verification methodology was applied to PV panels and its distributed power point tracking~\cite{Driouich2018}. However, prior studies did not deal with electricity generation or even solar PV systems optimization. Formal methods based on \textit{symbolic model checking} and its application to synthesize PV systems are still unexplored in literature.
+Formal methods could offer great potential to obtain a more effective design process for PV systems~\cite{ClarkeHV18}. In $2012$, a Chinese smart grid implementation considered a case study to address the verification problem for performance and energy consumption~\cite{Yukseletall2012}. In $2015$, an automated simulation-based verification technique was applied to verify the correctness of power system protection settings~\cite{Sengupta2015}. In $2017$, a researcher suggested the application of formal methods to verify and control the behavior of computational devices, interacting over a smart grid infrastructure~\cite{Abate2017}. Finally, in $2018$, a verification methodology was applied to PV panels (not a complete PV system) and its distributed power point tracking~\cite{Driouich2018}. However, prior studies did not deal with electricity generation or even solar PV systems optimization. Formal methods based on \textit{symbolic model checking} and its application to synthesize PV systems are still unexplored in literature.
  
 Here, we have developed a variant of counterexample guided inductive synthesis (CEGIS) for synthesizing optimal sizing of stand-alone PV systems using commercial equipment data. Given a correctness specification $\sigma$, our method uses that as a starting point and then iteratively produces a sequence of candidate solutions that satisfy $\sigma$, related to power reliability. In particular, in each iteration, we synthesize the sizing of stand-alone PV systems, but that may not achieve the lowest cost. The candidate solution is then verified via symbolic model checking with a lower bound that serves as the minimum cost of reference; if the verification step does not fail, the lower bound is adjusted. If it fails, then a counterexample is provided with an optimal sizing that meets both power reliability and system cost. Note that in this study, our focus is not on new criteria or even optimization objectives. Instead, our novelty relies on an effective approach to the pursuit of the optimal solution of PV systems using formal methods. 
-
+%
 %Our work makes two major contributions. \textbf{First}, the use of automated symbolic verification methods in electrical systems was rare in recent prior studies~\cite{abs-1811-09438}, and specifically their use in synthesizing optimal PV sizing is unprecedented. Here, a list of PV components (i.e., PV panels, charge controllers, inverters, and batteries) can be fed to our proposed synthesis method together with user requirements and environment constraints, and our synthesis algorithm based on symbolic model checking can find the optimal solution in technical and economical terms. \textbf{Second}, %our experimental results show that our synthesis method is an effective and efficient approach on the pursuit of the optimal solution of PV systems using formal methods, which outperforms existing state-of-the-art simulation tool. As a result, 
-In summary, this paper makes the following original contributions: (i) It is the first application of a sound and automated formal synthesis approach, which can provide accurate results of optimal sizing of stand-alone PV systems; (ii) We propose a variant CEGIS method with striking differences of how the {\sc Synthesize} and {\sc Verify} phases work together, with the abolition of the feasible solution candidate vector and the use of an incremental, iterative loop to reach the optimal cost solution of the system; and (iii)  Experimental results with seven case studies show that formal synthesis approach qualitatively outperforms an existing state-of-the-art simulation tool. Our solution is far detailed and closer to the commercial reality (real PV systems) than the solution presented by simulation.
+In summary, this paper makes the following original contributions.
+
+\begin{itemize}
+\item Our study marks the first application of a sound and automated formal synthesis approach, which can provide accurate results of optimal sizing of stand-alone PV systems. 
+\item We propose a variant CEGIS method with striking differences of how the {\sc Synthesize} and {\sc Verify} phases work together, with the abolition of the feasible solution candidate vector and the use of an incremental, iterative loop until we reach the optimal cost solution of the system.
+\item Experimental results show that our proposed formal synthesis approach qualitatively outperforms an existing state-of-the-art simulation tool used in a comparative with seven case studies. Our solution is far detailed and closer to the commercial reality (real PV systems) than the solution presented by simulation.
+\end{itemize}
 
 %\textit{Contribution}. Our study marks the first application of a sound and automated formal synthesis approach that can provide accurate results of optimal sizing of stand-alone PV systems, which outperforms an existing state-of-the-art simulation tool used in a comparative with seven case studies. In particular, the methodological research with automated synthesis produces more detailed and complete optimization when compared with the simulation tool, besides the fact that the sizing is closer to real PV systems deployed at isolated communities in the Amazon area of Brazil. Considering other studies carried out in the last two decades, we considerably advance the state-of-the-art in applied energy to optimally design PV systems.
 
@@ -673,7 +678,7 @@ The basic idea of program synthesis is to automatically construct a program $P$ 
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=0.75\columnwidth]{fig2_rev2.jpg}
-	\caption{CEGIS adapted to PV system sizing.}
+	\caption{CEGIS applied to PV system sizing.}
 	\label{Counter-Example-Guided-Inductive-Synthesis}
 \end{figure}
 
@@ -1026,13 +1031,17 @@ For future work, we plan to improve the power reliability analysis, to address t
 % use section* for acknowledgment
 \section*{Acknowledgment}
 
-The authors would like to thank to University of Sheffield's QR GCRF for HOMER Pro license.
+The authors would like to thank to University of Sheffield's QR GCRF for HOMER license.
+
+The authors would like to thank: (i) Newton Fund [grant $261881580$] for the mobility support; (ii) FAPEAM - Amazonas Foundation for Research [PROTI-Pesquisa $2018$], for the mobility support to UK (NOV-$2018$); (iii) FAS - Sustainable Amazonas Foundation for the PhD scholarship (NOV-$2017$ to MAR-$2019$); and
 
 % Can use something like this to put references on a page
 % by themselves when using endfloat and the captionsoff option.
 \ifCLASSOPTIONcaptionsoff
   \newpage
 \fi
+
+
 
 % trigger a \newpage just before the given reference
 % number - used to balance the columns on the last page
@@ -1041,7 +1050,9 @@ The authors would like to thank to University of Sheffield's QR GCRF for HOMER P
 %\IEEEtriggeratref{8}
 % The "triggered" command can be changed if desired:
 %\IEEEtriggercmd{\enlargethispage{-5in}}
+
 % references section
+
 % can use a bibliography generated by BibTeX as a .bbl file
 % BibTeX documentation can be easily obtained at:
 % http://mirror.ctan.org/biblio/bibtex/contrib/doc/
@@ -1078,27 +1089,35 @@ The authors would like to thank to University of Sheffield's QR GCRF for HOMER P
 % simpler here.)
 %\begin{IEEEbiography}[{\includegraphics[width=1in,height=1.25in,clip,keepaspectratio]{mshell}}]{Michael Shell}
 % or if you just want to reserve a space for a photo:
+\begin{IEEEbiography}
+    [{\includegraphics[width=1in,height=1.25in,clip,keepaspectratio]{alessandro3por4_2}}]{Alessandro Trindade}
+received his B.Sc. and M.Sc. in Electrical Engineering from the Federal University of Amazonas (UFAM) in 1995 and 2015, respectively. Currently, he is pursuing his Ph.D. in the Postgraduate Program in Informatics (PPGI) at UFAM, and holds an Assistant Professor position in the Electricity Department from UFAM. Before joining UFAM, he worked four years as a Consultant of renewable energy to the Amazonas State Electric Utility and the Inter-American Institute for Cooperation on Agriculture (IICA); he also worked for 12 years as R\&D and project manager at a non-profit foundation. His interest is in renewable energy, automated verification, and model checking.
+\end{IEEEbiography}
 %
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%\begin{IEEEbiography}
-%    [{\includegraphics[width=1in,height=1.25in,clip,keepaspectratio]{alessandro3por4_2}}]{Alessandro Trindade}
-%received his B.Sc. and M.Sc. in Electrical Engineering from the Federal University of Amazonas (UFAM) in 1995 and 2015, respectively. Currently, he is pursuing his Ph.D. in the Postgraduate Program in Informatics (PPGI) at UFAM, and holds an Assistant Professor position in the Electricity Department from UFAM. Before joining UFAM, he worked four years as a Consultant of renewable energy to the Amazonas State Electric Utility and the Inter-American Institute for Cooperation on Agriculture (IICA); he also worked for 12 years as R\&D and project manager at a non-profit foundation. His interest is in renewable energy, automated verification, and model checking.
-%\end{IEEEbiography}
-%\begin{IEEEbiography}
-%    [{\includegraphics[width=1in,height=1.25in,clip,keepaspectratio]{lucas3por4}}]{Lucas Cordeiro}
-%received his Ph.D. degree in Computer Science in 2011 from the University of Southampton, UK. Currently, he is a Senior Lecturer in the School of Computer Science at the University of Manchester, and leads the Systems and Software Verification laboratory. He is also a collaborator in the Postgraduate Program in Electrical Engineering and Informatics at the Federal University of Amazonas (UFAM), Brazil. Before joining the University of Manchester, he worked as a researcher at Oxford University / Diffblue and as an adjunct professor at UFAM; he also worked for four years as a software engineer in industry. His work focuses on software model checking, automated testing, program synthesis, and embedded \& cyber-physical systems.
-%\end{IEEEbiography}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\begin{IEEEbiographynophoto}{Alessandro Trindade}
+%received his BSc and MSc in Electrical Engineering from the Federal University of Amazonas (UFAM) in 1995 and 2015, respectively. Currently, he is pursuing his PhD in the Postgraduate Program in Informatics (PPGI) at UFAM, and holds an Assistant Professor position in the Electricity Department from UFAM. Prior to joining UFAM, he worked 4 years as Consultant of renewable energy to the State Electric Utility and to the Inter-American Institute for Cooperation on Agriculture (IICA); he also worked for 12 years as R\&D and project manager at a non-profit foundation (Centre of Analysis, Research and Innovation Technology Foundation). His interest is in renewable energy, automated verification, and model checking.
+%\end{IEEEbiographynophoto}
+%
+% if you will not have a photo at all:
+\begin{IEEEbiography}
+    [{\includegraphics[width=1in,height=1.25in,clip,keepaspectratio]{lucas3por4}}]{Lucas Cordeiro}
+received his Ph.D. degree in Computer Science in 2011 from the University of Southampton, UK. Currently, he is a Senior Lecturer in the School of Computer Science at the University of Manchester, and leads the Systems and Software Verification laboratory. He is also a collaborator in the Postgraduate Program in Electrical Engineering and Informatics at the Federal University of Amazonas (UFAM), Brazil. Before joining the University of Manchester, he worked as a researcher at Oxford University / Diffblue and as an adjunct professor at UFAM; he also worked for four years as a software engineer in industry. His work focuses on software model checking, automated testing, program synthesis, and embedded \& cyber-physical systems.
+\end{IEEEbiography}
 % You can push biographies down or up by placing
 % a \vfill before or after them. The appropriate
 % use of \vfill depends on what kind of text is
 % on the last page and whether or not the columns
 % are being equalized.
+
 %\vfill
+
 % Can be used to pull up biographies so that the bottom of the last one
 % is flush with the other column.
 %\enlargethispage{-5in}
+
+
+
 % that's all folks
 \end{document}
+
+
