@@ -472,8 +472,8 @@ In summary, this paper makes the following original contributions.
 
 \begin{itemize}
 \item Our study marks the first application of a sound and automated formal synthesis approach, which can provide accurate results of optimal sizing of stand-alone PV systems. 
-\item We propose a variant CEGIS method that consists of four distinct differences related to the traditional CEGIS: \textcolor{red}{explain here}
-\item Experimental results show that our proposed formal synthesis approach outperforms an existing state-of-the-art simulation tool used in a comparative with seven case studies. The median runtime for our case studies is X\,s, \textcolor{red}{is it good or bad? try to emphasize our main achievements gere}.
+\item \textcolor{red}{We propose a variant CEGIS method with striking differences of how the {\sc Synthesize} and {\sc Verify} phases work together, with the abolition of the feasible solution candidate vector and the use of an incremental iterative loop until the optimal cost solution of the system is reached.}
+\item Experimental results show that our proposed formal synthesis approach qualitatively outperforms an existing state-of-the-art simulation tool used in a comparative with seven case studies. \textcolor{red}{Our solution is far detailed and close to the commercial reality (real PV systems) than the solution presented by simulation}.
 \end{itemize}
 
 %\textit{Contribution}. Our study marks the first application of a sound and automated formal synthesis approach that can provide accurate results of optimal sizing of stand-alone PV systems, which outperforms an existing state-of-the-art simulation tool used in a comparative with seven case studies. In particular, the methodological research with automated synthesis produces more detailed and complete optimization when compared with the simulation tool, besides the fact that the sizing is closer to real PV systems deployed at isolated communities in the Amazon area of Brazil. Considering other studies carried out in the last two decades, we considerably advance the state-of-the-art in applied energy to optimally design PV systems.
@@ -712,10 +712,10 @@ Algorithm~\ref{alg:verification-algorithm} describes our pseudo-code to synthesi
   \STATE Declare power demand, power peak, energy consumption \\
   \STATE Declare battery autonomy, deep of discharge, AC voltage \\
   \FOR {$HintCost=0$ to $MaxCost$}
- 	\STATE Declare non-deterministic variable to select PV Panel from list \\
- 	\STATE Declare non-deterministic variable to select Controller from list \\
- 	\STATE Declare non-deterministic variable to select Battery from list \\
- 	\STATE Declare non-deterministic variable to select Inverter from list \\ 	
+ 	\STATE Non-deterministic variable selects PV Panel from list \\
+ 	\STATE Non-deterministic variable selects Controller from list \\
+ 	\STATE Non-deterministic variable selects Battery from list \\
+ 	\STATE Non-deterministic variable selects Inverter from list \\ 	
  	\STATE Calculate $E_{corrected}, \, E_{p} $ \\
 	\STATE Calculate $N_{TPmin}, \, N_{PSmin}, N_{PPmin} $ \\
  	\STATE Calculate $C_{bank}$ \\
@@ -728,7 +728,7 @@ Algorithm~\ref{alg:verification-algorithm} describes our pseudo-code to synthesi
 %	\STATE Requirement enforced by \textbf{assume}$(V_{out}AC)$ \\
 	\STATE Requirement enforced by \textbf{assume}$(Demand \wedge P_{surge})$ \\
 %	\STATE Requirement enforced by \textbf{assume}$(P_{surge})$ \\
-	\STATE non-deterministic variables hold feasible equipment and cost  \\
+	\STATE Variables hold feasible PV system candidate and cost  \\
 	\STATE $F_{obj} \leftarrow  N_{TP}*Panel_{Cost} \, + \, N_{TB}*Battery_{Cost} \, + Controller_{Cost} \, + \, Inverter_{Cost} \, + \, Installation_{Cost} \, + \, batrep_{Cost} \, + \, PWO\&M_{Cost}$ \\
 	\STATE Violation check with \textbf{assert}$(F_{obj} > HintCost)$ \\
   \ENDFOR
@@ -739,7 +739,8 @@ Algorithm~\ref{alg:verification-algorithm} describes our pseudo-code to synthesi
 %
 Our synthesis algorithm will synthesize constant values. It starts with the input of manufacturers' data and prices of PV panels, batteries, charge controllers, and inverters (line $2$). After that, we define user requirements, i.e., house requirements and design definitions, from lines $4$ and $5$. 
 
-The \textit{for}-loop started at line $6$ controls the lowest cost to the PV solution. In particular, it starts with cost $0$ and stops only when the algorithm finds a feasible solution in which the cost breaks the $assertion$ stated in line $22$; if that happens, then our algorithm has found an optimal solution, thereby stating that the {\sc Verify} phase reached a satisfiable condition (\textit{SAT}). The $MaxCost$ value at line $6$ is just a very high value put as a limit to the \textit{for}-loop, which never will be reached because the optimal solution will be found first \textcolor{red}{Is there some formal guarantee?}.
+\textcolor{red}{The \textit{for}-loop on line 6 ensures the search for the lowest cost to the PV solution. The $MaxCost$ value is a very high value put as a limit to the loop, which never will be reached because the optimal solution will be found first. The formal guarantee of this statement is based on the fact that the cost is verified just after a feasible technical candidate if found on {\sc Synthesize} phase}. 
+In particular, the loop starts with cost $0$ and stops only when the algorithm finds a feasible solution in which the cost breaks the $assertion$ stated in line $22$; if that happens, then our algorithm has found an optimal solution, thereby stating that the {\sc Verify} phase reached a satisfiable condition (\textit{SAT}).
 
 Our synthesis algorithm uses non-deterministic variables to choose one specific constant from a given list of PV panels, controllers, batteries, and inverters (lines $7$ to $10$). That procedure ensures that our synthesis engine checks all combinations of items from each equipment, and combine them to assemble a feasible (candidate) PV solution, which meets the user requirements.
 
@@ -796,7 +797,7 @@ This section describes our case studies, experimental setup,  objectives, and re
 \subsection{Case studies} 
 %---------------------------------------------------------------------------
 
-We have performed seven case studies to evaluate our proposed synthesis approach, as described in the first column of Table~\ref{tab1} (\textit{Specification}). These case studies were defined based on real houses visited by the team of a Newton Fund project in riverside communities around the Low Black River in Amazonas - Brazil \textcolor{red}{add citation, e.g., project website? can you also briefly explain this project? we should also mention it in the beginning of our article}. For all cases, an estimated load curve (kWh) was defined based on the electronics consumers found of each house.
+We have performed seven case studies to evaluate our proposed synthesis approach, as described in the first column of Table~\ref{tab1} (\textit{Specification}). These case studies were defined based on real houses visited by the team of a Newton Fund project in riverside communities around the Low Black River in Amazonas - Brazil. \textcolor{red}{This project, finished in March'2019, visited and surveyed 14 riverside isolated communities, aiming to evaluate the energetic habits of the dwellers\footnote{http://star-energy.coventry.ac.uk/}}. For all cases, an estimated load curve (kWh) was defined based on the electronics consumers found of each house.
 
 \begin{table}[!t]
 \caption{Case studies and results: optimization of PV systems.}\label{tab1}
