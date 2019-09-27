@@ -903,38 +903,15 @@ However, there exists a considerable divergence in case study $2$, where the cos
 
 In general, the size of the PV panels and battery bank were larger in HOMER Pro than with our formal synthesis approach,  and that discrepancy is not easy to address without some real systems validation \textcolor{red}{why is it not easy?}. The mathematical models are different, and particular parameters can be tuned as well in each approach, and that can justify the difference presented in all the case studies. As comparative, consider case study $1$: the optimal solution provided by HOMER Pro demands $7$ $\times$ more PV panels than the solution presented by our synthesis tool, and HOME Pro does not show the arrangement of arrays (i.e., the number of series and parallel PV panels); the battery bank presented by HOMER Pro provides $500.4$ Ah of capacity ($6 \times 83.4$), while our synthesis tool presented an optimal solution with $420$ Ah of total capacity ($4 \times 105$). 
 
-Just to compare the results obtained from the optimization 
-with the real-world, the authors had four PV systems deployed 
-and monitored since June $2018$ in a riverside community 
-in the Amazonas State in Brazil (coordinates 2$^{o}$44'50.0"S 60$^{o}$25'47.8"W), with similar power demands 
-presented by case studies $1$, $4$, $5$, and $6$, 
-always with a $3$ $\times$ $325$ W ($3$S) panels and 
-$4$ $\times$ $220$ Ah ($2$S-$2$P $= 440$ Ah) 
-lead-acid batteries. These solutions are more close 
-to the result presented by our formal synthesis 
-approach than HOMER Pro, thereby showing that our 
-solution is sound, which answers \textit{EQ1}.
+To compare the results obtained from the optimization with the real-world, the authors had four PV systems deployed and monitored since June $2018$ in a riverside community in the Amazonas State in Brazil (coordinates 2$^{o}$44'50.0"S 60$^{o}$25'47.8"W), with similar power demands presented by case studies $1$, $4$, $5$, and $6$, 
+always with a $3$ $\times$ $325$ W ($3$S) panels and $4$ $\times$ $220$ Ah ($2$S-$2$P $= 440$ Ah) lead-acid batteries. These solutions are closer to the result presented by our formal synthesis approach than HOMER Pro, thereby showing that our solution is sound, which answers \textit{EQ1}.
 
-Related to the inverters, HOMER Pro suggests a value in 
-kW very close to the peak of every case study, and it 
-is just a reference value and not a commercial value of 
-the employed inverter. Our synthesis tool, however, 
-presents inverters that are commercial and can be found 
-off-the-shelf. Therefore is a PRO to the formal synthesis method.
+Related to the inverters, HOMER Pro suggests a value in kW very close to the peak of every case study, and it is just a reference value and not a commercial value of the employed inverter. Our synthesis tool, however, 
+presents inverters that are commercial and can be found off-the-shelf; therefore, our approach is a PRO to the formal synthesis method.
 
-Concerning to charge controllers, as we reported in 
-the previous section, HOMER Pro does not include it 
-as an explicit equipment in its mathematical model, 
-only our synthesis tool presents a commercial controller 
-and includes it during the cost analysis. Therefore, 
-the formal synthesis method presents more reliable results than
-HOME Pro.
+Concerning the charge controllers, as we reported in the previous section, HOMER Pro does not include it as an explicit equipment in its mathematical model; only our synthesis tool presents a commercial controller and includes it during the cost analysis. Therefore, the formal synthesis method presents more reliable results than HOME Pro.
 
-Case study $7$ was not solved by our synthesis tool 
-within the time limit established during the experimental 
-phase. Case study $3$ was not possible to simulate in HOMER Pro, 
-because its restriction does not allow one to set the battery autonomy, 
-thus resting both without parameters to comparative.
+Our synthesis tool did not solve the case study $7$  within the time limit established during the experimental phase. Case study $3$ was not possible to simulate in HOMER Pro, because its restriction does not allow one to set the battery autonomy, thus resting both without parameters for comparison.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Threats to validity}
