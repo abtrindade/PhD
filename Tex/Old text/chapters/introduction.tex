@@ -88,17 +88,27 @@ power reliability and system cost. Note that in this study, the focus is not on 
 %----------------------------------------------
 \section{Outline of the Solution}
 %----------------------------------------------
+%\textcolor{red}{you should briefly describe here the outline of your solution. As example, take a look at \url{https://ssvlab.github.io/lucasccordeiro/papers/phd\_thesis\_cordeiro.pdf.}}
 
-\textcolor{red}{you should briefly describe here the outline of your solution. As example, take a look at \url{https://ssvlab.github.io/lucasccordeiro/papers/phd\_thesis\_cordeiro.pdf.}}
+\textcolor{red}{Our approach deals with the theoretical and pragmatic aspects of using model checking in stand-alone solar PV systems in order to tackle two issues: validation of a designed system (when a sized system must be evaluated in order to define if it meets the design requirements and user needs) and optimal sizing (when there are just the requirements and not the size of the PV system). We thus develop algorithms and the corresponding tools, moreover we evaluate them using comparative process in several case studies with simulation tool and real data from deployed PV systems.} 
 
-Our approach deals with the theoretical and pragmatic aspects of using model checking in stand-alone solar PV systems in order to tackle two issues: validation of a designed system (if a sized system must evaluated if meets the user demands) and optimal sizing (if there is just the demands and not the size of the PV system). We thus develop algorithms and the corresponding tools and evaluate them using comparative with simulation tool and real data from deployed PV systems. 
+\textcolor{red}{Fig.\ref{fig:validation_outline} outlines the proposed solution to perform the validation of stand-alone solar PV systems via automated verification. And Fig.\ref{fig:optimization_outline} illustrates the proposed solution to obtain the optimal sizing of stand-alone solar PV systems via automated synthesis. We describe here only a summary of each phase of our proposed approach, with highlights to the input parameters, the outputs and to the design-space coverage during the search for the validation or the optimal size of solar PV system; more details are presented in the next chapters.}
 
-XXXThe tools are built using a number of advanced (and complex) techniques, including symbolic execution engines, satisfiability modulo theories
-solvers, context-bounded analysis, and partial order reduction. We use off-the-shelf
-software wherever possible and focus our effort on a comprehensive and implemented
-SMT-based model checking procedure to verify embedded software or more precisely, fi-
-nite approximations of embedded software. In particular, we reuse the C/C++ front-end
-from the CProver framework3 and use existing SMT solvers
+\begin{figure}[h]
+\includegraphics[width=0.85\textwidth]{verification_outline.png}
+\centering
+\caption{Proposed validation of PV systems via automated verification.}
+\label{fig:validation_outline} 
+\end{figure}
+
+
+\begin{figure}[h]
+\includegraphics[width=0.85\textwidth]{optimization_outline.png}
+\centering
+\caption{Proposed optimal sizing of PV systems via automated synthesis.}
+\label{fig:optimization_outline} 
+\end{figure}
+
 
 %----------------------------------------------
 \section{Contributions}
