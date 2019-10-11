@@ -8,7 +8,7 @@ Furthermore, there exists a close relationship between the lack of energy and th
 
 The use of the power generation technology with renewable energy source is developing rapidly due to the industrial development~\cite{Yatimi}. The renewable energy leads to an advance all over the world by protecting the environment: it is clean (low greenhouse gases emissions), operating silently, long lifetime, low maintenance, absence of fuel cost and inexhaustible \cite{Noroozian}. Renewable energy, and particularly the power generation from solar energy using photovoltaic (PV) panels, has emerged as an alternative to fossil or nuclear fuel generation. 
 
-Among the options of renewable sources, there are hydro, wind, and solar photovoltaic (PV). According to \cite{SEIA} and \cite{Chauhan}, solar is the most abundant source of renewable energy on earth. In SPV system, solar radiations are captured from the sun and turned into electricity using SPV cells made of silicon and other materials.
+Among the options of renewable sources, there are hydro, wind, and solar PV. According to \cite{SEIA} and \cite{Chauhan}, solar is the most abundant source of renewable energy on earth. In solar PV systems, solar radiations are captured from the sun and turned into electricity using solar PV cells made of silicon and other materials.
 
 Only a niche market a few years ago, solar PV systems are now becoming a mainstream electricity provider, with an increase of approximately 50\% from 2016 to 2017 in terms of new installations of PV~\cite{EPIA}. However, this growth is not driven by stand-alone systems.
 
@@ -90,12 +90,12 @@ power reliability and system cost. Note that in this study, the focus is not on 
 %----------------------------------------------
 %\textcolor{red}{you should briefly describe here the outline of your solution. As example, take a look at \url{https://ssvlab.github.io/lucasccordeiro/papers/phd\_thesis\_cordeiro.pdf.}}
 
-\textcolor{red}{Our approach deals with the theoretical and pragmatic aspects of using model checking in stand-alone solar PV systems in order to tackle two issues: validation of a designed system (when a sized system must be evaluated in order to define if it meets the design requirements and user needs) and optimal sizing (when there are just the requirements and not the size of the PV system). We thus develop algorithms and the corresponding tools, moreover we evaluate them using comparative process in several case studies with simulation tool and real data from deployed PV systems.} 
+\textcolor{red}{Our approach deals with the theoretical and pragmatic aspects of using model checking in stand-alone solar PV systems in order to tackle two issues: validation of a designed system and optimal sizing. Validation when a sized system must be evaluated in order to define if it meets the design requirements and user needs; and optimization when there are just the requirements and the PV system is not sized, or then the user tries to obtain a better solution that he or she has. We thus develop algorithms and the corresponding tools, moreover we evaluate them using comparative process in several case studies with specialized simulation tool and real data from deployed PV systems.} 
 
-\textcolor{red}{Fig.\ref{fig:validation_outline} outlines the proposed solution to perform the validation of stand-alone solar PV systems via automated verification. And Fig.\ref{fig:optimization_outline} illustrates the proposed solution to obtain the optimal sizing of stand-alone solar PV systems via automated synthesis. We describe here only a summary of each phase of our proposed approach, with highlights to the input parameters, the outputs and to the design-space coverage during the search for the validation or the optimal size of solar PV system; more details are presented in the next chapters.}
+\textcolor{red}{Fig.\ref{fig:validation_outline} outlines the proposed solution to perform the validation of stand-alone solar PV systems via automated verification. And Fig.\ref{fig:optimization_outline} illustrates the proposed solution to obtain the optimal sizing of stand-alone solar PV systems via automated synthesis. We pictured here only a summary of each phase of our proposed approach, with highlights to the input parameters, the outputs for the validation or the optimal size of solar PV system; more details are presented in the next chapters. Moreover, the illustrations show the methodological approach related to comparative result analysis, employing our approaches, commercial software tool and data from real PV systems deployed at the field.}
 
 \begin{figure}[h]
-\includegraphics[width=0.85\textwidth]{verification_outline.png}
+\includegraphics[width=0.85\textwidth]{verification_outline2.png}
 \centering
 \caption{Proposed validation of PV systems via automated verification.}
 \label{fig:validation_outline} 
@@ -103,12 +103,13 @@ power reliability and system cost. Note that in this study, the focus is not on 
 
 
 \begin{figure}[h]
-\includegraphics[width=0.85\textwidth]{optimization_outline.png}
+\includegraphics[width=0.85\textwidth]{optimization_outline2.png}
 \centering
 \caption{Proposed optimal sizing of PV systems via automated synthesis.}
 \label{fig:optimization_outline} 
 \end{figure}
 
+Worth to mention that is out of our scope to perform code modification on the verifiers or the solvers used during the automated verification or automated synthesis steps of our approach. 
 
 %----------------------------------------------
 \section{Contributions}
