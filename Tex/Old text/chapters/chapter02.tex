@@ -1,6 +1,6 @@
-In this chapter some concepts related to the intersection of the two areas of this research are presented: the computer science applied to an electrical engineering problem, i.e., the use of formal verification methodology to perform automated verification and optimal sizing of stand-alone solar PV systems.
+In this chapter we present some concepts related to the intersection of the two areas: the computer science applied to an electrical engineering problem, i.e., the use of formal verification methodology to perform automated verification and optimal sizing of stand-alone solar PV systems.
 
-First, the concept of formal verification is introduced as background to understanding how a methodology that performs (mainly) bug detection can be used to validate a design sizing or to obtain an optimal solution of PV systems.
+First, we introduce the concept of formal verification as background to understanding how a methodology that performs (mainly) bug detection can be used to validate a design sizing or to obtain an optimal solution of PV systems.
 
 And secondly, how a solar PV system can be modeled in order to be validated or optimized by the formal verification methodology.
 
@@ -117,7 +117,7 @@ Fig. \ref{fig:modelcheckstruc} shows the structure of a typical model checking s
 \label{fig:modelcheckstruc}
 \end{figure}
 
-Here it is worth to mention that the term "model" is not the meaning taken from the dictionary. The problem is not dealing with an abstraction of the actual system under study. 
+Here it is worth to mention that the term "model" is not the meaning taken from the dictionary. In other words, the problem is not dealing with an abstraction of the actual system under study. 
 
 The Fig. \ref{fig:systemverif} shows the process to convert a real system to a model in order to be verified by a model checking. 
 
@@ -141,7 +141,7 @@ The use of SMT, instead of Boolean Satisfiability SAT from the original BMC, com
 
 %Although simulation and testing explore possible behaviors and scenarios of a given system, they leave open the question of whether unexplored trajectories may contain a flaw~\cite{ClarkeHV18}. Formal verification conducts an exhaustive exploration of all possible behaviors; when a design is said to be ``correct'' by a formal verification method, it implies that all behaviors have been explored; questions regarding adequate coverage or missed behavior becomes irrelevant~\cite{Clarke2012}. Formal verification is a systematic approach that applies mathematical reasoning to obtain guarantees about the correctness of a system; one successful method in this domain is model checking~\cite{Clarke2012}. 
 
-At this work will be evaluated three state-of-the-art model checkers to formally verifying and synthesize PV designs w.r.t. user requirements.
+At this work we will evaluated three state-of-the-art model checkers to formally verifying and synthesize PV designs w.r.t. user requirements. Moreover, different solvers will be evaluated as well, according with the feature of each model checker.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{CBMC}
@@ -157,6 +157,7 @@ CBMC's verification flow can be summarized in three stages:
 \item Back-end: supports SAT and SMT solvers to discharge verification conditions.
 \end{itemize}
 
+Particularly, CBMC comes with a built-in solver for bit-vector formulas that is based on MiniSat. We used this solver during the experimentation in this PhD thesis~\cite{Kroening}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{ESBMC}
@@ -172,7 +173,7 @@ ESBMC's verification flow can be summarized in three stages:
 \item The SMT solving stage, where all constraints and properties of the system are encoded into SMT and checked for satisfiability.
 \end{itemize}
  
-ESBMC exploits the standardized input language of SMT solvers (SMT-LIB\footnote{http://smtlib.cs.uiowa.edu/} logic format) to make use of a resource called \textit{assertion stack}~\cite{Morse2015}. This enables ESBMC, and the respective solver, to learn from previous checks, thus optimizing the search procedure and potentially eliminating a large amount of formula state space to be searched, because it solves and disregards data during the process, incrementally. This technique is called 'incremental SMT'~\cite{DBLP:journals/fac/SchrammelKBMTB17} and allows ESBMC to reduce the memory overhead, mainly when the verified system is complex and the computing platform does not have large amount of memory to deal with the entire design space state.
+ESBMC exploits the standardized input language of SMT solvers (SMT-LIB\footnote{http://smtlib.cs.uiowa.edu/} logic format) to make use of a resource called \textit{assertion stack}~\cite{Morse2015}. This enables ESBMC, and the respective solver, to learn from previous checks, thus optimizing the search procedure and potentially eliminating a large amount of formula state space to be searched, because it solves and disregards data during the process, incrementally. This technique is called 'incremental SMT'~\cite{DBLP:journals/fac/SchrammelKBMTB17} and allows ESBMC to reduce the memory overhead, mainly when the verified system is complex and the computing platform does not have large amount of memory to deal with the entire design space state. ESBMC in 'incremental SMT' uses only Z3 solver~\cite{DeMoura}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{CPAchecker}
@@ -192,6 +193,8 @@ The CPA framework provides interfaces to SMT solvers and interpolation procedure
 \label{sec:ProgramSynthesis}
 %-----------------------------------------------------------
 
+Program synthesis addresses an age-old problem in computer science: can a computer program itself?~\cite{Bornholt2019}. Before the computer can automatically generate a program, it is necessary to give it a specification of what the program should do. The specification needs to describe the program's desired behavior to ensure that the program does what it intends.
+
 The basic idea of program synthesis is to automatically construct a program $P$ that satisfies a correctness specification $\sigma$. In particular, program synthesis is automatically performed by engines that use a correctness specification $\sigma$, as starting point, and then incrementally produce a sequence of candidate solutions that partially satisfy $\sigma$~\cite{Abateetal2017}. As a result, a given candidate program $p$ is iteratively refined, in order to match $\sigma$ more closely. 
 
 CEGIS represents one of the most popular approaches to program synthesis that are currently used in practice for CPS~\cite{Abateetal2017}, whose basic architecture is illustrated in Figure~\ref{Counter-Example-Guided-Inductive-Synthesis} and has close connections to algorithmic debugging using counterexamples and abstraction refinement~\cite{Alur}. 
@@ -210,6 +213,7 @@ In Figure~\ref{Counter-Example-Guided-Inductive-Synthesis}, regarding CEGIS meth
 One may notice that each iteration of the CEGIS loop adds a new input to the finite set $\text{\sc inputs}$, which is then used for synthesis.  Given that the full set of inputs $\mathcal{D}$ is finite because we use bit-vector expressions, this means that the refinement loop can only iterate over a finite number of times; however, {\sc Synthesize} may conclude that no candidate solution obeying $\sigma$ for the finite set $\text{\sc inputs}$ exists and our synthesis engine can then conclude that no feasible solution was found.
 
 \section{Solar Photovoltaic System }
+
 According to \cite{Roy}, a PV system is designed to give the electric supply to a load. This load can be either Alternate Current (AC) type or Direct Current (DC) type. Electric supply can be needed either in daytime or evening time (in particular cases, in both times). The most basic PV system can give supply only in daytime.  For night hours or rainy days, one needed to have batteries, where power can be stored and used \cite{Gules}. 
 
 PV systems are broadly classified into three distinct types, as described by \cite{Mohanty}: 
