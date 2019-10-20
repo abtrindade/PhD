@@ -1,268 +1,292 @@
-%\section{Intro to Automated Formal Synthesis Optimization}
-This Chapter presents the case studies used to evaluate the proposed approach of optimal sizing of stand-alone solar PV systems using automated synthesis. 
-Moreover, the approach is compared with a simulation tool, named HOME Pro. 
-The version and command-line of each verifier adopted, 
-the computing setup, the objectives of the experimental phase, 
-and the results itself are also described.
+This Chapter is devoted to the results of using automated verification to validate the intended behavior of stand-alone solar PV systems. Moreover, there is the comparative with a specialized simulation tool, and even the use of different verifiers who perform the automated verification in order to evaluate performance. Tables, commented reports, and graphical outputs are presented to aid the understanding.
 
-%---------------------------------------------------------------------------
-\section{Optimization Case studies} 
-%---------------------------------------------------------------------------
+\section{Description of the Case Studies}
+%------------------------------------------
 
-It was performed seven stand-alone PV system case studies to evaluate the proposed synthesis approach: 
+%We have performed five case studies to evaluate our proposed verification method: (a) four PV systems (three in series 325W PV panels, four 220 Ah batteries in a configuration with two series and two parallel with 48h autonomy, 700 W inverter with peak power of 1,600W, charge controller with MPPT with 35A/150V of capacity) deployed in four different houses in an indigenous community (GPS coordinates 2$^{o}$44'50.0"S 60$^{o}$25'47.8"W) situated nearby Manaus (Brazil), with each house having a different power demand (house 1 = 253 W, house 2 = 263 W, house 3 = 283 W, and house 4 = 501 W); and (b) one case concerning a system deployed as an individual system in Manaus (GPS coordinates 3$^{o}$4'20.208"S 60$^{o}$0'30.168"W), supporting 915 W of the house's load (house 5 with four 325W PV panels in a configuration two series and two parallel, four 120Ah batteries in series and autonomy of just 6 h, 1,200 W inverter with surge of 1,600 W, charge controller with MPPT of 150V/35A). 
+It was performed five case studies to evaluate the proposed approach as described in Table~\ref{tab2}. %Furthermore, three start-of-art verification tools, as described in Section~\ref{sec:AutomatedVerification} (ESBMC, CBMC, and CPAchecker), and HOMER Pro simulation tool were used to compare the approach effectiveness and efficiency.
+These case studies were defined based on usual electrical load found in riverside communities of the Amazon State in Brazil~\cite{abs-1811-09438, Agrener2013}.
 
-\begin{itemize}
-\item Case Study 1: Power peak: 342 W, power surge: 342 W, energy consumption: 3,900 Wh/day, battery autonomy: 48 h;
-\item Case Study 2: Power peak: 814 W, power surge: 980 W, energy consumption: 4,880 Wh/day, battery autonomy: 48 h;
-\item Case Study 3: Power peak: 815 W, power surge: 980 W, energy consumption: 4,880 Wh/day, battery autonomy: 12 h;
-\item Case Study 4: Power peak: 253 W, power surge: 722 W, energy consumption: 3,600 Wh/day, battery autonomy: 48 h;
-\item Case Study 5: Power peak: 263 W, power surge: 732 W, energy consumption: 2,500 Wh/day, battery autonomy: 48 h;
-\item Case Study 6: Power peak: 322 W, power surge: 896 W, energy consumption: 4,300 Wh/day, battery autonomy: 48 h;
-\item Case Study 7: Power peak: 1,586 W, power surge: 2,900 W, energy consumtion: 14,000 Wh/day, battery autonomy: 48h.
-\end{itemize}
-
-These case studies were defined based on usual electrical load found in riverside communities of the Amazon State in Brazil~\cite{abs-1811-09438, Agrener2013}. With exception of case 7 that was idealized as a small town solution to support few lamps and an 12 kBTUs air-conditioner.
-
-%---------------------------------------------------------------------------
-\section{Objectives and Setup} 
-%---------------------------------------------------------------------------
-
-The evaluation aims to answer two experimental questions: 
-
-\begin{enumerate}
-
-\item[EQ1] \textbf{(soundness)} does the proposed automated synthesis approach provide correct results?
-
-\item[EQ2] \textbf{(performance)} how do the software verifiers compare to each other?
-
-\end{enumerate}
-
-All experiments regarding the verification tools were conducted 
-on an otherwise idle Intel Xeon CPU E5-4617 ($8$-cores) with 
-$2.90$ GHz and $64$ GB of RAM, running Ubuntu $16.04$ LTS $64$-bits. 
-Related to HOMER Pro, it was used an Intel Core i5-$4210$ ($4$-cores), 
-with $1.7$ GHz and $4$ GB of RAM, running Windows 10. 
-The experiments were performed with a predefined time out of $240$ minutes.
-
-Three start-of-art verification tools, CBMC\footnote{Command-line: \$ cbmc -\phantom{}-unwind 100 filename.c -\phantom{}-trace} version 5.11 with MiniSat 2.2.1~\cite{Kroening}, ESBMC\footnote{Command-line: \$ esbmc filename.c -\phantom{}-no-bounds-check -\phantom{}-no-pointer-check -\phantom{}-unwind 100 -\phantom{}-boolector} version 6.0.0 with solver Boolector 3.0.1~\cite{Brummayer}, %UAutomizer\footnote{Command-line: \$ ./Ultimate -tc config/AutomizerReach.xml -s config/svcomp-Reach-32bit-Automizer\_Default.epf -i filename.c -\phantom{}-traceabstraction.limit.analysis.time 900 -\phantom{}-traceabstraction.stop.after.first.violation.was.found false -\phantom{}-cacsl2boogietranslator.overapproximate.operations.on.floating.types false -\phantom{}- cacsl2boogietranslator.assume.nondeterminstic.values.are.in.range false -\phantom{}-rcfgbuilder.add.additional.assume.for.each.assert true -\phantom{}-rcfgbuilder.simplify.code.blocks true -\phantom{}-rcfgbuilder.size.of.a.code.block LoopFreeBlock}, 
-and CPAchecker\footnote{Command-line: \$ scripts/cpa.sh -heap 64000m -config config/bmc-incremental.properties -spec config/specification/sv-comp-reachability.spc filename.c} version 1.8 with MathSAT 5.5.3~\cite{mathsat5}, were used as verification engine to compare the proposed approach effectiveness and efficiency. Note that ``incremental'' ESBMC with the SMT solver Z3 version 4.7.1~\cite{DeMoura} was tried\footnote{Command-line: \$ esbmc filename.c -\phantom{}-no-bounds-check -\phantom{}-no-pointer-check -\phantom{}-unwind 100 -\phantom{}-smt-during-symex -\phantom{}-smt-symex-guard -\phantom{}-z3} as an alternative to use less computing memory. The Simulation tool HOMER Pro version $3.13.1$ was used for comparative purpose.
-
-%---------------------------------------------------------------------------
-\section{Results}  
-\label{sec:synthesisresults}
-%---------------------------------------------------------------------------
-
-The results are presented at Table~\ref{tab1}. 
+Worth to mention that the load curve represents a array of $24$ integer numbers for every hour of the day (instant power in Watts) and it was estimated after visiting and survey applied in June of $2017$, before the houses were electrified.
 
 \begin{table}
-\caption{Case studies and results: optimization of stand-alone PV systems.}\label{tab1}
+\caption{Case studies: stand-alone solar PV systems.}\label{tab2}
+\begin{scriptsize}
+\begin{tabular}{|c|c|c|c|c|c|}
+\hline
+\hline
+Item & House 1 & House 2 & House 3 & House 4 & House 5\\
+\hline
+\hline
+PV Panels &  \multicolumn{4}{|c|}{3$\times$325 W: (3S)} & 4$\times$325 W: (2S-2P) \\
+\hline
+Batteries & \multicolumn{4}{|c|}{\makecell{4$\times$220 Ah: (2S-2P)\\ autonomy: 48 h}} & \makecell{4$\times$120 Ah: (4S)\\ autonomy: 6 h}\\
+\hline
+Charge Controller & \multicolumn{5}{|c|}{With MPPT of 150 V/35 A}\\
+\hline
+Inverter & \multicolumn{4}{|c|}{700 W, surge: 1,600 W} & 1,200 W, surge: 1,600 W\\
+\hline
+Power peak (W)& 342  & 253  & 263 & 322 & 814 \\
+\hline
+Power surge (W)& 342 & 722 & 732 & 896 & 980\\
+\hline
+Load curve (W) & \multicolumn{5}{|l|}{\makecell{House 1: 118-118-118-46-46-46-95-95-170-170-296-242-242-95-95-95-95-95-342-288-288-288-288-118\\House 2: 136-136-136-136-136-136-67-67-184-184-184-184-184-67-67-67-67-67-253-253-253-253-253-136\\House 3: 113-113-113-113-113-113-67-67-217-97-97-97-97-97-97-97-97-97-263-113-113-113-113-113\\House 4: 207-207-207-135-135-135-66-66-161-161-233-253-248-66-66-66-66-66-302-317-322-302-302-207\\House 5: 45-16-16-16-16-16-0-0-0-72-72-222-150-150-0-0-72-72-814-814-814-742-742-16}}\\
+\hline
+\makecell{Consumption\\ (kWh/day)}& 3.9 & 3.6 & 2.5 & 4.3 & 4.88\\
+\hline
+GPS Coordinates & \multicolumn{4}{|c|}{\makecell{2$^{o}$44'50.0"S 60$^{o}$25'47.8"W\\}} & \makecell{3$^{o}$4'20.208"S \\60$^{o}$0'30.168"W}\\
+\hline
+Details & \multicolumn{4}{|c|}{\makecell{Riverside indigenous community\\Rural Area of Manaus - Brazil}} & \makecell{Urban house \\Manaus-Amazonas-Brazil}\\
+\hline
+\hline
+\end{tabular}
+Legend: (S): Series; (P): Parallel.
+\end{scriptsize}
+\end{table}
+
+%------------------------------------------
+\section{Objectives and Setup}
+\label{sec:setup}
+%------------------------------------------
+
+The experimental evaluation aims to answer two research questions:
+%
+\begin{enumerate}
+\item[RQ1] \textbf{(soundness)} Does the automated verification approach provide correct results?
+\item[RQ2] \textbf{(performance)} How do the verifiers compare to each other and to a simulation commercial tool?
+\end{enumerate}
+
+%In order to evaluate the proposed verification method and its performance, we have considered five case studies, three verification engines in different configurations, and also compared the results to the HOMER Pro tool. All the experiments were performed with a time out of 14,400 seconds. %Every dweller, who owns a PV system, was interviewed 
+%
+All experiments were conducted on an otherwise idle Intel Xeon CPU E5-4617 (8-cores) with 2.90 GHz and 64 GB of RAM, running Ubuntu 16.04 LTS 64-bits. The setup of HOMER Pro v3.13.1 was an Intel Core i5-4210 (4-cores), with 1.7 GHz and 4 GB of RAM, running Windows 10. The experiments were performed with time out of 240 minutes.
+
+Verification engine ESBMC, version v6.0.0 was used with the SMT solver Boolector version 3.0.1~\cite{Brummayer}\footnote{Command-line: \$ esbmc filename.c -\phantom{}-no-bounds-check -\phantom{}-no-pointer-check -\phantom{}-unwind 100 -\phantom{}-boolector}; and an alternative ESBMC v6.0.0 was used with the 'incremental SMT' mode\footnote{Command-line: \$ esbmc filename.c -\phantom{}-no-bounds-check -\phantom{}-no-pointer-check -\phantom{}-unwind 100 -\phantom{}-smt-during-symex -\phantom{}-smt-symex-guard -\phantom{}-z3} enabled; with SMT solver Z3 version 4.7.1~\cite{DeMoura}. % with the goal of reducing memory usage.
+
+Verification engine CBMC 5.11 and MiniSat 2.2.1 were used in the comparison~\cite{Kroening}\footnote{Command-line: \$ cbmc filename.c -\phantom{}-unwind 100 -\phantom{}-trace}.
+ 
+Verification engine CPAchecker 1.8 was used \footnote{Command-line: \$ scripts/cpa.sh -heap 64000m -stack 10240k -config config/bmc-incremental.properties -spec config/specification/sv-comp-reachability.spc filename.c}, with the SMT solver MathSAT version 5.5.3~\cite{mathsat5}. An alternative CPAchecker configuration was tried as well, using BMC k-induction option, but without improvements of performance or soundness in the results (so it is not reported here).
+
+%\section{Verifiers Environment}
+%\label{sec:verifenviron}
+
+%------------------------------------------
+\section{Results and Discussion}
+\label{sec:results_indeed}
+%------------------------------------------
+
+This Section presents the results, with commented outputs produced by every tool, mainly related to the reports (CBMC and ESBMC) and some graphical resources (CPAchecker and ESBMC).
+
+%\textcolor{red}{We should answer the two% research questions here... please take a look at https://ssvlab.github.io/lucasccordeiro/papers/cav2017.pdf to check how you can answer.}
+%\begin{enumerate}
+%\item[RQ1] \textbf{(soundness)} Does our approach provide correct results?
+%\item[RQ2] \textbf{(performance)} How does our approach compare against other existing tools?
+%
+Table~\ref{cases} summarizes the results. The times reported in Table~\ref{cases} answer RQ2. 
+Note that an UNKNOWN result from the proposed verification engines does not mean that a failure was found neither that the verification is successful: it indicates that the verification engine led to an \textit{out of memory} or a \textit{time out} situation.
+
+%HOMER Pro result: the $1,200$W was the only one that was proved to not meet the requirement of battery autonomy; all the 700W systems had no indication of flaws during simulation. The simulation took less than five seconds to be performed on each case study.
+%
+\begin{table}
+\centering
+\caption{Summary of the case-studies comparative and the automated tools.}\label{cases}
 \begin{scriptsize}
 \begin{tabular}{|c|c|c|c|c|}
 \hline
 \hline
-Tools & \makecell{CBMC 5.11 \\(MiniSat 2.2.1)}& \makecell{ESBMC 6.0.0 \\(Boolector 3.0.1 /\\Z3 4.7.1)}& \makecell{CPAchecker 1.8\\(MathSAT 5.5.3)}& HOMER Pro 3.13.1\\
+\multicolumn{5}{|c|}{Model Checker (SAT/UNSAT: time and message)}\\
+\hline
+Case &  \makecell{ESBMC 6.0.0\\(Boolector 3.0.1)} & \makecell {ESBMC 6.0.0\\(Z3 4.7.1)} & \makecell{CBMC 5.11\\(MiniSat 2.2.1)} & \makecell{CPAchecker 1.8\\(MathSAT 5.5.3)}\\
 \hline
 \hline
-Specification & Result & Result & Result & Result \\
+House 1 &  \makecell{Out of memory \\(UNKNOWN)} & \makecell{05 m 08 s \\(UNSAT)} & \makecell{19 m 02 s \\(UNSAT)} & \makecell{Time out \\ (UNKNOWN)}\\
 \hline
-\makecell{\textbf{Case Study 1}\\Peak:342W\\Surge:342W \\E:3,900Wh/day\\Autonomy:48h} & OM & TO / IF & \makecell{SAT (172.03 min) \\NTP:1$\times$340W (1S)\\NBT:8$\times$105Ah (2S-4P)\\Controller 15A/75V\\Inverter 700W/48V\\LCC: US\$ 7,790.53} & \makecell{(Time: 0.33 min)\\2.53 kW of PV\\NBT:12$\times$83.4Ah (2S-6P)\\0.351kW inverter\\LCC: US\$ 7,808.04}\\
+House 2 &  \makecell{Out of memory \\(UNKNOWN)} & \makecell{04 m 27 s \\(UNSAT)} & \makecell{18 m 59 s \\(UNSAT)} & \makecell{Time out \\ (UNKNOWN)}\\
 \hline
-\makecell{\textbf{Case Study 2}\\Peak:814W\\Surge:980W\\E:4,880Wh/day\\Autonomy:48h} & OM & TO / IF & \makecell {SAT (228.7 min) \\NTP:2$\times$330W (2S)\\NBT:10$\times$105Ah (2S-5P)\\Controller 20A/100V DC\\Inverter 1,200W/24V \\LCC: US\$ 8,335.90} & \makecell{(Time: 0.18 min)\\3.71 kW of PV\\NBT:20$\times$83.4Ah (2S-10P)\\0.817kW inverter\\LCC: US\$ 12,861.75} \\
+House 3 &  \makecell{Out of memory \\(UNKNOWN)} & \makecell{05 m 07 s \\(UNSAT)} & \makecell{18 m 39 s \\(UNSAT)} & \makecell{Time out \\ (UNKNOWN)}\\
 \hline
-\makecell{\textbf{Case Study 3}\\Peak:815W\\Surge:980W\\E:4,880Wh/day\\Autonomy:12h} & OM & TO / IF & \makecell {SAT (166.13 min) \\NTP:4$\times$150W (4S)\\NBT:4$\times$80Ah (2S-2P)\\Controller 15A/100V DC\\Inverter 1,200W/24V \\LCC: US\$ 7,306.27} & Not possible \\
+House 4 &  \makecell{Out of memory \\(UNKNOWN)} & \makecell{04 m 37 s \\(UNSAT)} & \makecell{18 m 36 s \\(UNSAT)} & \makecell{Time out \\ (UNKNOWN)}\\
 \hline
-\makecell{\textbf{Case Study 4}\\Peak:253W\\Surge:722W\\E:3,600Wh/day\\Autonomy:48h} & OM & TO / IF & \makecell {SAT (143.71 min) \\NTP:4$\times$150W (4S)\\NBT:10$\times$80Ah (2S-5P)\\Controller 15A/75V\\Inverter 750W/24V \\LCC: US\$ 7,816.31} & \makecell{(Time: 0.23 min)\\2.42 kW of PV\\NBT:12$\times$83.4Ah (2S-6P)\\0.254kW inverter\\LCC: US\$ 7,677.95}\\
-\hline
-\makecell{\textbf{Case Study 5}\\Peak:263W\\Surge:732W\\E:2,500Wh/day\\Autonomy:48h} & OM & TO / IF & \makecell {SAT (134.93 min) \\NTP:1$\times$340W (1S)\\NBT:6$\times$105Ah (2S-3P)\\Controller 15A/75V\\Inverter 400W/24V \\LCC: US\$ 7,252.14} & \makecell{(Time: 0.18 min)\\1.59 kW of PV\\NBT:10$\times$83.4Ah (2S-5P)\\0.268kW inverter\\LCC: US\$ 6,175.57} \\
-\hline
-\makecell{\textbf{Case Study 6}\\Peak:322W\\Surge:896W\\E:4,300Wh/day\\Autonomy:48h} & OM & TO / IF & \makecell {SAT (235.75 min) \\NTP:2$\times$200W (2S)\\NBT:10$\times$105Ah (2S-5P)\\Controller 15A/75V\\Inverter 400W/24V \\LCC: US\$ 8,287.23} & \makecell{(Time: 0.22 min)\\3.15 kW of PV\\NBT:14$\times$83.4Ah (2S-7P)\\0.328kW inverter\\LCC: US\$ 9,112.45} \\
-\hline
-\makecell{\textbf{Case Study 7}\\Peak:1,586W\\Surge:2,900W\\E:14,000Wh/day\\Autonomy:48h} & OM & TO / IF & TO & \makecell{(Time: 0.20 min)\\12.5 kW of PV\\NBT:66$\times$83.4Ah (2S-33P)\\1.60kW inverter\\LCC: US\$ 41,878.11} \\
+House 5 &  \makecell{Out of memory \\(UNKNOWN)} & \makecell{$\leq$ 1 sec \\(SAT Line 337)} & \makecell{$\leq$ 1 sec \\(SAT Line 337)} & \makecell{6 sec \\ (SAT line 337)}\\
 \hline
 \hline
 \end{tabular}
-\\Legend: OM = out of memory; TO = time out; IF = internal failure, E = energy.
 \end{scriptsize}
 \end{table}
 
-CPAchecker was able to synthesize the optimal sizing in six 
-out of seven case studies (cases $1$ to $6$): the result was produced within 
-the time limit, which varied from $134.71$ to $235.75$ minutes. Fig.~\ref{fig:CPAoptc1} illustrates the result of case 4 with the optimal sizing appearing in the left size as the integer $8$ to the solar panel (which is the model RSM36-6-150P from manufacturer Risen), battery $0$ that means the model 12MF80 of 80 Ah from Moura, charge controller $1$ that means the model 15A-75V MPPT from Victron  Energy, and the inverter number $3$ means the model IP350-11 from Epever (750 W). The variables NTP, NPS, NPP, NPS, NBP, and NBTotal, presented at the counter-example as well, shows how many and how the panels and batteries are connected.
+The description of the experimental results can be broken down into three parts, one for each verification engine: ESBMC, CBMC, and CPAchecker. 
 
-Only case study $7$ led to a \textit{time out} result in CPAchecker, i.e., 
-it was not solved within $240$ minutes. However, if it is removed 
-this time out limitation from CPAchecker, the verifier is 
-able to solve the optimization in $44.97$ hours. 
-The violation (SAT result) indicated in Table~\ref{tab1} 
-is the $assert$ of line $22$ from Algorithm~\ref{alg:verification-algorithm}. %The results were tested by manual PV sizing and were sound (\textit{RQ1}). %, linking a feasible technical solution with the lowest cost possible, considering the equipment that were inputted to the code. 
+\subsection{ESBMC}
 
-\begin{figure}[h]
-\includegraphics[width=1.0\textwidth]{CPA_opt_c4.png}
-\centering
-\caption{Counter-example generated by CPAchecker after validation of case 4 (file Counterexample.html).}
-\label{fig:CPAoptc1}
-\end{figure}
+Related to ESBMC, it was tried two possibilities: one with Boolector and another one with Z3. The 'incremental SMT' option, which uses less memory, can be performed with Z3 only since ESBMC does not support the 'incremental' mode with solver Boolector yet. 
 
-CBMC and ESBMC are unable to produce any conclusive result. 
-Situations of \textit{internal failure}, \textit{time out}, 
-or \textit{out of memory} occurred; this partially answers 
-the \textit{EQ2}. Note that the internal failure presented 
-by ESBMC was a Z3 solver issue (a bug); this will demand 
-an updated version of ESBMC to fix this issue. Similarly to CPAchecker, 
-if it is removed the \textit{time out} from ESBMC with the SMT solver Boolector, 
-then the verifier is able to obtain the automated synthesis 
-in $73.18$ hours for the case study $2$. CBMC, in the other hand, only could present some result if the RAM memory of the system was bigger to avoid the \textit{memory out} issue.
+Using ESBMC with Boolector led to an out of memory situation in all the case studies. This result was obtained in less than six minutes of execution, i.e., the $64$ GB of RAM were consumed by the verification engine and the processes were killed, thus leading to an UNKNOWN result returned by ESBMC as shown in the first column of Table~\ref{cases}. 
 
-Related to HOMER Pro, it was able to evaluate six case studies (cases $1$, $2$, $4$, $5$, $6$, and $7$), and within a time shorter than $30$ seconds, which was much 
-faster than the proposed automated synthesis tool (cf.~\textit{EQ2}). 
-Case study $3$ was not possible to be simulated since HOMER Pro 
-does not have the feature of adjusting the battery autonomy, i.e., 
-the tool always tries to feed with electricity the given load 
-during $365$ days/year. 
+However, running the same version of ESBMC but using 'incremental SMT' solving with Z3, the experimentation returned was conclusive (SAT or UNSAT) to all the case studies. 
 
-Fig.~\ref{fig:homeroptc4} illustrates parts of the 9-page PDF report presented by HOMER Pro, specifically for the case 4.
+Related to the cases that use a $700$ W PV system (house $1$, house $2$, house $3$, and house $4$), ESBMC could not reach an error in all the four houses and the execution time took from $04$ m $27$ s to $05$ m $08$ s. Fig.~\ref{fig:esbmcverifhouse1} shows the output report of the tool for the house $1$, with the absence of fail at the end of analysis. The file produced by ESBMC is $160$ lines long and $12.4$ kB of size. The author highlighted the result, which shows that was not found design flaws (SAT result or SUCCESS) within the bound $k$ of $100$.
 
 \begin{figure}[h]
-\includegraphics[width=0.8\textwidth]{homeroptc4.png}
+\includegraphics[width=0.65\textwidth]{esbmcverifh1.png}
 \centering
-\caption{Optimization report (partial) from HOMER Pro (case 4).}
-\label{fig:homeroptc4}
+\caption{Report generated by ESBMC (with Z3 solver) after validation of House 1.}
+\label{fig:esbmcverifhouse1}
 \end{figure}
 
-It was also noted other HOMER Pro drawbacks:
+However the $1,200$ W PV system (house $5$) failed (SAT) in line $337$ of the code, thereby indicating that the system is \textit{incorrectly} sized; in particular, the counterexample provided by the verification engine indicated that the nominal current from the charge controller is less than the minimum current demanded by the PV system, therefore the equipment chosen is not suitable to meet the design requirements.
 
-\begin{itemize}
-\item There exists no explicit charge controller 
-as a system equipment. HOMER Pro includes automatically 
-a controller just to simulate the charge/discharge 
-of batteries and to meet the load requirement; however, 
-without costs or even with electrical characteristics 
-as maximum current and voltage, which are common during PV sizing;
-\item HOME Pro demands to include some battery specification 
-to initiate the optimization; however, it does not change 
-the electrical specifications during the simulation; 
-the presented results are multiples of the original 
-battery type suggested by the user. As example, it was 
-started with a $83.4$ Ah lead-acid battery and during 
-the simulation, HOMER Pro did not try to use other capacities or types;
-\item HOMER Pro does not present the optimal solution 
-in terms of connections of arrays of PV panels, just the 
-total in terms of power, i.e., it does not present neither models 
-and the power of each PV panel nor the total of panels in series or parallel. 
-\end{itemize}
+Fig.~\ref{fig:esbmcverifhouse5} shows the report issued by the tool, with red highlights for the result, showing the incompatibility of the sized charge controller and the minimum necessary. The report generated by ESBMC was a text file of $14.1$ kB of size and $353$ lines of length. This verification took less than $1$ s to be performed, as indicated in the last line of Table~\ref{cases}, and it is faster than the previous analysis because ESBMC stops during the sizing check, which is in line $3$ of Algorithm~\ref{alg:verification-algorithm}, and does not perform the rest of verification code.
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Comparison between Formal Synthesis and HOMER Pro}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}[h]
+\includegraphics[width=0.5\textwidth]{esbmcverifh5.png}
+\centering
+\caption{Report generated by ESBMC (with Z3 solver) after validation of House 5.}
+\label{fig:esbmcverifhouse5}
+\end{figure}
 
-Comparing the results between the formal synthesis with CPAchecker 
-and HOMER Pro, it was observed that most results are quite similar, 
-in terms of technical solution and cost (cf. Table~\ref{tab1}). 
+%At the terminal, the command used to perform the verification is:
+%\$ esbmc filename.c -\phantom{}-no-bounds-check -\phantom{}-no-pointer-check -\phantom{}-no-div-by-zero-check -\phantom{}-unwind 300 -\phantom{}-smt-during-symex -\phantom{}-smt-symex-guard --z3
+%
+%Where:
+%
+%\begin{itemize}
+%\item The first three parameters, after the filename, are related to options that are usual to find bug in software, %for example, like bound check to arrays, pointer check, and division by zero, 
+%but unnecessary to check at this kind of problem (if not removed, there is lost of performance during the automated verification);
+%\item The parameter $unmind$ tells to ESBMC the limit to unroll the loops. This number was optimized (empirically) in order to reduce the running time and avoid to unwind unnecessarily the loops;
+%\item The two parameters with $symex$ tell to ESBMC to perform an incremental SMT solving. There are other options, but this parameter is necessary because the complexity of the algorithms. The incremental SMT solving uses few RAM memory, compared with other SMT solving. 
+%During empirical tests of the algorithms, the incremental solving was the only one who do not demanded 100\% the RAM memory. The use of swap-memory, i.e., the use of hard disk, reduces the performance and must be avoided;
+%\item And the last parameter says to the tool that the Z3 SMT solver will be used.
+%\end{itemize}
+%
 
-Particularly related to LCC, the cost was very close in cases 
-$1$, $4$, $5$ and $6$, with difference varying from $0.23$\% to $17.4$\%. 
-Even adopting the same price per kW to the PV panels, 
-inverters, and batteries, HOMER Pro does not use costs 
-related to charge controllers, which were introduced into the 
-CPAchecker modeling. The premise used in CPAchecker to adopt 
-a fixed annual cost for operation and maintenance can produce 
-some impact as well at this discrepancy; however, it is not significant
-since this annual cost is too small when compared to the resulting LCC value.
+\subsection{CBMC}
 
-However, there exists a huge divergence in case study $2$, 
-where the costs presented by HOMER Pro were $54$\% higher 
-than the automated synthesis tool, probably because the 
-operation and maintenance costs assumed by the automated 
-synthesis tool were underestimated to that specific load. 
+Concerning the CBMC tool, similar results were obtained, but with some slower time than ESBMC. The experimentation returned SAT or UNSAT to all the case studies, i.e., it was conclusive to all houses. 
 
-In general, the size of the PV panels and battery bank were 
-bigger in HOMER Pro than with the formal synthesis approach, 
-and that discrepancy is not easy to address without some real 
-systems validation. The mathematical models are different and 
-particular parameters can be tuned as well in each approach, 
-and that can justify the difference, which was presented in all 
-the case studies. As comparative, let's consider case study $1$: 
-the optimal solution provided by HOMER Pro demands $7$ $\times$ 
-more PV panels than the solution presented by the synthesis tool, 
-and HOME Pro does not show the arrangement of arrays 
-(i.e., the number of series and parallel PV panels); 
-the battery bank presented by HOMER Pro provides $500.4$ Ah 
-of capacity ($6 \times 83.4$), while the synthesis tool 
-presented an optimal solution with $420$ Ah of total capacity 
-($4 \times 105$). 
+Related to the 700 W PV systems (house $1$, house $2$, house $3$, and house $4$), the tool could not reach an error in all the four houses and the execution time took from $18$ m $36$ s to $19$ m $02$ s. 
 
-Just to compare the results obtained from the optimization 
-with the real-world, the authors had four PV systems deployed 
-and monitored since June $2018$ in a riverside community 
-in the Amazonas State in Brazil, with similar demands 
-presented by case studies $1$, $4$, $5$, and $6$, 
-always with a $3$ $\times$ $325$ W ($3$S) panels and 
-$4$ $\times$ $220$ Ah ($2$S-$2$P $= 440$ Ah) 
-lead-acid batteries. These solutions are more close 
-to the result presented by the proposed formal synthesis 
-approach than HOMER Pro, thereby showing that the 
-solution is sound, which answers \textit{EQ1}.
+Fig. \ref{fig:cbmcverifhouse1} shows part of report produced by CBMC when validating the house 1. The file produced by CBMC is $270,512$ lines long and $39$ MB of size. The author highlighted the result, which shows that was not found design flaws within the bound $k$ of $100$.
 
-Related to the inverters, HOMER Pro suggests a value in 
-kW very close to the peak of every case study, and it 
-is just a reference value and not a commercial value of 
-the employed inverter. The proposed synthesis tool, however, 
-presents inverters that are commercial and can be found 
-off-the-shelf. Therefore is a PRO to the formal synthesis method.
+\begin{figure}[h]
+\includegraphics[width=0.8\textwidth]{cbmcverifh1.png}
+\centering
+\caption{Report generated by CBMC after validation of House 1.}
+\label{fig:cbmcverifhouse1}
+\end{figure}
 
-Concerning to charge controllers, as it was reported in 
-the section~\ref{sec:synthesisresults}, HOMER Pro does not include it 
-as an explicit equipment in its mathematical model, 
-only the synthesis tool presents a commercial controller 
-and includes it during the cost analysis. Therefore, 
-the formal synthesis method presents more reliable results than
-HOME Pro.
+However the $1,200$ W PV system (house $5$) failed (SAT) in line $337$ of the code; with the same counterexample presented by ESBMC. This verification took less than $1$ s to be performed as well. Fig.~\ref{fig:cbmcverifhouse5} shows the (edited) report produced, with the highlights about the flaw found: the minimum controller current needed to the PV systems is not compatible with the chosen controller of the sized system. The report file generated contains $217$ lines and it was $13$ kB of size.
 
-Case study $7$ was not solved by the synthesis tool 
-within the time limit established during the experimental 
-phase. Case study $3$ was not possible to simulate in HOMER Pro, 
-because its restriction does not allow one to set the battery autonomy, 
-thus resting both without parameters to comparative.
+\begin{figure}[h]
+\includegraphics[width=0.7\textwidth]{cbmcverifh5.png}
+\centering
+\caption{Report generated by CBMC after validation of House 5.}
+\label{fig:cbmcverifhouse5}
+\end{figure}
 
-Summarizing, the synthesis tool is capable to present a 
-solution, which is far detailed and close to the commercial 
-reality than the solution presented by HOMER Pro. 
-In particular, the automated synthesis method 
-can provide all the details of every component of 
-a PV system solution, with complete electrical details 
-from data sheet of manufacturers, including 
-the model of the component, nominal current and voltage. 
-In this respect, even the name of the manufacturer 
-can be presented (in Table~\ref{tab1} it was removed 
-to avoid some advertising).
-%used with the SMT incremental mode\footnote{Command-line: \$ esbmc filename.c -\phantom{}-no-bounds-check -\phantom{}-no-pointer-check -\phantom{}-unwind 100 -\phantom{}-smt-during-symex -\phantom{}-smt-symex-guard -\phantom{}-z3} enabled with the goal of reducing memory usage; we have also used the SMT solver Z3 version 4.7.1~\cite{DeMoura}.
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Threats to validity}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{CPAchecker}
 
-At this Section, it was reported a favorable assessment of proposed formal synthesis method. 
-Nevertheless, it was also identified three threats to the validity 
-of the experimental results, which can be further assessed and 
-constitute future work: 
+Finally, the CPAchecker tool presented some different results. Even using two different configuration possibilities, as described in Section~\ref{sec:setup}, the verification engine presented an UNKNOWN result for all the $700$ W systems (house $1$, house $2$, house $3$, and house $4$). 
 
-\begin{itemize}
-\item ($1$) improvement of the power reliability 
-analysis: to include loss of load probability or loss of power 
-supply probability, which can make the analysis more accurate; 
-\item ($2$) the cost analysis is well tailored to the Amazon region of Brazil; 
-however, a broad analysis from other isolated areas must be 
-performed in order to make the optimization general in terms 
-of applicability; 
-\item ($3$) to deploy at the field some PV systems 
-sized using the synthesized results in order to validate it.
-\end{itemize}
+This is because the \textit{time out} limit was reached, i.e., after $4$ hours of execution the tool was unable to decide if the verification was SAT or UNSAT. This is shown in Fig.~\ref{fig:cpavalidh1} is shown one of the text reports issued by CPAchecker. Differently of ESBMC and CBMC, CPAchecker produces a lot of different reports, notable for log, statistical, and counterexample files (which is graphical and not in text format).
 
+\begin{figure}[h]
+\includegraphics[width=0.8\textwidth]{CPA_verif_h1.png}
+\centering
+\caption{CPAchecker time out result for house 1 validation (file CPALog.txt).}
+\label{fig:cpavalidh1}
+\end{figure}
+
+However, when validating the $1,200$ W PV system (house $5$), the tool presented a SAT message equal to the other engines, but with a execution time of $6$ seconds. Fig.~\ref{fig:cpavalidh5} show the result, with highlights to the line that causes the fail ($IC_{min}$) and part of the CFA (control-flow automata, represented as a control-flow graph) diagram pointing to this fail.
+
+\begin{figure}[h]
+\includegraphics[width=1.0\textwidth]{CPA_verif_h5.png}
+\centering
+\caption{CPAchecker time out result for house 5 validation (file Counterexample.html).}
+\label{fig:cpavalidh5}
+\end{figure}
+
+
+\subsection{HOMER Pro Specialized Simulation Tool}
+\label{sec:homerenviron}
+
+HOMER Pro is a powerful specialized electrical systems simulator, however even with the simulation characteristic, it in fact performs optimization when a given design is inputted to the schematic of the tool. This means that HOMER does not maintain the characteristic of the system under evaluation. It starts with the inputted information, however it uses the optimization default set up to increase or decrease the characteristic of each component until the load be meet by the electric generation system, and with the lowest cost. 
+
+Therefore, in order to perform a limited simulation and not exceed the values of each component (for example, the total power of the PV array under evaluation), it is necessary use the 'search space' instead of 'HOMER Optimizer' for sizing. That is done at the menu of each component inputted in the schematic of the tool. 
+
+Related to PV panels and batteries: If you want to simulate a particular capacity for PV and battery, you can use the 'search space' instead of 'HOMER Optimizer' for sizing. You can either aggregate all the PV panels together as a single PV component (in this case, the search space must vary from 0 to 1, i.e., from the option without PV panels until reach the power inputted to the component in the HOMER schematic) or add each PV components to represent the series configuration. For the batteries, you will have to find the equivalent capacity of the series and parallel configuration since HOMER considers only one battery component per simulation even if you add multiple battery components in the schematic.
+
+Other drawback of HOMER Pro is the fact that the user cannot set the autonomy of the batteries as HOMER controller will decide when it is economical to discharge the batteries during the simulation year. Therefore, any simulation regarding battery autonomy is not possible to be evaluated.
+
+Therefore, related to the comparative proposed, four $700$ W PV systems (houses $1$, $2$, $3$ and $4$) were evaluated by HOMER Pro (RQ2). The simulation results showed that for everyone of the sized systems, HOMER Pro concluded that it was not found feasible solution with the components inputted in the schematic. Fig. \ref{fig:homersimuh2no} shows one of the screens presented by HOMER Pro software, specifically to house $2$.
+
+\begin{figure}[h]
+\includegraphics[width=0.8\textwidth]{homersimuh2no.png}
+\centering
+\caption{HOMER simulation screen presented for house 2 with no feasible solution found.}
+\label{fig:homersimuh2no}
+\end{figure}
+
+Moreover, in order to evaluate what was the problem associated with the lack of feasible solution, it was performed some empirical changes to the evaluated project. Fig.~\ref{fig:homersimuh2yes} shows that a configuration with higher battery capacity (3 strings of 2 batteries each, 2S-3P, of 220 Ah; instead of 2 strings of 2 batteries each as the original sized system) can solve the problem of house 2. The same happened to the other tree houses of $700 W$, when improved battery capacity is presented by HOMER Pro as a optimal solution.
+
+\begin{figure}[h]
+\includegraphics[width=0.8\textwidth]{homersimuh2yes.png}
+\centering
+\caption{HOMER simulation screen presented for house 2 with feasible solution.}
+\label{fig:homersimuh2yes}
+\end{figure}
+
+The case study that was not possible to simulate was the $1,200$ W (house $5$). The reason is based on the fact that HOMER Pro do not allow to set up a battery autonomy (because it always size and optimize the electrical system in order to meet the load requirements for a entire year of simulation); therefore, it was was not possible to obtain any indication about the failures of this specifically PV system with simulation (RQ2).  
+
+%
+%Note that a PV design always uses daily average values of sun hours to each site, with impact in the PV components. Those hours are based on historical data and, in field, it is not unusual to find days where that number of hours was not reached due to weather conditions. The season has impact since the case studies are from the rain forest, where clouds are always present. As a result, the identified flaws in houses 1, 2, 3, and 4, are justified once again.
+%
+%We have evaluated five case studies in total using the HOMER Pro tool and our automated verification tool. Related to the HOMER Pro, the simulation, based on NASA data from the deployed systems (temperature and solar irradiance), shows that the restrictions were met by four 700 W PV systems (house 1, 2, 3 and 4), without any indication of sizing error or even performance. The case study that was unsuccessful during simulation was the 1,200 W (house 5); however, without any indication about the failures of this PV system. All the simulations took less than 5 seconds (each) to be performed.
+%
+%However, related to the results of the automated verification: (a) the 1,200 W PV system (house 5) failed during the sizing check. The number of panels was \textit{incorrect}; in particular, the counterexample provided by our verification method indicated 3 panels in parallel and the sized project has 2 in series and 2 in parallel. That verification took 63.3 hours to be performed. Surveying the owner of the 1,200 W system it was identified that, in fact, the system mostly of the time do not met the battery autonomy (mainly when all the loads are turned on). That behavior is expected because the system was purchased as an off-the-shelf solution and not as a specific design for the electrical charges of the house; (b) Related to the four 700 W PV systems, just one verification finished its analysis (house 1) considering the time-out of 432 h of computing. The sizing check was successful during automated verification, but there was found flaw related with the battery autonomy, when SOC reached levels below of 75\%. The automated verification identified the flaw right after the first night-discharge cycle, before the solar system start to recharge the batteries. The proposed tool took 409.3 hours to find this error at house 1. This possible flaw was confirmed with the dweller that uses the system: at least once or twice a mouth is usual the system to turn off, normally during raining days or with more clouds in the sky, and after the sun rises the system returns to normal operation. Related to houses 2, 3 and 4, it was considered that the automated verification had a time-out condition, with no conclusive results.
+
+\subsection{Comparing Automated Verification and Simulation Results with Real PV Systems}
+
+There were divergence of results for the houses $1$, $2$, $3$ and $4$ w.r.t. of proposed approach: the automated evaluation shows that there is not project flaws, but simulation demanded to improve batteries capacity (adding one more string of batteries to the system). 
+
+In order to evaluate which validation is correct, it was necessary to access the access interviews performed with the dwellers of deployed systems. From July of $2018$ to March $2019$, a monthly visiting was performed to apply surveys to the dwellers and to collect data from a local monitoring system: not every month were reported some energy interruption of the PV systems. 
+
+However, even when one interruption is reported in a month, this represents around $3.33$\% of interruption for the entire period ($1/30$), which indicates $96.97$\% of availability of the PV system ($96.67\% = 100\%-3.33\%$) and it is in accordance to what was described in Section~\ref{sec:availability}, because the type of electrical load of the houses is not critical; this situation is considered an energy interruption, but is not considered a system flaw, further affirming RQ1. Therefore, the proposed approach using automated verification provides the correct evaluation of the PV system, thus answering RQ2.
+
+House $5$ presented flaws from all tools (automated verified or simulation); however, only automated verification approaches indicated which design error was responsible for the flaw (charge controller specification), further answering RQ2.
+
+In order to validate the possible flaw identified by the automated verification from house $5$, it was surveyed the owner of the $1,200$ W system. It was identified that, in fact, the system does not meet the battery autonomy when all loads are turned on, and this was double checked with the monitoring system from the charge controller, which showed that the maximum power or surge power were not exceeded, thus affirming RQ1; this behavior is expected since the system was purchased as an off-the-shelf solution and not as a customized design for the electrical charges of the house. 
+
+%\begin{figure}[h]
+%\includegraphics[width=0.65\textwidth]{loadcurve.png}
+%\centering
+%\caption{Five weeks monitored load curve from House 1.}
+%\label{fig:loadcurve}
+%\end{figure}
+%
+%\subsection{Experimental results}
+%\label{sec:results}
+%---------------------------------------------------
+\section{Threats to Validity}
+%---------------------------------------------------
+
+At this Chapter, it was reported a favorable assessment of the proposed method. % over a diverse set of real-world benchmarks. 
+Nevertheless, it was also identified five threats to the validity of the results that can further be assessed.
+
+\textit{Model precision:} each component of the PV system is mathematically modeled. %, and the precision of the proposed method depends on the precision of that particular model. 
+The adoption of more complex models, or even an evaluation in a PV laboratory to validate the model could add more reliability to the results.
+
+\textit{Time step:} The run-time complexity of the proposed method is an issue; the time step of one hour can be further reduced to approximate the algorithm to the real-world scenario.
+
+\textit{Case studies:} The case studies are performed only in one municipality. A more complete evaluation can be performed with more case studies.
+
+\textit{Simulation Tool:} Only HOMER Pro was used. The inclusion of other specialized simulation tool or even a general simulation tool that uses the same mathematical model adopted by the automated verification could change the comparative.
+
+\textit{Temperature and Solar Irradiance Data}: Information related to temperature and solar irradiance of each case study, independently of using simulation or formal verification, come from databases available online~\cite{Temperature, Irradiance}. However, considering that riverside communities do not have weather stations, the data used in the present study come from the closest municipality (Manaus in all case studies), where stations collect regularly those data. Therefore, the most accurate should be the use of weather stations in each location.
 
 \section{Conclusion}
 
-At this Chapter it was performed the comparative among verifiers with the proposed automated synthesis using model checking, in order to obtain the optimal sizing of stand-alone solar PV systems, which showed that CPAchecker had the best overall performance. CBMC and ESBMC were not conclusive for all the cases, reaching the \textit{time out} stipulated ($240$ minutes) or by \textit{out of memory} issue. CPAchecker was not possible to present a conclusive result just in case $7$ (\textit{time out}).
+At this Chapter it was performed the comparative among verifiers with the proposed automated verification using model checking, which showed that 'incremental' ESBMC had the best overall performance. CBMC presented the same results, however with a worse time to result, and CPAchecker was not conclusive (house $1$, house $2$, house $3$, and house $4$) because the \textit{time out} was not enough to obtain some result.
 
-A comparative with a specialized simulation tool was performed as well, however in just $5$ case studies (case $1$, case $2$, case $4$, case $5$, and case $6$) it was possible comparative for the presented result. Some limitations of the simulation tool, mainly related to not allow battery autonomy setup, and the $time out$ or $out of memory$ messages presented by the verifiers, restricted the comparative between automated verification tools versus simulation tools. However, when the comparative was possible, it was noticed that the LCC was very close, and that HOMER Pro overestimated the sizing.
+A comparative with a specialized simulation tool was performed as well, however some limitations of the tool, mainly related to not allow battery autonomy setup or the oversize of the batteries bank by HOMER Pro, restricted the comparative between automated verification tools versus simulation tools.
 
-Based on the fact that mostly case studies were deployed at the field (case $1$, case $4$, case $5$, and case $6$), with regular visiting to perform interview with the dwellers, and with monitoring system in those houses, it was possible to compare the computer obtained results with the real world employment of the stand-alone solar PV systems. The final conclusion was that the proposed tool is sound, with an acceptable performance, and with a better quality of the presented output.
+Based on the fact that all case studies were deployed at the field, with regular visiting to perform interview with the dwellers, and with monitoring system in some of the houses (house $1$, house $2$, house $3$, and house $4$), it was possible to compare the computational validation (by simulation or automated verification) with the real world employment of the stand-alone solar PV systems. The final conclusion was that the proposed tool is sound and with an acceptable performance. 
