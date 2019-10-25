@@ -130,6 +130,8 @@ Nevertheless, if the verification engine does not fail, we can conclude that the
  \begin{scriptsize}
  \renewcommand{\algorithmicrequire}{\textbf{Input:}}
  \renewcommand{\algorithmicensure}{\textbf{Output:}}
+ \REQUIRE mathematical model (PV, batteries, inverter, charge controller), weather data (temperature, solar irradiance), system sizing details, design requirements (load curve, peak demand, output voltage, battery autonomy), design assumptions (system availability, battery state of charge, 1-hour step of validation)
+ \ENSURE design sizing check; FAIL with counter-example to improve the design; SUCCESS, saying that the project has no flaws
   \STATE $declare \, min \, and \, max \, solar \, irradiation[24h], \, and \, temperature[24h]$\\
   \STATE $declare \, case \, studies \, details: \, sizing \, and \, manufacturers \, data $ \\
   \STATE $sizing \_ check()$ \\

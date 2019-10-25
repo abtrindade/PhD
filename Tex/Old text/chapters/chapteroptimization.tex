@@ -42,12 +42,14 @@ There are four particular differences related to the traditional CEGIS described
 Program synthesis engines that implement the CEGIS approach~\cite{sketch} can automatically produce solutions for a large variety of specifications; here we have used symbolic software verifiers based on SMT solvers.
 
 Algorithm~\ref{alg:opt-algorithm} describes our pseudo-code to synthesize stand-alone PV systems using symbolic model checking. It was adopted the analytical method of optimization, with LCC economical analysis and power reliability based on the critical period criteria.
-%
+
  \begin{algorithm}
  \caption{Synthesis algorithm}
  \begin{algorithmic}[1]
  \renewcommand{\algorithmicrequire}{\textbf{Input:}}
  \renewcommand{\algorithmicensure}{\textbf{Output:}}
+  \REQUIRE weather data (temperature, solar irradiance), list of equipment (data sheet and price information), design requirements (load curve, peak demand, output voltage, battery autonomy), design assumptions (battery state of charge, criteria and objectives for technical and cost analysis)
+ \ENSURE FAIL with counter-example showing the optimal sizing; SUCCESS, saying that the project has no feasible solution considering the requirements and the list of equipment available
   \STATE Initialize variables \\
   \STATE Declare list of PV panels, controllers, batteries, and inverters data and cost \\
 %  \STATE Declare list of controllers data and cost \\
@@ -81,7 +83,6 @@ Algorithm~\ref{alg:opt-algorithm} describes our pseudo-code to synthesize stand-
  \end{algorithmic} 
  \label{alg:opt-algorithm}
  \end{algorithm}
-%
 
 Our synthesis algorithm will synthesize constant values; 
 it starts with the input of manufacturers data and prices of PV panels, batteries, 
