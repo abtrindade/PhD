@@ -321,6 +321,7 @@ House 5 &  \makecell{Out of memory \\(UNKNOWN)} & \makecell{$\leq$ 1 sec \\(SAT 
 The description of the experimental results can be broken down into three parts, one for each verification engine: ESBMC, CBMC, and CPAchecker. 
 
 \subsection{ESBMC}
+\label{sec:ESBMCverification}
 
 Related to ESBMC, it was tried two possibilities: one with Boolector and another one with Z3. The 'incremental SMT' option, which uses less memory, can be performed with Z3 only since ESBMC does not support the 'incremental' mode with solver Boolector yet. 
 
@@ -389,6 +390,7 @@ However the $1,200$ W PV system (house $5$) failed (SAT) in line $337$ of the co
 
 
 \subsection{CPAchecker}
+%\label{sec:CPAresult1}
 
 Finally, the CPAchecker tool presented some different results. Even using two different configuration possibilities, as described in Section~\ref{sec:setup}, the verification engine presented an UNKNOWN result for all the $700$ W systems (house $1$, house $2$, house $3$, and house $4$). 
 
