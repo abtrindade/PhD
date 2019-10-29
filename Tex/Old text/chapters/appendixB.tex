@@ -6,9 +6,11 @@ Here we describe the two tools created with the target to implement and validate
 
 During the Ph.D. process, the techniques from computer science proposed to tackle issues related to solar photovoltaic systems became algorithms and programs. Those programs became tools, and the tools were used during comparative with simulation tools in order to validate the techniques.
 
-\textcolor{red}{the second part of this sentence is unclear...} In general, we pursuit to write code that could be verification tool independent, i.e., that can be used in any model checking tool without adaptation, since we aimed to evaluate different.
+One premise of our tools was to be written as an ANSI C program, and to follow the requirements established for the International Competition on Software Verification (SV-COMP) \footnote{https://sv-comp.sosy-lab.org/}. That allow us to write a code that could be executed into three different verifiers without adaptation, and even in the future other verifiers can be used as well.
+%
+%\textcolor{red}{the second part of this sentence is unclear...} In general, we pursuit to write code that could be verification tool independent, i.e., that can be used in any model checking tool without adaptation, since we aimed to evaluate different.
 
-We wrote the tools in the C programming language, without the use of '\# include', or '\# define'. Based on the fact that there exists no use of compiler library, it was necessary to write some functions, which perform specific calculations according to the adopted mathematical models (e.g., logarithm of natural order and exponential).
+Therefore, we wrote the code without the use of '\# include', or '\# define'. Moreover, based on the fact that there exists no use of compiler library, it was necessary to write some functions, which perform specific calculations according to the adopted mathematical models (e.g., logarithm of natural order and exponential).
 
 %---------------------------------------
 \subsection{Automated Verification Tool (PV System validation)}
@@ -47,7 +49,7 @@ We split the code into three blocks:
 \section{How to use it}
 %---------------------------------------
 
-The only block that demands user intervention to input data is block 1 of both tools \textcolor{red}{where can I see block 1? which tools?}. If it is aimed to change the mathematical model adopted, so coding must be done in block 3 of the automated verification tool and block 2 of the automated synthesis tool.
+The only block that demands user intervention to input data is the block 1 listed in~\ref{sec:automatedverification} and \ref{sec:automatedsynthesis} from the automated verification and synthesis tools respectively. If it is aimed to change the mathematical model adopted, so coding must be done in block 3 of the automated verification tool and block 2 of the automated synthesis tool.
 
 Regarding the automated verification tool, it is necessary to input the following data (editing and modifying the code):
 
