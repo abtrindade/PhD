@@ -1,26 +1,26 @@
-In this chapter we present some concepts related to the intersection of the two areas:  computer science methods used to solve electrical engineering problems, i.e., the use of formal verification methodology to perform automated verification and optimal sizing of stand-alone solar PV systems.
+In this chapter we present some concepts related to the intersection of the two areas:  computer science methods used to solve electrical engineering problems; in this case, the use of formal verification methodology to perform automated verification and optimal sizing of stand-alone solar PV systems.
 
 First, we introduce the concept of formal verification as background to understanding how a methodology that performs (mainly) bug detection can be used to validate a design sizing or to obtain an optimal solution of PV systems.
 
-And secondly, how a solar PV system can be modeled in order to be validated or optimized by the formal verification methodology.
+And secondly, how a solar PV system can be modeled in order to be validated or optimized by formal verification methodology.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Formal Methods, Formal Design and Formal Verification}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-Formal methods are system design techniques that use rigorously specified mathematical models to validate systems, most notably (and known for) software and hardware systems~\cite{Collins98}. In contrast to other design systems, formal methods use mathematical proof as a complement to system testing in order to ensure correct behavior. With increasing scale and complexity, and safety becomes a more important issue, the formal approach to system design offers better level of insurance.
+Formal methods are system design techniques that use rigorously specified mathematical models to validate systems, most notably (and known for) software and hardware systems~\cite{Collins98}. In contrast to other design systems, formal methods use mathematical proof as a complement to system testing in order to ensure correct behavior. With increasing scale and complexity, when safety becomes a more important issue, the formal approach to system design offers a better level of insurance.
 
-Formal methods differ from other design systems through the use of formal verification schemes, the basic principles of the system must be proven correct before they are accepted~\cite{Bowen93}. Traditional system design has used extensive testing to verify behavior, but testing is capable of only finite conclusions. Dijkstra and others have demonstrated that tests can only show the situations where a system won't fail, but cannot say anything about the behavior of the system outside of the testing scenarios~\cite{Bentley99}. In contrast, once a theorem is proven true it remains true.
+Formal methods differ from other design systems through the use of formal verification schemes; the basic principles of the system must be proven correct before they are accepted~\cite{Bowen93}. Traditional system design has used extensive testing to verify behavior, but testing is capable of only finite conclusions. Dijkstra and others have demonstrated that tests can only show the situations where a system will not fail, but can say nothing about the behavior of the system outside of the testing scenarios~\cite{Bentley99}. In contrast, a theorem once proven true remains true.
 
-Prior the 80's, mainly deductive verification was used as formal method, with the use of axioms and proving rules to demonstrate the correctness of the system. The original focus was to verify critical systems based on the premise that 'if system is important, must spend the enough time to verify it'~\cite{Lowry1998}. Back in time, formal methods were initially performed by hand.
+Prior to the 1980s, mainly deductive verification was used as the formal method, with the use of axioms and proving rules to demonstrate the correctness of the system. The original focus was to verify critical systems based on the premise that if the system is important, time must be spent to verify it~\cite{Lowry1998}. Originally, formal methods were performed by hand.
 
-Worth to mention that formal verification does not avoid the need for testing~\cite{Bowen95}. Formal verification can not fix bad assumptions in the design, but it can help identify errors in reasoning which would otherwise be left unverified. In several cases, engineers have reported finding flaws in systems once they reviewed their designs formally~\cite{Kling95}.
+It is worth pointing out that formal verification does not avoid the need for testing~\cite{Bowen95}. Formal verification can not correct bad assumptions in the design, but it can help to identify errors in reasoning which would otherwise be left unverified. In several cases, engineers have reported finding flaws in systems following a formal review of their designs~\cite{Kling95}.
 
 A formal design can be summarized as a three step process, as described below~\cite{Collins98}:
 
 \begin{itemize}
-\item Formal Specification: During the formal specification phase, the engineer rigorously defines a system using a modeling language. Modeling languages are fixed grammars which allow users to model complex structures out of predefined types (are rigorously defined). This process of formal specification is similar to the process of converting a word problem into algebraic notation and help engineers to clearly define their problems, goals and solutions. Several engineers who have used formal specifications say that the clarity that this stage produces is a benefit in itself~\cite{Kling95}.
-\item Verification: As stated above, formal methods differ from other specification systems by their heavy emphasis on provability and correctness. By building a system using a formal specification, the designer is actually developing a set of theorems about his system. By proving these theorems correct, the formal verification ensures that the modeled system has an intended behavior. Verification is a difficult process, largely because even the simplest system has several dozen theorems, each of which has to be proven. Given the demands of complexity and Moore's law, almost all formal systems use an automated theorem proving tool of some form~\cite{Collins98}. That is the origin of 'automated verification' definition. These tools can prove simple theorems, verify the semantics of theorems, and provide assistance for verifying more complicated proofs and with feedback about the trace of the error (in order to correct the system and the specification of it).
+\item Formal Specification: During the formal specification phase, the engineer rigorously defines a system using a modeling language. Modeling languages are fixed grammars which allow users to model complex structures from predefined types (that are rigorously defined). This process of formal specification is similar to the process of converting a word problem into algebraic notation and helps engineers to clearly define their problems, goals and solutions. Several engineers who have used formal specifications claim that the clarity that this stage produces is a benefit in itself~\cite{Kling95}.
+\item Verification: As stated above, formal methods differ from other specification systems by their heavy emphasis on provability and correctness. In building a system using formal specification, the designer is actually developing a set of theorems about his system. By proving these theorems correct, the formal verification ensures that the modeled system has an intended behavior. Verification is a difficult process, largely because even the simplest system has several dozen theorems, each of which has to be proven. Given the demands of complexity and Moore's law, almost all formal systems use an automated theorem proving tool of some form~\cite{Collins98}. That is the origin of 'automated verification' definition. These tools can prove simple theorems, verify the semantics of theorems, and provide assistance for verifying more complicated proofs, with feedback about the trace of the error (in order to correct the system and the specification of it).
 \item Implementation: Once the model has been specified and verified, it is implemented by converting the specification into code.
 
 \end{itemize}
@@ -72,19 +72,20 @@ It is necessary to keep in mind that validation is the process of determining wh
 
 If the requirements, specifications, and regulations are given in a formal language, then it may be possible to automate verification.  
 
-Simulation may also be used for validation, but it is more problematic for verification. In order to use simulation for verification, it is necessary to ensure adequate coverage of operating conditions, scenarios, and system inputs. Testing can also be used for validation, but for the same reasons, it too is problematic for verification.
+Simulation may also be used for validation, but it raises more problems for verification. In order to use simulation for verification, it is necessary to ensure adequate coverage of operating conditions, scenarios, and system inputs. Testing can also be used for validation, but for the same reasons, it too raises problems for verification.
  
-According \cite{Clarke2008}, verification procedure is an intelligent exhaustive search of the state space of the design. In addition, according to \cite{Forejt2011}, formal verification is a systematic approach that applies mathematical reasoning to obtain guarantees about the correctness of a system. One successful method in this domain is model checking.
+According to \cite{Clarke2008}, verification procedure is an intelligent exhaustive search of the state space of the design. In addition, according to \cite{Forejt2011}, formal verification is a systematic approach that applies mathematical reasoning to obtain guarantees about the correctness of a system. One successful method in this domain is model checking.
 
 \subsection{Model Checking}
   
-Model checking is an automatic verification technique, as defined by \cite{Clarke2008}. Model checking was originally developed reasoned about finite state of concurrent systems, nowadays is mainly used to hardware and software verification, but can be applied to any kind of system. 
+Model checking is an automatic verification technique, as defined by \cite{Clarke2008}. Model checking was originally developed for reasoning about finite state of concurrent systems, though nowadays it is mainly used for hardware and software verification, but can be applied to any kind of system. 
 
 The process of model checking can be divided in three components: modeling, specification, and verification method. 
 
 \begin{itemize}
 \item In modeling, a model (normally mathematical) of the system is created; 
-\item In specification, normally a list of properties to be satisfied by the system is stablished, i.e., the requirements, as reliability to performance for example. \item Normally is expressed in temporal logic form ($CTL$); 
+\item In specification, normally a list of properties to be satisfied by the system is established, i.e., the requirements, such as reliability to performance, for example; 
+\item Normally it is expressed in temporal logic form ($CTL$); 
 \item The model checking is the verification method itself. 
 \end{itemize}
 
@@ -92,18 +93,18 @@ The model checking algorithm can be described as:
 
 \begin{itemize}
 \item Given the model $ 'M' $ and a $CTL$ formula $ \phi $ as input;  
-\item Model checking algorithm provides all the states of model $ M $ which satisfies $ \phi $;  
+\item The moodel checking algorithm provides all the states of model $ M $ which satisfy $ \phi $;  
 \item It returns $YES$ if $ \phi $ is $TRUE$, or returns $NO$ if $ \phi $ is $FALSE$.  
 
 \end{itemize}
-Specifically at the $FALSE$ situation, the algorithm returns a counterexample that is useful as diagnostic of the system, in order to discover in which situation the model is violated. \cite{Clarke2008} consider that the most important advantage of the use of model checking.  
+Specifically, in the case of $ \phi $ being $FALSE$, the algorithm returns a counterexample that is useful as a system diagnostic, in order to discover in which situation the model has been violated. \cite{Clarke2008} considers this to be the most important advantage of model checking.  
  
-Among the other advantages can be listed: there is no need of proofs (the algorithm is not a deductive procedure), there is no problem with partial specifications of the system, logics can easily express many concurrency properties, is fast (compared to other rigorous methods such as interactive theorem proving). However, there is a main disadvantage of model checking: the state explosion problem. 
+Model checking presents several other advantages: proofs are not needed (the algorithm is not a deductive procedure); there is no problem with partial specifications of the system, logics can easily express many concurrency properties; it is fast (compared to other rigorous methods such as interactive theorem proving). However, there is one major disadvantage in model checking: the state explosion problem. 
 
 The model checking problem can be defined as shown in \cite{Clarke2008}: 
 
 \begin{itemize}
-\item Let $M$ be a Kripke structure (i.e., state transition graph);
+\item Let $M$ be a Kripke structure (i.e., a state transition graph);
 \item $f$ be the specification in temporal logic (a formula);
 \item Find all states $s$ of $M$ such that $M , s \models f$
 \end{itemize}
@@ -117,9 +118,9 @@ Fig. \ref{fig:modelcheckstruc} shows the structure of a typical model checking s
 \label{fig:modelcheckstruc}
 \end{figure}
 
-Here it is worth to mention that the term "model" is not the meaning taken from the dictionary. In other words, the problem is not dealing with an abstraction of the actual system under study. 
+Here it is worth mentioning that the term "model" is not used here with its dictionary definition. In other words, the problem is not dealing with an abstraction of the actual system under study. 
 
-The Fig. \ref{fig:systemverif} shows the process to convert a real system to a model in order to be verified by a model checking. 
+The Fig. \ref{fig:systemverif} shows the process of converting a real system to a model in order to be verified by model checking. 
 
 \begin{figure}[h]
 \includegraphics[width=0.8\textwidth]{systemverif3}
@@ -128,20 +129,20 @@ The Fig. \ref{fig:systemverif} shows the process to convert a real system to a m
 \label{fig:systemverif}
 \end{figure}
 
-In order to solve the problem of state explosion, many different techniques were developed at the last decades. One of the promising is the Bounded Model Checking (BMC). 
+In order to solve the problem of state explosion, many different techniques have been developed over the last decades. One of the most promising is Bounded Model Checking (BMC). 
 
-BMC is a method that checks the model up to a given path in the path length. BMC algorithms traverses a finite state machine for a fixed number of steps, $k$, and checks whether violation occurs with this bound. It uses fast SAT solvers, where SAT means satisfiability. 
+BMC is a method that checks the model up to a given point in the path length. The BMC algorithms traverse a finite state machine for a fixed number of steps, $k$, and check whether violation occurs within this bound. It uses fast SAT solvers, where SAT means satisfiability. 
 
-SAT problem, as defined by \cite{Clarke2008}, is a problem of determining if there are certain conditions or interpretation that satisfy a given Boolean expression. SAT solvers are used in BMC, such that if there are some Boolean function, the solver would search the model for conditions (value of variables) that would make the formula $TRUE$. If SAT Solver find a substitution for the formula/function then the substitute induces a counterexample.  
+A SAT problem, as defined by \cite{Clarke2008}, is a problem of determining if there are certain conditions or interpretations that satisfy a given Boolean expression. SAT solvers are used in BMC, such that if there is some Boolean function, the solver would search the model for conditions (value of variables) that would make the formula $TRUE$. If the SAT Solver finds a substitution for the formula/function then the substitute induces a counterexample.  
 
 %%CBMC is considering the best-known model verification tool to validate code in ANSI-C and C++, as can be seen in \cite{Kroening}. 
 %
 %ESBMC is a context-bounded model checker for embedded C/C++ software based on Satisfiability Modulo Theories (SMT) solver, which can use CBMC as front-end.  
-The use of SMT, instead of Boolean Satisfiability SAT from the original BMC, comes as an alternative to overcome limitations of the systems modeling, especially considering that the complexity of these is increasing and the SMT method has high level and richer theories than the SAT to represent the models. 
+The use of SMT, instead of Boolean Satisfiability SAT from the original BMC, comes as an alternative to overcome limitations of the system's modeling, especially considering that the complexity of these is increasing and the SMT method has a higher level and richer theories than the SAT to represent the models. 
 
 %Although simulation and testing explore possible behaviors and scenarios of a given system, they leave open the question of whether unexplored trajectories may contain a flaw~\cite{ClarkeHV18}. Formal verification conducts an exhaustive exploration of all possible behaviors; when a design is said to be ``correct'' by a formal verification method, it implies that all behaviors have been explored; questions regarding adequate coverage or missed behavior becomes irrelevant~\cite{Clarke2012}. Formal verification is a systematic approach that applies mathematical reasoning to obtain guarantees about the correctness of a system; one successful method in this domain is model checking~\cite{Clarke2012}. 
 
-At this work we will evaluated three state-of-the-art model checkers to formally verifying and synthesize PV designs w.r.t. user requirements. Moreover, different solvers will be evaluated as well, according with the feature of each model checker.
+In this study we will evaluate three state-of-the-art model checkers to formally verifying and synthesize PV designs w.r.t. user requirements. In addition, other solvers will be evaluated, according to the feature of each model checker.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{CBMC}
@@ -157,7 +158,7 @@ CBMC's verification flow can be summarized in three stages:
 \item Back-end: supports SAT and SMT solvers to discharge verification conditions.
 \end{itemize}
 
-Particularly, CBMC comes with a built-in solver for bit-vector formulas that is based on MiniSat. We used this solver during the experimentation in this PhD thesis~\cite{Kroening}.
+Specifically, CBMC comes with a built-in solver for bit-vector formulas that is based on MiniSat. We used this solver during the experimentation in this Ph.D thesis~\cite{Kroening}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{ESBMC}
@@ -168,12 +169,12 @@ The Efficient SMT-based Bounded Model Checker (ESBMC) is a bounded and unbounded
 ESBMC's verification flow can be summarized in three stages: 
 
 \begin{itemize}
-\item A front-end that can read and compile C code, where the system formal specification is first handled; 
-\item Preprocessing steps to deal with code representation, control flow and unwinding of loops, and model simplification, thereby aiming to reduce verification effort; and finally 
+\item A front-end that can read and compile C code, where the system's formal specification is first handled; 
+\item Preprocessing steps deal with code representation, control flow and unwinding of loops, and model simplification, thereby aiming to reduce verification effort; and finally 
 \item The SMT solving stage, where all constraints and properties of the system are encoded into SMT and checked for satisfiability.
 \end{itemize}
  
-ESBMC exploits the standardized input language of SMT solvers (SMT-LIB\footnote{http://smtlib.cs.uiowa.edu/} logic format) to make use of a resource called \textit{assertion stack}~\cite{Morse2015}. This enables ESBMC, and the respective solver, to learn from previous checks, thus optimizing the search procedure and potentially eliminating a large amount of formula state space to be searched, because it solves and disregards data during the process, incrementally. This technique is called 'incremental SMT'~\cite{DBLP:journals/fac/SchrammelKBMTB17} and allows ESBMC to reduce the memory overhead, mainly when the verified system is complex and the computing platform does not have large amount of memory to deal with the entire design space state. ESBMC in 'incremental SMT' uses only Z3 solver~\cite{DeMoura}.
+ESBMC exploits the standardized input language of SMT solvers (SMT-LIB\footnote{http://smtlib.cs.uiowa.edu/} logic format) to make use of a resource called \textit{assertion stack}~\cite{Morse2015}. This enables ESBMC, and the respective solver, to learn from previous checks, thus optimizing the search procedure and potentially eliminating a large amount of formula state space to be searched, because it solves and disregards data during the process, incrementally. This technique is called 'incremental SMT'~\cite{DBLP:journals/fac/SchrammelKBMTB17} and allows ESBMC to reduce the memory overhead, mainly when the verified system is complex and the computing platform does not have a large amount of memory to deal with the entire design space state. ESBMC in 'incremental SMT' uses only the Z3 solver~\cite{DeMoura}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{CPAchecker}
@@ -183,7 +184,7 @@ Automatic program verification requires a choice between precision and efficienc
 
 Historically, this trade-off was reflected in two major approaches to static verification: program analysis and model checking. In order to experiment with the trade-off, and in order to be able to set the dial between the two extreme points, Configurable Program Analysis (CPA) provides a conceptual basis for expressing different verification approaches in the same formal setting. 
 
-The CPA formalism provides an interface for the definition of program analyses. Consequently, CPAchecker provides an implementation framework that allows the seamless integration of program analyses that are expressed in the CPA framework. The comparison among different approaches in the same experimental setting is intended to be easy and the experimental results are expected to be more meaningful~\cite{Beyer2011}. Related to the architecture, the central data structure is a set of control-flow automata (CFA), which consists of control-flow locations and control-flow edges. 
+CPA formalism provides an interface for the definition of program analyses. Consequently, CPAchecker provides an implementation framework that allows the seamless integration of program analyses that are expressed in the CPA framework. The comparison among different approaches in the same experimental setting is intended to be easy and the experimental results are expected to be more meaningful~\cite{Beyer2011}. As to the architecture, the central data structure is a set of control-flow automata (CFA), which consists of control-flow locations and control-flow edges. 
 
 The CPA framework provides interfaces to SMT solvers and interpolation procedures~\cite{Beyer2011}. Currently, CPAchecker uses MathSAT as SMT solver; and CSIsat and MathSAT as interpolation procedures~\cite{Beyer2011}. %CPAchecker performs reachability analysis and operates on an object of the abstract data type CPA, i.e., the underlying verification algorithm applies operations from the CPA interface without knowing which concrete CPA it is analyzing. For most configurations, the concrete CPA will be a composite CPA, which implements the combination of different CPAs. \textcolor{red}{It is unclear what a CPA is.}
 %In software verification, it is usual to take a considerable amount of effort to convert a verification idea into actual experimental results and CPAchecker aims to accelerate this process~\cite{Beyer2011}.
@@ -193,11 +194,11 @@ The CPA framework provides interfaces to SMT solvers and interpolation procedure
 \label{sec:ProgramSynthesis}
 %-----------------------------------------------------------
 
-Program synthesis addresses an age-old problem in computer science: can a computer program itself?~\cite{Bornholt2019}. Before the computer can automatically generate a program, it is necessary to give it a specification of what the program should do. The specification needs to describe the program's desired behavior to ensure that the program does what it intends.
+Program synthesis addresses an age-old problem in computer science: can a computer program itself?~\cite{Bornholt2019}. Before the computer can automatically generate a program, it is necessary to give it a specification of what the program should do. The specification needs to describe the program's desired behavior to ensure that the program does what it is intended.
 
-The basic idea of program synthesis is to automatically construct a program $P$ that satisfies a correctness specification $\sigma$. In particular, program synthesis is automatically performed by engines that use a correctness specification $\sigma$, as starting point, and then incrementally produce a sequence of candidate solutions that partially satisfy $\sigma$~\cite{Abateetal2017}. As a result, a given candidate program $p$ is iteratively refined, in order to match $\sigma$ more closely. 
+The basic idea of program synthesis is to automatically construct a program $P$ that satisfies a correctness specification $\sigma$. In particular, program synthesis is automatically performed by engines that use a correctness specification $\sigma$ as starting point, and then incrementally produce a sequence of candidate solutions that partially satisfy $\sigma$~\cite{Abateetal2017}. As a result, a given candidate program $p$ is iteratively refined, in order to match $\sigma$ more closely. 
 
-CEGIS represents one of the most popular approaches to program synthesis that are currently used in practice for CPS~\cite{Abateetal2017}, whose basic architecture is illustrated in Figure~\ref{Counter-Example-Guided-Inductive-Synthesis} and has close connections to algorithmic debugging using counterexamples and abstraction refinement~\cite{Alur}. 
+CEGIS represents one of the most popular approaches to program synthesis that are currently in use for CPS~\cite{Abateetal2017}, whose basic architecture is illustrated in Figure~\ref{Counter-Example-Guided-Inductive-Synthesis} and has close connections to algorithmic debugging using counterexamples and abstraction refinement~\cite{Alur}. 
 
 \begin{figure}[h]
 	\centering
@@ -208,25 +209,25 @@ CEGIS represents one of the most popular approaches to program synthesis that ar
 
 The correctness specification $\sigma$ provided to our program synthesizer is of the form $\exists \vec{F} .  \forall \vec{x}.  \sigma(\vec{x}, \vec{F})$, where $\vec{F}$ ranges over functions, $\vec{x}$ ranges over ground terms, and $\sigma$ is a quantifier-free (QF) formula typically supported by SMT solvers. The ground terms are interpreted over some finite domain $\mathcal{D}$, where $\mathcal{D}$ can be encoded using the SMT's bit-vectors part. 
 
-In Figure~\ref{Counter-Example-Guided-Inductive-Synthesis}, regarding CEGIS method, the phases {\sc Synthesize} and {\sc Verify} interact via a finite set of test vectors {\sc inputs}, which is incrementally updated. Given the correctness specification $\sigma$, the {\sc Synthesize} procedure tries to find an existential witness $\vec{F}$ satisfying the specification $\sigma(\vec{x}, \vec{F})$, for all $\vec{x}$ in {\sc inputs} (as opposed to all $\vec{x} \in \mathcal{D}$). If {\sc Synthesize} succeeds in finding a witness~$\vec{F}$, the latter is a candidate solution (i.e., feasible combination of equipment) to the full synthesis formula, which is passed to {\sc Verify} in order to check whether it is a proper solution ({\it i.e.}, $\vec{F}$ satisfies the specification $\sigma(\vec{x}, \vec{F})$ for all $\vec{x}\in\mathcal{D}$). If this is the case, then the algorithm terminates, i.e., we have found a feasible solution; otherwise, in the CEGIS method, additional information is provided to the phase {\sc Synthesize}, in the form of a new counterexample that is added to the {\sc inputs} set and the loop iterates again.
+In Figure~\ref{Counter-Example-Guided-Inductive-Synthesis}, the  CEGIS method's {\sc Synthesize} and {\sc Verify} phases interact via a finite set of test vector {\sc inputs}, which is incrementally updated. Given the correctness specification $\sigma$, the {\sc Synthesize} procedure tries to find an existential witness $\vec{F}$ satisfying the specification $\sigma(\vec{x}, \vec{F})$, for all $\vec{x}$ in {\sc inputs} (as opposed to all $\vec{x} \in \mathcal{D}$). If {\sc Synthesize} succeeds in finding a witness~$\vec{F}$, the latter is a candidate solution (i.e., a feasible combination of equipment) for the full synthesis formula, which is passed to {\sc Verify} in order to check whether it is a proper solution ({\it i.e.}, $\vec{F}$ satisfies the specification $\sigma(\vec{x}, \vec{F})$ for all $\vec{x}\in\mathcal{D}$). If this is the case, then the algorithm terminates, i.e., we have found a feasible solution; otherwise, in the CEGIS method, additional information is provided for the {\sc Synthesize} phase, in the form of a new counterexample that is added to the {\sc inputs} set and the loop iterates again.
 
-One may notice that each iteration of the CEGIS loop adds a new input to the finite set $\text{\sc inputs}$, which is then used for synthesis.  Given that the full set of inputs $\mathcal{D}$ is finite because we use bit-vector expressions, this means that the refinement loop can only iterate over a finite number of times; however, {\sc Synthesize} may conclude that no candidate solution obeying $\sigma$ for the finite set $\text{\sc inputs}$ exists and our synthesis engine can then conclude that no feasible solution was found.
+One may notice that each iteration of the CEGIS loop adds a new input to the finite set $\text{\sc inputs}$, which is then used for synthesis.  Given that the full set of inputs $\mathcal{D}$ is finite because we use bit-vector expressions, this means that the refinement loop can only iterate over a finite number of times. However, {\sc Synthesize} may conclude that no candidate solution obeying $\sigma$ for the finite set $\text{\sc inputs}$ exists and our synthesis engine can then conclude that no feasible solution was found.
 
 \section{Solar Photovoltaic System }
 
-According to \cite{Roy}, a PV system is designed to give the electric supply to a load. This load can be either Alternate Current (AC) type or Direct Current (DC) type. Electric supply can be needed either in daytime or evening time (in particular cases, in both times). The most basic PV system can give supply only in daytime.  For night hours or rainy days, one needed to have batteries, where power can be stored and used \cite{Gules}. 
+According to \cite{Roy}, a PV system is designed to supply electrical loads. This load can be of the Alternating Current (AC) type or the Direct Current (DC) type. The supply electricity can be needed either in daytime or nighttime (in particular cases, in both). The most basic PV system can supply only in daytime.  For the night hours or rainy days, batteries are needed, where power can be stored and used \cite{Gules}. 
 
 PV systems are broadly classified into three distinct types, as described by \cite{Mohanty}: 
 
 \begin{itemize}
-\item Standalone systems, where the energy is generated and consumed in the same place and which does not interact with the main grid. Normally, the electricity consuming/utilizing device is part of the system, i.e., solar home systems, solar street lighting system, solar lanterns, and solar power plants; 
-\item Grid-connected systems, where the solar PV system is connected to the grid. The grid-connected system can be either a grid-tied system, which can only feed power into the grid and such system cannot deliver power locally during blackouts and emergencies since these systems have to be completely disconnected from the grid and have to be shut down as per national and international electrical safety standards. Some grid-connected PV systems, with energy storage, can also provide power locally in an islanding mode; 
-\item Solar PV hybrid system: In a hybrid system, another source(s) of energy, such as wind, biomass or diesel, can work together with the solar PV system to provide the required demand. In such type of system, main objective is to bring more reliability into the overall system at an affordable way by adding one or more energy sources.
+\item Standalone systems, where the energy is generated and consumed in the same place and which does not interact with the main grid. Normally, the electricity consuming/utilizing device is part of the system, i.e., solar home systems, solar street lighting systems, solar lanterns, and solar power plants; 
+\item Grid-connected systems, where the solar PV system is connected to the grid. The grid-connected system can be either a grid-tied system, which can only feed power into the grid, with the result that this system cannot deliver power locally during blackouts and emergencies since these systems have to be completely disconnected from the grid and have to be shut down as per national and international electrical safety standards. Some grid-connected PV systems, with energy storage, can also provide power locally in an islanding mode; 
+\item Solar PV hybrid systems: In a hybrid system, another source(s) of energy, such as wind, biomass or diesel, can work together with the solar PV system to provide the required demand. In this type of system, the main objective is to bring more reliability into the overall system at an affordable cost by adding one or more energy sources.
 \end{itemize}
  
-Specifically concerning isolated communities, depending on the type of load, cost, resources availability, and requirements of the load, standalone systems can be split into several categories, which are described in this section. As the goal of this Thesis is just the solutions aimed to isolated/ off-grid application, therefore it is not considered the on-grid or hybrid configurations.
+In the specific case of isolated communities, depending on the type of load, cost, resources availability, and the load requirements, standalone systems can be split into several categories, as described below. Since the goal of this Thesis is to present solutions only to isolated/ off-grid applications, on-grid or hybrid configurations are not discussed here.
  
-There is a resource, called maximum power point tracking (MPPT), which is an electronic control mechanism that maintains the PV operating in a voltage that correspond to the voltage of maximum power, which maximizes the transfer of power and avoiding lost at the PV cells \cite{Pinho}. That resource is found at modern PV systems and is strongly indicated due to its advantages.
+There is a resource, called maximum power point tracking (MPPT), which is an electronic control mechanism that maintains the PV operating at a voltage that corresponds to maximum power voltage, which maximizes the transfer of power while avoiding loss of PV cells \cite{Pinho}. This resource is found in modern PV systems and is strongly indicated due to its advantages.
 
 \subsection{Unregulated standalone PV system with DC load }
 Usually this type of system is for low power applications, as defined by \cite{Roy}. The PV system is directly connected to the load without any MPPT controller, as shown at Fig.\ref{fig:unregSPV}. At night hours, the system will not provide any supply because of the absence of the battery. 
