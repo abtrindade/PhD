@@ -290,7 +290,7 @@ The design and validation of a SPV system can be done by hand or with the aid of
 
 In order to address different aspects of a project system and system's design, a lot of public domain and commercial software is available for the SPV market. According to \cite{Brooks}, the capabilities of these tools range from simple solar resource and energy production estimation, to site survey and system design tools, and to complex financial analysis software (with optimization). Some tools also provide support to rebate program applications and tax incentives (specific to each country or region), while other programs and worksheets focus on the technical aspects of system sizing and design.
  
-Manufacturers and integrators also have their own proprietary software to perform inverter string sizing and various system sizing and design tools, with the drawback of just including´ their own products among the possibilities of choice. In this study, the most widely used tools are presented: 
+Manufacturers and integrators also have their own proprietary software to perform inverter string sizing and various system sizing and design tools, with the drawback of just including their own products among the possibilities of choice. In this study, the most widely used tools are presented: 
 
 \begin{itemize}
 \item PVWatts 
@@ -774,19 +774,19 @@ It is worth mentioning that, specifically for PV systems used in Brazil, a Regul
 \label{sec:controller}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-Depending on the literature, the controller can receive different names: controller \cite{Hansen}, charge controller \cite{Mahanta} and \cite{Chauhan}, regulator \cite{Mellit}, DC-DC converter with MPPT and switch \cite{Dhanowa}, \cite{Yatimi}, \cite{Abdulateef}, \cite{Roy}. However, in this study, in order to simplify, the term used is controller. 
+The controller is named differently by different authors: controller \cite{Hansen}, charge controller \cite{Mahanta} and \cite{Chauhan}, regulator \cite{Mellit}, DC-DC converter with MPPT and switch \cite{Dhanowa}, \cite{Yatimi}, \cite{Abdulateef}, \cite{Roy}. However, in this study, in order to simplify, the term used is controller. 
 
-The controller is a set of items (DC-DC converter, a MPPT and switches) and can be defined as the responsible to manage the energy flow to PV system, batteries and loads by collecting information on the battery voltage and knowing the maximum and minimum values acceptable for the battery voltage. According to \cite{Pinho}, controllers aim to protect the battery (or batteries) against the excessive charge and discharge, improving its lifetime. 
+The controller is a set of items (DC-DC converter, a MPPT and switches) and can be defined as the responsible for managing the energy flow to the PV system, batteries and loads by collecting information on the battery voltage and knowing the maximum and minimum values acceptable for the battery voltage. According to \cite{Pinho}, controllers aim to protect the battery (or batteries) against the excessive charge and discharge, improving its lifetime. 
 
-Controllers with MPPT mechanism are the mostly used nowadays,  and it maintains the PV operating at the stage of maximum power.
+Currently, controllers with MPPT mechanisms are the most widely used nowadays,  and they maintain the PV operating at the stage of maximum power.
 
-As defined by \cite{Hansen} and \cite{Mellit}, all power systems must include a control strategy, which describes the interactions between its components. The use of battery as a storage form implies thus the presence of a charge controller. 
+As defined by \cite{Hansen} and \cite{Mellit}, all power systems must include a control strategy, which describes the interactions between its components. The use of a battery as a storage form thus implies the presence of a charge controller. 
 
 In general, there are two main operating modes for the controller: normal operating condition, when the battery voltage fluctuates between maximum and minimum voltages; and overcharge or over-discharge conditions, which occur when the battery voltage reaches some critical values. 
 
-In \cite{Mellit} was established that the controller allows the management of energy between the load and the battery. The input signals for regulator model are the battery current ($ I_{br} $), PV generator's voltage ($ V_{PV} $), PV generator's current ($ I_{PV} $), and battery voltage ($ V_{b} $). The outputs are battery ($ I_{rb} $) current and used current ($ I_{u} $). 
+\cite{Mellit} established that the controller allows the management of energy between the load and the battery. The input signals for the regulator model are the battery current ($ I_{br} $), the PV generator's voltage ($ V_{PV} $), the PV generator's current ($ I_{PV} $), and battery voltage ($ V_{b} $). The outputs are battery current ($ I_{rb} $) and used current ($ I_{u} $). 
 
-According \cite{Hansen}, to protect the battery against an excessive charge, the PV arrays are disconnected from the system, when the terminal voltage increases above a certain threshold $ V_{max \textunderscore off} $ and when the current required by the load is less than the current delivered by the PV arrays. PV arrays are connected again when the terminal voltage decreases below a certain value $ V_{max \textunderscore on} $. This can be done by using a switch with a hysteresis cycle, as illustrated in Fig. \ref{fig:controllerover}. 
+According to \cite{Hansen}, in order to protect the battery against an excessive charge, the PV arrays are disconnected from the system, whenever the terminal voltage increases above a certain threshold $ V_{max \textunderscore off} $ and whenever the current required by the load is less than the current delivered by the PV arrays. PV arrays are connected again when the terminal voltage decreases below a certain value $ V_{max \textunderscore on} $. This can be done by using a switch with a hysteresis cycle, as illustrated in Fig. \ref{fig:controllerover}. 
 
 \begin{figure}[h]
 \includegraphics[width=0.7\textwidth]{controllerover}
@@ -795,7 +795,7 @@ According \cite{Hansen}, to protect the battery against an excessive charge, the
 \label{fig:controllerover}
 \end{figure}
 
-To protect the battery against excessive discharge, the load is disconnected when the terminal voltage falls below a certain threshold i and when the current required by the load is larger than the current delivered by the PV arrays \cite{Hansen}. The load is reconnected to the system, when the terminal voltage is above a certain value i, using a switch with a hysteresis cycle, as shown in Fig. \ref{fig:controllerdisc}. 
+To protect the battery against excessive discharge, the load is disconnected whenever the terminal voltage falls below a certain threshold $i$ and when the current required by the load is larger than the current delivered by the PV arrays \cite{Hansen}. The load is reconnected to the system, when the terminal voltage is above a certain value $i$, using a switch with a hysteresis cycle, as shown in Fig. \ref{fig:controllerdisc}. 
 
 \begin{figure}[h]
 \includegraphics[width=0.7\textwidth]{controllerdisc}
@@ -836,82 +836,82 @@ Step  & Constraint & Command\\
 \end{tabular}
 \end{table}
 
-Regarding the DC-DC converter, the most basic idea is that the power is converted while altering the current and voltage. 
+As to the DC-DC converter, the most basic idea is that the power is converted while altering the current and voltage. 
 
-As shown in \cite{Abdulateef}, the DC-DC converter is used to increase the efficiency of the PV system by matching the voltage generated by PV array to the voltage required by the load. The output power ($ P_{out} $) of DC-DC converter is given by Equation \ref{eq:poutcont}. 
+As shown in \cite{Abdulateef}, the DC-DC converter is used to increase the efficiency of the PV system by matching the voltage generated by the PV array to the voltage required by the load. The output power ($ P_{out} $) of the DC-DC converter is given by Equation \ref{eq:poutcont}. 
 
 \begin{equation}
 \label{eq:poutcont}
 P_{in} = P_{out}
 \end{equation}
 
-Assuming that the efficiency of the controller ($ \eta_{c} $) is a manufacturer's data, from Equation \ref{eq:poutcont} is possible to reach Equation \ref{eq:potcont}.
+Assuming that the efficiency of the controller ($ \eta_{c} $) is data provided by the manufacturer, from Equation \ref{eq:poutcont} it is possible to reach Equation \ref{eq:potcont}.
 
 \begin{equation}
 \label{eq:potcont}
 V_{in} I_{in} \eta_{c} = V_{out} I_{out}
 \end{equation}
 
-Where $ V_{in} $ is the voltage across the PV array, $ I_{in} $ is the current output of PV array, $ V_{out}$ is the  DC bus voltage, and $I_{out}$ is the output current from the converter, when all the other values are known.
+\noindent where $ V_{in} $ is the voltage across the PV array, $ I_{in} $ is the current output of the PV array, $ V_{out}$ is the  DC bus voltage, and $I_{out}$ is the output current from the converter, when all the other values are known.
 
-Worth to mention that $ V_{out}$, depending on the PV panel generation and on the batteries charge, it can be the voltage that charges the battery $V_{b}$ (which is bigger than the nominal voltage of the batteries), the voltage that is feed by the batteries (the same $V_{b}$ but with levels that can be lower than it, or even the voltage that comes from the PV panels and depends on the MPPT system employed by the controller.
+It is worth mentioning that, depending on the PV panel generation and on the batteries charge, $ V_{out}$ can be the voltage that charges the battery $V_{b}$ (which is greater than the nominal voltage of the batteries), the voltage that is feed by the batteries (the same $V_{b}$ but with levels that can be lower), or even the voltage that comes from the PV panels and depends on the MPPT system employed by the controller.
 
-The output voltage is related to the input voltage as a function of duty cycle of the switch (\cite{Abdulateef}). 
+The output voltage is related to the input voltage as a function of the duty cycle of the switch (\cite{Abdulateef}). 
  
 A DC-DC converter can either be step-up (Boost), step-down (Buck), or both increase and decrease (Buck-Boost) the voltage, as defined by \cite{Mahanta}. In addition, there is the Cuk converter, which is a Buck-Boost converter with an inverting topology \cite{Catherine}. 
 
-For the Cuk converter, the relationship is expressed by \ref{eq:voutvin} as show in \cite{Abdulateef}.
+For the Cuk converter, the relationship is expressed by Equation  \ref{eq:voutvin} as shown in \cite{Abdulateef}.
 
 \begin{equation}
 \label{eq:voutvin}
 \dfrac{V_{out}}{V_{in}} = \dfrac{D}{D-1}
 \end{equation}
 
-Where $D$ is the duty cycle or ratio of the circuit converter, i.e., it is defined as the ratio of the on time of the switch to the total switching period.
+\noindent where $D$ is the duty cycle or ratio of the circuit converter, i.e., it is defined as the ratio of the on time of the switch to the total switching period.
  
 The DC/DC converter should always operate in the MPPT to maximize the PV array efficiency and consequently increase the efficiency of the PV system, as defined in \cite{Yatimi}.
   
-Various types of MPPT schemes are proposed by researchers, namely open circuit, short circuit, perturb and observe (P\& O)/hill climbing, incremental conductance, and so forth, as shown by \cite{Haque}.
+Various types of MPPT schemes are proposed by researchers, namely open circuit, short circuit, perturb and observe (P\& O)/hill climbing, incremental conductance, and so forth, as shown in  \cite{Haque}.
  
-As the MPPT definition and the equations to get the maximum power from the PV panels was described at the end of the PV panel modeling, the important here is to notice that the Equation \ref{eq:voutvin} defines the relationship between the input signal, the efficiency of the controller and the output power.
+As the MPPT definition and the equations to get the maximum power from the PV panels were described at the end of the PV panel modeling, what is important here is that Equation \ref{eq:voutvin} defines the relationship between the input signal, the efficiency of the controller and the output power.
  
 \subsubsection{The inverter model}
-As shown by \cite{Mellit}, the PV arrays produce DC and therefore when the PV system contains an AC load, a DC/AC conversion is required. An inverter is a converter, where the power flows from DC to AC side, i.e., having a DC voltage as input; it produces AC voltage, as output. The role of the inverter is to keep the voltage constant on the AC side, i.e., at the rated voltage (127 V or 220 V, for example), and to convert the input power $ P_{in} $ into the output power $ P_{out} $ with the best possible efficiency \cite{Hansen}.
+As shown by \cite{Mellit}, PV arrays produce DC and therefore when the PV system contains an AC load, DC/AC conversion is required. An inverter is a converter, where the power flows from the DC to the AC side, having DC voltage as input and producing AC voltage as output. The role of the inverter is to keep the voltage constant on the AC side, i.e., at the rated voltage (127 V or 220 V, for example), and to convert input power $ P_{in} $ into  output power $ P_{out} $ with the best possible efficiency \cite{Hansen}.
 
-The inverter is characterized by a power dependent efficiency $ \eta_{i} $ given by \cite{Hansen} as shown by Equation \ref{eq:efficinv}.
+The inverter is characterized by a power dependent efficiency $ \eta_{i} $ given by \cite{Hansen} as shown by Equation in  \ref{eq:efficinv}.
 
 \begin{equation}
 \label{eq:efficinv}
 \eta_{i} = \dfrac{P_{out}}{P_{in}} = \dfrac{V_{AC} I_{AC} cos\varphi}{V_{DC}I_{DC}}
 \end{equation}
 
-Where $ I_{DC} $ is the current required by the inverter from the DC source in order to be able to keep the rated voltage on the AC side, $ V_{DC} $ is the input voltage to the inverter delivered by the DC source (PV panel or battery),  $ V_{AC}  $ and $ I_{AC} $ are the output voltage and current, respectively, and $ cos \varphi $ can be found from the inverter's data-sheet.
+\noindent where $ I_{DC} $ is the current required by the inverter from the DC source in order to be able to keep the rated voltage on the AC side, $ V_{DC} $ is the input voltage to the inverter delivered by the DC source (PV panel or battery),  $ V_{AC}  $ and $ I_{AC} $ are the output voltage and current, respectively, and $ cos \varphi $ can be found from the inverter's data-sheet.
 
-Therefore, with this equation it is possible to simulate the output power of the inverter, based on information from the inverter's data-sheet and from the DC module or the PV panel that feed the inverter (which are obtained by this study model).
+Therefore, with this equation it is possible to simulate the output power of the inverter, based on information from the inverter's data-sheet and from the DC module or the PV panel that feeds the inverter (which is obtained by this study model).
 
 %--------------------------------------------------
 \subsection{Availability of Stand-alone PV Systems}
 \label{sec:availability}
 %--------------------------------------------------
 
-Each stand-alone PV system, like any other power systems, has a specific level of availability. This reliability level impacts various issues, as system performance, production, feasibility, and investment. 
+Each stand-alone PV system, like any other power system, has a specific level of availability. This reliability level impacts various issues: system performance, production, feasibility, and investment. 
 
-The availability of a stand-alone PV system can be defined as the percentage of time at which a power system is capable of meeting the load requirements~\cite{Khatib2014}. The number of hours that the system is available, divided by 8,760 h, gives the annual system availability.
-The system availability definition depends on how critical the load application is. For critical loads, 99\% is considered acceptable. While in a ordinary house electrical load, 95\% is considered acceptable. 
+The availability of a stand-alone PV system can be defined as the percentage of time during which a power system is capable of meeting the load requirements~\cite{Khatib2014}. The number of hours that the system is available, divided by 8,760 h, gives the annual system availability.
+The definition of system availability depends on how critical the load application is. For critical loads, 99\% is considered acceptable, while in an ordinary house electrical load, 95\% is considered acceptable. 
 
 As an example, a system with 95\% availability is expected to meet the load requirement of 8,322 h during an average year for the entire useful life of the system. An annual availability of 99\% means that the system can operate the load for 8,672 h of the 8,760 h.
 
-With that in mind, it is important to mention that even if a formal verification or a simulation shows that a PV system fails, it doesn't mean that the sizing is wrong. It is important to evaluate how critical the load application is and the horizon of evaluation. However this analysis can be useful, for example, to improve the sized battery autonomy.
+With that in mind, it is important to mention that even if formal verification or a simulation shows that a PV system fails, this  does not mean that the sizing is wrong. It is important to evaluate how critical the load application is and the evaluation period. However, this analysis can be useful, for example, to improve sized battery autonomy.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Sizing Stand-alone Solar Photovoltaic Systems}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-The mathematical model presented at section~\ref{model} is important for the project validation, however if it is included an approach to perform the sizing of stand-alone PV systems, than the proposed tools at this Thesis can perform the system validation (the intended behavior), and moreover to obtain the optimal project sizing.
+The mathematical model presented in section~\ref{model} is important for project validation; however if an approach is used to perform the sizing of stand-alone PV systems, then the tool proposed in this thesis can perform system validation (the intended behavior), and moreover obtain optimal project sizing.
 
 The sizing check stage can ensure that the system meets the standard project steps related 
-to critical period solar energy method~\cite{Pinho} and adopting MPPT (Maximum Power Point Tracking) charge controller,
-which is the most common one in practice. Firstly, we need to correct the energy consumption estimated to the load 
+to the critical period method for solar energy system sizing~\cite{Pinho} and adopting a MPPT (Maximum Power Point Tracking) charge controller,
+which is the most common one in use. Firstly, we need to correct the energy consumption estimated for the load 
 ($E_{consumption}$), which is carried out by Eq.~\eqref{eq:Ecorrected}, where the efficiency of batteries ($\eta_{b}$), 
 controller ($\eta_{c}$), and inverter ($\eta_{i}$) are considered~\cite{Pinho} as follows
 %
@@ -920,7 +920,7 @@ controller ($\eta_{c}$), and inverter ($\eta_{i}$) are considered~\cite{Pinho} a
 E_{corrected} = \dfrac{E_{consumption}}{\eta_{b} \eta_{c} \eta_{i} }.
 \end{equation}
 
-We also need to estimate the energy that can be produced for each panel, called $E_{p}$, in Wh, defined as
+We also need to estimate the energy that can be produced by each panel, called $E_{p}$, in Watt-hour ($Wh$), defined as
 %
 \begin{equation}
 \label{eq:Ep}
@@ -928,15 +928,15 @@ E_{p} = Solar\_Irradiance \times Panel\_Area \times \eta_{p} \times 1000,
 \end{equation}
 
 \noindent where the solar irradiance is expressed in terms of $kWh/m^{2}$ and depends on the site where the PV system will be deployed; 
-the PV panel area is given in $m^{2}$ and corresponds to the size of one PV panel, and $\eta_{p}$ represents the PV panel efficiency.
-The total minimum number of needed solar panels ($N_{TPmin}$) is computed as
+the PV panel area is given in $m^{2}$ and corresponds to the size of one PV panel, and $\eta_{p}$ represents PV panel efficiency.
+The total minimum number of solar panels needed ($N_{TPmin}$) is computed as
 %
 \begin{equation}
 \label{eq:NTPmin}
 N_{TPmin} = \dfrac{E_{corrected}}{E_{p}}.
 \end{equation}
 
-Particularly, the total number of panels in series ($N_{PSmin}$) and parallel ($N_{PPmin}$) are respectively given by
+Particularly, the total number of panels in series ($N_{PSmin}$) and parallel ($N_{PPmin}$) is respectively given by
 %
 \begin{equation}
 \label{eq:NPSmin}
@@ -953,47 +953,48 @@ is the minimum operation voltage of the charge controller; $V_{maxPower,TempMax}
 $V_{maxPower,TempMin}$ are the maximum power voltage from the PV module considering 
 the maximum and minimum operational temperature, respectively; 
 $P_{total}$ is the total power demanded from the PV system and 
-$P_{max,ref}$ is the power supplied from one PV panel in $Watts$.
-Regarding batteries, we must first define the total capacity of the battery bank, which can be described as
+$P_{max,ref}$ is the power supplied by one PV panel in $Watts$.
+As for batteries, we must first define the total capacity of the battery bank, which can be described as
 %
 \begin{equation}
 \label{eq:Cbank}
 C_{bank} = \dfrac{E_{corrected} \times autonomy}{V_{system} \times DOD},
 \end{equation}
 
-\noindent where the variable $autonomy$ is a design definition and normally has a value ranging from $6$ to $48$h; 
-$ V_{system} $ is the DC voltage of the bus, and $ DOD $ is the battery deep of discharge (considered of maximum of 25\% here).
+\noindent where the variable $autonomy$ is a design definition and normally has a value ranging from $6$ to $48$ hours; 
+$ V_{system} $ is the DC voltage of the bus, and $ DOD $ is the battery depth of discharge (considered the maximum of 25\% here).
 %
-Secondly, the total number of batteries is computed as 
+Second, the total number of batteries is computed as 
 
 \begin{equation}
 \label{eq:Nbtotal}
 N_{B}total = N_{BS}min \times N_{BP}min = \dfrac{V_{system}}{V_{bat}} \times \dfrac{C_{bank}}{1 \,Battery \, Capacity}.
 \end{equation}
 
-Moreover, the Equation \ref{eq:batcheck} perform the final sizing check, considering the number of batteries in series ($ N_{BS} $) and the number of batteries in parallel ($ N_{BP} $) adopted by the project.
+Equation \ref{eq:batcheck} then performs the final sizing check, considering the number of batteries in series ($ N_{BS} $) and the number of batteries in parallel ($ N_{BP} $) adopted by the project.
 
 \begin{equation}
 \label{eq:batcheck}
 \left( N_{BS} \times  N_{BP} \right) \geq N_{B}total
 \end{equation}
 
-Regarding the charge controller, it must initially meet the voltage requirement of the PV system, as described by Eq.~\eqref{eq:vcvsystem} to the charge controller voltage: 
+The charge controller must initially meet the voltage requirement of the PV system, as described by Eq.~\eqref{eq:vcvsystem}.
+ 
 \begin{equation}
 \label{eq:vcvsystem}
 V_{c} = V_{system}.
 \end{equation}
 
 The short circuit reference information from the manufacturer's solar panel must be corrected 
-to the cell temperature because the field temperature is higher than the nominal or laboratory temperature, 
-and PV system is temperature dependent, as 
+to the cell temperature because field temperature is higher than  nominal or laboratory temperature, 
+and the PV system is temperature dependent, as shown by Equation~\eqref{eq:iscamb}. 
 %
 \begin{equation}
 \label{eq:iscamb}
 I_{sc,amb} = \dfrac{G}{G_{ref}} \left[ I_{sc,ref} + \mu_{I} \times (T-25) \right]. 
 \end{equation}
 
-The controller must meet the maximum current from the PV array given by Eqs.~\eqref{eq:icmin} and~\eqref{eq:icicmin} as
+The controller must meet the maximum current from the PV array given by Eqs.~\eqref{eq:icmin} and~\eqref{eq:icicmin}.
 %
 \begin{equation}
 \label{eq:icmin}
@@ -1005,7 +1006,7 @@ I_{c,min} = I_{sc,amb} \times N_{PP},
 I_{c} \geq I_{c,min}.
 \end{equation}
 
-The number of controllers required for the off-grid PV system, as defined by \cite{Yatimi}, is calculated using Equation \ref{eq:numberofcmin}. In addition, the final sizing check is did by Equation \ref{eq:numberofc}, who validate the number of controllers adopted.
+The number of controllers required for the off-grid PV system, as defined by \cite{Yatimi}, is calculated using Equation \ref{eq:numberofcmin}. In addition, the final sizing check is performed by Equation \ref{eq:numberofc}, which validates the number of controllers adopted.
 
 \begin{equation}
 \label{eq:numberofcmin}
@@ -1039,9 +1040,9 @@ V_{out}AC = V_{AC}.
 \left[ (Demand \leq P_{AC,ref}) \, and \, (P_{surge} \leq MAX_{AC,ref}) \right].
 \end{equation}
 
-Some models of inverters allow parallel operation of more than one unit, besides the integration in order to create bi-phase and three-phase circuits. It is advised the use of pure sine wave inverter, especially for cases where are used electronic loads sensitive to harmonic distortion waves.
+Some inverter models allow parallel operation of more than one unit, besides the integration in order to create bi-phase and three-phase circuits. It is advisable to use pure sine wave inverters, especially for electronic loads sensitive to harmonic distortion waves.
 
-Moreover, it is important to verify the compatibility between charge controller and inverter, because there are some models that do not accept to work with brands of different manufacturers.
+Moreover, it is important to verify the compatibility between charge controller and inverter, because there are some models that are not compatible with equipment from other manufacturers.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1050,70 +1051,57 @@ Moreover, it is important to verify the compatibility between charge controller 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 In order to select an optimal combination to meet sizing constraints, 
-it is necessary to evaluate power reliability and system cost analysis for the underlying system. An ideal combination of any PV system is made by the best compromise between these two objectives.
+it is necessary to evaluate power reliability and analyze system cost for the underlying system. A PV system is best produced when there is an ideal compromise between these two objectives.
 
-During the PV system design, one of the most important aspects to ensure power system reliability is to analyze power supply availability~\cite{Alsadi2018}. The reason is because solar energy production is intermittent and, therefore, the energy generated usually will not match with the load demand. A reliable power is a generation system that has sufficient power to feed load demand in a period. 
+During the PV system design, one of the most important aspects in ensuring power system reliability is to analyze power supply availability~\cite{Alsadi2018}. The reason is that solar energy production is intermittent and, therefore, the energy generated will usually not match the load demand. Reliable power is a generation system that has sufficient power to feed load demand in a period. 
 
-There exist different methods to express system reliability, where the most popular ones 
+There are different methods of expressing system reliability, where the most popular ones 
 are the loss of load probability (LOLP) and the loss of power supply probability (LPSP)~\cite{Alsadi2018}. In both methods, if the probability is zero, then the load will always be fulfilled; otherwise (i.e., probability of one) the load will never be fulfilled.
 
-LOLP is the probability for the case when a load demand exceeds the generation power by the PV system. On one hand, we claim that we have a reliable PV system when it is able to generate sufficient power to fulfill the demanded load within a time span. On the other hand, LPSP is defined as the probability of the case when system generates insufficient power to satisfy the load demand. The main approaches to LPSP demand simulation or probabilistic treatment of time series data to predict dynamic changing on system performance. However, data is not always available and dynamic analysis is complex; and this is a drawback of LOLP and LPSP~\cite{Alsadi2018}.
+LOLP is the probability for the case when load demand exceeds the power generation of the PV system. On one hand, we claim that we have a reliable PV system when it is able to generate sufficient power to fulfill the demanded load within a time span. On the other, LPSP is defined as the probability of the system generating insufficient power to satisfy the load demand. The main approaches to LPSP demand simulation or probabilistic treatment of time series data to predict dynamic changing in system performance. However, data is not always available and dynamic analysis is complex; and this is a drawback of both LOLP and LPSP~\cite{Alsadi2018}.
 
-Related to economic analysis, there exist various methods available. The main objective is to determine whether the project has an acceptable investment; the usual way is to perform economic analysis after reliability analysis with the goal of proposing a system with high reliability and lowest cost~\cite{Alsadi2018}. The common methods include: Net Present Cost (NPC)~\cite{Park2004}, the Levelized Cost of Energy (LCOE)~\cite{Zhou2010}, or the Life Cycle Cost (LCC)~\cite{Applasamy2011}.
+Various methods of economic analysis are available. Their main objective is to determine whether the project is an acceptable investment. The usual way is to perform economic analysis after reliability analysis with the goal of proposing a system with high reliability at the lowest cost~\cite{Alsadi2018}. The most commonly used methods include: Net Present Cost (NPC)~\cite{Park2004}, the Levelized Cost of Energy (LCOE)~\cite{Zhou2010}, or the Life Cycle Cost (LCC)~\cite{Applasamy2011}.
 
 The NPC is the present value of all the costs over the project lifetime, minus the present value of all the revenues that it earns over the project lifetime. The net present worth is found by discounting all cash inflows and outflows, including cost of installation, replacement and maintenance of the PV system, at an internal rate of return (IRR)~\cite{Park2004}. IRR is used to evaluate the attractiveness of a project or investment.
 
-LCOE is defined as the average cost per kWh of useful electrical energy produced by the PV system when a lifetime, investment cost, replacement, operation and maintenance, and capital cost are considered~\cite{Kamel2005}. LCOE method is useful in comparing different generation technologies with different operating characteristics~\cite{Zhou2010}.
+LCOE is defined as the average cost per kWh of useful electrical energy produced by the PV system when lifetime, investment cost, replacement, operation and maintenance, and capital cost are considered~\cite{Kamel2005}. The LCOE method is useful in comparing different generations of technology with different operating characteristics~\cite{Zhou2010}.
 
-LCC is the estimation of sum of installation cost, operating and maintenance of a PV system for a period of time, and expressed in today's value~\cite{Applasamy2011}. Eq.~\eqref{eq:LCC} is used to calculate LCC of a PV system,
+LCC is the estimation of the current value of the sum of the installation cost, the operation and maintenance of a PV system for a period of time~\cite{Applasamy2011}. Eq.~\eqref{eq:LCC} is used to calculate LCC of a PV system,
 %
 \begin{equation}
 \label{eq:LCC}
 LCC = C_{PV} + C_{bat} + C_{charger} + C_{inv} + C_{installation} + C_{batrep} + C_{PWO\&M},
 \end{equation}
-\noindent where $C_{PV}$ is PV array cost, $C_{bat}$ is initial cost of batteries, $C_{charger}$ is cost of charger, $C_{inv}$ is inverter cost, $C_{installation}$ is installation cost, $C_{batrep}$ is battery replacement cost in present value, and $C_{PWO\&M}$ is operation and maintenance costs 
-in present worth.
+
+\noindent where $C_{PV}$ is the PV array cost, $C_{bat}$ is the initial cost of batteries, $C_{charger}$ is the cost of the charger, $C_{inv}$ is the inverter cost, $C_{installation}$ is the installation cost, $C_{batrep}$ is battery replacement cost at current prices, and $C_{PWO\&M}$ is operation and maintenance costs at current prices.
 
 %----------------------------------------------------------------------------------------------
 \subsection{Stand-alone PV System Optimization Technique}
 %----------------------------------------------------------------------------------------------
 
-In order to recommend an optimal configuration for PV systems, 
+In order to recommend an optimal configuration for a PV system, 
 the designer has to evaluate the design based on optimization variables. 
-As the number of optimization variables increases, the computational effort 
-will increase as well. Hence, to obtain the best PV system design as well as 
-simplified sizing process, prior work introduced three main techniques 
-for system sizing calculation, namely intuitive, numerical, and analytical methods~\cite{Zhou2010}.
+As the number of optimization variables increases, the computational effort will increase accordingly. Hence, to obtain the best PV system design as well as a simplified sizing process, three main techniques have been presented in the literature for system sizing calculation, namely intuitive, numerical, and analytical methods~\cite{Zhou2010}.
 
-Intuitive method is simple, easy to be implemented, and can be used to give 
-rough suggestion for preliminary design. The sizing rules are based on designer's experience, 
-using lowest performance either in a time period data or by directly using average value 
-(daily, monthly, or annual) of solar irradiance. This method does not consider the battery's 
-state of charge, or even the random nature of solar irradiation and meteorological conditions~\cite{Alsadi2018}.
+The intuitive method is simple, easily implemented, and can be used to give a rough suggestion for the preliminary design. The sizing rules are based on the designer's experience, using lowest performance data for a time period or by directly using average value (daily, monthly, or annual) of solar irradiance. This method does not consider the battery's state of charge, or even the random nature of solar irradiation and meteorological conditions~\cite{Alsadi2018}.
 
-For numerical method, the design is simulated for each time step within a period. 
-State of charge of batteries is calculated and investigated. It is very accurate, 
-however is complex, demanding more time for calculation~\cite{Park2004}.
+in the numerical method, the design is simulated for each time step within a period. Battery state of charge is calculated and investigated. Although very accurate, it is also complex, demanding more calculation time~\cite{Park2004}.
 
-Analytical methods is used to obtain a close relation or correlation in a form 
-of equation between capacities and reliabilities. The sizing task becomes much simpler 
-than numerical technique; however, the relation cannot be applied to different sites
-since it is specific to one place of deployment of the PV system, 
-thereby demanding adaptation if another site is analyzed.
+Analytical methods are used to obtain a close relation or correlation in the form of an equation between capacities and reliabilities. The sizing task becomes much simpler than in the numerical technique; however, the relation cannot be applied to different sites since it is specific to one place of deployment of the PV system, thereby demanding adaptation if another site is analyzed.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Summary}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-At this Section, all the background and theoretical base needed to understand the concepts, techniques, tools, and criteria used during the following Sections were presented.
+In this Section, all the background and theoretical base needed to understand the concepts, techniques, tools, and criteria used during the following Sections were presented.
 
-A historical explanation about the origin of the formal methods until to reach modern model checkers was presented. It was highlighted the importance of computers evolution in order to allow the automation of formal verification. If we were stuck in time, probably the formal verification was being made by hand until nowadays.
+A historical explanation was presented of the origin of formal methods, culminating with modern model checkers. The evolution of the computers was highlighted as essential to the automation of formal verification. If we were stuck in time, formal verification would probably still be being done by hand.
 
-Is was pointed out the importance of mathematical rigor to the models and representation of systems, and that automated verification method can be applied to any kind of systems (from simple ones to the complex ones)
+The importance of mathematical rigor to the models and representation of systems was emphasized, and that the automated verification method can be applied to any kind of system (from the most simple to the most complex).
 
-State-of-art automated verification tools were described with relation to their characteristics and techniques. Simulation tools were described as well and the reason why HOMER Pro was the one chosen to the comparative.
+State-of-the-art automated verification tools were described with respect to their characteristics and techniques. Simulation tools were also described and the reason why HOMER Pro was the chosen for the comparison was explained.
 
-It was explained how to validate a system, comparing test, simulation and automated verification techniques. It was possible to demonstrate that only automated verification can prove the absence of system flaws.
+System validation methods were explained, comparing test, simulation and automated verification techniques. It was possible to demonstrate that only automated verification can prove the absence of system flaws.
 
-The method of critical period solar energy method was presented as the chosen one for sizing solar PV systems. Following, the criteria and techniques for optimal sizing of PV systems were highlighted as well.
+The method of critical period solar energy sizing was presented as the one chosen for sizing solar PV systems. Following that, the criteria and techniques for optimal sizing of PV systems were also described.
 
