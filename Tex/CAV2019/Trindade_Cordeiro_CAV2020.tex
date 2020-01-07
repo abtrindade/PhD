@@ -21,8 +21,8 @@
 
 \begin{document}
 %
-\title{Automated Formal Synthesis of Optimal Sizing for Stand-alone Solar Photovoltaic Systems\thanks{Supported by Newton Fund (ref. 261881580) and FAPEAM
-(Amazonas State Foundation for Research Support, calls 009/2017 and PROTI Pesquisa 2018).}}
+%\title{Automated Formal Synthesis of Optimal Sizing for Stand-alone Solar Photovoltaic Systems\thanks{Supported by Newton Fund (ref. 261881580) and FAPEAM (Amazonas State Foundation for Research Support, calls 009/2017 and PROTI Pesquisa 2018).}}
+\title{Synthesis of Solar Photovoltaic Systems: Optimal Sizing Comparative\thanks{Supported by Newton Fund (ref. 261881580) and FAPEAM (Amazonas State Foundation for Research Support, calls 009/2017 and PROTI Pesquisa 2018).}}
 %
 %\titlerunning{Abbreviated paper title}
 % If the paper title is too long for the running head, you can set
@@ -41,8 +41,8 @@ The University of Manchester, Kilburn Building, Oxford Road, Manchester M13 UK
 \maketitle              % typeset the header of the contribution
 
 \begin{abstract}
-Currently, there exist various state-of-the-art tools to design solar photovoltaic (PV) systems, but they are mainly based on simulations, which do not cover all aspects of the design-space. We present a sound and automated approach to synthesize optimal sizing of stand-alone PV systems using program synthesis. In particular, our variant of counterexample guided inductive synthesis (CEGIS) approach has two phases: first we synthesize sizing of stand-alone PV systems but that may not achieve the lowest cost. The optimal solution is then verified via symbolic model checking; if the verification step fails, a counterexample is provided to the synthesis engine and the process iterates until an optimal sizing is obtained. Commercial equipment data is provided to our synthesis engine and candidate solutions are derived from financial analysis of the obtained sizing. Our synthesis method is novel and unprecedented to streamline the design of PV systems. Experimental results show that our synthesis method is able to synthesize within an acceptable run-time the optimal PV system sizing of seven different intricate case studies.
-
+%Currently, there exist various state-of-the-art tools to design solar photovoltaic (PV) systems, but they are mainly based on simulations, which do not cover all aspects of the design-space. We present a sound and automated approach to synthesize optimal sizing of stand-alone PV systems using program synthesis. In particular, our variant of counterexample guided inductive synthesis (CEGIS) approach has two phases: first we synthesize sizing of stand-alone PV systems but that may not achieve the lowest cost. The optimal solution is then verified via symbolic model checking; if the verification step fails, a counterexample is provided to the synthesis engine and the process iterates until an optimal sizing is obtained. Commercial equipment data is provided to our synthesis engine and candidate solutions are derived from financial analysis of the obtained sizing. Our synthesis method is novel and unprecedented to streamline the design of PV systems. Experimental results show that our synthesis method is able to synthesize within an acceptable run-time the optimal PV system sizing of seven different intricate case studies.
+In 2017, for the first time, the number of people without access to electricity dipped below 1 billion, but trends in energy access still fall short of global goals. Particular attention is given to stand-alone solar photovoltaic systems in rural areas or where grid extension is unfeasible. Tools to evaluate or to size electrification projects are available, but they are based on simulations that do not cover all aspects of the design space. The use of formal methods in electrical systems is a new subject, with published research spanning only the last four years. Moreover, the use of automated synthesis in order to obtain optimal sizing of solar photovoltaic systems has never been done before; this is our major goal: a sound, automated approach to obtaining optimal sizing of stand-alone photovoltaic systems using program synthesis. We propose a variant of the counterexample guided inductive synthesis (CEGIS) approach, with two phases linking the technical and the cost analysis. First, we synthesize a feasible candidate based on power reliability, but which may not attain the lowest cost. Second, the candidate is then verified iteratively with a lower bound cost via symbolic model checking. If the verification step succeeds, the lower bound is adjusted; if it fails, a counterexample provides the optimal solution. Experimental results using seven case studies demonstrate that we can produce optimal solution within an acceptable run-time. We also present a comparison with a specialized simulation tool over real photovoltaic systems in order to show the effectiveness of our approach.
 \keywords{Automated verification  \and Model Checking \and Electric systems \and Solar photovoltaic systems.}
 \end{abstract}
 %
@@ -70,6 +70,8 @@ In order to simulate or evaluate a PV system, there exist various specialized to
  Optimization of PV systems is not a recent topic; since the 90's different techniques using different criteria to find ultimate combinations for design parameters, based on intuitive, numerical and analytical methods were proposed and developed~\cite{Alsadi2018}.
  
 However, formal methods based on \textit{symbolic model checking} and its application to synthesize PV systems have not been further explored, which can offer a great potential to obtain a more effective design process to PV systems~\cite{ClarkeHV18}. Here, we use counterexample guided inductive synthesis (CEGIS) for synthesizing optimal sizing of stand-alone PV systems using commercial equipment data. Given a correctness specification $\sigma$, our method uses that as starting point and then iteratively produces a sequence of candidate solutions that satisfy $\sigma$. In particular, in each iteration, we synthesize sizing of stand-alone PV systems but that may not achieve the lowest cost. The optimal solution is then verified via symbolic model checking; if the verification step fails, a counterexample is provided to the synthesis engine and the process iterates until an optimal sizing is obtained from financial analysis.
+
+Related to past work, in $2012$, a Chinese smart grid implementation considered a case study to address the verification problem for performance and energy consumption~\cite{Yukseletall2012}. In $2015$, an automated simulation-based verification technique was applied to verify the correctness of power system protection settings~\cite{Sengupta2015}. In $2017$, a researcher suggested the application of formal methods to verify and control the behavior of computational devices in a smart grid ~\cite{Abate2017}. Finally, in $2018$, a verification methodology was applied to PV panels and its distributed power point tracking~\cite{Driouich2018}. However, prior studies did not deal with electricity generation or even solar PV systems optimization. Formal methods based on \textit{symbolic model checking} and its application to synthesize PV systems are still unexplored in literature.
 
 Our work makes two major contributions. Firstly, the use of automated symbolic verification in electrical systems was uncommon in recent prior studies~\cite{TrindadeCordeiro19}, and specifically their use in synthesizing PV sizing is unprecedented. Here, a list of PV components %(i.e., PV panels, charge controllers, inverters, and batteries) 
 can be fed to our proposed synthesis method together with user requirements and environment constraints, and our synthesis algorithm based on symbolic model checking can find the optimal solution in technical and economical terms. Secondly, we evaluate different state-of-art symbolic software verifiers with the goal of obtaining the best performance in our verification back-end for synthesizing optimal PV systems.
@@ -99,9 +101,15 @@ In Figure~\ref{Counter-Example-Guided-Inductive-Synthesis}, the phases {\sc Synt
 %
 One may notice that each iteration of the CEGIS loop adds a new input to the finite set $INPUTS$, which is then used for synthesis.  Given that the full set of inputs $\mathcal{D}$ is finite because we use bit-vector expressions, this means that the refinement loop can only iterate over a finite number of times; however, {\sc synthesize} may conclude that no candidate solution obeying $\sigma$ for the finite set $INPUTS$ exists and our synthesis engine can then conclude that no feasible equipment combination was found. At this specific automated formal synthesis of PV systems, we use a variant of CEGIS, where in each iteration we increase the expected cost of PV systems and this controls the {\sc verify} phase and the search by the optimal sizing.  %however, $\mathcal{D}$ can represent a large number of elements for the finite set  and our synthesis engine can then conclude that no feasible equipment combination was found. 
 %In order to avoid exploring all possible values, machine learning techniques can be used in the phase {\sc synthesize}, with the goal of learning from experience (input-output samples), {\it i.e.}, learning from counterexamples provided by a verification oracle~\cite{Alur13}. In addition to that, a pre-processing stage could also figure as another block in the scheme shown in Fig. \ref{Counter-Example-Guided-Inductive-Synthesis}, between {\sc verify} and {\sc synthesize}, which would process counterexamples and provide larger and refined information to the latter, according to specification $\sigma$ and domain $\mathcal{D}$, in order to speed-up convergence to a final candidate.
-Program synthesis engines that implement the CEGIS approach~\cite{sketch} can automatically produce solutions for a large variety of specifications; %, due to the combination of automated testing, genetic algorithms, and SMT-based reasoning~\cite{Sharma14}; 
-here we have used software verifiers based on SMT solvers.%Here we used software model checking techniques implemented by different tools: CBMC~\cite{Kroening}, CPAChecker~\cite{Beyer2011}, and ESBMC~\cite{esbmc2018}.
-%
+Program synthesis engines that implement the CEGIS approach~\cite{sketch} can automatically produce solutions for a large variety of specifications, due to the combination of automated testing, genetic algorithms, and SMT-based reasoning~\cite{Sharma14}; here we have used software verifiers based on SMT solvers: %Here we used software model checking techniques implemented by different tools: 
+CPAChecker~\cite{Beyer2011}, CBMC~\cite{Kroening}, and ESBMC~\cite{esbmc2018}.
+
+\textbf{CPAchecker}~\cite{LMU2019} is a state-of-the-art model checker, awarded with the golden medal at the annual competition in software verification: Automatic program verification requires a choice between precision and efficiency. The more precise a method, the fewer false positives it produces, but also the more expensive it is, and thus applicable to fewer programs. Historically, this trade-off was reflected in two major approaches to static verification: program analysis and model checking. To experiment with the trade-off and to be able to set the dial between the two extreme points, Configurable Program Analysis (CPA) provides a conceptual basis for expressing different verification approaches in the same formal setting. The CPA formalism provides an interface for the definition of program analysis. Consequently, CPAchecker provides an implementation framework that allows the seamless integration of program analysis expressed in the CPA framework. In terms of the architecture, the central data structure is a set of control-flow automata (CFA), which consists of control-flow locations and control-flow edges. The CPA framework provides interfaces to SMT (Satisfiability Modulo Theories) solvers and interpolation procedures~\cite{Beyer2011}. Currently, CPAchecker uses MathSAT as SMT solver~\cite{Beyer2011}.
+
+The C Bounded Model Checker (\textbf{CBMC}) falsifies assertions in C programs or proves that they are safe if a completeness threshold is given~\cite{Kroening}. CBMC implements a bit-precise translation of a C program, annotated with assertions and with loops unrolled up to a given depth, into a logical formula. If the formula is satisfiable, then a failing execution that leads to a violated assertion exists~\cite{Kroening}. CBMC's verification flow can be summarized in three stages: (i) Front-end: scans, parses and type-checks C code; it converts control flow elements, such as \textit{if} or \textit{switch} statements, loops and jumps, into equivalent guarded \textit{goto} statements, thus aiming to reduce verification effort; (ii) Middle-end: performs symbolic execution by eagerly unwinding loops up to a fixed bound, which can be specified by the user on a per-loop basis or globally, for all loops and finally; (iv) Back-end: supports SAT and SMT solvers to discharge verification conditions.
+
+The Efficient SMT-based Bounded Model Checker (\textbf{ESBMC}) is a bounded and unbounded model checker for C programs~\cite{esbmc2018}, which supports the verification of LTL properties with bounded traces~\cite{DBLP:journals/sosym/MorseCN015}. ESBMC's verification flow can be summarized in three stages: (i) a front-end that can read and compile C code, where the system formal specification is first handled; (ii) preprocessing steps to deal with code representation, control flow and unwinding of loops, and model simplification, thereby aiming to reduce verification effort; and finally (iii) the SMT solving stage, where all constraints and properties of the system are encoded into SMT and checked for satisfiability. ESBMC exploits the standardized input language of SMT solvers (SMT-LIB\footnote{http://smtlib.cs.uiowa.edu/} logic format) to make use of a resource called \textit{assertion stack}~\cite{Morse2015}. This enables ESBMC, and the respective solver, to learn from previous checks, thus optimizing the search procedure and potentially eliminating a large amount of formula state space to be searched, because it solves and disregards data during the process, incrementally. This technique is called ``incremental SMT''~\cite{DBLP:journals/fac/SchrammelKBMTB17} and allows ESBMC to reduce the memory overhead, mainly when the verified system is complex and the computing platform does not have large amount of memory to deal with the entire design space state.
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Sizing Stand-alone Solar PV Systems}
 \label{sec:sizing}
@@ -161,7 +169,7 @@ N_{PPmin} = \frac{P_{total}}{Number\,Panels\,Series \times P_{max,ref}},
 Regarding batteries, we must first define the total capacity of the battery bank, which can be described as
 \begin{equation}
 \label{eq:Cbank}
-\scriptstyle C_{bank} \scriptstyle = \frac{\scriptstyle E_{corrected} \scriptstyle \times \scriptstyle autonomy}{\scriptstyle V_{system} \scriptstyle \times \scriptstyle DOD},
+C_{bank} = \frac{E_{corrected} \times autonomy}{V_{system} \times DOD},
 \end{equation}
 %
 \noindent where the variable $autonomy$ is a design definition; % and normally has a value ranging from $6$ to $48$h; 
@@ -170,48 +178,48 @@ $ V_{system} $ is the DC voltage of the bus, and $ DOD $ is the battery deep of 
 Secondly, the total (minimum) number of batteries is computed as 
 \begin{equation}
 \label{eq:Nbtotal}
-\scriptstyle N_{B}total = \scriptstyle N_{BS}min \scriptstyle \times \scriptstyle N_{BP}min = \frac{\scriptstyle V_{system}}{\scriptstyle V_{bat}} \scriptstyle \times \frac{\scriptstyle C_{bank}}{\scriptstyle 1 \,Battery \, Capacity}.
+N_{B}total = N_{BS}min \times N_{BP}min = \frac{V_{system}}{V_{bat}} \times \frac{C_{bank}}{Battery \, Capacity}.
 \end{equation}
 %
 Regarding the charge controller, it must initially meet the voltage requirement of the PV system, as described by Eq.~\ref{eq:vcvsystem} to the charge controller voltage: 
 \begin{equation}
 \label{eq:vcvsystem}
-\scriptstyle V_{c} = \scriptstyle V_{system}.
+V_{c} = V_{system}.
 \end{equation}
 %
 The short circuit reference information from the manufacturer's solar panel must be corrected to the cell temperature because the field temperature is higher than the nominal or laboratory temperature, and PV system is temperature dependent, as 
 %
 \begin{equation}
 \label{eq:iscamb}
-\scriptstyle I_{sc,amb} = \frac{\scriptstyle G}{\scriptstyle G_{ref}} \left[ \scriptstyle I_{sc,ref} + \scriptstyle \mu_{I} \scriptstyle \times \scriptstyle (T-25) \right]. 
+I_{sc,amb} = \frac{G}{G_{ref}} \left[I_{sc,ref} +  \mu_{I} \times (T-25) \right]. 
 \end{equation}
 %
 The controller must meet the maximum current from the PV array given by Eqs. \ref{eq:icmin} and \ref{eq:icicmin} as
 \begin{equation}
 \label{eq:icmin}
-\scriptstyle I_{c,min} = \scriptstyle I_{sc,amb} \times \scriptstyle N_{PP},
+I_{c,min} = I_{sc,amb} \times N_{PP},
 \end{equation}
 %
 \begin{equation}
 \label{eq:icicmin}
-\scriptstyle I_{c} \geq \scriptstyle I_{c,min}.
+I_{c} \geq I_{c,min}.
 \end{equation}
 %
 The inverter sizing check is performed by means of three equations. Eq.~\ref{eq:vindc} ensures that the input voltage of the controller meets the system voltage. Eq.~\ref{eq:voutac} ensures that the output voltage of the controller meets the AC voltage of the load. Finally, Eq.~\ref{eq:invcheck} ensures that the controller can support the total demand of the load ($Demand$) and the surge power ($P_{surge}$), where $V_{in}DC$ is the nominal input voltage and $V_{out}AC$ is the nominal output voltage of the inverter; $MAX_{AC,ref}$ is the peak power that the inverter can support.
 %
 \begin{equation}
 \label{eq:vindc} 
-\scriptstyle V_{in}DC = \scriptstyle V_{system}.
+V_{in}DC = V_{system}.
 \end{equation}
 %
 \begin{equation}
 \label{eq:voutac} 
-\scriptstyle V_{out}AC = \scriptstyle V_{AC}.
+V_{out}AC = V_{AC}.
 \end{equation}
 %
 \begin{equation}
 \label{eq:invcheck} 
-\left[ (\scriptstyle Demand \leq \scriptstyle P_{AC,ref}) \, \scriptstyle and \, \scriptstyle (P_{surge} \leq MAX_{AC,ref}) \right].
+\left[ (Demand \leq P_{AC,ref}) \, and \, (P_{surge} \leq MAX_{AC,ref}) \right].
 \end{equation}
 % -------------------------------------------------------
 \subsection{Optimal Sizing of PV Systems}
@@ -288,19 +296,55 @@ Note that the process described here in completely automated and that a validati
 %---------------------------------------------------------------------------
 \section{Results and Discussion}
 %---------------------------------------------------------------------------
-\textbf{Case studies.} We have performed two stand-alone PV system case studies to evaluate our proposed synthesis approach as described in the first line of Table~\ref{tab1}. Our synthesis algorithm was fed with data and costs of twenty-two equipment items from nine different manufacturers of PV systems. Furthermore, three start-of-art verification tools, CBMC,\footnote{Command-line: \$ cbmc -\phantom{}-unwind 100 filename.c -\phantom{}-trace} ESBMC,\footnote{Command-line: \$ esbmc filename.c -\phantom{}-no-bounds-check -\phantom{}-no-pointer-check -\phantom{}-unwind 100 -\phantom{}-boolector} %UAutomizer\footnote{Command-line: \$ ./Ultimate -tc config/AutomizerReach.xml -s config/svcomp-Reach-32bit-Automizer\_Default.epf -i filename.c -\phantom{}-traceabstraction.limit.analysis.time 900 -\phantom{}-traceabstraction.stop.after.first.violation.was.found false -\phantom{}-cacsl2boogietranslator.overapproximate.operations.on.floating.types false -\phantom{}- cacsl2boogietranslator.assume.nondeterminstic.values.are.in.range false -\phantom{}-rcfgbuilder.add.additional.assume.for.each.assert true -\phantom{}-rcfgbuilder.simplify.code.blocks true -\phantom{}-rcfgbuilder.size.of.a.code.block LoopFreeBlock}, 
+
+
+\textbf{Case studies.} We have performed seven case studies to evaluate our proposed synthesis approach, as described in the first column of Table~\ref{tab1} (\textit{Specification}). These case studies were defined based on real houses visited by the team of a Newton Fund project in riverside communities around the Low Black River in Amazonas - Brazil. This project finished in March 2019, where we visited and surveyed 14 riverside isolated communities, aiming to evaluate the energetic habits of the dwellers.\footnote{http://star-energy.coventry.ac.uk/} For all cases, an estimated load curve (kWh) was defined based on the electronics consumers found of each house.
+
+Our synthesis algorithm was fed with data and costs of twenty-two equipment items from nine different manufacturers of PV systems. Furthermore, three start-of-art verification tools, CBMC,\footnote{Command-line: \$ cbmc -\phantom{}-unwind 100 filename.c -\phantom{}-trace} ESBMC,\footnote{Command-line: \$ esbmc filename.c -\phantom{}-no-bounds-check -\phantom{}-no-pointer-check -\phantom{}-unwind 100 -\phantom{}-boolector} %UAutomizer\footnote{Command-line: \$ ./Ultimate -tc config/AutomizerReach.xml -s config/svcomp-Reach-32bit-Automizer\_Default.epf -i filename.c -\phantom{}-traceabstraction.limit.analysis.time 900 -\phantom{}-traceabstraction.stop.after.first.violation.was.found false -\phantom{}-cacsl2boogietranslator.overapproximate.operations.on.floating.types false -\phantom{}- cacsl2boogietranslator.assume.nondeterminstic.values.are.in.range false -\phantom{}-rcfgbuilder.add.additional.assume.for.each.assert true -\phantom{}-rcfgbuilder.simplify.code.blocks true -\phantom{}-rcfgbuilder.size.of.a.code.block LoopFreeBlock}, 
 and CPAchecker,\footnote{Command-line: \$ scripts/cpa.sh -heap 64000m -config config/bmc-incremental.properties -spec config/specification/sv-comp-reachability.spc filename.c} were used as our verification engine to compare our approach effectiveness and efficiency. 
 
 \textbf{Setup.} All experiments were conducted on an otherwise idle Intel Xeon CPU E5-4617 (8-cores) with 2.90 GHz and 64 GB of RAM, running Ubuntu 16.04 LTS 64-bits. 
 The experiments were performed with a predefined timeout of $240$ minutes.
 
-\textbf{Objectives.} Our evaluation aims to answer two research questions: \textit{RQ1} (soundness) Does our automated synthesis approach provide correct results?, and \textit{RQ2} (performance) How do the software verifiers compare to each other?
+\textbf{Objectives.} Our evaluation aims to answer two research questions: \textit{RQ1} (soundness) Does our automated synthesis approach provide correct results?, \textit{RQ2} (performance) How do the software verifiers compare to each other?, and \textit{RQ3} how does our formal synthesis tool compare to a specialized simulation tool?
 
-\textbf{Results.}  CPAchecker was able to synthesize the optimal sizing of both case studies: the result was produced in $50.2$ and $37.2$ minutes, respectively. 
+\textbf{Results.}  xxxxfalta as demais ferramentas????? CPAchecker was able to synthesize the optimal sizing of both case studies: the result was produced in $50.2$ and $37.2$ minutes, respectively. 
 The violation of line 209 indicated in Table~\ref{tab1} is the $assert$ of line 22 from Algorithm~\ref{alg:verification-algorithm}. The results were tested by manual PV sizing and were sound (\textit{RQ1}). %, linking a feasible technical solution with the lowest cost possible, considering the equipment that were inputted to the code. 
 CBMC and ESBMC produced \textit{UNKNOWN} result (\textit{timeout} or \textit{out of memory}); this partially answers the \textit{RQ2}.
 %
 %used with the SMT incremental mode\footnote{Command-line: \$ esbmc filename.c -\phantom{}-no-bounds-check -\phantom{}-no-pointer-check -\phantom{}-unwind 100 -\phantom{}-smt-during-symex -\phantom{}-smt-symex-guard -\phantom{}-z3} enabled with the goal of reducing memory usage; we have also used the SMT solver Z3 version 4.7.1~\cite{DeMoura}.
+
+\begin{table}[!t]
+\caption{Case studies and results: optimization of PV systems.}\label{tab0}
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+\hline
+Tools & \makecell{CPAchecker 1.8\\(MathSAT 5.5.3)}& CBMC & ESBMC & HOMER Pro 3.13.1\\
+\hline
+\hline
+Specification & Result & Result & Result & Result \\
+\hline
+\makecell{\textbf{Case Study 1}\\Peak:342W\\Surge:342W \\E:3,900Wh/day\\Autonomy:48h} & \makecell{SAT (172.03 min) \\NTP:1$\times$340W (1S)\\NBT:8$\times$105Ah (2S-4P)\\Controller 15A/75V\\Inverter 700W/48V\\LCC: US\$ 7,790.53} & TO & TO & \makecell{(Time: 0.33 min)\\2.53 kW of PV\\NBT:12$\times$83.4Ah (2S-6P)\\0.351kW inverter\\LCC: US\$ 7,808.04}\\
+\hline
+\makecell{\textbf{Case Study 2}\\Peak:814W\\Surge:980W\\E:4,880Wh/day\\Autonomy:48h} & \makecell {SAT (228.7 min) \\NTP:2$\times$330W (2S)\\NBT:10$\times$105Ah (2S-5P)\\Controller 20A/100V DC\\Inverter 1,200W/24V \\LCC: US\$ 8,335.90} & TO & TO & \makecell{(Time: 0.18 min)\\3.71 kW of PV\\NBT:20$\times$83.4Ah (2S-10P)\\0.817kW inverter\\LCC: US\$ 12,861.75} \\
+\hline
+\makecell{\textbf{Case Study 3}\\Peak:815W\\Surge:980W\\E:4,880Wh/day\\Autonomy:12h} & \makecell {SAT (166.13 min) \\NTP:4$\times$150W (4S)\\NBT:4$\times$80Ah (2S-2P)\\Controller 15A/100V DC\\Inverter 1,200W/24V \\LCC: US\$ 7,306.27} & TO & TO & Not possible \\
+\hline
+\makecell{\textbf{Case Study 4}\\Peak:253W\\Surge:722W\\E:3,600Wh/day\\Autonomy:48h} &  \makecell {SAT (143.71 min) \\NTP:4$\times$150W (4S)\\NBT:10$\times$80Ah (2S-5P)\\Controller 15A/75V\\Inverter 750W/24V \\LCC: US\$ 7,816.31} & TO & TO & \makecell{(Time: 0.23 min)\\2.42 kW of PV\\NBT:12$\times$83.4Ah (2S-6P)\\0.254kW inverter\\LCC: US\$ 7,677.95}\\
+\hline
+\makecell{\textbf{Case Study 5}\\Peak:263W\\Surge:732W\\E:2,500Wh/day\\Autonomy:48h} &  \makecell {SAT (134.93 min) \\NTP:1$\times$340W (1S)\\NBT:6$\times$105Ah (2S-3P)\\Controller 15A/75V\\Inverter 400W/24V \\LCC: US\$ 7,252.14} & TO & TO & \makecell{(Time: 0.18 min)\\1.59 kW of PV\\NBT:10$\times$83.4Ah (2S-5P)\\0.268kW inverter\\LCC: US\$ 6,175.57} \\
+\hline
+\makecell{\textbf{Case Study 6}\\Peak:322W\\Surge:896W\\E:4,300Wh/day\\Autonomy:48h} &  \makecell {SAT (235.75 min) \\NTP:2$\times$200W (2S)\\NBT:10$\times$105Ah (2S-5P)\\Controller 15A/75V\\Inverter 400W/24V \\LCC: US\$ 8,287.23} & TO & TO & \makecell{(Time: 0.22 min)\\3.15 kW of PV\\NBT:14$\times$83.4Ah (2S-7P)\\0.328kW inverter\\LCC: US\$ 9,112.45} \\
+\hline
+\makecell{\textbf{Case Study 7}\\Peak:1,586W\\Surge:2,900W\\E:14,000Wh/day\\Autonomy:48h} & TO & TO & TO & \makecell{(Time: 0.20 min)\\12.5 kW of PV\\NBT:66$\times$83.4Ah (2S-33P)\\1.60kW inverter\\LCC: US\$ 41,878.11} \\
+\hline
+\hline
+\end{tabular}
+\\Caption: OM = out of memory; TO = timeout; IF = internal failure, E = energy.
+\end{table}
+
+
+
 \begin{table}
 \caption{Case studies and Results: optimization of PV systems.}\label{tab1}
 %\begin{scriptsize}
@@ -333,23 +377,23 @@ Tools & \textbf{Result} & \textbf{Result}\\
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %divisão para o material antigo sobre verificação
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
-
+%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{State-of-art in Automated Verification of Electrical Systems}
+%\section{State-of-art in Automated Verification of Electrical Systems}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-The conversion of traditional power grid into a smart grid, a fundamental example of a Cyber-Physical System (CPS), raises a number of issues that requires novel methods and applications. In 2012, a Chinese smart grid implementation was considered as case study to address the verification problem for performance and energy consumption~\cite{Yukseletall2012}. The authors employed a stochastic model checking approach and presented a modelling and analysis study using PRISM~\cite{KwiatkowskaNP11}. The focus of this study was on how CPs integrate information and communication technology functions to the physical elements of a system for monitoring and controlling purposes; here the authors employed automated verification of certain quantitative properties of the system, as 	probability	of	node	failure	in	the	long run, impact	of	repair	service	on	the	failure	risk, and expected energy consumption. %, with no interest in power generation or even solar PV systems.
-
-In 2015, an approach for applying Monte-Carlo simulation to power system protection schemes presented limitations of incomplete coverage of all possible operating conditions~\cite{Sengupta2015}. The authors proposed an automated simulation-based verification technique to verify correctness of protection settings efficiently using hybrid automata-temporal-logic framework. The initial focus was on relay operations and test-case generation to ensure early detection of design errors. %The study was limited to power system protection and did not deal with electricity generation or even solar PV systems.
-
-Other related studies from 2015 include a framework named Modana to achieve an integrated process from modeling with SysML/MARTE to analysis with statistical model checking for CPSs in terms of non-functional properties such as time and energy~\cite{Cheng2015}. In order to demonstrate Modana's capability, the authors modelled energy-aware buildings as a case study, and discussed the analysis on energy consumption in different scenarios. The focus here is on smart buildings and HVAC (heating, ventilation, and air conditioning) systems. %The research did no deal with solar PV systems. 
- 
-In 2017, a researcher suggested the application of formal methods to verify and control the behavior of computational devices interacting over a shared and smart infrastructure~\cite{Abate2017}. The author discussed the aggregation of large populations of thermostatically-controlled loads and of PV panels, and the corresponding problems of energy management in smart buildings, of demand-response on smart grids, and respectively of frequency stabilization and grid robustness. The focus was on controlling the behavior of components, thereby verifying the smart grid as a ``system of systems'' within the context of ``internet of things''. The author used approximate model checking of stochastic and hybrid models.
-
-In 2018, a verification methodology was proposed for the Cyber Physical Energy Systems (CPES) with applications to PV panels and its distributed power point tracking~\cite{Driouich2018}. This approach relied on representing unpredictable behavior of the environment to cover all possible feasible scenarios. The simulation results obtained by JModelica covered the system's complete dynamic behavior; however, it was evident the time consuming issue with almost three days of computer effort to verify the design space of one operation hour of the PV panels behavior. %The work did not include the other components of a stand-alone solar PV system.
-
-Another work from 2018 was the approach to modeling smart grid components using a formal specification. The authors used a state-based formal specification language named Z; they demonstrated the application of Z to four smart grid components~\cite{Akram2018}. The presented formal specification can be considered as a first step towards modeling of smart grid using formal methods. The starting point of this study was that a smart home can be considered as an integrated system consisting of various objects and system, which communicates and interacts with each other. This approach is base on Petri nets and from the premise that modeling of the smart home leads to clear understanding of the overall behavior of the smart grid.
-
+%
+%The conversion of traditional power grid into a smart grid, a fundamental example of a Cyber-Physical System (CPS), raises a number of issues that requires novel methods and applications. In 2012, a Chinese smart grid implementation was considered as case study to address the verification problem for performance and energy consumption~\cite{Yukseletall2012}. The authors employed a stochastic model checking approach and presented a modelling and analysis study using PRISM~\cite{KwiatkowskaNP11}. The focus of this study was on how CPs integrate information and communication technology functions to the physical elements of a system for monitoring and controlling purposes; here the authors employed automated verification of certain quantitative properties of the system, as 	probability	of	node	failure	in	the	long run, impact	of	repair	service	on	the	failure	risk, and expected energy consumption. %, with no interest in power generation or even solar PV systems.
+%
+%In 2015, an approach for applying Monte-Carlo simulation to power system protection schemes presented limitations of incomplete coverage of all possible operating conditions~\cite{Sengupta2015}. The authors proposed an automated simulation-based verification technique to verify correctness of protection settings efficiently using hybrid automata-temporal-logic framework. The initial focus was on relay operations and test-case generation to ensure early detection of design errors. %The study was limited to power system protection and did not deal with electricity generation or even solar PV systems.
+%
+%Other related studies from 2015 include a framework named Modana to achieve an integrated process from modeling with SysML/MARTE to analysis with statistical model checking for CPSs in terms of non-functional properties such as time and energy~\cite{Cheng2015}. In order to demonstrate Modana's capability, the authors modelled energy-aware buildings as a case study, and discussed the analysis on energy consumption in different scenarios. The focus here is on smart buildings and HVAC (heating, ventilation, and air conditioning) systems. %The research did no deal with solar PV systems. 
+% 
+%In 2017, a researcher suggested the application of formal methods to verify and control the behavior of computational devices interacting over a shared and smart infrastructure~\cite{Abate2017}. The author discussed the aggregation of large populations of thermostatically-controlled loads and of PV panels, and the corresponding problems of energy management in smart buildings, of demand-response on smart grids, and respectively of frequency stabilization and grid robustness. The focus was on controlling the behavior of components, thereby verifying the smart grid as a ``system of systems'' within the context of ``internet of things''. The author used approximate model checking of stochastic and hybrid models.
+%
+%In 2018, a verification methodology was proposed for the Cyber Physical Energy Systems (CPES) with applications to PV panels and its distributed power point tracking~\cite{Driouich2018}. This approach relied on representing unpredictable behavior of the environment to cover all possible feasible scenarios. The simulation results obtained by JModelica covered the system's complete dynamic behavior; however, it was evident the time consuming issue with almost three days of computer effort to verify the design space of one operation hour of the PV panels behavior. %The work did not include the other components of a stand-alone solar PV system.
+%
+%Another work from 2018 was the approach to modeling smart grid components using a formal specification. The authors used a state-based formal specification language named Z; they demonstrated the application of Z to four smart grid components~\cite{Akram2018}. The presented formal specification can be considered as a first step towards modeling of smart grid using formal methods. The starting point of this study was that a smart home can be considered as an integrated system consisting of various objects and system, which communicates and interacts with each other. This approach is base on Petri nets and from the premise that modeling of the smart home leads to clear understanding of the overall behavior of the smart grid.
+%
 %
 % ---- Bibliography ----
 % BibTeX users should specify bibliography style 'splncs04'.
