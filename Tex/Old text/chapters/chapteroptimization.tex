@@ -1,25 +1,25 @@
-In this Chapter, we detail the adopted methodology to perform optimal sizing of stand-alone solar PV systems, more specifically using model checking. Diagrams, flowcharts, and algorithms support and explain the solutions.
+In this Chapter, we detail methodology used for optimal sizing of stand-alone solar PV systems, more specifically using model checking. Diagrams, flowcharts, and algorithms support and explain the solutions.
 
-Besides that, we present all the assumptions and premises adopted. We present as well the case studies used to evaluate the proposed approach of optimal sizing of stand-alone solar PV systems using automated synthesis. Moreover, the approach is compared with a simulation tool, named HOME Pro. The version and command-line of each verifier adopted, the computing setup, the objectives of the experimental phase, and the results itself are also described.
+In addition, we present all the underlying assumptions and premises. We also present the case studies used to evaluate the proposed approach for optimal sizing of stand-alone solar PV systems using automated synthesis. Moreover, the approach is compared with the HOME Pro simulation tool. The version and command-line of each verifier, the computing setup, the objectives of the experimental phase, and the results are also described.
 
-It is important to emphasize that the whole explanation about the theoretical basis of the subject discussed here is present in the Chapter~\nameref{chap:background}. We do suggest that this previous Chapter reading must be done to facilitate the understanding.
+It is important to emphasize that the complete explanation of the theoretical basis of the subject discussed here is presented in the Chapter~\nameref{chap:background}. In addition, knowledge of the literature is essential to aid understanding.
 
 \section{Optimal Sizing of Solar PV Systems}
 
-Fig.~\ref{fig:optimization} illustrates how to obtain the optimal sizing of a stand-alone solar PV system, passing through the traditional techniques (manual, and simulation), and including the proposed automatic synthesis that is detailed in this Section. 
+Fig.~\ref{fig:optimization} illustrates how to obtain optimal sizing of a stand-alone solar PV system, beginning with the traditional techniques (manual, and simulation), and moving on to the proposed automatic synthesis detailed in this Section. 
 
-One more time, as depicted in automated verification process, the input information is the same for all the methods, with the difference that in automated validation it is possible to define the bound $k$ to restrict the design-space search. And the outputs are not equal, as the design-space coverage and the, mainly, the final resulting.
+Once more, as described in the automated verification process, the input information is the same for all the methods, with the difference that in automated validation it is possible to define the bound $k$ to restrict the design-space search. And the outputs are not equal, as in the design-space coverage and, mainly, in the final result.
 
 \begin{figure}[h]
 \includegraphics[width=1.0\textwidth]{optimalsizingprocess2g}
 \centering
-\caption{Comparative of optimal sizing methods}
+\caption{Comparison of optimal sizing methods}
 \label{fig:optimization}
 \end{figure}
  
-\subsection{Variant of CEGIS} 
+\subsection{A Variant of CEGIS} 
 
-In Figure~\ref{CEGISalt}, it is pictured a variant of CEGIS previously presented in Section ~\ref{sec:ProgramSynthesis}, Fig.~\ref{Counter-Example-Guided-Inductive-Synthesis}. This variant was created during this Thesis and it will be detailed in this Section.
+Figure~\ref{CEGISalt} illustrates a variant of CEGIS, previously presented in Section ~\ref{sec:ProgramSynthesis}, Fig.~\ref{Counter-Example-Guided-Inductive-Synthesis}. This variant was created during the research for this thesis and will be detailed in this Section.
 
 \begin{figure}[h]
 	\centering
@@ -28,20 +28,20 @@ In Figure~\ref{CEGISalt}, it is pictured a variant of CEGIS previously presented
 	\label{CEGISalt}
 \end{figure}
 
-Examples of specification used by the proposed method include solar insolation (site dependent), house power demand, house consumption energy, estimated load curve, AC voltage, and battery autonomy; we also provide a list of equipment specification and price from different manufacturers and models. Design assumptions are considered project specification as well. The assumptions regarding the optimal sizing are listed in Section~\ref{sec:OptAssumptions}.
+Examples of specification used by the proposed method include solar insolation (site dependent), house power demand, house  energy consumption, estimated load curve, AC voltage, and battery autonomy; we also provide a list of equipment specifications and prices from different manufacturers and models. Design assumptions are considered additional project specifications. The assumptions underlying optimal sizing are listed in Section~\ref{sec:OptAssumptions}.
 
-There are four particular differences related to the traditional CEGIS described in Figure ~\ref{Counter-Example-Guided-Inductive-Synthesis} when compared to the variant CEGIS used in the proposed approach: 
+The variant CEGIS used in the proposed approach differs in four specific aspects from the traditional CEGIS described in Figure ~\ref{Counter-Example-Guided-Inductive-Synthesis}: 
 
 \begin{itemize}
-\item There exists no test vector and every candidate is generated during the run-time in the {\sc Synthesize} phase and sent to the {\sc Verify} phase; 
-\item If the {\sc Verify} phase is unsuccessful, then a new candidate is generated by {\sc Synthesize} 
+\item There is no test vector and every candidate is generated during the run-time in the {\sc Synthesize} phase and sent to the {\sc Verify} phase; 
+\item If the {\sc Verify} phase is unsuccessful, a new candidate is generated by {\sc Synthesize} 
 \item The lower bound of the {\sc Verify} phase is incremented to search for the lowest cost; 
-\item As a result, there exists no refinement from the {\sc Verify} phase back to the {\sc Synthesize} phase, i.e., a new counterexample is not added to the {\sc input} set since a failure during the {\sc Verify} phase will only discard a given candidate that could be feasible in the next iteration with a new lower bound.
+\item As a result, there is no refinement from the {\sc Verify} phase back to the {\sc Synthesize} phase, i.e. a new counterexample is not added to the {\sc input} set since a failure during the {\sc Verify} phase will only discard a given candidate that could be viable in the next iteration with a new lower bound.
 \end{itemize}
 
 Program synthesis engines that implement the CEGIS approach~\cite{sketch} can automatically produce solutions for a large variety of specifications; here we have used symbolic software verifiers based on SMT solvers.
 
-Algorithm~\ref{alg:opt-algorithm} describes our pseudo-code to synthesize stand-alone PV systems using symbolic model checking. It was adopted the analytical method of optimization, with LCC economical analysis and power reliability based on the critical period criteria.
+Algorithm~\ref{alg:opt-algorithm} describes our pseudo-code to synthesize stand-alone PV systems using symbolic model checking. The analytical method of optimization was adopted, with LCC economic analysis and power reliability based on critical period criteria.
 
  \begin{algorithm}
  \caption{Synthesis algorithm}
@@ -57,7 +57,7 @@ Algorithm~\ref{alg:opt-algorithm} describes our pseudo-code to synthesize stand-
 %  \STATE Declare list of inverters data and cost \\
   \STATE Declare the maximum possible cost $MaxCost$  \\
   \STATE Declare power demand, power peak, energy consumption \\
-  \STATE Declare battery autonomy, deep of discharge, AC voltage \\
+  \STATE Declare battery autonomy, depth of discharge, AC voltage \\
   \FOR {$HintCost=0$ to $MaxCost$}
  	\STATE Declare non-deterministic variable to select PV Panel from list \\
  	\STATE Declare non-deterministic variable to select Controller from list \\
@@ -85,104 +85,65 @@ Algorithm~\ref{alg:opt-algorithm} describes our pseudo-code to synthesize stand-
  \end{algorithm}
 
 Our synthesis algorithm will synthesize constant values; 
-it starts with the input of manufacturers data and prices of PV panels, batteries, 
-charge controllers and inverters (line $2$). After that, we define user requirements, i.e., 
-house requirements and design definitions, from lines $4$ and $5$. 
+it starts with the input of the manufacturer's data and prices of PV panels, batteries, charge controllers and inverters (line $2$). After that, we define user requirements, i.e. house requirements and design definitions, from lines $4$ and $5$. 
 
-The \textit{for}-loop started at line $6$ controls the lowest cost to the PV solution. 
-In particular, it starts with cost $0$ and stops only when the algorithm finds a 
-feasible solution in which the cost breaks the $assertion$ stated in line $22$; 
-if that happens, then our algorithm has found an optimal solution, thereby stating 
-that the {\sc Verify} phase reached a satisfiable condition (\textit{SAT}). 
-The $MaxCost$ value at line $6$ is just a very high value put as a limit 
-to the \textit{for}-loop, that never will be reached because the optimal solution will be found first.
+The \textit{for}-loop started at line $6$ controls the lowest cost of the PV solution. In particular, it starts with cost $0$ and stops only when the algorithm finds a feasible solution in which the cost breaks the $assertion$ stated in line $22$; if that happens, then our algorithm has found an optimal solution, thereby stating that the {\sc Verify} phase reached a satisfiable condition (\textit{SAT}). The $MaxCost$ value at line $6$ is just a very high value inserted as a limit to the \textit{for}-loop, that will never be reached because the optimal solution will be found first.
 
-Our synthesis algorithm uses non-deterministic variables to choose one specific constant 
-from a given list of PV panels, controllers, batteries and inverters (lines $7$ to $10$). 
-That procedure ensures that our synthesis engine checks all combinations of items 
-from each equipment, and combine them to assemble a feasible (candidate) PV solution, 
-which meets the user requirements.
+Our synthesis algorithm uses non-deterministic variables to choose one specific constant from a given list of PV panels, controllers, batteries and inverters (lines $7$ to $10$). This procedure ensures that our synthesis engine checks all combinations of items from each equipment, and combines them to assemble a viable (candidate) PV solution, which meets user requirements.
 
-Next, we use Eq.~\eqref{eq:Ecorrected}, Eq.~\eqref{eq:Ep}, Eq.~\eqref{eq:NTPmin}, 
-Eq.~\eqref{eq:NPSmin}, Eq.~\eqref{eq:NPPmin}, Eq.~\eqref{eq:Cbank}, 
-Eq.~\eqref{eq:Nbtotal}, Eq.~\eqref{eq:iscamb}, and Eq.~\eqref{eq:icmin} to calculate the sizing variables (lines $11$ to $17$). The directive \textit{assume} (lines $15$, $18$ and $19$) 
-ensures the compatibility of the chosen items from the list of equipment: the {\sc Verify} phase 
-uses only the item (among all the possible ones) that satisfies the statements of Lines $15$, $18$ and $19$. Line $15$ is specific to the charge controller voltage check. Line $18$ checks the inverter check $I_{c}$, charge controller DC input voltage $V_{in}DC$, and charge controller AC output voltage $V_{in}DC$ check. Line $19$ ensures the power demand and the surge power of inverter.
-Therefore, our synthesis algorithm reaches line $20$ with one feasible solution, 
-and the cost of that solution is calculated in $F_{obj}$ (line $21$). This cost is the equivalent of ~\ref{eq:LCC} described in Section ~\ref{sec:optcriteria}.
+Next, we use Eq.~\eqref{eq:Ecorrected}, Eq.~\eqref{eq:Ep}, Eq.~\eqref{eq:NTPmin}, Eq.~\eqref{eq:NPSmin}, Eq.~\eqref{eq:NPPmin}, Eq.~\eqref{eq:Cbank}, Eq.~\eqref{eq:Nbtotal}, Eq.~\eqref{eq:iscamb} and Eq.~\eqref{eq:icmin} to calculate the sizing variables (lines $11$ to $17$). The directive \textit{assume} (lines $15$, $18$ and $19$) 
+ensures compatibility of the items chosen from the list of equipment: the {\sc Verify} phase uses only items (among all the possible ones) that satisfy the statements of Lines $15$, $18$ and $19$. Line $15$ is specific to the charge controller voltage check. Line $18$ checks the inverter check $I_{c}$, the charge controller DC input voltage $V_{in}DC$, and charge controller AC output voltage $V_{in}DC$ check. Line $19$ ensures the power demand and the surge power of the inverter.
+Therefore, our synthesis algorithm reaches line $20$ with one feasible solution, and the cost of that solution is calculated in $F_{obj}$ (line $21$). This cost is the equivalent to ~\ref{eq:LCC}, as described in Section ~\ref{sec:optcriteria}.
 
-If our algorithm does not find a feasible solution among the item of equipment that 
-were provided to our {\sc Synthesize} phase,  then the result is an unsatisfiable (\textit{UNSAT}), i.e., 
-the program finishes and does not find a solution, which indicates that it 
-was not possible to combine the items of each equipment in order to create a feasible solution. 
+If our algorithm does not find a feasible solution among the item of equipment that were provided for our {\sc Synthesize} phase,  then the result is unsatisfiable (\textit{UNSAT}), i.e. the program finishes without finding a solution, indicating that it was not possible to combine the specific items of equipment in order to create a feasible solution. 
 
-The main challenge for the {\sc Synthesize} phase is to find a feasible candidate 
-solution regarding the constraints and user requirements. Related to our {\sc Verify} 
-phase the challenge is to find the lowest acquisition cost from a list of equipment and 
-components that is provided from the {\sc Synthesize} phase. 
+The main challenge for the {\sc Synthesize} phase is to find a feasible candidate solution for the constraints and user requirements. The challenge for the {\sc Verify} phase is to find the lowest acquisition cost from a list of equipment and components provided by the {\sc Synthesize} phase. 
 
-Note that the process described here is completely automated and that a validation is performed 
-by our {\sc Verify} phase to ensure that the approach is sound.
+Note that the process described here is completely automated and that a validation is performed by our {\sc Verify} phase to ensure that the approach is sound.
 
-\subsection{Optimization Assumptions and Premises}
+\subsection{Optimization Premises and Assumptions}
 \label{sec:OptAssumptions}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-Here some premise are presented and some adopted assumptions are explained for the optimal sizing method, regarding the automated synthesis and simulation software.
+This section contains premises and assumptions underlying the optimal sizing method, in relation to automated synthesis and simulation software.
 
-Regarding the line $2$ of Algorithm~\ref{alg:opt-algorithm}, 
-a list of forty equipment from ten different manufacturers was provided 
-to the synthesis engine in order to allow the choice of every item 
-of PV sizing. Data sheet from each item was necessary to collect 
-technical information. Moreover, the price of each item was obtained 
-from available quotations in the market, and if the currency was not in US dollars, 
-then it was used the exchange rate of the day to convert it to US dollars.
+In line $2$ of Algorithm~\ref{alg:opt-algorithm}, the synthesis engine is provided with a list of forty items of equipment from ten different manufacturers in order to allow the engine to choose from among all items of PV sizing. The necessary technical information was collected from data sheet of each item. In addition, the price of each item was obtained from available market quotation, in US dollars. All the other currencies were converted to US dollars equivalents at the exchange rate of the day.
 
-With respect to power reliability, this work will rely on the critical period solar 
-energy method~\cite{Pinho} as described in Section~\ref{sec:sizing}. 
-The usual way is to use loss of load probability (LOLP) or loss of power 
-supply probability (LPSP). However, based on the fact that here we 
-are neither considering site characteristics nor the load changes over time, 
-which demands historical data, the reliability analysis will be developed only 
-by the critical period method of PV sizing.
+With respect to power reliability, the critical period solar energy method will be used~\cite{Pinho}, as described in Section~\ref{sec:sizing}. The usual way is to use loss of load probability (LOLP) or loss of power supply probability (LPSP). However, due to the fact that in this study we are considering neither site characteristics nor load changes over time, which demand historical data, the reliability analysis will be developed only by the critical period method of PV sizing.
 
-Regarding financial analysis:
+Financial analysis details:
 \begin{itemize}
 	\item LCC lifetime considered: $20$ years;
-	\item Installation costs: includes delivery in the isolated community and installation costs itself, $5$\% of total cost~\cite{Agrener2013};
-	\item Value of the discount rate or interest rate: $10$\%, which is a good rate considering financial investments in developing countries;
-	\item Operation and maintenance annual costs: based on past PV projects of similar size in the Amazon region of Brazil, will be adopted the value of US\$ 289.64~\cite{Agrener2013}. This cost includes the battery replacement based on its lifetime ($4$ years for lead-acid batteries), plus inverters and controller replacement (every $10$ years). Therefore, it will be performed three battery bank and one inverter-controller replacements during the LCC analysis.
+	\item Installation costs: these include delivery to the isolated community and the actual installation costs: $5$\% of total cost~\cite{Agrener2013};
+	\item Value of the discount rate or interest rate: $10$\%, a good rate, considering financial investments in developing countries;
+	\item Annual operation and maintenance costs: based on past PV projects of similar size in the Brazilian Amazon, the sum of US\$ 289.64~\cite{Agrener2013} will be adopted. This cost includes battery replacement based on a lifetime of $4$ years for lead-acid batteries, plus inverters and controller replacement (every $10$ years). This means that there will be three battery bank and one inverter-controller replacement during the LCC analysis.
 \end{itemize}
 
-On the subject of PV system optimization technique, we will adopt here the intuitive method 
-since the average value daily of solar irradiance is used in the mathematical model, 
-without considering the battery's state of charge, or even the random nature 
-of solar irradiation and meteorological conditions. Therefore, all the computational 
-effort will be concentrated in our automated synthesis algorithm.
+The PV system optimization technique adopted here is the intuitive method, since the average daily value of solar irradiance is used in the mathematical model, without considering battery state of charge, or even the random nature of solar irradiation and meteorological conditions. Therefore, all the computational effort will be concentrated on our automated synthesis algorithm.
 
-Regarding batteries, the voltage of the system (DC bus) is set in $24$ V DC (but the value can be adjusted to $12$ or $48$ V at the code).
+With regard to batteries, the voltage of the system (DC bus) is set at $24$ V DC (but this can be adjusted to $12$ or $48$ V in the code).
 
-Related to HOMER Pro:
+HOMER Pro details:
 
 \begin{itemize}
-	\item HOMER Pro do not have the LCC cost in its reports. However, it has NPC and LCOE. Therefore NPC was used to obtain LCC in order to allow the comparative among tools;
-	\item The optimization analysis of HOMER Pro allows to define a load curve and temperature according of data collected automatically from online databases. However, in order to allow a correct comparative, the curve load and the temperature were defined exactly the same as automated synthesis tools;
-	\item Battery autonomy is not an parameter that the user can set when using HOMER Pro. The tool will always to meet the user requirement, i.e., the load curve during the $365$ days of the year;
-	\item HOMER Pro do not have a explicit equipment called charge controller. It uses a controller resource that can perform in two different ways, according of the optimization choice or the user choice: load following or cycle charging~\cite{HOMER}. During the tests it was chosen the load following controller: it produces only enough power to meet the demand~\cite{HOMER};
-	\item It was assumed the value of 5\% of capacity shortage that is equivalent to 95\% of availability of the PV system. By definition, availability is the percentage of time at which a power system is capable of meeting the load requirements~\cite{Khatib2014}. For critical loads, 99\% is considered acceptable. While in a ordinary house electrical load, 95\% is considered acceptable;
-	\item It was assumed a string of two batteries in order to match the voltage of the system of $24$ V DC that was used for the automated synthesis tool;
-	\item The premise adopted when using HOMER Pro it was that the user does not know the optimal solution, and that in order to obtain this solution is necessary to include (at the design phase of the tool) generic PV and batteries modules that HOMER Pro will search for the optimized power of each component. With that in mind, it was included a generic flat plate PV of $1$ kW and generic lead-acid batteries of $1$ kW as well (and with capacity of $83.4$ Ah according with HOMER Pro modeling). HOMER, during run-time, decides the size in kW of each module, based on feasibility and lower cost.
+	\item HOMER Pro does not provide for the LCC cost in its reports. However, it has NPC and LCOE. For this reason, NPC was used to obtain LCC in order to allow the comparison among tools;
+	\item The optimization analysis of HOMER Pro permits the definition of a load curve and temperature on the basis of data collected automatically from online databases. However, in order to enable a correct comparison, the curve load and the temperature were defined exactly the same as automated synthesis tools;
+	\item Battery autonomy is not a parameter that the user can set when using HOMER Pro. The tool will always meet the user requirement, i.e. the load curve, $365$ days a year;
+	\item HOMER Pro does not have an item of equipment explicitly labeled charge controller. It uses a controller resource that can perform in two different ways, depending on optimization choice or user choice: load following or cycle charging~\cite{HOMER}. During the tests  'load following' controller was chosen: it produces only enough power to meet the demand~\cite{HOMER};
+	\item A 5\% of capacity shortage was assumed, equivalent to 95\%  availability of the PV system. By definition, availability is the percentage of time during which a power system is capable of meeting the load requirements~\cite{Khatib2014}. For critical loads, 99\% is considered acceptable, while in an ordinary residential electrical load, 95\% is considered acceptable;
+	\item A string of two batteries was assumed in order to match the system voltage of $24$ V DC used by the automated synthesis tool;
+	\item The premise adopted when using HOMER Pro was that the user does not know the optimal solution, and that in order to obtain this solution it is necessary to include (at the design phase of the tool) generic PV and battery modules that HOMER Pro will search for the optimized power of each component. With that in mind, a generic flat plate PV of $1$ kW was included and generic lead-acid batteries of $1$ kW also (and with capacity of $83.4$ Ah in accordance with HOMER Pro modeling). HOMER, during run-time, decides the size in kW of each module, based on feasibility and lower cost.	
 \end{itemize}
 
 \section{General Assumptions}
 
-The general assumptions for the scientific method of automated synthesis are the same presented at Chapter~\nameref{chap:methodology1}, related to the code in ANSI-C, to the bound $k$, to simulation tool comparative, and to the battery state of charge.
+The general assumptions for the scientific method of automated synthesis are the same presented in Chapter~\nameref{chap:methodology1}, with respect to the code in ANSI-C, to the bound $k$, to the simulation tool comparison, and to the battery state of charge.
 
 %---------------------------------------------------------------------------
 \section{Description of the case studies} 
 %---------------------------------------------------------------------------
 
-It was performed seven stand-alone PV system case studies to evaluate the proposed synthesis approach: 
+The proposed synthesis approach was evaluated in  seven stand-alone PV system case studies: 
 
 \begin{itemize}
 \item Case Study 1: Power peak: 342 W, power surge: 342 W, energy consumption: 3,900 Wh/day, battery autonomy: 48 h;
@@ -194,7 +155,7 @@ It was performed seven stand-alone PV system case studies to evaluate the propos
 \item Case Study 7: Power peak: 1,586 W, power surge: 2,900 W, energy consumtion: 14,000 Wh/day, battery autonomy: 48h.
 \end{itemize}
 
-These case studies were defined based on usual electrical load found in riverside communities of the Amazon State in Brazil~\cite{TrindadeCordeiro19, Agrener2013}. With exception of case 7 that was idealized as a small town solution to support few lamps and an 12 kBTUs air-conditioner.
+These case studies were defined based on the usual electrical load found in riverside communities in the State of Amazonas,  Brazil~\cite{TrindadeCordeiro19, Agrener2013}, with the exception of case 7, that was idealized as a small town solution to support a few lamps and a 12 kBTUs air-conditioner.
 
 %---------------------------------------------------------------------------
 \section{Objectives and Setup}
@@ -213,13 +174,13 @@ The evaluation aims to answer two experimental questions:
 
 All experiments regarding the verification tools were conducted 
 on an otherwise idle Intel Xeon CPU E5-4617 ($8$-cores) with 
-$2.90$ GHz and $64$ GB of RAM, running Ubuntu $16.04$ LTS $64$-bits. 
-Related to HOMER Pro, it was used an Intel Core i5-$4210$ ($4$-cores), 
-with $1.7$ GHz and $4$ GB of RAM, running Windows 10. 
-The experiments were performed with a predefined time out of $240$ minutes.
+$2.90$ GHz and $64$ GB RAM, running Ubuntu $16.04$ LTS $64$-bits. 
+For HOMER Pro, an Intel Core i5-$4210$ ($4$-cores) was used, 
+with $1.7$ GHz and $4$ GB RAM, running Windows 10. 
+The experiments were conducted with a predefined time-out of $240$ minutes.
 
-Three start-of-art verification tools, CBMC\footnote{Command-line: \$ cbmc -\phantom{}-unwind 100 filename.c -\phantom{}-trace} version 5.11 with MiniSat 2.2.1~\cite{Kroening}, ESBMC\footnote{Command-line: \$ esbmc filename.c -\phantom{}-no-bounds-check -\phantom{}-no-pointer-check -\phantom{}-unwind 100 -\phantom{}-boolector} version 6.0.0 with solver Boolector 3.0.1~\cite{Brummayer}, %UAutomizer\footnote{Command-line: \$ ./Ultimate -tc config/AutomizerReach.xml -s config/svcomp-Reach-32bit-Automizer\_Default.epf -i filename.c -\phantom{}-traceabstraction.limit.analysis.time 900 -\phantom{}-traceabstraction.stop.after.first.violation.was.found false -\phantom{}-cacsl2boogietranslator.overapproximate.operations.on.floating.types false -\phantom{}- cacsl2boogietranslator.assume.nondeterminstic.values.are.in.range false -\phantom{}-rcfgbuilder.add.additional.assume.for.each.assert true -\phantom{}-rcfgbuilder.simplify.code.blocks true -\phantom{}-rcfgbuilder.size.of.a.code.block LoopFreeBlock}, 
-and CPAchecker\footnote{Command-line: \$ scripts/cpa.sh -heap 64000m -config config/bmc-incremental.properties -spec config/specification/sv-comp-reachability.spc filename.c} version 1.8 with MathSAT 5.5.3~\cite{mathsat5}, were used as verification engine to compare the proposed approach effectiveness and efficiency. Note that ``incremental'' ESBMC with the SMT solver Z3 version 4.7.1~\cite{DeMoura} was tried\footnote{Command-line: \$ esbmc filename.c -\phantom{}-no-bounds-check -\phantom{}-no-pointer-check -\phantom{}-unwind 100 -\phantom{}-smt-during-symex -\phantom{}-smt-symex-guard -\phantom{}-z3} as an alternative to use less computing memory. The Simulation tool HOMER Pro version $3.13.1$ was used for comparative purpose.
+Three start-of-the-art verification tools, CBMC\footnote{Command-line: \$ cbmc -\phantom{}-unwind 100 filename.c -\phantom{}-trace} version 5.11 with MiniSat 2.2.1~\cite{Kroening}, ESBMC\footnote{Command-line: \$ esbmc filename.c -\phantom{}-no-bounds-check -\phantom{}-no-pointer-check -\phantom{}-unwind 100 -\phantom{}-boolector} version 6.0.0 with the  Boolector 3.0.1 solver~\cite{Brummayer}, %UAutomizer\footnote{Command-line: \$ ./Ultimate -tc config/AutomizerReach.xml -s config/svcomp-Reach-32bit-Automizer\_Default.epf -i filename.c -\phantom{}-traceabstraction.limit.analysis.time 900 -\phantom{}-traceabstraction.stop.after.first.violation.was.found false -\phantom{}-cacsl2boogietranslator.overapproximate.operations.on.floating.types false -\phantom{}- cacsl2boogietranslator.assume.nondeterminstic.values.are.in.range false -\phantom{}-rcfgbuilder.add.additional.assume.for.each.assert true -\phantom{}-rcfgbuilder.simplify.code.blocks true -\phantom{}-rcfgbuilder.size.of.a.code.block LoopFreeBlock}, 
+and CPAchecker\footnote{Command-line: \$ scripts/cpa.sh -heap 64000m -config config/bmc-incremental.properties -spec config/specification/sv-comp-reachability.spc filename.c} version 1.8 with MathSAT 5.5.3~\cite{mathsat5}, were used as verification engines to compare the proposed approach effectiveness and efficiency. Note that ``incremental'' ESBMC with the SMT solver Z3 version 4.7.1~\cite{DeMoura} was tried\footnote{Command-line: \$ esbmc filename.c -\phantom{}-no-bounds-check -\phantom{}-no-pointer-check -\phantom{}-unwind 100 -\phantom{}-smt-during-symex -\phantom{}-smt-symex-guard -\phantom{}-z3} as an alternative to use less computing memory. The Simulation tool HOMER Pro version $3.13.1$ was used for comparative purposes.
 
 %---------------------------------------------------------------------------
 \section{Results}  
@@ -259,14 +220,10 @@ Specification & Result & Result & Result & Result \\
 \end{scriptsize}
 \end{table}
 
-CPAchecker was able to synthesize the optimal sizing in six 
-out of seven case studies (cases $1$ to $6$): the result was produced within 
-the time limit, which varied from $134.71$ to $235.75$ minutes. Fig.~\ref{fig:CPAoptc1} illustrates the result of case 4 with the optimal sizing appearing in the left size as the integer $8$ to the solar panel (which is the model RSM36-6-150P from manufacturer Risen), battery $0$ that means the model 12MF80 of 80 Ah from Moura, charge controller $1$ that means the model 15A-75V MPPT from Victron  Energy, and the inverter number $3$ means the model IP350-11 from Epever (750 W). The variables NTP, NPS, NPP, NPS, NBP, and NBTotal, presented at the counter-example as well, shows how many and how the panels and batteries are connected.
+CPAchecker was able to synthesize optimal sizing in six 
+out of the seven case studies (cases $1$ - $6$): the result was produced within the time limit, which varied from $134.71$ to $235.75$ minutes. Fig.~\ref{fig:CPAoptc1} illustrates the result of case 4 with the optimal sizing appearing on the left size as the integer $8$ for the solar panel (which is the model RSM36-6-150P from the manufacturer Risen), battery $0$ refers to the model 12MF80 of 80 Ah from Moura, charge controller $1$ refers to the model 15A-75V MPPT from Victron  Energy, and the inverter number $3$ refers to the model IP350-11 from Epever (750 W). The variables NTP, NPS, NPP, NPS, NBP, and NBTotal, also presented in the counter-example as well, shows the number of panels and batteries and how they are connected.
 
-Only case study $7$ led to a \textit{time out} result in CPAchecker, i.e., 
-it was not solved within $240$ minutes. This is depicted in Fig.~\ref{fig:cpaoptcase7}. However, if it is removed this time out limitation from CPAchecker, the verifier is 
-able to solve the optimization in $44.97$ hours. 
-The violation (SAT result) indicated in Table~\ref{tab1} 
+Only case study $7$ led to a \textit{time out} result in CPAchecker, i.e.  it was not solved within $240$ minutes. This is illustrated in Fig.~\ref{fig:cpaoptcase7}. However, this CPAchecker time-out limitation is removed, the verifier is able to solve the optimization in $44.97$ hours. The violation (SAT result) indicated in Table~\ref{tab1} 
 is the $assert$ of line $22$ from Algorithm~\ref{alg:verification-algorithm}. %The results were tested by manual PV sizing and were sound (\textit{RQ1}). %, linking a feasible technical solution with the lowest cost possible, considering the equipment that were inputted to the code. 
 
 \begin{figure}[h]
@@ -283,24 +240,11 @@ is the $assert$ of line $22$ from Algorithm~\ref{alg:verification-algorithm}. %T
 \label{fig:cpaoptcase7}
 \end{figure}
 
-CBMC and ESBMC are unable to produce any conclusive result. 
-Situations of \textit{internal failure}, \textit{time out}, 
-or \textit{out of memory} occurred; this partially answers 
-the \textit{EQ2}. Note that the internal failure presented 
-by ESBMC was a Z3 solver issue (a bug); this will demand 
-an updated version of ESBMC to fix this issue. Similarly to CPAchecker, 
-if it is removed the \textit{time out} from ESBMC with the SMT solver Boolector, 
-then the verifier is able to obtain the automated synthesis 
-in $73.18$ hours for the case study $2$. CBMC, in the other hand, only could present some result if the RAM memory of the system was bigger to avoid the \textit{memory out} issue.
+CBMC and ESBMC are unable to produce any conclusive result. \textit{Internal failure}, \textit{time out}, or \textit{out of memory} situations occurred; this partially answers the \textit{EQ2}. Note that the internal failure presented by ESBMC was a Z3 solver issue (a bug), which will require an updated version of ESBMC to fix. Similar to CPAchecker, if the \textit{time out} is removed from ESBMC with the SMT solver Boolector, then the verifier is able to obtain the automated synthesis in $73.18$ hours for case study $2$. CBMC, on the other hand,  could present some result only if the RAM memory of the system was expanded in order to avoid the out of memory issue.
 
-Related to HOMER Pro, it was able to evaluate six case studies (cases $1$, $2$, $4$, $5$, $6$, and $7$), and within a time shorter than $30$ seconds, which was much 
-faster than the proposed automated synthesis tool (cf.~\textit{EQ2}). 
-Case study $3$ was not possible to be simulated since HOMER Pro 
-does not have the feature of adjusting the battery autonomy, i.e., 
-the tool always tries to feed with electricity the given load 
-during $365$ days/year. 
+HOMER Pro was able to evaluate six case studies (cases $1$, $2$, $4$, $5$, $6$, and $7$), and in under $30$ seconds, much faster than the proposed automated synthesis tool (cf.~\textit{EQ2}). Case study $3$ could not be simulated since HOMER Pro does not have the battery autonomy adjustment feature, i.e. the tool always tries to feed the given load with electricity $365$ days/year. 
 
-Fig.~\ref{fig:homeroptc4} illustrates parts of the 9-page PDF report presented by HOMER Pro, specifically for the case 4.
+Fig.~\ref{fig:homeroptc4} illustrates parts of the 9-page PDF report presented by HOMER Pro, specifically for case 4.
 
 \begin{figure}[h]
 \includegraphics[width=0.8\textwidth]{homeroptc4.png}
@@ -309,144 +253,60 @@ Fig.~\ref{fig:homeroptc4} illustrates parts of the 9-page PDF report presented b
 \label{fig:homeroptc4}
 \end{figure}
 
-It was also noted other HOMER Pro drawbacks:
+Certain other HOMER Pro drawbacks were also noted:
 
 \begin{itemize}
-\item There exists no explicit charge controller 
-as a system equipment. HOMER Pro includes automatically 
-a controller just to simulate the charge/discharge 
-of batteries and to meet the load requirement; however, 
-without costs or even with electrical characteristics 
-as maximum current and voltage, which are common during PV sizing;
-\item HOME Pro demands to include some battery specification 
-to initiate the optimization; however, it does not change 
-the electrical specifications during the simulation; 
-the presented results are multiples of the original 
-battery type suggested by the user. As example, it was 
-started with a $83.4$ Ah lead-acid battery and during 
-the simulation, HOMER Pro did not try to use other capacities or types;
-\item HOMER Pro does not present the optimal solution 
-in terms of connections of arrays of PV panels, just the 
-total in terms of power, i.e., it does not present neither models 
-and the power of each PV panel nor the total of panels in series or parallel. 
+\item System equipment does not include an explicit charge controller . HOMER Pro includes a controller automatically just to simulate the charge/discharge of batteries and to meet the load requirement; however, without costs or even with electrical characteristics such as maximum current and voltage, which are common during PV sizing;
+\item HOMER Pro requires the inclusion of some battery specification to initiate optimization; however, it does not change the electrical specifications during simulation; the results presented are multiples of the original battery type suggested by the user. For example, it was started with a $83.4$ Ah lead-acid battery and during simulation, HOMER Pro did not try to use other capacities or types;
+\item HOMER Pro does not present the optimal solution in terms of connections of PV panel arrays, just the total in terms of power, i.e. it presents neither the models and the power of each PV panel nor the total of panels in series or parallel.
 \end{itemize}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Comparison between Formal Synthesis and HOMER Pro}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-Comparing the results between the formal synthesis with CPAchecker 
-and HOMER Pro, it was observed that most results are quite similar, 
+Comparing the results of the formal synthesis against those of CPAchecker and HOMER Pro, it was observed that most results are quite similar, 
 in terms of technical solution and cost (cf. Table~\ref{tab1}). 
 
-Particularly related to LCC, the cost was very close in cases 
-$1$, $4$, $5$ and $6$, with difference varying from $0.23$\% to $17.4$\%. 
-Even adopting the same price per kW to the PV panels, 
-inverters, and batteries, HOMER Pro does not use costs 
-related to charge controllers, which were introduced into the 
-CPAchecker modeling. The premise used in CPAchecker to adopt 
-a fixed annual cost for operation and maintenance can produce 
-some impact as well at this discrepancy; however, it is not significant
-since this annual cost is too small when compared to the resulting LCC value.
+Particularly in the case of LCC, the cost was very close in cases $1$, $4$, $5$ and $6$, with differences varying from $0.23$\% to $17.4$\%. Even adopting the same price per kW for PV panels, inverters, and batteries, HOMER Pro does not use costs related to charge controllers, which were introduced into the CPAchecker modeling. The premise used in CPAchecker to adopt a fixed annual cost for operation and maintenance can produce some impact as well on this discrepancy; however, it is not significant since the annual cost is too small when compared to the resulting LCC value.
 
-However, there exists a huge divergence in case study $2$, 
-where the costs presented by HOMER Pro were $54$\% higher 
-than the automated synthesis tool, probably because the 
-operation and maintenance costs assumed by the automated 
-synthesis tool were underestimated to that specific load. 
+However, there exists a huge divergence in case study $2$, where the costs presented by HOMER Pro were $54$\% higher than the automated synthesis tool, probably because the operation and maintenance costs assumed by the automated synthesis tool were underestimated for that specific load. 
 
-In general, the size of the PV panels and battery bank were 
-bigger in HOMER Pro than with the formal synthesis approach, 
-and that discrepancy is not easy to address without some real 
-systems validation. The mathematical models are different and 
-particular parameters can be tuned as well in each approach, 
-and that can justify the difference, which was presented in all 
-the case studies. As comparative, let's consider case study $1$: 
-the optimal solution provided by HOMER Pro demands $7$ $\times$ 
-more PV panels than the solution presented by the synthesis tool, 
-and HOME Pro does not show the arrangement of arrays 
-(i.e., the number of series and parallel PV panels); 
-the battery bank presented by HOMER Pro provides $500.4$ Ah 
-of capacity ($6 \times 83.4$), while the synthesis tool 
-presented an optimal solution with $420$ Ah of total capacity 
-($4 \times 105$). 
+In general, the PV panels and battery bank were larger in HOMER Pro than with the formal synthesis approach, and that discrepancy is not easy to address without some real systems validation. The mathematical models are different and particular parameters can be tuned as well in each approach, and that can justify the difference, which was presented in all the case studies. As a comparison, consider case study $1$: the optimal solution provided by HOMER Pro requires $7$ $times$ more PV panels than the solution presented by the synthesis tool, and HOMER Pro does not show the arrangement of arrays (i.e. the number of series and parallel PV panels); the battery bank presented by HOMER Pro provides a capacity of $500.4$ Ah ($6 \times 83.4$), while the synthesis tool presented an optimal solution with a total capacity of $420$ Ah ($4 \times 105$). 
 
-Just to compare the results obtained from the optimization 
-with the real-world, the authors had four PV systems deployed 
-and monitored since June $2018$ in a riverside community 
-in the Amazonas State in Brazil, with similar demands 
-presented by case studies $1$, $4$, $5$, and $6$, 
-always with a $3$ $\times$ $325$ W ($3$S) panels and 
-$4$ $\times$ $220$ Ah ($2$S-$2$P $= 440$ Ah) 
-lead-acid batteries. These solutions are more close 
-to the result presented by the proposed formal synthesis 
-approach than HOMER Pro, thereby showing that the 
-solution is sound, which answers \textit{EQ1}.
+Comparing the optimization results with those the real-world, the author had four PV systems deployed and monitored since June $2018$ in a riverside community in State pf Amazonas, Brazil, with demands  similar to those of case studies $1$, $4$, $5$, and $6$, always with a $3$ $\times$ $325$ W ($3$S) panels and $4$ $\times$ $220$ Ah ($2$S-$2$P $= 440$ Ah) lead-acid batteries. These solutions are closer to the result presented by the proposed formal synthesis approach than that of HOMER Pro, thereby showing that the solution is sound, which answers \textit{EQ1}.
 
-Related to the inverters, HOMER Pro suggests a value in 
-kW very close to the peak of every case study, and it 
-is just a reference value and not a commercial value of 
-the employed inverter. The proposed synthesis tool, however, 
-presents inverters that are commercial and can be found 
-off-the-shelf. Therefore is a PRO to the formal synthesis method.
+HOMER Pro suggests a value in kW for the inverters that is very close to the peak of every case study, and it is just a reference value and not a commercial value of the inverter employed. The proposed synthesis tool, however, presents inverters that are commercial and can be bought off-the-shelf. This is a clear advantage of the formal synthesis method.
 
-Concerning to charge controllers, as it was reported in 
-the section~\ref{sec:synthesisresults}, HOMER Pro does not include it 
-as an explicit equipment in its mathematical model, 
-only the synthesis tool presents a commercial controller 
-and includes it during the cost analysis. Therefore, 
-the formal synthesis method presents more reliable results than
-HOME Pro.
+As was reported in section~\ref{sec:synthesisresults}, HOMER Pro does not include charge controllers as an explicit item of equipment in its mathematical model; only the synthesis tool presents a commercial controller and includes it during the cost analysis. The formal synthesis method, therefore, presents more reliable results than HOMER Pro.
 
-Case study $7$ was not solved by the synthesis tool 
-within the time limit established during the experimental 
-phase. Case study $3$ was not possible to simulate in HOMER Pro, 
-because its restriction does not allow one to set the battery autonomy, 
-thus resting both without parameters to comparative.
+Case study $7$ was not solved by the synthesis tool within the time limit established during the experimental phase. Case study $3$ could not be simulated in HOMER Pro, because of its restriction on setting battery autonomy, thus leaving both without parameters to compare.
 
-Summarizing, the synthesis tool is capable to present a 
-solution, which is far detailed and close to the commercial 
-reality than the solution presented by HOMER Pro. 
-In particular, the automated synthesis method 
-can provide all the details of every component of 
-a PV system solution, with complete electrical details 
-from data sheet of manufacturers, including 
-the model of the component, nominal current and voltage. 
-In this respect, even the name of the manufacturer 
-can be presented (in Table~\ref{tab1} it was removed 
-to avoid some advertising).
+Summarizing, the synthesis tool is capable of presenting a solution which is far more detailed and closer to commercial conditions than the solution presented by HOMER Pro. In particular, the automated synthesis method can provide all the details of every component of a PV system solution, with complete electrical details from the manufacturer data sheet, including  the model of the component, nominal current and voltage. In this respect, even the name of the manufacturer can be cited (in Table~\ref{tab1} it was removed to avoid unauthorized advertising).
 %used with the SMT incremental mode\footnote{Command-line: \$ esbmc filename.c -\phantom{}-no-bounds-check -\phantom{}-no-pointer-check -\phantom{}-unwind 100 -\phantom{}-smt-during-symex -\phantom{}-smt-symex-guard -\phantom{}-z3} enabled with the goal of reducing memory usage; we have also used the SMT solver Z3 version 4.7.1~\cite{DeMoura}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Threats to validity}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-At this Section, it was reported a favorable assessment of proposed formal synthesis method. 
-Nevertheless, it was also identified three threats to the validity 
-of the experimental results, which can be further assessed and 
+In this Section, a favorable assessment was made of the proposed formal synthesis method. Nevertheless, three threats to the validity of the experimental results were also identified, which can be further assessed and 
 constitute future work: 
 
 \begin{itemize}
-\item ($1$) improvement of the power reliability 
-analysis: to include loss of load probability or loss of power 
-supply probability, which can make the analysis more accurate; 
-\item ($2$) the cost analysis is well tailored to the Amazon region of Brazil; 
-however, a broad analysis from other isolated areas must be 
-performed in order to make the optimization general in terms 
-of applicability; 
-\item ($3$) to deploy at the field some PV systems 
-sized using the synthesized results in order to validate it.
+\item ($1$) improvement to the power reliability analysis: inclusion of loss of load probability or loss of power supply probability, in order to increase the accuracy of the analysis; 
+\item ($2$) the cost analysis is well tailored to Brazilian Amazon; however, a broad analysis of other isolated areas must be  performed in order to make the optimization general in terms of applicability; 
+\item ($3$) deployment in the field of PV systems sized using the synthesized results in order to validate them.
 \end{itemize}
 
 
 \section{Conclusion}
 
-In this Chapter we showed in details how the state-of-art computer science method of automated synthesis method was adapted in order to be used in stand-alone solar PV systems to obtain the optimal project sizing. Moreover, is was possible to picture how the proposed method compares with the traditional use of simulation tool for the same purpose.
+In this Chapter we showed in detail how the state-of-the-art computer science method of automated synthesis has been adapted to use in stand-alone solar PV systems in order to obtain optimal project sizing. Moreover, it was possible to illustrate how the proposed method compares with the traditional use of a simulation tool for the same purpose.
 
-Detailed diagrams, flowcharts and algorithms with pseudo-code were presented with the aim to support the proposed work and to facilitate the understanding. And even more so, the assumptions adopted for the automated verification and simulation software were listed. 
+Detailed diagrams, flowcharts and algorithms with pseudo-code were presented as support for the proposed work and to aid understanding. Also listed, were the assumptions underlying the automated verification and simulation software. 
 
-It was performed the comparative among verifiers with the proposed automated synthesis using model checking, in order to obtain the optimal sizing of stand-alone solar PV systems, which showed that CPAchecker had the best overall performance. CBMC and ESBMC were not conclusive for all the cases, reaching the \textit{time out} stipulated ($240$ minutes) or by \textit{out of memory} issue. CPAchecker was not possible to present a conclusive result just in case $7$ (\textit{time out}).
+Comparison of verifiers with the proposed automated synthesis using model checking was made, in order to obtain the optimal sizing of stand-alone solar PV systems, which showed that CPAchecker had the best overall performance. CBMC and ESBMC were not conclusive for all the cases, reaching the \textit{time out} stipulated ($240$ minutes) or being \textit{out of memory}. CPAchecker was unable to present a conclusive result only in case $7$ (\textit{time out}).
 
-A comparative with a specialized simulation tool was performed as well, however in just $5$ case studies (case $1$, case $2$, case $4$, case $5$, and case $6$) it was possible comparative for the presented result. Some limitations of the simulation tool, mainly related to not allow battery autonomy setup, and the $time out$ or $out of memory$ messages presented by the verifiers, restricted the comparative between automated verification tools versus simulation tools. However, when the comparative was possible, it was noticed that the LCC was very close, and that HOMER Pro overestimated the sizing.
+A comparison with a specialized simulation tool was also made, however only $5$ case studies (case $1$, case $2$, case $4$, case $5$, and case $6$) compared to the presented result. Some limitations of the simulation tool, mainly related to not allowing battery autonomy setup, and the $time-out$ or $out of memory$ messages presented by the verifiers, restricted the comparison between the automated verification tools and the simulation tools. However, when the comparison was possible, it was noticeable that the LCC came very close, and that HOMER Pro overestimated the sizing.
 
-Based on the fact that mostly case studies were deployed at the field (case $1$, case $4$, case $5$, and case $6$), with regular visiting to perform interview with the dwellers, and with monitoring system in those houses, it was possible to compare the computer obtained results with the real world employment of the stand-alone solar PV systems. The final conclusion was that the proposed tool is sound, with an acceptable performance, and with a better quality of the presented output.
+Based on the fact that mostly case studies were deployed in the field (case $1$, case $4$, case $5$, and case $6$), with regular visits to conduct interviews with the residents, and consult the monitoring system in those houses, it was possible to compare the computer assisted results with the real-world employment of stand-alone solar PV systems. The final conclusion was that the proposed tool is sound, with an acceptable performance, and a higher quality output.
