@@ -1,62 +1,62 @@
-Here we describe the two tools created with the target to implement and validate the two scientific methodologies of the thesis.
+Here we describe the two tools created to implement and validate the two scientific methods/techniques of the thesis.
 
 %---------------------------------------
 \section{Tools}
 %---------------------------------------
 
-During the Ph.D. process, the techniques from computer science proposed to tackle issues related to solar photovoltaic systems became algorithms and programs. Those programs became tools, and the tools were used during comparative with simulation tools in order to validate the techniques.
+During the doctoral process, the techniques from computer science proposed to deal with issues inherent to solar photovoltaic systems became algorithms and programs. These programs became tools, and the tools were used for the purpose of comparison with simulation tools in order to validate the techniques.
 
-One premise of our tools was to be written as an ANSI C program, and to follow the requirements established for the International Competition on Software Verification (SV-COMP) \footnote{https://sv-comp.sosy-lab.org/}. That allow us to write a code that could be executed into three different verifiers without adaptation, and even in the future other verifiers can be used as well.
+One premise of our tools was that they will be written as an ANSI C program, and to follow the requirements established for the International Competition on Software Verification (SV-COMP) \footnote{https://sv-comp.sosy-lab.org/}. This allows us to write a code that can be executed into three different verifiers without adaptation, with the possibility that in the future, other verifiers can also be used.
 %
 %\textcolor{red}{the second part of this sentence is unclear...} In general, we pursuit to write code that could be verification tool independent, i.e., that can be used in any model checking tool without adaptation, since we aimed to evaluate different.
 
-Therefore, we wrote the code without the use of '\# include', or '\# define'. Moreover, based on the fact that there exists no use of compiler library, it was necessary to write some functions, which perform specific calculations according to the adopted mathematical models (e.g., logarithm of natural order and exponential).
+With this in mind, the code was written without using of '\# include', or '\# define'. Moreover, based on the fact that a compiler library is not used, it was necessary to write in some functions which perform specific calculations depending on the mathematical models adopted (e.g. natural logarithms and exponents).
 
 %---------------------------------------
-\subsection{Automated Verification Tool (PV System validation)}
+\subsection{The Automated Verification Tool (for PV System validation)}
 \label{sec:automatedverification}
 %---------------------------------------
 
 We split the code into four blocks:
 
 \begin{itemize}
-\item \textbf{Block 1}: global variables declaration, with weather data from location (minimum and maximum solar irradiance and temperature, for 24-hour of the day) as array, requirements, and datasheet information from each equipment of the PV system that will be verified; 
+\item \textbf{Block 1}: global variables declaration, with weather data from the location (minimum and maximum solar irradiance and temperature, for 24 hours of the day) as array, requirements, and datasheet information pertaining to each item of equipment of the PV system to be verified; 
 
-\item \textbf{Block 2}: support functions (e.g., logarithm of natural order, exponential);
+\item \textbf{Block 2}: support functions (e.g. natural logarithms,  exponents);
 
 \item \textbf{Block 3}: PV system specific functions (charge battery, discharge battery, PV panel generation, sizing check);
 
-\item \textbf{Block 4}: main code with charge, discharge battery control, based on PV generation from solar panels and the state of charge form batteries, committing to deliver the power and energy that the house demands, according with the restrictions form the sized system.
+\item \textbf{Block 4}: main code with charge, discharge battery control, based on PV generation from solar panels and the battery state of charge, committing to deliver the power and energy that the house requires, in  accordance with the restrictions from the sized system.
 \end{itemize}
 
 %---------------------------------------
-\subsection{Automated Synthesis Tool (PV System Optimal Sizing)}
+\subsection{The Automated Synthesis Tool (for PV System Optimal Sizing)}
 \label{sec:automatedsynthesis}
 %---------------------------------------
 
 We split the code into three blocks:
 
 \begin{itemize}
-\item \textbf{Block 1}: global variables declaration, with weather data from location, requirements, and datasheet information from each equipment of the PV system that will be verified; 
+\item \textbf{Block 1}: global variables declaration, with weather data from the location, user requirements, and datasheet information on each item of equipment of the PV system to be verified; 
 
-\item \textbf{Block 2}: support functions (start value with the lowest cost for the list of equipment, synthesis phase function to obtain feasible technical solutions with model checking);
+\item \textbf{Block 2}: support functions (start value at the lowest cost for the list of equipment, synthesis phase function to obtain feasible technical solutions with model checking);
 
 \item \textbf{Block 3}: main code with the iterative control of the verify phase.
 \end{itemize}
 
 
 %---------------------------------------
-\section{How to use it}
+\section{Instructions on How to Use it}
 %---------------------------------------
 
-The only block that demands user intervention to input data is the block 1 listed in~\ref{sec:automatedverification} and \ref{sec:automatedsynthesis} from the automated verification and synthesis tools respectively. If it is aimed to change the mathematical model adopted, so coding must be done in block 3 of the automated verification tool and block 2 of the automated synthesis tool.
+The only block that requires user intervention to input data is Block 1 listed in~\ref{sec:automatedverification} and \ref{sec:automatedsynthesis} from the automated verification and synthesis tools respectively. If the intention is to change the mathematical model adopted, coding must be done in Block 3 of the automated verification tool Block 2 of the automated synthesis tool.
 
-Regarding the automated verification tool, it is necessary to input the following data (editing and modifying the code):
+For the automated verification tool, it is necessary to input the following data (editing and modifying the code):
 
 \begin{itemize}
-\item Minimum and maximum solar irradiance (average value for the 24-hour of the day) from location;
+\item Minimum and maximum solar irradiance (average value for the 24 hours of the day) at location;
 \item Minimum and maximum temperature (average for every month of the year);
-\item Local insolation (average number of sun hours by day at the location);
+\item Local insolation (average number of sun hours per day at the location);
 \item Number of solar panels in series;
 \item Number of solar panels in parallel;
 \item Number of series-connected cells from each solar panel;
@@ -78,8 +78,8 @@ Regarding the automated verification tool, it is necessary to input the followin
 \item State of charge limit;
 \item Number of batteries in series;
 \item Number of batteries in parallel;
-\item Autonomy of the batteries;
-\item Efficiency from batteries;
+\item Battery autonomy;
+\item Battery efficiency;
 \item Float, absorption, and bulk battery voltages;
 \item Charge controller efficiency;
 \item Charge controller current;
@@ -87,29 +87,29 @@ Regarding the automated verification tool, it is necessary to input the followin
 \item Inverter output voltage;
 \item Inverter AC reference power;
 \item Inverter maximum (surge) AC power reference;
-\item AC voltage (outlet standard);
+\item AC voltage (standard voltage from outlet);
 \item Power demand from the house;
 \item Surge demand from the house;
 \item Energy consumption from the house.
 \end{itemize}
 
-Moreover, regarding the automated synthesis tool, it is necessary to add the following data (editing and modifying the code):
+in the case of the automated synthesis tool, the following data must be added (editing and modifying the code):
 
 \begin{itemize}
-\item Minimum and maximum solar irradiance (average value for the 24-hour of the day) from location;
+\item Minimum and maximum solar irradiance (average value for the 24 hours of the day) at location;
 \item Minimum and maximum temperature (average for every month of the year);
-\item Local insolation (average number of sun hours by day at the location);
+\item Local insolation (average number of sun hours per day at the location);
 \item DC-bus voltage;
-\item Autonomy of the batteries;
+\item Battery autonomy;
 \item State of charge limit;
 \item Individual battery voltage;
 \item Reference solar irradiance;
 \item Reference temperature;
-\item For every item of solar PV panel list, as a matrix (area, efficiency, number of series-connected cells, Nominal Operating Cell Temperature, short-circuit current temperature coefficient, open-circuit voltage temperature coefficient, reference short-circuit current, reference open-circuit voltage, reference maximum power, reference maximum current, reference maximum voltage, maximum voltage on NOCT, cost in US dollars);
-\item For every item of batteries list, as a matrix (efficiency, voltage, capacity $C_{20}$), bulk voltage, float voltage, cost in US dollars);
-\item For every item of charge controller list, as a matrix (efficiency, nominal current, voltage output, minimum MPPT voltage, maximum current, cost in US dollars);
-\item For every item of inverter list, as a matrix (efficiency, input DC voltage, output AC voltage, reference AC power, reference maximum AC power, cost in US dollars);
-\item AC voltage (outlet standard);
+\item For every item on the solar PV panel list, as a matrix (area, efficiency, number of series-connected cells, Nominal Operating Cell Temperature, short-circuit current temperature coefficient, open-circuit voltage temperature coefficient, reference short-circuit current, reference open-circuit voltage, reference maximum power, reference maximum current, reference maximum voltage, maximum voltage on NOCT, cost in USD);
+\item For every item on the battery list, as a matrix (efficiency, voltage, capacity $C_{20}$), bulk voltage, float voltage, cost in USD);
+\item For every item on the charge controller list, as a matrix (efficiency, nominal current, voltage output, minimum MPPT voltage, maximum current, cost in USD);
+\item For every item on the inverter list, as a matrix (efficiency, input DC voltage, output AC voltage, reference AC power, reference maximum AC power, cost in USD);
+\item AC voltage (standard voltage from outlet);
 \item Power demand from the house;
 \item Surge demand from the house;
 \item Energy consumption from the house.
@@ -119,9 +119,9 @@ Moreover, regarding the automated synthesis tool, it is necessary to add the fol
 \subsection{Automated Verification with Incremental ESBMC}
 %---------------------------------------
 
-Here we describe precisely how to use the code explained in the previous section (\ref{sec:automatedverification}) using the incremental ESBMC with the Z3 SMT solver that presented the better performance during the comparative than other verifiers. However, in \ref{sec:setup} it was showed how to use the code with other verifiers.
+Here we describe precisely how to use the code explained in the previous section (\ref{sec:automatedverification}) using the incremental ESBMC with the Z3 SMT solver that presented the best performance during the comparison with other verifiers. However, in \ref{sec:setup} it was shown how to use the code with other verifiers.
 
-ESBMC can be downloaded from its GitHub in \url{https://github.com/esbmc/esbmc}. Installation commands can be found in \url{https://ssvlab.github.io/esbmc/documentation.html}. There is just the Linux version of the verifier.
+ESBMC can be downloaded from its GitHub in \url{https://github.com/esbmc/esbmc}. Installation commands can be found in \url{https://ssvlab.github.io/esbmc/documentation.html}. There is only the Linux version of the verifier.
 
 \bigskip
 \fbox{\parbox{\textwidth}{Command-line: \$ esbmc filename.c -\phantom{}-no-bounds-check -\phantom{}-no-pointer-check -\phantom{}-unwind 100 -\phantom{}-smt-during-symex -\phantom{}-smt-symex-guard -\phantom{}-z3.}}
@@ -131,21 +131,21 @@ Where:
 \begin{itemize}
 \item -no-bounds-check: says to the verifier to not perform array bound check (the aim is not to check array bound violation);
 \item -\phantom{}-no-pointer-check: says to the verifier to not check if there is pointer violation;
-\item -\phantom{}-unwind 100: it limits the bound of search (100 in this case);
-\item -\phantom{}-smt-during-symex: enable incremental SMT solving;
-\item -\phantom{}-smt-symex-guard: call the solver during symbolic execution;
+\item -\phantom{}-unwind 100: limits the bound of search (100 in this case);
+\item -\phantom{}-smt-during-symex: enables incremental SMT solving;
+\item -\phantom{}-smt-symex-guard: calls the solver during symbolic execution;
 \item -\phantom{}-z3: uses Z3 as solver.
 \end{itemize}
 
-Some results issued by the ESBMC verifier were shown in \ref{sec:ESBMCverification} when performing the case studies.
+Some results issued by the ESBMC verifier were shown in \ref{sec:ESBMCverification} when conducting the case studies.
 
 %---------------------------------------
 \subsection{Automated Synthesis with CPAchecker}
 %---------------------------------------
 
-Here we describe precisely how to use the code explained in previous sections (\ref{sec:automatedsynthesis}) using CPAchecker with MathSAT solver, which presented better performance during the comparative than other verifiers. However, in \ref{sec:synthesissetup} it was showed how to use the code with other verifiers.
+Here we describe precisely how to use the code explained in previous sections (\ref{sec:automatedsynthesis}) using CPAchecker with MathSAT solver, which presented the best performance during the comparison with other verifiers. However, in \ref{sec:synthesissetup} it was shown how to use the code with other verifiers.
 
-The CPAchecker can be downloaded from its web site in \url{https://cpachecker.sosy-lab.org/}. There are versions available to Linux and MS-Windows operational systems.
+The CPAchecker can be downloaded from its web site in \url{https://cpachecker.sosy-lab.org/}. There are versions available for Linux and MS-Windows operational systems.
 
 Install a Java Runtime Environment, which is at least Java 8 compatible (e.g., Oracle JRE, OpenJDK). Cf. the web site \url{http://java.oracle.com/}.
 
@@ -153,9 +153,9 @@ Install a Java Runtime Environment, which is at least Java 8 compatible (e.g., O
 \fbox{\parbox{\textwidth}{The command-line in Linux is: \$ scripts/cpa.sh -heap 64000m -config config/bmc-incremental.properties -spec config/specification/sv-comp-reachability.spc filename.c.}} 
 \bigskip
 
-Note that the default heap size is 1200m (or 1.2 GB of RAM). However, it is indicated to specify a significant value with '-heap' if you have more RAM available. In our case, we adjusted the heap to 64000m (64 GB). 
+Note that the default heap size is 1200m (or 1.2 GB RAM). However, specifying a significant value with '-heap' is recommended if you have more RAM available. In our case, we adjusted the heap to 64000m (64 GB). 
 
-Another important issue is the time-out of the execution process: the parameter 'limits.time.cpu' at the file 'resource-limits.properties' in folder 'config/includes' must be edited according to the desired value. In our case, 'limits.time.cpu = 14400s', i.e., 14400 seconds or 240 minutes or 4 hours.
+Another important issue is the time-out of the execution process: the parameter 'limits.time.cpu' in the file 'resource-limits.properties' in folder 'config/includes' must be edited according to the desired value. In our case, 'limits.time.cpu = 14400s', i.e. 14400 seconds or 240 minutes or 4 hours.
 
-Some results, reports, and graphics, issued by the CPAchecker verifier were depicted in \ref{sec:synthesisresults}.
+Some results, reports, and graphics, issued by the CPAchecker verifier were illustrated in \ref{sec:synthesisresults}.
 

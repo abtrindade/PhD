@@ -235,7 +235,7 @@ Usually this type of system is for low power applications, as defined by \cite{R
 \begin{figure}[h]
 \includegraphics[width=0.6\textwidth]{unregulatedSPV.png}
 \centering
-\caption{Unregulated standalone SPV system with DC load. Source: \cite{Roy}.}
+\caption{Unregulated standalone solar PV system with DC load. Source: \cite{Roy}.}
 \label{fig:unregSPV}
 \end{figure}
 
@@ -245,7 +245,7 @@ Similar to the unregulated standalone system with DC load, the main difference b
 \begin{figure}[h]
 \includegraphics[width=0.8\textwidth]{regulatedSPV1.png}
 \centering
-\caption{Regulated standalone SPV system with DC load. Source: \cite{Roy}.}
+\caption{Regulated standalone solar PV system with DC load. Source: \cite{Roy}.}
 \label{fig:regSPV1}
 \end{figure}
 
@@ -258,7 +258,7 @@ Configuration with PV array, battery, MPPT and DC load, as shown in Fig.\ref{fig
 \begin{figure}[h]
 \includegraphics[width=0.8\textwidth]{regulatedSPV2.png}
 \centering
-\caption{Regulated standalone SPV system with battery and DC load. Source: \cite{Roy}.}
+\caption{Regulated standalone solar PV system with battery and DC load. Source: \cite{Roy}.}
 \label{fig:regSPV2}
 \end{figure}
 
@@ -278,7 +278,7 @@ This system is similar to the previous one, but the AC load draws the power from
 \begin{figure}[h]
 \includegraphics[width=0.8\textwidth]{regulatedSPV3.png}
 \centering
-\caption{Regulated standalone system with battery, AC load. Source: \cite{Roy}.}
+\caption{Regulated standalone PV system with battery, AC load. Source: \cite{Roy}.}
 \label{fig:regSPV3}
 \end{figure}
 
@@ -286,9 +286,9 @@ This system is similar to the previous one, but the AC load draws the power from
 \subsection{Design and Validation of a Solar photovoltaic system}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-The design and validation of a SPV system can be done by hand or with the aid of a software tool. 
+The design and validation of a solar PV system can be done by hand or with the aid of a software tool. 
 
-In order to address different aspects of a project system and system's design, a lot of public domain and commercial software is available for the SPV market. According to \cite{Brooks}, the capabilities of these tools range from simple solar resource and energy production estimation, to site survey and system design tools, and to complex financial analysis software (with optimization). Some tools also provide support to rebate program applications and tax incentives (specific to each country or region), while other programs and worksheets focus on the technical aspects of system sizing and design.
+In order to address different aspects of a project system and system's design, a lot of public domain and commercial software is available for the solar PV market. According to \cite{Brooks}, the capabilities of these tools range from simple solar resource and energy production estimation, to site survey and system design tools, and to complex financial analysis software (with optimization). Some tools also provide support to rebate program applications and tax incentives (specific to each country or region), while other programs and worksheets focus on the technical aspects of system sizing and design.
  
 Manufacturers and integrators also have their own proprietary software to perform inverter string sizing and various system sizing and design tools, with the drawback of just including their own products among the possibilities of choice. In this study, the most widely used tools are presented: 
 
@@ -685,7 +685,7 @@ SOC = \left( 1 - \dfrac{Q}{C} \right)
 
 \noindent where $ Q $ is the charge delivered at the time of interest ($ Q=It $), and C is the battery capacity.
 
-The ratio between $ Q $ and $ C $ represents the depth of discharge ($ DOD $) or the fraction of discharge, i.e., $ DOC=1-SOC $.
+The ratio between $ Q $ and $ C $ represents the depth of discharge ($ DOD $) or the fraction of discharge, i.e., $ DOD=1-SOC $.
 
 The efficiency of the battery discharge is assumed to be 100\%, according to \cite{Copetti}; however, the total amount of useful charge available during discharge is limited by the current rate and temperature given by Equation \ref{eq:CC10}. This equation, known as capacity, is normalized with respect to discharge current corresponding to $ C_{10} $ rated capacity ($ I_{10} $).
 
