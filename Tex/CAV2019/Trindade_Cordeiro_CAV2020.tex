@@ -133,9 +133,10 @@ CPAChecker~\cite{Beyer2011}, CBMC~\cite{Kroening}, and ESBMC~\cite{esbmc2018}.
 \subsection{Sizing Stand-alone Solar PV Systems}
 \label{sec:sizing}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-A PV system is illustrated in Fig.\ref{fig:blockdiagram}. %It identifies the PV generator, batteries, charge controller, inverter, and AC load. 
-The PV generator, which can be a panel or an array, is a semiconductor device that can convert solar energy into DC electricity. %In Fig.\ref{fig:blockdiagram}, there are two variables that depend on the site where the system is deployed and also the weather (i.e., solar irradiance $G$ and temperature $T$). 
-For night hours or rainy days, we hold batteries where power can be stored and used. The use of batteries as a storage form implies the presence of a charge controller~\cite{Hansen}. The PV arrays produce DC and therefore when the PV system contains an AC load, a DC/AC conversion is required. That converter is called inverter; and the AC load dictates the behavior of AC electrical load from the house that will be fed by the system.
+
+A PV system is illustrated in Fig.\ref{fig:blockdiagram}. 
+The PV generator, which can be a panel or an array, is a semiconductor device that can convert solar energy into DC electricity. 
+For night hours or rainy days, we hold batteries where power can be stored and used. The use of batteries as a storage form implies the presence of a charge controller~\cite{Hansen}. The PV arrays produce DC, and therefore when the PV system contains an AC load, a DC/AC conversion is required. That converter is called inverter; the AC load dictates the behavior of the AC electrical load from the house that will be fed by the system.
 
 \begin{figure}[h]
 \includegraphics[width=0.7\textwidth]{blockdiagramPVS2_rev}
@@ -144,7 +145,7 @@ For night hours or rainy days, we hold batteries where power can be stored and u
 \label{fig:blockdiagram} 
 \end{figure}
 
-The sizing check stage will ensure that the system meets the standard project steps related to critical period solar energy method~\cite{Pinho} and adopting MPPT (Maximum Power Point Tracking) charge controller, which is the most common one in practice. 
+The sizing check stage will ensure that the system meets the standard project steps related to the critical period solar energy method~\cite{Pinho} and adopting the MPPT (Maximum Power Point Tracking) charge controller, which is the most common one in practice. 
 %
 Firstly, we need to correct the energy consumption estimated to the load ($E_{consumption}$), which is carried out by Eq.~\ref{eq:Ecorrected}, where the efficiency of batteries ($\eta_{b}$), controller ($\eta_{c}$), and inverter ($\eta_{i}$) are considered~\cite{Pinho} as follows
 
@@ -248,13 +249,10 @@ V_{out}AC = V_{AC}.
 \subsection{Optimal Sizing of PV Systems}
 % -------------------------------------------------------
 %
-%%%To select an optimal combination of components from a PV system to meet sizing constraints, 
-%we need to evaluate \textit{power reliability} and perform \textit{system cost} analysis for the recommended system. An ideal combination for any PV system 
 The optimal sizing of PV systems is made by the best compromise between two objectives: power reliability and system cost~\cite{Alsadi2018}. 
-Regarding power reliability, this work will rely on the critical period solar energy method~\cite{Pinho} as described in section~\ref{sec:sizing}. 
-%the usual is to use loss of load probability (LOLP) or loss of power supply probability (LPSP). Based on the fact that here we are neither considering site characteristics nor the load changes over time, the reliability analysis will be developed only by the critical period method of PV sizing \textcolor{red}{What does it mean? Remember that we have software engineering audience}. 
-%However, considering the system cost analysis, we usually find related studies done with Net Present Cost (NPC), Levelized Cost of Energy (LCOE), or Life Cycle Cost (LCC). Here, based on the fact that the deployment location is not specified, our study uses an adapted LCC analysis, where only the deployment cost is considered about the model, i.e., without the operational and maintenance costs~\cite{Alsadi2018}.
+Regarding power reliability, this work will rely on the critical period solar energy method~\cite{Pinho}, as described in Section~\ref{sec:sizing}. 
 Considering the system cost analysis, based on the fact that the deployment location is not specified, our study uses an adapted Life Cycle Cost (LCC) analysis, where only the acquisition cost is considered in the model, i.e., without the operational and maintenance costs~\cite{Alsadi2018}.
+
 %------------------------------------------------------
 \section{Synthesizing Optimal Sizing of Stand-alone Solar Photovoltaic Systems}
 %Applying Automated Verification to Optimal Sizing of Stand-alone Solar PV Systems}
@@ -302,15 +300,15 @@ Algorithm~\ref{alg:verification-algorithm} describes our pseudo-code to synthesi
  \label{alg:verification-algorithm}
  \end{algorithm}
 
-Our synthesis algorithm will synthesize constant values; it starts with the input of manufacturers data and prices of PV panels, batteries, charge controllers and inverters (Line 2). After that, we define user requirements, i.e., house requirements and design definitions, from Lines 4 and 5. 
+Our synthesis algorithm will synthesize constant values; it starts with the input of manufacturers' data and prices of PV panels, batteries, charge controllers, and inverters (Line 2). After that, we define user requirements, i.e., house requirements and design definitions, from Lines 4 and 5. 
 
 The \textit{for}-loop started at Line 6 controls the lowest cost to the PV solution. In particular, it starts with cost $0$ and stops only when the algorithm finds a feasible solution in which the cost breaks the $assertion$ stated in Line 22; if that happens, then our algorithm has found an optimal solution, thereby stating that the {\sc Verify} phase reached a satisfiable condition (\textit{SAT}). The $MaxCost$ value at Line 6 is just a very high value put as a limit to the \textit{for}-loop, that never will be reached because the optimal solution will be found first.
 
-Our synthesis algorithm uses non-deterministic variables to choose one specific constant from a given list of PV panels, controllers, batteries and inverters (Lines 7 to 10). That procedure ensures that our synthesis engine checks all combinations of items from each equipment, and combine them to assemble a feasible (candidate) PV solution, which meets the user requirements.
+Our synthesis algorithm uses non-deterministic variables to choose one specific constant from a given list of PV panels, controllers, batteries, and inverters (Lines 7 to 10). That procedure ensures that our synthesis engine checks all combinations of items from each equipment, and combine them to assemble a feasible (candidate) PV solution, which meets the user requirements.
 
 Next, we use Eq.~\ref{eq:Ecorrected}, Eq.~\ref{eq:Ep}, Eq.~\ref{eq:NTPmin}, Eq.~\ref{eq:NPSmin}, Eq.~\ref{eq:NPPmin}, Eq.~\ref{eq:Cbank}, Eq.~\ref{eq:Nbtotal}, Eq.~\ref{eq:iscamb}, and Eq.~\ref{eq:icmin} to calculate the sizing variables (Lines 11 to 17). The directive \textit{assume} (Lines 15, 18 and 19) ensures the compatibility of the chosen items from the list of equipment: the {\sc Verify} phase uses only the item (among all the possible ones) that satisfies the statements of Lines 15, 18 and 19. Therefore, our synthesis algorithm reaches Line 20 with one feasible solution, and the cost of that solution is calculated in $F_{obj}$ (Line 21). 
 
-If our algorithm does not find a feasible solution among the item of equipment that were provided to our {\sc Synthesize} phase,  then the result is an unsatisfiable (\textit{UNSAT}), i.e., the program finishes and does not find a solution. It indicates that was not possible to combine the items of each equipment and create a feasible solution. The main challenge for the {\sc Synthesize} phase is to find a feasible candidate solution regarding the constraints and user requirements. Related to our {\sc Verify} phase the challenge is to find the lowest acquisition cost from a list of equipment and components that is provided from the {\sc Synthesize} phase. 
+If our algorithm does not find a feasible solution among the item of equipment that was provided to our {\sc Synthesize} phase, then the result is an unsatisfiable (\textit{UNSAT}), i.e., the program finishes and does not find a solution. It indicates that it was not possible to combine the items of each equipment and create a feasible solution. The main challenge for the {\sc Synthesize} phase is to find a feasible candidate solution regarding the constraints and user requirements. Related to our {\sc Verify} phase, the challenge is to find the lowest acquisition cost from a list of equipment and components that are provided from the {\sc Synthesize} phase. 
 
 %Note that the process described here in completely automated and that a validation is performed by our {\sc Verify} phase to ensure that the approach is sound.
 %---------------------------------------------------------------------------
