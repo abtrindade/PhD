@@ -71,16 +71,16 @@ Our work makes three significant contributions. Firstly, the use of automated sy
 \label{sec:AutomatedVerification}
 %-----------------------------------------------------------
 %In this section, we present our theory and methodology to obtain the optimal sizing of stand-alone solar PV systems through program synthesis. In particular, 
-Fig.~\ref{fig:optimization} illustrates how to obtain the optimal sizing of a stand-alone PV system, which shows the traditional techniques (manual and simulation) and the proposed automated synthesis. Note that the input information is the same for all the methods: weather data, price information, design requirements, as load curve and power demand, and design assumptions) except for the automated synthesis where we also define the bound $k$ to restrict the design-space search. In terms of the output presented by both techniques, all of them produce a SUCCESS or FAIL result considering a feasible technical solution with the lowest cost. On the one hand, when done by simulation we get a report or graphical result; on the other hand, the automated synthesis technique, which is a mathematical reasoning of a model, presents a counterexample with the optimal solution stored in variables. Furthermore, 
-%as described in this section, 
-the design-space coverage during the optimal sizing search is sound and complete when using automated synthesis.
-
+Fig.~\ref{fig:optimization} illustrates how to obtain the optimal sizing of a stand-alone PV system using the traditional techniques (manual and simulation) and the proposed automated synthesis techniques. Note that the input information is the same for all the methods: weather data, price information, design requirements, as load curve and power demand, and design assumptions). For the automated synthesis, we also define the bound $k$ to restrict the design-space search \textcolor{red}{What are the implications to set this bound?}. 
+%
 \begin{figure}[h]
 \includegraphics[width=0.8\textwidth]{optimalsizingprocess3}
 \centering
 \caption{Comparison of optimal sizing methods.}
 \label{fig:optimization}
 \end{figure}
+
+The output presented by both techniques, all of them produce either a SUCCESS or FAIL result, thereby considering a feasible technical solution with the lowest cost. On the one hand, when done by simulation, we get a report or graphical result; on the other hand, the automated synthesis technique, which is a mathematical reasoning of a model, presents a counterexample with the optimal solution stored in variables. Furthermore, the design-space coverage during the optimal sizing search is sound and complete when using automated synthesis.
 
 %-----------------------------------------------------------
 \subsection{Program Synthesis}
