@@ -147,7 +147,7 @@ The minimum number of solar panels ($N_{TPmin}$) is computed as
 N_{TPmin} = \frac{E_{corrected}}{E_{p}}.
 \end{equation}
 
-Particularly, the total number of panels in series ($N_{PSmin}$) and parallel ($N_{PPmin}$) are respectively given by
+Notably, the total number of panels in series ($N_{PSmin}$) and parallel ($N_{PPmin}$) are respectively given by
 
 \begin{equation}
 \label{eq:NPSmin}
@@ -159,7 +159,7 @@ Particularly, the total number of panels in series ($N_{PSmin}$) and parallel ($
 N_{PPmin} = \frac{P_{total}}{Number\,Panels\,Series \times P_{max,ref}},
 \end{equation}
 
-\noindent where $V_{mppt,max}$ is the maximum operation voltage and $V_{mppt,min}$ is the minimum operation voltage of the charge controller; $V_{maxPower,TempMax}$ as well as $V_{maxPower,TempMin}$ are the maximum power voltage from the PV module considering the maximum and minimum operational temperature, respectively; $P_{total}$ is the total power demanded from the PV system and $P_{max,ref}$ is the power supplied from one PV panel in $Watts$. Regarding batteries, we must first define the total capacity of the battery bank, which can be described as
+\noindent where $V_{mppt, max}$ is the maximum operation voltage and $V_{mppt,min}$ is the minimum operating voltage of the charge controller. $V_{maxPower, TempMax}$, as well as $V_{maxPower, TempMin}$, are the maximum power voltage from the PV module considering the maximum and minimum operational temperature, respectively. $P_{total}$ is the total power demanded from the PV system and $P_{max, ref}$ is the power supplied from one PV panel in $Watts$. Regarding batteries, we must first define the total capacity of the battery bank, which can be described as
 
 \begin{equation}
 \label{eq:Cbank}
@@ -185,7 +185,7 @@ The short circuit reference from the manufacturer's solar panel must be correcte
 
 \begin{equation}
 \label{eq:iscamb}
-I_{sc,amb} = \frac{G}{G_{ref}} \left[I_{sc,ref} +  \mu_{I} \times (T-25) \right]. 
+I_{sc,amb} = \frac{G}{G_{ref}} \left[I_{sc,ref} + \mu_{I} \times (T-25) \right]. 
 \end{equation}
 
 The controller must meet the maximum current from the PV array given as
@@ -227,7 +227,7 @@ Regarding power reliability, this work will rely on the critical period solar en
 Considering the system cost analysis, based on the fact that the deployment location is not specified, our study uses an adapted Life Cycle Cost (LCC) analysis, where only the acquisition cost is considered in the model, i.e., without the operational and maintenance costs~\cite{Alsadi2018}.
 
 Algorithm~\ref{alg:verification-algorithm} describes our pseudo-code to synthesize stand-alone PV systems using symbolic model checking. 
-
+%
  \begin{algorithm}
  \caption{Synthesis algorithm}
  \begin{algorithmic}[1]
@@ -270,17 +270,17 @@ Algorithm~\ref{alg:verification-algorithm} describes our pseudo-code to synthesi
  \end{algorithmic} 
  \label{alg:verification-algorithm}
  \end{algorithm}
+%
+Our synthesis algorithm will synthesize constant values; it starts with the input of manufacturers' data and prices of PV panels, batteries, charge controllers, and inverters (Line 2). We define user requirements, i.e., house requirements and design definitions, from Lines 4 and 5. 
 
-Our synthesis algorithm will synthesize constant values; it starts with the input of manufacturers' data and prices of PV panels, batteries, charge controllers, and inverters (Line 2). After that, we define user requirements, i.e., house requirements and design definitions, from Lines 4 and 5. 
-
-The \textit{for}-loop started at Line 6 controls the lowest cost to the PV solution. In particular, it starts with cost $0$ and stops only when the algorithm finds a feasible solution in which the cost breaks the $assertion$ stated in Line 22; if that happens, then our algorithm has found an optimal solution, thereby stating that the {\sc Verify} phase reached a satisfiable condition (\textit{SAT}). The $MaxCost$ value at Line 6 is just a very high value put as a limit to the \textit{for}-loop, that never will be reached because the optimal solution will be found first.
+The \textit{for}-loop started at Line 6 controls the lowest cost to the PV solution. In particular, it starts with cost $0$ and stops only when the algorithm finds a feasible solution in which the cost breaks the $assertion$ stated in Line 22; if that happens, then our algorithm has found an optimal solution, thereby stating that the {\sc Verify} phase reached a satisfiable condition (\textit{SAT}). The $MaxCost$ value at Line 6 is just a very high value put as a limit to the \textit{for}-loop, which will never be reached because the optimal solution will be found first.
 
 Our synthesis algorithm uses non-deterministic variables to choose one specific constant from a given list of PV panels, controllers, batteries, and inverters (Lines 7 to 10). That procedure ensures that our synthesis engine checks all combinations of items from each equipment, and combine them to assemble a feasible (candidate) PV solution, which meets the user requirements.
-
-Next, we use Eq.~\ref{eq:Ecorrected}, Eq.~\ref{eq:Ep}, Eq.~\ref{eq:NTPmin}, Eq.~\ref{eq:NPSmin}, Eq.~\ref{eq:NPPmin}, Eq.~\ref{eq:Cbank}, Eq.~\ref{eq:Nbtotal}, Eq.~\ref{eq:iscamb}, and Eq.~\ref{eq:icmin} to calculate the sizing variables (Lines 11 to 17). The directive \textit{assume} (Lines 15, 18 and 19) ensures the compatibility of the chosen items from the list of equipment: the {\sc Verify} phase uses only the item (among all the possible ones) that satisfies the statements of Lines 15, 18 and 19. Therefore, our synthesis algorithm reaches Line 20 with one feasible solution, and the cost of that solution is calculated in $F_{obj}$ (Line 21). 
+%
+Next, we use Eq.~\ref{eq:Ecorrected}, Eq.~\ref{eq:Ep}, Eq.~\ref{eq:NTPmin}, Eq.~\ref{eq:NPSmin}, Eq.~\ref{eq:NPPmin}, Eq.~\ref{eq:Cbank}, Eq.~\ref{eq:Nbtotal}, Eq.~\ref{eq:iscamb}, and Eq.~\ref{eq:icmin} to calculate the sizing variables (Lines 11 to 17). The directive \textit{assume} (Lines 15, 18 and 19) ensures the compatibility of the chosen items from the list of equipment: the {\sc Verify} phase uses only the item (among all the possible ones) that satisfies the statements of Lines 15, 18, and 19. Our algorithm reaches Line 20 with one feasible solution; the cost of that solution is calculated in $F_{obj}$ (Line 21). 
 
 If our algorithm does not find a feasible solution among the item of equipment that was provided to our {\sc Synthesize} phase, then the result is an unsatisfiable (\textit{UNSAT}), i.e., the program finishes and does not find a solution. It indicates that it was not possible to combine the items of each equipment and create a feasible solution. The main challenge for the {\sc Synthesize} phase is to find a feasible candidate solution regarding the constraints and user requirements. Related to our {\sc Verify} phase, the challenge is to find the lowest acquisition cost from a list of equipment and components that are provided from the {\sc Synthesize} phase. 
-Note that the process described here in completely automated and that a validation is performed by our {\sc Verify} phase to ensure that the approach is sound.
+The process described here in completely automated; a validation is performed by our {\sc Verify} phase to ensure that the approach is sound.
 
 %---------------------------------------------------------------------------
 \section{Results and Discussion}
