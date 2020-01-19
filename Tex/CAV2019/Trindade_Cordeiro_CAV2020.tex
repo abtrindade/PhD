@@ -124,9 +124,7 @@ For night hours or rainy days, we hold batteries where power can be stored and u
 \label{fig:blockdiagram} 
 \end{figure}
 
-The sizing check stage will ensure that the system meets the standard project steps related to the critical period solar energy method~\cite{Pinho} and adopting the MPPT (Maximum Power Point Tracking) charge controller, which is the most common one in practice. 
-%
-Firstly, we need to correct the energy consumption estimated to the load ($E_{consumption}$), which is carried out by Eq.~\ref{eq:Ecorrected}, where the efficiency of batteries ($\eta_{b}$), controller ($\eta_{c}$), and inverter ($\eta_{i}$) are considered~\cite{Pinho} as follows
+The sizing check will ensure that the system meets the standard project steps related to the critical period solar energy method~\cite{Pinho} and the MPPT (Maximum Power Point Tracking) charge controller, which is the most common one in practice. Firstly, we need to correct the energy consumption estimated to the load ($E_{consumption}$), which is carried out by Eq.~\ref{eq:Ecorrected}, where the efficiency of batteries ($\eta_{b}$), controller ($\eta_{c}$), and inverter ($\eta_{i}$) are considered~\cite{Pinho} as follows
 
 \begin{equation}
 \label{eq:Ecorrected}
@@ -142,8 +140,7 @@ E_{p} = Solar\_Irradiance \times Panel\_Area \times \eta_{p} \times 1000,
 
 \noindent where the solar irradiance is expressed in terms of $kWh/m^{2}$ and depends on the site where the PV system will be deployed; 
 the PV panel area is given in $m^{2}$ and corresponds to the size of one PV panel, and $\eta_{p}$ represents the PV panel efficiency.
-
-The total minimum number of needed solar panels ($N_{TPmin}$) is computed as
+The minimum number of solar panels ($N_{TPmin}$) is computed as
 
 \begin{equation}
 \label{eq:NTPmin}
@@ -162,19 +159,15 @@ Particularly, the total number of panels in series ($N_{PSmin}$) and parallel ($
 N_{PPmin} = \frac{P_{total}}{Number\,Panels\,Series \times P_{max,ref}},
 \end{equation}
 
-\noindent where $V_{mppt,max}$ is the maximum operation voltage and $V_{mppt,min}$ is the minimum operation voltage of the charge controller; $V_{maxPower,TempMax}$ and $V_{maxPower,TempMin}$ are the maximum power voltage from the PV module considering the maximum and minimum operational temperature, respectively; $P_{total}$ is the total power demanded from the PV system and $P_{max,ref}$ is the power supplied from one PV panel in $Watts$.
-%, $ V_{system} $ is the DC voltage of the bus, normally $12$, $24$ or $48$ V.
-%
-Regarding batteries, we must first define the total capacity of the battery bank, which can be described as
+\noindent where $V_{mppt,max}$ is the maximum operation voltage and $V_{mppt,min}$ is the minimum operation voltage of the charge controller; $V_{maxPower,TempMax}$ as well as $V_{maxPower,TempMin}$ are the maximum power voltage from the PV module considering the maximum and minimum operational temperature, respectively; $P_{total}$ is the total power demanded from the PV system and $P_{max,ref}$ is the power supplied from one PV panel in $Watts$. Regarding batteries, we must first define the total capacity of the battery bank, which can be described as
 
 \begin{equation}
 \label{eq:Cbank}
 C_{bank} = \frac{E_{corrected} \times autonomy}{V_{system} \times DOD},
 \end{equation}
 
-\noindent where the variable $autonomy$ is a design definition; % and normally has a value ranging from $6$ to $48$h; 
+\noindent where the variable $autonomy$ is a design definition; 
 $ V_{system} $ is the DC voltage of the bus, and $ DOD $ is the battery deep of discharge (considered of maximum of 25\% here).
-
 Secondly, the total (minimum) number of batteries is computed as 
 \begin{equation}
 \label{eq:Nbtotal}
@@ -188,15 +181,15 @@ Regarding the charge controller, it must initially meet the voltage requirement 
 V_{c} = V_{system}.
 \end{equation}
 
-The short circuit reference information from the manufacturer's solar panel must be corrected to the cell temperature because the field temperature is higher than the nominal or laboratory temperature, and PV system is temperature dependent, as 
+The short circuit reference from the manufacturer's solar panel must be corrected to the cell temperature because the field temperature is higher than the nominal or laboratory temperature, and PV system is temperature dependent:
 
 \begin{equation}
 \label{eq:iscamb}
 I_{sc,amb} = \frac{G}{G_{ref}} \left[I_{sc,ref} +  \mu_{I} \times (T-25) \right]. 
 \end{equation}
 
-The controller must meet the maximum current from the PV array given by Eqs. \ref{eq:icmin} and \ref{eq:icicmin} as
-
+The controller must meet the maximum current from the PV array given as
+%
 \begin{equation}
 \label{eq:icmin}
 I_{c,min} = I_{sc,amb} \times N_{PP},
@@ -224,18 +217,15 @@ V_{out}AC = V_{AC}.
 \left[ (Demand \leq P_{AC,ref}) \, and \, (P_{surge} \leq MAX_{AC,ref}) \right].
 \end{equation}
 
-% -------------------------------------------------------
-\subsection{Optimal Sizing of PV Systems}
-% -------------------------------------------------------
-%
-The optimal sizing of PV systems is made by the best compromise between two objectives: power reliability and system cost~\cite{Alsadi2018}. 
-Regarding power reliability, this work will rely on the critical period solar energy method~\cite{Pinho}, as described in Section~\ref{sec:sizing}. 
-Considering the system cost analysis, based on the fact that the deployment location is not specified, our study uses an adapted Life Cycle Cost (LCC) analysis, where only the acquisition cost is considered in the model, i.e., without the operational and maintenance costs~\cite{Alsadi2018}.
-
 %------------------------------------------------------
 \section{Synthesizing Optimal Sizing of Stand-alone Solar Photovoltaic Systems}
 %Applying Automated Verification to Optimal Sizing of Stand-alone Solar PV Systems}
 %------------------------------------------------------
+
+The optimal sizing of PV systems is made by the best compromise between two objectives: power reliability and system cost~\cite{Alsadi2018}. 
+Regarding power reliability, this work will rely on the critical period solar energy method~\cite{Pinho}, as described in Section~\ref{sec:sizing}. 
+Considering the system cost analysis, based on the fact that the deployment location is not specified, our study uses an adapted Life Cycle Cost (LCC) analysis, where only the acquisition cost is considered in the model, i.e., without the operational and maintenance costs~\cite{Alsadi2018}.
+
 Algorithm~\ref{alg:verification-algorithm} describes our pseudo-code to synthesize stand-alone PV systems using symbolic model checking. 
 
  \begin{algorithm}
