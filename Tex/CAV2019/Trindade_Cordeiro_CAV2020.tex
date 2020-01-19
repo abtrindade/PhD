@@ -18,7 +18,7 @@
 % to display URLs in blue roman font according to Springer's eBook style:
 % \renewcommand\UrlFont{\color{blue}\rmfamily}
 
-\renewcommand{\baselinestretch}{0.97}
+\renewcommand{\baselinestretch}{0.98}
 
 \begin{document}
 %
@@ -219,7 +219,6 @@ V_{out}AC = V_{AC}.
 
 %------------------------------------------------------
 \section{Synthesizing Optimal Sizing of Stand-alone Solar Photovoltaic Systems}
-%Applying Automated Verification to Optimal Sizing of Stand-alone Solar PV Systems}
 %------------------------------------------------------
 
 The optimal sizing of PV systems is made by the best compromise between two objectives: power reliability and system cost~\cite{Alsadi2018}. 
@@ -234,17 +233,14 @@ Algorithm~\ref{alg:verification-algorithm} describes our pseudo-code to synthesi
  \begin{scriptsize}
  \renewcommand{\algorithmicrequire}{\textbf{Input:}}
  \renewcommand{\algorithmicensure}{\textbf{Output:}}
-   \REQUIRE weather data (temperature, solar irradiance), list of equipment (datasheet and price information), design requirements (load curve, peak demand, output voltage, battery autonomy), design assumptions (battery state of charge, criteria and objectives for technical and cost analysis).
+  \REQUIRE weather data (temperature, solar irradiance), list of equipment (datasheet and price information), design requirements (load curve, peak demand, output voltage, battery autonomy), design assumptions (battery state of charge, criteria and objectives for technical and cost analysis).
  \ENSURE FAIL with counter-example showing the optimal sizing; SUCCESS, saying that the project has no feasible solution considering the requirements and the list of equipment available.
-  \STATE Initialize variables \\
-  \STATE Declare list of PV panels, controllers, batteries, and inverters data and cost \\
-%  \STATE Declare list of controllers data and cost \\
-%  \STATE Declare list of batteries data and cost \\
-%  \STATE Declare list of inverters data and cost \\
-  \STATE Declare the maximum possible cost $MaxCost$  \\
-  \STATE Declare power demand, power peak, energy consumption \\
-  \STATE Declare battery autonomy, depth of discharge, AC voltage \\
-  \FOR {$HintCost=0$ to $MaxCost$}
+ \STATE Initialize variables \\
+ \STATE Declare list of PV panels, controllers, batteries, and inverters data and cost \\
+ \STATE Declare the maximum possible cost $MaxCost$ \\
+ \STATE Declare power demand, power peak, energy consumption \\
+ \STATE Declare battery autonomy, depth of discharge, AC voltage \\
+ \FOR {$HintCost=0$ to $MaxCost$}
  	\STATE Declare non-deterministic variable to select PV Panel from list \\
  	\STATE Declare non-deterministic variable to select Controller from list \\
  	\STATE Declare non-deterministic variable to select Battery from list \\
@@ -257,16 +253,13 @@ Algorithm~\ref{alg:verification-algorithm} describes our pseudo-code to synthesi
  	\STATE Calculate $I_{sc,amb}$ \\
  	\STATE Calculate $I_{c,min}$ \\
  	\STATE Requirement enforced by \textbf{assume}$(I_{c} \wedge V_{in}DC \wedge V_{out}AC)$ \\
-%	\STATE Requirement enforced by \textbf{assume}$(V_{in}DC \wedge V_{out}AC )$ \\
-%	\STATE Requirement enforced by \textbf{assume}$(V_{out}AC)$ \\
 	\STATE Requirement enforced by \textbf{assume}$(Demand \wedge P_{surge})$ \\
-%	\STATE Requirement enforced by \textbf{assume}$(P_{surge})$ \\
-	\STATE non-deterministic variables hold feasible equipment and cost  \\
-	\STATE $F_{obj} \leftarrow  N_{TP}*Panel_{Cost} \, + \, N_{TB}*Battery_{Cost} \, + Controller_{Cost} \, + \, Inverter_{Cost}$ \\
+	\STATE non-deterministic variables hold feasible equipment and cost \\
+	\STATE $F_{obj} \leftarrow N_{TP}*Panel_{Cost} \, + \, N_{TB}*Battery_{Cost} \, + Controller_{Cost} \, + \, Inverter_{Cost}$ \\
 	\STATE Violation check with \textbf{assert}$(F_{obj} > HintCost)$ \\
-  \ENDFOR
+ \ENDFOR
  \RETURN $(\,)$ 
-  \end{scriptsize}
+ \end{scriptsize}
  \end{algorithmic} 
  \label{alg:verification-algorithm}
  \end{algorithm}
@@ -280,7 +273,7 @@ Our synthesis algorithm uses non-deterministic variables to choose one specific 
 Next, we use Eq.~\ref{eq:Ecorrected}, Eq.~\ref{eq:Ep}, Eq.~\ref{eq:NTPmin}, Eq.~\ref{eq:NPSmin}, Eq.~\ref{eq:NPPmin}, Eq.~\ref{eq:Cbank}, Eq.~\ref{eq:Nbtotal}, Eq.~\ref{eq:iscamb}, and Eq.~\ref{eq:icmin} to calculate the sizing variables (Lines 11 to 17). The directive \textit{assume} (Lines 15, 18 and 19) ensures the compatibility of the chosen items from the list of equipment: the {\sc Verify} phase uses only the item (among all the possible ones) that satisfies the statements of Lines 15, 18, and 19. Our algorithm reaches Line 20 with one feasible solution; the cost of that solution is calculated in $F_{obj}$ (Line 21). 
 
 If our algorithm does not find a feasible solution among the item of equipment that was provided to our {\sc Synthesize} phase, then the result is an unsatisfiable (\textit{UNSAT}), i.e., the program finishes and does not find a solution. It indicates that it was not possible to combine the items of each equipment and create a feasible solution. The main challenge for the {\sc Synthesize} phase is to find a feasible candidate solution regarding the constraints and user requirements. Related to our {\sc Verify} phase, the challenge is to find the lowest acquisition cost from a list of equipment and components that are provided from the {\sc Synthesize} phase. 
-The process described here in completely automated; a validation is performed by our {\sc Verify} phase to ensure that the approach is sound.
+The process described here is entirely automated; a validation is performed by our {\sc Verify} phase to ensure that the approach is sound.
 
 %---------------------------------------------------------------------------
 \section{Results and Discussion}
@@ -288,27 +281,26 @@ The process described here in completely automated; a validation is performed by
 
 \textbf{Case studies.} We have performed seven case studies to evaluate our proposed synthesis approach, as described in the first column of Table~\ref{tab1} 
 (\textit{Specification}). These case studies were defined based on the usual electrical load found in riverside communities of the Amazon State in Brazil~\cite{Agrener2013,TrindadeCordeiro19}. Except for case 7, which was idealized as a small-town solution to support few lamps and a 12k BTUs air-conditioner. For all cases, an estimated load curve (kWh) was defined based on the electronics consumers in each house.
+%
+Our synthesis algorithm was fed with data and costs of forty equipment items from ten different manufacturers of PV systems. Furthermore, three start-of-art verifiers, CBMC,\footnote{Command-line: \$ cbmc -\phantom{}-unwind 100 filename.c -\phantom{}-trace} ESBMC,\footnote{Command-line: \$ esbmc filename.c -\phantom{}-no-bounds-check -\phantom{}-no-pointer-check -\phantom{}-unwind 100 -\phantom{}-boolector} and CPAchecker,\footnote{Command-line: \$ scripts/cpa.sh -heap 64000m -config config/bmc-incremental.properties -spec config/specification/sv-comp-reachability.spc filename.c} were used to compare our approach effectiveness and efficiency. 
 
-Our synthesis algorithm was fed with data and costs of forty equipment items from ten different manufacturers of PV systems. Furthermore, three start-of-art verification tools, CBMC,\footnote{Command-line: \$ cbmc -\phantom{}-unwind 100 filename.c -\phantom{}-trace} ESBMC,\footnote{Command-line: \$ esbmc filename.c -\phantom{}-no-bounds-check -\phantom{}-no-pointer-check -\phantom{}-unwind 100 -\phantom{}-boolector} and CPAchecker,\footnote{Command-line: \$ scripts/cpa.sh -heap 64000m -config config/bmc-incremental.properties -spec config/specification/sv-comp-reachability.spc filename.c} were used as our verification engine to compare our approach effectiveness and efficiency. It is important to mention that ESBMC with Z3 solver (version 4.7.1) in ``incremental mode'' was tested as well to reduce memory consumption; however, it was reported an ``internal failure'' error message. %caused by a bug in the solver that was not solved until the end of the tests.
+\noindent \textbf{Simulation Tool and Assumptions.} Related to off-the-shelf simulation tools, only HOMER Pro performs off-grid system with battery backup analysis and includes economical analysis. Here HOMER Pro will be the simulation tool used for comparison. HOMER Pro:
 
-\noindent \textbf{Simulation Tool and Assumptions.} Related to off-the-shelf simulation tools, only HOMER Pro performs off-grid system with battery backup analysis and includes economical analysis. Therefore, in this study, HOMER Pro will be the simulation tool used to comparison. HOMER Pro:
-
-%\textcolor{red}{reescrevi os itens todos, para tornar a leitura mais tranquila}
 \begin{itemize}
-\item is available only for Microsoft Windows and its annual standard subscription costs US\$ $504.00$~\cite{HOMER}; 
-\item it does not have LCC cost in its reports, only Net Present Cost (NPC). But it was possible to obtain LCC from NPC; 
-\item the optimization analysis of HOMER allows us to define a load curve and temperature according to data collected from online databases. However, in order to allow a correct comparison, the curve load and the temperature were defined the same as automated synthesis tools; 
-\item it does not have a explicit equipment called a charge controller. During the tests, it was chosen the ``load-following'' option which produces only enough power to meet the demand~\cite{HOMER} and (usually) presents a not overestimated solution; 
-\item it was assumed the value of 95\% for the availability of the PV system. By definition, 'availability' is the percentage of time at which a power system is capable of feed the load requirements~\cite{Khatib2014}. For ordinary house electrical load, 95\% is considered acceptable;
-\item it was assumed a string of two batteries in order to match the voltage of the system of $24$ V DC that was used for the automated synthesis tool; 
-\item it was included a generic flat-plate PV of $1$ kW and generic lead-acid batteries of $1$ kW as well (and with capacity of $83.4$ Ah according to HOMER Pro modeling). HOMER, during run-time, decides the size in kW of each module, based on feasibility and lower cost.
+\item It is available only for MS Windows; its annual standard subscription costs US\$ $504.00$~\cite{HOMER}; 
+\item It does not have LCC cost in its reports, only Net Present Cost (NPC). However, it is possible to obtain LCC from NPC; 
+\item The optimization analysis of HOMER allows us to define a load curve and temperature according to data collected from online databases. However, to allow a correct comparison, the curve load and the temperature were defined the same as automated synthesis tools; 
+\item It does not have a charge controller. During the tests, we have chosen the ``load-following'' option, which produces enough power to meet the demand~\cite{HOMER} and (usually) presents a non-overestimated solution; 
+\item It was assumed the value of 95\% for the availability of the PV system. By definition, ``availability'' is the percentage of time at which a power system is capable of feeding the load requirements~\cite{Khatib2014}. For ordinary house electrical load, 95\% is considered acceptable;
+\item It was assumed a string of two batteries to match the voltage of the system of $24$ V DC, which was used for the automated synthesis tool; 
+\item It was included a generic flat-plate PV of $1$ kW and generic lead-acid batteries of $1$ kW as well (and with capacity of $83.4$ Ah according to HOMER Pro modeling). HOMER, during run-time, decides the size in kW of each module, based on feasibility and lower cost.
 \end{itemize}
 
 \noindent \textbf{Setup.} All experiments regarding the verification tools were conducted on an otherwise idle Intel Xeon CPU E5-4617 ($8$-cores) with $2.90$ GHz and $64$ GB of RAM, running Ubuntu $16.04$ LTS $64$-bits. For HOMER Pro, it was used an Intel Core i5-$4210$ ($4$-cores), with $1.7$ GHz and $4$ GB of RAM, running Windows 10. The experiments were performed with a predefined time out of $240$ minutes.
 
 \noindent \textbf{Objectives.} Our evaluation aims to answer three experimental questions: 
 \textit{EQ1} \textbf{(soundness)} Does our automated synthesis approach provide correct results?, 
-\textit{EQ2} \textbf{(performance)} How do the software verifiers compare to each other?, and 
+\textit{EQ2} \textbf{(performance)} How do the software verifiers compare to each other for synthesizing PV systems?, and 
 \textit{EQ3} \textbf{(state-of-the-art)} how does our formal synthesis tool compare to a specialized simulation tool?
 
 \noindent \textbf{Results.} CPAchecker was able to synthesize the optimal sizing in six out of seven case studies (cases $1$ to $6$): the result was produced within the time limit, which varied from $134.71$ to $235.75$ minutes. 
@@ -322,7 +314,7 @@ Comparing the results between the formal synthesis with CPAchecker and HOMER Pro
 
 In general, the size of the PV panels and battery bank were larger in HOMER Pro than with our formal synthesis approach. To compare the results obtained from the optimization, the authors have four PV systems deployed and monitored since June $2018$ in a riverside community in the Amazonas State, Brazil, with similar demands presented by case studies $1$, $4$, $5$, and $6$, with a configuration of $3$ $\times$ $325$ W ($3$S) panels and $4$ $\times$ $220$ Ah ($2$S-$2$P $= 440$ Ah) lead-acid batteries. These deployed systems are closer to the result presented by the proposed formal synthesis approach than HOMER Pro, thereby showing that the solution is sound, which answers \textit{EQ1}.
 
-For the inverters, HOMER Pro suggests a value in kW very close to the peak of every case study, and it is just a reference value and not a commercial value of the employed inverter. The proposed synthesis tool, however, presents inverters that are commercial and can be found off-the-shelf. Therefore is a PRO to the formal synthesis method.
+For the inverters, HOMER Pro suggests a value in kW very close to the peak of every case study, and it is just a reference value and not a commercial value of the employed inverter. The proposed synthesis tool, however, presents inverters that are commercial and can be found off-the-shelf. Therefore, this feature is a PRO to the formal synthesis method.
 
 Concerning to charge controllers, as it was reported in this section, HOMER Pro does not include it as an explicit equipment in its mathematical model, only the synthesis tool presents a commercial controller and includes it during the cost analysis. Therefore, the formal synthesis method presents more reliable results than HOMER Pro.
 
@@ -331,11 +323,9 @@ Case study $7$ was not solved by the synthesis tool within the time limit establ
 \noindent \textbf{Threats to validity.} We have reported a favorable assessment of the proposed method. Nevertheless, we have also identified four threats to the validity of our results that can be further assessed and constitute future work: (1) improvement of the power reliability analysis: to include loss of load probability or loss of power supply probability, which can make the analysis more accurate; (2) improvement of the system cost analysis by including operational and maintenance costs to the adopted LCC analysis; (3) to increase the equipment and manufacturers database: this will increase the complexity of the optimization, but the result will also allow improved sizing; and (4) to compare the results of our approach with an off-the-shelf PV sizing/optimization software: this will validate the results obtained, and it allows a simulation-verification comparison.
 
 \noindent \textbf{Conclusion.} Summarizing, our synthesis tool is capable of presenting a solution, which is far detailed and close to the commercial reality than the solution presented by HOMER Pro. In particular, our automated synthesis method can provide all the details of every component of a PV system solution, with complete electrical details from datasheet of manufacturers, including the model of the component, nominal current, and voltage. In this respect, even the manufacturer's brand can be presented (in Table~\ref{tab1} it was removed to avoid some advertising).
-%
-%used with the SMT incremental mode\footnote{Command-line: \$ esbmc filename.c -\phantom{}-no-bounds-check -\phantom{}-no-pointer-check -\phantom{}-unwind 100 -\phantom{}-smt-during-symex -\phantom{}-smt-symex-guard -\phantom{}-z3} enabled with the goal of reducing memory usage; we have also used the SMT solver Z3 version 4.7.1~\cite{DeMoura}.
 
 \begin{table}[!t]
-\caption{Case studies and results: optimization of PV systems \textcolor{red}{could you please remove the columns for CBMC and ESBMC and just mention in the paper that both verifiers produce MO and TO, respectively?}.}\label{tab1}
+\caption{Case studies and results: optimization of PV systems \textcolor{red}{could you please put this table online?}.}\label{tab1}
 \begin{tabular}{|c|c|c|c|c|}
 \hline
 \hline
@@ -363,27 +353,6 @@ Specification & Result & Result & Result & Result \\
 \\Caption: OM= out of memory; TO= timeout; E= energy, NTP= total number of panels, NBT= total number of batteries, LCC= life cicle cost.
 \end{table}
 
-%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%divisão para o material antigo sobre verificação
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
-%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%\section{State-of-art in Automated Verification of Electrical Systems}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%
-%The conversion of traditional power grid into a smart grid, a fundamental example of a Cyber-Physical System (CPS), raises a number of issues that requires novel methods and applications. In 2012, a Chinese smart grid implementation was considered as case study to address the verification problem for performance and energy consumption~\cite{Yukseletall2012}. The authors employed a stochastic model checking approach and presented a modelling and analysis study using PRISM~\cite{KwiatkowskaNP11}. The focus of this study was on how CPs integrate information and communication technology functions to the physical elements of a system for monitoring and controlling purposes; here the authors employed automated verification of certain quantitative properties of the system, as 	probability	of	node	failure	in	the	long run, impact	of	repair	service	on	the	failure	risk, and expected energy consumption. %, with no interest in power generation or even solar PV systems.
-%
-%In 2015, an approach for applying Monte-Carlo simulation to power system protection schemes presented limitations of incomplete coverage of all possible operating conditions~\cite{Sengupta2015}. The authors proposed an automated simulation-based verification technique to verify correctness of protection settings efficiently using hybrid automata-temporal-logic framework. The initial focus was on relay operations and test-case generation to ensure early detection of design errors. %The study was limited to power system protection and did not deal with electricity generation or even solar PV systems.
-%
-%Other related studies from 2015 include a framework named Modana to achieve an integrated process from modeling with SysML/MARTE to analysis with statistical model checking for CPSs in terms of non-functional properties such as time and energy~\cite{Cheng2015}. In order to demonstrate Modana's capability, the authors modelled energy-aware buildings as a case study, and discussed the analysis on energy consumption in different scenarios. The focus here is on smart buildings and HVAC (heating, ventilation, and air conditioning) systems. %The research did no deal with solar PV systems. 
-% 
-%In 2017, a researcher suggested the application of formal methods to verify and control the behavior of computational devices interacting over a shared and smart infrastructure~\cite{Abate2017}. The author discussed the aggregation of large populations of thermostatically-controlled loads and of PV panels, and the corresponding problems of energy management in smart buildings, of demand-response on smart grids, and respectively of frequency stabilization and grid robustness. The focus was on controlling the behavior of components, thereby verifying the smart grid as a ``system of systems'' within the context of ``internet of things''. The author used approximate model checking of stochastic and hybrid models.
-%
-%In 2018, a verification methodology was proposed for the Cyber Physical Energy Systems (CPES) with applications to PV panels and its distributed power point tracking~\cite{Driouich2018}. This approach relied on representing unpredictable behavior of the environment to cover all possible feasible scenarios. The simulation results obtained by JModelica covered the system's complete dynamic behavior; however, it was evident the time consuming issue with almost three days of computer effort to verify the design space of one operation hour of the PV panels behavior. %The work did not include the other components of a stand-alone solar PV system.
-%
-%Another work from 2018 was the approach to modeling smart grid components using a formal specification. The authors used a state-based formal specification language named Z; they demonstrated the application of Z to four smart grid components~\cite{Akram2018}. The presented formal specification can be considered as a first step towards modeling of smart grid using formal methods. The starting point of this study was that a smart home can be considered as an integrated system consisting of various objects and system, which communicates and interacts with each other. This approach is base on Petri nets and from the premise that modeling of the smart home leads to clear understanding of the overall behavior of the smart grid.
-%
 %
 % ---- Bibliography ----
 % BibTeX users should specify bibliography style 'splncs04'.
