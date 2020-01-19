@@ -29,8 +29,7 @@
 % If the paper title is too long for the running head, you can set
 % an abbreviated paper title here
 %
-\author{Alessandro Trindade\inst{1}\orcidID{0000-0001-8262-2919} \and
-Lucas Cordeiro\inst{2}\orcidID{0000-0002-6235-4272}}
+\author{Alessandro Trindade\inst{1} \and Lucas Cordeiro\inst{2}} %\orcidID{0000-0001-8262-2919}  \orcidID{0000-0002-6235-4272}
 %
 \authorrunning{A. Trindade and L. Cordeiro}
 % First names are abbreviated in the running head.
@@ -41,11 +40,9 @@ University of Manchester, UK \email{lucas.cordeiro@manchester.ac.uk}}
 \maketitle              % typeset the header of the contribution
 
 \begin{abstract}
-%Currently, there exist various state-of-the-art tools to design solar photovoltaic (PV) systems, but they are mainly based on simulations, which do not cover all aspects of the design-space. We present a sound and automated approach to synthesize optimal sizing of stand-alone PV systems using program synthesis. In particular, our variant of counterexample guided inductive synthesis (CEGIS) approach has two phases: first we synthesize sizing of stand-alone PV systems but that may not achieve the lowest cost. The optimal solution is then verified via symbolic model checking; if the verification step fails, a counterexample is provided to the synthesis engine and the process iterates until an optimal sizing is obtained. Commercial equipment data is provided to our synthesis engine and candidate solutions are derived from financial analysis of the obtained sizing. Our synthesis method is novel and unprecedented to streamline the design of PV systems. Experimental results show that our synthesis method is able to synthesize within an acceptable run-time the optimal PV system sizing of seven different intricate case studies.
-
-%In 2017, for the first time, the number of people without access to electricity dipped below 1 billion, but trends in energy access still fall short of global goals. Particular attention is given to stand-alone solar photovoltaic systems in rural areas or where grid extension is unfeasible. 
-Tools to evaluate or to size electrification projects are available, but they are based on simulations that do not cover all aspects of the design space. The use of formal methods in electrical systems is a new subject, with published research spanning only the last four years. Moreover, the use of automated synthesis to obtain optimal sizing of solar photovoltaic systems has never been done before. Here our primary goal is to develop and evaluate a sound, automated approach to obtaining optimal sizing of stand-alone photovoltaic systems using program synthesis. We propose a variant of the counterexample guided inductive synthesis (CEGIS) approach, with two phases linking the technical and the cost analysis. First, we synthesize a feasible candidate based on power reliability, which may not attain the lowest cost. Second, the candidate is then verified iteratively with a lower bound cost via symbolic model checking. If the verification step succeeds, the lower bound is adjusted; if it fails, a counterexample provides the optimal solution. Experimental results using seven case studies demonstrate that we can produce an optimal solution within an acceptable run-time. We also present a comparison with a specialized simulation tool over real photovoltaic systems to show the effectiveness of our approach.
-\keywords{Automated verification  \and Model Checking \and Solar photovoltaic systems.}
+The use of formal methods in electrical systems is a new subject, with significant research spanning only the last four years. However, the use of automated synthesis to obtain optimal sizing of solar photovoltaic systems has never been done before. Here our primary goal is to develop and evaluate a sound, automated approach to obtaining optimal sizing of stand-alone photovoltaic systems using program synthesis. We propose a variant of the counterexample guided inductive synthesis (CEGIS) approach, with two phases linking the technical and the cost analysis. First, we synthesize a feasible candidate based on power reliability, which may not attain the lowest cost. Second, the candidate is then verified iteratively with a lower bound cost via symbolic model checking. If the verification step succeeds, the lower bound is adjusted; if it fails, a counterexample provides the optimal solution. Experimental results using seven case studies demonstrate that we can produce an optimal solution within an acceptable run-time. 
+%We also present a comparison with a specialized simulation tool over real photovoltaic systems to show the effectiveness of our approach.
+%\keywords{Automated verification  \and Model Checking \and Solar photovoltaic systems.}
 \end{abstract}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
