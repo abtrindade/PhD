@@ -115,12 +115,13 @@ A PV system is illustrated in Fig.\ref{fig:blockdiagram}.
 The PV generator, which can be a panel or an array, is a semiconductor device that can convert solar energy into DC electricity. 
 For night hours or rainy days, we hold batteries where power can be stored and used. The use of batteries as a storage form implies the presence of a charge controller~\cite{Hansen}. The PV arrays produce DC, and therefore when the PV system contains an AC load, a DC/AC conversion is required. That converter is called inverter; the AC load dictates the behavior of the AC electrical load from the house that will be fed by the system.
 
-\begin{figure}[h]
-\includegraphics[width=0.7\textwidth]{blockdiagramPVS2_rev}
+\begin{wrapfigure}{r}{0.5\textwidth}
+%\begin{figure}[h]
+\includegraphics[width=0.5\textwidth]{blockdiagramPVS2_rev}
 \centering
 \caption{Block diagram for a typical stand-alone PV system~\cite{Hansen}.}
 \label{fig:blockdiagram} 
-\end{figure}
+\end{wrapfigure}
 
 The sizing check will ensure that the system meets the standard project steps related to the critical period solar energy method~\cite{Pinho} and the MPPT (Maximum Power Point Tracking) charge controller, which is the most common one in practice. Firstly, we need to correct the energy consumption estimated to the load ($E_{consumption}$), which is carried out by Eq.~\ref{eq:Ecorrected}, where the efficiency of batteries ($\eta_{b}$), controller ($\eta_{c}$), and inverter ($\eta_{i}$) are considered~\cite{Pinho} as follows
 
@@ -165,28 +166,29 @@ C_{bank} = \frac{E_{corrected} \times autonomy}{V_{system} \times DOD},
 \end{equation}
 
 \noindent where the variable $autonomy$ is a design definition; 
-$ V_{system} $ is the DC voltage of the bus, and $ DOD $ is the battery deep of discharge (considered of maximum of 25\% here).
-Secondly, the total (minimum) number of batteries is computed as 
+$ V_{system} $ is the DC voltage of the bus, and $ DOD $ is the battery depth of discharge (considered of maximum of 25\% here).
+Secondly, the total (minimum) number of batteries $N_{B}total$ is computed as a product of the minimum number of batteries in series $N_{BS}min$ with the minimum number of batteries in parallel $ N_{BP}min $ and, therefore, as function of battery bank capacity $ C_{bank} $ and the capacity of the chosen battery $ Battery \, Capacity $ as
+
 \begin{equation}
 \label{eq:Nbtotal}
 N_{B}total = N_{BS}min \times N_{BP}min = \frac{V_{system}}{V_{bat}} \times \frac{C_{bank}}{Battery \, Capacity}.
 \end{equation}
 
-Regarding the charge controller, it must initially meet the voltage requirement of the PV system, as described by Eq.~\ref{eq:vcvsystem} to the charge controller voltage: 
+Regarding the charge controller, it must initially meet the voltage requirement of the PV system $V_{system}$, as described by Eq.~\ref{eq:vcvsystem} to the charge controller voltage $V_{c}$: 
 
 \begin{equation}
 \label{eq:vcvsystem}
 V_{c} = V_{system}.
 \end{equation}
 
-The short circuit reference from the manufacturer's solar panel must be corrected to the cell temperature because the field temperature is higher than the nominal or laboratory temperature, and PV system is temperature dependent:
+The short circuit reference current $ I_{sc,ref} $ from the manufacturer's solar panel must be corrected to the cell temperature because the field temperature $ T $ is higher than the nominal or laboratory temperature, and PV system is temperature dependent. This corrected current is called $I_{sc,amb}$, it uses $G_{ref} = 1000$ and the ratio of current change over temperature $\mu_{I}$:
 
 \begin{equation}
 \label{eq:iscamb}
-I_{sc,amb} = \frac{G}{G_{ref}} \left[I_{sc,ref} + \mu_{I} \times (T-25) \right]. 
+I_{sc,amb} = \frac{Solar \, Irradiance}{G_{ref}} \left[I_{sc,ref} + \mu_{I} \times (T-25) \right]. 
 \end{equation}
 
-The controller must meet the maximum current from the PV array given as
+The controller must meet the maximum current from the PV array. Therefore the controller current $I_{c}$ must be less than the calculated $I_{c,min}$ and given as
 %
 \begin{equation}
 \label{eq:icmin}
@@ -198,7 +200,7 @@ I_{c,min} = I_{sc,amb} \times N_{PP},
 I_{c} \geq I_{c,min}.
 \end{equation}
 
-The inverter sizing check is performed by means of three equations. Eq.~\ref{eq:vindc} ensures that the input voltage of the controller meets the system voltage. Eq.~\ref{eq:voutac} ensures that the output voltage of the controller meets the AC voltage of the load. Finally, Eq.~\ref{eq:invcheck} ensures that the controller can support the total demand of the load ($Demand$) and the surge power ($P_{surge}$), where $V_{in}DC$ is the nominal input voltage and $V_{out}AC$ is the nominal output voltage of the inverter; $MAX_{AC,ref}$ is the peak power that the inverter can support.
+The inverter sizing check is performed by means of three equations. Eq.~\ref{eq:vindc} ensures that the input voltage of the controller $V_{in}DC$ meets the system voltage. Eq.~\ref{eq:voutac} ensures that the output voltage of the controller $V_{out}AC$ meets the AC voltage of the load $V_{AC}$. Finally, Eq.~\ref{eq:invcheck} ensures that the controller can support the total demand of the load ($Demand$) and the surge power ($P_{surge}$), where $V_{in}DC$ is the nominal input voltage and $V_{out}AC$ is the nominal output voltage of the inverter; $P_{AC,ref}$ is the nominal power and $MAX_{AC,ref}$ is the peak power that the inverter can support.
 
 \begin{equation}
 \label{eq:vindc} 
@@ -215,7 +217,7 @@ V_{out}AC = V_{AC}.
 \left[ (Demand \leq P_{AC,ref}) \, and \, (P_{surge} \leq MAX_{AC,ref}) \right].
 \end{equation}
 
-\textcolor{red}{did we address this comment of the ASE reviewer? ``In some of the equations, the variables are not typed. In CPS some of the variables may belong to continuous domains (real numbers). You need to explain the types for variables and justify that the underlying verification tool supports those types.'' I think we should make it explicit in this section.}
+\textcolor{red}{In CPS some of the variables may belong to continuous domains (real numbers).  All the equations illustrated here produces real numbers, although when choosing batteries and panels quantities those real numbers must be translated into integer number (closest ones, considering the minimum or maximum according with each equation). The underlying verification tool and the simulation tool must support those type of variables in order to produce a correct result.}
 
 %------------------------------------------------------
 \section{Synthesizing Optimal Sizing of Stand-alone Solar Photovoltaic Systems}
@@ -278,19 +280,21 @@ The process described here is entirely automated; a validation is performed by o
 %---------------------------------------------------------------------------
 \section{Results and Discussion}
 %---------------------------------------------------------------------------
-
 %---------------------------------------------------------------------------
 \subsection{Description of the Case studies}
 %---------------------------------------------------------------------------
+The proposed synthesis approach was evaluated in  seven stand-alone PV system case studies: 
+\textbf{case study 1:} power peak: 342 W, power surge: 342 W, energy consumption: 3,900 Wh/day, battery autonomy: 48 h; \textbf{case study 2:} Power peak: 814 W, power surge: 980 W, energy consumption: 4,880 Wh/day, battery autonomy: 48 h; \textbf{case study 3:} power peak: 815 W, power surge: 980 W, energy consumption: 4,880 Wh/day, battery autonomy: 12 h; \textbf{case study 4:} power peak: 253 W, power surge: 722 W, energy consumption: 3,600 Wh/day, battery autonomy: 48 h; \textbf{case study 5:} power peak: 263 W, power surge: 732 W, energy consumption: 2,500 Wh/day, battery autonomy: 48 h; \textbf{case study 6:} power peak: 322 W, power surge: 896 W, energy consumption: 4,300 Wh/day, battery autonomy: 48 h; \textbf{case study 7:} power peak: 1,586 W, power surge: 2,900 W, energy consumtion: 14,000 Wh/day, battery autonomy: 48 h.
 
-We have performed seven case studies to evaluate our proposed synthesis approach, as described in the first column of Table~\ref{tab1} 
-(\textit{Specification}) \textcolor{red}{shall we make this table available online?}. These case studies were defined based on the usual electrical load found in riverside communities of the Amazon State in Brazil~\cite{Agrener2013,TrindadeCordeiro19}. Except for case 7 that was idealized as a small-town solution to support only a few lamps and a 12k BTUs air-conditioner. For all cases, an estimated load curve (kWh) was defined based on the electronics consumers in each house. Our synthesis algorithm was fed with data and costs of forty equipment items from ten different manufacturers of PV systems. Furthermore, three start-of-art verifiers, CBMC,\footnote{Command-line: \$ cbmc -\phantom{}-unwind 100 filename.c -\phantom{}-trace} ESBMC,\footnote{Command-line: \$ esbmc filename.c -\phantom{}-no-bounds-check -\phantom{}-no-pointer-check -\phantom{}-unwind 100 -\phantom{}-boolector} and CPAchecker,\footnote{Command-line: \$ scripts/cpa.sh -heap 64000m -config config/bmc-incremental.properties -spec config/specification/sv-comp-reachability.spc filename.c} were used to compare our approach effectiveness and efficiency. 
+These case studies were defined based on the usual electrical load found in riverside communities in the State of Amazonas,  Brazil~\cite{TrindadeCordeiro19,Agrener2013}, with the exception of case 7, that was idealized as a small town solution to support a few lamps and a 12 kBTUs air-conditioner. For all cases, an estimated load curve (kWh) was defined based on the electronics consumers in each house. Our synthesis algorithm was fed with data and costs of forty equipment items from ten different manufacturers of PV systems. 
+
+Three start-of-the-art verification tools, CBMC\footnote{Command-line: \$ cbmc -\phantom{}-unwind 100 filename.c -\phantom{}-trace} version 5.11 with MiniSat 2.2.1~\cite{Kroening}, ESBMC\footnote{Command-line: \$ esbmc filename.c -\phantom{}-no-bounds-check -\phantom{}-no-pointer-check -\phantom{}-unwind 100 -\phantom{}-boolector} version 6.0.0 with the  Boolector 3.0.1 solver~\cite{Brummayer}, and CPAchecker\footnote{Command-line: \$ scripts/cpa.sh -heap 64000m -config config/bmc-incremental.properties -spec config/specification/sv-comp-reachability.spc filename.c} version 1.8 with MathSAT 5.5.3~\cite{mathsat5}, were used as verification engines to compare the proposed approach effectiveness and efficiency. 
 
 %---------------------------------------------------------------------------
 \subsection{Simulation Tool and Assumptions}
 %---------------------------------------------------------------------------
 
-Concerning the off-the-shelf simulation tools, only HOMER Pro performs off-grid system with battery backup analysis and includes economical analysis. Here we used HOMER Pro as a state-of-the-art simulation tool for comparison purposes. In particular, HOMER Pro has the following characteristics:
+Concerning the off-the-shelf simulation tools, only HOMER Pro performs off-grid system with battery backup analysis and includes economical analysis. Here we used HOMER Pro version $3.13.1$ as a state-of-the-art simulation tool for comparison purposes. In particular, HOMER Pro has the following characteristics:
 
 \begin{itemize}
 \item It is available only for MS Windows; its annual standard subscription costs US\$ $504.00$~\cite{HOMER}; 
@@ -314,13 +318,13 @@ Our evaluation aims to answer three experimental goals:
 \end{enumerate}
 
 
-All experiments regarding the verification tools were conducted on an otherwise idle Intel Xeon CPU E5-4617 ($8$-cores) with $2.90$ GHz and $64$ GB of RAM, running Ubuntu $16.04$ LTS $64$-bits. For HOMER Pro, we have used an Intel Core i5-$4210$ ($4$-cores) with $1.7$ GHz and $4$ GB of RAM running Windows 10. \textcolor{red}{we have to explain here why we have used two different hardware platform. Does it influence on the results?}. We We perform the experiments with a predefined time out of $240$ minutes.
+All experiments regarding the verification tools were conducted on an otherwise idle Intel Xeon CPU E5-4617 ($8$-cores) with $2.90$ GHz and $64$ GB of RAM, running Ubuntu $16.04$ LTS $64$-bits. For HOMER Pro, we have used an Intel Core i5-$4210$ ($4$-cores) with $1.7$ GHz and $4$ GB of RAM running Windows 10. \textcolor{red}{The hardware platform was not the same because of the availability of the machines, and this has impact in respect to the performance that is less favorable to HOMER Pro}. We perform the experiments with a predefined time out of $240$ minutes.
 
 %---------------------------------------------------------------------------
 \subsection{Results}
 %---------------------------------------------------------------------------
 
-CPAchecker was able to synthesize the optimal sizing in six out of seven case studies (cases $1$ to $6$): CPAchecker produced the results within the time limit, which varied from $2.24$ to $3.92$ hours. Only case study $7$ led to a \textit{time out} result in CPAchecker, i.e., it was not solved within $240$ minutes. The violation (SAT result) indicated in Table~\ref{tab1} is the $assert$ of Line $22$ at Algorithm~\ref{alg:verification-algorithm}. CBMC and ESBMC are unable to produce any conclusive result. Situations of \textit{time out} or \textit{out of memory} occurred; these results partially answer the \textit{EG2} and \textit{EG3} \textcolor{red}{why? explain it here...}. 
+A Table with the details of the results is present on-line\footnote{\url{https://drive.google.com/file/d/1I1Cg4FNz9grMqXHUmOKnd-\_PFmLpmk6m/view?usp=sharing}}. Summarizing,  CPAchecker was able to synthesize the optimal sizing in six out of seven case studies (cases $1$ to $6$): CPAchecker produced the results within the time limit, which varied from $2.24$ to $3.92$ hours. Only case study $7$ led to a \textit{time out} result in CPAchecker, i.e., it was not solved within $240$ minutes. The violation (SAT result) indicated in Table~\ref{tab1} is the $assert$ of Line $22$ at Algorithm~\ref{alg:verification-algorithm}. CBMC and ESBMC are unable to produce any conclusive result. Situations of \textit{time out} or \textit{out of memory} occurred; these results partially answer the \textit{EG2} and \textit{EG3} \textcolor{red}{why? explain it here...}. 
 
 HOMER Pro was able to evaluate six case studies (cases $1$, $2$, $4$, $5$, $6$, and $7$) within a time shorter than $30$ seconds, which was faster than the proposed automated synthesis tool (cf.~\textit{EG3}) \textcolor{red}{why do we need to publish our results then?}. HOME Pro was unable to simulate case study $3$ since it does not have the feature of adjusting the battery autonomy, i.e., the tool always tries to feed with electricity the given load during $365$ days/year \textcolor{red}{Does this feature add more complexity to our synthesis model? If so, we have to point it out here}. 
 
@@ -343,36 +347,6 @@ We have reported a favorable assessment of the proposed method. Nevertheless, we
 \textcolor{red}{What is the novelty of our work? what are the impacts/relevance of our method to the society and formal methods community? How formal methods can improve the people's life? we should emphasize the relevance of the problem we solve and give numbers to show the efficiency of our approach if compared to HOME Pro.}
 
 Our synthesis tool can present a solution, which is far detailed and closer to the commercial reality than the solution presented by HOMER Pro. In particular, our automated synthesis method can provide all the details of every component of a PV system solution, with complete electrical details from datasheet of manufacturers, including the model of the component, nominal current, and voltage. In this respect, even the manufacturer's brand can be presented (\textcolor{red}{shall we add this table online?} in Table~\ref{tab1} it was removed to avoid some advertising).
-
-\begin{table}[!t]
-\caption{Case studies and results: optimization of PV systems \textcolor{red}{could you please put this table online?}.}\label{tab1}
-\begin{tabular}{|c|c|c|c|c|}
-\hline
-\hline
-Tools & \makecell{CPAchecker 1.8\\(MathSAT 5.5.3)}& \makecell{CBMC 5.11\\(MiniSat 2.2.1)} & \makecell {ESBMC 6.0.0\\(Boolector 3.0.1)} & HOMER Pro 3.13.1\\
-\hline
-\hline
-Specification & Result & Result & Result & Result \\
-\hline
-\makecell{\textbf{Case Study 1}\\Peak:342W\\Surge:342W \\E:3,900Wh/day\\Autonomy:48h} & \makecell{SAT (172.03 min) \\NTP:1$\times$340W (1S)\\NBT:8$\times$105Ah (2S-4P)\\Controller 15A/75V\\Inverter 700W/48V\\LCC: US\$ 7,790.53} & OM & TO & \makecell{(Time: 0.33 min)\\2.53 kW of PV\\NBT:12$\times$83.4Ah (2S-6P)\\0.351kW inverter\\LCC: US\$ 7,808.04}\\
-\hline
-\makecell{\textbf{Case Study 2}\\Peak:814W\\Surge:980W\\E:4,880Wh/day\\Autonomy:48h} & \makecell {SAT (228.7 min) \\NTP:2$\times$330W (2S)\\NBT:10$\times$105Ah (2S-5P)\\Controller 20A/100V DC\\Inverter 1,200W/24V \\LCC: US\$ 8,335.90} & OM & TO & \makecell{(Time: 0.18 min)\\3.71 kW of PV\\NBT:20$\times$83.4Ah (2S-10P)\\0.817kW inverter\\LCC: US\$ 12,861.75} \\
-\hline
-\makecell{\textbf{Case Study 3}\\Peak:815W\\Surge:980W\\E:4,880Wh/day\\Autonomy:12h} & \makecell {SAT (166.13 min) \\NTP:4$\times$150W (4S)\\NBT:4$\times$80Ah (2S-2P)\\Controller 15A/100V DC\\Inverter 1,200W/24V \\LCC: US\$ 7,306.27} & OM & TO & Not possible \\
-\hline
-\makecell{\textbf{Case Study 4}\\Peak:253W\\Surge:722W\\E:3,600Wh/day\\Autonomy:48h} &  \makecell {SAT (143.71 min) \\NTP:4$\times$150W (4S)\\NBT:10$\times$80Ah (2S-5P)\\Controller 15A/75V\\Inverter 750W/24V \\LCC: US\$ 7,816.31} & OM & TO & \makecell{(Time: 0.23 min)\\2.42 kW of PV\\NBT:12$\times$83.4Ah (2S-6P)\\0.254kW inverter\\LCC: US\$ 7,677.95}\\
-\hline
-\makecell{\textbf{Case Study 5}\\Peak:263W\\Surge:732W\\E:2,500Wh/day\\Autonomy:48h} &  \makecell {SAT (134.93 min) \\NTP:1$\times$340W (1S)\\NBT:6$\times$105Ah (2S-3P)\\Controller 15A/75V\\Inverter 400W/24V \\LCC: US\$ 7,252.14} & OM & TO & \makecell{(Time: 0.18 min)\\1.59 kW of PV\\NBT:10$\times$83.4Ah (2S-5P)\\0.268kW inverter\\LCC: US\$ 6,175.57} \\
-\hline
-\makecell{\textbf{Case Study 6}\\Peak:322W\\Surge:896W\\E:4,300Wh/day\\Autonomy:48h} &  \makecell {SAT (235.75 min) \\NTP:2$\times$200W (2S)\\NBT:10$\times$105Ah (2S-5P)\\Controller 15A/75V\\Inverter 400W/24V \\LCC: US\$ 8,287.23} & OM & TO & \makecell{(Time: 0.22 min)\\3.15 kW of PV\\NBT:14$\times$83.4Ah (2S-7P)\\0.328kW inverter\\LCC: US\$ 9,112.45} \\
-\hline
-\makecell{\textbf{Case Study 7}\\Peak:1,586W\\Surge:2,900W\\E:14,000Wh/day\\Autonomy:48h} & TO & OM & TO & \makecell{(Time: 0.20 min)\\12.5 kW of PV\\NBT:66$\times$83.4Ah (2S-33P)\\1.60kW inverter\\LCC: US\$ 41,878.11} \\
-\hline
-\hline
-\end{tabular}
-\\Caption: OM= out of memory; TO= timeout; E= energy, NTP= total number of panels, NBT= total number of batteries, LCC= life cicle cost.
-\end{table}
-
 %
 % ---- Bibliography ----
 % BibTeX users should specify bibliography style 'splncs04'.
