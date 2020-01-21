@@ -11,6 +11,8 @@
 %\usepackage{amsmath,amssymb,amsfonts}
 \usepackage{algorithm,algorithmic}
 \usepackage{wrapfig}
+\usepackage{mathtools}
+\usepackage{tabularx}
 % Used for displaying a sample figure. If possible, figure files should
 % be included in EPS format.
 %
@@ -187,34 +189,42 @@ I_{sc,amb} = \frac{Solar \, Irradiance}{G_{ref}} \left[I_{sc,ref} + \mu_{I} \tim
 
 The controller must meet the maximum current from the PV array. Therefore the controller current $I_{c}$ must be less than the calculated $I_{c,min}$ and given as
 %
-\begin{equation}
-\label{eq:icmin}
-I_{c,min} = I_{sc,amb} \times N_{PP},
-\end{equation}
-
+\begin{subequations}
+  \begin{tabularx}{\textwidth}{Xp{1cm}X}
+    \begin{equation}
+    \label{eq:icmin}
+      I_{c,min} = I_{sc,amb} \times N_{PP}.
+    \end{equation}
+  & &
 \begin{equation}
 \label{eq:icicmin}
 I_{c} \geq I_{c,min}.
 \end{equation}
+\end{tabularx}
+\end{subequations}
 
 The inverter sizing check is performed by means of three equations. Eq.~\ref{eq:vindc} ensures that the input voltage of the controller $V_{in}DC$ meets the system voltage. Eq.~\ref{eq:voutac} ensures that the output voltage of the controller $V_{out}AC$ meets the AC voltage of the load $V_{AC}$. Finally, Eq.~\ref{eq:invcheck} ensures that the controller can support the total demand of the load ($Demand$) and the surge power ($P_{surge}$), where $V_{in}DC$ is the nominal input voltage and $V_{out}AC$ is the nominal output voltage of the inverter; $P_{AC,ref}$ is the nominal power and $MAX_{AC,ref}$ is the peak power that the inverter can support.
 
+\begin{subequations}
+  \begin{tabularx}{\textwidth}{Xp{1cm}X}
 \begin{equation}
 \label{eq:vindc} 
 V_{in}DC = V_{system}.
 \end{equation}
-
+  & &
 \begin{equation}
 \label{eq:voutac} 
 V_{out}AC = V_{AC}.
 \end{equation}
+\end{tabularx}
+\end{subequations}
 
 \begin{equation}
 \label{eq:invcheck} 
 \left[ (Demand \leq P_{AC,ref}) \, and \, (P_{surge} \leq MAX_{AC,ref}) \right].
 \end{equation}
 
-All the equations above model the continuous-time behavior of the PV system; they produce real numbers, but when choosing batteries and panels quantities, those real numbers must be converted into integer numbers (closest ones, considering the minimum or maximum according to each equation). The underlying verification and simulation tools need to handle non-linear real arithmetic to produce the correct result.
+All the equations above model the continuous-time behavior of the PV system; they produce real numbers except for the batteries and panels, where real numbers must be converted into integer ones (closest ones, considering the minimum or maximum according to each equation). The verification and simulation tools need to handle non-linear real arithmetic to produce the correct result.
 
 %------------------------------------------------------
 \section{Synthesizing Optimal Sizing of Stand-alone Solar Photovoltaic Systems}
