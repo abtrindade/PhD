@@ -64,8 +64,8 @@ Our work makes three significant contributions to advance the state-of-the-art i
 \label{sec:AutomatedVerification}
 %-----------------------------------------------------------
 
-Fig.~\ref{fig:optimization} illustrates how to obtain the optimal sizing of a stand-alone PV system using the traditional techniques (manual and simulation) and the proposed automated synthesis techniques. Note that the input information is the same for all the methods: weather data, price information, design requirements, as load curve and power demand, and design assumptions. For the automated synthesis, we also define the bound $k$ to restrict the design-space search. On the one hand, if $k$ is too small, then the approach might not return a solution due to the search-space depth. Here we start with a low bound $k$ and incrementally increase it to avoid time and memory constraints on our verification back-end. Therefore, the proper choice of $k$ is essential to this method.
-%
+Fig.~\ref{fig:optimization} illustrates how to obtain the optimal sizing of a stand-alone PV system using the traditional techniques (manual and simulation) and the proposed synthesis technique. Note that the input information is the same for all the methods: weather data, price information, design requirements, as load curve and power demand, and design assumptions. For the automated synthesis, we also define the bound $k$ to restrict the design-space search. Here we start with a low bound $k$ and incrementally increase it to avoid time and memory constraints on our verification back-end. Therefore, the proper choice of $k$ is essential to this method.
+
 \begin{figure}[h]
 \includegraphics[width=0.8\textwidth]{optimalsizingprocess3}
 \centering
@@ -84,27 +84,24 @@ The basic idea of program synthesis is to automatically construct a program $P$ 
 %
 \begin{wrapfigure}{r}{0.5\textwidth}
 \begin{center}
-%\begin{figure}[h]
-%	\centering
 	\includegraphics[width=0.5\columnwidth]{fig2_rev2.jpg}
 \end{center}	
 	\caption{CEGIS in PV system sizing.}
 	\label{Counter-Example-Guided-Inductive-Synthesis}
-%\end{figure}
 \end{wrapfigure}
 
 The correctness specification $\sigma$ provided to our synthesizer is of the form $\exists \vec{F}. \forall \vec{x}. \sigma(\vec{x}, \vec{F})$, where $\vec{F}$ ranges over functions, $\vec{x}$ ranges over ground terms, and $\sigma$ is a quantifier-free (QF) formula typically supported by SMT solvers. The ground terms are interpreted over some finite domain $\mathcal{D}$, where $\mathcal{D}$ can be encoded using the SMT's bit-vectors part. Our specification includes house demand, energy, and battery autonomy; we also provide equipment specifications and prices from different manufacturers and models.
 
-In Figure~\ref{Counter-Example-Guided-Inductive-Synthesis}, regarding traditional CEGIS method, the phases {\sc Synthesize} and {\sc Verify} interact via a finite set of test vectors {\sc inputs}, which is incrementally updated. Given the correctness specification $\sigma$, the {\sc Synthesize} procedure tries to find an existential witness $\vec{F}$ satisfying the specification $\sigma(\vec{x}, \vec{F})$, for all $\vec{x}$ in {\sc inputs} (as opposed to all $\vec{x} \in \mathcal{D}$). If {\sc Synthesize} succeeds in finding a witness~$\vec{F}$, the latter is a candidate solution (i.e., feasible combination of equipment) to the full synthesis formula, which is passed to {\sc Verify} to check whether it is a proper solution ({\it i.e.}, $\vec{F}$ satisfies the specification $\sigma(\vec{x}, \vec{F})$ for all $\vec{x}\in\mathcal{D}$). If this is the case, then the algorithm terminates, i.e., we have found a feasible equipment with the lowest cost; otherwise, in the CEGIS traditional method, additional information is provided to the phase {\sc Synthesize}, in the form of a new counterexample that is added to the {\sc inputs} set and the loop iterates again.
+In Figure~\ref{Counter-Example-Guided-Inductive-Synthesis}, the phases {\sc Synthesize} and {\sc Verify} interact via a finite set of test vectors {\sc inputs}, which is incrementally updated. Given the correctness specification $\sigma$, the {\sc Synthesize} procedure tries to find an existential witness $\vec{F}$ satisfying the specification $\sigma(\vec{x}, \vec{F})$, for all $\vec{x}$ in {\sc inputs} (as opposed to all $\vec{x} \in \mathcal{D}$). If {\sc Synthesize} succeeds in finding a witness~$\vec{F}$, the latter is a candidate solution to the full synthesis formula, which is passed to {\sc Verify} to check whether it is a proper solution ({\it i.e.}, $\vec{F}$ satisfies the specification $\sigma(\vec{x}, \vec{F})$ for all $\vec{x}\in\mathcal{D}$). If this is the case, then the algorithm terminates.
 
-One may notice that each iteration of the traditional CEGIS loop adds a new input to the finite set $INPUTS$, which is then used for synthesis. Given that the full set of inputs $\mathcal{D}$ is finite because we use bit-vector expressions, this means that the refinement loop can only iterate over a finite number of times. However, {\sc Synthesize} may conclude that no candidate solution obeying $\sigma$ for the finite set $INPUTS$ exists, and our synthesis engine can then conclude that no possible equipment combination was found.
+One may notice that each iteration of the traditional CEGIS loop adds a new input to the finite set $INPUTS$, which is then used for synthesis. Given that the full set of inputs $\mathcal{D}$ is finite because we use bit-vector expressions, this means that the refinement loop can only iterate over a finite number of times. However, {\sc Synthesize} may conclude that no candidate solution obeying $\sigma$ for the finite set $INPUTS$ exists. %, and our synthesis engine can then conclude that no possible equipment combination was found.
 
 In our CEGIS variant, there exist four differences related to the traditional one: 
 (1) there exists no test vector and every candidate is generated during the run-time in the {\sc Synthesize} phase and sent to the {\sc Verify} phase; 
 (2) if the {\sc Verify} phase is unsuccessful, then a new candidate is generated by {\sc Synthesize} and 
 (3) the lower bound of the {\sc Verify} phase is incremented to search for the lowest cost; as a result,
 (4) there exists no refinement from the {\sc Verify} phase back to the {\sc Synthesize} phase, i.e., 
-a new counterexample is not added to the {\sc input} set since a failure during the {\sc Verify} phase will only discard a given candidate, which could be feasible in the next iteration with a new lower bound.%
+a new counterexample is not added to the {\sc input} set since a failure during the {\sc Verify} phase will only discard a given candidate, which could be feasible in the next iteration with a new lower bound.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Sizing Stand-alone Solar PV Systems}
