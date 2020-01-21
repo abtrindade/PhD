@@ -217,7 +217,7 @@ V_{out}AC = V_{AC}.
 \left[ (Demand \leq P_{AC,ref}) \, and \, (P_{surge} \leq MAX_{AC,ref}) \right].
 \end{equation}
 
-\textcolor{red}{In CPS some of the variables may belong to continuous domains (real numbers).  All the equations illustrated here produces real numbers, although when choosing batteries and panels quantities those real numbers must be translated into integer number (closest ones, considering the minimum or maximum according with each equation). The underlying verification tool and the simulation tool must support those type of variables in order to produce a correct result.}
+All the equations above model the continuous-time behavior of the PV system; they produce real numbers, but when choosing batteries and panels quantities, those real numbers must be converted into integer numbers (closest ones, considering the minimum or maximum according to each equation). The underlying verification and simulation tools need to handle non-linear real arithmetic to produce the correct result.
 
 %------------------------------------------------------
 \section{Synthesizing Optimal Sizing of Stand-alone Solar Photovoltaic Systems}
