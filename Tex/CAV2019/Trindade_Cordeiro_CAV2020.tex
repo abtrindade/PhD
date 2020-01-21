@@ -18,7 +18,7 @@
 % to display URLs in blue roman font according to Springer's eBook style:
 % \renewcommand\UrlFont{\color{blue}\rmfamily}
 
-\renewcommand{\baselinestretch}{0.97}
+\renewcommand{\baselinestretch}{0.96}
 
 \begin{document}
 %
@@ -47,6 +47,7 @@ The use of formal methods in electrical systems is a new subject, with significa
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Introduction}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 Lack of access to clean and affordable energy is considered a core dimension of poverty~\cite{Hussein2012}. Progress has been made worldwide; in particular, in 2017, the number of people without electricity access fell below $1$ billion threshold for the first time~\cite{IEAweo2018}. In order to provide electricity for all, decentralized systems led by solar photovoltaic (PV) in off-grid and mini-grid systems will be the lowest-cost solution for three-quarters of the additional connections needed~\cite{Hussein2012}. 
 
 In order to simulate or evaluate a PV system, there exist various specialized tools, e.g., RETScreen~\cite{Pradhan} and HOMER~\cite{Swarnkar}; and even general-purpose simulation tools, e.g., MATLAB/Simulink~\cite{Gow1999}. 
@@ -54,7 +55,7 @@ In order to simulate or evaluate a PV system, there exist various specialized to
 
 Optimization of PV systems is not a recent topic; since the '90s, different techniques using different criteria to find ultimate combinations for design parameters, based on intuitive, numerical, and analytical methods, were proposed and developed~\cite{Alsadi2018}. In $2015$, an automated simulation-based verification technique was applied to verify the correctness of power system protection settings~\cite{Sengupta2015}. In $2017$, a researcher suggested the application of formal methods to verify and control the behavior of computational devices in a smart grid ~\cite{Abate2017}. In $2018$, a verification methodology was applied to PV panels and its distributed power point tracking~\cite{Driouich2018}. In $2019$, an automated verification methodology was proposed to validate stand-alone solar PV systems~\cite{TrindadeCordeiro19}. However, \textit{formal methods and its application to synthesize PV systems are still unexplored in literature}.
 
-Here, we have developed a (non-trivial) variant of counterexample guided inductive synthesis (CEGIS) for synthesizing optimal sizing of stand-alone PV systems using commercial equipment data. Given a correctness specification $\sigma$, our method uses that as a starting point and then iteratively produces a sequence of candidate solutions that satisfy $\sigma$, related to power reliability. In particular, on each iteration, we synthesize the sizing of stand-alone PV systems, but that may not achieve the lowest cost. The candidate solution is then verified via symbolic model checking with a lower bound that serves as the minimum cost of reference; if the verification step does not fail, the lower bound is adjusted. If it fails, then a counterexample is provided with an optimal sizing that meets both power reliability and system cost. Here our focus is not on new criteria or even optimization objectives.  
+Here we developed a variant of the counterexample guided inductive synthesis (CEGIS)~\cite{DBLP:conf/asplos/Solar-LezamaTBSS06} technique for synthesizing optimal sizing of stand-alone PV systems using commercial equipment data. Given a correctness specification $\sigma$, our method uses that as a starting point and then iteratively produces a sequence of candidate solutions that satisfy $\sigma$, related to power reliability. In particular, on each iteration, we synthesize the sizing of stand-alone PV systems, but that may not achieve the lowest cost. The candidate solution is then verified via symbolic model checking with a lower bound that serves as the minimum cost of reference; if the verification step does not fail, the lower bound is adjusted. If it fails, then a counterexample is provided with an optimal sizing that meets both power reliability and system cost. 
 
 Our work makes three significant contributions to advance the state-of-the-art in PV optimal sizing. First, the use of automated symbolic verification in PV systems was uncommon in recent prior studies~\cite{TrindadeCordeiro19}, and specifically, their use in synthesizing PV sizing is novel. Second, we evaluate our approach using different state-of-the-art symbolic verifiers to obtain the best performance in our verification back-end for synthesizing optimal PV systems and compare that to HOMER. Lastly, we discuss the main challenges of applying formal methods to PV systems and also reflect on lessons learned from this practical experience.
 
