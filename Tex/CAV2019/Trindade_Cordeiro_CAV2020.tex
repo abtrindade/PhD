@@ -14,6 +14,8 @@
 \usepackage{wrapfig}
 \usepackage{mathtools}
 \usepackage{tabularx}
+\usepackage{etoolbox}
+
 % Used for displaying a sample figure. If possible, figure files should
 % be included in EPS format.
 %
@@ -42,8 +44,9 @@
 University of Manchester, UK, \email{lucas.cordeiro@manchester.ac.uk}}
 \maketitle              % typeset the header of the contribution
 
+
 \begin{abstract}
-The use of formal methods in electrical systems is a new subject, with significant research spanning only the last four years. However, the use of automated synthesis to obtain optimal sizing of solar photovoltaic (PV) systems remains unexplored in literature. Here our primary goal is to develop and evaluate a sound, automated synthesis approach to obtain optimal sizing of stand-alone PV systems. We propose a variant of the counterexample guided inductive synthesis approach, with two phases linking the technical and the cost analysis. First, we synthesize a feasible candidate based on power reliability, which may not attain the lowest cost. Second, the candidate is then verified iteratively with a lower bound cost via symbolic model checking. If the verification step succeeds, the lower bound is adjusted; if it fails, a counterexample provides the optimal solution. Experimental results demonstrate that we can produce an optimal solution within an acceptable run-time. We also present a comparison with a specialized simulation tool over real PV systems to show the effectiveness of our approach.
+The use of formal methods in electrical systems is a new subject, with significant research spanning only the last four years. However, the use of automated synthesis to obtain optimal sizing of solar photovoltaic (PV) systems remains unexplored in literature. Here we develop and evaluate a sound, automated synthesis approach to obtain optimal sizing of stand-alone PV systems. We propose a variant of the counterexample guided inductive synthesis approach, with two phases linking the technical and cost analysis. First, we synthesize a feasible candidate based on power reliability, which may not attain the lowest cost. Second, the candidate is then verified iteratively with a lower bound cost via model checking. If the verification step succeeds, the lower bound is adjusted; if it fails, a counterexample provides the optimal solution. Experimental results demonstrate that we can produce an optimal solution within an acceptable run-time, which is validated via deployed systems in a riverside community in the Amazonas State (Brazil). We also present a comparison with a specialized simulation tool over real PV systems to show the effectiveness of our approach.
 %\keywords{Automated verification  \and Model Checking \and Solar photovoltaic systems.}
 \end{abstract}
 
@@ -62,10 +65,14 @@ Here we developed a variant of the counterexample guided inductive synthesis (CE
 
 Our work makes three significant contributions to advance the state-of-the-art in PV optimal sizing. First, the use of automated symbolic verification in PV systems was uncommon in recent prior studies~\cite{TrindadeCordeiro19}, and specifically, their use in synthesizing PV sizing is novel. Second, we evaluate our approach using different state-of-the-art symbolic verifiers to obtain the best performance in our verification back-end for synthesizing optimal PV systems and compare that to HOMER. Lastly, we discuss the main challenges of applying formal methods to PV systems and also reflect on lessons learned from this practical experience.
 
+\vspace{-2ex}
+
 %-----------------------------------------------------------
 \section{Preliminaries}
 \label{sec:AutomatedVerification}
 %-----------------------------------------------------------
+
+\vspace{-1ex}
 
 Fig.~\ref{fig:optimization} illustrates how to obtain the optimal sizing of a stand-alone PV system using the traditional techniques (manual and simulation) and the proposed synthesis technique. Note that the input information is the same for all the methods: weather data, price information, design requirements, as load curve and power demand, and design assumptions. For the automated synthesis, we also define the bound $k$ to restrict the design-space search. Here we start with a low bound $k$ and incrementally increase it to avoid time and memory constraints on our verification back-end. Therefore, the proper choice of $k$ is essential to this method.
 
