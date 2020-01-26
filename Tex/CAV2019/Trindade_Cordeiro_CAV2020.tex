@@ -46,14 +46,13 @@ University of Manchester, UK, \email{lucas.cordeiro@manchester.ac.uk}}
 
 
 \begin{abstract}
-The use of formal methods in electrical systems is a new subject, with significant research spanning only the last four years. However, the use of automated synthesis to obtain optimal sizing of solar photovoltaic (PV) systems remains unexplored in literature. Here we develop and evaluate a sound, automated synthesis approach to obtain optimal sizing of stand-alone PV systems. We propose a variant of the counterexample guided inductive synthesis approach, with two phases linking the technical and cost analysis. First, we synthesize a feasible candidate based on power reliability, which may not attain the lowest cost. Second, the candidate is then verified iteratively with a lower bound cost via model checking. If the verification step succeeds, the lower bound is adjusted; if it fails, a counterexample provides the optimal solution. Experimental results demonstrate that we can produce an optimal solution within an acceptable run-time, which is validated via deployed systems in a riverside community in the Amazonas State (Brazil). We also present a comparison with a specialized simulation tool over real PV systems to show the effectiveness of our approach.
+\textcolor{red}{The use of the power generation with a renewable energy source is growing rapidly due to the industrial development. Renewable energy is environment-friendly: clean, operates silently, long-lasting, low maintenance costs, zero fuel costs and an inexhaustible supply. Particularly, photovoltaic (PV) panels have emerged as an alternative to fossil or nuclear fuel generation.} The use of formal methods in electrical systems is a new subject, with significant research spanning only the last five years. However, the use of automated synthesis to obtain optimal sizing of solar photovoltaic systems remains unexplored in literature. Here we develop and evaluate a sound, automated synthesis approach to obtain optimal sizing of stand-alone PV systems. We propose a variant of the counterexample guided inductive synthesis approach, with two phases linking the technical and cost analysis. First, we synthesize a feasible candidate based on power reliability, which may not attain the lowest cost. Second, the candidate is then verified iteratively with a lower bound cost via model checking. If the verification step succeeds, the lower bound is adjusted; if it fails, a counterexample provides the optimal solution. Experimental results demonstrate that we can produce an optimal solution within an acceptable run-time, which is validated via deployed systems in a riverside community in the Amazonas State (Brazil). We also present a comparison with a specialized simulation tool over real PV systems to show the effectiveness of our approach.
 %\keywords{Automated verification  \and Model Checking \and Solar photovoltaic systems.}
 \end{abstract}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Introduction}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 Lack of access to clean and affordable energy is considered a core dimension of poverty~\cite{Hussein2012}. Progress has been made worldwide; in particular, in 2017, the number of people without electricity access fell below $1$ billion threshold for the first time~\cite{IEAweo2018}. In order to provide electricity for all, decentralized systems led by solar photovoltaic (PV) in off-grid and mini-grid systems will be the lowest-cost solution for three-quarters of the additional connections needed~\cite{Hussein2012}. 
 
 In order to simulate or evaluate a PV system, there exist various specialized tools, e.g., RETScreen~\cite{Pradhan} and HOMER~\cite{Swarnkar}; and even general-purpose simulation tools, e.g., MATLAB/Simulink~\cite{Gow1999}. 
@@ -307,12 +306,13 @@ Three start-of-the-art verifiers, CBMC\footnote{Command-line: \$ cbmc -\phantom{
 
 Concerning the off-the-shelf simulation tools, only HOMER Pro performs an off-grid system with battery backup analysis and includes economical analysis. Here we used HOMER Pro version $3.13.1$ as a state-of-the-art simulation tool for comparison purposes. In particular, HOMER Pro has the following characteristics:
 (a) it is available only for MS-Windows; its annual standard subscription costs US\$ $504.00$~\cite{HOMER}; 
-(b) it does not have LCC cost in its reports, only Net Present Cost (NPC); however, we can obtain LCC from NPC; 
-(c) the optimization analysis defines a load curve and temperature according to data collected from online databases. However, to allow a correct comparison, the curve load and the temperature were defined the same as our synthesis approach; 
-(d) it does not have a charge controller. During the tests, we have chosen the ``load-following'' option, which produces enough power to meet the demand~\cite{HOMER} and (usually) presents a non-overestimated solution; 
-(e) it was assumed 95\% availability of the PV system. By definition, ``availability'' is the percentage of time at which a power system can feed the load requirements~\cite{Khatib2014}. For an ordinary house electrical load, 95\% is considered acceptable;
-(f) it was assumed a string of two batteries to match the voltage of the system of $24$ V DC, which was used for our automated synthesis tool; 
-(g) it was included a generic flat-plate PV of $1$ kW and generic lead-acid batteries of $1$ kW ($83.4$ Ah capacity). During run-time, HOMER decides the size in kW of each based on feasibility and lower cost.
+\textcolor{red}{(b) it has two optimization algorithms. One algorithm simulates all of the feasible system configurations defined by the search space. Additionally, a proprietary derivative-free algorithm to search for the least-costly system;}
+(c) it does not have LCC cost in its reports, only Net Present Cost (NPC). However, we can obtain LCC from NPC; 
+(d) the optimization analysis defines a load curve and temperature according to data collected from online databases. However, to allow a correct comparison, the curve load and the temperature were defined the same as our synthesis approach; 
+(e) it does not have a charge controller. During the tests, we have chosen the ``load-following'' option, which produces enough power to meet the demand~\cite{HOMER} and (usually) presents a non-overestimated solution; 
+(f) it was assumed 95\% availability of the PV system. By definition, ``availability'' is the percentage of time at which a power system can feed the load requirements~\cite{Khatib2014}. For an ordinary house electrical load, 95\% is considered acceptable;
+(g) it was assumed a string of two batteries to match the voltage of the system of $24$ V DC, which was used for our automated synthesis tool; 
+(h) it was included a generic flat-plate PV of $1$ kW and generic lead-acid batteries of $1$ kW ($83.4$ Ah capacity). During run-time, HOMER decides the size in kW of each based on feasibility and lower cost.
 
 %---------------------------------------------------------------------------
 \subsection{Objectives and Setup}
