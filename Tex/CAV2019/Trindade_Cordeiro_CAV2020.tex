@@ -307,8 +307,8 @@ Three start-of-the-art verifiers, CBMC\footnote{Command-line: \$ cbmc -\phantom{
 \subsection{Simulation Tool and Assumptions}
 %---------------------------------------------------------------------------
 Concerning the off-the-shelf simulation tools, only HOMER Pro performs an off-grid system with battery backup analysis and includes economical analysis. Here we used HOMER Pro version $3.13.1$ as a state-of-the-art simulation tool for comparison purposes. In particular, HOMER Pro has the following characteristics:
-(a) it is available only for MS-Windows; its annual standard subscription costs US\$ $504.00$~\cite{HOMER}; 
-\textcolor{red}{(b) it has two optimization algorithms. One algorithm simulates all of the feasible system configurations defined by the search space. Additionally, a proprietary derivative-free algorithm to search for the least-costly system;}
+(a) it is available only for MS-Windows, its annual standard subscription costs US\$ $504.00$~\cite{HOMER}; 
+\textcolor{red}{(b) it has two optimization algorithms: one algorithm simulates all of the feasible system configurations defined by the search space, and additionally, a proprietary derivative-free algorithm to search for the least-costly system;}
 (c) it does not have LCC cost in its reports, only Net Present Cost (NPC). However, we can obtain LCC from NPC; 
 (d) the optimization analysis defines a load curve and temperature according to data collected from online databases. However, to allow a correct comparison, the curve load and the temperature were defined the same as our synthesis approach; 
 (e) it does not have a charge controller. During the tests, we have chosen the ``load-following'' option, which produces enough power to meet the demand~\cite{HOMER} and (usually) presents a non-overestimated solution; 
