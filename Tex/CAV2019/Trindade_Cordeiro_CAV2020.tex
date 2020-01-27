@@ -152,7 +152,7 @@ The minimum number of solar panels ($N_{TPmin}$) is computed as
 N_{TPmin} = \frac{E_{corrected}}{E_{p}}.
 \end{equation}
 
-Notably, the total number of panels in series ($N_{PSmin}$) and parallel ($N_{PPmin}$) are respectively given by
+The number of panels in series ($N_{PSmin}$) and parallel ($N_{PPmin}$) are resp.:
 
 \begin{equation}
 \label{eq:NPSmin}
@@ -180,7 +180,7 @@ Secondly, the total (minimum) number of batteries $N_{B}total$ is computed as a 
 N_{B}total = N_{BS}min \times N_{BP}min = \frac{V_{system}}{V_{bat}} \times \frac{C_{bank}}{Battery \, Capacity}.
 \end{equation}
 
-Regarding the charge controller, it must initially meet the voltage requirement of the PV system $V_{system}$, as described by Eq.~\ref{eq:vcvsystem} to the charge controller voltage $V_{c}$: 
+Regarding the charge controller, it must initially meet the voltage requirement of the PV system $V_{system}$, given by Eq.~\ref{eq:vcvsystem} to the charge controller voltage: % $V_{c}$: 
 
 \begin{equation}
 \label{eq:vcvsystem}
@@ -255,7 +255,7 @@ Algorithm~\ref{alg:verification-algorithm} describes our pseudo-code to synthesi
  \renewcommand{\algorithmicrequire}{\textbf{Input:}}
  \renewcommand{\algorithmicensure}{\textbf{Output:}}
  \REQUIRE weather data (temperature, solar irradiance), list of equipment (datasheet and price), design requirements (load curve, peak demand, output voltage, battery autonomy), design assumptions (battery state of charge, criteria and objectives for technical and cost analysis).
- \ENSURE FAIL with counter-example showing the optimal sizing; SUCCESS, stating that the project has no feasible solution considering the requirements and the list of equipment available.
+ \ENSURE FAIL with counterexample showing the optimal sizing; SUCCESS, stating that the project has no feasible solution considering the requirements and the list of equipment available.
  \STATE Initialize variables \\
  \STATE Declare list of PV panels, controllers, batteries, and inverters data and cost \\
  \STATE Declare the maximum possible cost $MaxCost$ \\
@@ -279,7 +279,7 @@ Algorithm~\ref{alg:verification-algorithm} describes our pseudo-code to synthesi
 	\STATE $F_{obj} \leftarrow N_{TP}*Panel_{Cost} \, + \, N_{TB}*Battery_{Cost} \, + Controller_{Cost} \, + \, Inverter_{Cost}$ \\
 	\STATE Violation check with \textbf{assert}$(F_{obj} > HintCost)$ \\
  \ENDFOR
- \RETURN $(\,)$ 
+% \RETURN $(\,)$ 
  \end{scriptsize}
  \end{algorithmic} 
  \label{alg:verification-algorithm}
