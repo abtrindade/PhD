@@ -1,0 +1,39 @@
+Here we describe the detailed data from each one of the equipment there were used during the validation and/or optimization of Solar PV systems. The aim is to aid to understand where each variable or parameter came from.
+
+%---------------------------------------
+\section{PV Panels}
+%---------------------------------------
+
+During the doctoral process, the techniques from computer science proposed to deal with issues inherent to solar photovoltaic systems became algorithms and programs. These programs became tools, and the tools were used for the purpose of comparison with simulation tools in order to validate the techniques.
+
+One premise of our tools was that they will be written as an ANSI C program, and to follow the requirements established for the International Competition on Software Verification (SV-COMP) \footnote{https://sv-comp.sosy-lab.org/}. This allows us to write a code that can be executed into three different verifiers without adaptation, with the possibility that in the future, other verifiers can also be used.
+%
+%\textcolor{red}{the second part of this sentence is unclear...} In general, we pursuit to write code that could be verification tool independent, i.e., that can be used in any model checking tool without adaptation, since we aimed to evaluate different.
+
+With this in mind, the code was written without using of '\# include', or '\# define'. Moreover, based on the fact that a compiler library is not used, it was necessary to write in some functions which perform specific calculations depending on the mathematical models adopted (e.g. natural logarithms and exponents).
+
+
+%---------------------------------------
+\section{Batteries}
+%---------------------------------------
+
+The only block that requires user intervention to input data is Block 1 listed in~\ref{sec:automatedverification} and \ref{sec:automatedsynthesis} from the automated verification and synthesis tools respectively. If the intention is to change the mathematical model adopted, coding must be done in Block 3 of the automated verification tool Block 2 of the automated synthesis tool.
+
+For the automated verification tool, it is necessary to input the following data (editing and modifying the code):
+
+%---------------------------------------
+\section{Charge Controllers}
+%---------------------------------------
+
+The only block that requires user intervention to input data is Block 1 listed in~\ref{sec:automatedverification} and \ref{sec:automatedsynthesis} from the automated verification and synthesis tools respectively. If the intention is to change the mathematical model adopted, coding must be done in Block 3 of the automated verification tool Block 2 of the automated synthesis tool.
+
+For the automated verification tool, it is necessary to input the following data (editing and modifying the code):
+
+
+%---------------------------------------
+\section{Inverters}
+%---------------------------------------
+
+The only block that requires user intervention to input data is Block 1 listed in~\ref{sec:automatedverification} and \ref{sec:automatedsynthesis} from the automated verification and synthesis tools respectively. If the intention is to change the mathematical model adopted, coding must be done in Block 3 of the automated verification tool Block 2 of the automated synthesis tool.
+
+For the automated verification tool, it is necessary to input the following data (editing and modifying the code):

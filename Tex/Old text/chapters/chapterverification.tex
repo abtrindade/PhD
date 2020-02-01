@@ -5,7 +5,7 @@ Additionally, we present all assumptions and premises adopted, all of which supp
 It is important to emphasize that the theoretical basis of the subject presented in this chapter was discussed in Chapter 1, ~\nameref{chap:background}. In addition, knowledge of the literature is essentila to aid understanding.
 
 
-\section{Automated Verification of Solar PV Systems}
+\section{Methodology for Automated Verification of Solar PV Systems}
 
 Fig.~\ref{fig:validation} illustrates how a stand-alone solar PV project can be validated, starting with the traditional techniques - manual, simulation, testing, only then including the proposed automatic verification that is detailed in this Section. 
 
@@ -24,9 +24,7 @@ With respect to the results presented, a project validated manually is just a pi
 
 Starting at his point, it will be shown how the proposed automated verification of stand-alone solar PV systems functions. 
 
-The process begins with the conversion of a real PV system into a model. Fig. \ref{fig:systemverif4} shows how a real solar PV system is equivalent and converted to a model in order to be verified by model checking. 
-
-Fig.~\ref{fig:systemverif} is an adaptation of the general process of real system conversion detailing the inputs, outputs, and requirements of a real solar PV system. 
+The process begins with the conversion of a real PV system into a model. Fig. \ref{fig:systemverif} showed how a general system is converted to a model in order to be verified by model checking. Fig.~\ref{fig:systemverif4} is an adaptation of the general diagram, replacing the original system by a PV system and detailing the inputs, outputs, and requirements. 
 
 It is important to bear in mind that the model checking process is the same whatever the system that is being validated; what is  important is to choose an accurate model, define the requirements/constraints, and get correct information from the system components, in order to achieve sound and effective validation.
 
@@ -131,7 +129,7 @@ Nevertheless, if the verification engine does not fail, we can conclude that the
  \renewcommand{\algorithmicrequire}{\textbf{Input:}}
  \renewcommand{\algorithmicensure}{\textbf{Output:}}
  \REQUIRE mathematical model (PV, batteries, inverter, charge controller), weather data (temperature, solar irradiance), system sizing details, design requirements (load curve, peak demand, output voltage, battery autonomy), design assumptions (system availability, battery state of charge, 1-hour step of validation)
- \ENSURE design sizing check; FAIL with counter-example to improve the design; SUCCESS, saying that the project has no flaws
+ \ENSURE design sizing check; FAIL with counterexample to improve the design; SUCCESS, saying that the project has no flaws
   \STATE $declare \, min \, and \, max \, solar \, irradiation[24h], \, and \, temperature[24h]$\\
   \STATE $declare \, case \, studies \, details: \, sizing \, and \, manufacturers \, data $ \\
   \STATE $sizing \_ check()$ \\
@@ -254,11 +252,11 @@ Caption: (S): Series; (P): Parallel.
 \label{sec:setup}
 %------------------------------------------
 
-The experimental evaluation aims to answer two research questions:
+The experimental evaluation aims to answer two experimental questions:
 %
 \begin{enumerate}
-\item[RQ1] \textbf{(soundness)} Does the automated verification approach provide correct results?
-\item[RQ2] \textbf{(performance)} How do the verifiers compare to each other and to a commercial simulation tool?
+\item[EQ1] \textbf{(soundness)} Does the automated verification approach provide correct results?
+\item[EQ2] \textbf{(performance)} How do the verifiers compare to each other and to a commercial simulation tool?
 \end{enumerate}
 
 %In order to evaluate the proposed verification method and its performance, we have considered five case studies, three verification engines in different configurations, and also compared the results to the HOMER Pro tool. All the experiments were performed with a time out of 14,400 seconds. %Every dweller, who owns a PV system, was interviewed 
@@ -275,7 +273,7 @@ The verification engine CPAchecker 1.8 was used \footnote{Command-line: \$ scrip
 %\label{sec:verifenviron}
 
 %------------------------------------------
-\section{Results and Discussion}
+\section{Experimental Results and Discussion}
 \label{sec:results_indeed}
 %------------------------------------------
 
@@ -286,7 +284,7 @@ This Section presents the results, with commented outputs produced by every tool
 %\item[RQ1] \textbf{(soundness)} Does our approach provide correct results?
 %\item[RQ2] \textbf{(performance)} How does our approach compare against other existing tools?
 %
-Table~\ref{cases} summarizes the results. The times reported in Table~\ref{cases} answer RQ2. 
+Table~\ref{cases} summarizes the results. The times reported in Table~\ref{cases} answer EQ2. 
 Note that an UNKNOWN result from the proposed verification engines does not mean that a failure was found nor that the verification was successful: it indicates that the verification engine led to an \textit{out of memory} or a \textit{time out} situation.
 
 %HOMER Pro result: the $1,200$W was the only one that was proved to not meet the requirement of battery autonomy; all the 700W systems had no indication of flaws during simulation. The simulation took less than five seconds to be performed on each case study.
@@ -424,7 +422,7 @@ The PV panels and batteries: simulation of a particular capacity for PVs and bat
 
 Another drawback of HOMER Pro is the fact that the user cannot set battery autonomy, as the HOMER controller will decide when it is economical to discharge the batteries during the simulation year. It follows that simulation of battery autonomy cannot to be evaluated.
 
-As part of the comparison proposed, four $700$ W PV systems (houses $1$, $2$, $3$ and $4$) were evaluated by HOMER Pro (RQ2). The simulation results showed that for each of the sized systems, HOMER Pro concluded that no viable solution was found with the components inputted in the schematic. Fig. \ref{fig:homersimuh2no} shows one of the screens presented by HOMER Pro software, specifically by house $2$.
+As part of the comparison proposed, four $700$ W PV systems (houses $1$, $2$, $3$ and $4$) were evaluated by HOMER Pro (EQ2). The simulation results showed that for each of the sized systems, HOMER Pro concluded that no viable solution was found with the components inputted in the schematic. Fig. \ref{fig:homersimuh2no} shows one of the screens presented by HOMER Pro software, specifically by house $2$.
 
 \begin{figure}[h]
 \includegraphics[width=0.8\textwidth]{homersimuh2no.png}
@@ -442,7 +440,7 @@ Moreover, in order to evaluate the problem associated with the lack of a viable 
 \label{fig:homersimuh2yes}
 \end{figure}
 
-The case study that was not possible to simulate was the $1,200$ W (house $5$). The reason is that HOMER Pro does not allow battery autonomy setup (because it always sizes and optimizes the electrical system in order to meet the load requirements for an entire year of simulation); therefore, it was not possible to obtain any indication about the failures of this specific PV system with simulation (RQ2).  
+The case study that was not possible to simulate was the $1,200$ W (house $5$). The reason is that HOMER Pro does not allow battery autonomy setup (because it always sizes and optimizes the electrical system in order to meet the load requirements for an entire year of simulation); therefore, it was not possible to obtain any indication about the failures of this specific PV system with simulation (EQ2).  
 
 %
 %Note that a PV design always uses daily average values of sun hours to each site, with impact in the PV components. Those hours are based on historical data and, in field, it is not unusual to find days where that number of hours was not reached due to weather conditions. The season has impact since the case studies are from the rain forest, where clouds are always present. As a result, the identified flaws in houses 1, 2, 3, and 4, are justified once again.
@@ -457,11 +455,11 @@ Results diverged for houses $1$, $2$, $3$ and $4$ w.r.t. the proposed approach: 
 
 In order to evaluate which validation is correct, it was necessary to consult the access interviews conducted with the residents of the deployed systems. From July $2018$ to March $2019$, surveys were applied to the residents on a monthly basis and data was collected from a local monitoring system: energy interruptions of the PV systems were not reported every month. 
 
-However, even when only one interruption is reported in a month, this represents around $3.33$\% interruption for the entire period ($1/30$), which indicates $96.97$\% of availability of the PV system ($96.67\% = 100\%-3.33\%$), and in accordance to what was described in Section~\ref{sec:availability}, the type of electrical load of the houses is not critical; this situation is considered an energy interruption, not a system flaw, further affirming RQ1. Therefore, the proposed approach using automated verification provides the correct evaluation of the PV system, thus answering RQ2.
+However, even when only one interruption is reported in a month, this represents around $3.33$\% interruption for the entire period ($1/30$), which indicates $96.97$\% of availability of the PV system ($96.67\% = 100\%-3.33\%$), and in accordance to what was described in Section~\ref{sec:availability}, the type of electrical load of the houses is not critical; this situation is considered an energy interruption, not a system flaw, further affirming EQ1. Therefore, the proposed approach using automated verification provides the correct evaluation of the PV system, thus answering EQ2.
 
-All tools indicated flaws in house $5$ (automated verification or simulation); however, only the automated verification approaches indicated which design error was responsible for the flaw (charge controller specification), further answering RQ2.
+All tools indicated flaws in house $5$ (automated verification or simulation); however, only the automated verification approaches indicated which design error was responsible for the flaw (charge controller specification), further answering EQ2.
 
-In order to validate the possible flaw identified by the automated verification in house $5$, the owner of the $1,200$ W system was interviewed. From this it became clear that, in fact, the system does not meet the battery autonomy when all loads are turned on, and this was double-checked against the monitoring system of the charge controller, which showed that the maximum power or surge power was not exceeded, thus affirming RQ1; this behavior is to be expected since the system was purchased as an off-the-shelf solution and not as a customized design for the house's electrical charges. 
+In order to validate the possible flaw identified by the automated verification in house $5$, the owner of the $1,200$ W system was interviewed. From this it became clear that, in fact, the system does not meet the battery autonomy when all loads are turned on, and this was double-checked against the monitoring system of the charge controller, which showed that the maximum power or surge power was not exceeded, thus affirming EQ1; this behavior is to be expected since the system was purchased as an off-the-shelf solution and not as a customized design for the house's electrical charges. 
 
 %\begin{figure}[h]
 %\includegraphics[width=0.65\textwidth]{loadcurve.png}

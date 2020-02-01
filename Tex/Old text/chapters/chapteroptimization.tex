@@ -4,7 +4,7 @@ In addition, we present all the underlying assumptions and premises. We also pre
 
 It is important to emphasize that the complete explanation of the theoretical basis of the subject discussed here is presented in the Chapter~\nameref{chap:background}. In addition, knowledge of the literature is essential to aid understanding.
 
-\section{Optimal Sizing of Solar PV Systems}
+\section{Methodology for Optimal Sizing of Solar PV Systems}
 
 Fig.~\ref{fig:optimization} illustrates how to obtain optimal sizing of a stand-alone solar PV system, beginning with the traditional techniques (manual, and simulation), and moving on to the proposed automatic synthesis detailed in this Section. 
 
@@ -49,7 +49,7 @@ Algorithm~\ref{alg:opt-algorithm} describes our pseudo-code to synthesize stand-
  \renewcommand{\algorithmicrequire}{\textbf{Input:}}
  \renewcommand{\algorithmicensure}{\textbf{Output:}}
   \REQUIRE weather data (temperature, solar irradiance), list of equipment (data sheet and price information), design requirements (load curve, peak demand, output voltage, battery autonomy), design assumptions (battery state of charge, criteria and objectives for technical and cost analysis)
- \ENSURE FAIL with counter-example showing the optimal sizing; SUCCESS, saying that the project has no feasible solution considering the requirements and the list of equipment available
+ \ENSURE FAIL with counterexample showing the optimal sizing; SUCCESS, saying that the project has no feasible solution considering the requirements and the list of equipment available
   \STATE Initialize variables \\
   \STATE Declare list of PV panels, controllers, batteries, and inverters data and cost \\
 %  \STATE Declare list of controllers data and cost \\
@@ -137,10 +137,10 @@ HOMER Pro details:
 
 \section{General Assumptions}
 
-The general assumptions for the scientific method of automated synthesis are the same presented in Chapter~\nameref{chap:methodology1}, with respect to the code in ANSI-C, to the bound $k$, to the simulation tool comparison, and to the battery state of charge.
+The general assumptions for the scientific method of automated synthesis are the same presented in Section~\ref{sec:assumptions}, with respect to the code in ANSI-C, to the bound $k$, to the simulation tool comparison, and to the battery state of charge.
 
 %---------------------------------------------------------------------------
-\section{Description of the case studies} 
+\section{Description of the Case Studies} 
 %---------------------------------------------------------------------------
 
 The proposed synthesis approach was evaluated in  seven stand-alone PV system case studies: 
@@ -183,7 +183,7 @@ Three start-of-the-art verification tools, CBMC\footnote{Command-line: \$ cbmc -
 and CPAchecker\footnote{Command-line: \$ scripts/cpa.sh -heap 64000m -config config/bmc-incremental.properties -spec config/specification/sv-comp-reachability.spc filename.c} version 1.8 with MathSAT 5.5.3~\cite{mathsat5}, were used as verification engines to compare the proposed approach effectiveness and efficiency. Note that ``incremental'' ESBMC with the SMT solver Z3 version 4.7.1~\cite{DeMoura} was tried\footnote{Command-line: \$ esbmc filename.c -\phantom{}-no-bounds-check -\phantom{}-no-pointer-check -\phantom{}-unwind 100 -\phantom{}-smt-during-symex -\phantom{}-smt-symex-guard -\phantom{}-z3} as an alternative to use less computing memory. The Simulation tool HOMER Pro version $3.13.1$ was used for comparative purposes.
 
 %---------------------------------------------------------------------------
-\section{Results}  
+\section{Experimental Results}  
 \label{sec:synthesisresults}
 %---------------------------------------------------------------------------
 
@@ -221,7 +221,7 @@ Specification & Result & Result & Result & Result \\
 \end{table}
 
 CPAchecker was able to synthesize optimal sizing in six 
-out of the seven case studies (cases $1$ - $6$): the result was produced within the time limit, which varied from $134.71$ to $235.75$ minutes. Fig.~\ref{fig:CPAoptc1} illustrates the result of case 4 with the optimal sizing appearing on the left size as the integer $8$ for the solar panel (which is the model RSM36-6-150P from the manufacturer Risen), battery $0$ refers to the model 12MF80 of 80 Ah from Moura, charge controller $1$ refers to the model 15A-75V MPPT from Victron  Energy, and the inverter number $3$ refers to the model IP350-11 from Epever (750 W). The variables NTP, NPS, NPP, NPS, NBP, and NBTotal, also presented in the counter-example as well, shows the number of panels and batteries and how they are connected.
+out of the seven case studies (cases $1$ - $6$): the result was produced within the time limit, which varied from $134.71$ to $235.75$ minutes. Fig.~\ref{fig:CPAoptc1} illustrates the result of case 4 with the optimal sizing appearing on the left size as the integer $8$ for the solar panel (which is the model RSM36-6-150P from the manufacturer Risen), battery $0$ refers to the model 12MF80 of 80 Ah from Moura, charge controller $1$ refers to the model 15A-75V MPPT from Victron  Energy, and the inverter number $3$ refers to the model IP350-11 from Epever (750 W). The variables NTP, NPS, NPP, NPS, NBP, and NBTotal, also presented in the counterexample as well, shows the number of panels and batteries and how they are connected.
 
 Only case study $7$ led to a \textit{time out} result in CPAchecker, i.e.  it was not solved within $240$ minutes. This is illustrated in Fig.~\ref{fig:cpaoptcase7}. However, this CPAchecker time-out limitation is removed, the verifier is able to solve the optimization in $44.97$ hours. The violation (SAT result) indicated in Table~\ref{tab1} 
 is the $assert$ of line $22$ from Algorithm~\ref{alg:verification-algorithm}. %The results were tested by manual PV sizing and were sound (\textit{RQ1}). %, linking a feasible technical solution with the lowest cost possible, considering the equipment that were inputted to the code. 
@@ -229,7 +229,7 @@ is the $assert$ of line $22$ from Algorithm~\ref{alg:verification-algorithm}. %T
 \begin{figure}[h]
 \includegraphics[width=1.0\textwidth]{CPA_opt_c4.png}
 \centering
-\caption{Counter-example generated by CPAchecker after validation of case 4 (file Counterexample.html).}
+\caption{Counterexample generated by CPAchecker after validation of case 4 (file Counterexample.html).}
 \label{fig:CPAoptc1}
 \end{figure}
 
@@ -262,7 +262,7 @@ Certain other HOMER Pro drawbacks were also noted:
 \end{itemize}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Comparison between Formal Synthesis and HOMER Pro}
+\subsection{Comparison Between Formal Synthesis and HOMER Pro}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 Comparing the results of the formal synthesis against those of CPAchecker and HOMER Pro, it was observed that most results are quite similar, 

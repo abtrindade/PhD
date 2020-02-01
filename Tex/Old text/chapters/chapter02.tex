@@ -220,37 +220,37 @@ According to \cite{Roy}, a PV system is designed to supply electrical loads. Thi
 PV systems are broadly classified into three distinct types, as described by \cite{Mohanty}: 
 
 \begin{itemize}
-\item Standalone systems, where the energy is generated and consumed in the same place and which does not interact with the main grid. Normally, the electricity consuming/utilizing device is part of the system, i.e., solar home systems, solar street lighting systems, solar lanterns, and solar power plants; 
+\item Stand-alone systems, where the energy is generated and consumed in the same place and which does not interact with the main grid. Normally, the electricity consuming/utilizing device is part of the system, i.e., solar home systems, solar street lighting systems, solar lanterns, and solar power plants; 
 \item Grid-connected systems, where the solar PV system is connected to the grid. The grid-connected system can be either a grid-tied system, which can only feed power into the grid, with the result that this system cannot deliver power locally during blackouts and emergencies since these systems have to be completely disconnected from the grid and have to be shut down as per national and international electrical safety standards. Some grid-connected PV systems, with energy storage, can also provide power locally in an islanding mode; 
 \item Solar PV hybrid systems: In a hybrid system, another source(s) of energy, such as wind, biomass or diesel, can work together with the solar PV system to provide the required demand. In this type of system, the main objective is to bring more reliability into the overall system at an affordable cost by adding one or more energy sources.
 \end{itemize}
  
-In the specific case of isolated communities, depending on the type of load, cost, resources availability, and the load requirements, standalone systems can be split into several categories, as described below. Since the goal of this Thesis is to present solutions only to isolated/ off-grid applications, on-grid or hybrid configurations are not discussed here.
+In the specific case of isolated communities, depending on the type of load, cost, resources availability, and the load requirements, stand-alone systems can be split into several categories, as described below. Since the goal of this Thesis is to present solutions only to isolated/ off-grid applications, on-grid or hybrid configurations are not discussed here.
  
 There is a resource, called maximum power point tracking (MPPT), which is an electronic control mechanism that maintains the PV operating at a voltage that corresponds to maximum power voltage, which maximizes the transfer of power while avoiding loss of PV cells \cite{Pinho}. This resource is found in modern PV systems and is strongly indicated due to its advantages.
 
-\subsection{Unregulated standalone PV systems with DC load }
+\subsection{Unregulated Stand-alone PV Systems With DC Load }
 Usually this type of system is for low power applications, as defined by \cite{Roy}. The PV system is directly connected to the load without any MPPT controller, as shown in Fig.\ref{fig:unregSPV}. At night, the system will not provide any supply because of the absence of a battery. 
  
 \begin{figure}[h]
 \includegraphics[width=0.6\textwidth]{unregulatedSPV.png}
 \centering
-\caption{Unregulated standalone solar PV system with DC load. Source: \cite{Roy}.}
+\caption{Unregulated stand-alone solar PV system with DC load. Source: \cite{Roy}.}
 \label{fig:unregSPV}
 \end{figure}
 
-\subsection{Regulated standalone PV systems with DC load}
-Similar to the unregulated standalone system with DC load, the main difference between this and the previous one is that this system requires a MPPT technique, as illustrated in Fig.\ref{fig:regSPV1}. Usually systems with MPPT should have a battery; otherwise, the extra power will be wasted.
+\subsection{Regulated Stand-alone PV Systems With DC Load}
+Similar to the unregulated stand-alone system with DC load, the main difference between this and the previous one is that this system requires a MPPT technique, as illustrated in Fig.\ref{fig:regSPV1}. Usually systems with MPPT should have a battery; otherwise, the extra power will be wasted.
 
 \begin{figure}[h]
 \includegraphics[width=0.8\textwidth]{regulatedSPV1.png}
 \centering
-\caption{Regulated standalone solar PV system with DC load. Source: \cite{Roy}.}
+\caption{Regulated stand-alone solar PV system with DC load. Source: \cite{Roy}.}
 \label{fig:regSPV1}
 \end{figure}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Regulated standalone systems with battery and DC load}
+\subsection{Regulated Stand-alone Systems With Battery and DC load}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 Configuration with PV array, battery, MPPT and DC load, as shown in Fig.\ref{fig:regSPV2}. The battery is used to store the extra power from the PV system. A charge controller is necessary for this type of system because the useful life of the battery is less than that of the PV module. Extra charging and deep discharging can reduce the battery life \cite{Kim}. 
@@ -258,14 +258,14 @@ Configuration with PV array, battery, MPPT and DC load, as shown in Fig.\ref{fig
 \begin{figure}[h]
 \includegraphics[width=0.8\textwidth]{regulatedSPV2.png}
 \centering
-\caption{Regulated standalone solar PV system with battery and DC load. Source: \cite{Roy}.}
+\caption{Regulated stand-alone solar PV system with battery and DC load. Source: \cite{Roy}.}
 \label{fig:regSPV2}
 \end{figure}
 
-According to \cite{Pinho}, PV systems that are used to feed loads with low variation of consumption can be sized to operate without the controller. This is known as a self-regulated standalone PV system with battery. However, PV panel voltage must be compatible with the battery voltage. Normally, the bank of batteries is oversized in relation to the PV panel and to the load. The drawback is the operation of the batteries, normally overloaded or with excessive discharges (that can damage the batteries).
+According to \cite{Pinho}, PV systems that are used to feed loads with low variation of consumption can be sized to operate without the controller. This is known as a self-regulated stand-alone PV system with battery. However, PV panel voltage must be compatible with the battery voltage. Normally, the bank of batteries is oversized in relation to the PV panel and to the load. The drawback is the operation of the batteries, normally overloaded or with excessive discharges (that can damage the batteries).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Regulated standalone systems with battery, AC load}
+\subsection{Regulated Stand-alone Systems With Battery and AC load}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 This system is similar to the previous one, but the AC load draws the power from the PV system and, because of the AC load, an inverter (DC to AC converter) is required, as seen in Fig.\ref{fig:regSPV3}. This solution has an cost increase because it has more equipment. However, AC availability has the advantage of permitting the use of a higher number of AC appliances in homes or consumer units. This configuration is this thesis since it is currently the most common system used specifically for remote rural areas of developing countries or areas where the grid extension is not feasible.
@@ -278,12 +278,12 @@ This system is similar to the previous one, but the AC load draws the power from
 \begin{figure}[h]
 \includegraphics[width=0.8\textwidth]{regulatedSPV3.png}
 \centering
-\caption{Regulated standalone PV system with battery, AC load. Source: \cite{Roy}.}
+\caption{Regulated stand-alone PV system with battery, AC load. Source: \cite{Roy}.}
 \label{fig:regSPV3}
 \end{figure}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Design and Validation of a Solar photovoltaic system}
+\subsection{Design and Validation of a Solar PV System}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 The design and validation of a solar PV system can be done by hand or with the aid of a software tool. 
@@ -380,13 +380,13 @@ Considering that the focus of this research is on off-grid solutions and support
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Component models for stand-alone PV systems}
-\label{model}
+\label{sec:model}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-The main purpose of this section is to describe the models for the elements of a standalone PV system: the PV generator, battery, controller, inverter, and load. The modeling of the PV system is based on modular blocks, as illustrated in Fig.\ref{fig:blockdiagram}, from \cite{Hansen}. The modular structure facilitates the modeling of the other system structures and the replacement of elements such as a DC load instead of an AC load. 
+The main purpose of this section is to describe the models for the elements of a stand-alone PV system: the PV generator, battery, controller, inverter, and load. The modeling of the PV system is based on modular blocks, as illustrated in Fig.\ref{fig:blockdiagram}, from \cite{Hansen}. The modular structure facilitates the modeling of the other system structures and the replacement of elements such as a DC load instead of an AC load. 
 
 \begin{figure}[h]
-\includegraphics[width=0.95\textwidth]{blockdiagramPVS}
+\includegraphics[width=0.95\textwidth]{blockdiagramPVS2}
 \centering
 \caption{Block diagram for the stand-alone PV system. Source: \cite{Hansen}.}
 \label{fig:blockdiagram}
@@ -395,7 +395,7 @@ The main purpose of this section is to describe the models for the elements of a
 In the literature, there are several mathematical models available for each component of stand-alone PV systems. In this section, the mathematical model for each component of PV system is presented. 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsubsection{PV generator (cell, module, string, and array) }
+\subsubsection{PV Generator (Cell, Module, String, and Array) }
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 A photovoltaic PV generator is the whole assembly of solar cells, connections, protective parts, and supports. In the present modeling, the focus is only on the cell/module/array.
@@ -413,7 +413,7 @@ To increase their utility, a number of individual PV cells are interconnected to
 
 The PV modules are generally rated under standard test conditions (STC), which leads to the following specification by the manufacturers:  solar radiation of 1000 W/m$^{2}$, cell temperature of 25$^{o}$C, and solar spectrum of 1.5. The parameters required for the input of the PV modules are dependent on the meteorological conditions of the area to be serviced by photovoltaic solution. However, the climatic conditions are unpredictable due to the random nature of their occurrence \cite{Jakhrani}.
  
-These uncertainties lead to either over- or underestimation of energy yield from PV modules. An overestimation of up to 40\% was reported as compared to the rated power output of PV modules \cite{Durisch}. The growing demand for photovoltaics technologies has led to research into the various aspects of its components from cell technology to the modeling, size optimization, and system performance \cite{Rajanna}, \cite{Badejani}; \cite{Yatimi}, \cite{Ferrari}, \cite{Saloux}, \cite{Hasan}, \cite{King}, \cite{Mellit}. Modeling PV modules is one of the major components responsible for proper functioning of PV systems. However, the estimation of models is affected by various intrinsic and extrinsic factors, which ultimately influence the behavior of current and voltage. Therefore, perfect modeling is essential to estimate the performance of PV modules in different environmental conditions \cite{Jakhrani}.
+These uncertainties lead to either over- or underestimation of energy yield from PV modules. An overestimation of up to 40\% was reported as compared to the rated power output of PV modules \cite{Durisch}. The growing demand for photovoltaics technologies has led to research into the various aspects of its components from cell technology to the modeling, size optimization, and system performance \cite{Rajanna}, \cite{Badejani}; \cite{Yatimi}, \cite{Ferrari}, \cite{Saloux}, \cite{Hasan}, \cite{King}, \cite{Mellit}. Modeling PV modules is one of the major components responsible for proper functioning of PV systems. However, the estimation of models is affected by various intrinsic and extrinsic factors, which ultimately influence the behavior of current and voltage. Therefore, the choice of the model is essential to estimate the performance of PV modules in different environmental conditions \cite{Jakhrani}.
  
 Modeling provides the means to understand the current, voltage, and power relationships of PV systems.
   
@@ -430,7 +430,7 @@ The 1-diode model, whose equation to relate the output current, $I$, to the outp
 
 \begin{equation}
 \label{eq:1diodemodel}
-I = I_{ph}-I_{D1}=I_{ph}-I_{0}\left[ exp \left( \dfrac{V}{NaV_{T}} \right)  \right] 
+I = I_{ph}-I_{D1}=I_{ph}-I_{0}\left[ exp \left( \dfrac{V}{NaV_{T}} \right) -1 \right] 
 \end{equation}
 
 Where:
@@ -544,7 +544,7 @@ The derivative of Equation \ref{eq:didv} is used to calculate the output voltage
 
 \begin{equation}
 \label{eq:Vmderiv}
-V_{m}=\dfrac{aNk_{B}T}{q} ln \left( -\dfrac{qNk_{B}T}{qI_{0}} \left( \dfrac{dI}{dV}  \right)_{V_{m}}   \right) 
+V_{m}=\dfrac{aNk_{B}T}{q} ln \left( -\dfrac{aNk_{B}T}{qI_{0}} \left( \dfrac{dI}{dV}  \right)_{V_{m}}   \right) 
 \end{equation}
 
 It is evident that Equation \ref{eq:Vmderiv} requires an expression of the derivative of the current with voltage evaluated at the maximum power point. The fact that the maximum power corresponds to an extreme, the variation of the maximum output power with voltage is relatively small, i.e., a change in $ V_{m} $ has a relatively small effect on the maximum power of the cell \cite{Saloux}. Consequently, considering the asymptotic behavior of the $I-V$ curve in short- and open-circuit conditions, the derivative required by Equation 10 can be calculated as shown in Equation \ref{eq:dIdV_Vm}.
@@ -636,17 +636,17 @@ V_{array} = (N_{cells in series})(V_{one panel})
 
 Because of the fluctuating nature of the output delivered by the PV arrays, batteries are an essential part of a PV system. Thus, during the hours of sunshine, the PV system feeds the load directly and excess electrical energy is stored in the battery. During the night, or during a period with low solar irradiation, energy is supplied to the load from the battery \cite{Mellit}.
   
-Several models have been presented in the literature. However, regardless of the model, normally the following parameters are normally required: 
+Several models have been presented in the literature. However, regardless of the model, normally the following parameters are normally required\cite{Mellit}: 
 
 \begin{itemize}
 \item Nominal capacity ($ q_{m} $), is the number of Ampere-hours ($ Ah $) that can maximally be extracted from the battery, under predetermined discharge conditions.
-\item State of charge ($ SOC $), is the ratio between the present capacity and the nominal capacity, i.e., $ SOC = q/q_{max} $. Obviously $ 0<SOC<1 $. If $ SOC=1 $, then the battery is totally charged; and if $ SOC=0 $, the battery is fully discharged
-\item Charge (or discharge) regime.This parameter reflects the relationship between the nominal capacity of a battery and the current at which it is charged (or discharged). It is expressed in hours: for instance, discharge regime is 30h for a battery of 150 Ah that is discharged at 5A.
+\item State of charge ($ SOC $), is the ratio between the present capacity and the nominal capacity, i.e., $ SOC = q/q_{max} $. Obviously $ 0<SOC<1 $. If $ SOC=1 $, then the battery is totally charged; and if $ SOC=0 $, the battery is fully discharged.
+\item Charge (or discharge) regime. This parameter reflects the relationship between the nominal capacity of a battery and the current at which it is charged (or discharged). It is expressed in hours. %: for instance, discharge regime is 30h for a battery of 150 Ah that is discharged at 5A.
 \item Efficiency ($\eta_{b}$), is the ratio of the charge extracted during discharge divided by the amount of the charge needed to restore the initial state of charging or discharging current. 
 \item Lifetime, is the number of charge/discharge cycles the battery can sustain before losing 20\% of its nominal capacity.
 \end{itemize}
 
-The merit of a stand-alone PV system is evaluated in terms of the reliability of the electricity supply to the load and in terms of the long-term efficiency of the components. Battery efficiency was described in this section, and the liability is quantified by the concept of loss of load probability (LLP). LLP is defined as the ratio between the Ampere-hour deficit and the Ampere-hour demand, both with respect to the load, over a long period of time \cite{Copetti}. 
+The merit of a stand-alone PV system is evaluated in terms of the reliability of the electricity supply to the load and in terms of the long-term efficiency of the components. Battery efficiency was described in this section, and the reliability is quantified by the concept of loss of load probability (LLP). LLP is defined as the ratio between the Ampere-hour deficit and the Ampere-hour demand, both with respect to the load, over a long period of time \cite{Copetti}. 
 
 In general, the battery models view the battery as a voltage source $ E $ in series with an internal resistance $ R_{0} $, as shown in Fig. \ref{fig:batteryckt}. 
 
@@ -657,15 +657,14 @@ In general, the battery models view the battery as a voltage source $ E $ in ser
 \label{fig:batteryckt}
 \end{figure}
 
-The terminal voltage of the battery can be expressed in terms of its open circuit voltage and the voltage across the internal resistance of the battery \cite{Sukamongkol}, as shown by Equation 31.  
-
-Where $ V_{b} $ is the battery terminal voltage, $ E_{oc} $ is the battery circuit voltage, $ I_{b} $ is the battery current, and $ R_{b} $ is the internal resistance of the battery.
+%The terminal voltage of the battery can be expressed in terms of its open circuit voltage and the voltage across the internal resistance of the battery \cite{Sukamongkol}, as shown by Equation 31.  
+%Where $ V_{b} $ is the battery terminal voltage, $ E_{oc} $ is the battery circuit voltage, $ I_{b} $ is the battery current, and $ R_{b} $ is the internal resistance of the battery.
 
 The battery model, which describes the relationship between the voltage, the current and the state of charge, can be found in \cite{Copetti}, \cite{Manwell93}, and \cite{Manwell94}.  
 
 Manwell and McGowen's Kinetic Battery Model (KiBaM)  \cite{Manwell93} was developed at the University of Massachusetts to predict the performance of the battery, based on manufacturer's data. However, it uses some data extracted from batteries tested in laboratory. It is therefore not suitable for this study. 
 
-Most of the models created were used to simulate and optimize PV storage systems based on lead-acid batteries, the most commonly used batteries in PV applications, owing to their relative low cost and wide availability \cite{Copetti}. 
+Most of the models created were used to simulate and optimize PV storage systems based on lead-acid batteries, the most commonly used batteries in developing countries, owing to their relative low cost and wide availability. % \cite{Copetti}. 
 
 Here, the model adopted is the based on \cite{Copetti}, who uses manufacturer's data and allows finding relations among voltage, current, state of charge and temperature. 
 
@@ -905,9 +904,10 @@ With that in mind, it is important to mention that even if formal verification o
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Sizing Stand-alone Solar Photovoltaic Systems}
+\label{sec:sizing}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-The mathematical model presented in section~\ref{model} is important for project validation; however if an approach is used to perform the sizing of stand-alone PV systems, then the tool proposed in this thesis can perform system validation (the intended behavior), and moreover obtain optimal project sizing.
+The mathematical model presented in section~\ref{sec:model} is important for project validation; however if an approach is used to perform the sizing of stand-alone PV systems, then the tool proposed in this thesis can perform system validation (the intended behavior), and moreover obtain optimal project sizing.
 
 The sizing check stage can ensure that the system meets the standard project steps related 
 to the critical period method for solar energy system sizing~\cite{Pinho} and adopting a MPPT (Maximum Power Point Tracking) charge controller,
