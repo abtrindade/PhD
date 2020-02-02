@@ -83,9 +83,9 @@ Model checking is an automatic verification technique, as defined by \cite{Clark
 The process of model checking can be divided in three components: modeling, specification, and verification method. 
 
 \begin{itemize}
-\item In modeling, a model (normally mathematical) of the system is created; 
-\item In specification, normally a list of properties to be satisfied by the system is established, i.e., the requirements, such as reliability to performance, for example; 
-\item Normally it is expressed in temporal logic form ($CTL$); 
+\item In modeling, a model (usually mathematical) of the system is created; 
+\item In specification, usually a list of properties to be satisfied by the system is established, i.e., the requirements, such as reliability to performance, for example; 
+\item It is expressed usually in temporal logic form ($CTL$); 
 \item The model checking is the verification method itself. 
 \end{itemize}
 
@@ -220,7 +220,7 @@ According to \cite{Roy}, a PV system is designed to supply electrical loads. Thi
 PV systems are broadly classified into three distinct types, as described by \cite{Mohanty}: 
 
 \begin{itemize}
-\item Stand-alone systems, where the energy is generated and consumed in the same place and which does not interact with the main grid. Normally, the electricity consuming/utilizing device is part of the system, i.e., solar home systems, solar street lighting systems, solar lanterns, and solar power plants; 
+\item Stand-alone systems, where the energy is generated and consumed in the same place and which does not interact with the main grid. Usually, the electricity consuming/utilizing device is part of the system, i.e., solar home systems, solar street lighting systems, solar lanterns, and solar power plants; 
 \item Grid-connected systems, where the solar PV system is connected to the grid. The grid-connected system can be either a grid-tied system, which can only feed power into the grid, with the result that this system cannot deliver power locally during blackouts and emergencies since these systems have to be completely disconnected from the grid and have to be shut down as per national and international electrical safety standards. Some grid-connected PV systems, with energy storage, can also provide power locally in an islanding mode; 
 \item Solar PV hybrid systems: In a hybrid system, another source(s) of energy, such as wind, biomass or diesel, can work together with the solar PV system to provide the required demand. In this type of system, the main objective is to bring more reliability into the overall system at an affordable cost by adding one or more energy sources.
 \end{itemize}
@@ -262,7 +262,7 @@ Configuration with PV array, battery, MPPT and DC load, as shown in Fig.\ref{fig
 \label{fig:regSPV2}
 \end{figure}
 
-According to \cite{Pinho}, PV systems that are used to feed loads with low variation of consumption can be sized to operate without the controller. This is known as a self-regulated stand-alone PV system with battery. However, PV panel voltage must be compatible with the battery voltage. Normally, the bank of batteries is oversized in relation to the PV panel and to the load. The drawback is the operation of the batteries, normally overloaded or with excessive discharges (that can damage the batteries).
+According to \cite{Pinho}, PV systems that are used to feed loads with low variation of consumption can be sized to operate without the controller. This is known as a self-regulated stand-alone PV system with battery. However, PV panel voltage must be compatible with the battery voltage. Usually, the bank of batteries is oversized in relation to the PV panel and to the load. The drawback is the operation of the batteries, usually overloaded or with excessive discharges (that can damage the batteries).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Regulated Stand-alone Systems With Battery and AC load}
@@ -417,7 +417,7 @@ These uncertainties lead to either over- or underestimation of energy yield from
  
 Modeling provides the means to understand the current, voltage, and power relationships of PV systems.
   
-The performance of photovoltaic systems (solar cell/panels), that is, the output current/voltage curve ($I-V$ curve), is usually studied using an equivalent circuit model. This equivalent circuit consists of a current source with one or two diodes connected in parallel, and up to two resistors, one connected in parallel and the other one in series, to take into account energy losses in this model \cite{Cubas}. Based on these electronic components, four basic configurations are normally used when studying photovoltaic systems, as shown in Fig. \ref{fig:equivckt}. 
+The performance of photovoltaic systems (solar cell/panels), that is, the output current/voltage curve ($I-V$ curve), is usually studied using an equivalent circuit model. This equivalent circuit consists of a current source with one or two diodes connected in parallel, and up to two resistors, one connected in parallel and the other one in series, to take into account energy losses in this model \cite{Cubas}. Based on these electronic components, four basic configurations are usually used when studying PV systems, as shown in Fig. \ref{fig:equivckt}. 
 
 \begin{figure}[h]
 \includegraphics[width=0.95\textwidth]{equivckt}
@@ -636,7 +636,7 @@ V_{array} = (N_{cells in series})(V_{one panel})
 
 Because of the fluctuating nature of the output delivered by the PV arrays, batteries are an essential part of a PV system. Thus, during the hours of sunshine, the PV system feeds the load directly and excess electrical energy is stored in the battery. During the night, or during a period with low solar irradiation, energy is supplied to the load from the battery \cite{Mellit}.
   
-Several models have been presented in the literature. However, regardless of the model, normally the following parameters are normally required\cite{Mellit}: 
+Several models have been presented in the literature. However, regardless of the model, the following parameters are usually required\cite{Mellit}: 
 
 \begin{itemize}
 \item Nominal capacity ($ q_{m} $), is the number of Ampere-hours ($ Ah $) that can maximally be extracted from the battery, under predetermined discharge conditions.
@@ -874,7 +874,7 @@ Various types of MPPT schemes are proposed by researchers, namely open circuit, 
  
 As the MPPT definition and the equations to get the maximum power from the PV panels were described at the end of the PV panel modeling, what is important here is that Equation \ref{eq:voutvin} defines the relationship between the input signal, the efficiency of the controller and the output power.
  
-\subsubsection{The inverter model}
+\subsubsection{The Inverter Model}
 As shown by \cite{Mellit}, PV arrays produce DC and therefore when the PV system contains an AC load, DC/AC conversion is required. An inverter is a converter, where the power flows from the DC to the AC side, having DC voltage as input and producing AC voltage as output. The role of the inverter is to keep the voltage constant on the AC side, i.e., at the rated voltage (127 V or 220 V, for example), and to convert input power $ P_{in} $ into  output power $ P_{out} $ with the best possible efficiency \cite{Hansen}.
 
 The inverter is characterized by a power dependent efficiency $ \eta_{i} $ given by \cite{Hansen} as shown by Equation in  \ref{eq:efficinv}.
@@ -961,7 +961,7 @@ As for batteries, we must first define the total capacity of the battery bank, w
 C_{bank} = \dfrac{E_{corrected} \times autonomy}{V_{system} \times DOD},
 \end{equation}
 
-\noindent where the variable $autonomy$ is a design definition and normally has a value ranging from $6$ to $48$ hours; 
+\noindent where the variable $autonomy$ is a design definition and usually has a value ranging from $6$ to $48$ hours; 
 $ V_{system} $ is the DC voltage of the bus, and $ DOD $ is the battery depth of discharge (considered the maximum of 25\% here).
 %
 Second, the total number of batteries is computed as 
