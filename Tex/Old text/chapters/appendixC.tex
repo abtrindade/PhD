@@ -10,39 +10,43 @@ According with the evaluated local of the PV systems installation:
 \end{itemize} 
 
 %---------------------------------------
-\section{PV Panels}
+%\section{PV Panels}
 %---------------------------------------
+\begin{table}
+\caption{PV Panels}\label{tab:panels}
+\begin{scriptsize}
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+\hline
+\hline
+$\eta_{p}$ & N & T & $\mu_{I}$ & $\mu_{V}$ & $I_{sc,ref}$ & $V_{oc,ref}$ & $P_{m,ref}$ & $I_{m,ref}$ & $V_{m,ref}$ & $V_{mp}$ & US\$ & Model \\
+\hline
+\hline
+0.1620 & 72 & 45 & 0.053 & -0.31 & 9.18 & 45.1 & 315 & 8.16 & 36.6 & 33.4 & 268.40 & CS6U-315 \\
+\hline
+0.1646 & 72 & 45 & 0.053 & -0.31 & 9.26 & 45.3 & 320 & 8.69 & 36.8 & 33.6 & 190.00 &  CS6U-320 \\
+\hline
+0.1672 & 72 & 45 & 0.053 & -0.31 & 9.34 & 45.5 & 325 & 8.78 & 37.0 & 33.7 & 216.67 & CS6U-325 \\
+\hline
+0.1697 & 72 & 45 & 0.053 & -0.31 & 9.45 & 45.6 & 330 & 8.88 & 37.2 & 33.9 & 170.30 & CS6U-330 \\
+\hline
+0.1515 & 80 & 47 & 0.020 & -0.48 & 8.86 & 50.8 & 340 & 8.26 & 41.2 & 37.0 & 214.20 & KU340-8BCA \\
+\hline
+0.1600 & 54 & 47 & 0.00318 & -0.123 & 8.21 & 32.9 & 200 & 7.61 & 32.9 & 23.2 & 300.00 & KC200GT \\
+\hline
+0.1690 & 60 & 47 & 0.039 & -0.307 & 9.44 & 38.84 & 275 & 8.81 & 31.22 & 26.72 & 150.00 & SA275-60P \\
+\hline
+0.1855 & 72 & 45 & 0.039 & -0.307 & 9.73 & 47.60 & 360 & 9.33 & 38.59 & 34.96 & 237.24 & SA360-72M \\
+\hline
+0.1515 & 36 & 45 & 0.033 & -0.39 & 8.81 & 22.30 & 150 & 8.20 & 18.30 & 14.40 & 94.75 & RSM36-6-150P \\
+\hline
+0.1500 & 36 & 46 & 0.060 & -0.37 & 8.61 & 22.90 & 150 & 8.12 & 18.50 & 14.61 & 108.50 & YL150P-17b \\
+\hline
+\hline
+\end{tabular}
+\\Caption: (T): NOCT, (CS): Canadian, (KC or KU): Kyocera, (SA): Sinosola, (RMS): Risen, (YL): Yingli.
+\end{scriptsize}
+\end{table}
 
-Solar Panel Canadian 325W CS6U-325P
-N = 72
-NOCT = 45 oC
-Gref = 1000 W/m2
-Tref = 298.15 K
-mii = 0.053 \%
-miv = -0.31 \%
-Iscref = 9.34 A
-Vocref = 45.5 V
-Imref = 8.78 A
-Vmref = 37.0 V
-Pmref = 325.0 W
-Vmpptmin = 33.7 V
-Imp = 6.98 A
-np = 0.1672
-Panel Area = 1.94432 m2 or 1.96 x 0.992 m
-Tcell = 45.0 oC
-
-{area, efficiency, num cells, NOCT, mii, miv, Iscref, Vocref, Pmref, Imref, Vmref, VmpNOCT, cost} 
-// Canadian (CS6U-315, 320, 325, 330P), Kyocera (KU340-8BCA, KC200GT), Sinosola (SA275-60P, SA360-72M), Risen (RSM36-6-150P), Yingli (YL150P-17b)
-float PanelData[10][13] = {{1.94432, 0.1620, 72, 45, 0.053, -0.31, 9.18, 45.1, 315, 8.16, 36.6, 33.4, 268.40},
-                          {1.94432, 0.1646, 72, 45, 0.053, -0.31, 9.26, 45.3, 320, 8.69, 36.8, 33.6, 190.00},
-                          {1.94432, 0.1672, 72, 45, 0.053, -0.31, 9.34, 45.5, 325, 8.78, 37.0, 33.7, 216.67},
-			  {1.94432, 0.1697, 72, 45, 0.053, -0.31, 9.45, 45.6, 330, 8.88, 37.2, 33.9, 170.30},
-			  {2.19384, 0.1515, 80, 47, 0.020, -0.48, 8.86, 50.8, 340, 8.26, 41.2, 37.0, 214.20},
-			  {1.41075, 0.1600, 54, 47, 0.00318, -0.123, 8.21, 32.9, 200, 7.61, 32.9, 23.2, 300.00},
-			  {1.62688, 0.1690, 60, 47, 0.039, -0.307, 9.44, 38.84, 275, 8.81, 31.22, 26.72, 150.00},
-			  {1.94035, 0.1855, 72, 45, 0.039, -0.307, 9.73, 47.60, 360, 9.33, 38.59, 34.96, 237.24},
-			  {1.00640, 0.1515, 36, 45, 0.033, -0.39, 8.81, 22.30, 150, 8.20, 18.30, 14.40, 94.75},
-			  {0.99960, 0.1500, 36, 46, 0.060, -0.37, 8.61, 22.90, 150, 8.12, 18.50, 14.61, 108.50}};
 
 %---------------------------------------
 %\section{Batteries}
@@ -54,49 +58,34 @@ float PanelData[10][13] = {{1.94432, 0.1620, 72, 45, 0.053, -0.31, 9.18, 45.1, 3
 \begin{tabular}{|c|c|c|c|c|c|c|c|}
 \hline
 \hline
-$\eta_{b}$ & $V_{b}$  & $C_{20}$ & $V_{bulk}$  & $V_{float}$ & $Cost (US\$)$ & Brand & Model\\
+$\eta_{b}$  &  $V_{b}$  &  $C_{20}$  &  $V_{bulk}$  &  $V_{float}$  &  $Cost \, (US\$)$  &  Brand  &  Model \\
 \hline
 \hline
-Moura & 12MF80 \\            
+  0.85  &  12  &  80  &  14.4  &  13.8  &  131.00  &  Moura  &  12MF80  \\            
 \hline
-Moura & 12MF105 \\
+0.85 & 12 & 105 & 14.4 & 13.8 & 150.00 & Moura & 12MF105 \\
 \hline
-Moura & 12MF150 \\
+0.85 & 12 & 150 & 14.4 & 13.8 & 324.75 & Moura & 12MF150 \\
 \hline
-Moura & 12MF175 \\
+0.85 & 12 & 175 & 14.4 & 13.8 & 299.75 & Moura & 12MF175 \\
 \hline
-Moura & 12MF220 \\
+0.85 & 12 & 220 & 14.4 & 13.8 & 374.75 & Moura & 12MF220 \\
 \hline
-Heliar & \\
+0.85 & 12 & 60 & 14.4 & 13.8 & 114.75 & Heliar & DF1000 \\     
 \hline
-Heliar & \\
+0.85 & 12 & 80 & 14.4 & 13.2 & 138.00 & Heliar & DF1500 \\
 \hline
-Heliar & \\
+0.85 & 12 & 150 & 14.4 & 13.2 & 275.00 & Heliar & DF2500 \\
 \hline
-Heliar & \\
+0.85 & 12 & 170 & 14.4 & 13.2 & 299.01 & Heliar & DF3000 \\
 \hline
-Heliar & \\
+0.85 & 12 & 220 & 14.4 & 13.2 & 330.73 & Heliar & DF4001 \\
 \hline
 \hline
 \end{tabular}
-Caption: (SE): Schneider Electric.
+%\\Caption: (SE): Schneider Electric.
 \end{scriptsize}
 \end{table}
-
-
-// battery data  	{efficiency, voltage, capacityC20, Vbulk, Vfloat, cost} 
- 
-Heliar DF1000 DF1500 DF2500 DF3000 DF4001
-float BatteryData [10][6] = {{0.85, 12, 80, 14.4, 13.8, 131.00},
-			    {0.85, 12, 105, 14.4, 13.8, 150.00},
-			    {0.85, 12, 150, 14.4, 13.8, 324.75},
-			    {0.85, 12, 175, 14.4, 13.8, 299.75},
-                            {0.85, 12, 220, 14.4, 13.8, 374.75},
-			    {0.85, 12, 60, 14.4, 13.8, 114.75},
-			    {0.85, 12, 80, 14.4, 13.2, 138.00},
-			    {0.85, 12, 150, 14.4, 13.2, 275.00},
-			    {0.85, 12, 170, 14.4, 13.2, 299.01},
-			    {0.85, 12, 220, 14.4, 13.2, 330.73}};
 
 %---------------------------------------
 %\section{Charge Controllers}
@@ -108,7 +97,7 @@ float BatteryData [10][6] = {{0.85, 12, 80, 14.4, 13.8, 131.00},
 \begin{tabular}{|c|c|c|c|c|c|c|c|}
 \hline
 \hline
-$\eta_{c}$ & $I_{c}$  & $V_{OUT}$ & $V_{MPPT,min}$  & $V_{c,max}$ & $Cost (US\$)$ & Brand & Model\\
+$\eta_{c}$ & $I_{c}$  & $V_{OUT}$ & $V_{MPPT,min}$  & $V_{c,max}$ & $Cost \, (US\$)$ & Brand & Model\\
 \hline
 \hline
 0.98 & 35 & 24 & 13 & 145 & 294.95 & Victron & 35-145 \\
@@ -133,27 +122,48 @@ $\eta_{c}$ & $I_{c}$  & $V_{OUT}$ & $V_{MPPT,min}$  & $V_{c,max}$ & $Cost (US\$)
 \hline
 \hline
 \end{tabular}
-Caption: (SE): Schneider Electric.
+\\Caption: (SE): Schneider Electric.
 \end{scriptsize}
 \end{table}
 
 %---------------------------------------
-\section{Inverters}
+%\section{Inverters}
 %---------------------------------------
-// inverter data  	{efficiency, VinDC, VoutAC, PACref, MAXACref, cost}   //???VinDC pode variar tem range
-// victron (Phoenix 24-800,Phoenix 48-1200), Epever (IP1500-11,  IP350-11, IP500-11), Epsolar (SHI600-12, STI1000-24-120), Xantrex (SW 1000, HFS 1055 1000W, )
-float InverterData [10][6] =   {{0.93, 48, 110, 700, 1600, 400.00},
-			       {0.93, 48, 110, 1200, 2400, 750.00},
-			       {0.93, 24, 120, 1200, 2400, 450.00},
-			       {0.91, 24, 120, 280, 750, 149.75},
-			       {0.91, 24, 120, 400, 1000, 187.25},
-			       {0.93, 12, 220, 600, 1350, 342.25},
-			       {0.93, 24, 120, 800, 1200, 500.00},
-			       {0.90, 12, 120, 900, 2000, 649.75},
-			       {0.82, 12, 120, 1000, 2000, 1122.25},
-			       {0.90, 24, 125, 1800, 2900, 1669.75}};
 
-
+\begin{table}
+\caption{Inverters}\label{tab:inverter}
+\begin{scriptsize}
+\begin{tabular}{|c|c|c|c|c|c|c|c|}
+\hline
+\hline
+$\eta_{i}$ & $V_{in}DC$  & $V_{out}AC$ & $P_{AC,ref}$  & $MAX_{AC,ref}$ & $Cost (US\$)$ & Brand & Model\\
+\hline
+\hline
+0.93 & 48 & 110 & 700 & 1600 & 400.00 & Victron & 24-800 \\
+\hline
+0.93 & 48 & 110 & 1200 & 2400 & 750.00 & Victron & 48-1200 \\
+\hline
+0.93 & 24 & 120 & 1200 & 2400 & 450.00 & Epever & IP1500-11 \\
+\hline
+0.91 & 24 & 120 & 280 & 750 & 149.75 & Epever & IP350-11 \\
+\hline
+0.91 & 24 & 120 & 400 & 1000 & 187.25 & Epever &  IP500-11 \\
+\hline
+0.93 & 12 & 220 & 600 & 1350 & 342.25 & Epsolar & SHI600-12 \\
+\hline
+0.93 & 24 & 120 & 800 & 1200 & 500.00 & Epsolar & STI1000-24-120 \\
+\hline
+0.90 & 12 & 120 & 900 & 2000 & 649.75 & Xantrex & SW 1000 \\
+\hline
+0.82 & 12 & 120 & 1000 & 2000 & 1122.25 & Xantrex & HFS 1055 1000W \\
+\hline
+0.90 & 24 & 125 & 1800 & 2900 & 1669.75 & Xantrex & HF 1800W \\
+\hline
+\hline
+\end{tabular}
+%Caption: (SE): Schneider Electric.
+\end{scriptsize}
+\end{table}
 
 %//HOUSE1 
 %// int loadcurve[24] = %{118,118,118,46,46,46,95,95,170,170,296,242,242,95,95,95,95,95,342,288,288,288,288,118};
