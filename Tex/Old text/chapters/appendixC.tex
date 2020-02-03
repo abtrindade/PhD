@@ -1,39 +1,172 @@
 Here we describe the detailed data from each one of the equipment there were used during the validation and/or optimization of Solar PV systems. The aim is to aid to understand where each variable or parameter came from.
 
+According with the evaluated local of the PV systems installation:
+\begin{itemize}
+ \item The considered insolation for the worst month is $3.8 kWh/m^{2}$ per day;
+ \item The minimum average solar irradiance in $W/m^{2}$ per hour (in a day) is:  {0, 0, 0, 0, 0, 0, 25, 135, 274, 422, 509, 537, 503, 505, 430, 281, 80, 10, 0, 0, 0, 0, 0, 0};
+ \item The maximum average solar irradiance in $W/m^{2}$ per hour (in a day) is {0, 0, 0, 0, 0, 4, 87, 295, 487, 648, 751, 852, 817, 742, 610, 418, 128, 51, 0, 0, 0, 0, 0, 0};
+ \item The average minimum temperature (in $^{o}$C) per month is: {23, 23, 23, 23, 23, 23, 23, 23, 23, 24, 24, 23};
+ \item The average maximum temperature (in $^{o}$C) per month is: {30, 30, 30, 30, 30, 30, 30, 31, 32, 32, 31, 30};
+\end{itemize} 
+
 %---------------------------------------
 \section{PV Panels}
 %---------------------------------------
 
-During the doctoral process, the techniques from computer science proposed to deal with issues inherent to solar photovoltaic systems became algorithms and programs. These programs became tools, and the tools were used for the purpose of comparison with simulation tools in order to validate the techniques.
+Solar Panel Canadian 325W CS6U-325P
+N = 72
+NOCT = 45 oC
+Gref = 1000 W/m2
+Tref = 298.15 K
+mii = 0.053 \%
+miv = -0.31 \%
+Iscref = 9.34 A
+Vocref = 45.5 V
+Imref = 8.78 A
+Vmref = 37.0 V
+Pmref = 325.0 W
+Vmpptmin = 33.7 V
+Imp = 6.98 A
+np = 0.1672
+Panel Area = 1.94432 m2 or 1.96 x 0.992 m
+Tcell = 45.0 oC
 
-One premise of our tools was that they will be written as an ANSI C program, and to follow the requirements established for the International Competition on Software Verification (SV-COMP) \footnote{https://sv-comp.sosy-lab.org/}. This allows us to write a code that can be executed into three different verifiers without adaptation, with the possibility that in the future, other verifiers can also be used.
-%
-%\textcolor{red}{the second part of this sentence is unclear...} In general, we pursuit to write code that could be verification tool independent, i.e., that can be used in any model checking tool without adaptation, since we aimed to evaluate different.
-
-With this in mind, the code was written without using of '\# include', or '\# define'. Moreover, based on the fact that a compiler library is not used, it was necessary to write in some functions which perform specific calculations depending on the mathematical models adopted (e.g. natural logarithms and exponents).
-
+{area, efficiency, num cells, NOCT, mii, miv, Iscref, Vocref, Pmref, Imref, Vmref, VmpNOCT, cost} 
+// Canadian (CS6U-315, 320, 325, 330P), Kyocera (KU340-8BCA, KC200GT), Sinosola (SA275-60P, SA360-72M), Risen (RSM36-6-150P), Yingli (YL150P-17b)
+float PanelData[10][13] = {{1.94432, 0.1620, 72, 45, 0.053, -0.31, 9.18, 45.1, 315, 8.16, 36.6, 33.4, 268.40},
+                          {1.94432, 0.1646, 72, 45, 0.053, -0.31, 9.26, 45.3, 320, 8.69, 36.8, 33.6, 190.00},
+                          {1.94432, 0.1672, 72, 45, 0.053, -0.31, 9.34, 45.5, 325, 8.78, 37.0, 33.7, 216.67},
+			  {1.94432, 0.1697, 72, 45, 0.053, -0.31, 9.45, 45.6, 330, 8.88, 37.2, 33.9, 170.30},
+			  {2.19384, 0.1515, 80, 47, 0.020, -0.48, 8.86, 50.8, 340, 8.26, 41.2, 37.0, 214.20},
+			  {1.41075, 0.1600, 54, 47, 0.00318, -0.123, 8.21, 32.9, 200, 7.61, 32.9, 23.2, 300.00},
+			  {1.62688, 0.1690, 60, 47, 0.039, -0.307, 9.44, 38.84, 275, 8.81, 31.22, 26.72, 150.00},
+			  {1.94035, 0.1855, 72, 45, 0.039, -0.307, 9.73, 47.60, 360, 9.33, 38.59, 34.96, 237.24},
+			  {1.00640, 0.1515, 36, 45, 0.033, -0.39, 8.81, 22.30, 150, 8.20, 18.30, 14.40, 94.75},
+			  {0.99960, 0.1500, 36, 46, 0.060, -0.37, 8.61, 22.90, 150, 8.12, 18.50, 14.61, 108.50}};
 
 %---------------------------------------
-\section{Batteries}
+%\section{Batteries}
 %---------------------------------------
 
-The only block that requires user intervention to input data is Block 1 listed in~\ref{sec:automatedverification} and \ref{sec:automatedsynthesis} from the automated verification and synthesis tools respectively. If the intention is to change the mathematical model adopted, coding must be done in Block 3 of the automated verification tool Block 2 of the automated synthesis tool.
+\begin{table}
+\caption{Batteries}\label{tab:battery}
+\begin{scriptsize}
+\begin{tabular}{|c|c|c|c|c|c|c|c|}
+\hline
+\hline
+$\eta_{b}$ & $V_{b}$  & $C_{20}$ & $V_{bulk}$  & $V_{float}$ & $Cost (US\$)$ & Brand & Model\\
+\hline
+\hline
+Moura & 12MF80 \\            
+\hline
+Moura & 12MF105 \\
+\hline
+Moura & 12MF150 \\
+\hline
+Moura & 12MF175 \\
+\hline
+Moura & 12MF220 \\
+\hline
+Heliar & \\
+\hline
+Heliar & \\
+\hline
+Heliar & \\
+\hline
+Heliar & \\
+\hline
+Heliar & \\
+\hline
+\hline
+\end{tabular}
+Caption: (SE): Schneider Electric.
+\end{scriptsize}
+\end{table}
 
-For the automated verification tool, it is necessary to input the following data (editing and modifying the code):
+
+// battery data  	{efficiency, voltage, capacityC20, Vbulk, Vfloat, cost} 
+ 
+Heliar DF1000 DF1500 DF2500 DF3000 DF4001
+float BatteryData [10][6] = {{0.85, 12, 80, 14.4, 13.8, 131.00},
+			    {0.85, 12, 105, 14.4, 13.8, 150.00},
+			    {0.85, 12, 150, 14.4, 13.8, 324.75},
+			    {0.85, 12, 175, 14.4, 13.8, 299.75},
+                            {0.85, 12, 220, 14.4, 13.8, 374.75},
+			    {0.85, 12, 60, 14.4, 13.8, 114.75},
+			    {0.85, 12, 80, 14.4, 13.2, 138.00},
+			    {0.85, 12, 150, 14.4, 13.2, 275.00},
+			    {0.85, 12, 170, 14.4, 13.2, 299.01},
+			    {0.85, 12, 220, 14.4, 13.2, 330.73}};
 
 %---------------------------------------
-\section{Charge Controllers}
+%\section{Charge Controllers}
 %---------------------------------------
 
-The only block that requires user intervention to input data is Block 1 listed in~\ref{sec:automatedverification} and \ref{sec:automatedsynthesis} from the automated verification and synthesis tools respectively. If the intention is to change the mathematical model adopted, coding must be done in Block 3 of the automated verification tool Block 2 of the automated synthesis tool.
-
-For the automated verification tool, it is necessary to input the following data (editing and modifying the code):
-
+\begin{table}
+\caption{Charge controllers}\label{tab:charg}
+\begin{scriptsize}
+\begin{tabular}{|c|c|c|c|c|c|c|c|}
+\hline
+\hline
+$\eta_{c}$ & $I_{c}$  & $V_{OUT}$ & $V_{MPPT,min}$  & $V_{c,max}$ & $Cost (US\$)$ & Brand & Model\\
+\hline
+\hline
+0.98 & 35 & 24 & 13 & 145 & 294.95 & Victron & 35-145 \\
+\hline
+0.98 & 15 & 24 & 13 & 75 & 88.40 & Victron & 15-75 \\
+\hline
+0.98 & 15 & 24 & 13 & 100 & 137.70 & Victron & 15-100 \\
+\hline
+0.98 & 50 & 24 & 13 & 100 & 294.95 & Victron & 50-100 \\
+\hline
+0.98 & 20 & 24 & 13 & 100 & 132.25 & Epever & TRIRON 2210N 20A 12/24V \\
+\hline
+0.98 & 30 & 24 & 13 & 100 & 161.00 & Epever & TRIRON 3210N 30A 12/24V \\
+\hline
+0.98 & 40 & 24 & 13 & 100 & 184.75 & Epever & TRIRON 4210N 40A 12/24V \\
+\hline
+0.97 & 20 & 24 & 13 & 100 & 217.25 & Epsolar & Tracer-2210RN 20A 12/24V \\
+\hline
+0.97 & 30 & 24 & 13 & 100 & 297.25 & Epsolar & Tracer-3215BN 30A 12/24V \\
+\hline
+0.96 & 60 & 60 & 13 & 140 & 1072.50 & SE & XW-MPPT 60/150 \\
+\hline
+\hline
+\end{tabular}
+Caption: (SE): Schneider Electric.
+\end{scriptsize}
+\end{table}
 
 %---------------------------------------
 \section{Inverters}
 %---------------------------------------
+// inverter data  	{efficiency, VinDC, VoutAC, PACref, MAXACref, cost}   //???VinDC pode variar tem range
+// victron (Phoenix 24-800,Phoenix 48-1200), Epever (IP1500-11,  IP350-11, IP500-11), Epsolar (SHI600-12, STI1000-24-120), Xantrex (SW 1000, HFS 1055 1000W, )
+float InverterData [10][6] =   {{0.93, 48, 110, 700, 1600, 400.00},
+			       {0.93, 48, 110, 1200, 2400, 750.00},
+			       {0.93, 24, 120, 1200, 2400, 450.00},
+			       {0.91, 24, 120, 280, 750, 149.75},
+			       {0.91, 24, 120, 400, 1000, 187.25},
+			       {0.93, 12, 220, 600, 1350, 342.25},
+			       {0.93, 24, 120, 800, 1200, 500.00},
+			       {0.90, 12, 120, 900, 2000, 649.75},
+			       {0.82, 12, 120, 1000, 2000, 1122.25},
+			       {0.90, 24, 125, 1800, 2900, 1669.75}};
 
-The only block that requires user intervention to input data is Block 1 listed in~\ref{sec:automatedverification} and \ref{sec:automatedsynthesis} from the automated verification and synthesis tools respectively. If the intention is to change the mathematical model adopted, coding must be done in Block 3 of the automated verification tool Block 2 of the automated synthesis tool.
 
-For the automated verification tool, it is necessary to input the following data (editing and modifying the code):
+
+%//HOUSE1 
+%// int loadcurve[24] = %{118,118,118,46,46,46,95,95,170,170,296,242,242,95,95,95,95,95,342,288,288,288,288,118};
+%// int Phouse = 501, Psurge = 501, Econsumption = 3900;
+%//HOUSE2 
+%// int loadcurve[24] = {136, 136, 136, 136, 136, 136, 67, 67, 184, 184, 184, 184, 184, 67, 67, 67, 67, 67, 253, 253, 253, 253, 253, 136};
+%// int Phouse = 253, Psurge = 722, Econsumption = 3600;
+%//HOUSE3 
+%// int loadcurve[24] = %{113,113,113,113,113,113,67,67,217,97,97,97,97,97,97,97,97,97,263,113,113,113,113,113};
+%// int Phouse = 263, Psurge = 732, Econsumption = 2500;
+%//HOUSE4 
+%// int loadcurve[24] = %{207,207,207,135,135,135,66,66,161,161,233,253,248,66,66,66,66,66,302,317,322,302,302,207};
+%// int Phouse = 322, Psurge = 896, Econsumption = 4300;
+%//HOUSE5 
+%// int loadcurve[24] = %{45,16,16,16,16,16,0,0,0,72,72,222,150,150,0,0,72,72,814,814,814,742,742,16};
+%// int Phouse = 915, Psurge = 980, Econsumption = 4880;

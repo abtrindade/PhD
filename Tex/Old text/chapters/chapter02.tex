@@ -233,7 +233,7 @@ In the specific case of isolated communities, depending on the type of load, cos
 
 \subsection{MPPT} 
 
-There is a resource, called maximum power point tracking (MPPT), which is an electronic control mechanism that maintains the PV panel operating at a voltage that corresponds to maximum power voltage, which maximizes the transfer of power while avoiding loss of PV cells \cite{Pinho}. This resource is found in modern PV systems and is strongly indicated due to its advantages.
+There is a feature, called maximum power point tracking (MPPT), which is a control mechanism that maintains the PV panel operating at a voltage that corresponds to maximum power voltage, which maximizes the transfer of power while avoiding loss of PV cells \cite{Pinho}. This resource is found in modern PV systems and is strongly indicated due to its advantages.
 
 \subsection{Unregulated Stand-alone PV Systems With DC Load }
 
@@ -509,7 +509,7 @@ Therefore, a wide variety of models exists for estimation of the power output of
 
 With the proposed model, an explicit set of equations is derived from the ideal PV model given by Equation~\ref{eq:1diodemodel}.
 
-A single-diode without series and shunt resistances is considered. Equation~\ref{eq:1diodemodel} is used to write down expressions for currents and voltages at each key point shown in Fig. \ref{fig:ivcurve}.
+A single-diode without series and shunt resistances is considered. Equation~\ref{eq:1diodemodel} is used to write down expressions for currents and voltages at each key point shown in Fig. \ref{fig:ivcurve}. Note that the MPPT point from the PV panel is illustrated, highlighting the maximum voltage $ V_{m} $ and maximum current $ I_{m} $ that a panel can produce.
 
 \begin{figure}[h]
 \includegraphics[width=0.7\textwidth]{ivcurve}
@@ -599,7 +599,7 @@ The cell temperature ($ T $) can be obtained from \cite{Ross} and is shown in Eq
 T = T_{air} + \dfrac{NOCT-20}{800}G
 \end{equation}
 
-\noindent where $ T_{air} $ is the ambient temperature, $NOCT$ is the nominal operating cell temperature (in $^{o}$C) that is found on the PV manufacturer's data-sheet, and $G$ is the solar irradiance ($ W/m^{2} $) at the location of the PV system.
+\noindent where $ T_{air} $ is the ambient temperature, $NOCT$ is the nominal operating cell temperature (in $^{o}$C) that is found on the PV manufacturer's data-sheet, and $G$ is the solar irradiance ($ W/m^{2} $) at the location of the PV system. In this thesis is not considered shading, which can impact in the cell temperature as well.
 
 Furthermore, \cite{Villalva} have proposed a relationship, which allows the saturation current ($ I_{0} $) to be expressed as a function of the cell temperature. In this study, this relation is explicitly written based on cell open-circuit conditions using the short-circuit current temperature coefficient in addition to the open-circuit voltage temperature coefficient (Equation \ref{eq:I0}).
 
@@ -643,7 +643,7 @@ V_{array} = (N_{cells in series})(V_{one panel})
 \subsubsection{Battery Storage Model}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-Because of the fluctuating nature of the output delivered by the PV arrays, batteries are an essential part of a PV system. Thus, during the hours of sunshine, the PV system feeds the load directly and excess electrical energy is stored in the batteries. During the night, or during a period with low solar irradiation, energy is supplied to the load from the battery bank~\cite{Mellit}.
+Because of the fluctuating nature of the output delivered by the PV arrays, batteries are an essential part of a PV system. Thus, during the hours of sunshine, the PV system feeds the load directly and excess electrical energy is stored in the batteries. During the night, or during a period with low solar irradiation, energy is supplied to the load from the battery bank ~\cite{Mellit}.
   
 Several models have been presented in the literature. However, regardless of the model, the following parameters are usually required\cite{Mellit}: 
 
@@ -754,14 +754,14 @@ The battery's storage capacity can be calculated using Equation \ref{eq:stor}, a
 
 \begin{equation}
 \label{eq:stor}
-Storage capacity = \dfrac{N_{C}E_{load}}{DOD \eta _{b}}
+Storage \, capacity = \dfrac{N_{C}E_{load}}{DOD \eta _{b}}
 \end{equation}
 
-\noindent where $ DOD $ is the maximum possible depth of battery discharge, $ E_{load} $ is the average energy consumed by the load, $ N_{C} $ is the largest number of continuous cloudy days of the area, and $ \eta_{b} $ is the efficiency of the battery.
+\noindent where $ DOD $ is the maximum possible depth of battery discharge, $ E_{load} $ is the average energy consumed by the load corrected according PV equipment efficiency, $ N_{C} $ is the largest number of continuous cloudy days of the area, and $ \eta_{b} $ is the efficiency of the battery.
 
-As an example of this formula's application, as shown in \cite{Abdulateef}, considering that an off-grid PV system is intended to supply $1.5 kW/48 V$ for 24 hours ($=36 kWh$); The largest number of continuous cloudy days in the selected site is about 1 day; For a maximum depth of battery discharge $DOD$ of $0.8$ and battery efficiency at $80\%$.
+As an example of this formula's application, as shown in \cite{Abdulateef}, considering that an off-grid PV system is intended to supply $1.5 kW/48 V$ for 24 hours ($=36 kWh$); The largest number of continuous cloudy days in the selected site is about 1 day; For a maximum depth of battery discharge $DOD$ of $0.8$ and battery efficiency at $80\%$. In this thesis, the adopted efficiency of the battery will be considered constant and equal to $86\%$ as expected to lead-acid batteries~\cite{Pinho}.
 
-Using Equation \ref{eq:stor}, the storage capacity then becomes $56.3 kWh$. Since the selected DC bus voltage is $48 V$, then the required Ampere-hours of the battery is $1173 Ah$ ($56.3 kWh/48$). If a single battery is 12 V and 350 Ah, then four batteries are connected in series ($4 \times 350 Ah = 1400 Ah$).
+Using Equation \ref{eq:stor}, the storage capacity then becomes $56.3 kWh$. Since the selected DC bus voltage is $48 V$, then the required Ampere-hours of the battery is $1173 Ah$ ($56.3 kWh/48$). If a single battery is 12 V and 350 Ah, then four batteries are connected in series ($4 \times 350 Ah = 1400 Ah$) and a total of 16 batteries is defined (an array of 4 to reach the 48 V of the DC bus in four arrays to feed the $Ah$ demanded).
 
 In this study, a simplified model for battery charging (Equation \ref{eq:charge}) and discharging (Equation \ref{eq:discharge}) was considered, even recognizing that the process is not linear and is temperature-dependent. The equations are used to update the $SOC$ of the batteries, and have the number of hours ($ Num_{h} $) as a variable. There is a factor (1.15) which is present in the charging equation, and is necessary to express that during the charging process it is usual to reach 115\% of the battery capacity.
 
@@ -775,7 +775,7 @@ SOC_{charge} = SOC_{previous} + \dfrac{100*Pm*Num_{h}}{V_{system}*capacity*N_{BP
 SOC_{discharge} = SOC_{previous} - \dfrac{100*I_{drained}*Num_{h}}{capacity}
 \end{equation}
 
-It is worth mentioning that, specifically for PV systems used in Brazil, a Regulation (RN 493/2012), issued by the Brazilian Electricity Regulatory Agency (ANEEL) establishes a minimum of 48 hours of battery autonomy for stand-alone solar PV systems, among others related definitions.
+It is worth mentioning that, specifically for PV systems used in Brazil, a Regulation (RN 493/2012), issued by the Brazilian Electricity Regulatory Agency (ANEEL) recommends a minimum of 48 hours of battery autonomy for stand-alone solar PV systems, among others related definitions.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Controller Model}
@@ -784,7 +784,7 @@ It is worth mentioning that, specifically for PV systems used in Brazil, a Regul
 
 The controller is named differently by different authors: controller \cite{Hansen}, charge controller \cite{Mahanta} and \cite{Chauhan}, regulator \cite{Mellit}, DC-DC converter with MPPT and switch \cite{Dhanowa}, \cite{Yatimi}, \cite{Abdulateef}, \cite{Roy}. However, in this study, in order to simplify, the term used is controller. 
 
-The controller is a set of items (DC-DC converter, a MPPT algorithm and switches) and can be defined as the responsible for managing the energy flow to the PV system, batteries and loads by collecting information on the battery voltage and knowing the maximum and minimum values acceptable for the battery voltage. According to \cite{Pinho}, controllers aim to protect the battery (or batteries) against the excessive charge and discharge, improving its lifetime. 
+The controller is a set of items (DC-DC converter, a MPPT algorithm and switches) and can be defined as the responsible for managing the energy flow to the PV system, batteries and loads by collecting information on the battery voltage and knowing the maximum and minimum values acceptable for the battery voltage. Controllers aim to protect the battery (or batteries) against the excessive charge and discharge, improving its lifetime. 
 
 Currently, controllers with MPPT algorithms are the most widely used nowadays,  and they maintain the PV operating at the stage of maximum power.
 
@@ -792,9 +792,9 @@ As defined by \cite{Hansen} and \cite{Mellit}, all power systems must include a 
 
 In general, there are two main operating modes for the controller: normal operating condition, when the battery voltage fluctuates between maximum and minimum voltages; and overcharge or over-discharge conditions, which occur when the battery voltage reaches some critical values. 
 
-\cite{Mellit} established that the controller allows the management of energy between the load and the battery. The input signals for the regulator model are the battery current ($ I_{br} $), the PV generator's voltage ($ V_{PV} $), the PV generator's current ($ I_{PV} $), and battery voltage ($ V_{b} $). The outputs are battery current ($ I_{rb} $) and used current ($ I_{u} $). 
+\cite{Mellit} established that the controller allows the management of energy between the load and the battery. The input signals for the regulator model are the battery current, the PV generator's voltage, the PV generator's current, and battery voltage. The outputs are battery current and used current. 
 
-According to \cite{Hansen}, in order to protect the battery against an excessive charge, the PV arrays are disconnected from the system, whenever the terminal voltage increases above a certain threshold $ V_{max \textunderscore off} $ and whenever the current required by the load is less than the current delivered by the PV arrays. PV arrays are connected again when the terminal voltage decreases below a certain value $ V_{max \textunderscore on} $. This can be done by using a switch with a hysteresis cycle, as illustrated in Fig. \ref{fig:controllerover}. 
+According to \cite{Hansen}, in order to protect the battery against an excessive charge, the PV arrays are disconnected from the system, whenever the terminal voltage increases above a certain threshold $ V_{max \textunderscore off} $ and whenever the current required by the load is less than the current delivered by the PV arrays. PV arrays are connected again when the terminal voltage decreases below a certain value $ V_{max \textunderscore on} $. This can be done by using a switch with a hysteresis cycle, as illustrated in Fig. \ref{fig:controllerover} in a on-off charge controller model.
 
 \begin{figure}[h]
 \includegraphics[width=0.7\textwidth]{controllerover}
@@ -850,10 +850,10 @@ As shown in \cite{Abdulateef}, the DC-DC converter is used to increase the effic
 
 \begin{equation}
 \label{eq:poutcont}
-P_{in} = P_{out}
+P_{in} \eta_{c} = P_{out}
 \end{equation}
 
-Assuming that the efficiency of the controller ($ \eta_{c} $) is data provided by the manufacturer, from Equation \ref{eq:poutcont} it is possible to reach Equation \ref{eq:potcont}.
+Assuming that the efficiency of the controller ($ \eta_{c} $) is data provided by the manufacturer (ideally constant in this thesis), from Equation \ref{eq:poutcont} it is possible to reach Equation \ref{eq:potcont}.
 
 \begin{equation}
 \label{eq:potcont}
@@ -877,7 +877,7 @@ For the Cúk converter, the relationship is expressed by Equation \ref{eq:voutvi
 
 \noindent where $D$ is the duty cycle or ratio of the circuit converter, i.e., it is defined as the ratio of the on time of the switch to the total switching period.
  
-The DC/DC converter should always operate in the MPPT to maximize the PV array efficiency and consequently increase the efficiency of the PV system, as defined in \cite{Yatimi}.
+The DC/DC converter tries always to operate in the MPPT to maximize the PV array efficiency and consequently increase the efficiency of the PV system, as defined in \cite{Yatimi}.
   
 Various types of MPPT schemes are proposed by researchers, namely open circuit, short circuit, perturb and observe (P\& O)/hill climbing, incremental conductance, and so forth, as shown in  \cite{Haque}.
  
@@ -890,10 +890,11 @@ The inverter is characterized by a power dependent efficiency $ \eta_{i} $ given
 
 \begin{equation}
 \label{eq:efficinv}
+P_{out} = \eta_{i} P_{in} = \eta_{i} V_{DC} I_{DC}
 \eta_{i} = \dfrac{P_{out}}{P_{in}} = \dfrac{V_{AC} I_{AC} cos\varphi}{V_{DC}I_{DC}}
 \end{equation}
 
-\noindent where $ I_{DC} $ is the current required by the inverter from the DC source in order to be able to keep the rated voltage on the AC side, $ V_{DC} $ is the input voltage to the inverter delivered by the DC source (PV panel or battery),  $ V_{AC}  $ and $ I_{AC} $ are the output voltage and current, respectively, and $ cos \varphi $ can be found from the inverter's data-sheet.
+\noindent where $ I_{DC} $ is the current required by the inverter from the DC source in order to be able to keep the rated voltage on the AC side, $ V_{DC} $ is the input voltage to the inverter delivered by the DC source (PV panel or battery). %,  $ V_{AC}  $ and $ I_{AC} $ are the output voltage and current, respectively, and $ cos \varphi $ can be found from the inverter's data-sheet.
 
 Therefore, with this equation it is possible to simulate the output power of the inverter, based on information from the inverter's data-sheet and from the DC module or the PV panel that feeds the inverter (which is obtained by this study model).
 
@@ -920,7 +921,7 @@ The mathematical model presented in section~\ref{sec:model} is important for pro
 
 The sizing check stage can ensure that the system meets the standard project steps related 
 to the critical period method for solar energy system sizing~\cite{Pinho} and adopting a MPPT (Maximum Power Point Tracking) charge controller,
-which is the most common in use. Firstly, we need to correct the energy consumption estimated for the load 
+which is the most common in use. Firstly, we need to correct the daily energy consumption estimated for the load 
 ($E_{consumption}$), which is carried out by Eq.~\eqref{eq:Ecorrected}, where the efficiency of batteries ($\eta_{b}$), 
 controller ($\eta_{c}$), and inverter ($\eta_{i}$) are considered~\cite{Pinho} as follows
 %
@@ -933,10 +934,10 @@ We also need to estimate the energy that can be produced by each panel, called $
 %
 \begin{equation}
 \label{eq:Ep}
-E_{p} = Solar\_Irradiance \times Panel\_Area \times \eta_{p} \times 1000,
+E_{p} = Solar\_Irradiation \times Panel\_Area \times \eta_{p} \times 1000,
 \end{equation}
 
-\noindent where the solar irradiance is expressed in terms of $kWh/m^{2}$ and depends on the site where the PV system will be deployed; 
+\noindent where the solar irradiation, also called solar exposure of insolation per day, is expressed in terms of $kWh/m^{2}$ and depends on the site where the PV system will be deployed; 
 the PV panel area is given in $m^{2}$ and corresponds to the size of one PV panel, and $\eta_{p}$ represents PV panel efficiency.
 The total minimum number of solar panels needed ($N_{TPmin}$) is computed as
 %
@@ -967,11 +968,11 @@ As for batteries, we must first define the total capacity of the battery bank, w
 %
 \begin{equation}
 \label{eq:Cbank}
-C_{bank} = \dfrac{E_{corrected} \times autonomy}{V_{system} \times DOD},
+C_{bank} = \dfrac{Eq.~\eqref{eq:stor}}{V_{system}},
 \end{equation}
 
-\noindent where the variable $autonomy$ is a design definition and usually has a value ranging from $6$ to $48$ hours; 
-$ V_{system} $ is the DC voltage of the bus, and $ DOD $ is the battery depth of discharge (considered the maximum of 25\% here).
+\noindent where %the variable $autonomy$ is a design definition and usually has a value ranging from $6$ to $48$ hours; 
+$ V_{system} $ is the DC voltage of the bus, and $ DOD $ is the battery depth of discharge.
 %
 Second, the total number of batteries is computed as 
 

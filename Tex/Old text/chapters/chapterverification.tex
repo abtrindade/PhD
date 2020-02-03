@@ -9,20 +9,20 @@ It is important to emphasize that the theoretical basis of the subject presented
 
 Fig.~\ref{fig:validation} illustrates how a stand-alone solar PV project can be validated, starting with the traditional techniques - manual, simulation, testing, only then including the proposed automatic verification that is detailed in this Section. 
 
-Note that, on the one hand, although the input information is the same for all the techniques, automated validation is different in that it is possible to define the bound $k$ to restrict the space-design search. Among the possible inputs are: weather data at the location (temperature, solar irradiance, and solar insolation); system sizing information regarding specifications and configuration of PV panels, charge controller, inverter, batteries, DC bus  voltage; and requirements (battery autonomy, electric load demand, electric peak power demand, energy consumption, load curve, and AC voltage).
+Note that, on the one hand, although the input information is the same for all the techniques, automated validation is different in that it is possible to define the bound $k$ to restrict the space-design search. Among the possible inputs are: weather data at the location (temperature, solar irradiance, and insolation); system sizing information regarding specifications and configuration of PV panels, charge controller, inverter, batteries, DC bus  voltage; and requirements (battery autonomy, electric load demand, electric peak power demand, energy consumption, load curve, and AC voltage).
 
 In contrast, the outputs are not equal: design-space coverage and the information presented as result. Design-space coverage was shown in chapter \nameref{chap:background} to be the most complete when performed by automated verification, event using the bound $k$ to restrict the search, it not being necessary to unbound the system completely in order to discover a design flaw. Moreover, testing and simulation depend on the test vector used as input to evaluate the system.
 
-With respect to the results presented, a project validated manually is just a piece of paper; simulation software produces success - fail information and can additionally present the optimized design if the system evaluated has some flaw, with graphics and reports; testing (whether laboratory or field) uses  measurement equipment and/or data from monitoring systems. Automated verification, as proposed in this thesis, presents success-fail information also, however the output is not graphic  (as will be shown in the  \autoref{chap:automatedverification}), is summarized in reports with details about the variables and states of the project that cause a project flaw (in this case,  where a design flaw is detected).
+With respect to the results presented, a project validated manually is just a piece of paper; simulation software produces success - fail information and can additionally present the optimized design if the system evaluated has some flaw, with graphics and reports; testing (whether laboratory or field) uses  measurement equipment and/or data from monitoring systems. Automated verification, as proposed in this thesis, presents success-fail information also, however the output is not graphic  (as will be shown), is summarized in reports with details about the variables and states of the project that cause a project flaw (in this case,  where a design flaw is detected).
 
 \begin{figure}[h]
-\includegraphics[width=1.0\textwidth]{PVprojectvalidation2g}
+\includegraphics[width=1.0\textwidth]{PVprojectvalidation3g}
 \centering
 \caption{Project validation methods compared}
 \label{fig:validation}
 \end{figure}
 
-Starting at his point, it will be shown how the proposed automated verification of stand-alone solar PV systems functions. 
+Starting at this point, it will be shown how the proposed automated verification of stand-alone solar PV systems functions. 
 
 The process begins with the conversion of a real PV system into a model. Fig. \ref{fig:systemverif} showed how a general system is converted to a model in order to be verified by model checking. Fig.~\ref{fig:systemverif4} is an adaptation of the general diagram, replacing the original system by a PV system and detailing the inputs, outputs, and requirements. 
 
@@ -85,11 +85,11 @@ In order to reduce the computational effort of the algorithm,
 % caused by the state explosion inherent of the technique, 
 every 24 h-day was considered as a time-step of 1 hour, and it was split into two parts: (a) one where PV generation is possible, during daylight, with a duration in hours depending on each site (but dependent on the sun and weather conditions); and (b) one that includes the rest of the day (with no PV generation), when the batteries are required to feed the house.
 
-\textbf{Assumption:} The day is divided into two parts (representing presence or absence of PV generation, based on historical data from the location), considering average temperature and solar irradiance (for every hour of the day) and  annual solar insolation (per day).
+\textbf{Assumption:} The day is divided into two parts (representing presence or absence of PV generation, based on historical data from the location), considering average temperature and solar irradiance (for every hour of the day) and  annual insolation (per day).
 
 Lines 1 carries information from the location where the PV system will be/was deployed. We use the average annual minimum and maximum, both for temperature ($T$) and solar irradiance ($G$), hour by hour, from~\cite{Temperature}, and ~\cite{Irradiance}.
 
-\textbf{Premise:} Temperature, solar irradiance, and solar insolation data is available pertaining to the location where the solar PV system will be used.
+\textbf{Premise:} Temperature, solar irradiance, and insolation data is available pertaining to the location where the solar PV system will be used.
 
 Line 2 represents all the information that derives from the PV sizing and from the equipment manufacturer's data: PV, battery, inverter and charge controller specification and data. This item also includes information from the house's load curve.
 
@@ -130,7 +130,7 @@ Nevertheless, if the verification engine does not fail, we can conclude that the
  \renewcommand{\algorithmicensure}{\textbf{Output:}}
  \REQUIRE mathematical model (PV, batteries, inverter, charge controller), weather data (temperature, solar irradiance), system sizing details, design requirements (load curve, peak demand, output voltage, battery autonomy), design assumptions (system availability, battery state of charge, 1-hour step of validation)
  \ENSURE design sizing check; FAIL with counterexample to improve the design; SUCCESS, saying that the project has no flaws
-  \STATE $declare \, min \, and \, max \, solar \, irradiation[24h], \, and \, temperature[24h]$\\
+  \STATE $declare \, min \, and \, max \, solar \, irradiance[24h], \, and \, temperature[24h]$\\
   \STATE $declare \, case \, studies \, details: \, sizing \, and \, manufacturers \, data $ \\
   \STATE $sizing \_ check()$ \\
   \STATE $startPVgeneration \leftarrow findStartPVgeneration()$ \\
@@ -183,11 +183,11 @@ In order to be clear, we now provide a list of the assumptions adopted by the sc
 The code in ANSI-C, was created to perform both methods, automated verification and automated synthesis, regardless of the verifier used. This means that: 
 
 \begin{itemize}
-\item The '\# include' preprocessor directive is not used, despite being very common in the C language, which allows the use of C language libraries, including the mathematical one;
-\item In the absence of the '\# include' directive, it was necessary to create specific mathematical functions at the proposed code in order to calculate the exponential 'exp(x)' or $e^{x}$, and natural logarithm 'log(x)' functions, used for the solar PV model;
-\item There is no '\# define' preprocessor directive. Therefore, global variables were used to replace it;
-\item The macro 'assert (expression);' must be replaced by 'if (!expression) \{ \_ \_ VERIFIER\_ error();\}'
-\item The macro 'assume (expression);' must be replaced by '\_ \_ VERIFIER\_ assume(expression)';
+\item The `\# include' preprocessor directive is not used, despite being very common in the C language, which allows the use of C language libraries, including the mathematical one;
+\item In the absence of the `\# include' directive, it was necessary to create specific mathematical functions at the proposed code in order to calculate the exponential `$exp(x)$' or $e^{x}$, and natural logarithm `$log(x)$' functions, used for the solar PV model;
+\item There is no `\# define' preprocessor directive. Therefore, global variables were used to replace it;
+\item The macro `assert (expression);' must be replaced by `if (!expression) \{ \_ \_ VERIFIER\_ error();\}';
+\item The macro `assume (expression);' must be replaced by `\_ \_ VERIFIER\_ assume(expression);';
 \item It is not possible to use the \# if, \# else, \# elif, \# endif or \# ifdef, \# ifndef commands.
 \end{itemize}
 
@@ -200,7 +200,7 @@ Regarding the automated verification scientific method:
 
 Of the off-the-shelf simulation tools, only HOMER Pro and Hybrid2 perform off-grid system with battery backup analysis. Additionally, HOMER and RETScreen include economic analysis or even optimization-sensitive analysis; however RETScreen does not have the capacity for stand-alone solar PV system analysis. Therefore, in this study, HOMER Pro will be the only simulation tool used to compare with our method.  
 
-For all case studies, the minimum battery state of charge was defined at $75$\%, i.e. with a DOD maximum of $25$\%, which is common to lead-acid batteries (adopted as standard here), and the AC voltage from the inverter at $127$ V (Brazilian standard).
+For all case studies, the minimum battery state of charge was defined at $75$\%, and the efficiency of $86$\%, which is common to lead-acid batteries (adopted as standard here), and the AC voltage from the inverter at $127$ V (Brazilian standard). According with the evaluated local of the PV systems installation, the considered insolation for the worst month is $3.8 kWh/m^{2}$ per day.
 
 
 \section{Description of the Case Studies}
@@ -229,9 +229,9 @@ Charge Controller & \multicolumn{5}{|c|}{With MPPT of 150 V/35 A}\\
 \hline
 Inverter & \multicolumn{4}{|c|}{700 W, surge: 1,600 W} & 1,200 W, surge: 1,600 W\\
 \hline
-Power peak (W)& 342  & 253  & 263 & 322 & 814 \\
+Load power peak (W)& 342  & 253  & 263 & 322 & 814 \\
 \hline
-Power surge (W)& 342 & 722 & 732 & 896 & 980\\
+Load Power surge (W)& 342 & 722 & 732 & 896 & 980\\
 \hline
 Load curve (W) & \multicolumn{5}{|l|}{\makecell{House 1: 118-118-118-46-46-46-95-95-170-170-296-242-242-95-95-95-95-95-342-288-288-288-288-118\\House 2: 136-136-136-136-136-136-67-67-184-184-184-184-184-67-67-67-67-67-253-253-253-253-253-136\\House 3: 113-113-113-113-113-113-67-67-217-97-97-97-97-97-97-97-97-97-263-113-113-113-113-113\\House 4: 207-207-207-135-135-135-66-66-161-161-233-253-248-66-66-66-66-66-302-317-322-302-302-207\\House 5: 45-16-16-16-16-16-0-0-0-72-72-222-150-150-0-0-72-72-814-814-814-742-742-16}}\\
 \hline
@@ -327,7 +327,7 @@ Using ESBMC with Boolector led to an out of memory situation in all the case stu
 
 However, running the same version of ESBMC, using 'incremental SMT' solving with Z3, the experimentation results returned were conclusive (SAT or UNSAT) in all the case studies. 
 
-In the houses that use a $700$ W PV system (house $1$, house $2$, house $3$, and house $4$), ESBMC could not reach an error in any of the four houses and the execution time took from $04$ m $27$ s to $05$ m $08$ s. Fig.~\ref{fig:esbmcverifhouse1} shows the output report of the tool for house $1$, with the absence of fail at the end of the analysis. The file produced by ESBMC is $160$ lines long and $12.4$ kB in size. The author highlighted the result, which shows that no design flaws were found (SAT result or SUCCESS) within the bound $k$ of $100$.
+In the houses that use a $975$ W PV system (house $1$, house $2$, house $3$, and house $4$), ESBMC could not reach an error in any of the four houses and the execution time took from $04$ m $27$ s to $05$ m $08$ s. Fig.~\ref{fig:esbmcverifhouse1} shows the output report of the tool for house $1$, with the absence of fail at the end of the analysis. The file produced by ESBMC is $160$ lines long and $12.4$ kB in size. The author highlighted the result, which shows that no design flaws were found (SAT result or SUCCESS) within the bound $k$ of $100$.
 
 \begin{figure}[h]
 \includegraphics[width=0.65\textwidth]{esbmcverifh1.png}
@@ -366,7 +366,7 @@ Fig.~\ref{fig:esbmcverifhouse5} shows the report generated by the tool, with red
 
 Similar results were obtained with the CBMC tool, but with slower times than with ESBMC. The experimentation returned SAT or UNSAT for all the case studies, i.e. it was conclusive for all houses. 
 
-In the 700 W PV systems (house $1$, house $2$, house $3$, and house $4$), the tool could not reach an error in any of the four houses in an execution time of $18$ m $36$ s to $19$ m $02$ s. 
+In the $975$ W PV systems (house $1$, house $2$, house $3$, and house $4$), the tool could not reach an error in any of the four houses in an execution time of $18$ m $36$ s to $19$ m $02$ s. 
 
 Fig. \ref{fig:cbmcverifhouse1} shows part of the report produced by CBMC when validating house 1. This file contains $270,512$ lines and is $39$ MB in size. The author highlighted the result, which shows that no design flaws were found within the bound $k$ of $100$.
 
@@ -390,7 +390,7 @@ However, the $1,200$ W PV system (house $5$) failed (SAT) in line $337$ of the c
 \subsection{CPAchecker}
 %\label{sec:CPAresult1}
 
-Finally, the CPAchecker tool presented some different results. Even using two different configuration possibilities, as described in Section~\ref{sec:setup}, the verification engine presented an UNKNOWN result for all the $700$ W systems (house $1$, house $2$, house $3$, and house $4$). 
+Finally, the CPAchecker tool presented some different results. Even using two different configuration possibilities, as described in Section~\ref{sec:setup}, the verification engine presented an UNKNOWN result for all the $975$ W systems (house $1$, house $2$, house $3$, and house $4$). 
 
 This is because the \textit{time out} limit was reached, i.e. after $4$ hours of execution the tool was unable to decide if the verification was SAT or UNSAT. This is shown in Fig.~\ref{fig:cpavalidh1} which reproduces one of the text reports issued by CPAchecker. Unlike ESBMC and CBMC, CPAchecker produces many different reports, notably for log, statistical, and counterexample files (which are in graphic, not text format).
 
@@ -416,13 +416,13 @@ However, when validating the $1,200$ W PV system (house $5$), the tool presented
 
 HOMER Pro is a powerful specialized electrical systems simulator, however even with the simulation characteristic, it performs optimization only when a given design is inputted to the schematic of the tool. This means that HOMER does not maintain the characteristic of the system under evaluation. It starts with the inputted information, but uses the optimization default set up to increase or decrease the characteristic of each component until the load is fulfilled by the electrical generation system, and at the lowest cost. 
 
-Therefore, in order to perform a limited simulation and not exceed the values of each component (for example, the total power of the PV array under evaluation), the 'search space' must be used for sizing instead of the 'HOMER Optimizer'. This is done on the menu of each component inputted in the schematic of the tool. 
+Therefore, in order to perform a limited simulation and not exceed the values of each component (for example, the total power of the PV array under evaluation), the `search space' must be used for sizing instead of the `HOMER Optimizer'. This is done on the menu of each component inputted in the schematic of the tool. 
 
-The PV panels and batteries: simulation of a particular capacity for PVs and batteris is possible using the 'search space' for sizing instead of the 'HOMER Optimizer'. It is possible either to aggregate all the PV panels as a single PV component, in which case, the search space must vary from 0 to 1, i.e. from the option without PV panels until it reaches the power inputted to the component in the HOMER schematic, or add each PV component to represent the series' configuration. For the batteries, it is necessary to find the equivalent capacity of the series and parallel configuration since HOMER considers only one battery component per simulation even if multiple battery components are added to the schematic.
+The PV panels and batteries: simulation of a particular capacity for PVs and batteris is possible using the `search space' for sizing instead of the `HOMER Optimizer'. It is possible either to aggregate all the PV panels as a single PV component, in which case, the search space must vary from 0 to 1, i.e. from the option without PV panels until it reaches the power inputted to the component in the HOMER schematic, or add each PV component to represent the series' configuration. For the batteries, it is necessary to find the equivalent capacity of the series and parallel configuration since HOMER considers only one battery component per simulation even if multiple battery components are added to the schematic.
 
 Another drawback of HOMER Pro is the fact that the user cannot set battery autonomy, as the HOMER controller will decide when it is economical to discharge the batteries during the simulation year. It follows that simulation of battery autonomy cannot to be evaluated.
 
-As part of the comparison proposed, four $700$ W PV systems (houses $1$, $2$, $3$ and $4$) were evaluated by HOMER Pro (EQ2). The simulation results showed that for each of the sized systems, HOMER Pro concluded that no viable solution was found with the components inputted in the schematic. Fig. \ref{fig:homersimuh2no} shows one of the screens presented by HOMER Pro software, specifically by house $2$.
+As part of the comparison proposed, four $975$ W PV systems (houses $1$, $2$, $3$ and $4$) were evaluated by HOMER Pro (EQ2). The simulation results showed that for each of the sized systems, HOMER Pro concluded that no viable solution was found with the components inputted in the schematic. Fig. \ref{fig:homersimuh2no} shows one of the screens presented by HOMER Pro software, specifically by house $2$.
 
 \begin{figure}[h]
 \includegraphics[width=0.8\textwidth]{homersimuh2no.png}
@@ -431,7 +431,7 @@ As part of the comparison proposed, four $700$ W PV systems (houses $1$, $2$, $3
 \label{fig:homersimuh2no}
 \end{figure}
 
-Moreover, in order to evaluate the problem associated with the lack of a viable solution, some empirical changes were made to the  project under evaluation. Fig.~\ref{fig:homersimuh2yes} shows that a configuration with higher battery capacity (3 strings of 2 batteries each, 2S-3P, of 220 Ah; instead of 2 strings of 2 batteries each as in the original sized system) can solve the problem of house 2. The same is true of the other three houses of $700 W$, when improved battery capacity is presented by HOMER Pro as an optimal solution.
+Moreover, in order to evaluate the problem associated with the lack of a viable solution, some empirical changes were made to the  project under evaluation. Fig.~\ref{fig:homersimuh2yes} shows that a configuration with higher battery capacity (3 strings of 2 batteries each, 2S-3P, of 220 Ah; instead of 2 strings of 2 batteries each as in the original sized system) can solve the problem of house 2. The same is true of the other three houses of $975 W$, when improved battery capacity is presented by HOMER Pro as an optimal solution.
 
 \begin{figure}[h]
 \includegraphics[width=0.8\textwidth]{homersimuh2yes.png}
@@ -451,7 +451,7 @@ The case study that was not possible to simulate was the $1,200$ W (house $5$). 
 
 \subsection{Comparing Automated Verification and Simulation Results with Real PV Systems}
 
-Results diverged for houses $1$, $2$, $3$ and $4$ w.r.t. the proposed approach: the automated evaluation shows there is no project flaws, but simulation demanded improvement of battery capacity (adding one more string of batteries to the system). 
+Results diverged for houses $1$, $2$, $3$ and $4$ with respect to the proposed approach: the automated evaluation shows there is no project flaws, but simulation demanded improvement of battery capacity (adding one more string of batteries to the system). 
 
 In order to evaluate which validation is correct, it was necessary to consult the access interviews conducted with the residents of the deployed systems. From July $2018$ to March $2019$, surveys were applied to the residents on a monthly basis and data was collected from a local monitoring system: energy interruptions of the PV systems were not reported every month. 
 

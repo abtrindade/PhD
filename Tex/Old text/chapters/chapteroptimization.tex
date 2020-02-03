@@ -11,7 +11,7 @@ Fig.~\ref{fig:optimization} illustrates how to obtain optimal sizing of a stand-
 Once more, as described in the automated verification process, the input information is the same for all the methods, with the difference that in automated validation it is possible to define the bound $k$ to restrict the design-space search. And the outputs are not equal, as in the design-space coverage and, mainly, in the final result.
 
 \begin{figure}[h]
-\includegraphics[width=1.0\textwidth]{optimalsizingprocess2g}
+\includegraphics[width=1.0\textwidth]{optimalsizingprocess3g}
 \centering
 \caption{Comparison of optimal sizing methods}
 \label{fig:optimization}
@@ -28,7 +28,7 @@ Figure~\ref{CEGISalt} illustrates a variant of CEGIS, previously presented in Se
 	\label{CEGISalt}
 \end{figure}
 
-Examples of specification used by the proposed method include solar insolation (site dependent), house power demand, house  energy consumption, estimated load curve, AC voltage, and battery autonomy; we also provide a list of equipment specifications and prices from different manufacturers and models. Design assumptions are considered additional project specifications. The assumptions underlying optimal sizing are listed in Section~\ref{sec:OptAssumptions}.
+Examples of specification used by the proposed method include insolation (site dependent), house power demand, house  energy consumption, estimated load curve, AC voltage, and battery autonomy; we also provide a list of equipment specifications and prices from different manufacturers and models. Design assumptions are considered additional project specifications. The assumptions underlying optimal sizing are listed in Section~\ref{sec:OptAssumptions}.
 
 The variant CEGIS used in the proposed approach differs in four specific aspects from the traditional CEGIS described in Figure ~\ref{Counter-Example-Guided-Inductive-Synthesis}: 
 
@@ -107,7 +107,7 @@ Note that the process described here is completely automated and that a validati
 
 This section contains premises and assumptions underlying the optimal sizing method, in relation to automated synthesis and simulation software.
 
-In line $2$ of Algorithm~\ref{alg:opt-algorithm}, the synthesis engine is provided with a list of forty items of equipment from ten different manufacturers in order to allow the engine to choose from among all items of PV sizing. The necessary technical information was collected from data sheet of each item. In addition, the price of each item was obtained from available market quotation, in US dollars. All the other currencies were converted to US dollars equivalents at the exchange rate of the day.
+In line $2$ of Algorithm~\ref{alg:opt-algorithm}, the synthesis engine is provided with a list of forty items of equipment from ten different manufacturers in order to allow the engine to choose from among all items of PV sizing. The necessary technical information was collected from data sheet of each item. In addition, the price of each item was obtained from available market quotation from internet, in US dollars. All the other currencies were converted to US dollars equivalents at the exchange rate of the day (May and June of 2019).
 
 With respect to power reliability, the critical period solar energy method will be used~\cite{Pinho}, as described in Section~\ref{sec:sizing}. The usual way is to use loss of load probability (LOLP) or loss of power supply probability (LPSP). However, due to the fact that in this study we are considering neither site characteristics nor load changes over time, which demand historical data, the reliability analysis will be developed only by the critical period method of PV sizing.
 
@@ -115,8 +115,8 @@ Financial analysis details:
 \begin{itemize}
 	\item LCC lifetime considered: $20$ years;
 	\item Installation costs: these include delivery to the isolated community and the actual installation costs: $5$\% of total cost~\cite{Agrener2013};
-	\item Value of the discount rate or interest rate: $10$\%, a good rate, considering financial investments in developing countries;
-	\item Annual operation and maintenance costs: based on past PV projects of similar size in the Brazilian Amazon, the sum of US\$ 289.64~\cite{Agrener2013} will be adopted. This cost includes battery replacement based on a lifetime of $4$ years for lead-acid batteries, plus inverters and controller replacement (every $10$ years). This means that there will be three battery bank and one inverter-controller replacement during the LCC analysis.
+	\item Value of the discount rate or interest rate: $10$\%, a reasonable rate, considering financial investments in developing countries;
+	\item Annual operation and maintenance costs: based on past PV projects of similar size in the Brazilian Amazon, the sum of US\$ 289.64~\cite{Agrener2013} will be adopted. This cost includes battery replacement based on a lifetime of $4$ years for lead-acid batteries, plus inverters and controller replacement (every $8$ years). This means that there will be four battery bank and two inverter-controller replacement during the LCC analysis.
 \end{itemize}
 
 The PV system optimization technique adopted here is the intuitive method, since the average daily value of solar irradiance is used in the mathematical model, without considering battery state of charge, or even the random nature of solar irradiation and meteorological conditions. Therefore, all the computational effort will be concentrated on our automated synthesis algorithm.
@@ -128,8 +128,8 @@ HOMER Pro details:
 \begin{itemize}
 	\item HOMER Pro does not provide for the LCC cost in its reports. However, it has NPC and LCOE. For this reason, NPC was used to obtain LCC in order to allow the comparison among tools;
 	\item The optimization analysis of HOMER Pro permits the definition of a load curve and temperature on the basis of data collected automatically from online databases. However, in order to enable a correct comparison, the curve load and the temperature were defined exactly the same as automated synthesis tools;
-	\item Battery autonomy is not a parameter that the user can set when using HOMER Pro. The tool will always meet the user requirement, i.e. the load curve, $365$ days a year;
-	\item HOMER Pro does not have an item of equipment explicitly labeled charge controller. It uses a controller resource that can perform in two different ways, depending on optimization choice or user choice: load following or cycle charging~\cite{HOMER}. During the tests  'load following' controller was chosen: it produces only enough power to meet the demand~\cite{HOMER};
+	\item Battery autonomy is not a parameter that the user can set when using HOMER Pro. The tool will always try to meet the system requirement, i.e. the load curve, $365$ days a year;
+	\item HOMER Pro does not have an item of equipment explicitly labeled charge controller. It uses a controller resource that can operate in two different ways, depending on optimization choice or user choice: `load following' or `cycle charging'~\cite{HOMER}. During the tests  `load following' controller was chosen: it produces only enough power to meet the demand~\cite{HOMER};
 	\item A 5\% of capacity shortage was assumed, equivalent to 95\%  availability of the PV system. By definition, availability is the percentage of time during which a power system is capable of meeting the load requirements~\cite{Khatib2014}. For critical loads, 99\% is considered acceptable, while in an ordinary residential electrical load, 95\% is considered acceptable;
 	\item A string of two batteries was assumed in order to match the system voltage of $24$ V DC used by the automated synthesis tool;
 	\item The premise adopted when using HOMER Pro was that the user does not know the optimal solution, and that in order to obtain this solution it is necessary to include (at the design phase of the tool) generic PV and battery modules that HOMER Pro will search for the optimized power of each component. With that in mind, a generic flat plate PV of $1$ kW was included and generic lead-acid batteries of $1$ kW also (and with capacity of $83.4$ Ah in accordance with HOMER Pro modeling). HOMER, during run-time, decides the size in kW of each module, based on feasibility and lower cost.	
