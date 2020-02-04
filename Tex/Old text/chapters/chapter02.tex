@@ -719,6 +719,7 @@ SOC = \left( 1 - \dfrac{Q}{C} \right)
 \noindent where $ Q $ is the charge delivered at the time of interest ($ Q=It $), and C is the battery capacity.
 
 The ratio between $ Q $ and $ C $ represents the depth of discharge ($ DOD $) or the fraction of discharge, i.e., $ DOD=1-SOC $.
+However it is worth to separate the $DOD$ into two different definitions when the battery autonomy is bigger than one day ($24$ hours). Therefore, here in this thesis, the definition given here is for maximum $DOD$. When we deal with daily $DOD$ we will call it of $DOD_{day}$, and obviously the sum of every $DOD_{day}$ can not exceed the maximum $DOD$.
 
 The efficiency of the battery discharge is assumed to be 100\%, according to \cite{Copetti}; however, the total amount of useful charge available during discharge is limited by the current rate and temperature given by Equation \ref{eq:CC10}. This equation, known as capacity, is normalized with respect to discharge current corresponding to $ C_{10} $ rated capacity ($ I_{10} $).
 
@@ -784,7 +785,9 @@ Storage \, capacity = \dfrac{N_{C}E_{load}}{DOD \eta _{b}}
 
 \noindent where $ DOD $ is the maximum possible depth of battery discharge, $ E_{load} $ is the average energy consumed by the load corrected according PV equipment efficiency, $ N_{C} $ is the largest number of continuous cloudy days of the area, and $ \eta_{b} $ is the efficiency of the battery.
 
-As an example of this formula's application, as shown in \cite{Abdulateef}, considering that an off-grid PV system is intended to supply $1.5 kW/48 V$ for 24 hours ($=36 kWh$); The largest number of continuous cloudy days in the selected site is about 1 day; For a maximum depth of battery discharge $DOD$ of $0.8$ and battery efficiency at $80\%$. In this thesis, the adopted efficiency of the battery will be considered constant and equal to $86\%$ as expected to lead-acid batteries~\cite{Pinho}.
+As an example of this formula's application, as shown in \cite{Abdulateef}, considering that an off-grid PV system is intended to supply $1.5 kW/48 V$ for 24 hours ($=36 kWh$); The largest number of continuous cloudy days in the selected site is about 1 day; For a maximum depth of battery discharge $DOD$ of $0.8$ and battery efficiency at $80\%$. 
+
+In this thesis, the adopted efficiency of the battery will be considered constant and equal to $86\%$ as expected to lead-acid batteries~\cite{Pinho}.
 
 Using Equation \ref{eq:stor}, the storage capacity then becomes $56.3 kWh$. Since the selected DC bus voltage is $48 V$, then the required Ampere-hours of the battery is $1173 Ah$ ($56.3 kWh/48$). If a single battery is 12 V and 350 Ah, then four batteries are connected in series ($4 \times 350 Ah = 1400 Ah$) and a total of 16 batteries is defined (an array of 4 to reach the 48 V of the DC bus in four arrays to feed the $Ah$ demanded).
 
@@ -949,62 +952,65 @@ to the critical period method for solar energy system sizing~\cite{Pinho} and ad
 which is the most common in use. Firstly, we need to correct the daily energy consumption estimated for the load 
 ($E_{consumption}$), which is carried out by Eq.~\eqref{eq:Ecorrected}, where the efficiency of batteries ($\eta_{b}$), 
 controller ($\eta_{c}$), and inverter ($\eta_{i}$) are considered~\cite{Pinho} as follows
-%
+
 \begin{equation}
 \label{eq:Ecorrected}
-E_{corrected} = \dfrac{E_{consumption}}{\eta_{b} \eta_{c} \eta_{i} }.
+E_{corrected} = \dfrac{E_{consumption}}{\eta_{b} \times \eta_{c} \times \eta_{i} }.
 \end{equation}
 
-We also need to estimate the energy that can be produced by each panel, called $E_{p}$, in Watt-hour ($Wh$), defined as
-%
+We must estimate the total power that will be demanded from the PV panels, as defined by Eq. ~\eqref{eq:Pminpanel}.
+
 \begin{equation}
-\label{eq:Ep}
-E_{p} = Solar\_Irradiation \times Panel\_Area \times \eta_{p} \times 1000,
+\label{eq:Pminpanel}
+P_{min,panels} = \dfrac{1.25 \times E_{corrected}}{Insolation},
 \end{equation}
 
-\noindent where the solar irradiation, also called solar exposure of insolation per day, is expressed in terms of $kWh/m^{2}$ and depends on the site where the PV system will be deployed; 
-the PV panel area is given in $m^{2}$ and corresponds to the size of one PV panel, and $\eta_{p}$ represents PV panel efficiency.
-The total minimum number of solar panels needed ($N_{TPmin}$) is computed as
-%
+\noindent where $Insolation$, also called solar irradiation or solar exposure, is expressed in terms of $kWh/m^{2}$ per day and depends on the site where the PV system will be deployed. A factor of $20$\% for losses is considered, because $1.25 = 1 \mathbin{/} (1 - 0.2)$.
+
+In one hand, the sizing must meet this requirement of minimum power supplied from the PV panels $P_{min,panels}$. In other hand, the arrangement, if in series or parallel connections, it will depends on the charge controller specification of current $I_{c}$ and voltage $V_{c}$, as shown in Eq.~\eqref{eq:Icmin} and 
+\eqref{eq:Vcmin}.
+
 \begin{equation}
-\label{eq:NTPmin}
-N_{TPmin} = \dfrac{E_{corrected}}{E_{p}}.
+\label{eq:Icmin}
+I_{c} \geq I_{total,PVpanels},
 \end{equation}
 
-Particularly, the total number of panels in series ($N_{PSmin}$) and parallel ($N_{PPmin}$) is respectively given by
-%
 \begin{equation}
-\label{eq:NPSmin}
-\dfrac{V_{mppt,min}}{V_{maxPower,TempMax}} \leq N_{PSmin} \leq \dfrac{V_{mppt,max}}{V_{maxPower,TempMin}},
+\label{eq:Vcmin}
+V_{c} \geq V_{total,PVpanels},
 \end{equation}
-%
+
+Related to the batteries, the energy $E_{b}$ to be demanded by the PV system, in order to meet the load requirements, is defined by Eq.~\eqref{eq:Ebat}.
+
 \begin{equation}
-\label{eq:NPPmin}
-N_{PPmin} = \dfrac{P_{total}}{Number\,Panels\,Series \times P_{max,ref}},
+\label{eq:Ebat}
+E_{b} = \dfrac{Autonomy \times E_{corrected}}{DOD},
 \end{equation}
-%
-\noindent where $V_{mppt,max}$ is the maximum operation voltage and $V_{mppt,min}$ 
-is the minimum operation voltage of the charge controller; $V_{maxPower,TempMax}$ and 
-$V_{maxPower,TempMin}$ are the maximum power voltage from the PV module considering 
-the maximum and minimum operational temperature, respectively; 
-$P_{total}$ is the total power demanded from the PV system and 
-$P_{max,ref}$ is the power supplied by one PV panel in $Watts$.
-As for batteries, we must first define the total capacity of the battery bank, which can be described as
-%
+
+\noindent where $Autonomy$ is a number of days expected for the PV system to work even when rain or clouds avoid the recharging of batteries.
+
+In order to define the $DOD_{day}$ we use Eq.~\eqref{eq:DODday}. Moreover, the minimum current from DC bus is defined by Eq.~\eqref{eq:Idcbus}. This equation is important to define the battery arrangement of the system (series and parallel connections).
+
+\begin{equation}
+\label{eq:DODday}
+DOD_{day} = \dfrac{E_{corrected} \times 100}{E_{b}},
+\end{equation}
+
+\begin{equation}
+\label{eq:Idcbus}
+I_{min,DCbus} = \dfrac{E_{b}}{V_{system}},
+\end{equation}
+
+\noindent where $V_{system}$ is the DC voltage of the bus. As for batteries, we must first define the total capacity of the battery bank, which can be described as
+
 \begin{equation}
 \label{eq:Cbank}
 C_{bank} = \dfrac{Eq.~\eqref{eq:stor}}{V_{system}},
 \end{equation}
 
-\noindent where %the variable $autonomy$ is a design definition and usually has a value ranging from $6$ to $48$ hours; 
-$ V_{system} $ is the DC voltage of the bus, and $ DOD $ is the battery depth of discharge.
+%\noindent where %the variable $autonomy$ is a design definition and usually has a value ranging from $6$ to $48$ hours; 
+%$ V_{system} $ is the DC voltage of the bus.
 %
-Second, the total number of batteries is computed as 
-
-\begin{equation}
-\label{eq:Nbtotal}
-N_{B}total = N_{BS}min \times N_{BP}min = \dfrac{V_{system}}{V_{bat}} \times \dfrac{C_{bank}}{1 \,Battery \, Capacity}.
-\end{equation}
 
 Equation \ref{eq:batcheck} then performs the final sizing check, considering the number of batteries in series ($ N_{BS} $) and the number of batteries in parallel ($ N_{BP} $) adopted in the project.
 
@@ -1020,22 +1026,20 @@ The charge controller must initially meet the voltage requirement of the PV syst
 V_{c} = V_{system}.
 \end{equation}
 
-The short circuit reference information from the manufacturer's solar panel must be corrected 
-to the cell temperature because field temperature is higher than  nominal or laboratory temperature, 
-and the PV system is temperature dependent, as shown by Equation~\eqref{eq:iscamb}. 
-%
+The short circuit reference information from the manufacturer's solar panel must be corrected   to the cell temperature because field temperature is higher than  nominal or laboratory temperature, and the PV system is temperature dependent, as shown by Equation~\eqref{eq:iscamb}. 
+
 \begin{equation}
 \label{eq:iscamb}
 I_{sc,amb} = \dfrac{G}{G_{ref}} \left[ I_{sc,ref} + \mu_{I} \times (T-25) \right]. 
 \end{equation}
 
 The controller must meet the maximum current from the PV array given by Eqs.~\eqref{eq:icmin} and~\eqref{eq:icicmin}.
-%
+
 \begin{equation}
 \label{eq:icmin}
 I_{c,min} = I_{sc,amb} \times N_{PP},
 \end{equation}
-%
+
 \begin{equation}
 \label{eq:icicmin}
 I_{c} \geq I_{c,min}.
@@ -1053,23 +1057,18 @@ number_{controllers} = \dfrac{Total \, max \, power \, of \, PV}{Controller \, m
 N_{controller} \geq number_{controllers}
 \end{equation}
 
-The inverter sizing check is performed by means of three equations. Eq.~\eqref{eq:vindc} ensures that 
-the input voltage of the controller meets the system voltage. Eq.~\eqref{eq:voutac} ensures that the 
-output voltage of the controller meets the AC voltage of the load. Finally, Eq.~\eqref{eq:invcheck} ensures that 
-the controller can support the total demand of the load ($Demand$) and the surge power ($P_{surge}$), 
-where $V_{in}DC$ is the nominal input voltage and $V_{out}AC$ is the nominal output voltage of the inverter; 
-$MAX_{AC,ref}$ is the peak power that the inverter can support.
-%
+The inverter sizing check is performed by means of three equations. Eq.~\eqref{eq:vindc} ensures that the input voltage of the controller meets the system voltage. Eq.~\eqref{eq:voutac} ensures that the output voltage of the controller meets the AC voltage of the load. Finally, Eq.~\eqref{eq:invcheck} ensures that the controller can support the total demand of the load ($Demand$) and the surge power ($P_{surge}$), where $V_{in}DC$ is the nominal input voltage and $V_{out}AC$ is the nominal output voltage of the inverter; $MAX_{AC,ref}$ is the peak power that the inverter can support.
+
 \begin{equation}
 \label{eq:vindc} 
 V_{in}DC = V_{system}.
 \end{equation}
-%
+
 \begin{equation}
 \label{eq:voutac} 
 V_{out}AC = V_{AC}.
 \end{equation}
-%
+
 \begin{equation}
 \label{eq:invcheck} 
 \left[ (Demand \leq P_{AC,ref}) \, and \, (P_{surge} \leq MAX_{AC,ref}) \right].
@@ -1077,8 +1076,7 @@ V_{out}AC = V_{AC}.
 
 Some inverter models allow parallel operation of more than one unit, besides the integration in order to create bi-phase and three-phase circuits. It is advisable to use pure sine wave inverters, especially for electronic loads sensitive to harmonic distortion waves.
 
-Moreover, it is important to verify the compatibility between charge controller and inverter, because there are some models that are not compatible with equipment from other manufacturers.
-
+Moreover, it is important to verify the compatibility between charge controller and inverter, because there are some models that are not compatible with equipment from other manufacturers. Moreover, it is important to select an inverter power that is lower than (or equal) the charge controller power, because the demand from the electric load causes the inverter to transfer this demand from the DC side. Then the controller can be overcharged during this operation and to burn.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{PV Systems Optimization Criteria}

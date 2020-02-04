@@ -28,7 +28,8 @@ CPAchecker Configurable Program Analysis Checker \\
 CPES Cyber-Physical Energy Systems \\
 CPS Cyber-Physical Systems \\
 DC Direct current \\
-$DOD$ Depth of discharge ($DOD=1-SOC$) \\
+$DOD$ Maximum depth of discharge ($DOD=1-SOC$), considering the battery autonomy \\
+$DOD_{day}$ Depth of discharge for one day \\
 $E_{consumption}$ Energy consumption \\
 $E_{corrected}$ Energy corrected \\
 $E_{p}$ Energy produced by one panel \\
@@ -41,24 +42,26 @@ HDI Human Development Index \\
 IEA International Energy Agency \\
 IRR  Internal Rate of Return \\
 $I$ Current \\
+$Insolation$ Also called solar irradiation or solar exposure ($kWh/m^{2}$ per day) \\
 $I_{0}$ Reverse saturation current \\
 $ I_{AC} $ Current that the inverter supply to the house \\
 $I_{c,min}$ Charge controller minimum current \\
 $ I_{DC} $ Current required by the inverter from the DC source \\
+$I_{min,DCbus}$ Minimum DC bus current to be considered during sizing \\
 $ I_{in} $ Input current \\
 $I_{load}$ Current that feeds the load \\
 $ I_{out} $ Output current \\
 $I_{ph}$ Photocurrent \\
 $ I_{ph,ref} $ Photocurrent at STC \\
 $I_{pv}$ Current from the PV system \\
+$I_{total,PVpanels}$ Total current supplied by the PV panels array \\
 $ I_{sc} $ Short-circuit current \\
 $ I_{sc,amb} $ Ambient short-circuit current \\
 $ I_{sc,ref} $ Short-circuit current at STC \\
 $ k_{B} $ Boltzmann constant ($ 1.3806503\times10^{-23}J/K $); \\
 LCC  Life Cycle Cost \\
 LCOE Levelized Cost of Energy \\
-LLP  Loss of Load probability \\
-LOLP Loss of Load Probability \\
+LLP  (or LPLP) Loss of Load probability \\
 LPSP Loss of Power Supply Probability \\
 $MAX_{AC,ref}$ Peak power that the inverter can support \\
 MPPT Maximum Power Point Tracking \\
@@ -78,6 +81,7 @@ $ N_{TP} $ Number of sized panels \\
 $N_{TPmin}$ Total minimum number of solar panels needed \\
 PV Photovoltaic \\
 P Power \\
+$P_{min,panels}$ Minimum power that the PV panels must supply, used during PV sizing \\
 $P_{in}$ Input power \\
 $P_{out}$ Output power \\
 $P_{surge}$ Maximum peak power demanded by house for few seconds \\
@@ -106,6 +110,7 @@ $ V_{oc} $ Open-circuit voltage \\
 $ V_{oc,ref} $ Reference open-circuit voltage at STC \\
 $ V_{out} $ Output voltage \\
 $ V_{system} $ DC voltage of the bus \\
+$V_{total,PVpanels}$ Total voltage supplied by the PV panels array \\
 $V_{T}$ Thermal voltage ($ V_{T}=k_{B}T/q $) \\
 $\Delta T$ Temperature variation ($\Delta T=T-T_{ref} $) \\
 $ \mu_{I} $ Short-circuit current temperature coefficient ($A/K$) \\
