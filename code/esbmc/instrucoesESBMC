@@ -89,6 +89,9 @@ Daniel (19-FEB-2019)
 13-MAR-2019 optimization
 ./Ultimate -tc config/AutomizerReach.xml -s config/svcomp-Reach-32bit-Automizer_Default.epf -i arquivo.c --traceabstraction.limit.analysis.time 900 --traceabstraction.stop.after.first.violation.was.found false --cacsl2boogietranslator.overapproximate.operations.on.floating.types false --cacsl2boogietranslator.assume.nondeterminstic.values.are.in.range false --rcfgbuilder.add.additional.assume.for.each.assert true --rcfgbuilder.simplify.code.blocks true --rcfgbuilder.size.of.a.code.block LoopFreeBlock > 
 
+04-02-2020 CPAchecker
+scripts/cpa.sh -heap 64000m -bmc-incremental -spec sv-comp-reachability -benchmark file.c
+
 ------------------------------------------------------------------------------------------------------------------------
 -------------------------------------------------------How to compile code and check errors in C (without verification):
 ------------------------------------------------------------------------------------------------------------------------

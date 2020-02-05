@@ -267,7 +267,7 @@ The verification engine ESBMC, version v6.0.0 was used with the SMT solver Boole
 
 The verification engine CBMC 5.11 and MiniSat 2.2.1 were used in the comparison~\cite{Kroening}\footnote{Command-line: \$ cbmc filename.c -\phantom{}-unwind 100 -\phantom{}-trace}.
  
-The verification engine CPAchecker 1.8 was used \footnote{Command-line: \$ scripts/cpa.sh -heap 64000m -stack 10240k -config config/bmc-incremental.properties -spec config/specification/sv-comp-reachability.spc filename.c}, with the SMT solver MathSAT version 5.5.3~\cite{mathsat5}. An alternative CPAchecker configuration was also tried, using the BMC k-induction option, but the results show no improvement in performance or soundness (so it is not reported here).
+The verification engine CPAchecker 1.8 was used in a configuration of bound model checking\footnote{Command-line: \$ scripts/cpa.sh -heap 64000m -stack 10240k -config config/bmc-incremental.properties -spec config/specification/sv-comp-reachability.spc -benchmark filename.c}, with the SMT solver MathSAT version 5.5.3~\cite{mathsat5}. An alternative CPAchecker configuration was also tried, using the BMC k-induction option, but the results show no improvement in performance or soundness (so it is not reported here).
 
 %\section{Verifiers Environment}
 %\label{sec:verifenviron}
@@ -296,20 +296,20 @@ Note that an UNKNOWN result from the proposed verification engines does not mean
 \begin{tabular}{c|c|c|c|c}
 \hline
 \hline
-\multicolumn{5}{c}{Model Checker (SAT/UNSAT: time and message)}\\
+\multicolumn{5}{c}{Model Checker (SAT/UNSAT: time, message, and used memory)}\\
 \hline
 Case &  \makecell{ESBMC 6.0.0\\(Boolector 3.0.1)} & \makecell {ESBMC 6.0.0\\(Z3 4.7.1)} & \makecell{CBMC 5.11\\(MiniSat 2.2.1)} & \makecell{CPAchecker 1.8\\(MathSAT 5.5.3)}\\
 \hline
 \hline
-House 1 &  \makecell{Out of memory \\(UNKNOWN)} & \makecell{05 m 08 s \\(UNSAT)} & \makecell{19 m 02 s \\(UNSAT)} & \makecell{Time out \\ (UNKNOWN)}\\
+House 1 &  \makecell{Out of memory \\(UNKNOWN)\\$\geq$ 64 GB} & \makecell{$\leq$ 1 sec \\(SAT) \\ 44 MB} & \makecell{Out of memory \\(UNKNOWN)\\$\geq$ 64 GB} & \makecell{4.36 s \\ (SAT) \\ 173 MB}\\
 \hline
-House 2 &  \makecell{Out of memory \\(UNKNOWN)} & \makecell{04 m 27 s \\(UNSAT)} & \makecell{18 m 59 s \\(UNSAT)} & \makecell{Time out \\ (UNKNOWN)}\\
+House 2 &  \makecell{Out of memory \\(UNKNOWN)\\$\geq$ 64 GB} & \makecell{$\leq$ 1 sec \\(SAT)\\ 44 MB} & \makecell{Out of memory \\(UNKNOWN)\\$\geq$ 64 GB} & \makecell{4.34 s \\ (SAT)\\174 MB}\\
 \hline
-House 3 &  \makecell{Out of memory \\(UNKNOWN)} & \makecell{05 m 07 s \\(UNSAT)} & \makecell{18 m 39 s \\(UNSAT)} & \makecell{Time out \\ (UNKNOWN)}\\
+House 3 &  \makecell{Out of memory \\(UNKNOWN)\\$\geq$ 64 GB} & \makecell{$\leq$ 1 sec \\(SAT)\\ 45 MB} & \makecell{Out of memory \\(UNKNOWN)\\$\geq$ 64 GB} & \makecell{4.38 s \\ (SAT)\\ 174 MB}\\
 \hline
-House 4 &  \makecell{Out of memory \\(UNKNOWN)} & \makecell{04 m 37 s \\(UNSAT)} & \makecell{18 m 36 s \\(UNSAT)} & \makecell{Time out \\ (UNKNOWN)}\\
+House 4 &  \makecell{Out of memory \\(UNKNOWN)\\$\geq$ 64 GB} & \makecell{$\leq$ 1 sec \\(SAT)\\ 45 MB} & \makecell{Out of memory \\(UNKNOWN)\\$\geq$ 64 GB} & \makecell{4.46 s \\ (SAT)\\ 176 MB}\\
 \hline
-House 5 &  \makecell{Out of memory \\(UNKNOWN)} & \makecell{$\leq$ 1 sec \\(SAT)} & \makecell{$\leq$ 1 sec \\(SAT)} & \makecell{6 sec \\ (SAT)}\\
+House 5 &  \makecell{Out of memory \\(UNKNOWN)\\$\geq$ 64 GB} & \makecell{$\leq$ 1 sec \\(SAT)\\ 45 MB} & \makecell{Out of memory \\(UNKNOWN)\\$\geq$ 64 GB} & \makecell{4.19 s \\ (SAT)\\ 174 MB}\\
 \hline
 \hline
 \end{tabular}
