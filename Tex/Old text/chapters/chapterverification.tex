@@ -1,8 +1,8 @@
-In this Chapter, we detail the methodology adopted to perform formal verification of stand-alone solar PV systems using formal methods, more specifically model checking. Diagrams, flowcharts, and algorithms support and explain the solutions. The experimentation, case studies, and results are also presented. In addition, the Chapter contains a comparison with a specialized simulation tool, and also the use of different verifiers that evaluate performance by means of automated verification. Tables, commented reports, and graphic outputs are presented to aid  understanding.
+In this chapter, we detail the methodology adopted to perform formal verification of stand-alone solar PV systems using formal methods, more specifically model checking. Diagrams, flowcharts, and algorithms support and explain the solutions. The experimentation, case studies, and results are also presented. In addition, the chapter contains a comparison with a specialized simulation tool, and also the use of different verifiers that evaluate performance by means of automated verification. Tables, commented reports, and graphic outputs are presented to aid  understanding.
 
-Additionally, we present all assumptions and premises adopted, all of which support the results/conclusions, with direct impact on them. Usually, a premise is an unquestionable fact, however assumptions can be questioned. Unlike premises, assumptions are not explicit and need to be deciphered. With that in mind, we perform a detailed explanation of all assumptions over the course of the Chapter.
+Additionally, we present all assumptions and premises adopted, all of which support the results/conclusions, with direct impact on them. Usually, a premise is an unquestionable fact, however assumptions can be questioned. Unlike premises, assumptions are not explicit and need to be deciphered. With that in mind, we perform a detailed explanation of all assumptions over the course of the chapter.
 
-It is important to emphasize that the theoretical basis of the subject presented in this chapter was discussed in Chapter 2, ~\nameref{chap:background}. In addition, knowledge of the literature is essential to aid understanding.
+It is important to emphasize that the theoretical basis of the subject presented in this chapter was discussed in chapter 2, ~\nameref{chap:background}. In addition, knowledge of the literature is essential to aid understanding.
 
 
 \section{Methodology for Automated Verification of Solar PV Systems}
@@ -434,7 +434,7 @@ In order to validate the possible flaw identified by the automated verification 
 \section{Threats to Validity}
 %---------------------------------------------------
 
-This Chapter presented a favorable assessment of the proposed method. % over a diverse set of real-world benchmarks. 
+This chapter presented a favorable assessment of the proposed method. % over a diverse set of real-world benchmarks. 
 Nevertheless, it also identified six threats to the validity of the results that bear further assessment.
 
 \textit{Model precision:} each component of the PV system is mathematically modeled. %, and the precision of the proposed method depends on the precision of that particular model. 
@@ -452,11 +452,11 @@ The adoption of more complex models, or even an evaluation in a PV laboratory to
 
 \section{Conclusion}
 
-This Chapter showed in details how the state-of-the-art computer science method of automated verification was adapted to be used in stand-alone solar PV systems in order to validate their behavior. Moreover, it was possible to illustrate the comparative differences in how the proposed method and the traditional method of simulation work.
+This chapter showed in details how the state-of-the-art computer science method of automated verification was adapted to be used in stand-alone solar PV systems in order to validate their behavior. Moreover, it was possible to illustrate the comparative differences in how the proposed method and the traditional method of simulation work.
 
 Detailed diagrams, flowcharts and algorithm with pseudo-code were presented in support of the proposed work and to aid the understanding. Additionally, the assumptions adopted in relation to the automated verification and simulation software were listed.
 
-Furthermore, in this Chapter verifiers with the proposed automated verification using model checking were compared, which demonstrated that 'incremental' ESBMC had the best overall performance. CBMC was not conclusive, presented out of memory issues in all cases. CPAchecker had similar quality results than ESBMC, but with a slower performance for all cases.
+Furthermore, in this chapter verifiers with the proposed automated verification using model checking were compared, which demonstrated that 'incremental' ESBMC had the best overall performance. CBMC was not conclusive, presented out of memory issues in all cases. CPAchecker had similar quality results than ESBMC, but with a slower performance for all cases.
 
 A comparison with a specialized simulation tool was also performed, although some of the tool's limitations, mainly related to not allowing battery autonomy setup.  The need of better PV panels and/or battery sizing by HOMER Pro and the verifier engines showed the flaws identified by the tools.
 

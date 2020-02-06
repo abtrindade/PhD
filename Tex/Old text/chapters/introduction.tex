@@ -95,7 +95,13 @@ Concerning the \textbf{automated synthesis} technique and optimal sizing of stan
 %----------------------------------------------
 %\textcolor{red}{you should briefly describe here the outline of your solution. As example, take a look at \url{https://ssvlab.github.io/lucasccordeiro/papers/phd\_thesis\_cordeiro.pdf.}}
 
-Our approach deals with the theoretical and pragmatic aspects of using model checking in stand-alone solar PV systems to tackle two issues: validation of a designed system and optimal sizing. Validation when a sized system must be evaluated in order to decide if it meets the design requirements and user needs. \textcolor{red}{this sentence is confusing... Optimization, when there exist just the requirements and the PV system, is not sized, or when the user tries to obtain a better solution that he or she has}. We thus develop algorithms and the corresponding tools; we then evaluate them through several case studies, in comparison with specialized simulation tools, supported by real data from installed PV systems.
+Our approach deals with the theoretical and pragmatic aspects of using model checking in stand-alone solar PV systems to tackle two issues: validation of a designed system and optimal sizing. 
+
+Validation is a important issue when a sized system must be evaluated in order to decide if it meets the design requirements and user needs. In other words, it is a way to guarantee that a sized PV system will not fail (stopping to supply energy to a house, for example) after deployment at the field.
+
+\textcolor{red}{Optimization is important when there exist (just) the requirements of the house to be electrified. In our particular case, we need a optimal PV system solution, in technical and economical terms, that can show us a list of equipment to be bought and how it will be connected together (configuration)}. 
+
+We thus develop algorithms and the corresponding tools; we then evaluate them through several case studies, in comparison with specialized simulation tools, supported by real data from installed PV systems.
 
 %Our approach deals with the theoretical and pragmatic aspects of using model checking in stand-alone solar PV systems in order to tackle two issues: validation of a designed system and optimal sizing. Validation when a sized system must be evaluated in order to define if it meets the design requirements and user needs; and optimization when there are just the requirements and the PV system is not sized, or then the user tries to obtain a better solution that he or she has. We thus develop algorithms and the corresponding tools; moreover, we evaluate them with several case studies, in a comparative with specialized simulation tools, supported by real data from deployed PV systems.
 Fig.~\ref{fig:validation_outline} outlines the proposed solution to perform the validation of stand-alone solar PV systems via automated verification. Fig.\ref{fig:optimization_outline} illustrates the proposed solution to obtain the optimal sizing of stand-alone solar PV systems via automated synthesis. We pictured here only a summary of each phase of our proposed approach, highlighting the input parameters, the outputs for the validation, or the optimal size of the solar PV system; more details will be presented in the next chapters. Moreover, the illustrations show the methodological approach concerning comparative result analysis, employing our approaches, the commercial software tool, and data from real PV systems deployed in the field.
@@ -121,11 +127,21 @@ Note that it is out of our scope to perform code modification on the verifiers o
 \section{Contributions}
 %----------------------------------------------
 
-\textcolor{red}{The following two paragraphs are too long! Please consider breaking them into smaller sentences!}
+\textcolor{red}{My comment: paragraphs broken in small and organized parts:}
 
-Concerning the proposed \textbf{automated verification} technique, this thesis makes three main contributions: \textbf{first}, we propose an algorithm written in the C programming language which implements the automated verification method to formally check the sizing and the operation of a given stand-alone PV system; \textbf{second}, we evaluate the verification technique by comparing three state-of-the-art model checkers in five real case studies; \textbf{third}, experimental results show that this approach can find subtle design errors in stand-alone PV systems not easily detected by other approaches based on simulation.
+Concerning the proposed \textbf{automated verification} technique, this thesis makes three main contributions: 
+\begin{itemize}
+\item \textbf{First}, we propose an algorithm written in the C programming language which implements the automated verification method to formally check the sizing and the operation of a given stand-alone PV system; 
+\item \textbf{Second}, we evaluate the verification technique by comparing three state-of-the-art model checkers in five real case studies; and 
+\item \textbf{Third}, experimental results show that this approach can find subtle design errors in stand-alone PV systems not easily detected by other approaches based on simulation.
+\end{itemize}
 
-In the area of \textbf{automated synthesis}, our study makes a further three original contributions: \textbf{first}, it is the first application of a sound and automated formal synthesis approach which can provide accurate results for optimal sizing of stand-alone PV systems; \textbf{second}, we propose a variant CEGIS method of synthesis with striking differences of how the Synthesize and Verify phases from the original CEGIS work (without solution candidate vector and using an incremental and iterative loop to reach the optimal cost solution); and \textbf{third}, experimental results in seven case studies show that our approach qualitatively outperforms state-of-the-art simulation tools: our solution is far more detailed and closer to real PV systems than solutions presented by simulation.
+In the area of \textbf{automated synthesis}, our study makes a further three original contributions: 
+\begin{itemize}
+\item \textbf{First}, it is the first application of a sound and automated formal synthesis approach which can provide accurate results for optimal sizing of stand-alone PV systems; 
+\item \textbf{Second}, we propose a variant CEGIS method of synthesis with striking differences of how the Synthesize and Verify phases from the original CEGIS work (without solution candidate vector and using an incremental and iterative loop to reach the optimal cost solution); and 
+\item \textbf{Third}, experimental results in seven case studies show that our approach qualitatively outperforms state-of-the-art simulation tools: our solution is far more detailed and closer to real PV systems than solutions presented by simulation.
+\end{itemize}
 
 % Firstly, we describe a modular modeling of each component of a PV system by means of mathematical models that can be encoded into fragments of first-order theories supported by software model checkers. Secondly
 %
