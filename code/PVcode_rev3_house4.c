@@ -94,6 +94,7 @@ int loadcurve[24] = {207,207,207,135,135,135,66,66,161,161,233,253,248,66,66,66,
 int N = 72;    //N=number of series-connected cells
 int NOCT = 45; //Nominal Operating Cell Temperature=45°C +-2 at G=800 W/m2, light spectrum AM 1.5G, windspeed=1m/s, air temp at 20°C
 int Gref = 1000; //reference irradiance is 1000 W/m²
+int G = 800;
 float Tref = 298.15; //reference temperature is 25oC or 298.15K
 float mii = 0.00053; //short-circuit current temperature coefficient (A/K)
 float miv = -0.0031; //open-circuit voltage temperature coefficient (V/K)
@@ -363,7 +364,7 @@ if( ! ((VCmax* IC * nc) >= PACref) ){ __VERIFIER_error();};
 	//controller check, considering just one controller
 	if( ! ( VC == Vsystem ) ){ __VERIFIER_error(); }
 
-	Iscamb = Iscref*(1+mii*(Tcell-25)); //from each PV panel
+	Iscamb = G*Iscref*(1+mii*(Tcell-25))/Gref; //from each PV panel
 	ICmin = Iscamb * NPP;
 	if( ! ( IC >= ICmin ) ){ __VERIFIER_error(); }
 
