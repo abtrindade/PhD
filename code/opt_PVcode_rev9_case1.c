@@ -82,13 +82,16 @@ float BatteryData [10][6] = {{0.85, 12, 80, 14.4, 13.8, 131.00},
 // victron MPPT (35-145, 15-75, 15-100, 50-100), Epever (TRIRON 2210N 20A 12/24V, TRIRON 3210N 30A 12/24V, TRIRON 4210N 40A 12/24V), Epsolar (Tracer-2210RN 20A 12/24V, New Tracer-3215BN 30A 12/24V), Schneider Electric (XW-MPPT 60/150)
 float ControllerData [10][6] = {{0.98, 35, 24, 13, 145, 294.95},
 			       {0.98, 15, 24, 13, 75, 88.40},
-			       {0.98, 15, 24, 13, 100, 137.70},
+//			       {0.98, 15, 24, 13, 100, 137.70},
+
                                {0.98, 50, 24, 13, 100, 294.95},
 			       {0.98, 20, 24, 13, 100, 132.25},
 			       {0.98, 30, 24, 13, 100, 161.00},
 			       {0.98, 40, 24, 13, 100, 184.75},
 			       {0.97, 20, 24, 13, 100, 217.25},
-			       {0.97, 30, 24, 13, 100, 297.25},
+//			       {0.97, 30, 24, 13, 100, 297.25},
+{0.98, 50, 48, 13, 150, 347.82},
+{0.98, 60, 48, 13, 150, 388.91},
 			       {0.96, 60, 60, 13, 140, 1072.50}};
 
 // inverter data  	{efficiency, VinDC, VoutAC, PACref, MAXACref, cost}   //???VinDC pode variar tem range
@@ -211,7 +214,7 @@ float Pminpanels, ItotalPVpanels, VtotalPVpanels, Eb, DODdaycalc, IminDCbus, equ
 
 ////definir arranjos de painéis solares para tentativa de projeto ótimo NPS, NPP
 
-arrang = nondet_uint();
+//arrang = nondet_uint();
 
 //	NPP = 1; //arrangement for series connection
 //	NPS = ((Pminpanels-1) / Pmref)+1;  //arrangement for series connection
