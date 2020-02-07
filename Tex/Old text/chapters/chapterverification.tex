@@ -99,7 +99,7 @@ Line 2 represents all the information that derives from the PV sizing and from t
 
 \textbf{Assumption:} The load curve of every house must be estimated or measured. Moreover, the time step is 1 hour, and seasonality is not considered, i.e. the load curve is the same for the entire year.
 
-The first automated verification is the sizing check (line 3), if an error is found then the algorithm stops. In order to perform the sizing check, the algorithm uses Equations \eqref{eq:NTPmin}, \eqref{eq:NPSmin} and \eqref{eq:NPPmin} to verify the PV panel, Equations \eqref{eq:Nbtotal}, and \eqref{eq:batcheck} to verify the batteries, Equations \eqref{eq:vcvsystem}, \eqref{eq:icmin} and \eqref{eq:icicmin} to verify the charge controller; and Equations \eqref{eq:vindc}, \eqref{eq:voutac} and \eqref{eq:invcheck} to verify the inverter.
+The first automated verification is the sizing check (line 3), if an error is found then the algorithm stops. In order to perform the sizing check, the algorithm uses Equations \eqref{eq:Ecorrected}, and \eqref{eq:Pminpanel} to verify the PV panel, Equations \eqref{eq:Ebat}, \eqref{eq:DODday}, \eqref{eq:Idcbus}, \eqref{eq:Cbank}, and \eqref{eq:batcheck} to verify the batteries, Equations \eqref{eq:Icmin}, \eqref{eq:Vcmin}, \eqref{eq:vcvsystem}, \eqref{eq:icmin} and \eqref{eq:icicmin} to verify the charge controller; and Equations \eqref{eq:vindc}, \eqref{eq:voutac} and \eqref{eq:invcheck} to verify the inverter.
 
 Then, if no sizing design flaw is found, two functions, called at lines 4 and 5, are responsible for discovering at which hour PV generation starts and when it stops. These functions receive this information from the array inputted to the Algorithm with the solar irradiance values.
 
