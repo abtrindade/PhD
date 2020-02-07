@@ -246,9 +246,10 @@ __VERIFIER_assume ( (IC >= ItotalPVpanels) );
 VtotalPVpanels = NPS * Vmref;
 __VERIFIER_assume ( (VCmax >= VtotalPVpanels) );
 
-DODmax = (100-SOClimit);
+DODmax = (100-SOClimit)*2;
 //checking batteries
-Eb = (autonomy/24) * Ecorrected/((float)(DODmax/100)),
+//Eb = (autonomy/24) * Ecorrected/((float)(DODmax/100));
+Eb = (autonomy/24) * Ecorrected*100/DODmax;
 
 DODdaycalc = Ecorrected * 100/Eb;
 
