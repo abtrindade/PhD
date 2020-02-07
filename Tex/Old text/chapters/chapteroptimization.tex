@@ -48,33 +48,26 @@ Algorithm~\ref{alg:opt-algorithm} describes our pseudo-code to synthesize stand-
  \begin{algorithmic}[1]
  \renewcommand{\algorithmicrequire}{\textbf{Input:}}
  \renewcommand{\algorithmicensure}{\textbf{Output:}}
-  \REQUIRE weather data (temperature, solar irradiance), list of equipment (data sheet and price information), design requirements (load curve, peak demand, output voltage, battery autonomy), design assumptions (battery state of charge, criteria and objectives for technical and cost analysis)
- \ENSURE FAIL with counterexample showing the optimal sizing; SUCCESS, saying that the project has no feasible solution considering the requirements and the list of equipment available
+  \REQUIRE weather data (temperature, solar irradiance); list of PV panels, controllers, batteries, and inverters datasheet information and cost; design requirements (load curve, peak demand, load surge power, daily energy consumption, battery autonomy, AC voltage); design assumptions (battery state of charge, depth of discharge, criteria and objectives for technical and cost analysis)
+ \ENSURE FAIL with counterexample showing the optimal sizing; SUCCESS, saying that the project has no feasible solution considering the requirements and the list of equipment
   \STATE Initialize variables \\
-  \STATE Declare list of PV panels, controllers, batteries, and inverters data and cost \\
-%  \STATE Declare list of controllers data and cost \\
-%  \STATE Declare list of batteries data and cost \\
-%  \STATE Declare list of inverters data and cost \\
   \STATE Declare the maximum possible cost $MaxCost$  \\
-  \STATE Declare power demand, power peak, energy consumption \\
-  \STATE Declare battery autonomy, depth of discharge, AC voltage \\
-  \FOR {$HintCost=0$ to $MaxCost$}
+  \STATE Calculate min possible Cost $MinCost$, based on the equipment list \\
+  \FOR {$HintCost=MinCost$ to $MaxCost$}
  	\STATE Declare non-deterministic variable to select PV Panel from list \\
  	\STATE Declare non-deterministic variable to select Controller from list \\
  	\STATE Declare non-deterministic variable to select Battery from list \\
  	\STATE Declare non-deterministic variable to select Inverter from list \\ 	
- 	\STATE Calculate $E_{corrected}, \, E_{p} $ \\
-	\STATE Calculate $N_{TPmin}, \, N_{PSmin}, N_{PPmin} $ \\
+ 	\STATE Calculate $E_{corrected}, \, P_{min,panels} $ \\
+	\STATE Calculate and define PV panels arrangement $N_{TP}, \, N_{PS}, N_{PP} $ \\
+	\STATE Requirement enforced by \textbf{assume}$(P_{min,panels} \leq (N_{PS} \times N_{PP} \times P_{mref}))$ \\
+	\STATE Calculate $I_{c,min} = N_{PP} \times I_{m,ref}$ \\
+	\STATE Calculate $V_{c,min} = N_{PS} \times V_{m,ref}$ \\
  	\STATE Calculate $C_{bank}$ \\
-	\STATE Calculate $N_{BS}min, \, N_{BP}min, \, N_{B}total$ \\
-	\STATE Requirement enforced by \textbf{assume}$(V_{c})$ \\
- 	\STATE Calculate $I_{sc,amb}$ \\
- 	\STATE Calculate $I_{c,min}$ \\
- 	\STATE Requirement enforced by \textbf{assume}$(I_{c} \wedge V_{in}DC \wedge V_{out}AC)$ \\
-%	\STATE Requirement enforced by \textbf{assume}$(V_{in}DC \wedge V_{out}AC )$ \\
-%	\STATE Requirement enforced by \textbf{assume}$(V_{out}AC)$ \\
-	\STATE Requirement enforced by \textbf{assume}$(Demand \wedge P_{surge})$ \\
-%	\STATE Requirement enforced by \textbf{assume}$(P_{surge})$ \\
+	\STATE Calculate and define battery arrangement $N_{BS}, \, N_{BP}, \, N_{BT}$ \\
+	\STATE Requirement enforced by \textbf{assume} $(I_{min,DCbus} \leq (N_{BP} \times Capacity))$ \\
+ 	\STATE Controller requirements enforced by \textbf{assume}$((P_{controller} \geq P_{inverter}) \wedge V_{c} \wedge I_{c})$ \\
+	\STATE Inverter requirements enforced by \textbf{assume}$(V_{in}DC \wedge V_{out}AC \wedge Demand \wedge P_{surge})$ \\
 	\STATE non-deterministic variables hold feasible equipment and cost  \\
 	\STATE $F_{obj} \leftarrow  N_{TP}*Panel_{Cost} \, + \, N_{TB}*Battery_{Cost} \, + Controller_{Cost} \, + \, Inverter_{Cost} \, + \, Installation_{Cost} \, + \, batrep_{Cost} \, + \, PWO\&M_{Cost}$ \\
 	\STATE Violation check with \textbf{assert}$(F_{obj} > HintCost)$ \\
