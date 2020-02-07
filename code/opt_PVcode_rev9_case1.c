@@ -147,7 +147,7 @@ int FHintCost(void){
 ----------------------------------*/
 int Faux (int cost){
 	int NTP, NPP, NPS, NBtotal, NBS, NBP, NPPmin, ICmin;
-	int DODmax;
+	int DODmax, arrang, NPmin;
 	float Ecorrected, Ep, NTPmin, NPSmin1, NPSmin2, Cbank, Iscamb, NBSmin, NBPmin, Fobj;
 float Pminpanels, ItotalPVpanels, VtotalPVpanels, Eb, DODdaycalc, IminDCbus, equipcost;
 	unsigned char PanelChoice, BatteryChoice, ControllerChoice, InverterChoice;
@@ -210,8 +210,29 @@ float Pminpanels, ItotalPVpanels, VtotalPVpanels, Eb, DODdaycalc, IminDCbus, equ
 	Pminpanels = 1.25 * Ecorrected / Insol;
 
 ////definir arranjos de painéis solares para tentativa de projeto ótimo NPS, NPP
-	NPP = 1;
-	NPS = ((Pminpanels-1) / Pmref)+1;
+
+arrang = nondet_uint();
+
+//	NPP = 1; //arrangement for series connection
+//	NPS = ((Pminpanels-1) / Pmref)+1;  //arrangement for series connection
+NPmin = ((Pminpanels -1)/ Pmref)+1;
+if (NPmin >= 3) {
+	arrang = nondet_uint();
+	__VERIFIER_assume( (arrang >= 1) && (arrang <= 2) );
+	if (arrang == 1) { //series arrangement of PV array
+		NPP = 1;
+		NPS = NPmin;
+	}
+	if (arrang == 2) { //parallel arrangement of PV array
+		NPP = 2;
+		if ((NPmin % 2) == 0) NPS = NPmin/2; //even number
+		else NPS = (NPmin + 1)/2; //odd number
+	}	
+} 
+else { //1 or two panels in series
+NPP = 1;
+NPS = NPmin;
+}
 
 //
 
