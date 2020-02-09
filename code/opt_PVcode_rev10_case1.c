@@ -2,7 +2,7 @@
  ============================================================================
  Name        : opt_PVcode_rev7_CASEx
  Author      : Alessandro Trindade
- Version     : rev7 - Feb 2020: 40 equipment, lowerbound defined by SW, better HintCost, reviewed sizing method
+ Version     : rev10 - Feb 2020: 40 equipment, lowerbound defined by SW, better HintCost, reviewed sizing method
  Description : stand-alone PV sizing optimization (Universal: CBMC, ESBMC, UAutomizer and CPChecker)
  //assume (exp);  MUST BE REPLACE BY:   if (!expr) { __VERIFIER_error(); }
  ============================================================================*/
@@ -120,29 +120,28 @@ unsigned char nondet_uchar();
 
 
 int FHintCost(void){
-	int lowervalue, cost=0, cont;
-	lowervalue=(int)PanelData[0][12];
-	for (cont=1; cont <= 9; cont++) {
-		if ((int)PanelData[cont][12] < lowervalue) lowervalue=(int)PanelData[cont][12];
-	}
-	cost = lowervalue;
-	lowervalue=(int)BatteryData[0][5];
-	for (cont=1; cont <= 9; cont++) {
-		if ((int)BatteryData[cont][5] < lowervalue) lowervalue=(int)BatteryData[cont][5];
-	}
-	cost = cost+lowervalue;
-	lowervalue=(int)ControllerData[0][5];
-	for (cont=1; cont <= 9; cont++) {
-		if ((int)ControllerData[cont][5] < lowervalue) lowervalue=(int)ControllerData[cont][5];
-	}
-	cost = cost+lowervalue;
-	lowervalue=(int)InverterData[0][5];
-	for (cont=1; cont <= 9; cont++) {
-		if ((int)InverterData[cont][5] < lowervalue) lowervalue=(int)InverterData[cont][5];
-	}
-	cost = cost+lowervalue;
-//	cost = (cost + lowervalue) + (cost + lowervalue)*0.05+20*289.64;
-	return(cost);
+//	int lowervalue, cost=0, cont;
+//	lowervalue=(int)PanelData[0][12];
+//	for (cont=1; cont <= 9; cont++) {
+//		if ((int)PanelData[cont][12] < lowervalue) lowervalue=(int)PanelData[cont][12];
+//	}
+//	cost = lowervalue;
+//	lowervalue=(int)BatteryData[0][5];
+//	for (cont=1; cont <= 9; cont++) {
+//		if ((int)BatteryData[cont][5] < lowervalue) lowervalue=(int)BatteryData[cont][5];
+//	}
+//	cost = cost+lowervalue;
+//	lowervalue=(int)ControllerData[0][5];
+//	for (cont=1; cont <= 9; cont++) {
+//		if ((int)ControllerData[cont][5] < lowervalue) lowervalue=(int)ControllerData[cont][5];
+//	}
+//	cost = cost+lowervalue;
+//	lowervalue=(int)InverterData[0][5];
+//	for (cont=1; cont <= 9; cont++) {
+//		if ((int)InverterData[cont][5] < lowervalue) lowervalue=(int)InverterData[cont][5];
+//	}
+//	cost = cost+lowervalue;
+	return(1000);  //without calculus, just US$1000 initial value
 }
 
 /*--------------------------------
@@ -219,23 +218,24 @@ float Pminpanels, ItotalPVpanels, VtotalPVpanels, Eb, DODdaycalc, IminDCbus, equ
 //	NPP = 1; //arrangement for series connection
 //	NPS = ((Pminpanels-1) / Pmref)+1;  //arrangement for series connection
 NPmin = ((Pminpanels -1)/ Pmref)+1;
-if (NPmin >= 3) {
-	arrang = nondet_uint();
-	__VERIFIER_assume( (arrang >= 1) && (arrang <= 2) );
-	if (arrang == 1) { //series arrangement of PV array
-		NPP = 1;
-		NPS = NPmin;
-	}
-	if (arrang == 2) { //parallel arrangement of PV array
+//begin panel arrangement definition
+//if (NPmin >= 3) {
+//	arrang = nondet_uint();
+//	__VERIFIER_assume( (arrang >= 1) && (arrang <= 2) );
+//	if (arrang == 1) { //series arrangement of PV array
+//		NPP = 1;
+//		NPS = NPmin;
+//	}
+//	if (arrang == 2) { //parallel arrangement of PV array
 		NPP = 2;
 		if ((NPmin % 2) == 0) NPS = NPmin/2; //even number
 		else NPS = (NPmin + 1)/2; //odd number
-	}	
-} 
-else { //1 or two panels in series
-NPP = 1;
-NPS = NPmin;
-}
+//	}	
+//} 
+//else { //1 or two panels in series
+//NPP = 1;
+//NPS = NPmin;
+//}
 
 NTP = NPS * NPP;
 
@@ -272,10 +272,10 @@ __VERIFIER_assume ((VCmax* IC * nc) >= PACref);
 	
 //ok daqui pra baixo
 	//controller sizing and check, considering just one controller
-	__VERIFIER_assume( (VC == Vsystem) );
-	Iscamb = G*Iscref*(1+mii*(NOCT-25))/Gref; //from each PV panel
-	ICmin = ((Iscamb - 1) * NPP)+1;
-	__VERIFIER_assume( (IC >= ICmin) );
+//__VERIFIER_assume( (VC == Vsystem) );
+//Iscamb = G*Iscref*(1+mii*(NOCT-25))/Gref; //from each PV panel
+//ICmin = ((Iscamb - 1) * NPP)+1;
+//	__VERIFIER_assume( (IC >= ICmin) );
 
 	//inverter sizing and check
 	__VERIFIER_assume ( ( VinDC >= Vsystem ) ); //if inverter supports 48V, then it supports 12 and 24 as well
@@ -285,7 +285,7 @@ __VERIFIER_assume ((VCmax* IC * nc) >= PACref);
 
 	__VERIFIER_assume ( (Phouse <= PACref) && (Psurge <= MAXACref) ); 
 	//Power supported by the inverter must be greater than House's demand
-	// and the Peak power from inverter must support the Reak from the house
+	// and the Peak power from inverter must support the Peak from the house
 
 	// Function objective: minimum acquisition cost
 //equipcost = NTP*PanelCost + NBtotal*BatteryCost + ControllerCost + InverterCost;
