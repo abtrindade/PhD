@@ -99,7 +99,7 @@ Note that the process described here is completely automated and that a validati
 
 This section contains premises and assumptions underlying the optimal sizing method, in relation to automated synthesis and simulation software.
 
-As input of Algorithm~\ref{alg:opt-algorithm}, the synthesis engine is provided with a list of forty items of equipment from ten different manufacturers in order to allow the engine to choose from among all items of PV sizing. The necessary technical information was collected from data sheet of each item. In addition, the price of each item was obtained from available market quotation from internet, in US dollars. All the other currencies were converted to US dollars equivalents at the exchange rate of the day (May and June of 2019).
+As input of Algorithm~\ref{alg:opt-algorithm}, the synthesis engine is provided with a list of forty items of equipment from ten different manufacturers in order to allow the engine to choose from among all items of PV sizing. The necessary technical information was collected from data sheet of each item. In addition, the price of each item was obtained from available market quotation from internet, in US dollars. Preferably, we sought equipment sold in the Brazilian market, in Reais $R\$$, having been converted to US dollars using the exchange rate of the day (May and June of 2019).
 
 With respect to power reliability, the critical period solar energy method will be used~\cite{Pinho}, as described in Section~\ref{sec:sizing}. The usual way is to use loss of load probability (LOLP) or loss of power supply probability (LPSP). However, due to the fact that in this study we are considering neither site characteristics nor load changes over time, which demand historical data, the reliability analysis will be developed only by the critical period method of PV sizing.
 
@@ -172,7 +172,9 @@ with $1.7$ GHz and $4$ GB RAM, running Windows 10.
 The experiments were conducted with a predefined time-out of $240$ minutes.
 
 Three start-of-the-art verification tools, CBMC\footnote{Command-line: \$ cbmc -\phantom{}-unwind 100 filename.c -\phantom{}-trace} version 5.11 with MiniSat 2.2.1~\cite{Kroening}, ESBMC\footnote{Command-line: \$ esbmc filename.c -\phantom{}-no-bounds-check -\phantom{}-no-pointer-check -\phantom{}-unwind 100 -\phantom{}-boolector} version 6.0.0 with the  Boolector 3.0.1 solver~\cite{Brummayer}, %UAutomizer\footnote{Command-line: \$ ./Ultimate -tc config/AutomizerReach.xml -s config/svcomp-Reach-32bit-Automizer\_Default.epf -i filename.c -\phantom{}-traceabstraction.limit.analysis.time 900 -\phantom{}-traceabstraction.stop.after.first.violation.was.found false -\phantom{}-cacsl2boogietranslator.overapproximate.operations.on.floating.types false -\phantom{}- cacsl2boogietranslator.assume.nondeterminstic.values.are.in.range false -\phantom{}-rcfgbuilder.add.additional.assume.for.each.assert true -\phantom{}-rcfgbuilder.simplify.code.blocks true -\phantom{}-rcfgbuilder.size.of.a.code.block LoopFreeBlock}, 
-and CPAchecker\footnote{Command-line: \$ scripts/cpa.sh -heap 64000m -config config/bmc-incremental.properties -spec config/specification/sv-comp-reachability.spc -benchmark filename.c} version 1.8 in a configuration as bound model checking and with MathSAT 5.5.3~\cite{mathsat5}, were used as verification engines to compare the proposed approach effectiveness and efficiency. Note that ``incremental'' ESBMC with the SMT solver Z3 version 4.7.1~\cite{DeMoura} was tried\footnote{Command-line: \$ esbmc filename.c -\phantom{}-no-bounds-check -\phantom{}-no-pointer-check -\phantom{}-unwind 100 -\phantom{}-smt-during-symex -\phantom{}-smt-symex-guard -\phantom{}-z3} as an alternative to use less computing memory. The Simulation tool HOMER Pro version $3.13.1$ was used for comparative purposes.
+and CPAchecker\footnote{Command-line: \$ scripts/cpa.sh -heap 64000m -config config/bmc-incremental.properties -spec config/specification/sv-comp-reachability.spc -benchmark filename.c} version 1.8 in a configuration as bound model checking and with MathSAT 5.5.3~\cite{mathsat5}, were used as verification engines to compare the proposed approach effectiveness and efficiency. An ``incremental'' ESBMC with the SMT solver Z3 version 4.7.1~\cite{DeMoura} was tried\footnote{Command-line: \$ esbmc filename.c -\phantom{}-no-bounds-check -\phantom{}-no-pointer-check -\phantom{}-unwind 100 -\phantom{}-smt-during-symex -\phantom{}-smt-symex-guard -\phantom{}-z3} as an alternative to use less computing memory.
+
+The Simulation tool HOMER Pro version $3.13.1$ was used for comparative purposes.
 
 %---------------------------------------------------------------------------
 \section{Experimental Results}  
@@ -187,24 +189,24 @@ The results are presented at Table~\ref{tab1}.
 \begin{tabular}{c|c|c|c|c}
 \hline
 \hline
-Tools & \makecell{CBMC 5.11 \\(MiniSat 2.2.1)}& \makecell{ESBMC 6.0.0 \\(Boolector 3.0.1 /\\Z3 4.7.1)}& \makecell{CPAchecker 1.8\\(MathSAT 5.5.3)}& HOMER Pro 3.13.1\\
+Tools & \makecell{CBMC 5.11 \\(MiniSat 2.2.1)}& \makecell{ESBMC 6.0.0 \\(Boolector 3.0.1)}& \makecell{CPAchecker 1.8\\(MathSAT 5.5.3)}& HOMER Pro 3.13.1\\
 \hline
 \hline
 Specification & Result & Result & Result & Result \\
 \hline
-\makecell{\textbf{Case Study 1}\\Peak:342W\\Surge:342W \\E:3,900Wh/day\\Autonomy:48h} & OM & TO / IF & \makecell{SAT (172.03 min) \\NTP:1$\times$340W (1S)\\NBT:8$\times$105Ah (2S-4P)\\Controller 15A/75V\\Inverter 700W/48V\\LCC: US\$ 7,790.53} & \makecell{(Time: 0.33 min)\\2.53 kW of PV\\NBT:12$\times$83.4Ah (2S-6P)\\0.351kW inverter\\LCC: US\$ 7,808.04}\\
+\makecell{\textbf{Case Study 1}\\Peak:342W\\Surge:342W \\E:3,900Wh/day\\Autonomy:48h} & TO & \makecell{SAT (620 min) \\NTP:6$\times$330W (2P+3S)\\NBT:16$\times$105Ah (2S-8P)\\Controller 35A/145V\\Inverter 700W/48V\\LCC: US\$ 10,214.04} & \makecell{SAT (548 min) \\NTP:6$\times$330W (2P+3S)\\NBT:16$\times$105Ah (2S-8P)\\Controller 35A/145V\\Inverter 700W/1600W/48V\\LCC: US\$ 10,214.04} & \makecell{(Time: 0.33 min)\\2.53 kW of PV\\NBT:12$\times$83.4Ah (2S-6P)\\0.351kW inverter\\LCC: US\$ 7,808.04}\\
 \hline
-\makecell{\textbf{Case Study 2}\\Peak:814W\\Surge:980W\\E:4,880Wh/day\\Autonomy:48h} & OM & TO / IF & \makecell {SAT (228.7 min) \\NTP:2$\times$330W (2S)\\NBT:10$\times$105Ah (2S-5P)\\Controller 20A/100V DC\\Inverter 1,200W/24V \\LCC: US\$ 8,335.90} & \makecell{(Time: 0.18 min)\\3.71 kW of PV\\NBT:20$\times$83.4Ah (2S-10P)\\0.817kW inverter\\LCC: US\$ 12,861.75} \\
+\makecell{\textbf{Case Study 2}\\Peak:814W\\Surge:980W\\E:4,880Wh/day\\Autonomy:48h} & OM & TO & TO & \makecell{(Time: 0.18 min)\\3.71 kW of PV\\NBT:20$\times$83.4Ah (2S-10P)\\0.817kW inverter\\LCC: US\$ 12,861.75} \\
 \hline
-\makecell{\textbf{Case Study 3}\\Peak:815W\\Surge:980W\\E:4,880Wh/day\\Autonomy:12h} & OM & TO / IF & \makecell {SAT (166.13 min) \\NTP:4$\times$150W (4S)\\NBT:4$\times$80Ah (2S-2P)\\Controller 15A/100V DC\\Inverter 1,200W/24V \\LCC: US\$ 7,306.27} & Not possible \\
+\makecell{\textbf{Case Study 3}\\Peak:815W\\Surge:980W\\E:4,880Wh/day\\Autonomy:12h} & OM & XX & \makecell {SAT (166.13 min) \\NTP:4$\times$150W (4S)\\NBT:4$\times$80Ah (2S-2P)\\Controller 15A/100V DC\\Inverter 1,200W/24V \\LCC: US\$ 7,306.27} & Not possible \\
 \hline
-\makecell{\textbf{Case Study 4}\\Peak:253W\\Surge:722W\\E:3,600Wh/day\\Autonomy:48h} & OM & TO / IF & \makecell {SAT (143.71 min) \\NTP:4$\times$150W (4S)\\NBT:10$\times$80Ah (2S-5P)\\Controller 15A/75V\\Inverter 750W/24V \\LCC: US\$ 7,816.31} & \makecell{(Time: 0.23 min)\\2.42 kW of PV\\NBT:12$\times$83.4Ah (2S-6P)\\0.254kW inverter\\LCC: US\$ 7,677.95}\\
+\makecell{\textbf{Case Study 4}\\Peak:253W\\Surge:722W\\E:3,600Wh/day\\Autonomy:48h} & OM & \makecell{SAT (147 min) \\NTP:6$\times$330W (2P+3S)\\NBT:16$\times$105Ah (2S-8P)\\Controller 35A/145V\\Inverter 280W/48V\\LCC: US\$ 9,678.63} & \makecell{SAT (605 min) \\NTP:6$\times$330W (2P+3S)\\NBT:16$\times$105Ah (2S-8P)\\Controller 35A/145V\\Inverter 280W/48V\\LCC: US\$ 9,678.63} & \makecell{(Time: 0.23 min)\\2.42 kW of PV\\NBT:12$\times$83.4Ah (2S-6P)\\0.254kW inverter\\LCC: US\$ 7,677.95}\\
 \hline
 \makecell{\textbf{Case Study 5}\\Peak:263W\\Surge:732W\\E:2,500Wh/day\\Autonomy:48h} & OM & TO / IF & \makecell {SAT (134.93 min) \\NTP:1$\times$340W (1S)\\NBT:6$\times$105Ah (2S-3P)\\Controller 15A/75V\\Inverter 400W/24V \\LCC: US\$ 7,252.14} & \makecell{(Time: 0.18 min)\\1.59 kW of PV\\NBT:10$\times$83.4Ah (2S-5P)\\0.268kW inverter\\LCC: US\$ 6,175.57} \\
 \hline
-\makecell{\textbf{Case Study 6}\\Peak:322W\\Surge:896W\\E:4,300Wh/day\\Autonomy:48h} & OM & TO / IF & \makecell {SAT (235.75 min) \\NTP:2$\times$200W (2S)\\NBT:10$\times$105Ah (2S-5P)\\Controller 15A/75V\\Inverter 400W/24V \\LCC: US\$ 8,287.23} & \makecell{(Time: 0.22 min)\\3.15 kW of PV\\NBT:14$\times$83.4Ah (2S-7P)\\0.328kW inverter\\LCC: US\$ 9,112.45} \\
+\makecell{\textbf{Case Study 6}\\Peak:322W\\Surge:896W\\E:4,300Wh/day\\Autonomy:48h} & OM & XX & \makecell {SAT (235.75 min) \\NTP:2$\times$200W (2S)\\NBT:10$\times$105Ah (2S-5P)\\Controller 15A/75V\\Inverter 400W/24V \\LCC: US\$ 8,287.23} & \makecell{(Time: 0.22 min)\\3.15 kW of PV\\NBT:14$\times$83.4Ah (2S-7P)\\0.328kW inverter\\LCC: US\$ 9,112.45} \\
 \hline
-\makecell{\textbf{Case Study 7}\\Peak:1,586W\\Surge:2,900W\\E:14,000Wh/day\\Autonomy:48h} & OM & TO / IF & TO & \makecell{(Time: 0.20 min)\\12.5 kW of PV\\NBT:66$\times$83.4Ah (2S-33P)\\1.60kW inverter\\LCC: US\$ 41,878.11} \\
+\makecell{\textbf{Case Study 7}\\Peak:1,586W\\Surge:2,900W\\E:14,000Wh/day\\Autonomy:48h} & OM & XX & YY & \makecell{(Time: 0.20 min)\\12.5 kW of PV\\NBT:66$\times$83.4Ah (2S-33P)\\1.60kW inverter\\LCC: US\$ 41,878.11} \\
 \hline
 \hline
 \end{tabular}
@@ -234,7 +236,9 @@ is the $assert$ of line $21$ from Algorithm~\ref{alg:verification-algorithm}. %T
 \label{fig:cpaoptcase7}
 \end{figure}
 
-CBMC and ESBMC are unable to produce any conclusive result. \textit{Internal failure}, \textit{time out}, or \textit{out of memory} situations occurred; this partially answers the \textit{EQ2}. Note that the internal failure presented by ESBMC was a Z3 solver issue (a bug), which will require an updated version of ESBMC to fix. Similar to CPAchecker, if the \textit{time out} is removed from ESBMC with the SMT solver Boolector, then the verifier is able to obtain the automated synthesis in $73.18$ hours for case study $2$. CBMC, on the other hand,  could present some result only if the RAM memory of the system was expanded in order to avoid the out of memory issue.
+An internal failure was presented by ESBMC when using Z3 solver in all case studies. It corresponds to a 'bug' at the Z3 solver which will require an updated version of ESBMC to fix it. CBMC was unable to produce any conclusive result. \textit{Out of memory} situations occurred in all case studies. Those specific results partially answers the \textit{EQ2}
+
+ESBMC are unable to produce any conclusive result. \textit{Internal failure}, \textit{time out}, or \textit{out of memory} situations occurred; this partially answers the \textit{EQ2}.  Similar to CPAchecker, if the \textit{time out} is removed from ESBMC with the SMT solver Boolector, then the verifier is able to obtain the automated synthesis in $73.18$ hours for case study $2$. 
 
 HOMER Pro was able to evaluate six case studies (cases $1$, $2$, $4$, $5$, $6$, and $7$), and in under $30$ seconds, much faster than the proposed automated synthesis tool (cf.~\textit{EQ2}). Case study $3$ could not be simulated since HOMER Pro does not have the battery autonomy adjustment feature, i.e. the tool always tries to feed the given load with electricity $365$ days/year. 
 
