@@ -29,6 +29,7 @@
 %Alessandro input: makecell package to permite line break inside tables
 \usepackage{makecell}
 \usepackage[alf]{abntex2cite}	% citacoes
+\usepackage{pdfpages} %in order to include PDF from the Folha de Aprovação
 
 %\documentclass[12pt,twoside]{report}
 %\usepackage[utf8]{inputenc}
@@ -61,6 +62,9 @@
 \input{fichacatalog}
 %\thispagestyle{empty}
 \newpage 
+
+%\input{folhaaprovacao}
+\includepdf[pages=-]{folhaaprovacao}
 
 \input{abstract}
 \pagestyle{empty}

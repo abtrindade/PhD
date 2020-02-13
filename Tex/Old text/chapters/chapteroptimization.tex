@@ -49,7 +49,7 @@ Algorithm~\ref{alg:opt-algorithm} describes our pseudo-code to synthesize stand-
  \renewcommand{\algorithmicrequire}{\textbf{Input:}}
  \renewcommand{\algorithmicensure}{\textbf{Output:}}
   \REQUIRE weather data (temperature, solar irradiance); list of PV panels, controllers, batteries, and inverters datasheet information and cost; design requirements (load curve, peak demand, load surge power, daily energy consumption, battery autonomy, AC voltage); design assumptions (battery state of charge, depth of discharge, criteria and objectives for technical and cost analysis)
- \ENSURE FAIL with counterexample showing the optimal sizing; SUCCESS, saying that the project has no feasible solution considering the requirements and the list of equipment
+ \ENSURE FAIL (SAT) with counterexample showing the optimal sizing; SUCCESS (UNSAT), saying that the project has no feasible solution considering the requirements and the list of equipment
   \STATE Initialize variables \\
   \STATE Declare the maximum possible cost $MaxCost$  \\
   \STATE Calculate min possible Cost $MinCost$, based on the equipment list \\
@@ -63,8 +63,8 @@ Algorithm~\ref{alg:opt-algorithm} describes our pseudo-code to synthesize stand-
 	\STATE Requirement enforced by \textbf{assume}$(P_{min,panels} \leq (N_{PS} \times N_{PP} \times P_{mref}))$ \\
 	\STATE Calculate $I_{c,min} = N_{PP} \times I_{m,ref}$ \\
 	\STATE Calculate $V_{c,min} = N_{PS} \times V_{m,ref}$ \\
- 	\STATE Calculate $C_{bank}$ \\
-	\STATE Calculate and define battery arrangement $N_{BS}, \, N_{BP}, \, N_{BT}$ \\
+ 	\STATE Calculate $C_{bank}$ and $E_{b}$ \\
+	\STATE Calculate and define battery arrangement $N_{BS}, \, N_{BP}, \, N_{BTotal}$ \\
 	\STATE Requirement enforced by \textbf{assume} $(I_{min,DCbus} \leq (N_{BP} \times Capacity))$ \\
  	\STATE Controller requirements enforced by \textbf{assume}$((P_{controller} \geq P_{inverter}) \wedge V_{c} \wedge I_{c})$ \\
 	\STATE Inverter requirements enforced by \textbf{assume}$(V_{in}DC \wedge V_{out}AC \wedge Demand \wedge P_{surge})$ \\
@@ -78,15 +78,14 @@ Algorithm~\ref{alg:opt-algorithm} describes our pseudo-code to synthesize stand-
  \end{algorithm}
 
 Our synthesis algorithm will synthesize constant values; 
-it starts with the input of the manufacturer's data and prices of PV panels, batteries, charge controllers and inverters (line $2$). After that, we define user requirements, i.e. house requirements and design definitions, from lines $4$ and $5$. 
+it starts with the input of the manufacturer's data and prices of PV panels, batteries, charge controllers and inverters. Moreover, we define design (house) requirements and design assumptions. The assumptions are present in sections~\ref{sec:assumptions} and~\ref{sec:OptAssumptions}.
 
-The \textit{for}-loop started at line $6$ controls the lowest cost of the PV solution. In particular, it starts with cost $0$ and stops only when the algorithm finds a feasible solution in which the cost breaks the $assertion$ stated in line $22$; if that happens, then our algorithm has found an optimal solution, thereby stating that the {\sc Verify} phase reached a satisfiable condition (\textit{SAT}). The $MaxCost$ value at line $6$ is just a very high value inserted as a limit to the \textit{for}-loop, that will never be reached because the optimal solution will be found first.
+The \textit{for}-loop started at line $4$ controls the lowest cost of the PV solution. In particular, it starts with cost $0$ and stops only when the algorithm finds a feasible solution in which the cost breaks the $assertion$ stated in line $21$; if that happens, then our algorithm has found an optimal solution, thereby stating that the {\sc Verify} phase reached a satisfiable condition (\textit{SAT}). The $MaxCost$ value at line $2$ is just a very high value inserted as a limit to the \textit{for}-loop, that: (1) it will never be reached because the optimal solution will be found first (SAT result); or (2) it will be reached when the search engine did not find a feasible solution for the optimization (UNSAT result).
 
-Our synthesis algorithm uses non-deterministic variables to choose one specific constant from a given list of PV panels, controllers, batteries and inverters (lines $7$ to $10$). This procedure ensures that our synthesis engine checks all combinations of items from each equipment, and combines them to assemble a viable (candidate) PV solution, which meets user requirements.
+Our synthesis algorithm uses non-deterministic variables to choose one specific constant from a given list of PV panels, controllers, batteries and inverters (lines $5$ to $8$). This procedure ensures that our synthesis engine checks all combinations of items from each equipment, and combines them to assemble a viable (candidate) PV solution, which meets user requirements.
 
-Next, we use Eq.~\eqref{eq:Ecorrected}, Eq.~\eqref{eq:Ep}, Eq.~\eqref{eq:NTPmin}, Eq.~\eqref{eq:NPSmin}, Eq.~\eqref{eq:NPPmin}, Eq.~\eqref{eq:Cbank}, Eq.~\eqref{eq:Nbtotal}, Eq.~\eqref{eq:iscamb} and Eq.~\eqref{eq:icmin} to calculate the sizing variables (lines $11$ to $17$). The directive \textit{assume} (lines $15$, $18$ and $19$) 
-ensures compatibility of the items chosen from the list of equipment: the {\sc Verify} phase uses only items (among all the possible ones) that satisfy the statements of Lines $15$, $18$ and $19$. Line $15$ is specific to the charge controller voltage check. Line $18$ checks the inverter check $I_{c}$, the charge controller DC input voltage $V_{in}DC$, and charge controller AC output voltage $V_{in}DC$ check. Line $19$ ensures the power demand and the surge power of the inverter.
-Therefore, our synthesis algorithm reaches line $20$ with one feasible solution, and the cost of that solution is calculated in $F_{obj}$ (line $21$). This cost is the equivalent to ~\ref{eq:LCC}, as described in Section ~\ref{sec:optcriteria}.
+Next, we use from Eq.~\eqref{eq:Ecorrected} to Eq.~\eqref{eq:icmin} to calculate the sizing variables (lines $9$ to $15$). The directive \textit{assume} (lines $11$, $16$, $17$ and $18$) ensures compatibility of the items chosen from the list of equipment: the {\sc Verify} phase uses only items (among all the possible ones) that satisfy the statements of lines $11$, $16$, $17$ and $18$. Line $11$ is specific to PV panels. Line $16$ is for the battery bank. Line $17$ is the charge controller voltage check. Line $18$ does the inverter check and ensures the power demand and the surge power of the inverter.
+Therefore, our synthesis algorithm reaches line $19$ with one feasible solution, and the cost of that solution is calculated in $F_{obj}$ (line $20$). This cost is the equivalent to~\ref{eq:LCC}, as described in Section~\ref{sec:optcriteria}.
 
 If our algorithm does not find a feasible solution among the item of equipment that were provided for our {\sc Synthesize} phase,  then the result is unsatisfiable (\textit{UNSAT}), i.e. the program finishes without finding a solution, indicating that it was not possible to combine the specific items of equipment in order to create a feasible solution. 
 
@@ -100,7 +99,7 @@ Note that the process described here is completely automated and that a validati
 
 This section contains premises and assumptions underlying the optimal sizing method, in relation to automated synthesis and simulation software.
 
-In line $2$ of Algorithm~\ref{alg:opt-algorithm}, the synthesis engine is provided with a list of forty items of equipment from ten different manufacturers in order to allow the engine to choose from among all items of PV sizing. The necessary technical information was collected from data sheet of each item. In addition, the price of each item was obtained from available market quotation from internet, in US dollars. All the other currencies were converted to US dollars equivalents at the exchange rate of the day (May and June of 2019).
+As input of Algorithm~\ref{alg:opt-algorithm}, the synthesis engine is provided with a list of forty items of equipment from ten different manufacturers in order to allow the engine to choose from among all items of PV sizing. The necessary technical information was collected from data sheet of each item. In addition, the price of each item was obtained from available market quotation from internet, in US dollars. All the other currencies were converted to US dollars equivalents at the exchange rate of the day (May and June of 2019).
 
 With respect to power reliability, the critical period solar energy method will be used~\cite{Pinho}, as described in Section~\ref{sec:sizing}. The usual way is to use loss of load probability (LOLP) or loss of power supply probability (LPSP). However, due to the fact that in this study we are considering neither site characteristics nor load changes over time, which demand historical data, the reliability analysis will be developed only by the critical period method of PV sizing.
 
@@ -114,7 +113,7 @@ Financial analysis details:
 
 The PV system optimization technique adopted here is the intuitive method, since the average daily value of solar irradiance is used in the mathematical model, without considering battery state of charge, or even the random nature of solar irradiation and meteorological conditions. Therefore, all the computational effort will be concentrated on our automated synthesis algorithm.
 
-With regard to batteries, the voltage of the system (DC bus) is set at $24$ V DC (but this can be adjusted to $12$ or $48$ V in the code).
+With regard to batteries, the voltage of the system (DC bus) is set at $24$ V DC, but this can be adjusted to $12$ or $48$ V in the code.
 
 HOMER Pro details:
 
@@ -216,8 +215,10 @@ Specification & Result & Result & Result & Result \\
 CPAchecker was able to synthesize optimal sizing in six 
 out of the seven case studies (cases $1$ - $6$): the result was produced within the time limit, which varied from $134.71$ to $235.75$ minutes. Fig.~\ref{fig:CPAoptc1} illustrates the result of case 4 with the optimal sizing appearing on the left size as the integer $8$ for the solar panel (which is the model RSM36-6-150P from the manufacturer Risen), battery $0$ refers to the model 12MF80 of 80 Ah from Moura, charge controller $1$ refers to the model 15A-75V MPPT from Victron  Energy, and the inverter number $3$ refers to the model IP350-11 from Epever (750 W). The variables NTP, NPS, NPP, NPS, NBP, and NBTotal, also presented in the counterexample as well, shows the number of panels and batteries and how they are connected.
 
-Only case study $7$ led to a \textit{time out} result in CPAchecker, i.e.  it was not solved within $240$ minutes. This is illustrated in Fig.~\ref{fig:cpaoptcase7}. However, this CPAchecker time-out limitation is removed, the verifier is able to solve the optimization in $44.97$ hours. The violation (SAT result) indicated in Table~\ref{tab1} 
-is the $assert$ of line $22$ from Algorithm~\ref{alg:verification-algorithm}. %The results were tested by manual PV sizing and were sound (\textit{RQ1}). %, linking a feasible technical solution with the lowest cost possible, considering the equipment that were inputted to the code. 
+Only case study $7$ led to a \textit{time out} result in CPAchecker, i.e.  it was not solved within $240$ minutes. This is illustrated in Fig.~\ref{fig:cpaoptcase7}. However, this CPAchecker time-out limitation is removed, the verifier is able to solve the optimization in $44.97$ hours. 
+
+The violation (SAT result) indicated all over the Table~\ref{tab1} 
+is the $assert$ of line $21$ from Algorithm~\ref{alg:verification-algorithm}. %The results were tested by manual PV sizing and were sound (\textit{RQ1}). %, linking a feasible technical solution with the lowest cost possible, considering the equipment that were inputted to the code. 
 
 \begin{figure}[h]
 \includegraphics[width=1.0\textwidth]{CPA_opt_c4.png}
