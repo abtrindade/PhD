@@ -27,7 +27,7 @@ int G = 800;
 float Tref = 298.15; //reference temperature is 25oC or 298.15K
 
 //data from the house
-int Phouse = 342, Psurge = 342, Econsumption = 3900;
+int Phouse = 815, Psurge = 980, Econsumption = 4880;
 
 //must define
 int MaxCost=10000; //10 million maximum cost just to control the loop of main function

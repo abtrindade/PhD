@@ -8,13 +8,26 @@
  ============================================================================*/
 
 //case studies
-//case1       int Phouse = 342, Psurge = 342, Econsumption = 3900;
-//case2       int Phouse = 814, Psurge = 980, Econsumption = 4800;
-//case3       int Phouse = 815, Psurge = 980, Econsumption = 4880;
-//case4       int Phouse = 253, Psurge = 722, Econsumption = 3600;
-//case5       int Phouse = 263, Psurge = 732, Econsumption = 2500;
-//case6       int Phouse = 322, Psurge = 896, Econsumption = 4300;
-//case7       int Phouse = 1586, Psurge = 2900, Econsumption = 14400;
+//HOUSE1 
+// int loadcurve[24] = {118,118,118,46,46,46,95,95,170,170,296,242,242,95,95,95,95,95,342,288,288,288,288,118};
+// int Phouse = 501, Psurge = 501, Econsumption = 3900;
+// int SOClimit = 75, SOCabsorption = 95, SOCfull = 100, Vbat = 12, VAC = 127;
+//HOUSE2 
+// int loadcurve[24] = {136, 136, 136, 136, 136, 136, 67, 67, 184, 184, 184, 184, 184, 67, 67, 67, 67, 67, 253, 253, 253, 253, 253, 136};
+// int Phouse = 253, Psurge = 722, Econsumption = 3600;
+// int SOClimit = 75, SOCabsorption = 95, SOCfull = 100, Vbat = 12, VAC = 127;
+//HOUSE3 
+// int loadcurve[24] = {113,113,113,113,113,113,67,67,217,97,97,97,97,97,97,97,97,97,263,113,113,113,113,113};
+// int Phouse = 263, Psurge = 732, Econsumption = 2500;
+// int SOClimit = 75, SOCabsorption = 95, SOCfull = 100, Vbat = 12, VAC = 127;
+//HOUSE4 
+// int loadcurve[24] = {207,207,207,135,135,135,66,66,161,161,233,253,248,66,66,66,66,66,302,317,322,302,302,207};
+// int Phouse = 322, Psurge = 896, Econsumption = 4300;
+// int SOClimit = 75, SOCabsorption = 95, SOCfull = 100, Vbat = 12, VAC = 127;
+//HOUSE5 
+// int loadcurve[24] = {45,16,16,16,16,16,0,0,0,72,72,222,150,150,0,0,72,72,814,814,814,742,742,16};
+// int Phouse = 915, Psurge = 980, Econsumption = 4880;
+// int SOClimit = 75, SOCabsorption = 95, SOCfull = 100, Vbat = 12, VAC = 127;
 
 //data from Manaus
 int minSolarIrrad [24] = {0,0,0,0,0,0,25,135,274,422,509,537,503,505,430,281,80,10,0,0,0,0,0,0};
@@ -27,7 +40,7 @@ int G = 800;
 float Tref = 298.15; //reference temperature is 25oC or 298.15K
 
 //data from the house
-int Phouse = 342, Psurge = 342, Econsumption = 3900;
+int Phouse = 501, Psurge = 501, Econsumption = 3900;
 
 //must define
 int MaxCost=10000; //10 million maximum cost just to control the loop of main function
@@ -238,7 +251,7 @@ VtotalPVpanels = NPS * Vmref;
 __VERIFIER_assume ( (VCmax >= VtotalPVpanels) );
 
 DODmax = (100-SOClimit)*2;
-autonomy = 2; // (48/24)
+autonomy = 2; //48/24;
 //checking batteries
 //Eb = (autonomy/24) * Ecorrected/((float)(DODmax/100));
 Eb = autonomy * Ecorrected*100/DODmax;
