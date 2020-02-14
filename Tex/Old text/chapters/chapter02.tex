@@ -155,7 +155,7 @@ CBMC's verification flow can be summarized in three stages:
 \begin{itemize}
 \item Front-end: scans, parses and type-checks C code; it converts control flow elements, such as \textit{if} or \textit{switch} statements, loops and jumps, into equivalent guarded \textit{goto} statements, thus aiming to reduce verification effort; 
 \item Middle-end: performs symbolic execution by eagerly unwinding loops up to a fixed bound, which can be specified by the user on a per-loop basis or globally, for all loops and finally; 
-\item Back-end: supports SAT and SMT solvers to discharge verification conditions.
+\item Back-end: supports SAT and SMT solvers to discharge verification conditions (VCs).
 \end{itemize}
 
 Specifically, CBMC comes with a built-in solver for bit-vector formulas that is based on MiniSat. We used this solver during the experimentation in this Ph.D thesis~\cite{Kroening}.
@@ -172,7 +172,7 @@ ESBMC's verification flow can be summarized in three stages:
 \begin{itemize}
 \item A front-end that can read and compile C code, where the system's formal specification is first handled; 
 \item Preprocessing steps deal with code representation, control flow and unwinding of loops, and model simplification, thereby aiming to reduce verification effort; and finally 
-\item The SMT solving stage, where all constraints and properties of the system are encoded into SMT and checked for satisfiability.
+\item The SMT solving stage, where all constraints (C) and properties (P) of the system are encoded into SMT and checked for satisfiability ($C \wedge \neg P$).
 \end{itemize}
  
 ESBMC exploits the standardized input language of SMT solvers (SMT-LIB\footnote{http://smtlib.cs.uiowa.edu/} logic format) to make use of a resource called \textit{assertion stack}~\cite{Morse2015}. This enables ESBMC, and the respective solver, to learn from previous checks, thus optimizing the search procedure and potentially eliminating a large amount of formula state space to be searched, because it solves and disregards data during the process, incrementally. This technique is called 'incremental SMT'~\cite{DBLP:journals/fac/SchrammelKBMTB17} and allows ESBMC to reduce the memory overhead, mainly when the verified system is complex and the computing platform does not have a large amount of memory to deal with the entire design space state. ESBMC in 'incremental SMT' uses only the Z3 solver~\cite{DeMoura}.
