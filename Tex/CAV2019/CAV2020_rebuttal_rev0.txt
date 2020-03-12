@@ -1,0 +1,178 @@
+SUBMISSION: 22
+TITLE: Synthesis of Solar Photovoltaic Systems: Optimal Sizing Comparison
+AUTHORS: Alessandro Trindade and Lucas Cordeiro
+Category: Industrial Experience Reports & Case Studies
+
+
+================REBUTTAL====================================
+
+*****************Reviewer 1*********************************
+Q2: Isn't CBMC a model checker for C/C++? Can't you use directly an SMT solver like Z3?
+Answer: The algorithm was written in Language C (we are sorry, but it seems that this information is not present at the peper), and the code was the same for all verifier engines (CBMC, ESBMC, and CPAchecker). This technique (the use of formal synthesis in order to obtain the optimal sizing of solar PV systems) was one part of a Thesis defended by one author in January of 2020; and we treid different verifier engines (and solvers), but the combination ESBMC with Z3 version 4.7.1 presented an internal failure in all case studies. It corresponds to a ’bug’ in the Z3 solver which will require an updated version of ESBMC to fix it.
+
+*******************Reviewer 2*******************************
+Question for authors #1: Currently, the CEGIS loop results in a *single input* being added at each iteration. This may require a large number of iterations for the synthesis component to produce a candidate that succeeds in the verifier. Is there a more *general* constraint that the verifier can produce, to help the synthesizer more quickly rule out bad candidates?
+Answer: We realized that just after the paper submission. In a updated version of the algorithm (not the one presented at this paper), we inclued a minimum cost for the beginning of iterative loop. This cost is the lowest among the list of equipment used, considering a configuration of just one solar PV panel, one charge controller, one battery, and one inverter. Indeed, if we use a bigger list of equipment then the time to result is bigger.
+
+Question for authors #2: Where does the verification step occur in Algorithm 1? Unless I'm missing something, the VERIFY and SYNTHESIZE phases don't show up explicitly in Algorithm 1.
+Answer: We will try to explain better here: the SYNTHESIZE phase is obtained by an feasible combination of equipment that meet the properties collected from the electrical requirements of the equipment itself (power, current or voltage). As told at the paper, this phase produces one feasible solution at line 20. The VERIFY phase is the responsible to obtain the lowest cost (minimum cost is the optimization objective function) considering the iterative steps taken from the 'for' loop that goes from line 6 to 22 of the algorithm 1. The code will cause an FAIL when the optimal sizing is found or when there is not feasible solution (SUCCESS).
+
+Question for authors #3: My understanding is that the verification step uses a model checker. What exactly does the model look like?
+Answer: Yes, we use model checking. The model (constraint and properties) is obtained from the math model used for the sizing, from the electrical characteristic of the equipment (in order to combine electrical compatibility among equipment, as current, voltage, or power), from the 'assumes' included explicitly at the algorithm 1, and from the objective function (minimum cost of the feasible PV sizing solution). We created a specific page for the C^(not)P, after the paper was finished, and it is present in: 
+
+Question for authors #4: In regards to the mismatched Windows/Ubuntu machine specs in section 4.3, why couldn't you just use separate Windows/Ubuntu VMs on the same host machine?
+Answer: Yes, the ideal should be to use the same hardware configuration for the tests. However we got restrictions related to the licence for the HOMER Pro, and we did not have autonomy to change the Linux VM machine because it was shared with other PhD students with lots of experiments running.
+
+****************REVIEWER 3************************************
+1. You mention in the last sentence of Section 2 that the requirements involve non-linear equations. In many cases, it is sufficient for the requirements to be monotonic (for example, doubling the solar irradiance will conceivably always increase power output, even if it does not double it, or increasing panel efficiency will necessarily increase power output). Have you thought of exploiting such monotonicity properties for the purposes of optimization?
+
+2. Your choice of words in Figure 2 (and elsewhere in the paper) is a bit non-standard. In traditional usage, failure to verify a candidate program results in a counter-example and successful verification results in termination of the CEGIS loop.
+
+3. In any case, why do you describe the algorithm as a CEGIS loop when it could more simply be described as iteratively increasing the target cost and using a constraint solver to determine whether the target cost is feasible?
+
+
+*********************REVIEWER 4*******************************
+However, I have some reservations about the technical approach. First, the target problem here is one of optimization, but the synthesis algorithm does not model the optimality objective explicitly, instead relying on standard CEGIS. A quantitative synthesis approach, which casts synthesis as constrained optimization over a space of programs, seems more appropriate. Second, the application demands reasoning about constraints in nonlinear real arithmetic, which is a hard problem. It is not clear how this problem will be solved. 
+
+
+
+Finally, the paper claims that the method does can lead to "more accurate results than existing commercial tools." However, this claim is not validated through an empirical evaluation.
+
+
+*******************************************************************
+*****************ORIGINAL COMMENTS*********************************
+*******************************************************************
+
+----------------------- REVIEW 1 ---------------------
+SUBMISSION: 22
+TITLE: Synthesis of Solar Photovoltaic Systems: Optimal Sizing Comparison
+AUTHORS: Alessandro Trindade and Lucas Cordeiro
+
+----------- Overall evaluation -----------
+SCORE: 1 (weak accept)
+----- TEXT:
+This (tool) paper describes a new application area for SMT-based synthesis in the domain of photovoltaic systems. The method is a standard CEGIS approach + constantly increasing the allowed cost as long as there is no feasible solution. The case studies (based on the real data of electrical load) compare the developed tool to a commercial software called Homer.
+
+I appreciate the application of formal methods in industrial applications (especially for clean and affordable energy), and believe that the paper (while not in the main focus of the conference) could be a nice addition to CAV.
+
+One drawback is that I could not really see a conclusive answer to EG3 (how does the is formal synthesis tool compare to a specialized simulation tool?). In particular, do the case studies (except for #2) have deployed systems that allow to validate the synthesized results?
+
+For rebuttal:
+Q1: Is this optimization problem beyond the scope (or ability) of probabilistic programming?
+Q2: Isn't CBMC a model checker for C/C++? Can't you use directly an SMT solver like Z3?
+
+
+----------------------- REVIEW 2 ---------------------
+SUBMISSION: 22
+TITLE: Synthesis of Solar Photovoltaic Systems: Optimal Sizing Comparison
+AUTHORS: Alessandro Trindade and Lucas Cordeiro
+
+----------- Overall evaluation -----------
+SCORE: 1 (weak accept)
+----- TEXT:
+======= Paper Summary =======
+
+This paper presents a program synthesis-based approach for solving the optimal PV sizing problem, which consists of selecting optimal parameters for photovoltaic (PV) systems. The tool uses a CEGIS loop architecture, with a synthesizer producing a candidate solution that is correct for a finite number of inputs, and a verifier checking whether the candidate is correct for *all* inputs. To evaluate the tool, the authors apply it to real-world electrical systems, including one in the Amazonas State, Brazil.
+
+======= Contributions =======
+
+The paper presents the following contributions:
+
+#1. The paper is one of the first to apply formal methods to PV system design.
+
+#2. The approach translates problems in the PV design space into a form that can be tackled using efficient off-the-shelf verification tools.
+
+#3. The paper contains meaningful real-world applications of the approach, and discusses ways to improve on the state of the art in this area.
+
+======= General Questions/Comments =======
+
+Cons:
+- The techniques are not particularly novel (CEGIS, model-checking, etc. are used in a mostly black-box way).
+- There are some shortcomings and unclear components of the algorithm. For example, the CEGIS loop could iterate a huge number of times, due to the simple strategy for adding inputs to the synthesis component. Additionally, the verification/synthesis components are not described in detail.
+
+Pros:
+- The paper describes a tool which targets a vital real-world problem. I think it's fantastic to see researchers applying formal methods in areas related to renewable energy.
+- The overall CEGIS approach seems promising, and the experimental results seem good.
+
+Question for authors #1: Currently, the CEGIS loop results in a *single input* being added at each iteration. This may require a large number of iterations for the synthesis component to produce a candidate that succeeds in the verifier. Is there a more *general* constraint that the verifier can produce, to help the synthesizer more quickly rule out bad candidates?
+
+Question for authors #2: Where does the verification step occur in Algorithm 1? Unless I'm missing something, the VERIFY and SYNTHESIZE phases don't show up explicitly in Algorithm 1.
+
+Question for authors #3: My understanding is that the verification step uses a model checker. What exactly does the model look like?
+
+Question for authors #4: In regards to the mismatched Windows/Ubuntu machine specs in section 4.3, why couldn't you just use separate Windows/Ubuntu VMs on the same host machine?
+
+Suggestions for improvement:
+- I don't quite understand why a *counterexample* from the verifier represents "success" of the tool. Usually a generated counterexample would be sent back to the synthesizer to help improve the next generated candidate. It would be helpful if this is clarified in the next revision.
+- It would be helpful if the "PV sizing" problem could be more precisely articulated.
+
+======= Conclusion =======
+
+This is an interesting application of program synthesis to an important problem in the real world. Although the tool primarily uses existing techniques, it seems to perform well compared to existing tools in the PV design domain.
+
+======= Nitpicks =======
+
+- page 2: "reasoning of a model" --> "reasoning about a model"
+- page 7: "ensure that the approach is sound" --> "ensure that the solution is sound"
+- page 10: "HOME Pro was unable" --> "HOMER Pro was unable"
+- page 10: "but not sound as our method" --> "but not sound, as is our method"
+- page 10: "approach to pursuit the" --> "approach to pursue the"
+- page 10: "which is far detailed" --> "which is far more detailed"
+
+
+----------------------- REVIEW 3 ---------------------
+SUBMISSION: 22
+TITLE: Synthesis of Solar Photovoltaic Systems: Optimal Sizing Comparison
+AUTHORS: Alessandro Trindade and Lucas Cordeiro
+
+----------- Overall evaluation -----------
+SCORE: -2 (reject)
+----- TEXT:
+Overview of the Paper
+---------------------
+
+The choice of optimal photovoltaic cells (in terms of weather, cost, efficiency, surface area, number of panels, etc.) is an important challenge in the widespread deployment of decentralized solar energy harvesting systems. This paper considers the use of CEGIS-based techniques in combination of program verifiers such as CPAchecker, CBMC, or ESBMC to make optimal decisions.
+
+The algorithm takes as input a list of panel types and associated equipment, including batteries, controllers, inverters, and installation-specific details, such as weather data, power demand etc. The problem is to identify the most cost-effective installation which satisfies the given requirements. The core technique appears to involve repeatedly checking whether a solar panel configuration exists with a given target cost, which starts at 0 and iteratively increases until it reaches some pre-defined maximum. In each step, the installation parameters are non-deterministically chosen, and a program verifier determines whether there is a choice of these parameters which leads to the requirements being satisfied.
+
+Experiments are presented which evaluate the system on a selection of six installation requirements. CBMC is able to generate an optimal configuration for all but one of the settings.
+
+Appraisal
+---------
+
+It is unclear to me that CAV is an appropriate venue for such a paper. The specific domain of solar photovoltaics is outside my area of expertise, and I presume, outside the expertise of the average CAV attendee. The paper seems better suited to a conference on smart cities, IoT, or energy systems.
+
+One potential reason to accept this at CAV would be if the technique involved some novelty at the level of the optimization algorithm. Examples include (a) a non-trivial use of CEGIS to perform optimization, (b) a close synergy between program synthesis and the application domain of photovoltaic cells, or (c) a failure of off-the-shelf numerical optimizers to succeed at this task. Unfortunately, the paper could not convince me of this.
+
+I therefore do not vote for this paper to be accepted.
+
+Questions and Comments for the Authors
+--------------------------------------
+
+1. You mention in the last sentence of Section 2 that the requirements involve non-linear equations. In many cases, it is sufficient for the requirements to be monotonic (for example, doubling the solar irradiance will conceivably always increase power output, even if it does not double it, or increasing panel efficiency will necessarily increase power output). Have you thought of exploiting such monotonicity properties for the purposes of optimization?
+
+2. Your choice of words in Figure 2 (and elsewhere in the paper) is a bit non-standard. In traditional usage, failure to verify a candidate program results in a counter-example and successful verification results in termination of the CEGIS loop.
+
+3. In any case, why do you describe the algorithm as a CEGIS loop when it could more simply be described as iteratively increasing the target cost and using a constraint solver to determine whether the target cost is feasible?
+
+
+----------------------- REVIEW 4 ---------------------
+SUBMISSION: 22
+TITLE: Synthesis of Solar Photovoltaic Systems: Optimal Sizing Comparison
+AUTHORS: Alessandro Trindade and Lucas Cordeiro
+
+----------- Overall evaluation -----------
+SCORE: -2 (reject)
+----- TEXT:
+Summary:
+
+The paper is a case study of the application of program synthesis to obtaining the optimal sizing of solar photovoltaic (PV) systems.
+
+Evaluation:
+
+The paper is on an interesting topic. Prior work has sought to verify the correctness of PV panels. The automatic synthesis of safe-by-construction parameters of PV panels is a natural next step. Also, the authors have taken care to use real data from the Amazonas state.
+
+However, I have some reservations about the technical approach. First, the target problem here is one of optimization, but the synthesis algorithm does not model the optimality objective explicitly, instead relying on standard CEGIS. A quantitative synthesis approach, which casts synthesis as constrained optimization over a space of programs, seems more appropriate. Second, the application demands reasoning about constraints in nonlinear real arithmetic, which is a hard problem. It is not clear how this problem will be solved. Finally, the paper claims that the method does can lead to "more accurate results than existing commercial tools." However, this claim is not validated through an empirical evaluation.
+
+
+------------------------------------------------------
