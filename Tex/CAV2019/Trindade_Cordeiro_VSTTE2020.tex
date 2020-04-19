@@ -76,7 +76,7 @@ Our work makes three significant contributions to advance the state-of-the-art i
 Fig.~\ref{fig:optimization} illustrates how to obtain the optimal sizing of a stand-alone PV system using the traditional techniques (manual and simulation) and the proposed synthesis technique. Note that the input information is the same for all the methods: weather data, price information, design requirements, as load curve and power demand, and design assumptions. For the automated synthesis, we also define the bound $k$ to restrict the design-space search. Here we start with a low bound $k$ and incrementally increase it to avoid time and memory constraints on our verification back-end. Therefore, the proper choice of $k$ is essential to this method.
 
 \begin{figure}[h]
-\includegraphics[width=0.8\textwidth]{optimalsizingprocess4}
+\includegraphics[width=0.9\textwidth]{optimalsizingprocess4}
 \centering
 \caption{Comparison of optimal sizing methods.}
 \label{fig:optimization}
@@ -89,14 +89,18 @@ Both techniques (traditional and automated synthesis)  produce as output either 
 \label{sec:ProgramSynthesis}
 %-----------------------------------------------------------
 The basic idea of program synthesis is to automatically construct a program $P$ that satisfies a correctness specification $\sigma$. In particular, program synthesis is automatically performed by engines that use a correctness specification $\sigma$, as starting point, and then incrementally produce a sequence of candidate solutions that partially satisfy $\sigma$~\cite{Abateetal2017}. As a result, a given candidate program $p$ is iteratively refined to match $\sigma$ more closely. Figure~\ref{Counter-Example-Guided-Inductive-Synthesis} illustrates the underlying architecture. 
+
+\begin{figure}[h]
+\includegraphics[width=0.8\textwidth]{fig2_rev2.jpg}
 %
-\begin{wrapfigure}{r}{0.5\textwidth}
-\begin{center}
-	\includegraphics[width=0.5\columnwidth]{fig2_rev2.jpg}
-\end{center}	
+%\begin{wrapfigure}{r}{0.5\textwidth}
+%\begin{center}
+%	\includegraphics[width=0.5\columnwidth]{fig2_rev2.jpg}
+%\end{center}	
 	\caption{CEGIS in PV system sizing.}
 	\label{Counter-Example-Guided-Inductive-Synthesis}
-\end{wrapfigure}
+%\end{wrapfigure}
+\end{figure}
 
 The correctness specification $\sigma$ provided to our synthesizer is of the form $\exists \vec{F}. \forall \vec{x}. \sigma(\vec{x}, \vec{F})$, where $\vec{F}$ ranges over functions, $\vec{x}$ ranges over ground terms, and $\sigma$ is a quantifier-free (QF) formula typically supported by SMT solvers. The ground terms are interpreted over some finite domain $\mathcal{D}$, where $\mathcal{D}$ can be encoded using the SMT's bit-vectors part. Our specification includes house demand, energy, and battery autonomy; we also provide equipment specifications and prices from different manufacturers and models.
 
@@ -115,118 +119,145 @@ In our CEGIS variant, there exist four differences related to the traditional on
 \label{sec:sizing}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%A PV system is illustrated in Fig.\ref{fig:blockdiagram}. 
-A photovoltaic system employs: the PV generator, which can be a \textbf{panel or an array}, is a semiconductor device that can convert solar energy into DC electricity; for night hours or rainy days, we hold \textbf{batteries} where power can be stored and used; the use of batteries as a storage form implies the presence of a \textbf{charge controller}~\cite{Hansen}; the PV arrays produce DC, and therefore when the PV system contains an AC load, a DC/AC conversion is required (\textbf{inverter}); the \textbf{AC load} dictates the behavior of the AC electrical load from the house that will be fed by the system.
+A PV system is illustrated in Fig.\ref{fig:blockdiagram}. It 
+%A photovoltaic system 
+employs: the PV generator, which can be a \textbf{panel or an array}, is a semiconductor device that can convert solar energy into DC electricity; for night hours or rainy days, we hold \textbf{batteries} where power can be stored and used; the use of batteries as a storage form implies the presence of a \textbf{charge controller}~\cite{Hansen}; the PV arrays produce DC, and therefore when the PV system contains an AC load, a DC/AC conversion is required (\textbf{inverter}); the \textbf{AC load} dictates the behavior of the AC electrical load from the house that will be fed by the system.
 
 %\begin{wrapfigure}{r}{0.5\textwidth}
-%%\begin{figure}[h]
-%\includegraphics[width=0.5\textwidth]{blockdiagramPVS2_rev}
-%\centering
-%\caption{Block diagram for a typical stand-alone PV system~\cite{Hansen}.}
-%\label{fig:blockdiagram} 
-%\end{wrapfigure}
-%
-The sizing check will ensure that the system meets the standard project steps related to the critical period solar energy method~\cite{Pinho} and the MPPT (Maximum Power Point Tracking) charge controller, which is the most common one in practice. Firstly, we need to correct the energy consumption estimated to the load ($E_{consumption}$), which is carried out by Eq.~\ref{eq:Ecorrected}, where the efficiency of batteries ($\eta_{b}$), controller ($\eta_{c}$), and inverter ($\eta_{i}$) are considered~\cite{Pinho} as follows
+\begin{figure}[h]
+\includegraphics[width=0.8\textwidth]{blockdiagramPVS2_rev}
+\centering
+\caption{Block diagram for a typical stand-alone PV system~\cite{Hansen}.}
+\label{fig:blockdiagram} 
+\end{figure}
+
+The sizing check stage can ensure that the system meets the standard project steps related to the critical period method (worst month) for solar energy system sizing~\cite{Pinho} and adopting an MPPT (Maximum Power Point Tracking) charge controller, which is the most common in use. Firstly, we need to correct the daily energy consumption estimated for the load ($E_{consumption}$), which is carried out by Eq.~\eqref{eq:Ecorrected}, where the efficiency of batteries ($\eta_{b}$), controller ($\eta_{c}$), and inverter ($\eta_{i}$) are considered~\cite{Pinho} as follows
 
 \begin{equation}
 \label{eq:Ecorrected}
-E_{corrected} = \frac {E_{consumption}}{\eta_{b} \eta_{c} \eta_{i} }.
+E_{corrected} = \dfrac{E_{consumption}}{\eta_{b} \times \eta_{c} \times \eta_{i} }.
 \end{equation}
 
-We also need to estimate the energy that can be produced for each panel, called $E_{p}$, in Wh, defined as
+We must estimate the total power that will be demanded from the PV panels, as defined by Eq. ~\eqref{eq:Pminpanel}.
 
 \begin{equation}
-\label{eq:Ep}
-E_{p} = Solar\_Irradiance \times Panel\_Area \times \eta_{p} \times 1000,
+\label{eq:Pminpanel}
+P_{min,panels} = \dfrac{1.25 \times E_{corrected}}{Insolation},
 \end{equation}
 
-\noindent where the solar irradiance is expressed in terms of $kWh/m^{2}$ and depends on the site where the PV system will be deployed; 
-the PV panel area is given in $m^{2}$ and corresponds to the size of one PV panel, and $\eta_{p}$ represents the PV panel efficiency.
-The minimum number of solar panels ($N_{TPmin}$) is computed as
+\noindent where $Insolation$, also called solar irradiation or solar exposure, is expressed in terms of $kWh/m^{2}$ per day and depends on the site where the PV system will be deployed. A factor of $20$\% for losses is considered, because $1.25 = 1 \mathbin{/} (1 - 0.2)$.
+
+On the one hand, the sizing must meet this requirement of minimum power supplied from the PV panels $P_{min,panels}$. On the other hand, the arrangement, if in series or parallel connections, it will depend on the charge controller specification of current $I_{c}$ and voltage $V_{c}$, as shown in Eq.~\eqref{eq:Icmin} and 
+\eqref{eq:Vcmin}.
 
 \begin{equation}
-\label{eq:NTPmin}
-N_{TPmin} = \frac{E_{corrected}}{E_{p}}.
-\end{equation}
-
-The number of panels in series ($N_{PSmin}$) and parallel ($N_{PPmin}$) are resp.:
-
-\begin{equation}
-\label{eq:NPSmin}
-\frac{V_{mppt,min}}{V_{maxPower,TempMax}} \leq N_{PSmin} \leq \frac{V_{mppt,max}}{V_{maxPower,TempMin}},
+\label{eq:Icmin}
+I_{c} \geq I_{total,PVpanels},
 \end{equation}
 
 \begin{equation}
-\label{eq:NPPmin}
-N_{PPmin} = \frac{P_{total}}{Number\,Panels\,Series \times P_{max,ref}},
+\label{eq:Vcmin}
+V_{c} \geq V_{total,PVpanels},
 \end{equation}
 
-\noindent where $V_{mppt, max}$ is the maximum operation voltage and $V_{mppt,min}$ is the minimum operating voltage of the charge controller. $V_{maxPower, TempMax}$, as well as $V_{maxPower, TempMin}$, are the maximum power voltage from the PV module considering the maximum and minimum operational temperature, respectively. $P_{total}$ is the total power demanded from the PV system and $P_{max, ref}$ is the power supplied from one PV panel in $Watts$. Regarding batteries, we must first define the total capacity of the battery bank, which can be described as
+Related to the batteries, the energy $E_{b}$ to be demanded by the PV system, in order to meet the load requirements, is defined by Eq.~\eqref{eq:Ebat}.
+
+\begin{equation}
+\label{eq:Ebat}
+E_{b} = \dfrac{Autonomy \times E_{corrected}}{DOD},
+\end{equation}
+
+\noindent where $Autonomy$ is the number of days expected for the PV system to work even when rain or clouds avoid the recharging of batteries, usually is a design definition and has a value ranging from $0.5$ to $2$ days. $DOD$ is the 
+the depth of discharge or the fraction of discharge (usually 25\% for lead-acid batteries, and 80\% for lithium batteries). However it is worth to separate the $DOD$ into two different definitions when the battery autonomy is bigger than one day ($24$ hours). Therefore, here in this thesis, the definition given here is for maximum $DOD$. When we deal with daily $DOD$ we will call it of $DOD_{day}$, and obviously the sum of every $DOD_{day}$ can not exceed the maximum $DOD$.
+
+In order to define the $DOD_{day}$ we use Eq.~\eqref{eq:DODday}. Moreover, the minimum current from DC bus is defined by Eq.~\eqref{eq:Idcbus}. This equation is important to define the battery arrangement of the system (series and parallel connections).
+
+\begin{equation}
+\label{eq:DODday}
+DOD_{day} = \dfrac{E_{corrected} \times 100}{E_{b}},
+\end{equation}
+
+\begin{equation}
+\label{eq:Idcbus}
+I_{min,DCbus} = \dfrac{E_{b}}{V_{system}},
+\end{equation}
+
+\noindent where $V_{system}$ is the DC voltage of the bus. 
+
+As for batteries, we must first define the total capacity of the battery bank, which can be described as
 
 \begin{equation}
 \label{eq:Cbank}
-C_{bank} = \frac{E_{corrected} \times autonomy}{V_{system} \times DOD},
+C_{bank} = \dfrac{Autonomy E_{load}}{DOD \eta _{b} V_{system}},
 \end{equation}
 
-\noindent where the variable $autonomy$ is a design definition; 
-$ V_{system} $ is the DC voltage of the bus, and $ DOD $ is the battery depth of discharge (considered of maximum of 25\% here).
-Secondly, the total (minimum) number of batteries $N_{B}total$ is computed as a product of the minimum number of batteries in series $N_{BS}min$ with the minimum number of batteries in parallel $ N_{BP}min $ and, therefore, as function of battery bank capacity $ C_{bank} $ and the capacity of the chosen battery $ Battery \, Capacity $ as
+\noindent where $ E_{load} $ is the average energy consumed by the load corrected according PV equipment efficiency, and $ \eta_{b} $ is the efficiency of the battery.
+
+Equation \ref{eq:batcheck} then performs the final sizing check, considering the number of batteries in series ($ N_{BS} $) and the number of batteries in parallel ($ N_{BP} $) adopted in the project.
 
 \begin{equation}
-\label{eq:Nbtotal}
-N_{B}total = N_{BS}min \times N_{BP}min = \frac{V_{system}}{V_{bat}} \times \frac{C_{bank}}{Battery \, Capacity}.
+\label{eq:batcheck}
+\left( N_{BS} \times N_{BP} \right) \geq N_{B}total
 \end{equation}
 
-Regarding the charge controller, it must initially meet the voltage requirement of the PV system $V_{system}$, given by Eq.~\ref{eq:vcvsystem} to the charge controller voltage: % $V_{c}$: 
-
+The charge controller must initially meet the voltage requirement of the PV system, as described by Eq.~\eqref{eq:vcvsystem}.
+ 
 \begin{equation}
 \label{eq:vcvsystem}
 V_{c} = V_{system}.
 \end{equation}
 
-The short circuit reference current $ I_{sc,ref} $ from the manufacturer's solar panel must be corrected to the cell temperature because the field temperature $ T $ is higher than the nominal or laboratory temperature, and PV system is temperature dependent. This corrected current is called $I_{sc,amb}$, it uses $G_{ref} = 1000$ and the ratio of current change over temperature $\mu_{I}$:
+The short circuit reference information from the manufacturer's solar panel must be corrected to the cell temperature because field temperature is higher than nominal or laboratory temperature, and the PV system is temperature dependent, as shown by Equation~\eqref{eq:iscamb}. 
 
 \begin{equation}
 \label{eq:iscamb}
-I_{sc,amb} = \frac{Solar \, Irradiance}{G_{ref}} \left[I_{sc,ref} + \mu_{I} \times (T-25) \right]. 
+I_{sc,amb} = \dfrac{G}{G_{ref}} \left[ I_{sc,ref} + \mu_{I} \times (T-25) \right]. 
 \end{equation}
 
-The controller must meet the maximum current from the PV array. Therefore the controller current $I_{c}$ must be less than the calculated $I_{c,min}$ and given as
-%
-\begin{subequations}
-  \begin{tabularx}{\textwidth}{Xp{1cm}X}
-    \begin{equation}
-    \label{eq:icmin}
-      I_{c,min} = I_{sc,amb} \times N_{PP}.
-    \end{equation}
-  & &
+The controller must meet the maximum current from the PV array given by Eqs.~\eqref{eq:icmin} and~\eqref{eq:icicmin}.
+
+\begin{equation}
+\label{eq:icmin}
+I_{c,min} = I_{sc,amb} \times N_{PP},
+\end{equation}
+
 \begin{equation}
 \label{eq:icicmin}
 I_{c} \geq I_{c,min}.
 \end{equation}
-\end{tabularx}
-\end{subequations}
 
-The inverter sizing check is performed by means of three equations. Eq.~\ref{eq:vindc} ensures that the input voltage of the controller $V_{in}DC$ meets the system voltage. Eq.~\ref{eq:voutac} ensures that the output voltage of the controller $V_{out}AC$ meets the AC voltage of the load $V_{AC}$. Finally, Eq.~\ref{eq:invcheck} ensures that the controller can support the total demand of the load ($Demand$) and the surge power ($P_{surge}$), where $V_{in}DC$ is the nominal input voltage and $V_{out}AC$ is the nominal output voltage of the inverter; $P_{AC,ref}$ is the nominal power and $MAX_{AC,ref}$ is the peak power that the inverter can support.
+The number of controllers required for the off-grid PV system, as defined by \cite{Yatimi}, is calculated using Equation \ref{eq:numberofcmin}. Besides, the final sizing check is performed by Equation \ref{eq:numberofc}, which validates the number of controllers adopted.
 
-\begin{subequations}
-  \begin{tabularx}{\textwidth}{Xp{1cm}X}
+\begin{equation}
+\label{eq:numberofcmin}
+number_{controllers} = \dfrac{Total \, max \, power \, of \, PV}{Controller \, max \, power} = \dfrac{P_{m,ref} \times N_{TP}}{V_{system} \times I_{controller,max}}
+\end{equation}
+
+\begin{equation}
+\label{eq:numberofc}
+N_{controller} \geq number_{controllers}
+\end{equation}
+
+The inverter sizing check is performed through three equations. Eq.~\eqref{eq:vindc} ensures that the input voltage of the controller meets the system voltage. Eq.~\eqref{eq:voutac} ensures that the output voltage of the controller meets the AC voltage of the load. Finally, Eq.~\eqref{eq:invcheck} ensures that the controller can support the total demand of the load ($Demand$) and the surge power ($P_{surge}$), where $V_{in}DC$ is the nominal input voltage, and $V_{out}AC$ is the nominal output voltage of the inverter; $MAX_{AC,ref}$ is the peak power that the inverter can support.
+
 \begin{equation}
 \label{eq:vindc} 
 V_{in}DC = V_{system}.
 \end{equation}
-  & &
+
 \begin{equation}
 \label{eq:voutac} 
 V_{out}AC = V_{AC}.
 \end{equation}
-\end{tabularx}
-\end{subequations}
 
 \begin{equation}
 \label{eq:invcheck} 
 \left[ (Demand \leq P_{AC,ref}) \, and \, (P_{surge} \leq MAX_{AC,ref}) \right].
 \end{equation}
+
+Some inverter models allow parallel operation of more than one unit, besides the integration in order to create bi-phase and three-phase circuits. It is advisable to use pure sine wave inverters, especially for electronic loads sensitive to harmonic distortion waves.
+
+Besides that, it is crucial to verify the compatibility between the charge controller and inverter because some models are not compatible with equipment from other manufacturers. Furthermore, it is vital to select an inverter power that is lower than (or equal) the charge controller power, because the demand from the electric load causes the inverter to transfer this demand from the DC side. Then the controller can be overcharged during this operation and to burn.
 
 All the equations above model the continuous-time behavior of the PV system; they produce real numbers except for the batteries and panels, where real numbers must be converted into integer ones, considering the minimum or maximum according to each equation. The verification and simulation tools need to handle non-linear real arithmetic to produce the correct result.
 
