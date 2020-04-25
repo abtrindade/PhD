@@ -23,7 +23,7 @@
 % to display URLs in blue roman font according to Springer's eBook style:
 % \renewcommand\UrlFont{\color{blue}\rmfamily}
 
-\renewcommand{\baselinestretch}{0.96}
+\renewcommand{\baselinestretch}{0.98}
 
 \begin{document}
 %
@@ -443,7 +443,7 @@ Particularly in the case of LCC, the cost varied from $11$\% to $44$\%, producin
 
 On the one hand, concerning the PV panels sizing, the results presented by the automated synthesis were smaller in terms of power than the ones produced by the simulation tool. The difference varied from $19$\% to $65$\%. On the other hand, concerning the battery bank, the results were smaller in terms of capacity to the HOMER Pro. The difference was between $34$\% to $68$\%. The mathematical models are different and particular parameters can be tuned for each technique, and that can justify the difference, which was presented in all the case studies.
 
-Those discrepancies are not easy to address without some real systems validation. However, we use the simulation software PVsyst to validate the optimal sizing produced, as shown in ~\ref{tab2}. Note that PVsyst has a pre-sizing feature, indicated in the table, that presents a minimum recommended sizing of PV panels and batteries (only), but without using manufacturers' data or models for it. This feature was used as reference mainly with HOMER Pro, where there is not equipment brands or models (only power and capacities specification). The full feature of PVsyst was used with the field-deployed and the formal synthesis sizing solutions, where brands and models were simulated in PVsyst according to the sized system.
+Those discrepancies are not easy to address without some real systems validation. However, we use the simulation software PVsyst to validate the optimal sizing produced, as shown in ~\ref{tab2}. Note that PVsyst has a pre-sizing feature, indicated in the table, that presents a minimum recommended sizing of PV panels and batteries (only), but without using manufacturers' data or models for it. This feature was used as reference mainly with HOMER Pro, where there is not equipment brands or models (only power and capacities specification). PVsyst was used with the field-deployed and the formal synthesis sizing solutions, where brands and models were simulated in PVsyst according to the sized system.
 
 \begin{table}
 \caption{Optimal sizing validation with PVsyst.}
@@ -475,7 +475,7 @@ CS 7 & \makecell{P= 4,263 W\\B= 1,384 Ah\\(minimum)} & \makecell{NA\\There is no
 \end{scriptsize}
 \end{table}
 
-Each simulation with PVsyst took $4$ seconds. Case study $3$ was not possible to be validated by PVsyst because the battery autonomy is less than 24 hours, and only the proposed synthesis technique can perform the optimal sizing (PVsyst and HOMER Pro are limited for a 24 h minimum autonomy). Case studies $2$ and $7$ had only HOMER Pro sizing validation, because there is not deployed equivalent system in the field, and the synthesis technique did not present a solution (our technique presented a \textit{time out} in case study $2$ and a \textit{UNSAT} in the case study $7$).
+Each simulation with PVsyst took $4$ seconds. We were unable to validate case study $3$ using PVsyst since the battery autonomy is less than 24 hours, and only the proposed synthesis technique can perform the optimal sizing (PVsyst and HOMER Pro are limited for a 24 h minimum autonomy). Case studies $2$ and $7$ had only HOMER Pro sizing validation, because there exists no deployed equivalent system in the field, and the synthesis technique did not present a solution due to time-out and internal failures in the underlying verification engine. %(our technique presented a \textit{time out} in case study $2$ and an \textit{UNSAT} in the case study $7$).
 
 Overall, those comparisons among our approach, the optimization software, and the deployed systems, with validation through simulation tool, show that the synthesis solution is sound, which answers \textit{EG1 and EG3}.
 
