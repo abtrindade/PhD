@@ -34,7 +34,7 @@
 % If the paper title is too long for the running head, you can set
 % an abbreviated paper title here
 %
-\author{Alessandro Trindade\inst{1} \and Lucas Cordeiro\inst{2}} %\orcidID{0000-0001-8262-2919}  \orcidID{0000-0002-6235-4272}
+\author{Alessandro Trindade\inst{1} \and Lucas Cordeiro\inst{2}} %\orcidID{0000-0001-8262-2919} \orcidID{0000-0002-6235-4272}
 %
 \authorrunning{A. Trindade and L. Cordeiro}
 % First names are abbreviated in the running head.
@@ -42,29 +42,26 @@
 %
 \institute{Federal University of Amazonas, Brazil, \email{alessandrotrindade@ufam.edu.br} \and
 University of Manchester, UK, \email{lucas.cordeiro@manchester.ac.uk}}
-\maketitle              % typeset the header of the contribution
+\maketitle       % typeset the header of the contribution
 
 
 \begin{abstract}
-The use of power generation with renewable energy sources is proliferating due to industrial development. Photovoltaic (PV) panels have emerged as an alternative to fossil or nuclear fuel energy generation. The use of formal methods for PV systems is a new subject with significant research spanning only the last five years. Here we develop and evaluate a sound, automated synthesis approach to obtain optimal sizing PV systems. We use a stand-alone configuration for this study since it is the most common system used for remote rural areas of developing countries or areas where the grid extension is infeasible. We propose a variant of the counterexample guided inductive synthesis (CEGIS) approach with two phases linking the technical and cost analysis. We advocate that the application of CEGIS to obtain optimal PV sizing has various advantages if compared to off-the-shelf optimization tools available in the market. Experimental results from seven case studies demonstrate that we can produce an optimal solution within an acceptable run-time; different verification tools are evaluated to check performance and soundness. We also compare our CEGIS approach with a commercial tool specialized in PV systems optimization. Both results are validated with commercial design software; furthermore, some real PV systems comparison are used to show our approach effectiveness. 
-%First, we synthesize a feasible candidate based on power reliability, which may not attain the lowest cost. Second, the candidate is then verified iteratively with a lower bound cost via model checking. If the verification step succeeds, the lower bound is adjusted; if it fails, a counterexample provides the optimal solution. 
-%However, the use of automated synthesis to obtain optimal sizing of solar photovoltaic systems remains unexplored in literature. 
-%\keywords{Formal symthesis \and Automated verification  \and Model Checking \and Solar photovoltaic systems.}
+The use of power generation with renewable energy sources is proliferating due to industrial development. Photovoltaic (PV) panels have emerged as an alternative to the fossil or nuclear fuel energy generation. The use of formal methods for PV systems is a new subject with significant research spanning only the last five years. Here we develop and evaluate a sound, automated synthesis approach to obtain optimal sizing PV systems. We use a stand-alone configuration for this study since it is the most common system used for remote rural areas of developing countries or areas where the grid extension is infeasible. We propose a variant of the counterexample guided inductive synthesis (CEGIS) approach with two phases linking the technical and cost analysis. We advocate that the application of CEGIS to obtain optimal PV sizing has various advantages if compared to off-the-shelf optimization tools available in the market. Experimental results from seven case studies demonstrate that we can produce an optimal solution within an acceptable run-time; different verification tools are evaluated to check performance and soundness. We also compare our CEGIS approach with a commercial tool specialized in PV systems optimization. Both results are validated with commercial design software; furthermore, some real PV systems comparison are used to show our approach effectiveness. 
 \end{abstract}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Introduction}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-Lack of access to clean and affordable energy is considered a core dimension of poverty~\cite{Hussein2012}. Progress has been made worldwide; in particular, in 2017, the number of people without electricity access fell below $1$ billion threshold for the first time~\cite{IEAweo2018}. The share of people without access to electricity from Africa is 58\%, while 19\% of the share comes from developing Asia, and 31\% from Latin America~\cite{IEAweo2018}. Numbers from Brazil show the aim to electrify 270 isolated areas and 2.7 million people by 2023~\cite{EPE2018}. 
+Lack of access to clean and affordable energy is considered a core dimension of poverty~\cite{Hussein2012}. Progress has been made worldwide; in particular, in 2017, the number of people without electricity access fell below $1$ billion thresholds for the first time~\cite{IEAweo2018}. The share of people without access to electricity from Africa is 58\%, while 19\% of the share comes from developing Asia, and 31\% from Latin America~\cite{IEAweo2018}. Numbers from Brazil show the aim to electrify 270 isolated areas and 2.7 million people by 2023~\cite{EPE2018}. 
 There exists a close relationship between the lack of energy and the low HDI (Human Development Index) of those localities~\cite{Coelho}. It follows that increased access to energy allows economic growth and poverty alleviation \cite{Karekesi}. In order to provide electricity for all, decentralized systems led by solar photovoltaic (PV) in off-grid and mini-grid systems will be the lowest-cost solution for three-quarters of the connections needed~\cite{Hussein2012}. 
 
-In order to evaluate a PV system, there exist various specialized tools, e.g., RETScreen~\cite{Pradhan} and HOMER~\cite{Swarnkar}; and even general-purpose tools, e.g., MATLAB/Simulink~\cite{Gow1999}. However, these tools are based on simulation; they have the drawback of an incomplete coverage since verification of all possible combinations and potential failures of a system is infeasible~\cite{ClarkeHV18}. Non-linear optimization tools could be employed since a PV system is typically modelled as a non-linear set of equations. However, the industry demands the final solution to be the optimum, considering manufacturers, models, and brands available on the market and not just minimum or maximum powers and values for the optimized items, which can only be achieved with specialist PV optimization software.
+In order to evaluate a PV system, there exist various specialized tools, e.g., RETScreen~\cite{Pradhan} and HOMER~\cite{Swarnkar}; and even general-purpose tools, e.g., MATLAB/Simulink~\cite{Gow1999}. However, these tools are based on simulation; they have the drawback of an incomplete coverage since verification of all possible combinations, and potential failures of a system are infeasible~\cite{ClarkeHV18}. Non-linear optimization tools could be employed since a PV system is typically modeled as a non-linear set of equations. However, the industry demands the final solution to be the optimum, considering manufacturers, models, and brands available on the market and not just minimum or maximum powers and values for the optimized items, which can only be achieved with specialist PV optimization software.
 
-Optimization of PV systems is not a recent topic; since the 1990s, different techniques using different criteria to find ultimate combinations for design parameters, based on intuitive, numerical, and analytical methods, were proposed and developed~\cite{Alsadi2018}. In $2015$, an automated simulation-based verification technique was applied to verify the correctness of power system protection settings~\cite{Sengupta2015}. In $2017$, a researcher suggested the application of formal methods to verify and control the behaviour of computational devices in a smart grid ~\cite{Abate2017}. In $2018$, a verification methodology was applied to PV panels and its distributed power point tracking~\cite{Driouich2018}. In $2019$, an automated verification methodology was proposed to validate stand-alone solar PV systems~\cite{TrindadeCordeiro19}. However, \textit{formal methods and its application to synthesize PV systems are still unexplored in literature}.
+Optimization of PV systems is not a recent topic; since the 1990s, different techniques using different criteria to find ultimate combinations for design parameters, based on intuitive, numerical, and analytical methods, were proposed and developed~\cite{Alsadi2018}. In $2015$, an automated simulation-based verification technique was applied to verify the correctness of power system protection settings~\cite{Sengupta2015}. In $2017$, a researcher suggested the application of formal methods to verify and control the behavior of computational devices in a smart grid ~\cite{Abate2017}. In $2018$, a verification methodology was applied to PV panels and its distributed power point tracking~\cite{Driouich2018}. In $2019$, an automated verification methodology was proposed to validate stand-alone solar PV systems~\cite{TrindadeCordeiro19}. However, \textit{formal methods and its application to synthesize PV systems are still unexplored in literature}.
 
 Here we developed a variant of the counterexample guided inductive synthesis (CEGIS)~\cite{DBLP:conf/asplos/Solar-LezamaTBSS06} technique for synthesizing optimal sizing of stand-alone PV systems using commercial equipment data. Given a correctness specification $\sigma$, our method uses that as a starting point and then iteratively produces a sequence of candidate solutions that satisfy $\sigma$, related to power reliability. In particular, on each iteration, we synthesize the sizing of stand-alone PV systems, but that may not achieve the lowest cost. The candidate solution is then verified via model checking with a lower bound that serves as the minimum cost of reference. If the verification step does not produce a counterexample, then the lower bound is adjusted; otherwise, we have achieved an optimal PV sizing.
 
-Our work makes three significant contributions to advance the state-of-the-art in PV optimal sizing. First, the use of automated verification in PV systems was uncommon in recent prior studies; we have shown that formal methods can detect various errors in PV systems designed by existing commercial tools~\cite{TrindadeCordeiro19}. Here the application of formal methods to synthesize PV sizing is novel, thereby leading to more accurate results than existing commercial tools. Second, we evaluate our approach using different state-of-the-art verifiers to obtain the best performance in our verification back-end for synthesizing optimal PV systems and compare that to HOMER Pro optimization, with the results being validated with a complete and accurate commercial design software called PVsyst. Lastly, we discuss the challenges of applying formal methods to PV systems and reflect on lessons learned from this experience.
+Our work makes three significant contributions to advance the state-of-the-art in PV optimal sizing. First, the use of automated verification in PV systems was uncommon in recent prior studies; we have shown that formal methods can detect various errors in PV systems designed by existing commercial tools~\cite{TrindadeCordeiro19}. Here the application of formal methods to synthesize PV sizing is novel, thereby leading to more accurate results than existing commercial tools. Second, we evaluate our approach using different state-of-the-art verifiers to obtain the best performance in our verification back-end for synthesizing optimal PV systems. We compare that to HOMER Pro optimization, with the results being validated with accurate commercial design software called PVsyst. Lastly, we discuss the challenges of applying formal methods to PV systems and reflect on lessons learned from this experience.
 
 \vspace{-2ex}
 
@@ -83,13 +80,13 @@ Fig.~\ref{fig:optimization} illustrates how to obtain the optimal sizing of a st
 \label{fig:optimization}
 \end{figure}
 
-Both techniques (traditional and automated synthesis)  produce as output either a SUCCESS or FAIL result, thereby considering a feasible technical solution with the lowest cost. On the one hand, when done by simulation, we get a report or graphical result; on the other hand, the automated synthesis technique, which is a mathematical reasoning of a model, presents a counterexample with the optimal solution stored in variables. Furthermore, the design-space coverage during the optimal sizing search is sound and complete when using synthesis.
+Both techniques (traditional and automated synthesis) produce as output either a SUCCESS or FAIL result, thereby considering a feasible technical solution with the lowest cost. On the one hand, when done by simulation, we get a report or graphical result; on the other hand, the automated synthesis technique, which is mathematical reasoning of a model, presents a counterexample with the optimal solution stored in variables. Furthermore, the design-space coverage during the optimal sizing search is sound and complete when using synthesis.
 
 %-----------------------------------------------------------
 \subsection{Program Synthesis}
 \label{sec:ProgramSynthesis}
 %-----------------------------------------------------------
-The basic idea of program synthesis is to automatically construct a program $P$ that satisfies a correctness specification $\sigma$. In particular, program synthesis is automatically performed by engines that use a correctness specification $\sigma$, as starting point, and then incrementally produce a sequence of candidate solutions that partially satisfy $\sigma$~\cite{Abateetal2017}. As a result, a given candidate program $p$ is iteratively refined to match $\sigma$ more closely. Figure~\ref{Counter-Example-Guided-Inductive-Synthesis} illustrates the underlying architecture. 
+The basic idea of program synthesis is to automatically construct a program $P$ that satisfies a correctness specification $\sigma$. In particular, program synthesis is automatically performed by engines that use a correctness specification $\sigma$, as a starting point, and then incrementally produce a sequence of candidate solutions that partially satisfy $\sigma$~\cite{Abateetal2017}. As a result, a given candidate program $p$ is iteratively refined to match $\sigma$ more closely. Figure~\ref{Counter-Example-Guided-Inductive-Synthesis} illustrates the underlying architecture. 
 
 \begin{figure}[h]
 \begin{center}
@@ -109,13 +106,13 @@ The correctness specification $\sigma$ provided to our synthesizer is of the for
 
 In Figure~\ref{Counter-Example-Guided-Inductive-Synthesis}, the phases {\sc Synthesize} and {\sc Verify} interact via a finite set of test vectors {\sc inputs}, which is incrementally updated. Given the correctness specification $\sigma$, the {\sc Synthesize} procedure tries to find an existential witness $\vec{F}$ satisfying the specification $\sigma(\vec{x}, \vec{F})$, for all $\vec{x}$ in {\sc inputs} (as opposed to all $\vec{x} \in \mathcal{D}$). If {\sc Synthesize} succeeds in finding a witness~$\vec{F}$, the latter is a candidate solution to the full synthesis formula, which is passed to {\sc Verify} to check whether it is a proper solution ({\it i.e.}, $\vec{F}$ satisfies the specification $\sigma(\vec{x}, \vec{F})$ for all $\vec{x}\in\mathcal{D}$). If this is the case, then the algorithm terminates.
 
-One may notice that each iteration of the traditional CEGIS loop adds a new input to the finite set $INPUTS$, which is then used for synthesis. Given that the full set of inputs $\mathcal{D}$ is finite because we use bit-vector expressions, this means that the refinement loop can only iterate over a finite number of times. However, {\sc Synthesize} may conclude that no candidate solution obeying $\sigma$ for the finite set $INPUTS$ exists. %, and our synthesis engine can then conclude that no possible equipment combination was found.
+One may notice that each iteration of the traditional CEGIS loop adds a new input to the finite set $INPUTS$, which is then used for synthesis. Given that the full set of inputs $\mathcal{D}$ is finite because we use bit-vector expressions, this means that the refinement loop can only iterate over a finite number of times. However, {\sc Synthesize} may conclude that no candidate solution obeying $\sigma$ for the finite set $INPUTS$ exists. 
 
 In our CEGIS variant, there exist four differences related to the traditional one: 
 (1) there exists no test vector and every candidate is generated in the {\sc Synthesize} phase and sent to the {\sc Verify} phase; 
 (2) if the {\sc Verify} phase is unsuccessful, then a new candidate is generated by {\sc Synthesize} and 
 (3) the lower bound of the {\sc Verify} phase is incremented to search for the lowest cost; as a result,
-(4) there exists no refinement from the {\sc Verify} phase back to the {\sc Synthesize} phase, i.e., a new counterexample is not added to the {\sc input} set since a failure during the {\sc Verify} phase will only discard a given candidate, which could be feasible in the next iteration with a new lower bound.
+(4) there exists no refinement from the {\sc Verify} phase back to the {\sc Synthesize} phase. In particular, a new counterexample is not added to the {\sc input} set since a failure during the {\sc Verify} phase will only discard a given candidate, which could be feasible in the next iteration with a new lower bound.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Sizing Stand-alone Solar PV Systems}
@@ -123,10 +120,8 @@ In our CEGIS variant, there exist four differences related to the traditional on
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 A PV system is illustrated in Fig.\ref{fig:blockdiagram}. It 
-%A photovoltaic system 
 employs: the PV generator, which can be a \textbf{panel or an array}, is a semiconductor device that can convert solar energy into DC electricity; for night hours or rainy days, we hold \textbf{batteries} where power can be stored and used; the use of batteries as a storage form implies the presence of a \textbf{charge controller}~\cite{Hansen}; the PV arrays produce DC, and therefore when the PV system contains an AC load, a DC/AC conversion is required (\textbf{inverter}); the \textbf{AC load} dictates the behaviour of the AC electrical load from the house that will be fed by the system.
 
-%\begin{wrapfigure}{r}{0.5\textwidth}
 \begin{figure}[h]
 \fbox{\includegraphics[width=0.8\textwidth]{blockdiagramPVS2_rev}}
 \centering
@@ -154,12 +149,12 @@ On the one hand, the sizing must meet this requirement of minimum power supplied
 \eqref{eq:Vcmin}.
 
 \begin{subequations}
-  \begin{tabularx}{\textwidth}{Xp{1cm}X}
+ \begin{tabularx}{\textwidth}{Xp{1cm}X}
 \begin{equation}
 \label{eq:Icmin}
 I_{c} \geq I_{total,PVpanels},
 \end{equation}
-  & &
+ & &
 \begin{equation}
 \label{eq:Vcmin}
 V_{c} \geq V_{total,PVpanels},
@@ -174,18 +169,17 @@ Related to the batteries, the energy $E_{b}$ to be demanded by the PV system, in
 E_{b} = \dfrac{Autonomy \times E_{corrected}}{DOD},
 \end{equation}
 
-\noindent where $Autonomy$ is the number of days expected for the PV system to work even when rain or clouds avoid the recharging of batteries, usually is a design definition and has a value ranging from $0.5$ to $2$ days. $DOD$ is the 
-the depth of discharge or the fraction of discharge. The $DOD$ is usually $25$\% for lead-acid batteries, and $80$\% for lithium batteries; that represents a State of Charge ($SOC$) of $75$\% and $20$\% respectively, because $SOC=1-DOD$. However it is worth to separate the $DOD$ into two different definitions when the battery autonomy is bigger than one day ($24$ hours). Therefore, here in this thesis, the definition given here is for maximum $DOD$. When we deal with daily $DOD$ we will call it of $DOD_{day}$, and obviously the sum of every $DOD_{day}$ can not exceed the maximum $DOD$.
+\noindent where $Autonomy$ is the number of days expected for the PV system to work even when rain or clouds avoid the recharging of batteries usually is a design definition and has a value ranging from $0.5$ to $2$ days. $DOD$ is the depth of discharge or the fraction of discharge. The $DOD$ is usually $25$\% for lead-acid batteries, and $80$\% for lithium batteries; that represents a State of Charge ($SOC$) of $75$\% and $20$\% respectively, because $SOC=1-DOD$. However, it is worth separating the $DOD$ into two different definitions when the battery autonomy is bigger than one day ($24$ hours). Therefore, here in this thesis, the definition given here is for a maximum of $DOD$. When we deal with daily $DOD$, we will call it $DOD_{day}$, and obviously, the sum of every $DOD_{day}$ can not exceed the maximum $DOD$.
 
-In order to define the $DOD_{day}$ we use Eq.~\eqref{eq:DODday}. Moreover, the minimum current from DC bus is defined by Eq.~\eqref{eq:Idcbus}. This equation is important to define the battery arrangement of the system (series and parallel connections).
+In order to define the $DOD_{day}$ we use Eq.~\eqref{eq:DODday}. Moreover, the minimum current from the DC bus is defined by Eq.~\eqref{eq:Idcbus}. This equation is important to define the battery arrangement of the system (series and parallel connections).
 
 \begin{subequations}
-  \begin{tabularx}{\textwidth}{Xp{1cm}X}
+ \begin{tabularx}{\textwidth}{Xp{1cm}X}
 \begin{equation}
 \label{eq:DODday}
 DOD_{day} = \dfrac{E_{corrected} \times 100}{E_{b}},
 \end{equation}
-  & &
+ & &
 \begin{equation}
 \label{eq:Idcbus}
 I_{min,DCbus} = \dfrac{E_{b}}{V_{system}},
@@ -202,7 +196,7 @@ As for batteries, we must first define the total capacity of the battery bank, w
 C_{bank} = \dfrac{Autonomy E_{load}}{DOD \eta _{b} V_{system}},
 \end{equation}
 
-\noindent where $ E_{load} $ is the average energy consumed by the load corrected according PV equipment efficiency, and $ \eta_{b} $ is the efficiency of the battery.
+\noindent where $ E_{load} $ is the average energy consumed by the load corrected according to PV equipment efficiency, and $ \eta_{b} $ is the efficiency of the battery.
 
 Equation \ref{eq:batcheck} then performs the final sizing check, considering the number of batteries in series ($ N_{BS} $) and the number of batteries in parallel ($ N_{BP} $) adopted in the project.
 
@@ -228,7 +222,7 @@ I_{sc,amb} = \dfrac{G}{G_{ref}} \left[ I_{sc,ref} + \mu_{I} \times (T-25) \right
 The controller must meet the maximum current from the PV array given by Eqs.~\eqref{eq:icmin} and~\eqref{eq:icicmin}.
 
 \begin{subequations}
-  \begin{tabularx}{\textwidth}{Xp{1cm}X}
+ \begin{tabularx}{\textwidth}{Xp{1cm}X}
 \begin{equation}
 \label{eq:icmin}
 I_{c,min} = I_{sc,amb} \times N_{PP},
@@ -253,10 +247,10 @@ number_{controllers} = \dfrac{Total \, max \, power \, of \, PV}{Controller \, m
 N_{controller} \geq number_{controllers}
 \end{equation}
 
-The inverter sizing check is performed through three equations. Eq.~\eqref{eq:vindc} ensures that the input voltage of the controller meets the system voltage. Eq.~\eqref{eq:voutac} ensures that the output voltage of the controller meets the AC voltage of the load, i.e. the outlet voltage. Finally, Eq.~\eqref{eq:invcheck} ensures that the controller can support the total demand of the load ($Demand$) and the surge power ($P_{surge}$), where $V_{in}DC$ is the nominal input voltage, and $V_{out}AC$ is the nominal output voltage of the inverter; $MAX_{AC,ref}$ is the peak power that the inverter can support.
+The inverter sizing check is performed through three equations. Eq.~\eqref{eq:vindc} ensures that the input voltage of the controller meets the system voltage. Eq.~\eqref{eq:voutac} ensures that the output voltage of the controller meets the AC voltage of the load, i.e., the outlet voltage. Finally, Eq.~\eqref{eq:invcheck} ensures that the controller can support the total demand of the load ($Demand$) and the surge power ($P_{surge}$), where $V_{in}DC$ is the nominal input voltage, and $V_{out}AC$ is the nominal output voltage of the inverter; $MAX_{AC,ref}$ is the peak power that the inverter can support.
 
 \begin{subequations}
-  \begin{tabularx}{\textwidth}{Xp{1cm}X}
+ \begin{tabularx}{\textwidth}{Xp{1cm}X}
 \begin{equation}
 \label{eq:vindc} 
 V_{in}DC = V_{system}.
@@ -278,7 +272,7 @@ Some inverter models allow parallel operation of more than one unit, besides the
 
 Besides that, it is crucial to verify the compatibility between the charge controller and inverter because some models are not compatible with equipment from other manufacturers. Furthermore, it is vital to select an inverter power that is lower than (or equal) the charge controller power, because the demand from the electric load causes the inverter to transfer this demand from the DC side. Then the controller can be overcharged during this operation and to burn.
 
-All the equations above model the continuous-time behaviour of the PV system; they produce real numbers except for the batteries and panels, where real numbers must be converted into integer ones, considering the minimum or maximum according to each equation. The verification and simulation tools need to handle non-linear real arithmetic to produce the correct result.
+All the equations above model the continuous-time behavior of the PV system; they produce real numbers except for the batteries and panels, where real numbers must be converted into integer ones, considering the minimum or maximum according to each equation. The verification and simulation tools need to handle non-linear real arithmetic to produce the correct result.
 
 %------------------------------------------------------
 \section{Synthesizing Optimal Sizing of Stand-alone Solar Photovoltaic Systems}
@@ -300,16 +294,13 @@ Algorithm~\ref{alg:opt-algorithm} describes our pseudo-code to synthesize stand-
  \begin{algorithmic}[1]
  \renewcommand{\algorithmicrequire}{\textbf{Input:}}
  \renewcommand{\algorithmicensure}{\textbf{Output:}}
-  \REQUIRE weather data (temperature, solar irradiance); data from panels, controllers, batteries, and inverters; design requirements (load curve, peak demand, load surge power, energy consumption, battery autonomy, AC voltage); design assumptions (SOC, DOD, criteria and objectives for technical and cost analysis)
+ \REQUIRE weather data (temperature, solar irradiance); data from panels, controllers, batteries, and inverters; design requirements (load curve, peak demand, load surge power, energy consumption, battery autonomy, AC voltage); design assumptions (SOC, DOD, criteria and objectives for technical and cost analysis)
  \ENSURE FAIL (SAT) with counterexample showing the optimal sizing; SUCCESS (UNSAT), saying that the project has no feasible solution considering the requirements and the list of equipment
-  \STATE Initialize variables \\
-  \STATE Declare the maximum possible cost $MaxCost$  \\
-  \STATE Calculate min possible Cost $MinCost$, based on the equipment list \\
-  \FOR {$HintCost=MinCost$ to $MaxCost$} 
+ \STATE Initialize variables \\
+ \STATE Declare the maximum possible cost $MaxCost$ \\
+ \STATE Calculate min possible Cost $MinCost$, based on the equipment list \\
+ \FOR {$HintCost=MinCost$ to $MaxCost$} 
  	\STATE Declare non-deterministic variables to select PV Panel, Controller, Battery, and Inverter from list \\
-% 	\STATE Declare non-deterministic variable to select Controller from list \\
-% 	\STATE Declare non-deterministic variable to select Battery from list \\
-% 	\STATE Declare non-deterministic variable to select Inverter from list \\ 	
  	\STATE Calculate $E_{corrected}, \, P_{min,panels} $ \\
 	\STATE Calculate and define PV panels arrangement $N_{TP}, \, N_{PS}, N_{PP} $ \\
 	\STATE Requirement enforced by \textbf{assume}$(P_{min,panels} \leq (N_{PS} \times N_{PP} \times P_{m,ref}))$ \\
@@ -320,30 +311,30 @@ Algorithm~\ref{alg:opt-algorithm} describes our pseudo-code to synthesize stand-
 	\STATE Requirement enforced by \textbf{assume} $(I_{min,DCbus} \leq (N_{BP} \times Capacity))$ \\
  	\STATE Controller requirements enforced by \textbf{assume}$((P_{controller} \geq P_{inverter}) \wedge V_{c} \wedge I_{c})$ \\
 	\STATE Inverter requirements enforced by \textbf{assume}$(V_{in}DC \wedge V_{out}AC \wedge Demand \wedge P_{surge})$ \\
-	\STATE non-deterministic variables hold feasible equipment and cost  \\
-	\STATE $F_{obj} \leftarrow  N_{TP}*Panel_{Cost} \, + \, N_{TB}*Battery_{Cost} \, + Controller_{Cost} \, + \, Inverter_{Cost} \, + \, Installation_{Cost} \, + \, batrep_{Cost} \, + \, PWO\&M_{Cost}$ \\
+	\STATE non-deterministic variables hold feasible equipment and cost \\
+	\STATE $F_{obj} \leftarrow N_{TP}*Panel_{Cost} \, + \, N_{TB}*Battery_{Cost} \, + Controller_{Cost} \, + \, Inverter_{Cost} \, + \, Installation_{Cost} \, + \, batrep_{Cost} \, + \, PWO\&M_{Cost}$ \\
 	\STATE Violation check with \textbf{assert}$(F_{obj} > HintCost)$ \\
-  \ENDFOR
+ \ENDFOR
  \RETURN $(\,)$ 
  \end{algorithmic} 
  \label{alg:opt-algorithm}
  \end{algorithm}
 
 Our synthesis algorithm will synthesize constant values; 
-it starts with the input of the manufacturer's data and prices of PV panels, batteries, charge controllers and inverters. Moreover, we define design (house) requirements and design assumptions. 
+it starts with the input of the manufacturer's data and prices of PV panels, batteries, charge controllers, and inverters. Moreover, we define design (house) requirements and design assumptions. 
 
-The \textit{for}-loop started at line $4$ controls the lowest cost of the PV solution. In particular, it starts with cost $MinCost$ and stops only when the algorithm finds a feasible solution in which the cost breaks the $assertion$ stated in line $18$; if that happens, then our algorithm has found an optimal solution, thereby stating that the {\sc Verify} phase reached a satisfiable condition (\textit{SAT}). The $MaxCost$ value at line $2$ is just a very high value inserted as a limit to the \textit{for}-loop, that: (1) it will never be reached because the optimal solution will be found first (SAT result); or (2) it will be reached when the search engine did not find a feasible solution for the optimization (UNSAT result).
+The \textit{for}-loop started at line $4$ controls the lowest cost of the PV solution. In particular, it starts with cost $MinCost$ and stops when the algorithm finds a feasible solution in which the cost breaks the $assertion$ stated in line $18$. If that happens, then our algorithm has found an optimal solution, thereby stating that the {\sc Verify} phase reached a satisfiable condition (\textit{SAT}). The $MaxCost$ value at line $2$ is just a very high value inserted as a limit to the \textit{for}-loop, that: (1) it will never be reached because the optimal solution will be found first (SAT result); or (2) it will be reached when the search engine did not find a feasible solution for the optimization (UNSAT result).
 
-Our synthesis algorithm uses non-deterministic variables to choose one specific constant from a given list of PV panels, controllers, batteries and inverters (line $5$). This procedure ensures that our synthesis engine checks all combinations of items from each equipment, and combines them to assemble a viable (candidate) PV solution, which meets user requirements. A list of forty equipment from ten different manufacturers was provided (as INPUT) to our synthesis engine in order to allow the choice of every item of PV sizing. Data sheet from each item was necessary to collect technical information. Moreover, the price of each item was obtained from available quotations in the market, and if the currency was not in US dollars, then it was used the exchange rate of the day to convert it to US dollars. All this data is available online\footnote{https://drive.google.com/file/d/1xZtAR4Wvgfqgox2PgySuPP-fZ9OA1u1j/view?usp=sharing}.
+Our synthesis algorithm uses non-deterministic variables to choose one specific constant from a given list of PV panels, controllers, batteries, and inverters (line $5$). This procedure ensures that our synthesis engine checks all combinations of items from each equipment, and combines them to assemble a viable (candidate) PV solution, which meets user requirements. A list of forty equipment from ten different manufacturers was provided (as INPUT) to our synthesis engine in order to allow the choice of every item of PV sizing. Datasheet from each item was necessary to collect technical information. Moreover, the price of each item was obtained from available quotations in the market, and if the currency was not in US dollars, then it was used the exchange rate of the day to convert it to US dollars. All this data is available online\footnote{https://drive.google.com/file/d/1xZtAR4Wvgfqgox2PgySuPP-fZ9OA1u1j/view?usp=sharing}.
 
-Next, we use from Eq.~\eqref{eq:Ecorrected} to Eq.~\eqref{eq:icmin} to calculate the sizing variables (lines $9$ to $15$). The directive \textit{assume} (lines $8$, $13$, $14$ and $15$) ensures compatibility of the items chosen from the list of equipment: the {\sc Verify} phase uses only items (among all the possible ones) that satisfy the statements of those lines. Line $5$ is specific to PV panels. Line $13$ is for the battery bank. Line $14$ is the charge controller voltage check. Line $15$ does the inverter check and ensures the power demand and the surge power of the inverter.
+Next, we use from Eq.~\eqref{eq:Ecorrected} to Eq.~\eqref{eq:icmin} to calculate the sizing variables (lines $9$ to $15$). The directive \textit{assume} (lines $8$, $13$, $14$, and $15$) ensures compatibility of the items chosen from the list of equipment: the {\sc Verify} phase uses only items (among all the possible ones) that satisfy the statements of those lines. Line $5$ is specific to PV panels. Line $13$ is for the battery bank. Line $14$ is the charge controller voltage check. Line $15$ does the inverter check and ensures the power demand and the surge power of the inverter.
 Therefore, our synthesis algorithm reaches line $16$ with one feasible solution, and the cost of that solution is calculated in $F_{obj}$ (line $17$). This cost is the equivalent to~\ref{eq:LCC}.
 
-If our algorithm does not find a feasible solution among the item of equipment that were provided for our {\sc Synthesize} phase,  then the result is unsatisfiable (\textit{UNSAT}), i.e., the program finishes without finding a solution, indicating that it was unable to combine the specific items of equipment to create a feasible solution. 
+If our algorithm does not find a feasible solution among the item of equipment that was provided for our {\sc Synthesize} phase, then the result is unsatisfiable (\textit{UNSAT}). In particular, the program finishes without finding a solution, indicating that it was unable to combine the specific items of equipment to create a feasible solution. 
 %
 The main challenge for the {\sc Synthesize} phase is to find a feasible candidate solution for the constraints and user requirements. The challenge for the {\sc Verify} phase is to find the lowest acquisition cost from a list of equipment and components provided by the {\sc Synthesize} phase. 
 %
-Note that the process described here is completely automated and that a validation is performed by our {\sc Verify} phase to ensure that the approach is sound.
+Note that the process described here is completely automated and that validation is performed by our {\sc Verify} phase to ensure that the approach is sound.
 
 %---------------------------------------------------------------------------
 \section{Results and Discussion}
@@ -372,7 +363,7 @@ Concerning the off-the-shelf optimization/simulation tools, only HOMER Pro perfo
 (g) it was assumed a string of two batteries to match the voltage of the system of $24$ V DC, which was used for our automated synthesis tool; 
 (h) it was included a generic flat-plate PV of $1$ kW and generic lead-acid batteries of $1$ kW ($83.4$ Ah capacity). During run-time, HOMER decides the size in kW of each based on feasibility and lower cost.
 
-In order to validate and compare the optimal sizing solution produced by our approach and by HOMER Pro, we use a simulation tool, called PVsyst version $6.86$, with plenty of commercial equipment in its data bank. We have considered a comparison for an entire year's weather data of simulation to guarantee that the proposed sizing meets the electrification requirements. PVsyst is a PC software package developed by a Swiss company used for the study, sizing, simulation, and data analysis of solar PV systems. PVsyst contains: design, sizing, 3D shading scene, simulation, grid, and off-grid features. It uses comprehensive irradiation data from Meteonorm,\footnote{https://meteonorm.com/en/}, and aging analysis~\cite{PVsyst2017}. However, it does not perform optimization; therefore, PVsyst needs the system sized in order to validate it. Furthermore, PVsyst does not have commercial inverter equipment and, as a result, does not consider surge power demand as the ones produced by air conditioners and refrigerators for a few seconds. PVsyst is a paid software with $30$-day test possibility and runs only in MS-Windows operational system.
+In order to validate and compare the optimal sizing solution produced by our approach and by HOMER Pro, we use a simulation tool, called PVsyst version $6.86$, with plenty of commercial equipment in its data bank. We have considered a comparison for an entire year's weather data of simulation to guarantee that the proposed sizing meets the electrification requirements. PVsyst is a PC software package developed by a Swiss company used for the study, sizing, simulation and data analysis of solar PV systems. PVsyst contains design, sizing, 3D shading scene, simulation, grid, and off-grid features. It uses comprehensive irradiation data from Meteonorm,\footnote{https://meteonorm.com/en/}, and aging analysis~\cite{PVsyst2017}. However, it does not perform optimization; therefore, PVsyst needs the system sized in order to validate it. Furthermore, PVsyst does not have commercial inverter equipment and, as a result, does not consider surge power demand as the ones produced by air conditioners and refrigerators for a few seconds. PVsyst is a paid software with $30$-day test possibility and runs only in MS-Windows operational system.
 
 %---------------------------------------------------------------------------
 \subsection{Objectives and Setup}
@@ -380,7 +371,7 @@ In order to validate and compare the optimal sizing solution produced by our app
 
 Our evaluation aims to answer three experimental goals: [EG1] \textbf{(soundness)} Does our automated synthesis approach provide correct results?; [EG2] \textbf{(performance)} How do the symbolic verifiers compare to each other for synthesizing PV systems?; and [EG3] \textbf{(state-of-the-art)} how does our formal synthesis tool compare to a specialized simulation tool?
 
-All experiments regarding the verification tools were conducted on an otherwise idle Intel Xeon CPU E5-4617 ($8$-cores) with $2.90$ GHz and $64$ GB RAM, running Ubuntu $16.04$ LTS $64$-bits. For HOMER Pro, we have used an Intel Core i5-$4210$ ($4$-cores) with $1.7$ GHz and $4$ GB RAM running Windows 10. The hardware platform was not the same because of the availability of the machines; this has an impact on performance, which is less favourable to HOMER Pro. PVsyst used the same configuration as HOMER Pro. We perform the experiments with a predefined time out of $660$ minutes.
+All experiments regarding the verification tools were conducted on an otherwise idle Intel Xeon CPU E5-4617 ($8$-cores) with $2.90$ GHz and $64$ GB RAM, running Ubuntu $16.04$ LTS $64$-bits. For HOMER Pro, we have used an Intel Core i5-$4210$ ($4$-cores) with $1.7$ GHz and $4$ GB RAM running Windows 10. The hardware platform was not the same because of the availability of the machines; this has an impact on performance, which is less favorable to HOMER Pro. PVsyst used the same configuration as HOMER Pro. We perform the experiments with a predefined time out of $660$ minutes.
 
 %---------------------------------------------------------------------------
 \subsection{Results}
@@ -407,7 +398,7 @@ Specification & Result & Result & Result & Result \\
 \hline
 \makecell{\textbf{Case Study 4}\\Peak:253W\\Surge:722W\\E:3,600Wh/day\\Autonomy:48h} & OM & \makecell{SAT (147 min) \\NTP:6$\times$330W (2P-3S)\\NBT:16$\times$105Ah (2S-8P)\\Controller 35A/145V\\Inverter 280W/48V\\LCC: US\$ 9,678.63} & \makecell{SAT (605 min) \\NTP:6$\times$330W (2P-3S)\\NBT:16$\times$105Ah (2S-8P)\\Controller 35A/145V\\Inverter 280W/48V\\LCC: US\$ 9,678.63} & \makecell{(Time: 0.23 min)\\2.42 kW of PV\\NBT:12$\times$83.4Ah (2S-6P)\\0.254kW inverter\\LCC: US\$ 7,677.95}\\
 \hline
-\makecell{\textbf{Case Study 5}\\Peak:263W\\Surge:732W\\E:2,500Wh/day\\Autonomy:48h} & OM & \makecell {SAT (36.70 min) \\NTP:4$\times$330W (2S-2P)\\NBT:14$\times$80Ah (2S-7P)\\Controller 35A/145V\\Inverter 280W/24V \\LCC: US\$ 8,900.70}  & \makecell {SAT (254.25 min) \\NTP:4$\times$330W (2S-2P)\\NBT:14$\times$80Ah (2S-7P)\\Controller 35A/145V\\Inverter 280W/24V \\LCC: US\$ 8,900.70} & \makecell{(Time: 0.18 min)\\1.59 kW of PV\\NBT:10$\times$83.4Ah (2S-5P)\\0.268kW inverter\\LCC: US\$ 6,175.57} \\
+\makecell{\textbf{Case Study 5}\\Peak:263W\\Surge:732W\\E:2,500Wh/day\\Autonomy:48h} & OM & \makecell {SAT (36.70 min) \\NTP:4$\times$330W (2S-2P)\\NBT:14$\times$80Ah (2S-7P)\\Controller 35A/145V\\Inverter 280W/24V \\LCC: US\$ 8,900.70} & \makecell {SAT (254.25 min) \\NTP:4$\times$330W (2S-2P)\\NBT:14$\times$80Ah (2S-7P)\\Controller 35A/145V\\Inverter 280W/24V \\LCC: US\$ 8,900.70} & \makecell{(Time: 0.18 min)\\1.59 kW of PV\\NBT:10$\times$83.4Ah (2S-5P)\\0.268kW inverter\\LCC: US\$ 6,175.57} \\
 \hline
 \makecell{\textbf{Case Study 6}\\Peak:322W\\Surge:896W\\E:4,300Wh/day\\Autonomy:48h} & OM & \makecell {SAT (380.93 min) \\NTP:6$\times$320W (2P-3S)\\NBT:18$\times$105Ah (2S-9P)\\Controller 35A/145V\\Inverter 400W/24V \\LCC: US\$ 10,136.61} & TO & \makecell{(Time: 0.22 min)\\3.15 kW of PV\\NBT:14$\times$83.4Ah (2S-7P)\\0.328kW inverter\\LCC: US\$ 9,112.45} \\
 \hline
@@ -415,7 +406,7 @@ Specification & Result & Result & Result & Result \\
 \hline
 \hline
 \end{tabular}
-\\Legend: OM = out of memory; TO = time out; IF = internal failure; E = energy;        NTP = total number of panels, NBtotal = total number of batteries, NPS = number of panels in series; NPP = number of panels in parallel, NBS = number of batteries in series; NBP = number of batteries in parallel; LCC = Life Cycle Cost.
+\\Legend: OM = out of memory; TO = time out; IF = internal failure; E = energy;    NTP = total number of panels, NBtotal = total number of batteries, NPS = number of panels in series; NPP = number of panels in parallel, NBS = number of batteries in series; NBP = number of batteries in parallel; LCC = Life Cycle Cost.
 \end{scriptsize}
 \end{table}
 %
@@ -434,20 +425,7 @@ Case studies $2$, $3$, $6$, and $7$ led to a \textit{time out} result in CPAchec
 \label{fig:CPAoptc1}
 \end{figure}
 
-%An internal failure was presented by ESBMC when using Z3 solver in all case studies. It corresponds to a 'bug' in the Z3 solver, which will require an updated version of ESBMC to fix it. 
-
-Here we used ESBMC in incremental BMC configuration with Boolector; ESBMC was able to reach the optimal sizing of case studies $1$, $3$, $4$, $5$, and $6$ with a FAIL/ SAT response, varying from $36$ minutes to $10$ hours. 
-%Fig.~\ref{fig:esbmcoptcase3} shows the counterexample generated. 
-ESBMC with this configuration was unable to obtain an optimal solution in cases $2$ and $7$. Case $2$ produced a \textit{time out}. Moreover, case $7$ resulted in a UNSAT result, i.e., the verifier engine was unable to provide a feasible solution. However this is not a bug, and it means that the available list of equipment can not produce an feasible solution that satisfies electrical compatibility or the design requirements. This UNSAT situation was reached in less than one minute.
-%
-%\begin{figure}[h]
-%\fbox{\includegraphics[width=1.0\textwidth]{ESBMC_SAT_case3.png}}
-%\centering
-%\caption{ESBMC counterexample for case 3 optimization.}
-%\label{fig:esbmcoptcase3}
-%\end{figure}
-%
-These experimental results answers the \textit{EG2}.
+Here we used ESBMC in incremental BMC configuration with Boolector; ESBMC was able to reach the optimal sizing of case studies $1$, $3$, $4$, $5$, and $6$ with a FAIL/ SAT response, varying from $36$ minutes to $10$ hours. ESBMC, with this configuration, was unable to obtain an optimal solution in cases $2$ and $7$. Case $2$ produced a \textit{time out}. Moreover, case $7$ resulted in a UNSAT result, i.e., the verifier engine was unable to provide a feasible solution. However, this is not a bug, and it means that the available list of equipment can not produce a feasible solution that satisfies electrical compatibility or design requirements. This UNSAT situation was reached in less than one minute. These experimental results answer the \textit{EG2}.
 
 HOMER Pro was able to evaluate six case studies (cases $1$, $2$, $4$, $5$, $6$, and $7$) under $30$ seconds; it was much faster than the proposed automated synthesis tool (cf.~\textit{EG3}). Case study $3$ could not be simulated since HOMER Pro does not have the battery autonomy adjustment feature, i.e., the tool always tries to feed the given load with electricity $365$ days/year. 
 
@@ -459,13 +437,13 @@ The authors had four PV systems deployed and monitored since June $2018$ in a ri
 \subsection{Comparison Between Formal Synthesis and HOMER Pro, using PVsyst}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-If we compare the results of the formal synthesis with CPAchecker and ESBMC against those of HOMER Pro, we observed some distinct results in terms of the technical solution and cost (cf. Table~\ref{tab1}). Concerning the performance, there exists a vast difference in favour of HOMER Pro that obtained the results in considerably less time: few seconds in the opposite of an average of $4$ hours for the automated synthesis technique.
+If we compare the results of the formal synthesis with CPAchecker and ESBMC against those of HOMER Pro, we observed some distinct results in terms of the technical solution and cost (cf. Table~\ref{tab1}). Concerning the performance, there exists a vast difference in favor of HOMER Pro that obtained the results in considerably less time: few seconds in the opposite of an average of $4$ hours for the automated synthesis technique.
 %
 Particularly in the case of LCC, the cost varied from $11$\% to $44$\%, producing a higher estimation from the automated synthesis technique. However, considering that the cost of individual items of each database used to compose the optimal design is not the same among the tools, it is plausible to obtain distinct results.
 
 On the one hand, concerning the PV panels sizing, the results presented by the automated synthesis were smaller in terms of power than the ones produced by the simulation tool. The difference varied from $19$\% to $65$\%. On the other hand, concerning the battery bank, the results were smaller in terms of capacity to the HOMER Pro. The difference was between $34$\% to $68$\%. The mathematical models are different and particular parameters can be tuned for each technique, and that can justify the difference, which was presented in all the case studies.
 
-Those discrepancies are not easy to address without some real systems validation. However, we use the simulation software PVsyst to validate the optimal sizing produced, as shown in ~\ref{tab2}. Worth to mention that PVsyst has a pre-sizing feature, indicated in the table, that presents a minimum recommended sizing of PV panels and batteries (only), but without using manufacturers data or models for it; this feature was used as reference mainly with HOMER Pro, where there is not equipment brands or models (only power and capacities specification). The full feature of PVsyst was used with the field deployed and the formal synthesis sizing solutions, where brands and models were simulated in PVsyst according with the sized system.%According to PVsyst, we have to each case study:
+Those discrepancies are not easy to address without some real systems validation. However, we use the simulation software PVsyst to validate the optimal sizing produced, as shown in ~\ref{tab2}. Note that PVsyst has a pre-sizing feature, indicated in the table, that presents a minimum recommended sizing of PV panels and batteries (only), but without using manufacturers' data or models for it. This feature was used as reference mainly with HOMER Pro, where there is not equipment brands or models (only power and capacities specification). The full feature of PVsyst was used with the field-deployed and the formal synthesis sizing solutions, where brands and models were simulated in PVsyst according to the sized system.
 
 \begin{table}
 \caption{Optimal sizing validation with PVsyst.}
@@ -497,35 +475,21 @@ CS 7 & \makecell{P= 4,263 W\\B= 1,384 Ah\\(minimum)} & \makecell{NA\\There is no
 \end{scriptsize}
 \end{table}
 
-%\begin{itemize}
-%For case study 1, PVsyst indicates that a minimum necessary of $1,166$ W of PV panels and $381$ Ah of batteries. We deployed this case study in field ($975$ W of panels and $440$ Ah of batteries); simulations showed that the availability is lower than the $95$\%; therefore, the sizing that was manually carried out is not correct. Concerning our produced sizing, it was not found error during the $365$-day of the year simulation, the same result for HOMER Pro. However, the power values for panels and batteries show that HOMER Pro solution is oversized: $2.16$ times more for panels, and $1.39$ times more for batteries capability than necessary.
-%For case study 2, PVsyst indicates that a minimum necessary of $1,482$ W of PV panels and $478$ Ah of batteries. We did not deploy this case study in the field to perform a comparative evaluation; our approach did not produce a solution. Only HOMER Pro was left for comparison. However, PVsyst showed that the sized PV system has $2.6$ times more panels and $1.74$ more batteries than the necessary.
-%
-%For case study 3, only our approach produced the optimal solution because there exists a requirement of $12$ hours of battery autonomy. HOMER Pro and PVsyst do not allow autonomy less than $24$ hours;
-%For case study 4, PVsyst indicates that a minimum necessary of $1,078$ W of PV panels and $354$ Ah of batteries. We deployed this case study in the field ($975$ W of panels and $440$ ah of batteries), and PVsyst showed an incorrect sizing since the system availability was only $87$\%. Concerning our optimal solution, it was not found an error, the same as HOMER Pro. However, the power values for panels and batteries show that HOMER Pro solution is oversized: $2.24$ times more for panels, and $1.41$ times more for batteries than necessary.
-%For case study 5, PVsyst indicates that a minimum necessary of $823$ W of PV panels and $268$ Ah of batteries. We deployed this case study in the field; PVsyst showed a correct sizing ($975$ W of panels and $440$ Ah of batteries). Concerning our optimal solution, it was not found an error, the same as HOMER Pro. However, the power values for panels and batteries show that HOMER Pro solution is oversized: $2.24$ times more for panels, and $1.41$ times more for batteries capability than necessary.
-%
-%For case study 6, PVsyst indicates that a minimum necessary of $1,299$ W of PV panels and $421$ Ah of batteries. We deployed this case study in the field ($975$ W of panels and $440$ ah of batteries), and PVsyst showed an incorrect sizing since the system availability was only $85.65$\%. Concerning our optimal solution, it was not found an error, the same as HOMER Pro. However, the power values for panels and batteries show that HOMER Pro solution is oversized: $2.42$ times more for panels, and $1.38$ times more for batteries capability than necessary.
-%For case study 7, PVsyst indicates that a minimum necessary of $4,263$ W of PV panels and $1,384$ Ah of batteries. We did not deploy this case study in the field to perform comparisons; our approach did not produce a feasible solution with the equipment list available. Only HOMER Pro was left for comparisons. However, PVsyst showed that the sized PV system has $2.9$ times more panels and $1.99$ more batteries than the necessary.
-%\end{itemize}  
-
-Each simulation with PVsyst took $4$ seconds. Case study $3$ was not possible to be validated by PVsyst because the battery autonomy is less than 24 hours, and only the proposed synthesis technique can perform the optimal sizing (PVsyst and HOMER Pro are limited for a 24 h minimum autonomy). Case studies $2$ and $7$ had only HOMER Pro sizing validation, because there is not deployed equivalent system in the field, and the synthesis technique did not presented a solution (our technique presented a \textit{time out} in case study $2$ and a \textit{UNSAT} in case study $7$).
+Each simulation with PVsyst took $4$ seconds. Case study $3$ was not possible to be validated by PVsyst because the battery autonomy is less than 24 hours, and only the proposed synthesis technique can perform the optimal sizing (PVsyst and HOMER Pro are limited for a 24 h minimum autonomy). Case studies $2$ and $7$ had only HOMER Pro sizing validation, because there is not deployed equivalent system in the field, and the synthesis technique did not present a solution (our technique presented a \textit{time out} in case study $2$ and a \textit{UNSAT} in the case study $7$).
 
 Overall, those comparisons among our approach, the optimization software, and the deployed systems, with validation through simulation tool, show that the synthesis solution is sound, which answers \textit{EG1 and EG3}.
 
 HOMER Pro suggests a value in kW for the inverters that are very close to the maximum load of every case study, and it is just a reference value and not a commercial value of the inverter employed. The proposed synthesis tool, however, presents inverters that are commercial and can be bought off-the-shelf. Moreover, our synthesis approach considers surge power demand from the house, which is not considered by HOMER Pro or PVsyst. This feature is a definite advantage of the formal synthesis method.
 
 HOMER Pro does not include charge controllers as a specific item of equipment in its mathematical model; only the synthesis tool presents a commercial controller and includes it during the cost analysis. The formal synthesis method, therefore, presents more reliable results than HOMER Pro.
-%
-%Case study $7$ was not solved by the synthesis tool within the time limit established during the experimental phase. Case study $2$ was solved just by the ESBMC verification engine. Case study $3$ could not be simulated in HOMER Pro, because of its restriction on setting battery autonomy, thus leaving those three cases without parameters to compare.
 
-In summary, our synthesis tool can present a solution that is far more detailed and closer to commercial conditions than the solution presented by HOMER Pro. In particular, the automated synthesis method can provide all the details of every component of a PV system solution, with complete electrical details from the manufacturer data-sheet, including the model of the component, nominal current, and voltage. In this respect, even the name of the manufacturer can be cited (in Table~\ref{tab1} it was removed to avoid unauthorized advertising). Moreover, the validation through PVsyst simulation, using the PV sizing produced by HOMER Pro and our synthesis approach, shows that our results are feasible and not as oversized as HOMER Pro results, mainly concerning PV panels.
+In summary, our synthesis tool can present a solution that is far more detailed and closer to commercial conditions than the solution presented by HOMER Pro. In particular, the automated synthesis method can provide all the details of every component of a PV system solution, with complete electrical details from the manufacturer datasheet, including the model of the component, nominal current, and voltage. In this respect, even the name of the manufacturer can be cited (in Table~\ref{tab1}, it was removed to avoid unauthorized advertising). Moreover, the validation through PVsyst simulation, using the PV sizing produced by HOMER Pro and our synthesis approach, shows that our results are feasible and not as oversized as HOMER Pro results, mainly concerning PV panels.
 
 %---------------------------------------------------------------------------
 \subsection{Threats to validity} 
 %---------------------------------------------------------------------------
 
-We have reported a favourable assessment of the proposed method. Nevertheless, we have also identified four threats to the validity of our results that constitute future work. (1) improvement of the power reliability analysis: to include loss of load probability or loss of power supply probability, which can make the analysis more accurate. (2) improvement of the system cost analysis by including operational and maintenance costs to the adopted LCC analysis. (3) to increase the equipment and manufacturers database: this will increase the optimization complexity, but the result will also allow improved sizing. (4) the underlying symbolic verifiers employed here perform bit-precise verification based on the Floating-Point (FP) theory; we could use a real arithmetic strategy to tackle these equations; however, in this study, we have exploited the FP arithmetic, which is an approximation of the real one. 
+We have reported a favorable assessment of the proposed method. Nevertheless, we have also identified four threats to the validity of our results that constitute future work. (1) improvement of the power reliability analysis: to include loss of load probability or loss of power supply probability, which can make the analysis more accurate. (2) improvement of the system cost analysis by including operational and maintenance costs to the adopted LCC analysis. (3) to increase the equipment and manufacturers database: this will increase the optimization complexity, but the result will also allow improved sizing. (4) the underlying symbolic verifiers employed here perform bit-precise verification based on the Floating-Point (FP) theory. We could use a real arithmetic strategy to tackle these equations; however, in this study, we have exploited the FP arithmetic, which is an approximation of the real one. 
 
 %------------------------------------
 \section{Conclusions} 
@@ -533,9 +497,6 @@ We have reported a favourable assessment of the proposed method. Nevertheless, w
 
 Our novelty relies on a practical approach to pursuit the optimal solution of PV systems using contemporary formal methods. The use of formal synthesis to design PV systems has no precedent in literature; we show that the results of our approach, using seven case studies, are promising. Our synthesis tool can present a solution, which is far detailed and closer to the commercial reality than the solution presented by HOMER Pro, a state-of-the-art commercial tool. In particular, the battery autonomy feature, together with the details of every component of a PV system solution, is an advantage for our synthesis approach. These technical details are essential for the owner of the PV system since the industry demands proximity between the result presented by off-the-shelf optimization tools and the items of equipment for solar systems available on the market to achieve accuracy. It is worth mentioning that our synthesis technique was developed and used open-source tools and environment, in contrast to the optimization and simulation tools used in this work. Lastly, the use of data from real deployed systems in Amazonas State (Brazil) and the validation through PVsyst was essential to validate the comparison.
 
-%Our novelty relies on a practical approach to pursuit the optimal solution of PV systems using contemporary formal methods. The use of formal synthesis to design PV systems has no precedent in literature; we show that the results of our approach, using seven case studies, are promising. Our synthesis tool can present a solution, which is far detailed and closer to the commercial reality than the solution presented by HOMER Pro, a state-of-the-art commercial tool. In particular, the battery autonomy feature together with the details of every component of a PV system solution are an advantage for our synthesis approach. These technical details are essential for the owner of the PV system since the industry demands proximity between the result presented by optimization tools and the items of equipment for solar systems available on the market; and not just maximum or minimum values of parameters given by off-the-shelf optimization tools, which still need to be adjusted according to the chosen equipment. Lastly, the use of data from real deployed systems in Amazonas State (Brazil) was essential to validate the comparison.
-%and aid the process of equipment purchase 
-%, e.g., complete electrical information from datasheet of manufacturers, including the component model, nominal current, and voltage, 
 %
 % ---- Bibliography ----
 % BibTeX users should specify bibliography style 'splncs04'.
