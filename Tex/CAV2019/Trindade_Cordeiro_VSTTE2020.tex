@@ -72,7 +72,7 @@ Our work makes three significant contributions to advance the state-of-the-art i
 %-----------------------------------------------------------
 \vspace{-1ex}
 
-Fig.~\ref{fig:optimization} illustrates how to obtain the optimal sizing of a stand-alone PV system using the traditional techniques (manual and simulation) and the proposed synthesis technique. Note that the input information is the same for all the methods: weather data, price information, design requirements, as load curve and power demand, and design assumptions. For the automated synthesis, we also define the bound $k$ to restrict the design-space search. Here we start with a low bound $k$ and incrementally increase it to avoid time and memory constraints on our verification back-end. Therefore, the proper choice of $k$ is essential to this method.
+Fig.~\ref{fig:optimization} illustrates how to obtain the optimal sizing of a stand-alone PV system using the traditional techniques (manual and simulation) and the proposed synthesis technique. Note that the input information is the same for all the methods: weather data, price information, design requirements, as load curve and power demand, and design assumptions. For the automated synthesis, we also define the bound $k$ to restrict the design-space search. Here we start with a low bound $k$ and incrementally increase it to avoid time and memory constraints on our verification engine. Therefore, the proper choice of $k$ is essential to this method.
 
 \begin{figure}[h]
 \fbox{\includegraphics[width=0.9\textwidth]{optimalsizingprocess4}}
@@ -120,8 +120,7 @@ In our CEGIS variant, there exist four differences related to the traditional on
 \label{sec:sizing}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-A PV system is illustrated in Fig.\ref{fig:blockdiagram}. It 
-employs: the PV generator, which can be a \textbf{panel or an array}, is a semiconductor device that can convert solar energy into DC electricity; for night hours or rainy days, we hold \textbf{batteries} where power can be stored and used; the use of batteries as a storage form implies the presence of a \textbf{charge controller}~\cite{Hansen}; the PV arrays produce DC, and therefore when the PV system contains an AC load, a DC/AC conversion is required (\textbf{inverter}); the \textbf{AC load} dictates the behaviour of the AC electrical load from the house that will be fed by the system.
+A PV system is illustrated in Fig.\ref{fig:blockdiagram}. It employs the PV generator (\textit{panel or an array}), which is a semiconductor device that can convert solar energy into DC electricity. For night hours or rainy days, we hold \textit{batteries}, where power can be stored and used. The use of batteries as a storage form implies the presence of a \textit{charge controller}~\cite{Hansen}. The PV arrays produce DC, and therefore when the PV system contains an AC load, a DC/AC conversion is required (\textit{inverter}). The \textit{AC load} dictates the behavior of the AC electrical load from the house that will be fed by the system.
 
 \begin{figure}[h]
 \fbox{\includegraphics[width=0.8\textwidth]{blockdiagramPVS2_rev}}
@@ -146,7 +145,7 @@ P_{min,panels} = \dfrac{1.25 \times E_{corrected}}{Insolation},
 
 \noindent where $Insolation$, also called solar irradiation or solar exposure, is expressed in terms of $kWh/m^{2}$ per day and depends on the site where the PV system will be deployed. A factor of $20$\% for losses is considered, because $1.25 = 1 \mathbin{/} (1 - 0.2)$.
 
-On the one hand, the sizing must meet this requirement of minimum power supplied from the PV panels $P_{min,panels}$. On the other hand, the arrangement, if in series or parallel connections, it will depend on the charge controller specification of current $I_{c}$ and voltage $V_{c}$, as shown in Eq.~\eqref{eq:Icmin} and 
+On the one hand, the sizing must meet this requirement of minimum power supplied from the PV panels $P_{min,panels}$. On the other hand, the arrangement, if in series or parallel connections, it will depend on the charge controller specification of current $I_{c}$ and voltage $V_{c}$, as described by Eqs.~\eqref{eq:Icmin} and 
 \eqref{eq:Vcmin}.
 
 \begin{subequations}
@@ -163,16 +162,16 @@ V_{c} \geq V_{total,PVpanels},
 \end{tabularx}
 \end{subequations}
 
-Related to the batteries, the energy $E_{b}$ to be demanded by the PV system, in order to meet the load requirements, is defined by Eq.~\eqref{eq:Ebat}.
+Concerning the batteries, the energy $E_{b}$ to be demanded by the PV system, in order to meet the load requirements, is defined by Eq.~\eqref{eq:Ebat}.
 
 \begin{equation}
 \label{eq:Ebat}
 E_{b} = \dfrac{Autonomy \times E_{corrected}}{DOD},
 \end{equation}
 
-\noindent where $Autonomy$ is the number of days expected for the PV system to work even when rain or clouds avoid the recharging of batteries usually is a design definition and has a value ranging from $0.5$ to $2$ days. $DOD$ is the depth of discharge or the fraction of discharge. The $DOD$ is usually $25$\% for lead-acid batteries, and $80$\% for lithium batteries; that represents a State of Charge ($SOC$) of $75$\% and $20$\% respectively, because $SOC=1-DOD$. However, it is worth separating the $DOD$ into two different definitions when the battery autonomy is bigger than one day ($24$ hours). Therefore, here in this thesis, the definition given here is for a maximum of $DOD$. When we deal with daily $DOD$, we will call it $DOD_{day}$, and obviously, the sum of every $DOD_{day}$ can not exceed the maximum $DOD$.
+\noindent where $Autonomy$ is the number of days expected for the PV system to work even when rain or clouds avoid the recharging of batteries usually is a design definition and has a value ranging from $0.5$ to $2$ days. $DOD$ is the depth of discharge or the fraction of discharge. The $DOD$ is usually $25$\% for lead-acid batteries, and $80$\% for lithium batteries; that represents a State of Charge ($SOC$) of $75$\% and $20$\% respectively, because $SOC=1-DOD$. However, it is worth separating the $DOD$ into two different definitions when the battery autonomy is larger than one day ($24$ hours). Therefore, here in this study, the definition given here is for a maximum of $DOD$. When we deal with daily $DOD$, we will call it $DOD_{day}$, and obviously, the sum of every $DOD_{day}$ can not exceed the maximum $DOD$.
 
-In order to define the $DOD_{day}$ we use Eq.~\eqref{eq:DODday}. Moreover, the minimum current from the DC bus is defined by Eq.~\eqref{eq:Idcbus}. This equation is important to define the battery arrangement of the system (series and parallel connections).
+In order to define the $DOD_{day}$, we use Eq.~\eqref{eq:DODday}. Moreover, the minimum current from the DC bus is defined by Eq.~\eqref{eq:Idcbus}. This equation is important to define the battery arrangement of the system (series and parallel connections).
 
 \begin{subequations}
  \begin{tabularx}{\textwidth}{Xp{1cm}X}
@@ -198,8 +197,8 @@ C_{bank} = \dfrac{Autonomy E_{load}}{DOD \eta _{b} V_{system}},
 \end{equation}
 
 \noindent where $ E_{load} $ is the average energy consumed by the load corrected according to PV equipment efficiency, and $ \eta_{b} $ is the efficiency of the battery.
-
-Equation \ref{eq:batcheck} then performs the final sizing check, considering the number of batteries in series ($ N_{BS} $) and the number of batteries in parallel ($ N_{BP} $) adopted in the project.
+%
+Eq.~\ref{eq:batcheck} then performs the final sizing check, considering the number of batteries in series ($ N_{BS} $) and the number of batteries in parallel ($ N_{BP} $) adopted in the project.
 
 \begin{equation}
 \label{eq:batcheck}
@@ -213,7 +212,7 @@ The charge controller must initially meet the voltage requirement of the PV syst
 V_{c} = V_{system}.
 \end{equation}
 
-The short circuit reference information from the manufacturer's solar panel must be corrected to the cell temperature because field temperature is higher than nominal or laboratory temperature, and the PV system is temperature dependent, as shown by Equation~\eqref{eq:iscamb}. 
+The short circuit reference information from the manufacturer's solar panel must be corrected to the cell temperature because field temperature is higher than nominal or laboratory temperature, and the PV system is temperature dependent, as described by Eq.~\eqref{eq:iscamb}. 
 
 \begin{equation}
 \label{eq:iscamb}
@@ -236,7 +235,7 @@ I_{c} \geq I_{c,min}.
 \end{tabularx}
 \end{subequations}
 
-The number of controllers required for the off-grid PV system, as defined by \cite{Yatimi}, is calculated using Equation \ref{eq:numberofcmin}. Besides, the final sizing check is performed by Equation \ref{eq:numberofc}, which validates the number of controllers adopted.
+The number of controllers required for the off-grid PV system, as defined by \cite{Yatimi}, is calculated using Eq.~\eqref{eq:numberofcmin}. Besides, the final sizing check is performed by Eq.~\eqref{eq:numberofc}, which validates the number of controllers adopted.
 
 \begin{equation}
 \label{eq:numberofcmin}
@@ -269,9 +268,9 @@ V_{out}AC = V_{AC}.
 \left[ (Demand \leq P_{AC,ref}) \, and \, (P_{surge} \leq MAX_{AC,ref}) \right].
 \end{equation}
 
-Some inverter models allow parallel operation of more than one unit, besides the integration in order to create bi-phase and three-phase circuits. It is advisable to use pure sine wave inverters, especially for electronic loads sensitive to harmonic distortion waves.
+Some inverter models allow parallel operation of more than one unit, besides the integration to create bi- and three-phase circuits. It is advisable to use pure sine wave inverters for electronic loads sensitive to harmonic distortion waves.
 
-Besides that, it is crucial to verify the compatibility between the charge controller and inverter because some models are not compatible with equipment from other manufacturers. Furthermore, it is vital to select an inverter power that is lower than (or equal) the charge controller power, because the demand from the electric load causes the inverter to transfer this demand from the DC side. Then the controller can be overcharged during this operation and to burn.
+Besides that, it is crucial to verify the compatibility between the charge controller and inverter because some models are not compatible with equipment from other manufacturers. Furthermore, it is vital to select an inverter power that is lower than (or equal) the charge controller power, because the demand from the electric load causes the inverter to transfer this demand from the DC side. Then the controller can be overcharged during this operation and burn.
 
 All the equations above model the continuous-time behavior of the PV system; they produce real numbers except for the batteries and panels, where real numbers must be converted into integer ones, considering the minimum or maximum according to each equation. The verification and simulation tools need to handle non-linear real arithmetic to produce the correct result.
 
