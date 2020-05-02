@@ -68,7 +68,7 @@
 % correct bad hyphenation here
 \hyphenation{op-tical net-works semi-conduc-tor}
 
-\renewcommand{\baselinestretch}{0.97}
+\renewcommand{\baselinestretch}{0.96}
 
 \begin{document}
 %
@@ -93,7 +93,7 @@
 
 \author{Alessandro~Trindade and Lucas~Cordeiro% <-this % stops a space
 \thanks{A. Trindade is with the Department of Electricity, Federal University of Amazonas, Manaus, Brazil, e-mail: alessandrotrindade@ufam.edu.br.}% <-this % stops a space
-\thanks{L. Cordeiro is with School of Computer Science, The University of Manchester, UK, e-mail: lucas.cordeiro@manchester.ac.uk.}% <-this % stops a space
+\thanks{L. Cordeiro is with the Department of Computer Science, The University of Manchester, UK, e-mail: lucas.cordeiro@manchester.ac.uk.}% <-this % stops a space
 \thanks{The work of A. Trindade was supported in part by Newton Fund under Grant $261881580$, and in part by FAPEAM- Amazonas Foundation for Research under Grant PROTI-Pesquisa $2018$.}
 \thanks{Manuscript received May XY, 2020; revised XXXXX 11, 2020.}}
 
@@ -138,7 +138,7 @@
 % As a general rule, do not put math, special symbols or citations
 % in the abstract or keywords.
 \begin{abstract}
-There exist various methods and tools to size solar photovoltaic systems; however, these tools rely on simulations, which do not cover all aspects of the design space during the search for optimal solution. In prior studies in optimal sizing, the focus was always on criteria or objectives. Here, we present a new sound and automated approach to obtain optimal sizing  using an unprecedented program synthesis. Our variant of counterexample guided inductive synthesis (CEGIS) approach has two phases linking the technical and cost analysis: first we synthesize a feasible candidate based on power reliability, but that may not achieve the lowest cost; second, the candidate is then verified iteratively with a lower bound cost via symbolic model checking. If the verification step does not fail, the lower bound is adjusted; and if it fails, a counterexample provides the optimal solution. Experimental results using seven case studies and commercial equipment data show that our synthesis method can produce within an acceptable run-time the optimal system sizing. We also compare our approach with a commercial tool specialized in photovoltaic systems optimization. Both results are validated with commercial design software in order to show our approach effectiveness.
+There exist various methods and tools to size solar photovoltaic systems; however, these tools rely on simulations, which do not cover all aspects of the design space during the search for the optimal solution. In prior studies in optimal sizing, the focus was always on criteria or objectives. Here, we present a new sound and complete approach to obtaining optimal sizing using an unprecedented program synthesis technique. Our variant of counterexample guided inductive synthesis (CEGIS) approach has two phases linking the technical and cost analysis. First, we synthesize a feasible candidate based on power reliability, but that may not achieve the lowest cost. Second, the candidate is then verified iteratively with a lower bound cost via symbolic model checking. If the verification step does not fail, the lower bound is adjusted; and if it fails, a counterexample provides the optimal solution. Experimental results using seven case studies and commercial equipment data show that our synthesis method can produce within an acceptable run-time the optimal system sizing. We also compare our approach with a commercial tool specialized in photovoltaic systems optimization. Both results are validated with commercial design software to show the effectiveness of our approach.
 \end{abstract}
 
 % Note that keywords are not normally used for peerreview papers.
