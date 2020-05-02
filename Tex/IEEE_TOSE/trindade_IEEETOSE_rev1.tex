@@ -347,7 +347,7 @@ To perform the automated formal synthesis, we use a state-of-the-art model check
 \label{sec:ProgramSynthesis}
 %-----------------------------------------------------------
 
-Program synthesis addresses an age-old problem in computer science: can a computer program itself?~\cite{Bornholt2019}. Before the computer can automatically generate a program, it is necessary to give it a specification of what the program should do. The specification needs to describe the program's desired behavior to ensure that the program does what it intends.
+%Program synthesis addresses an age-old problem in computer science: can a computer program itself?~\cite{Bornholt2019}. Before the computer can automatically generate a program, it is necessary to give it a specification of what the program should do. The specification needs to describe the program's desired behavior to ensure that the program does what it intends.
 
 The basic idea of program synthesis is to automatically construct a program $P$ that satisfies a correctness specification $\sigma$. In particular, program synthesis is automatically performed by engines that use a correctness specification $\sigma$, as a starting point, and then incrementally produce a sequence of candidate solutions that partially satisfy $\sigma$~\cite{Abateetal2017}. As a result, a given candidate program $p$ is iteratively refined to match $\sigma$ more closely. CEGIS represents one of the most popular approaches to program synthesis currently used in practice for cyber-physical systems~\cite{Abateetal2017}. %, as energy production, distribution, and optimization. 
 Figure~\ref{Counter-Example-Guided-Inductive-Synthesis} illustrates the architecture. 
