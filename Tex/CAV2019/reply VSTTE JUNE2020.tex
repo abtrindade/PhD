@@ -1,0 +1,248 @@
+\documentclass[11pt]{article}
+
+\usepackage[normalem]{ulem}
+\usepackage[english]{babel}
+\usepackage[latin1]{inputenc}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{epstopdf}
+\usepackage{url}
+%\usepackage{mathtools}
+\usepackage{enumerate}
+\usepackage[nodayofweek]{datetime}
+\usepackage[caption=false]{subfig}
+%\mathtoolsset{showonlyrefs}
+\usepackage[linesnumbered,lined,ruled,boxed]{algorithm2e}
+\SetKw{KwBy}{by}
+\usepackage{xcolor}
+%\input{rgbcolors}
+%\usepackage{color}
+\usepackage{natbib}
+% \usepackage[style=authoryear-comp,dashed=false]{biblatex}
+% \bibliography{piecewise_lyapunov}
+\newtheorem{myassumption}{Assumption}
+\newcommand{\mstitle}{Synthesis of Solar Photovoltaic Systems: Optimal Sizing Comparison}
+\newcommand{\refnumber}{Paper 14}
+\newenvironment{resposta}{~~~\begin{quote}\color{blue}\textbf{Response:}}{\end{quote}}
+\newcommand{\comment}[1]{}
+%\definecolor{DarkGreen}{rgb}{0.2, 0.4, 0.2}
+\usepackage{amsmath}
+\usepackage{listings}
+\lstset{language=C,basicstyle=\small\ttfamily}
+\usepackage{tikz}
+\usetikzlibrary{positioning, automata, shapes.arrows, calc, shapes, arrows, calc,patterns,decorations.pathmorphing,decorations.markings}
+
+\newcommand{\param}[2]{\ensuremath{\langle{#1},{#2}\rangle}\xspace}
+\textwidth 15cm
+\setlength{\textheight}{1.1\textheight}
+\newcommand\hi{\hspace*{\parindent}}
+\newcommand\vi{\vspace{\baselineskip}}
+\newcommand\lac{{\mbox{{\Huge\bf L}\hspace{-0.65em}
+\raisebox{-1.2ex}{\Huge\bf A}\hspace{-1.1em}
+\raisebox{-0.6ex}{\Huge\bf C~}}}}
+\newcommand{\fwlfunction}[1]{\mathcal{FWL}[#1]}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{Manuscript Reference Number: \refnumber}
+\rhead{Page \thepage\ of \pageref{LastPage}}
+\lfoot{}
+\rfoot{}
+
+%\pagestyle{headings}
+\pagenumbering{roman}
+\begin{document}
+\setcounter{page}{1}
+\thispagestyle{empty}
+
+
+\hoffset -1.5cm \voffset .5cm
+
+
+\sf
+
+\vspace*{-2.5cm} \hspace*{-0.1cm} {\small
+{\mbox{\begin{minipage}{2cm}
+\centerline{\includegraphics[width=1.5cm]{ufam_logo.png}}
+\end{minipage}}} \hspace*{0.1cm}
+\begin{minipage}{11.0cm}{\large \textbf{Federal University of Amazonas}}\\
+{\sc Faculty of Technology}\\
+{\sc Department of Electricity}
+\end{minipage}
+} \vspace*{0mm}
+
+\hspace*{-.7cm} {\rule[-1ex]{15cm}{0.03cm}}
+
+\begin{flushright}
+\begin{minipage}{7.0cm}\small
+{\bf Please Reply to:}\\
+Adjunct Professor Alessandro Trindade\\
+Universidade Federal do Amazonas\\
+Departamento de Eletricidade\\
+Av. Gal. Rodrigo Otávio, 3000, Japiim, Campus Universitário\\
+ZIP 69077-000, Manaus - AM, Brazil\\
+{\em alessandrotrindade@ufam.edu.br}
+\end{minipage}
+\end{flushright}
+ 
+\vi
+\hspace*{\fill}{\small Manaus, \today.}
+\vi
+
+
+
+\begin{flushleft}
+	Nadia Polikarpova and Maria Christakis \\
+	PC co-chairs,\\
+	VSTTE'20
+    \end{flushleft}
+\vi
+
+\begin{flushleft}
+\textbf{REF.:} \refnumber
+    \end{flushleft}
+\vi \vi
+ 
+\indent Dear Nadia Polikarpova and Maria Christakis,
+\vi 
+
+We thank you for asking us to comply with your reviewers' reports. 
+We are submitting a revised version of our manuscript entitled 
+``{\em \mstitle}'' by Alessandro Trindade and Lucas Cordeiro. 
+This revised version carefully addresses each comment provided 
+by the reviewers, as suggested in your original decision letter. 
+In particular, our reply letter describes all modifications we made 
+to our manuscript and the respective responses to the comments 
+raised by the reviewers.  
+
+%\vi
+
+%Thank you very much in advance.
+
+\vi\vi
+
+\indent
+Sincerely,\\
+
+
+
+\begin{quote}
+\begin{quote}
+\begin{flushright}
+
+
+\vi
+\vi
+
+Alessandro B. Trindade~~~~~~~
+\end{flushright}
+\end{quote}
+\end{quote}
+
+\hoffset -1.5cm \voffset .5cm
+
+
+% =============================================
+\newpage
+\subsection*{Authors'  Response to the Review Comments on manuscript ``{\mstitle}'' -- Manuscript Reference Number: \refnumber}
+
+\vi
+
+The authors would like to thank the anonymous reviewers for their valuable and constructive comments and suggestions, which helped us significantly improve the quality of our manuscript. 
+
+According to the reviewers' comments, our manuscript has been carefully revised and all detailed changes are highlighted in red color, along with the original text. The revision included the Abstract, Introduction, Methodology?????, and Results???? sections.
+
+Our responses  to all comments (in blue color) are given in the sequel, with clear indications about how and where they were addressed along our manuscript.
+
+We hope those modifications in our manuscript and also our responses are sufficient to make our work suitable for publication.
+
+
+
+\newpage
+\subsection*{Reviewer \#2 comments followed by the authors' answers:}
+
+\begin{quote}
+
+In the manuscript, the authors report about the first application of software model checking to formally verify the design of a stand-alone solar photovoltaic system including solar panel, charge controller, battery, inverter, and electric load. They show, case studies, from real photovoltaic systems deployed in five different places, ranging from 700 W to 1,200 W, were used to evaluate this proposed approach and to compare that with specialized simulation tools. Also, the authors reported the evaluated different verification tools, in order to compare performance and soundness. Data from practical applications show the effectiveness of their approach, where specific conditions that lead to failures in a photovoltaic solar system are only detailed by the automated verification method.
+
+I have specifics questions and suggestions in order to improvement the manuscript.
+
+(1) To clarify the figure 2, i recommend write "current" inside the figure, don't put just I.
+
+\begin{resposta} 
+We thank the reviewer for this insightful comment. Indeed, it summarizes what was intended to be studied in this manuscript. Additionally, we have emphasized that the main focus of our study relies on the validation process of solar PV systems instead of the mathematical modeling, which was already investigated in prior studies over the last two decades; this particular information was carefully included in the revised abstract, introduction, and conclusion sections since it was unclear in the previous version of our manuscript. Regarding Figure 2, we fixed it as recommended by the reviewer. Moreover, we applied the same procedure to voltage $V$, in order to keep consistency throughout our manuscript.
+
+
+\end{resposta}
+
+(2) This software model checking has performance in comparison the other commercials software,how is this performance?, Could you give the areas where your software performs better than commercial software?   
+
+\begin{resposta} 
+Note that our options about specialized off-the-shelf tools to design stand-alone solar PV systems are very limited in literature, which motivated us to perform further studies in this area. In particular, as described in Section 2.1, only Hybrid2 and HOMER Pro perform off-grid with battery analysis of PV systems. Hybrid2 is not supported anymore, thereby being in disuse. We have updated this information in our manuscript (Section 2.1 as well). Therefore, in this particular research field (stand-alone solar PV systems), only HOMER Pro could be used for comparative purposes. However, in our experiments we could use some general simulation tools with the same mathematical model adopted by our automated verification tool. However, this would represent an unfair comparison since we would need to tweak the simulation tools to prepare them for comparison purposes, which could introduce errors. We have described this limitation in Section 5.4 (``Threats to Validity'') in order to state that additional comparisons could be carried out with general simulation tools if they employ similar mathematical models as the ones described here. Moreover, we mentioned the possibility to include this general purpose software tool comparative as future work (Section 6).
+
+Note that model checking and software simulations are two different techniques that use mathematical models. However, the way they work is completely different. On one hand, simulation depends on the choice of input variables (and their values) in order to obtain the output. On the other hand, model checking performs an exhaustive search with the goal of proving or violating a given property. In the latter case, if the property is violated (an unexpected behavior of the system), then a model checker presents the input that causes such a violation. Therefore, we can prove the absence of system flaws using model checking. This information was included in the revised version of our manuscript in Section 1 (Introduction).
+
+Importantly, model checking explores more efficiently the design-space because the system specification is based on a formal notation, which gets converted into Boolean algebra; the evaluation of variables is made automatically by a Boolean Satisfiability (SAT) solver based on the system's constraints, i.e., system information and electrical load demand transformed into properties (e.g., use defined demands and non-deterministic variables to model the respective weather that does not have precise forecasting). This resulting mathematical model is submitted to full exploration of all possible states to find a configuration, where an error might occur or not. Logically, depending on the number of variables, state-explosion can occur and the model checking process might be time-consuming to transverse the entire state-space.
+
+However, the authors demonstrated in $2016$ [1] that model checking can present better performance than software simulation if one performs hardware-software partitioning in specifically amount of instances.
+
+[1] Trindade, A.B. and Cordeiro, Applying SMT-based verification to hardware/software partitioning in embedded systems. Des Autom Embed Syst (2016) 20: 1. https://doi.org/10.1007/s10617-015-9163-z
+
+\end{resposta}
+
+(3) In text reference at figure 1 the authors do not describe all symbols drawn into image, for instances, what is means G, T. I suspect that in section 4 they define which are the variables (Irradiation and temperature). I suggest you define those symbols in the text that that figure describes.
+
+\begin{resposta} 
+Indeed, we have missed this particular information in the paragraph that describes the mentioned figure. We thank you so much for this observation. We have revised our manuscript to describe every employed symbol. The revised version of these paragraphs in Section ``2.2 Component models for a stand-alone PV system'' are now described as: ``A stand-alone PV system is illustrated in Fig.1. The PV generator is a semiconductor device that can convert solar energy into DC electricity, with high dependence on two weather variables from the site, where the system is deployed: solar irradiance $G$ and temperature $T$. For night hours or rainy days, power stored in batteries can be used and it implies the presence of a charge controller. The PV arrays produce DC and therefore when the PV system contains an AC load, a DC/AC conversion is required (inverter). The AC load dictates the behavior of AC electrical load from the house that will be fed by the system. At this pictured modular structure, every element produces/consumes current $I$ and voltage $V$ as illustrated by their physical magnitudes, where $pv$ means photovoltaic, $bat$ is battery, $dc$ is direct and $ac$ is alternating signals.''.
+\end{resposta}
+
+(4) Are the verification results carried out affected by the different characteristics of the computers?
+
+\begin{resposta} 
+Indeed, we did not inform the impact of changing the computer setup or related issues. We thank the reviewer for this observation. We have revised our manuscript to include the following paragraph in Section "5.2 Objectives and Setup": ``Note that the results presented here depend on the computer's processor and memory, the version of each software verifier (i.e., CBMC, ESBMC, CPAchecker), the parameters passed by the command-line, and the implemented model (software created by the authors) to be solved. Additionally, any change from HOMER Pro to another simulation tool can also influence the measured time to obtain results.''.
+\end{resposta}
+
+\end{quote}
+\newpage
+
+
+\subsection*{Reviewer \#4 comments followed by the authors' answers:} 
+
+\begin{quote}
+
+(5) The topic itself is interest for the PV application. However some section including abstract and result must be rewritten to be enhanced, here are the comments: 
+
+-       The manuscript illustrated the main drawback from other existed work that they are based on simulation and the proposed approach is claimed to do evaluation based real PV system as illustrated in the abstract, however the evolution is based on simulation model, mathematical, and information from website data such as Weather base and Energy Plus. The author should present real data measurement for more accurate results then compared and the main difference should be clarified.
+
+\begin{resposta} 
+We appreciate these comments; we actually realized that the contributions of our manuscript were unclear. We should highlight that our main research focus is on the validation process of the stand-alone solar PV system instead of the mathematical modeling, which was already investigated in prior studies over the last two decades. Moreover, we compare the results of using automated verification with simulation; real PV systems were employed just to validate the results presented by both approaches (model checking and simulation). Note that the automated verification and simulation tools are intended to be used during the design of the PV system, i.e., before actually buying or deploying the equipment. This information was carefully included in the revised abstract, introduction, and conclusion sections since it was unclear in the previous version of our manuscript.
+
+The authors hold real load curve and information collected from monitoring system using Raspberry Pi deployed in House 1, House 2, House 3 and House 4; however, based on the fact that the automated verification is mathematical and not visual (i.e., automated verifiers do not present curves or plots; they present the result of FAIL or SUCCESS, with a counterexample detailing the status of the variables that cause a FAIL result), we understand that this comparison is not appropriate.
+
+The information from temperature and solar irradiance from every house location, used by the simulation and formal verification tools, come from historical data collected from real stations, which are available in Weather Base and Energy Plus web sites, as presented in our "References" section: (Weatherbase, 2018) and (EnergyPlus, 2018). Considering that the idea of our study is to show the effectiveness of the proposed verification method just after the design phase (i.e., before deployment), we believe that it is a plausible procedure for not using weather base stations in each place since House 1, House 2, House 3, and House 4 (the ones in a riverside indigenous community) do not have weather station available to collect data and the information must be approximated to Manaus data (the closest municipality with historical data and regular measurement of data). Because of that, we decided to add this discussion in Section ``5.4 Threats to Validity''. We thank you for that specific comment.
+\end{resposta}
+
+(6)      Section 5 "Experimental Evolution" It can be changed to Verification result, otherwise the author should clarify the real measurements of the system.
+
+\begin{resposta} 
+We thank the reviewer for this comment. We implemented as suggested, i.e., we changed the section title to ``Verification and Simulation Results" since the results are related to both verification and simulation tools. The data collected from dwellers with real PV systems were used just to confirm (or not) flaws and complains about the equipment deployed in the field. 
+
+The authors hold real load curve and information collected from monitoring system using Raspberry Pi deployed in House 1, House 2, House 3 and House 4; however, based on the fact that the automated verification is mathematical and not visual (i.e., automated verifiers do not present curves or plots; they present the result of FAIL or SUCCESS, with a counterexample detailing the status of the variables that cause a FAIL result, as described in Section 4 of our manuscript), so we understand that this comparison is not appropriate.
+
+Note that model checking and software simulations are two different techniques that use mathematical models. However, the way they work is completely different. On one hand, simulation depends on the choice of input variables (and their values) in order to obtain the output. On the other hand, model checking performs an exhaustive search with the goal of proving or violating a given property. In the latter case, if the property is violated (an unexpected behavior of the system), then a model checker presents the input that causes such a violation. Therefore, we can prove the absence of system flaws using model checking. This information was included in the revised version of our manuscript in Section 1 (Introduction).
+\end{resposta}
+
+(7)       Can the author present the main waveform of the PV system in the steady state operation and under failure or any environmental change? wave-forms such as: Input power, VMPP, IMPP, AC load  
+
+\begin{resposta}
+
+We agree with the reviewer that we could further improve the explanation of our study. In our manuscript, we compare model checking with software simulation. However, the way they work is completely different. On one hand, simulation depends on the choice of input variables (and their values) in order to obtain the output. On the other hand, model checking performs an exhaustive search with the goal of proving or violating a given property. In the latter case, if the property is violated (an unexpected behavior of the system), then a model checker presents the input that causes such a violation. Therefore, we can prove the absence of system flaws using model checking. This information was included in the revised version of our manuscript in Section 1 (Introduction).
+
+When we work with waveform, we are performing testing or simulation, and that is different of automated verification. We consider that this comment (number $7$ in this Reply Letter) is related to the experimental question done by the same reviewer in (6). As a result, we expect that the explanations given in (6), together with the consequent updated manuscript, can cover any further concerns about this particular issue. 
+\end{resposta}
+\end{quote}
+
+\label{LastPage}
+
+% \printbibliography
+\end{document} 
