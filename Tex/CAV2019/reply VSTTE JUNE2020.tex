@@ -159,88 +159,254 @@ We hope those modifications in our manuscript and also our responses are suffici
 
 
 \newpage
-\subsection*{Reviewer \#2 comments followed by the authors' answers:}
+\subsection*{Reviewer \#1 comments followed by the authors' answers:}
 
 \begin{quote}
 
-In the manuscript, the authors report about the first application of software model checking to formally verify the design of a stand-alone solar photovoltaic system including solar panel, charge controller, battery, inverter, and electric load. They show, case studies, from real photovoltaic systems deployed in five different places, ranging from 700 W to 1,200 W, were used to evaluate this proposed approach and to compare that with specialized simulation tools. Also, the authors reported the evaluated different verification tools, in order to compare performance and soundness. Data from practical applications show the effectiveness of their approach, where specific conditions that lead to failures in a photovoltaic solar system are only detailed by the automated verification method.
+The paper presents an application of program verification and synthesis to select a combination of photovoltaic (PV) components that are optimally sized from a given set of available commercial components. The approach is compared to a commercial simulation tool, and generates PV systems that have better power characteristics.
 
-I have specifics questions and suggestions in order to improvement the manuscript.
+The application of existing verification and synthesis techniques for solving the real-world problem of designing optimal PV systems is very interesting, and certainly in scope of VSTTE. However, the current presentation of the paper needs to be substantially improved.
 
-(1) To clarify the figure 2, i recommend write "current" inside the figure, don't put just I.
+First, it is not entirely clear who the paper is primarily aimed at. For a software verification conference, it assumes too much knowledge of PV systems and the physics involved, but on the other hand, includes too little detail about the actual verification and synthesis technique. For example, the background in section 2.2 is not accessible to a general verification audience. Rather, I would suggest to provide a much more high-level background on PV systems, and simply state that such a system can be modelled using a set of equations, possibly giving the (main) variables. Similarly, many of the PV-specific details in the evaluation are not accesible for a general verification audience, and need to be discussed at a higher level.
 
 \begin{resposta} 
-We thank the reviewer for this insightful comment. Indeed, it summarizes what was intended to be studied in this manuscript. Additionally, we have emphasized that the main focus of our study relies on the validation process of solar PV systems instead of the mathematical modeling, which was already investigated in prior studies over the last two decades; this particular information was carefully included in the revised abstract, introduction, and conclusion sections since it was unclear in the previous version of our manuscript. Regarding Figure 2, we fixed it as recommended by the reviewer. Moreover, we applied the same procedure to voltage $V$, in order to keep consistency throughout our manuscript.
+Alessandro: acho que o revisor tem razão. Creio que valeria a pena tratar a parte da modelagem e fenômenos da geração de energia a um nível mais alto. Vou trabalhar isso mas sem remover toda a modelagem.
 
 
 \end{resposta}
 
-(2) This software model checking has performance in comparison the other commercials software,how is this performance?, Could you give the areas where your software performs better than commercial software?   
+Secondly, the problem that the paper is trying to solve needs to be stated precisely and early. In particular, it is not clear to me what the optimization objective is, i.e. what does 'optimal sizing' mean? Do you optimize for cost, or power consumption, or both? Currently, it is not until section 3 (page 8), that the paper seems to explain that the optimization is done w.r.t. to cost, but the evaluation seems to contradict this, because the commercial solution is regarded as not optimal, even though it has the lowest cost (in dollars).
 
 \begin{resposta} 
-Note that our options about specialized off-the-shelf tools to design stand-alone solar PV systems are very limited in literature, which motivated us to perform further studies in this area. In particular, as described in Section 2.1, only Hybrid2 and HOMER Pro perform off-grid with battery analysis of PV systems. Hybrid2 is not supported anymore, thereby being in disuse. We have updated this information in our manuscript (Section 2.1 as well). Therefore, in this particular research field (stand-alone solar PV systems), only HOMER Pro could be used for comparative purposes. However, in our experiments we could use some general simulation tools with the same mathematical model adopted by our automated verification tool. However, this would represent an unfair comparison since we would need to tweak the simulation tools to prepare them for comparison purposes, which could introduce errors. We have described this limitation in Section 5.4 (``Threats to Validity'') in order to state that additional comparisons could be carried out with general simulation tools if they employ similar mathematical models as the ones described here. Moreover, we mentioned the possibility to include this general purpose software tool comparative as future work (Section 6).
+Alessandro: realmente a definição de optimal sizing não é colocada logo de início. Realmente a definição só vem na página 8, não tem na Introdução. Vou melhorar a parte introdutória e onde explica o comparativo da solução ótima. No comparativo, o ótimo de uma ferramenta é apenas o ótimo da ferramenta, não necessariamente o ótimo do comparativo com outras ferramentas. Vou deixar isso claro lá também na parte de avaliação perto do quadro comparativo.
 
-Note that model checking and software simulations are two different techniques that use mathematical models. However, the way they work is completely different. On one hand, simulation depends on the choice of input variables (and their values) in order to obtain the output. On the other hand, model checking performs an exhaustive search with the goal of proving or violating a given property. In the latter case, if the property is violated (an unexpected behavior of the system), then a model checker presents the input that causes such a violation. Therefore, we can prove the absence of system flaws using model checking. This information was included in the revised version of our manuscript in Section 1 (Introduction).
-
-Importantly, model checking explores more efficiently the design-space because the system specification is based on a formal notation, which gets converted into Boolean algebra; the evaluation of variables is made automatically by a Boolean Satisfiability (SAT) solver based on the system's constraints, i.e., system information and electrical load demand transformed into properties (e.g., use defined demands and non-deterministic variables to model the respective weather that does not have precise forecasting). This resulting mathematical model is submitted to full exploration of all possible states to find a configuration, where an error might occur or not. Logically, depending on the number of variables, state-explosion can occur and the model checking process might be time-consuming to transverse the entire state-space.
-
-However, the authors demonstrated in $2016$ [1] that model checking can present better performance than software simulation if one performs hardware-software partitioning in specifically amount of instances.
-
-[1] Trindade, A.B. and Cordeiro, Applying SMT-based verification to hardware/software partitioning in embedded systems. Des Autom Embed Syst (2016) 20: 1. https://doi.org/10.1007/s10617-015-9163-z
 
 \end{resposta}
 
-(3) In text reference at figure 1 the authors do not describe all symbols drawn into image, for instances, what is means G, T. I suspect that in section 4 they define which are the variables (Irradiation and temperature). I suggest you define those symbols in the text that that figure describes.
+Then, I am confused about which verification, resp. synthesis, technique is actually being used. This is partially due to lack of details, but also because of inconsistencies in the paper. In different places, the paper describes the technique as CEGIS, or as model checking, or as optimization. 
 
 \begin{resposta} 
-Indeed, we have missed this particular information in the paragraph that describes the mentioned figure. We thank you so much for this observation. We have revised our manuscript to describe every employed symbol. The revised version of these paragraphs in Section ``2.2 Component models for a stand-alone PV system'' are now described as: ``A stand-alone PV system is illustrated in Fig.1. The PV generator is a semiconductor device that can convert solar energy into DC electricity, with high dependence on two weather variables from the site, where the system is deployed: solar irradiance $G$ and temperature $T$. For night hours or rainy days, power stored in batteries can be used and it implies the presence of a charge controller. The PV arrays produce DC and therefore when the PV system contains an AC load, a DC/AC conversion is required (inverter). The AC load dictates the behavior of AC electrical load from the house that will be fed by the system. At this pictured modular structure, every element produces/consumes current $I$ and voltage $V$ as illustrated by their physical magnitudes, where $pv$ means photovoltaic, $bat$ is battery, $dc$ is direct and $ac$ is alternating signals.''.
+Alessandro: Pra mim, é o desenvolvimento de uma técnica (como já discutimos em janeiro), que usa model checking e, como é feita em duas etapas, ela lembra o modo como o CEGIS funciona. E como o resultado é uma solução ótima, o resultado é uma otimização. Creio que isto deva ir pra introdução também (e pro abstract).
+
+
 \end{resposta}
 
-(4) Are the verification results carried out affected by the different characteristics of the computers?
+Algorithm 1 to me seems to construct a contraint and then tries to solve it for the nondeterministic variables to obtain a solution, and to use essentially a linear search to find the minimum cost. Is this correct? If so, it is unclear to me how this fits with the CEGIS algorithm in Fig. 2, and where model checking is used.
 
 \begin{resposta} 
-Indeed, we did not inform the impact of changing the computer setup or related issues. We thank the reviewer for this observation. We have revised our manuscript to include the following paragraph in Section "5.2 Objectives and Setup": ``Note that the results presented here depend on the computer's processor and memory, the version of each software verifier (i.e., CBMC, ESBMC, CPAchecker), the parameters passed by the command-line, and the implemented model (software created by the authors) to be solved. Additionally, any change from HOMER Pro to another simulation tool can also influence the measured time to obtain results.''.
+Alessandro: Provavelmente eu tenha que melhorar o texto, pois a escolha de uma solução factível ou não achar uma solução factível já é por model checking ( e isso corresponde a 1a parte da técnica), a 2a parte é uma busca linear mas com teste de SUCCESS ou FAIL para gerar contraexemplo (e, pra mim, é model checking de novo).Pra mim, estamos aplicando model checking duas vezes na técnica. \textbf{Que achas?}
+
+
+\end{resposta}
+
+
+Finally, section 2.2 presents nonlinear continuous real-valued constraints.How can the discrete solvers used handle these constraints?   
+
+\begin{resposta} 
+Alessandro: Essa questão é para se pensar. Pra mim, a não linearidade das equações do artigo anterior de validação de sistemas solares estava mais claro pois usamos equações exponenciais e logaritmas. Nesse, a não linearidade se deve ao fato de a curva do ótimo global não ser contínua, pois pegamos valores específicos de variáveis não determinísticas, valores inteiros...daí eu não sei responder o que o revisor questionou.
+
+Lucas: Modelamos essas usando aritmética de ponto flutuante. É apenas uma aproximação dos números reais. No entanto, neste trabalho, não nos preocupamos em calcular o erro de arredondamento. Precisamos enfatizar isso no texto. Esse nosso paper descreve um pouco sobre esses erros: https://arxiv.org/pdf/2004.12699.pdf
+
 \end{resposta}
 
 \end{quote}
 \newpage
 
 
-\subsection*{Reviewer \#4 comments followed by the authors' answers:} 
+\subsection*{Reviewer \#2 comments followed by the authors' answers:} 
 
 \begin{quote}
 
-(5) The topic itself is interest for the PV application. However some section including abstract and result must be rewritten to be enhanced, here are the comments: 
+This paper presents a novel approach based on formal methods in order to obtain the optimal size of solar photovoltaic systems. The paper first introduces the basic formalization of such systems (in Section 2), then it discusses how these were modeled by means of formal methods (Section 3), and it then presents and discusses the experimental results (Section 4) comparing it with a commercial tool performing the same tasks using a different approach (HOMER).
 
--       The manuscript illustrated the main drawback from other existed work that they are based on simulation and the proposed approach is claimed to do evaluation based real PV system as illustrated in the abstract, however the evolution is based on simulation model, mathematical, and information from website data such as Weather base and Energy Plus. The author should present real data measurement for more accurate results then compared and the main difference should be clarified.
+Pros
+--------
 
-\begin{resposta} 
-We appreciate these comments; we actually realized that the contributions of our manuscript were unclear. We should highlight that our main research focus is on the validation process of the stand-alone solar PV system instead of the mathematical modeling, which was already investigated in prior studies over the last two decades. Moreover, we compare the results of using automated verification with simulation; real PV systems were employed just to validate the results presented by both approaches (model checking and simulation). Note that the automated verification and simulation tools are intended to be used during the design of the PV system, i.e., before actually buying or deploying the equipment. This information was carefully included in the revised abstract, introduction, and conclusion sections since it was unclear in the previous version of our manuscript.
+* This paper extends the application of formal methods to a novel scenario (aka optimization of solar photovoltaic systems).
 
-The authors hold real load curve and information collected from monitoring system using Raspberry Pi deployed in House 1, House 2, House 3 and House 4; however, based on the fact that the automated verification is mathematical and not visual (i.e., automated verifiers do not present curves or plots; they present the result of FAIL or SUCCESS, with a counterexample detailing the status of the variables that cause a FAIL result), we understand that this comparison is not appropriate.
+* Overall, the formal approach seems to be sound and robust, even if I was not able to fully understand the background (see cons below).
 
-The information from temperature and solar irradiance from every house location, used by the simulation and formal verification tools, come from historical data collected from real stations, which are available in Weather Base and Energy Plus web sites, as presented in our "References" section: (Weatherbase, 2018) and (EnergyPlus, 2018). Considering that the idea of our study is to show the effectiveness of the proposed verification method just after the design phase (i.e., before deployment), we believe that it is a plausible procedure for not using weather base stations in each place since House 1, House 2, House 3, and House 4 (the ones in a riverside indigenous community) do not have weather station available to collect data and the information must be approximated to Manaus data (the closest municipality with historical data and regular measurement of data). Because of that, we decided to add this discussion in Section ``5.4 Threats to Validity''. We thank you for that specific comment.
-\end{resposta}
-
-(6)      Section 5 "Experimental Evolution" It can be changed to Verification result, otherwise the author should clarify the real measurements of the system.
+* The authors have carried out very deep experiments. In particular, the algorithm was tested using 3 different state-of-the-art verifiers, and the results were compared with a commercial solution. In addition, since it is not straightforward to evaluate the results without a real system validation, the authors used a simulation tool.
 
 \begin{resposta} 
-We thank the reviewer for this comment. We implemented as suggested, i.e., we changed the section title to ``Verification and Simulation Results" since the results are related to both verification and simulation tools. The data collected from dwellers with real PV systems were used just to confirm (or not) flaws and complains about the equipment deployed in the field. 
-
-The authors hold real load curve and information collected from monitoring system using Raspberry Pi deployed in House 1, House 2, House 3 and House 4; however, based on the fact that the automated verification is mathematical and not visual (i.e., automated verifiers do not present curves or plots; they present the result of FAIL or SUCCESS, with a counterexample detailing the status of the variables that cause a FAIL result, as described in Section 4 of our manuscript), so we understand that this comparison is not appropriate.
-
-Note that model checking and software simulations are two different techniques that use mathematical models. However, the way they work is completely different. On one hand, simulation depends on the choice of input variables (and their values) in order to obtain the output. On the other hand, model checking performs an exhaustive search with the goal of proving or violating a given property. In the latter case, if the property is violated (an unexpected behavior of the system), then a model checker presents the input that causes such a violation. Therefore, we can prove the absence of system flaws using model checking. This information was included in the revised version of our manuscript in Section 1 (Introduction).
+Thank you.
 \end{resposta}
 
-(7)       Can the author present the main waveform of the PV system in the steady state operation and under failure or any environmental change? wave-forms such as: Input power, VMPP, IMPP, AC load  
+Cons
+--------
+
+* For someone not familiar with the topic (like myself and, I would expect, 95\% of VSTTE community), it might be difficult to understand the overall setup, since Section 2 fails to provide some of the background (see minor comments below)
+
+\begin{resposta} 
+Mesmo do revisor 1. Mudanças que farei endereçarão isso
+
+\end{resposta}
+
+* In general, I would say that the experimental results are not outstanding, but they show some potential in applying a total different approach to this field. However, the authors at the beginning state that the goal is to compute a solution with minimal cost, but then in Table 1 Homer computed cheapest solutions in all the cases, then it looks like the introduced approach is worse than existing commercial tools. Then the following discussion is a bit shallow: Table 2 "show that the synthesis solution is sound and complete, which answers EG1 and EG3", but EG3 is about "how does our formal synthesis tool compare to a specialized simulation tool?" (so I am still not sure if Homer is sound and complete and what's the comparison). Finally, the three drawbacks of Homer are discussed at the end of Section 4.4, but this is not about the costs of the system, and not connect to the three experimental goals.
+
 
 \begin{resposta}
-
-We agree with the reviewer that we could further improve the explanation of our study. In our manuscript, we compare model checking with software simulation. However, the way they work is completely different. On one hand, simulation depends on the choice of input variables (and their values) in order to obtain the output. On the other hand, model checking performs an exhaustive search with the goal of proving or violating a given property. In the latter case, if the property is violated (an unexpected behavior of the system), then a model checker presents the input that causes such a violation. Therefore, we can prove the absence of system flaws using model checking. This information was included in the revised version of our manuscript in Section 1 (Introduction).
-
-When we work with waveform, we are performing testing or simulation, and that is different of automated verification. We consider that this comment (number $7$ in this Reply Letter) is related to the experimental question done by the same reviewer in (6). As a result, we expect that the explanations given in (6), together with the consequent updated manuscript, can cover any further concerns about this particular issue. 
+Preciso pensar aqui
+ 
 \end{resposta}
+
+- Almost all equations end with a comma, please remove it
+
+\begin{resposta}
+Thank you for the advice. We removed all the commas.
+ 
+\end{resposta}
+
+- Page 2: specialist PV optimization software -> specialized PV optimization software
+done
+
+\begin{resposta}
+Thank you, we corrected the text as suggested.
+\end{resposta}
+
+- In the introduction it is stated that formal methods for PV systems are unexplored in literature. I think a discussion about why this is the case, and what is intuitively needed to apply them to this new scenario would help the reader to understand the potential and impact of the novel approach
+
+
+\begin{resposta}
+Concordo. Vou fazer isso no texto
+\end{resposta}
+
+- Section 2.2: some parts of this section are not well explained. To people that do not know this field, some choices feel completely arbitrary: why a factor of 20\% for losses is considered in equation 2? Similarly, why DOD is 75\%? I guess these are standard values, but maybe some citations of papers using the same parameters (or discussing them) might be helpful to convince the reader about the robustness of the formalization
+
+\begin{resposta}
+Concordo. Vou acrescer isso no texto
+\end{resposta}
+
+- page 6: Therefore, here in this study, the definition given here -> Therefore, the definition given here
+
+\begin{resposta}
+Thank you, we corrected the text as suggested.
+\end{resposta}
+
+- From equation 9 on I was lost. What are G, G\_ref, and T equation 9? Why you have T - 25 here? What is N\_PP in equation 10a?
+
+\begin{resposta}
+Thank you, you were right. The whole sentence was rebuild, with correct mention and explanation about the elements.
+\end{resposta}
+
+- Equation 6 is missing the 'x' to represent multiplications
+
+\begin{resposta}
+Thank you, we corrected the text.
+\end{resposta}
+
+- Page 10: start-of-the-art -> state-of-the-art
+done
+
+\begin{resposta}
+Thank you, we corrected the text as suggested.
+\end{resposta}
+
 \end{quote}
+\newpage
+
+\subsection*{Reviewer \#3 comments followed by the authors' answers:} 
+
+\begin{quote}
+The paper describes a system for optimally sizing PV systems.
+A detailed account is given of both modeling parameters, evaluation method
+and evaluation results. The details, covered in the paper, contain
+a substantial amount of information on PV optimization and approaches
+for solving the constraints. It uses methods developed in the FM
+community, such as CBMC with MiniSAT, MathSat and Boolector and compares with
+available commercial tools based on other technologies.
+The substantial results are impressive and be inspirational.
+There are also some drawbacks that makes the material not well
+accessible:
+- The description is very tedious and mixes a lot of low level
+  information that is really only interesting to the authors
+  and not suitable for a conference paper. More emphasis should
+  be applied to the overall principles, and then details should be
+  presented as instantiations.
+  Essentially, parts of the paper, such as section 2.2 are not
+  really useful. It is not possible for a reader to keep track of
+  the many variables that are introduced. I don't see how they add
+  conceptual value.
+  Algorithm 1 also contains too many references to inlined variables.
+
+
+\begin{resposta} 
+Repete o revisor 1. As mudanças que farei matam essas questões
+\end{resposta}
+
+ I do have some doubts about suitable the encodings that
+  the authors choose, in particular, how relevant full fledged
+  floating point reasoning is, but have no way to check.
+  For a conference paper I am quite willing to give the paper a
+  pass on this doubt as exposing details in the encodings could
+  make the paper even less accessible.
+- The paper contains several awkwardly formulated sentences. Examples
+  are listed below.
+
+The net effect is that the paper reads as a tour-de-force in "we did all of this hard work", but does not read "let us explain you something new and interesting from what we learned to inspire you".
+
+Overall, based on the substance of the results, the paper remains adequate for the venue.
+
+\begin{resposta}
+Thank you.
+\end{resposta}
+
+Examples of awkward sentences:
+
+Progress has been made worldwide; in particular, in 2017, the number
+of people without electricity access fell below 1 billion thresholds
+-> Progress has been made worldwide; in particular, in 2017, the number
+of people without electricity access fell below 1 billion
+
+\begin{resposta}
+Thank you, we corrected the text as suggested.
+\end{resposta}
+
+they have the drawback of an incomplete coverage ->
+they have the drawback of incomplete coverage
+
+\begin{resposta}
+Thank you, we corrected the text as suggested.
+\end{resposta}
+
+are infeasible
+
+\begin{resposta}
+Thank you, we corrected the the two occurrences to "not feasible".
+\end{resposta}
+
+In 2017, a researcher suggested the application of formal methods to verify and
+control the behaviour of computational devices in a smart grid [2].
+
+\begin{resposta}
+Thank you, we corrected the text to ?In 2017, it was suggested the application...?.
+\end{resposta}
+
+
+are still unexplored in literature
+$->$
+
+\begin{resposta}
+Thank you, we corrected the text as "systems are not explored in literature".
+\end{resposta}
+
+using the traditional techniques
+->
+
+\begin{resposta}
+Thank you, we corrected the text as "using the manual or simulation techniques and...".
+\end{resposta}
+
+For the automated synthesis
+->
+
+\begin{resposta}
+Thank you, we corrected the text as "However, when using automated synthesis..".
+\end{resposta}
+
+
+\end{quote}
+
 
 \label{LastPage}
 
