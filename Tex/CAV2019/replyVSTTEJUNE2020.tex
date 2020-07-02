@@ -150,7 +150,7 @@ Alessandro B. Trindade~~~~~~~
 
 The authors would like to thank the anonymous reviewers for their valuable and constructive comments and suggestions, which helped us significantly improve the quality of our manuscript. 
 
-According to the reviewers' comments, our manuscript has been carefully revised and all detailed changes are highlighted in red color, along with the original text. The revision included the Abstract, Introduction, Methodology?????, and Results???? sections.
+According to the reviewers' comments, our manuscript has been carefully revised and all detailed changes are highlighted in red color, along with the original text. The revision included the Abstract, Introduction, Background, Synthesizing Optimal Sizing, Results, and Conclusions sections.
 
 Our responses  to all comments (in blue color) are given in the sequel, with clear indications about how and where they were addressed along our manuscript.
 
@@ -167,40 +167,40 @@ The paper presents an application of program verification and synthesis to selec
 
 The application of existing verification and synthesis techniques for solving the real-world problem of designing optimal PV systems is very interesting, and certainly in scope of VSTTE. However, the current presentation of the paper needs to be substantially improved.
 
-First, it is not entirely clear who the paper is primarily aimed at. For a software verification conference, it assumes too much knowledge of PV systems and the physics involved, but on the other hand, includes too little detail about the actual verification and synthesis technique. For example, the background in section 2.2 is not accessible to a general verification audience. Rather, I would suggest to provide a much more high-level background on PV systems, and simply state that such a system can be modelled using a set of equations, possibly giving the (main) variables. Similarly, many of the PV-specific details in the evaluation are not accesible for a general verification audience, and need to be discussed at a higher level.
+First, it is not entirely clear who the paper is primarily aimed at. For a software verification conference, it assumes too much knowledge of PV systems and the physics involved, but on the other hand, includes too little detail about the actual verification and synthesis technique. For example, the background in section 2.2 is not accessible to a general verification audience. Rather, I would suggest to provide a much more high-level background on PV systems, and simply state that such a system can be modelled using a set of equations, possibly giving the (main) variables. Similarly, many of the PV-specific details in the evaluation are not accessible for a general verification audience, and need to be discussed at a higher level.
 
 \begin{resposta} 
-Alessandro: acho que o revisor tem razão. Creio que valeria a pena tratar a parte da modelagem e fenômenos da geração de energia a um nível mais alto. Vou trabalhar isso mas sem remover toda a modelagem.
-
+We thank the reviewer for this insightful comment and suggestion. Indeed, we had to revise the Background, and the Synthesizing Optimal Sizing sections in order to address the right conference attendants profile. The paper was reviewed and the PV sizing modelling was changed to a more higher level of explanation. Different parts of the above mentioned sections in blue indicate where we changed/reviewed the text.
 
 \end{resposta}
 
 Secondly, the problem that the paper is trying to solve needs to be stated precisely and early. In particular, it is not clear to me what the optimization objective is, i.e. what does 'optimal sizing' mean? Do you optimize for cost, or power consumption, or both? Currently, it is not until section 3 (page 8), that the paper seems to explain that the optimization is done w.r.t. to cost, but the evaluation seems to contradict this, because the commercial solution is regarded as not optimal, even though it has the lowest cost (in dollars).
 
 \begin{resposta} 
-Alessandro: realmente a definição de optimal sizing não é colocada logo de início. Realmente a definição só vem na página 8, não tem na Introdução. Vou melhorar a parte introdutória e onde explica o comparativo da solução ótima. No comparativo, o ótimo de uma ferramenta é apenas o ótimo da ferramenta, não necessariamente o ótimo do comparativo com outras ferramentas. Vou deixar isso claro lá também na parte de avaliação perto do quadro comparativo.
-
+We thank the reviewer again. Indeed, we had to revise the Abstract, the Introduction, and the Synthesizing Optimal Sizing sections in order to address more correctly what is PV optimal sizing. We must realize as well, and we added a highlight about this in the Results section, that a optimal solution from a tool is not necessarily the same optimal of other tool, mainly when the data base of equipment items (with different costs) are not the same. 
 
 \end{resposta}
 
 Then, I am confused about which verification, resp. synthesis, technique is actually being used. This is partially due to lack of details, but also because of inconsistencies in the paper. In different places, the paper describes the technique as CEGIS, or as model checking, or as optimization. 
 
 \begin{resposta} 
+We thank the reviewer again for this insightful comment and suggestion. Indeed, we had to revise every section of the paper in order to address the specific issues highlighted by the reviewer......
 Alessandro: Pra mim, é o desenvolvimento de uma técnica (como já discutimos em janeiro), que usa model checking e, como é feita em duas etapas, ela lembra o modo como o CEGIS funciona. E como o resultado é uma solução ótima, o resultado é uma otimização. Creio que isto deva ir pra introdução também (e pro abstract).
 
 
 \end{resposta}
 
-Algorithm 1 to me seems to construct a contraint and then tries to solve it for the nondeterministic variables to obtain a solution, and to use essentially a linear search to find the minimum cost. Is this correct? If so, it is unclear to me how this fits with the CEGIS algorithm in Fig. 2, and where model checking is used.
+Algorithm 1 to me seems to construct a constraint and then tries to solve it for the nondeterministic variables to obtain a solution, and to use essentially a linear search to find the minimum cost. Is this correct? If so, it is unclear to me how this fits with the CEGIS algorithm in Fig. 2, and where model checking is used.
 
 \begin{resposta} 
 Alessandro: Provavelmente eu tenha que melhorar o texto, pois a escolha de uma solução factível ou não achar uma solução factível já é por model checking ( e isso corresponde a 1a parte da técnica), a 2a parte é uma busca linear mas com teste de SUCCESS ou FAIL para gerar contraexemplo (e, pra mim, é model checking de novo).Pra mim, estamos aplicando model checking duas vezes na técnica. \textbf{Que achas?}  \textbf{Lucas: Concordo. Nao poderia aplicar uma busca binaria como fizemos no nosso journal do IJES?} 
+acrescentei busca binária e $\nu Z$ na conclusão.
 
 
 \end{resposta}
 
 
-Finally, section 2.2 presents nonlinear continuous real-valued constraints.How can the discrete solvers used handle these constraints?   
+Finally, section 2.2 presents nonlinear continuous real-valued constraints. How can the discrete solvers used handle these constraints?   
 
 \begin{resposta} 
 Alessandro: Essa questão é para se pensar. Pra mim, a não linearidade das equações do artigo anterior de validação de sistemas solares estava mais claro pois usamos equações exponenciais e logaritmas. Nesse, a não linearidade se deve ao fato de a curva do ótimo global não ser contínua, pois pegamos valores específicos de variáveis não determinísticas, valores inteiros...daí eu não sei responder o que o revisor questionou.
@@ -217,7 +217,7 @@ Lucas: Modelamos essas usando aritmética de ponto flutuante. É apenas uma aproxi
 
 \begin{quote}
 
-This paper presents a novel approach based on formal methods in order to obtain the optimal size of solar photovoltaic systems. The paper first introduces the basic formalization of such systems (in Section 2), then it discusses how these were modeled by means of formal methods (Section 3), and it then presents and discusses the experimental results (Section 4) comparing it with a commercial tool performing the same tasks using a different approach (HOMER).
+This paper presents a novel approach based on formal methods in order to obtain the optimal size of solar photovoltaic systems. The paper first introduces the basic formalization of such systems (in Section 2), then it discusses how these were modelled by means of formal methods (Section 3), and it then presents and discusses the experimental results (Section 4) comparing it with a commercial tool performing the same tasks using a different approach (HOMER).
 
 Pros
 --------
@@ -229,7 +229,7 @@ Pros
 * The authors have carried out very deep experiments. In particular, the algorithm was tested using 3 different state-of-the-art verifiers, and the results were compared with a commercial solution. In addition, since it is not straightforward to evaluate the results without a real system validation, the authors used a simulation tool.
 
 \begin{resposta} 
-Thank you.
+Thank you. We appreciate the compliment.
 \end{resposta}
 
 Cons
@@ -238,7 +238,7 @@ Cons
 * For someone not familiar with the topic (like myself and, I would expect, 95\% of VSTTE community), it might be difficult to understand the overall setup, since Section 2 fails to provide some of the background (see minor comments below)
 
 \begin{resposta} 
-Mesmo do revisor 1. Mudanças que farei endereçarão isso
+We thank the reviewer for this insightful comment and suggestion. He/she is right and it was the same observation did by Reviewer \#1. In order to correct this issue, we had to revise the Background, and the Synthesizing Optimal Sizing sections in order to address the right conference attendants profile. The paper was reviewed and the PV sizing modelling was passed to a more higher level of explanation. Different parts of the paper in blue indicate where we changed/reviewed the text.
 
 \end{resposta}
 
@@ -266,13 +266,14 @@ We have fixed this typo.
 
 
 \begin{resposta}
-Concordo. Vou fazer isso no texto
+We appreciate this Reviewer's suggestion. Indeed only with a double background and experience, specifically in computer science and in electrical engineering, is that is possible to realize that the tool (formal synthesis) can solve, and with remarkable results, the PV system sizing issue. Therefore we included a specific text in the Introduction section:
+"However, formal methods and its application to synthesize PV systems are not explored in literature, mainly because it is necessary background and experience, at the same time, in computer science and PV systems, what is not so common."
 \end{resposta}
 
 - Section 2.2: some parts of this section are not well explained. To people that do not know this field, some choices feel completely arbitrary: why a factor of 20\% for losses is considered in equation 2? Similarly, why DOD is 75\%? I guess these are standard values, but maybe some citations of papers using the same parameters (or discussing them) might be helpful to convince the reader about the robustness of the formalization
 
 \begin{resposta}
-Concordo. Vou acrescer isso no texto
+The reviewer is right, we missed the details about why those values are taken. Therefore we reviewed the text to: "The $DOD$ is usually $25$\% for lead-acid batteries, and $80$\% for lithium batteries and represent an intrinsic and empirical feature of those type of batteries [Pinho and Galdino, 2014] in order to guarantee its lifetime".
 \end{resposta}
 
 - page 6: Therefore, here in this study, the definition given here -$>$ Therefore, the definition given here
