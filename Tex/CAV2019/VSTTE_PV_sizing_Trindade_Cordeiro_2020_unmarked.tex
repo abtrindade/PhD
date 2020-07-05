@@ -42,7 +42,7 @@ The sizing check stage can ensure that the system meets the standard project ste
 E_{corrected} = \dfrac{E_{consumption}}{\eta_{b} \times \eta_{c} \times \eta_{i} }
 \end{equation}
 
-We must estimate the total power that will be demanded from the PV panels, as defined by Eq. ~\eqref{eq:Pminpanel}. Where $Insolation$, also called solar irradiation or solar exposure, is expressed in terms of $kWh/m^{2}$ per day and depends on the site where the PV system will be deployed. \textcolor{blue}{An empirical factor of $20$\% for losses is considered~\cite{Pinho}}, because $1.25 = 1 \mathbin{/} (1 - 0.2)$.
+We must estimate the total power that will be demanded from the PV panels, as defined by Eq. ~\eqref{eq:Pminpanel}. Where $Insolation$, also called solar irradiation or solar exposure, is expressed in terms of $kWh/m^{2}$ per day and depends on the site where the PV system will be deployed. An empirical factor of $20$\% for losses is considered~\cite{Pinho}, because $1.25 = 1 \mathbin{/} (1 - 0.2)$.
 
 \begin{equation}
 \label{eq:Pminpanel}
@@ -68,7 +68,7 @@ Concerning the batteries, the energy $E_{b}$ to be demanded by the PV system, in
 E_{b} = \dfrac{Autonomy \times E_{corrected}}{DOD}
 \end{equation}
 
-\noindent Where $Autonomy$ is the number of days expected for the PV system to work even when rain or clouds avoid the recharging of batteries usually is a design definition and has a value ranging from $0.5$ to $2$ days. $DOD$ is the depth of discharge or the fraction of discharge. The $DOD$ is usually $25$\% for lead-acid batteries, and $80$\% for lithium batteries \textcolor{blue}{and represent an intrinsic and empirical feature of those type of batteries~\cite{Pinho} in order to guarantee its lifetime}; that represents a State of Charge ($SOC$) of $75$\% and $20$\% respectively, because $SOC=1-DOD$. However, it is worth separating the $DOD$ into two different definitions when the battery autonomy is larger than one day ($24$ hours). \textcolor{blue}{Therefore, the definition given here is for a maximum of $DOD$}. When we deal with daily $DOD$, we will call it $DOD_{day}$, and obviously, the sum of every $DOD_{day}$ can not exceed the maximum $DOD$.
+\noindent Where $Autonomy$ is the number of days expected for the PV system to work even when rain or clouds avoid the recharging of batteries usually is a design definition and has a value ranging from $0.5$ to $2$ days. $DOD$ is the depth of discharge or the fraction of discharge. The $DOD$ is usually $25$\% for lead-acid batteries, and $80$\% for lithium batteries and represent an intrinsic and empirical feature of those type of batteries~\cite{Pinho} in order to guarantee its lifetime; that represents a State of Charge ($SOC$) of $75$\% and $20$\% respectively, because $SOC=1-DOD$. However, it is worth separating the $DOD$ into two different definitions when the battery autonomy is larger than one day ($24$ hours). Therefore, the definition given here is for a maximum of $DOD$. When we deal with daily $DOD$, we will call it $DOD_{day}$, and obviously, the sum of every $DOD_{day}$ can not exceed the maximum $DOD$.
 
 In order to define the $DOD_{day}$, we use Eq.~\eqref{eq:DODday}. Moreover, the minimum current from the DC bus is defined by Eq.~\eqref{eq:Idcbus}. This equation is important to define the battery arrangement of the system (series and parallel connections). Where $V_{system}$ is the DC voltage of the bus.
 
@@ -87,7 +87,7 @@ As for batteries, we must first define the total capacity of the battery bank, w
 
 \begin{equation}
 \label{eq:Cbank}
-\textcolor{blue}{C_{bank} = \dfrac{Autonomy \times E_{load}}{DOD \times \eta_{b} \times V_{system}}}
+C_{bank} = \dfrac{Autonomy \times E_{load}}{DOD \times \eta_{b} \times V_{system}}
 \end{equation}
 
 Eq.~\ref{eq:batcheck} then performs the final sizing check, considering the number of batteries in series ($ N_{BS} $) and the number of batteries in parallel ($ N_{BP} $) adopted in the project.
@@ -104,7 +104,7 @@ The charge controller must initially meet the voltage requirement of the PV syst
 V_{c} = V_{system}
 \end{equation}
 
-\textcolor{blue}{The short circuit reference information ($I_{sc,ref}$) from the manufacturer's solar panel must be corrected because field temperature ($T$) is higher than nominal or laboratory temperature ($25^{\circ}C$), and the PV system is temperature dependent (heat can reduce output efficiency by 10-25\%), as described by Eq.~\eqref{eq:iscamb} for the ambient short-circuit current from the PV panel. $G$ is the solar irradiance from the deployment site, and $G_{ref}$ is defined as $1000$ $W/m^{2}$ by the manufacturers.}
+The short circuit reference information ($I_{sc,ref}$) from the manufacturer's solar panel must be corrected because field temperature ($T$) is higher than nominal or laboratory temperature ($25^{\circ}C$), and the PV system is temperature dependent (heat can reduce output efficiency by 10-25\%), as described by Eq.~\eqref{eq:iscamb} for the ambient short-circuit current from the PV panel. $G$ is the solar irradiance from the deployment site, and $G_{ref}$ is defined as $1000$ $W/m^{2}$ by the manufacturers.
 
 \begin{equation}
 \label{eq:iscamb}
