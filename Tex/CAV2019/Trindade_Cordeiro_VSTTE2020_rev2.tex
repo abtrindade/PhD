@@ -77,7 +77,7 @@ Our work makes three significant contributions to advance the state-of-the-art i
 \vspace{-1ex}
 
 \textcolor{blue}{Fig.~\ref{fig:optimization} illustrates how to obtain the optimal sizing of a stand-alone PV system using the manual or simulation techniques and the proposed synthesis technique}. Note that the input information is the same for all the methods: weather data, price information, design requirements, as load curve and power demand, and design assumptions. \textcolor{blue}{However, when using automated synthesis, we also define the bound $k$ to restrict the design-space search}. Here we start with a low bound $k$ and incrementally increase it to avoid time and memory constraints on our verification engine. Therefore, the proper choice of $k$ is essential to this method.
-
+%
 \begin{figure}[h]
 \fbox{\includegraphics[width=0.9\textwidth]{optimalsizingprocess4}}
 \centering
@@ -85,36 +85,30 @@ Our work makes three significant contributions to advance the state-of-the-art i
 \label{fig:optimization}
 \end{figure}
 
-The techniques (manual, simulation and automated synthesis) produce as output either a SUCCESS or FAIL result, thereby considering a feasible technical solution with the lowest cost. On the one hand, when done by simulation, we get a report or graphical result; on the other hand, the automated synthesis technique, which is mathematical reasoning about a model, presents a counterexample with the optimal solution stored in variables. Furthermore, the design-space coverage during the optimal sizing search is sound and complete when using synthesis.
+The techniques (manual, simulation, and automated synthesis) produce either a SUCCESS or FAIL result, thereby considering a feasible technical solution with the lowest cost. On the one hand, when done by simulation, we get a report or graphical result; on the other hand, the automated synthesis technique, which is mathematical reasoning about a model, presents a counterexample with the optimal solution stored in variables. Furthermore, the design-space coverage during the optimal sizing search is sound and complete when using synthesis.
 
 %-----------------------------------------------------------
 \subsection{Program Synthesis}
 \label{sec:ProgramSynthesis}
 %-----------------------------------------------------------
-The basic idea of program synthesis is to automatically construct a program $P$ that satisfies a correctness specification $\sigma$. In particular, program synthesis is automatically performed by engines that use a correctness specification $\sigma$, as a starting point, and then incrementally produce a sequence of candidate solutions that partially satisfy $\sigma$~\cite{Abateetal2017}. As a result, a given candidate program $p$ is iteratively refined to match $\sigma$ more closely. Figure~\ref{Counter-Example-Guided-Inductive-Synthesis} illustrates the underlying architecture. 
-
+The basic idea of program synthesis is to automatically construct a $ P $ program that satisfies a correctness specification $\sigma$. In particular, program synthesis is automatically performed by engines that use a correctness specification $\sigma$, as a starting point, and then incrementally produce a sequence of candidate solutions that partially satisfy $\sigma$~\cite{Abateetal2017}. As a result, a given candidate program $p$ is iteratively refined to match $\sigma$ more closely. Figure~\ref{Counter-Example-Guided-Inductive-Synthesis} illustrates the underlying architecture. 
+%
 \begin{figure}[h]
 \begin{center}
 \fbox{\includegraphics[width=0.75\textwidth]{fig2_rev2.jpg}}
 \end{center}
-%
-%\begin{wrapfigure}{r}{0.5\textwidth}
-%\begin{center}
-%	\includegraphics[width=0.5\columnwidth]{fig2_rev2.jpg}
-%\end{center}	
 	\caption{CEGIS in PV system sizing.}
 	\label{Counter-Example-Guided-Inductive-Synthesis}
-%\end{wrapfigure}
 \end{figure}
 
 The correctness specification $\sigma$ provided to our synthesizer is of the form $\exists \vec{F}. \forall \vec{x}. \sigma(\vec{x}, \vec{F})$, where $\vec{F}$ ranges over functions, $\vec{x}$ ranges over ground terms, and $\sigma$ is a quantifier-free (QF) formula typically supported by SMT solvers. The ground terms are interpreted over some finite domain $\mathcal{D}$, where $\mathcal{D}$ can be encoded using the SMT's bit-vectors part. Our specification includes house demand, energy, and battery autonomy; we also provide equipment specifications and prices from different manufacturers and models.
 
 In Figure~\ref{Counter-Example-Guided-Inductive-Synthesis}, the phases {\sc Synthesize} and {\sc Verify} interact via a finite set of test vectors {\sc inputs}, which is incrementally updated. Given the correctness specification $\sigma$, the {\sc Synthesize} procedure tries to find an existential witness $\vec{F}$ satisfying the specification $\sigma(\vec{x}, \vec{F})$, for all $\vec{x}$ in {\sc inputs} (as opposed to all $\vec{x} \in \mathcal{D}$). If {\sc Synthesize} succeeds in finding a witness~$\vec{F}$, the latter is a candidate solution to the full synthesis formula, which is passed to {\sc Verify} to check whether it is a proper solution ({\it i.e.}, $\vec{F}$ satisfies the specification $\sigma(\vec{x}, \vec{F})$ for all $\vec{x}\in\mathcal{D}$). If this is the case, then the algorithm terminates.
 
-One may notice that each iteration of the traditional CEGIS loop adds a new input to the finite set $INPUTS$, which is then used for synthesis. Given that the full set of inputs $\mathcal{D}$ is finite because we use bit-vector expressions, this means that the refinement loop can only iterate over a finite number of times. However, {\sc Synthesize} may conclude that no candidate solution obeying $\sigma$ for the finite set $INPUTS$ exists. 
+One may notice that each iteration of the traditional CEGIS loop adds a new input to the finite set $INPUTS$, which is then used for synthesis. Given that the full set of inputs $\mathcal{D}$ is finite because we use bit-vector expressions, the refinement loop can only iterate over a finite number of times. However, {\sc Synthesize} may conclude that no candidate solution obeying $\sigma$ for the finite set $INPUTS$ exists. 
 
 In our CEGIS variant, there exist four differences related to the traditional one: 
-(1) there exists no test vector and every candidate is generated in the {\sc Synthesize} phase and sent to the {\sc Verify} phase; 
+(1) there exists no test vector, and every candidate is generated in the {\sc Synthesize} phase and sent to the {\sc Verify} phase; 
 (2) if the {\sc Verify} phase is unsuccessful, then a new candidate is generated by {\sc Synthesize} and 
 (3) the lower bound of the {\sc Verify} phase is incremented to search for the lowest cost; as a result,
 (4) there exists no refinement from the {\sc Verify} phase back to the {\sc Synthesize} phase. In particular, a new counterexample is not added to the {\sc input} set since a failure during the {\sc Verify} phase will only discard a given candidate, which could be feasible in the next iteration with a new lower bound.
@@ -124,8 +118,8 @@ In our CEGIS variant, there exist four differences related to the traditional on
 \label{sec:sizing}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-A PV system is illustrated in Fig.\ref{fig:blockdiagram}. It employs the PV generator (\textit{panel or an array}), which is a semiconductor device that can convert solar energy into DC electricity. For night hours or rainy days, we hold \textit{batteries}, where power can be stored and used. The use of batteries as a storage form implies the presence of a \textit{charge controller}~\cite{Hansen}. The PV arrays produce DC, and therefore when the PV system contains an AC load, a DC/AC conversion is required (\textit{inverter}). The \textit{AC load} dictates the behaviour of the AC electrical load from the house that will be fed by the system.
-
+A PV system is illustrated in Fig.\ref{fig:blockdiagram}. It employs the PV generator (\textit{panel or an array}), a semiconductor device that can convert solar energy into DC electricity. For night hours or rainy days, we hold \textit{batteries}, where power can be stored and used. The use of batteries as a storage form implies the presence of a \textit{charge controller}~\cite{Hansen}. The PV arrays produce DC, and therefore when the PV system contains an AC load, a DC/AC conversion is required (\textit{inverter}). The \textit{AC load} dictates the behavior of the AC electrical load from the house that will be fed by the system.
+%
 \begin{figure}[h]
 \fbox{\includegraphics[width=0.8\textwidth]{blockdiagramPVS2_rev}}
 \centering
@@ -133,10 +127,10 @@ A PV system is illustrated in Fig.\ref{fig:blockdiagram}. It employs the PV gene
 \label{fig:blockdiagram} 
 \end{figure}
 
-The sizing check stage can ensure that the system meets the standard project steps related to the critical period method (worst month) for solar energy system sizing~\cite{Pinho} and adopting an MPPT (Maximum Power Point Tracking) charge controller, which is the most common in use. 
+The sizing check stage can ensure that the system meets the standard project steps related to the critical period method (worst month) for solar energy system sizing~\cite{Pinho}. It adopts an MPPT (Maximum Power Point Tracking) charge controller, which is the most common in use. 
 
-\textcolor{blue}{In this paper, which audience is targeted to be from software verification area, we decided to use a higher level explanation about the PV sizing. The sizing process involve a set of eighteen equations, related to electrical engineering area, which are detailed online\footnote{\url{https://drive.google.com/file/d/1C\_OEo06Or0TrcaysHtYQAP1awa9VNR-T/view?usp=sharing }}. The flowchart pictured in Fig.~\ref{fig:flow}  is the overview of the steps that must be taken in order to size a stand-alone PV system.}
-
+\textcolor{blue}{In this paper, which audience is targeted to be from the software verification area, we decided to use a higher-level explanation about the PV sizing. The sizing process involves a set of eighteen equations related to the electrical engineering area, which is detailed online \textcolor{red}{I was unable to open this file}\footnote{\url{https://drive.google.com/file/d/1C\_OEo06Or0TrcaysHtYQAP1awa9VNR-T/view?usp=sharing}}. The flowchart pictured in Fig.~\ref{fig:flow} is the overview of the steps that must be taken to size a stand-alone PV system.}
+%
 \begin{figure}[h]
 \fbox{\includegraphics[width=0.9\textwidth]{flowchart}}
 \centering
@@ -144,13 +138,11 @@ The sizing check stage can ensure that the system meets the standard project ste
 \label{fig:flow} 
 \end{figure}
 
-\textcolor{blue}{On the left side of Fig.~\ref{fig:flow} it is possible to visualize the \textbf{inputs} need to size a PV system. There are requirements from the house to be electrified, there are design assumptions, weather information from the targeted local of the PV system deployment, and a possible initial list of equipment to be used, covering all the items listed in Fig.\ref{fig:blockdiagram}. Related to the equipment list, the designer can use few equipment or a vast one. It is possible, as well, do not adopt commercial equipment list. However, the result is a PV sizing of specific power/current/ or voltage values, and usually just close of real equipment that can be found in the market. That possibility has the drawback of possible incompatibility among equipment when the real one are bought and deployed.}
+\textcolor{blue}{On the left side of Fig.~\ref{fig:flow}, we can visualize the needed \textbf{inputs} to size a PV system. There exist requirements from the house to be electrified; in particular, there exist design assumptions, weather information from the targeted local of the PV system deployment, and a possible initial list of equipment to be used, covering all the items listed in Fig.\ref{fig:blockdiagram}. Related to the equipment list, the designer can use a few equipments or a vast one. We can also decide not to adopt the commercial equipment list. However, the result is a PV sizing of specific power, current, or voltage values, and usually just close to original equipment, which can be found in the market. This possibility has the drawback of possible incompatibility among equipment when the real one is bought and deployed.}
 
-\textcolor{blue}{There are specific steps that aim the calculation of some variables and other related to the electrical compatibility validation among equipment items, both enumerated from \textbf{i} to \textbf{xiv} in Fig.~\ref{fig:flow}. Those represent different shades of gray of the  rectangle boxes. The start point usually is a candidate list of PV panels, change controller, battery, and inverter, as indicated at the top of the flowchart. The arrows, in the right side, it shows a point where some specific item is validated. The flowchart do not shows the returning point, but if the candidate item is not compatible with other, or do not meet some calculated requirement, it must be changed to other in order to follow the indicated flux. The last rectangle box checks the inverter electrical compatibility with the DC-bus voltage, with the required AC voltage from outlet; moreover, the inverter specified power must be lower than the charge controller power in order to avoid it to burn by overcharge. At the end of the flowchart, all the items are defined and the PV sizing is finished.}
+\textcolor{blue}{There exist specific steps that aim the calculation of some variables and others related to the electrical compatibility validation among equipment items, both enumerated from \textbf{i} to \textbf{xiv}, as illustrated in Fig.~\ref{fig:flow}; those represent different shades of gray of the rectangle boxes. The start point is usually a candidate list of PV panels, charge controller, battery, and inverter, as indicated at the top of the flowchart. The arrows, on the right side, show a point where some specific item is validated. The diagram does not show the returning location. However, if the candidate item is not compatible with others or does not meet some requirement, it must be changed to follow the indicated flux. The last rectangle box checks the inverter electrical compatibility with the DC-bus voltage, with the required AC voltage from the outlet. Besides, the inverter specified power must be lower than the charge controller power to avoid it from burning by overcharge. At the end of the flowchart, all the items are defined, and the PV sizing is finished.}
 
-\textcolor{blue}{All the equations used, model} the continuous-time behaviour of the PV system; they produce real numbers except for the batteries and panels, where real numbers must be converted into integer ones, considering the minimum or maximum according to each equation. The verification and simulation tools need to handle non-linear real arithmetic to produce the correct result.
-
-\textcolor{blue}{Our mathematical model uses floating point arithmetic. It is just an approximation of the real numbers. However, in this work, we are not concerned with calculating the rounding error, which is negligible when we consider the size of the physical quantities and the variables adopted~\cite{DBLP:journals/corr/abs-2004-12699}.}
+\textcolor{blue}{These equations model} the continuous-time behavior of the PV system; they produce real numbers except for the batteries and panels, where real numbers must be converted into integer ones, considering the minimum or maximum according to each equation. The verification and simulation tools need to handle non-linear real arithmetic to produce the correct result. \textcolor{blue}{Our mathematical model uses floating-point arithmetic. It is just an approximation of the real numbers. However, in this work, we are not concerned with calculating the rounding error, which is negligible when considering the size of the physical quantities and the variables adopted~\cite{DBLP:journals/corr/abs-2004-12699}.}
 
 %------------------------------------------------------
 \section{Synthesizing Optimal Sizing of Stand-alone Solar Photovoltaic Systems}
