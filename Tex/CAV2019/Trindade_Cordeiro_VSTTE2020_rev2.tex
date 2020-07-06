@@ -148,16 +148,16 @@ The sizing check stage can ensure that the system meets the standard project ste
 \section{Synthesizing Optimal Sizing of Stand-alone Solar Photovoltaic Systems}
 %------------------------------------------------------
 
-The optimal sizing of PV systems is made by the best compromise between two objectives: \textit{power reliability} and \textit{system cost}~\cite{Alsadi2018}. This study will rely on the critical period solar energy method~\cite{Pinho}, as described in Section~\ref{sec:sizing}. \textcolor{blue}{Our study will use an adapted Life Cycle Cost (LCC) analysis, where the acquisition cost of every item of equipment is considered, plus the installation cost, the operational and maintenance costs}~\cite{Alsadi2018}, given as,
+The best compromise between two objectives makes the optimal sizing of PV systems: \textit{power reliability} and \textit{system cost}~\cite{Alsadi2018}. This study will rely on the critical period solar energy method~\cite{Pinho}, as described in Section~\ref{sec:sizing}. \textcolor{blue}{Our study will use an adapted Life Cycle Cost (LCC) analysis, where the acquisition cost of every item of equipment is considered, plus the installation cost, the operational and maintenance costs}~\cite{Alsadi2018}, given as,
 %
 \begin{equation}
 \label{eq:LCC}
 LCC = C_{PV} + C_{bat} + C_{charger} + C_{inv} + C_{installation} + C_{batrep} + C_{PWO\&M}
 \end{equation}
 
-\noindent Where $C_{PV}$ is the PV array cost, $C_{bat}$ is the initial cost of batteries, $C_{charger}$ is the cost of the charger, $C_{inv}$ is the inverter cost, $C_{installation}$ is the installation cost, $C_{batrep}$ is battery replacement cost at current prices, and $C_{PWO\&M}$ is operation and maintenance costs at current prices. \textcolor{blue}{In this study, we will use a $C_{installation}$ equivalent to 5\% of total equipment cost and a $C_{PWO\&M}$ equal to U\$ 289.64/year according with Amazon State literature data\cite{Agrener2013}.}
+\noindent where $C_{PV}$ is the PV array cost, $C_{bat}$ is the initial cost of batteries, $C_{charger}$ is the cost of the charger, $C_{inv}$ is the inverter cost, $C_{installation}$ is the installation cost, $C_{batrep}$ is battery replacement cost at current prices, and $C_{PWO\&M}$ is operation and maintenance costs at current rates. \textcolor{blue}{In this study, we will use a $C_{installation}$ equivalent to 5\% of total equipment cost and a $C_{PWO\&M}$ equal to U\$ 289.64/year according to Amazon State literature data~\cite{Agrener2013}.}
 
-Algorithm~\ref{alg:opt-algorithm} describes our pseudo-code to synthesize stand-alone PV systems using software model checking~\cite{DBLP:journals/corr/abs-1909-13139}. The analytical method of optimization was adopted.
+Algorithm~\ref{alg:opt-algorithm} describes our pseudo-code to synthesize stand-alone PV systems using software model checking as a backend verification engine~\cite{DBLP:journals/corr/abs-1909-13139}. The analytical method of optimization was adopted.
 
  \begin{algorithm}[h]
  \caption{Synthesis algorithm}
@@ -171,18 +171,18 @@ Algorithm~\ref{alg:opt-algorithm} describes our pseudo-code to synthesize stand-
  \STATE Calculate min possible Cost $MinCost$, based on the equipment list \\
  \FOR {$HintCost=MinCost$ to $MaxCost$} 
  	\STATE Declare non-deterministic variables to select PV Panel, Controller, Battery, and Inverter from list \\
- 	\STATE Calculate steps i and ii of Fig.~\ref{fig:flow} \\
-	\STATE Define PV panels arrangement: step iii of Fig.~\ref{fig:flow} \\
-	\STATE Calculate  step iv of Fig.~\ref{fig:flow} \\
-	\STATE Enforce electrical compatibility in step v of Fig.~\ref{fig:flow} with statement \textbf{assume} \\
-	\STATE Calculate steps vi to viii of Fig.~\ref{fig:flow} \\
-	\STATE Define battery arrangement according step ix of Fig.~\ref{fig:flow} \\
-	\STATE Enforce electrical compatibility in step x of Fig.~\ref{fig:flow} with statement \textbf{assume} \\
-	\STATE Correct variables to ambient temperature: step xi of Fig.~\ref{fig:flow} \\
-	\STATE Enforce electrical compatibility in step xii of Fig.~\ref{fig:flow} with statement \textbf{assume} \\
-	\STATE Define number of charge controllers: step xiii of Fig.~\ref{fig:flow}\\
-	\STATE Enforce electrical compatibilities in step xiv of Fig.~\ref{fig:flow} with statement \textbf{assume} and define the inverter \\
-	\STATE non-deterministic variables hold feasible equipment and cost \\
+ 	\STATE Calculate Steps i and ii of Fig.~\ref{fig:flow} \\
+	\STATE Define PV panels arrangement: Step iii of Fig.~\ref{fig:flow} \\
+	\STATE Calculate Step iv of Fig.~\ref{fig:flow} \\
+	\STATE Enforce electrical compatibility in Step v of Fig.~\ref{fig:flow} with statement \textbf{assume} \\
+	\STATE Calculate Steps vi to viii of Fig.~\ref{fig:flow} \\
+	\STATE Define battery arrangement according Step ix of Fig.~\ref{fig:flow} \\
+	\STATE Enforce electrical compatibility in Step x of Fig.~\ref{fig:flow} with statement \textbf{assume} \\
+	\STATE Correct variables to ambient temperature: Step xi of Fig.~\ref{fig:flow} \\
+	\STATE Enforce electrical compatibility in Step xii of Fig.~\ref{fig:flow} with statement \textbf{assume} \\
+	\STATE Define number of charge controllers: Step xiii of Fig.~\ref{fig:flow}\\
+	\STATE Enforce electrical compatibilities in Step xiv of Fig.~\ref{fig:flow} with statement \textbf{assume} and define the inverter \\
+	\STATE Non-deterministic variables hold feasible equipment and cost \\
 	\STATE $F_{obj} \leftarrow N_{TP}*Panel_{Cost} \, + \, N_{TB}*Battery_{Cost} \, + Controller_{Cost} \, + \, Inverter_{Cost} \, + \, Installation_{Cost} \, + \, batrep_{Cost} \, + \, PWO\&M_{Cost}$ \\
 	\STATE Violation check with \textbf{assert}$(F_{obj} > HintCost)$ \\
  \ENDFOR
@@ -194,18 +194,18 @@ Algorithm~\ref{alg:opt-algorithm} describes our pseudo-code to synthesize stand-
 Our synthesis algorithm will synthesize constant values; 
 it starts with the input of the manufacturer's data and prices of PV panels, batteries, charge controllers, and inverters. Moreover, we define design (house) requirements and design assumptions. 
 %
-The \textit{for}-loop started in line $4$ controls the lowest cost of the PV solution. In particular, it starts with cost $MinCost$ and stops when the algorithm finds a feasible solution in which the cost breaks the $assertion$ stated in line $18$. If that happens, then our algorithm has found an optimal solution, thereby stating that the {\sc Verify} phase reached a satisfiable condition (\textit{SAT}). The $MaxCost$ value in line $2$ is just a very high value inserted as a limit to the \textit{for}-loop, that: (1) it will never be reached because the optimal solution will be found first (SAT result); or (2) it will be reached when the search engine did not find a feasible solution for the optimization (UNSAT result).
+The \textit{for}-loop started in line $4$ controls the lowest cost of the PV solution. In particular, it begins with a value $MinCost$ and stops when the algorithm finds a feasible solution in which the value breaks the $assertion$ stated in line $18$. If that happens, then our algorithm has found an optimal solution, thereby indicating that the {\sc Verify} phase reached a satisfiable condition (\textit{SAT}). The $MaxCost$ value in line $2$ is just a very high value inserted as a limit to the \textit{for}-loop, that meets one of the following requirements. (1) It will never be reached because the optimal solution will be found first (SAT result); or (2) it will be achieved when the search engine did not find a feasible solution for the optimization (UNSAT result).
 
-Our synthesis algorithm uses non-deterministic variables to choose one specific constant from a given list of PV panels, controllers, batteries, and inverters (line $5$). This procedure ensures that our synthesis engine checks all combinations of items from each equipment, and combines them to assemble a viable (candidate) PV solution, which meets user requirements. A list of forty equipment from ten different manufacturers was provided (as INPUT) to our synthesis engine to allow the choice of every item of PV sizing. Datasheet from each item was necessary to collect technical information. Moreover, the price of each item was obtained from available quotations in the market, and if the currency was not in US dollars, then it was used the exchange rate of the day to convert it to US dollars. All this data is available online\footnote{\url{https://drive.google.com/file/d/1DUtM3Ui\_pU54DmtTXnW1DUcanOcXBVeg/view?usp=sharing}}.
+Our synthesis algorithm uses non-deterministic variables to choose one specific constant from a given list of PV panels, controllers, batteries, and inverters (line $5$). This procedure ensures that our synthesis engine checks all combinations of items from each equipment, and combines them to assemble a viable (candidate) PV solution, which meets user requirements. A list of forty equipment from ten different manufacturers was provided (as INPUT) to our synthesis engine to allow the choice of every item of PV sizing. Datasheet from each item was necessary to collect technical information. Moreover, the price of each item was obtained from available quotations in the market, and if the currency was not in US dollars, then it was used the exchange rate of the day to convert it to US dollars. All this data is available online \textcolor{red}{I was unable to open this file}\footnote{\url{https://drive.google.com/file/d/1DUtM3Ui\_pU54DmtTXnW1DUcanOcXBVeg/view?usp=sharing}}.
 
 \textcolor{blue}{Next, we use a set of equations to calculate the sizing variables (lines $6$, $7$, $8$, $10$, $11$, $13$, $15$). The statements \textit{assume} (lines $9$, $12$, $14$, and $16$) ensures compatibility of the items chosen from the list of equipment: the {\sc Verify} phase uses only items (among all the possible ones) that satisfy the statements of those lines. Line $12$ is for the battery bank. Lines $9$ and $14$ are the charge controller voltage check. Line $16$ does the inverter check and ensures the power demand and the surge power of the inverter. Therefore, our synthesis algorithm reaches line $17$ with one feasible solution, and the cost of that solution is calculated in $F_{obj}$ (line $18$). This cost is the equivalent to Eq.~\eqref{eq:LCC}.}
 
 If our algorithm does not find a feasible solution among the item of equipment that was provided for our {\sc Synthesize} phase, then the result is unsatisfiable (\textit{UNSAT}). In particular, the program finishes without finding a solution, indicating that it was unable to combine the specific items of equipment to create a feasible solution. 
 %
-The main challenge for the {\sc Synthesize} phase is to find a feasible candidate solution for the constraints and user requirements. The challenge for the {\sc Verify} phase is to find the lowest acquisition cost from a list of equipment and components provided by the {\sc Synthesize} phase. 
+The main challenge for the {\sc Synthesize} phase is to find a feasible candidate solution for the constraints and user requirements. The problem for the {\sc Verify} phase is to find the lowest acquisition cost from a list of equipment and components provided by the {\sc Synthesize} phase. 
 %
 Note that the process described here is completely automated and that validation is performed by our {\sc Verify} phase to ensure that the solution is sound.
-The Algorithm~\ref{alg:opt-algorithm} is transformed by the verification engines into the Boolean expressions that are passed to the solver in order to verify ($C \wedge \neg P$), as shown online\footnote{\url{https://drive.google.com/file/d/1Q_hlgUt6AWrNeOtxhFlIpW4P4OPrPyIA/view?usp=sharing}}.
+The verification engines transform the Algorithm~\ref{alg:opt-algorithm} into the Boolean expressions that are passed to the solver to verify ($C \wedge \neg P$), as described online\footnote{\url{https://drive.google.com/file/d/1Q_hlgUt6AWrNeOtxhFlIpW4P4OPrPyIA/view?usp=sharing}}.
 
 %---------------------------------------------------------------------------
 \section{Results and Discussion}
