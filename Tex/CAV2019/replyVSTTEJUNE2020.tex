@@ -106,14 +106,7 @@ ZIP 69077-000, Manaus - AM, Brazil\\
 \indent Dear Nadia Polikarpova and Maria Christakis,
 \vi 
 
-We thank you for asking us to comply with your reviewers' reports. 
-We are submitting a revised version of our manuscript entitled 
-``{\em \mstitle}'' by Alessandro Trindade and Lucas Cordeiro. 
-This revised version carefully addresses each comment provided 
-by the reviewers, as suggested in your original decision letter. 
-In particular, our reply letter describes all modifications we made 
-to our manuscript and the respective responses to the comments 
-raised by the reviewers.  
+We thank you for asking us to comply with your reviewers' reports. We are submitting a revised version of our manuscript entitled  ``{\em \mstitle}'' by Alessandro Trindade and Lucas Cordeiro.  This revised version carefully addresses each comment provided by the reviewers, as suggested in the original notification.  In particular, our reply letter describes all modifications we have made to our manuscript and the respective responses to the comments raised by the reviewers.  
 
 %\vi
 
@@ -148,13 +141,13 @@ Alessandro B. Trindade~~~~~~~
 
 \vi
 
-The authors would like to thank the anonymous reviewers for their valuable and constructive comments and suggestions, which helped us significantly improve the quality of our manuscript. 
+The authors would like to thank the anonymous reviewers for their valuable and constructive comments and suggestions, which helped us significantly improve our manuscript quality. 
 
-According to the reviewers' comments, our manuscript has been carefully revised and all detailed changes are highlighted in red color, along with the original text. The revision included the Abstract, Introduction, Background, Synthesizing Optimal Sizing, Results, and Conclusions sections.
+According to the reviewers' comments, our manuscript was carefully revised, and all detailed changes are highlighted in blue color, along with the original text. The revision included the Abstract, Introduction, Background, Synthesizing Optimal Sizing, Results, and Conclusions sections.
 
-Our responses  to all comments (in blue color) are given in the sequel, with clear indications about how and where they were addressed along our manuscript.
+Our responses to all comments (in blue color) are given in the sequel, with clear indications about how and where they were addressed in our manuscript.
 
-We hope those modifications in our manuscript and also our responses are sufficient to make our work suitable for publication.
+We hope those modifications in our manuscript and our responses are sufficient to make our work suitable for publication in the \textbf{12th Working Conference on Verified Software: Theories, Tools, and Experiments}.
 
 
 
@@ -170,38 +163,33 @@ The application of existing verification and synthesis techniques for solving th
 First, it is not entirely clear who the paper is primarily aimed at. For a software verification conference, it assumes too much knowledge of PV systems and the physics involved, but on the other hand, includes too little detail about the actual verification and synthesis technique. For example, the background in section 2.2 is not accessible to a general verification audience. Rather, I would suggest to provide a much more high-level background on PV systems, and simply state that such a system can be modelled using a set of equations, possibly giving the (main) variables. Similarly, many of the PV-specific details in the evaluation are not accessible for a general verification audience, and need to be discussed at a higher level.
 
 \begin{resposta} 
-We thank the reviewer for this insightful comment and suggestion. Indeed, we had to revise the Background, and the Synthesizing Optimal Sizing sections in order to address the right conference attendants profile. The paper was reviewed and the PV sizing modelling was changed to a higher level of explanation, with a flowchart. The Algorithm's pseudo-code followed the same idea. Besides that, in case of interest about the complete and detailed mathematical sizing of PV systems, we created a link to a 5-page PDF file that can be accessed as well.
-
+We thank the reviewer for these insightful comments and suggestions. We had to revise the Background and the Synthesizing Optimal Sizing sections to address the right conference attendants' profile. Our manuscript was entirely revised, and the PV sizing modeling was changed to a higher level of explanation, with a flowchart. The proposed synthesis algorithm followed the same principle. Besides that, in case of interest in the complete and detailed mathematical sizing of PV systems, we created a link to a 5-page PDF file that can be accessed.
 \end{resposta}
 
 Secondly, the problem that the paper is trying to solve needs to be stated precisely and early. In particular, it is not clear to me what the optimization objective is, i.e. what does 'optimal sizing' mean? Do you optimize for cost, or power consumption, or both? Currently, it is not until section 3 (page 8), that the paper seems to explain that the optimization is done w.r.t. to cost, but the evaluation seems to contradict this, because the commercial solution is regarded as not optimal, even though it has the lowest cost (in dollars).
 
 \begin{resposta} 
-We thank the reviewer again. Indeed, we had to revise the Abstract, the Introduction, and the Synthesizing Optimal Sizing sections in order to address more correctly what is PV optimal sizing. We must realize as well, and we added a highlight about this in the Results section, that a optimal solution from a tool is not necessarily the same optimal of other tool, mainly when the data base of equipment items (with different costs) are not the same. 
-
+We thank the reviewer again. Indeed, we had to revise the Abstract, the Introduction, and the Synthesizing Optimal Sizing sections in order to address more correctly what is PV optimal sizing. We must realize as well, and we added a highlight about this in the Results section. An optimal solution from a tool is not necessarily the same optimal of another tool, mainly when the database of equipment items (with different costs) are not the same. 
 \end{resposta}
 
 Then, I am confused about which verification, resp. synthesis, technique is actually being used. This is partially due to lack of details, but also because of inconsistencies in the paper. In different places, the paper describes the technique as CEGIS, or as model checking, or as optimization. 
 
 \begin{resposta} 
-We thank the reviewer again for this insightful comment. Indeed, we had to revise some specific parts of the paper where CEGIS, technique, or optimization appeared (Abstract, Introduction, and Background sections). Our proposal is a technique, that is based on CEGIS when we consider the use of synthesis and automated verification, and we aim to synthesize the optimal solution of a PV system (i.e., the technique produces an optimization). We expect that the reviewed text can clarify the issue.
-
-
+We thank the reviewer again for this insightful comment. We had to revise some specific parts of the paper, where the CEGIS technique, or optimization appeared (Abstract, Introduction, and Background sections). Our proposal is a technique based on CEGIS when considering the use of synthesis and automated verification. We aim to synthesize the optimal solution of a PV system (i.e., the technique produces an optimization). We expect that the revised sections can clarify the issue. \textcolor{red}{Which changes did you implement? please specify them here}.
 \end{resposta}
 
 Algorithm 1 to me seems to construct a constraint and then tries to solve it for the nondeterministic variables to obtain a solution, and to use essentially a linear search to find the minimum cost. Is this correct? If so, it is unclear to me how this fits with the CEGIS algorithm in Fig. 2, and where model checking is used.
 
 \begin{resposta} 
-We will try to clarify this issue. We use 4 nondeterministic variables hold the position of 4 matrices with complete datasheet information from a equipment item. We have 4 variables and 4 matrices: one to PV panels, one to batteries, one to inverter, and one to the charge controller. Those nondeterministic variables are used during the search for the feasible solution and controlled by the statements \textbf{assume}: this is the phase {\sc Synthesize} of the technique. For the {\sc Verify} phase, is performed a linear search for the lowest cost, and the search is based in FAIL or SUCCESS check from a cost that is linearly incremented in this model. The model checking is used during this {\sc Verify} phase: if the process FAIL then a optimal solution is found, if SUCCESSES then there is not a feasible solution from the equipment list inputted of the technique. We added a future work at the end of the CONCLUSIONS section, related to the possibility of speed up the {\sc Verify} phase through binary search or even using specific optimization targeted solvers (as $\nu Z$).
-
+\textcolor{red}{where do we address this comment? Please indicate the section.}
+We use four nondeterministic variables to hold four matrices with complete datasheet information from an equipment item. We have four variables and four matrices: one to PV panels, one to batteries, one to the inverter, and one to the charge controller. Those nondeterministic variables are used during the search for the feasible solution and controlled by the statements \textbf{assume}. The candidate solution is proposed in the phase {\sc Synthesize} of the technique. For the {\sc Verify} phase, we performed a linear search for the lowest cost, and the result is based on FAIL or SUCCESS check from a cost that is linearly incremented in this model. The model checking is used during this {\sc Verify} phase. If the process produces FAIL, then an optimal solution is found. If SUCCESS is provided, there is no feasible solution from the equipment list provided by the technique. We added a future work at the end of the CONCLUSIONS section, related to the possibility of speeding up the {\sc Verify} phase through binary search or even using specific optimization targeted solvers (as $\nu Z$).
 \end{resposta}
 
 
 Finally, section 2.2 presents nonlinear continuous real-valued constraints. How can the discrete solvers used handle these constraints?   
 
 \begin{resposta} 
-We model these PV sizing constraints using floating point arithmetic. It is just an approximation of the real numbers. However, in this work, we are not concerned with calculating the rounding error, which is negligible when we consider the size of the physical quantities and the variables adopted. We added this information at the end of section 2.2. Therefore, we thank you the question and the possibility to clarify this issue in the paper.
-
+We model these PV sizing constraints using floating-point arithmetic. It is just an approximation of the real numbers. However, in this work, we are not concerned with calculating the rounding error, which is negligible when considering the size of the physical quantities and the variables adopted. We added this information at the end of Section 2.2. Therefore, we thank the reviewer for the question and the possibility of clarifying this issue in our manuscript.
 \end{resposta}
 
 \end{quote}
@@ -224,7 +212,7 @@ Pros
 * The authors have carried out very deep experiments. In particular, the algorithm was tested using 3 different state-of-the-art verifiers, and the results were compared with a commercial solution. In addition, since it is not straightforward to evaluate the results without a real system validation, the authors used a simulation tool.
 
 \begin{resposta} 
-Thank you. We appreciate the compliment.
+We thank the reviewer for these comments.
 \end{resposta}
 
 Cons
@@ -233,21 +221,18 @@ Cons
 * For someone not familiar with the topic (like myself and, I would expect, 95\% of VSTTE community), it might be difficult to understand the overall setup, since Section 2 fails to provide some of the background (see minor comments below)
 
 \begin{resposta} 
-We thank the reviewer for this insightful comment and suggestion. He/she is right and it was the same observation did by Reviewer \#1. We had to revise the Background, and the Synthesizing Optimal Sizing sections in order to address the right conference attendants profile. The paper was reviewed and the PV sizing modelling was changed to a higher level of explanation, with a flowchart. The Algorithm's pseudo-code followed the same idea. Besides that, in case of interest about the complete and detailed mathematical sizing of PV systems, we created a link to a 5-page PDF complementary file that can be accessed as well.
-
+We thank the reviewer for this insightful comment and suggestion. You are correct; Reviewer \#1 also provided the same observation. We had to revise the Background, and the Synthesizing Optimal Sizing sections in order to address the right conference attendants profile. Our manuscript was revised, and the PV sizing modeling was changed to a higher level of explanation, including a flowchart in Section 2 (cf. Figure 4). In Section 3, the synthesis algorithm followed the same idea. Besides that, in case of interest in the complete and detailed mathematical sizing of PV systems, we created a link to a 5-page PDF complementary file that can be accessed as well.
 \end{resposta}
 
 * In general, I would say that the experimental results are not outstanding, but they show some potential in applying a total different approach to this field. However, the authors at the beginning state that the goal is to compute a solution with minimal cost, but then in Table 1 Homer computed cheapest solutions in all the cases, then it looks like the introduced approach is worse than existing commercial tools. Then the following discussion is a bit shallow: Table 2 "show that the synthesis solution is sound and complete, which answers EG1 and EG3", but EG3 is about "how does our formal synthesis tool compare to a specialized simulation tool?" (so I am still not sure if Homer is sound and complete and what's the comparison). Finally, the three drawbacks of Homer are discussed at the end of Section 4.4, but this is not about the costs of the system, and not connect to the three experimental goals.
 
 
 \begin{resposta}
-Indeed the optimal sizing means the lowest cost from a feasible (technical) solution. When we compare just the LCC you are right: HOMER Pro produces the lowest values in mostly case-studies. However, we prove that using a simulation tool (PVsyst) with the optimal produced from our technique and from HOMER, that our technical solution is better to meet the house's requirements. We added two sentences in order to clarify this issue.
+Indeed the optimal sizing means the lowest cost from a feasible (technical) solution. When we compare just the LCC, you are correct: HOMER Pro produces the lowest values in most case-studies. However, we prove that using a simulation tool (PVsyst) with the optimal produced from our technique and HOMER, our technical solution is better to meet the house's requirements. We added two sentences in order to clarify this issue.
 
-In section 4.4 Results: "The cost of every equipment item used in HOMER Pro is an US-based cost, without adaptation regardless of where the equipment is installed."
+Section 4.4 Results: ``The cost of every equipment item used in HOMER Pro is a US-based cost, without adaptation regardless of where the equipment is installed.''
 
-In section 4.5 Comparison Between Formal Synthesis and HOMER Pro: "Related to the cost (LCC) present by both tools, HOMER Pro do not use the real cost for PV systems deployed in Brazil; therefore the optimal solution presented by HOMER Pro is notoriously cheaper than our technique. However, considering that the aim is to present an optimal PV sizing solution that is feasible and closer to the market prices, then our technique is more indicated."
-
- 
+Section 4.5 Comparison Between Formal Synthesis and HOMER Pro: ``Related to the cost (LCC) present by both tools, HOMER Pro does not use the real cost for PV systems deployed in Brazil. The optimal solution presented by HOMER Pro is notoriously cheaper than our technique. However, considering that the aim is to present an optimal PV sizing solution that is feasible and closer to the market prices, our technique is more indicated.'' 
 \end{resposta}
 
 - Almost all equations end with a comma, please remove it
@@ -266,14 +251,14 @@ We have fixed this typo.
 
 
 \begin{resposta}
-We appreciate this Reviewer's suggestion. Indeed only with a double background and experience, specifically in computer science and in electrical engineering, is that is possible to realize that the tool (formal synthesis) can solve, and with remarkable results, the PV system sizing issue. Therefore we included a specific text in the Introduction section:
-"However, formal methods and its application to synthesize PV systems are not explored in literature, mainly because it is necessary background and experience, at the same time, in computer science and PV systems, what is not so common."
+We appreciate the reviewer's suggestion. Indeed only with background and experience, specifically in computer science and in electrical engineering, we can realize that the tool (formal synthesis) can solve, and with remarkable results, the PV system sizing issue. Therefore, we included a specific text in the Introduction section to address this particular comment:
+``However, formal methods and its application to synthesize PV systems are not explored in literature, mainly because it is necessary background and experience, at the same time, in computer science and PV systems, what is not so common.''
 \end{resposta}
 
 - Section 2.2: some parts of this section are not well explained. To people that do not know this field, some choices feel completely arbitrary: why a factor of 20\% for losses is considered in equation 2? Similarly, why DOD is 75\%? I guess these are standard values, but maybe some citations of papers using the same parameters (or discussing them) might be helpful to convince the reader about the robustness of the formalization
 
 \begin{resposta}
-The reviewer is right, we missed the details about why those values are taken. Therefore we reviewed the complementary online text to: "The $DOD$ is usually $25$\% for lead-acid batteries, and $80$\% for lithium batteries and represent an intrinsic and empirical feature of those type of batteries [Pinho and Galdino, 2014] in order to guarantee its lifetime".
+We agree with the reviewer. We missed the details about why those values are taken. Therefore, we revised the corresponding online text to: ``The $DOD$ is usually $25$\% for lead-acid batteries, and $80$\% for lithium batteries and represent an intrinsic and empirical feature of those type of batteries [Pinho and Galdino, 2014] in order to guarantee its lifetime''.
 \end{resposta}
 
 - page 6: Therefore, here in this study, the definition given here -$>$ Therefore, the definition given here
@@ -285,7 +270,7 @@ Implemented as suggested.
 - From equation 9 on I was lost. What are G, G\_ref, and T equation 9? Why you have T - 25 here? What is N\_PP in equation 10a?
 
 \begin{resposta}
-We have updated the entire paragraph in the complementary online file to explain the meaning of these variables as follows: ``The short circuit reference information ($I_{sc,ref}$) from the manufacturer's solar panel must be corrected because field temperature ($T$) is higher than nominal or laboratory temperature ($25^{\circ}C$), and the PV system is temperature dependent, as described by Eq. (9) for the ambient short-circuit current from the PV panel. $G$ is the solar irradiance from the deployment site, and $G_{ref}$ is defined as $1000$ $W/m^{2}$ by the manufacturers.''
+We have updated the entire paragraph in the complementary online file to explain the meaning of these variables. ``The short circuit reference information ($I_{sc,ref}$) from the manufacturer's solar panel must be corrected because field temperature ($T$) is higher than nominal or laboratory temperature ($25^{\circ}C$), and the PV system is temperature dependent, as described by Eq. (9) for the ambient short-circuit current from the PV panel. $G$ is the solar irradiance from the deployment site, and $G_{ref}$ is defined as $1000$ $W/m^{2}$ by the manufacturers.''
 \end{resposta}
 
 - Equation 6 is missing the 'x' to represent multiplications
@@ -330,8 +315,7 @@ accessible:
 
 
 \begin{resposta} 
-We thank the reviewer for this insightful comment and suggestion. Those are the same observations did by Reviewer \#1 and \#2. We had to revise the Background, and the Synthesizing Optimal Sizing sections in order to address the right conference attendants profile. The paper was reviewed and the PV sizing modelling was changed to a higher level of explanation, with a flowchart. The Algorithm's pseudo-code followed the same idea. Besides that, in case of interest about the complete and detailed mathematical sizing of PV systems, we created a link to a 5-page PDF complementary file that can be accessed as well.
-
+We thank the reviewer for these insightful comments and suggestions. Those are the same observations did by Reviewer \#1 and \#2. We had to revise the Background, and the Synthesizing Optimal Sizing sections in order to address the right conference attendants profile. Our manuscript was revised, and the PV sizing modeling was changed to a higher level of explanation, including a flowchart in Section 2 (cf. Figure 4). In Section 3, the synthesis algorithm followed the same idea. Besides that, in case of interest in the complete and detailed mathematical sizing of PV systems, we created a link to a 5-page PDF complementary file that can be accessed as well.
 \end{resposta}
 
  I do have some doubts about suitable the encodings that
@@ -342,7 +326,7 @@ We thank the reviewer for this insightful comment and suggestion. Those are the 
   make the paper even less accessible.
   
 \begin{resposta}
-Related to the floating point reasoning: we model the PV sizing constraints using floating point arithmetic. It is just an approximation of the real numbers. However, in this work, we are not concerned with calculating the rounding error, which is negligible when we consider the size of the physical quantities and the variables adopted. We added this information at the end of section 2.2. Therefore, we thank you the question and the possibility to clarify this issue in the paper.
+Concerning the floating-point reasoning: we model the PV sizing constraints using floating-point arithmetic. It is just an approximation of the real numbers. However, in this work, we are not concerned with calculating the rounding error, which is negligible when considering the size of the physical quantities and the variables adopted. We added this information at the end of Section 2.2. Therefore, we thank the reviewer for the question and the possibility to clarify this issue in the paper.
 \end{resposta}  
 
 - The paper contains several awkwardly formulated sentences. Examples
@@ -353,7 +337,7 @@ The net effect is that the paper reads as a tour-de-force in "we did all of this
 Overall, based on the substance of the results, the paper remains adequate for the venue.
 
 \begin{resposta}
-Thank you.
+We thank the reviewer.
 \end{resposta}
 
 Examples of awkward sentences:
@@ -384,7 +368,7 @@ In 2017, a researcher suggested the application of formal methods to verify and
 control the behaviour of computational devices in a smart grid [2].
 
 \begin{resposta}
-We have rewritten this sentence as ``In $2017$, it was suggested the application of formal methods to verify and control the behaviour of computational devices in a smart grid [2]''.
+We have rewritten this sentence as ``In $2017$, Abate suggested the application of formal methods to verify and control the behavior of devices in a smart grid [2]''.
 \end{resposta}
 
 
