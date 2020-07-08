@@ -175,14 +175,11 @@ We thank the reviewer again. Indeed, we had to revise the Abstract, the Introduc
 Then, I am confused about which verification, resp. synthesis, technique is actually being used. This is partially due to lack of details, but also because of inconsistencies in the paper. In different places, the paper describes the technique as CEGIS, or as model checking, or as optimization. 
 
 \begin{resposta} 
-We thank the reviewer again for this insightful comment. We had to revise some specific parts of the paper, where the CEGIS technique, or optimization appeared (Abstract, and Background sections). Our proposal is a technique based on CEGIS when considering the use of synthesis and automated verification. We aim to synthesize the optimal solution of a PV system (i.e., the technique produces an optimization). We expect that the revised sections below can clarify the issue, besides the next answer related to Algorithm 1. 
+We thank the reviewer again for this insightful comment. We had to revise some specific parts of the paper, where the CEGIS technique or optimization appeared (Abstract and Background sections). Our proposal is a technique based on CEGIS when considering the use of synthesis and automated verification. We aim to synthesize the optimal solution of a PV system (i.e., the technique produces an optimization). We expect that the revised sections below clarify the issue, besides the next answer related to Algorithm 1. 
 
-Into the Abstract section now we have: "Here we develop and evaluate an automated synthesis technique to obtain optimal sizing of PV systems based on Life Cycle Cost (LCC) analysis. The optimal solution is the lowest cost from a list of equipment that meets the electrical demands from a house, plus the replacement, operation, and maintenance costs over $20$ years. We propose a variant of the counterexample guided inductive synthesis (CEGIS) approach with two phases linking the technical and cost analysis to obtain the PV sizing optimization."
+In the Abstract section, we now have: ``Here we develop and evaluate an automated synthesis technique to obtain optimal sizing of PV systems based on Life Cycle Cost (LCC) analysis. The optimal solution is the lowest cost from a list of equipment that meets the electrical demands from a house, plus the replacement, operation, and maintenance costs over $20$ years. We propose a variant of the counterexample guided inductive synthesis (CEGIS) approach with two phases linking the technical and cost analysis to obtain the PV sizing optimization.''
 
-In the Background section now we have: "Summarizing: Our proposal is a technique based on CEGIS and we aim to synthesize the optimal solution of a PV system. Therefore, our technique produces an optimization."
-
-\textcolor{red}{The two above sentences are new}.
-
+In the Background section, we now have: ``In summary, our proposal is a technique based on CEGIS, which aims to synthesize the optimal solution of a PV system; therefore, our technique addresses an optimization problem.''
 \end{resposta}
 
 Algorithm 1 to me seems to construct a constraint and then tries to solve it for the nondeterministic variables to obtain a solution, and to use essentially a linear search to find the minimum cost. Is this correct? If so, it is unclear to me how this fits with the CEGIS algorithm in Fig. 2, and where model checking is used.
