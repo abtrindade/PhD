@@ -6,7 +6,8 @@
 \usepackage{graphicx}
 \usepackage{amssymb}
 \usepackage{epstopdf}
-\usepackage{url}
+%\usepackage{url}
+\usepackage{hyperref}
 %\usepackage{mathtools}
 \usepackage{enumerate}
 \usepackage[nodayofweek]{datetime}
@@ -139,7 +140,8 @@ Alessandro B. Trindade~~~~~~~
 
 The authors would like to thank the anonymous reviewers for their valuable and constructive comments and suggestions, which helped us significantly improve our manuscript quality. 
 
-According to the reviewers' comments, our manuscript was carefully revised, and all detailed changes are highlighted in blue color, along with the original text. The revision included the Abstract, Introduction, Background, Synthesizing Optimal Sizing, Results, and Conclusions sections.
+According to the reviewers' comments, our manuscript was carefully revised%, and all detailed changes are highlighted in blue color, along with the original text
+. The revision included the Abstract, Introduction, Background, Synthesizing Optimal Sizing, Results, and Conclusions sections. A highlighted version of the entire paper is available in \url{https://tinyurl.com/y9scqv6g} if the reviewers would like access.
 
 Our responses to all comments (in blue color) are given in the sequel, with clear indications about how and where they were addressed in our manuscript.
 
@@ -159,13 +161,13 @@ The application of existing verification and synthesis techniques for solving th
 First, it is not entirely clear who the paper is primarily aimed at. For a software verification conference, it assumes too much knowledge of PV systems and the physics involved, but on the other hand, includes too little detail about the actual verification and synthesis technique. For example, the background in section 2.2 is not accessible to a general verification audience. Rather, I would suggest to provide a much more high-level background on PV systems, and simply state that such a system can be modelled using a set of equations, possibly giving the (main) variables. Similarly, many of the PV-specific details in the evaluation are not accessible for a general verification audience, and need to be discussed at a higher level.
 
 \begin{resposta} 
-We thank the reviewer for these insightful comments and suggestions. We had to revise the Background and the Synthesizing Optimal Sizing sections to address the right conference attendants' profile. Our manuscript was entirely revised, and the PV sizing modeling was changed to a higher level of explanation, with a flowchart. The proposed synthesis algorithm followed the same principle. Besides that, in case of interest in the complete and detailed mathematical sizing of PV systems, we created a link to a 5-page PDF file that can be accessed.
+We thank the reviewer for these insightful comments and suggestions. We had to revise parts of the Background and the Synthesizing Optimal Sizing sections to address the right conference attendants' profile. The PV sizing modeling was changed to a higher level of explanation, with a flowchart in page 6 (Fig.4). The proposed synthesis algorithm followed the same principle in page 8. Besides that, in case of interest in the complete and detailed mathematical sizing of PV systems, that we removed from the paper, we created a link to a 5-page PDF online file that can be accessed.
 \end{resposta}
 
 Secondly, the problem that the paper is trying to solve needs to be stated precisely and early. In particular, it is not clear to me what the optimization objective is, i.e. what does 'optimal sizing' mean? Do you optimize for cost, or power consumption, or both? Currently, it is not until section 3 (page 8), that the paper seems to explain that the optimization is done w.r.t. to cost, but the evaluation seems to contradict this, because the commercial solution is regarded as not optimal, even though it has the lowest cost (in dollars).
 
 \begin{resposta} 
-We thank the reviewer again. Indeed, we had to revise the Abstract, the Introduction, and the Synthesizing Optimal Sizing sections in order to address more correctly what is PV optimal sizing. We must realize as well, and we added a highlight about this in the Results section. An optimal solution from a tool is not necessarily the same optimal of another tool, mainly when the database of equipment items (with different costs) are not the same. 
+We thank the reviewer again. Indeed, we had to revise parts of the Abstract, the Introduction, and the Synthesizing Optimal Sizing sections in order to address more correctly what is PV optimal sizing. We must realize as well, and we added a highlight about this in the Results section: "An optimal solution from a tool is not necessarily the same optimal of another tool, mainly when the database of equipment items (with different costs) are not the same." 
 \end{resposta}
 
 Then, I am confused about which verification, resp. synthesis, technique is actually being used. This is partially due to lack of details, but also because of inconsistencies in the paper. In different places, the paper describes the technique as CEGIS, or as model checking, or as optimization. 
@@ -220,7 +222,7 @@ Cons
 * For someone not familiar with the topic (like myself and, I would expect, 95\% of VSTTE community), it might be difficult to understand the overall setup, since Section 2 fails to provide some of the background (see minor comments below)
 
 \begin{resposta} 
-We thank the reviewer for this insightful comment and suggestion. You are correct; Reviewer \#1 also provided the same observation. We had to revise the Background, and the Synthesizing Optimal Sizing sections to address the right conference attendants profile. Our manuscript was revised, and the PV sizing modeling was changed to a higher level of explanation, including a flowchart in Section 2 (cf. Figure 4). In Section 3, the synthesis algorithm followed the same idea. Besides that, in case of interest in the complete and detailed mathematical sizing of PV systems, we created a link to a 5-page PDF complementary file that can be accessed.
+We thank the reviewer for this insightful comment and suggestion. You are correct; Reviewer \#1 also provided the same observation. We had to revise parts of the Background, and the Synthesizing Optimal Sizing sections to address the right conference attendants profile. Our manuscript was revised, and the PV sizing modeling was changed to a higher level of explanation, including a flowchart in Section 2 (cf. Figure 4 at page 6). In Section 3 (page 8), the synthesis algorithm followed the same idea. Besides that, in case of interest in the complete and detailed mathematical sizing of PV systems, that was removed from this revised paper, we created a link to a 5-page PDF complementary file that can be accessed.
 \end{resposta}
 
 * In general, I would say that the experimental results are not outstanding, but they show some potential in applying a total different approach to this field. However, the authors at the beginning state that the goal is to compute a solution with minimal cost, but then in Table 1 Homer computed cheapest solutions in all the cases, then it looks like the introduced approach is worse than existing commercial tools. Then the following discussion is a bit shallow: Table 2 "show that the synthesis solution is sound and complete, which answers EG1 and EG3", but EG3 is about "how does our formal synthesis tool compare to a specialized simulation tool?" (so I am still not sure if Homer is sound and complete and what's the comparison). Finally, the three drawbacks of Homer are discussed at the end of Section 4.4, but this is not about the costs of the system, and not connect to the three experimental goals.
@@ -257,7 +259,7 @@ We appreciate the reviewer's suggestion. Indeed only with background and experie
 - Section 2.2: some parts of this section are not well explained. To people that do not know this field, some choices feel completely arbitrary: why a factor of 20\% for losses is considered in equation 2? Similarly, why DOD is 75\%? I guess these are standard values, but maybe some citations of papers using the same parameters (or discussing them) might be helpful to convince the reader about the robustness of the formalization
 
 \begin{resposta}
-We agree with the reviewer. We missed the details about why those values are taken. Therefore, we revised the corresponding online text to: ``The $DOD$ is usually $25$\% for lead-acid batteries, and $80$\% for lithium batteries and represent an intrinsic and empirical feature of those type of batteries [Pinho and Galdino, 2014] in order to guarantee its lifetime''.
+We agree with the reviewer. We missed the details about why those values are taken. Considering that the new paper version has a higher level explanation for the PV sizing, we removed this part and transferred it to the complementary PDF text. Therefore, we revised the corresponding online text to: ``The $DOD$ is usually $25$\% for lead-acid batteries, and $80$\% for lithium batteries and represent an intrinsic and empirical feature of those type of batteries [Pinho and Galdino, 2014] in order to guarantee its lifetime''.
 \end{resposta}
 
 - page 6: Therefore, here in this study, the definition given here -$>$ Therefore, the definition given here
@@ -313,7 +315,7 @@ accessible:
 
 
 \begin{resposta} 
-We thank the reviewer for these insightful comments and suggestions. Those are the same observations did by Reviewer \#1 and \#2. We had to revise the Background, and the Synthesizing Optimal Sizing sections to address the right conference attendants profile. Our manuscript was revised, and the PV sizing modeling was changed to a higher level of explanation, including a flowchart in Section 2 (cf. Figure 4). In Section 3, the synthesis algorithm followed the same idea. Besides that, in case of interest in the complete and detailed mathematical sizing of PV systems, we created a link to a 5-page PDF complementary file that can be accessed as well.
+We thank the reviewer for these insightful comments and suggestions. Those are the same observations did by Reviewer \#1 and \#2. We had to revise parts of the Background, and the Synthesizing Optimal Sizing sections to address the right conference attendants profile. Our manuscript was revised, and the PV sizing modeling was changed to a higher level of explanation, including a flowchart in Section 2 (cf. Figure 4 at page 6). In Section 3, the synthesis algorithm followed the same idea (page 8). Besides that, in case of interest in the complete and detailed mathematical sizing of PV systems, that was removed from this revised version of the paper, we created a link to a 5-page PDF complementary file that can be accessed as well.
 \end{resposta}
 
  I do have some doubts about suitable the encodings that
